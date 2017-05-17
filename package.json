@@ -5,5 +5,8 @@
   "main": "index.js",
   "repository": "https://github.com/gcba/hermes.git",
   "author": "Rita Zerrizuela <zeta@widcket.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "docpress": "^0.7.1"
+  }
 }
