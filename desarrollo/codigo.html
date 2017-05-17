@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../assets/style.css?t=615badd5">
+    <script src="../assets/script.js?t=42463e55"></script>
+    <title>Código - Hermes</title>
+    <meta name="viewport" content="width=device-width">
+  </head>
+  <body class="-menu-visible">
+    <div class="doc-layout">
+      <div class="toggle menu-toggle js-menu-toggle"></div>
+      <div class="menu toc-menu">
+        <li class="menu-item -level-0 -parent">
+          <ul class="submenu">
+            <li class="menu-item -level-1"><a class="link title  link-index" href="../index.html">Hermes</a>
+            </li>
+            <li class="menu-item -level-1"><a class="link title  link-analisis-funcional" href="../analisis-funcional/index.html">Análisis Funcional</a>
+            </li>
+            <li class="menu-item -level-1 -parent"><span class="title">Desarrollo</span>
+              <ul class="submenu">
+                <li class="menu-item -level-2"><a class="link title  link-desarrollometodologia" href="../desarrollo/metodologia.html">Metodología</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title -active link-desarrollocodigo" href="../desarrollo/codigo.html">Código</a>
+                  <ul class="headings heading-list">
+                    <li class="heading-item -depth-2"><a class="hlink link-stack" href="#stack">Stack</a>
+                      <ul class="heading-list -depth-2">
+                        <li class="heading-item -depth-3"><a class="hlink link-admin" href="#admin">Admin</a>
+                        </li>
+                        <li class="heading-item -depth-3"><a class="hlink link-apis" href="#apis">APIs</a>
+                        </li>
+                        <li class="heading-item -depth-3"><a class="hlink link-datos" href="#datos">Datos</a>
+                        </li>
+                        <li class="heading-item -depth-3"><a class="hlink link-api-gateway" href="#api-gateway">API Gateway</a>
+                        </li>
+                      </ul>
+                    </li>
+                    <li class="heading-item -depth-2"><a class="hlink link-convenciones" href="#convenciones">Convenciones</a>
+                      <ul class="heading-list -depth-2">
+                        <li class="heading-item -depth-3"><a class="hlink link-go" href="#go">Go</a>
+                        </li>
+                        <li class="heading-item -depth-3"><a class="hlink link-php" href="#php">PHP</a>
+                        </li>
+                      </ul>
+                    </li>
+                    <li class="heading-item -depth-2"><a class="hlink link-testeo" href="#testeo">Testeo</a>
+                      <ul class="heading-list -depth-2">
+                        <li class="heading-item -depth-3"><a class="hlink link-apis" href="#apis">APIs</a>
+                        </li>
+                        <li class="heading-item -depth-3"><a class="hlink link-admin" href="#admin">Admin</a>
+                        </li>
+                      </ul>
+                    </li>
+                    <li class="heading-item -depth-2"><a class="hlink link-repositorio" href="#repositorio">Repositorio</a>
+                      <ul class="heading-list -depth-2">
+                        <li class="heading-item -depth-3"><a class="hlink link-ramas" href="#ramas">Ramas</a>
+                        </li>
+                        <li class="heading-item -depth-3"><a class="hlink link-releases" href="#releases">Releases</a>
+                        </li>
+                        <li class="heading-item -depth-3"><a class="hlink link-estructura-de-carpetas" href="#estructura-de-carpetas">Estructura de carpetas</a>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </div>
+      <div class="body page-desarrollocodigo">
+        <div class="header-nav">
+          <div class="right">
+          </div>
+        </div>
+        <div class="markdown-body"><h1 id="codigo">C&#xF3;digo</h1>
+<h2 id="stack">Stack</h2>
+<h3 id="admin">Admin</h3>
+<p>PHP 7.1 con Laravel 5.4</p>
+<p>###&#xA0;APIs</p>
+<p>Go 1.8 con Echo y Gorm</p>
+<h3 id="datos">Datos</h3>
+<p>Postgresql, Redis e InfluxDB</p>
+<h3 id="api-gateway">API Gateway</h3>
+<p>Tyk</p>
+<h2 id="convenciones">Convenciones</h2>
+<h3 id="go">Go</h3>
+<p>El c&#xF3;digo debe formatearse con la herramienta <code>gofmt</code>.</p>
+<h3 id="php">PHP</h3>
+<p>Se seguir&#xE1; el est&#xE1;ndar PSR-1.</p>
+<p><a href="https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-1-basic-coding-standard.md">https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-1-basic-coding-standard.md</a></p>
+<h2 id="testeo">Testeo</h2>
+<h3 id="apis">APIs</h3>
+<p>Para las APIs el testeo ser&#xE1; automatizado, con el objetivo de conseguir una cobertura del 100%. Se escribir&#xE1;n los siguientes tipos de tests:</p>
+<ul>
+<li>Unitarios</li>
+<li>Integraci&#xF3;n</li>
+<li>End-to-end</li>
+</ul>
+<h3 id="admin">Admin</h3>
+<p>En el caso del Admin, se testar&#xE1;n en forma autom&#xE1;tica las clases propias de la aplicaci&#xF3;n y en forma manual los flujos de la interfaz gr&#xE1;fica. Los tests automatizados ser&#xE1;n s&#xF3;lo unitarios, y no habr&#xE1; un objetivo concreto de cobertura.</p>
+<h2 id="repositorio">Repositorio</h2>
+<p>Todo el c&#xF3;digo y la documentaci&#xF3;n se alojar&#xE1;n en GitHub, en un solo repositorio.</p>
+<p><a href="https://github.com/gcba/hermes">https://github.com/gcba/hermes</a></p>
+<h3 id="ramas">Ramas</h3>
+<p>Se trabajar&#xE1; con un esquema de 3 ramas: dev, qa y master, con una rama adicional para el deploy de la documentaci&#xF3;n.</p>
+<h4 id="dev">dev</h4>
+<p>En dev se realizar&#xE1; el desarrollo. Al finalizar un sprint, se mergear&#xE1; a qa para testear.</p>
+<h4 id="qa">qa</h4>
+<p>En qa residir&#xE1; un snapshot de c&#xF3;digo del sprint anterior para testar autom&#xE1;tica y manualmente. Al finalizar un sprint, si no quedan bugs sin solucionar (del sprint anterior) se mergear&#xE1; a master. Si se fueran juntando bugs de varios sprints y no se puede mergear a master, se realizar&#xE1; un sprint dedicado a la correcci&#xF3;n de bugs.</p>
+<h4 id="master">master</h4>
+<p>En master residir&#xE1; el c&#xF3;digo de las releases m&#xE1;s recientes. En las primera etapa del desarrollo (cuando no hay versiones usables a&#xFA;n) contendr&#xE1; el c&#xF3;digo que m&#xE1;s recientemente haya superado la etapa de qa.</p>
+<p>Cuando ya se est&#xE9;n taggeando releases cada nuevo merge a master supondr&#xE1; la creaci&#xF3;n de una nueva release.</p>
+<h4 id="gh_pages">gh_pages</h4>
+<p>Esta rama se utilizar&#xE1; para servir la documentaci&#xF3;n a trav&#xE9;s de Github Pages.</p>
+<h3 id="releases">Releases</h3>
+<p>Se seguir&#xE1; el esquema SemVer (semantic versioning): major.minor.patch.</p>
+<p>Es decir, cuando haya breaking changes se incrementar&#xE1; la versi&#xF3;n major; cuando haya nuevas funcionalidades pero no breaking changes se incrementar&#xE1; la versi&#xF3;n minor; y cuando s&#xF3;lo haya bugfixes pero no nuevas funcionalidades ni breaking changes se incrementar&#xE1; la versi&#xF3;n patch.</p>
+<p>En una primer etapa no habr&#xE1; releases hasta que se complete una versi&#xF3;n funcional del proyecto.</p>
+<h3 id="estructura-de-carpetas">Estructura de carpetas</h3>
+<pre><code>/hermes
+|___/admin
+|   |____ ...
+|___/apis
+|	|___/src
+|	    |___/ratings
+|	    |	|___ ...
+|    	|___/stats
+|    	|	|___ ...
+|		|___ ...
+|___/sdks
+|	|___/java
+|	|	|___ ...
+|	|___/swift
+|	|	|___ ...
+|	|___/js
+|	|	|___ ...
+|___/docs
+	|___ ...
+</code></pre>
+<p><code>hermes</code> es el directorio base de la aplicaci&#xF3;n.</p>
+<p><code>hermes/admin</code> contiene el proyecto Laravel del admin.</p>
+<p><code>hermes/apis</code> es el workspace de Go. Aqu&#xED; debe apuntar la GOPATH.</p>
+<p><code>hermes/apis/src</code> contiene los proyectos Go (apis y librer&#xED;as comunes propias).</p>
+<p><code>hermes/apis/src/ratings</code> contiene el proyecto Echo de la API de calificaciones.</p>
+<p><code>hermes/apis/src/stats</code> contiene el proyecto Echo de la API de estad&#xED;sticas.</p>
+<p><code>hermes/sdks</code> contiene las librer&#xED;as que facilitar&#xE1;n a las aplicaciones interactuar con la API de calificaciones.</p>
+<p><code>hermes/sdks/java</code> contiene el cliente para Java.</p>
+<p><code>hermes/sdks/swift</code> contiene el cliente para Swift.</p>
+<p><code>hermes/sdks/js</code> contiene el cliente para JavaScript.</p>
+<p><code>hermes/docs</code> contiene la documentaci&#xF3;n del proyecto, que se mantendr&#xE1; sincronizada a la rama gh_pages mediante un build script.</p>
+
+        </div>
+        <div class="footer-nav">
+          <div class="left"><a href="../desarrollo/metodologia.html"><span class="title">Metodología</span></a></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
