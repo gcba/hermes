@@ -1,0 +1,9 @@
+{
+  "name": "hermes",
+  "version": "0.1.0",
+  "description": "Sistema de gestión de feedback para las apps móviles y web de la Ciudad",
+  "main": "index.js",
+  "repository": "https://github.com/gcba/hermes.git",
+  "author": "Rita Zerrizuela <zeta@widcket.com>",
+  "license": "MIT"
+}
