@@ -21,11 +21,19 @@
               <ul class="submenu">
                 <li class="menu-item -level-2"><a class="link title -active link-estructuraarquitectura" href="../estructura/arquitectura.html">Arquitectura</a>
                   <ul class="headings heading-list">
-                    <li class="heading-item -depth-2"><a class="hlink link-arquitectura" href="#arquitectura">Arquitectura</a>
+                    <li class="heading-item -depth-2"><a class="hlink link-logica" href="#logica">Lógica</a>
                       <ul class="heading-list -depth-2">
-                        <li class="heading-item -depth-3"><a class="hlink link-logica" href="#logica">Lógica</a>
+                        <li class="heading-item -depth-3"><a class="hlink link-admin" href="#admin">Admin</a>
                         </li>
-                        <li class="heading-item -depth-3"><a class="hlink link-fisica" href="#fisica">Física</a>
+                        <li class="heading-item -depth-3"><a class="hlink link-apis" href="#apis">APIs</a>
+                        </li>
+                      </ul>
+                    </li>
+                    <li class="heading-item -depth-2"><a class="hlink link-fisica" href="#fisica">Física</a>
+                      <ul class="heading-list -depth-2">
+                        <li class="heading-item -depth-3"><a class="hlink link-admin-y-apis" href="#admin-y-apis">Admin y APIs</a>
+                        </li>
+                        <li class="heading-item -depth-3"><a class="hlink link-base-de-datos" href="#base-de-datos">Base de datos</a>
                         </li>
                       </ul>
                     </li>
@@ -51,17 +59,17 @@
           <div class="right">
           </div>
         </div>
-        <div class="markdown-body"><h2 id="arquitectura">Arquitectura</h2>
-<h3 id="logica">L&#xF3;gica</h3>
-<h4 id="admin">Admin</h4>
+        <div class="markdown-body"><h1 id="arquitectura">Arquitectura</h1>
+<h2 id="logica">L&#xF3;gica</h2>
+<h3 id="admin">Admin</h3>
 <p>El Admin seguir&#xE1; el patr&#xF3;n MVC (Model-View-Controller). Las vistas ser&#xE1;n renderizadas por el servidor, y no se utilizar&#xE1;n frameworks frontend para gestionar la UI.</p>
-<h4 id="apis">APIs</h4>
+<h3 id="apis">APIs</h3>
 <p>Se utilizar&#xE1; una adaptaci&#xF3;n de MVC compuesta por el Modelo, un Controlador, un Parser de Requests y un Generador de Responses. Este &#xFA;ltimo ser&#xE1; el encargado de generar las responses JSON. El Parser transformar&#xE1; las responses a un formato intermedio, &#xFA;til para el Controlador. Tanto el Parser como el Generador admitir&#xE1;n el uso de middlewares.</p>
 <p>Controlador, Parser y Generador ser&#xE1;n &#xFA;nicos para toda la aplicaci&#xF3;n, con posibilidades de adoptar reglas en el Controlador para casos particulares. S&#xF3;lo en el caso del Modelo habr&#xE1; uno para cada entidad.</p>
-<h3 id="fisica">F&#xED;sica</h3>
-<h4 id="admin-y-apis">Admin y APIs</h4>
+<h2 id="fisica">F&#xED;sica</h2>
+<h3 id="admin-y-apis">Admin y APIs</h3>
 <p>Tanto el Admin como las APIs compartir&#xE1;n una m&#xE1;quina virtual. El Admin no estar&#xE1; expuesto en forma directa, sino detr&#xE1;s de Nginx. En el caso de las APIs un API Gateway tomar&#xE1; el lugar de Nginx.</p>
-<h4 id="base-de-datos">Base de datos</h4>
+<h3 id="base-de-datos">Base de datos</h3>
 <p>Se utlizar&#xE1;n dos servidores de bases de datos replicados en estructura master-slave. El servidor master estar&#xE1; encargado &#xFA;nicamente de las escrituras, y el slave ser&#xE1; de s&#xF3;lo lectura.</p>
 
         </div>

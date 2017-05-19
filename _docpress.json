@@ -91,19 +91,36 @@
             "slug": "estructuraarquitectura",
             "headings": [
               {
-                "title": "Arquitectura",
+                "title": "Lógica",
                 "depth": 2,
-                "id": "arquitectura",
+                "id": "logica",
                 "headings": [
                   {
-                    "title": "Lógica",
+                    "title": "Admin",
                     "depth": 3,
-                    "id": "logica"
+                    "id": "admin"
                   },
                   {
-                    "title": "Física",
+                    "title": "APIs",
                     "depth": 3,
-                    "id": "fisica"
+                    "id": "apis"
+                  }
+                ]
+              },
+              {
+                "title": "Física",
+                "depth": 2,
+                "id": "fisica",
+                "headings": [
+                  {
+                    "title": "Admin y APIs",
+                    "depth": 3,
+                    "id": "admin-y-apis"
+                  },
+                  {
+                    "title": "Base de datos",
+                    "depth": 3,
+                    "id": "base-de-datos"
                   }
                 ]
               }
@@ -375,19 +392,36 @@
       "slug": "estructuraarquitectura",
       "headings": [
         {
-          "title": "Arquitectura",
+          "title": "Lógica",
           "depth": 2,
-          "id": "arquitectura",
+          "id": "logica",
           "headings": [
             {
-              "title": "Lógica",
+              "title": "Admin",
               "depth": 3,
-              "id": "logica"
+              "id": "admin"
             },
             {
-              "title": "Física",
+              "title": "APIs",
               "depth": 3,
-              "id": "fisica"
+              "id": "apis"
+            }
+          ]
+        },
+        {
+          "title": "Física",
+          "depth": 2,
+          "id": "fisica",
+          "headings": [
+            {
+              "title": "Admin y APIs",
+              "depth": 3,
+              "id": "admin-y-apis"
+            },
+            {
+              "title": "Base de datos",
+              "depth": 3,
+              "id": "base-de-datos"
             }
           ]
         }
