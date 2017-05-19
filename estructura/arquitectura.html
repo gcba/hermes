@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../assets/style.css?t=615badd5">
+    <script src="../assets/script.js?t=42463e55"></script>
+    <title>Arquitectura - Hermes</title>
+    <meta name="viewport" content="width=device-width">
+  </head>
+  <body class="-menu-visible">
+    <div class="doc-layout">
+      <div class="toggle menu-toggle js-menu-toggle"></div>
+      <div class="menu toc-menu">
+        <li class="menu-item -level-0 -parent">
+          <ul class="submenu">
+            <li class="menu-item -level-1"><a class="link title  link-index" href="../index.html">Hermes</a>
+            </li>
+            <li class="menu-item -level-1"><a class="link title  link-analisis-funcional" href="../analisis-funcional/index.html">Análisis Funcional</a>
+            </li>
+            <li class="menu-item -level-1 -parent"><span class="title">Estructura</span>
+              <ul class="submenu">
+                <li class="menu-item -level-2"><a class="link title -active link-estructuraarquitectura" href="../estructura/arquitectura.html">Arquitectura</a>
+                  <ul class="headings heading-list">
+                    <li class="heading-item -depth-2"><a class="hlink link-arquitectura" href="#arquitectura">Arquitectura</a>
+                      <ul class="heading-list -depth-2">
+                        <li class="heading-item -depth-3"><a class="hlink link-logica" href="#logica">Lógica</a>
+                        </li>
+                        <li class="heading-item -depth-3"><a class="hlink link-fisica" href="#fisica">Física</a>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li class="menu-item -level-1 -parent"><span class="title">Desarrollo</span>
+              <ul class="submenu">
+                <li class="menu-item -level-2"><a class="link title  link-desarrollogestion" href="../desarrollo/gestion.html">Gestión</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-desarrollometodologia" href="../desarrollo/metodologia.html">Metodología</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-desarrollocodigo" href="../desarrollo/codigo.html">Código</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </div>
+      <div class="body page-estructuraarquitectura">
+        <div class="header-nav">
+          <div class="right">
+          </div>
+        </div>
+        <div class="markdown-body"><h2 id="arquitectura">Arquitectura</h2>
+<h3 id="logica">L&#xF3;gica</h3>
+<h4 id="admin">Admin</h4>
+<p>El Admin seguir&#xE1; el patr&#xF3;n MVC (Model-View-Controller). Las vistas ser&#xE1;n renderizadas por el servidor, y no se utilizar&#xE1;n frameworks frontend para gestionar la UI.</p>
+<h4 id="apis">APIs</h4>
+<p>Se utilizar&#xE1; una adaptaci&#xF3;n de MVC compuesta por el Modelo, un Controlador, un Parser de Requests y un Generador de Responses. Este &#xFA;ltimo ser&#xE1; el encargado de generar las responses JSON. El Parser transformar&#xE1; las responses a un formato intermedio, &#xFA;til para el Controlador. Tanto el Parser como el Generador admitir&#xE1;n el uso de middlewares.</p>
+<p>Controlador, Parser y Generador ser&#xE1;n &#xFA;nicos para toda la aplicaci&#xF3;n, con posibilidades de adoptar reglas en el Controlador para casos particulares. S&#xF3;lo en el caso del Modelo habr&#xE1; uno para cada entidad.</p>
+<h3 id="fisica">F&#xED;sica</h3>
+<h4 id="admin-y-apis">Admin y APIs</h4>
+<p>Tanto el Admin como las APIs compartir&#xE1;n una m&#xE1;quina virtual. El Admin no estar&#xE1; expuesto en forma directa, sino detr&#xE1;s de Nginx. En el caso de las APIs un API Gateway tomar&#xE1; el lugar de Nginx.</p>
+<h4 id="base-de-datos">Base de datos</h4>
+<p>Se utlizar&#xE1;n dos servidores de bases de datos replicados en estructura master-slave. El servidor master estar&#xE1; encargado &#xFA;nicamente de las escrituras, y el slave ser&#xE1; de s&#xF3;lo lectura.</p>
+
+        </div>
+        <div class="footer-nav">
+          <div class="left"><a href="../analisis-funcional/index.html"><span class="title">Análisis Funcional</span></a></div>
+          <div class="right"><a href="../desarrollo/gestion.html"><span class="label">Next: </span><span class="title">Gestión</span></a></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

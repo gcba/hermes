@@ -82,6 +82,36 @@
         ]
       },
       {
+        "title": "Estructura",
+        "sections": [
+          {
+            "title": "Arquitectura",
+            "source": "docs/estructura/arquitectura.md",
+            "url": "estructura/arquitectura.html",
+            "slug": "estructuraarquitectura",
+            "headings": [
+              {
+                "title": "Arquitectura",
+                "depth": 2,
+                "id": "arquitectura",
+                "headings": [
+                  {
+                    "title": "Lógica",
+                    "depth": 3,
+                    "id": "logica"
+                  },
+                  {
+                    "title": "Física",
+                    "depth": 3,
+                    "id": "fisica"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
         "title": "Desarrollo",
         "sections": [
           {
@@ -338,6 +368,31 @@
         }
       ]
     },
+    "estructura/arquitectura.html": {
+      "source": "docs/estructura/arquitectura.md",
+      "title": "Arquitectura - Hermes",
+      "pageTitle": "Arquitectura",
+      "slug": "estructuraarquitectura",
+      "headings": [
+        {
+          "title": "Arquitectura",
+          "depth": 2,
+          "id": "arquitectura",
+          "headings": [
+            {
+              "title": "Lógica",
+              "depth": 3,
+              "id": "logica"
+            },
+            {
+              "title": "Física",
+              "depth": 3,
+              "id": "fisica"
+            }
+          ]
+        }
+      ]
+    },
     "desarrollo/gestion.html": {
       "source": "docs/desarrollo/gestion.md",
       "title": "Gestión - Hermes",
@@ -511,6 +566,7 @@
   "sources": {
     "README.md": "index.html",
     "docs/analisis-funcional/README.md": "analisis-funcional/index.html",
+    "docs/estructura/arquitectura.md": "estructura/arquitectura.html",
     "docs/desarrollo/gestion.md": "desarrollo/gestion.html",
     "docs/desarrollo/metodologia.md": "desarrollo/metodologia.html",
     "docs/desarrollo/codigo.md": "desarrollo/codigo.html"
