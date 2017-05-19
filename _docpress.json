@@ -4,7 +4,6 @@
       {
         "title": "Hermes",
         "source": "README.md",
-        "expand": true,
         "url": "index.html",
         "slug": "index",
         "headings": [
@@ -27,6 +26,232 @@
             "title": "Licencia",
             "depth": 2,
             "id": "licencia"
+          }
+        ]
+      },
+      {
+        "title": "Análisis Funcional",
+        "source": "docs/analisis-funcional/README.md",
+        "url": "analisis-funcional/index.html",
+        "slug": "analisis-funcional",
+        "headings": [
+          {
+            "title": "Requerimientos",
+            "depth": 2,
+            "id": "requerimientos",
+            "headings": [
+              {
+                "title": "Funcionales",
+                "depth": 3,
+                "id": "funcionales"
+              },
+              {
+                "title": "No funcionales",
+                "depth": 3,
+                "id": "no-funcionales"
+              }
+            ]
+          },
+          {
+            "title": "Actores",
+            "depth": 2,
+            "id": "actores"
+          },
+          {
+            "title": "Casos de uso",
+            "depth": 2,
+            "id": "casos-de-uso",
+            "headings": [
+              {
+                "title": "Usuario",
+                "depth": 3,
+                "id": "usuario"
+              },
+              {
+                "title": "Soporte",
+                "depth": 3,
+                "id": "soporte"
+              },
+              {
+                "title": "Admin",
+                "depth": 3,
+                "id": "admin"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Desarrollo",
+        "sections": [
+          {
+            "title": "Gestión",
+            "source": "docs/desarrollo/gestion.md",
+            "url": "desarrollo/gestion.html",
+            "slug": "desarrollogestion",
+            "headings": [
+              {
+                "title": "Planeamiento",
+                "depth": 2,
+                "id": "planeamiento",
+                "headings": [
+                  {
+                    "title": "Mes 1",
+                    "depth": 3,
+                    "id": "mes-1"
+                  },
+                  {
+                    "title": "Mes 2",
+                    "depth": 3,
+                    "id": "mes-2"
+                  },
+                  {
+                    "title": "Mes 3",
+                    "depth": 3,
+                    "id": "mes-3"
+                  },
+                  {
+                    "title": "Mes 4",
+                    "depth": 3,
+                    "id": "mes-4"
+                  },
+                  {
+                    "title": "Mes 5",
+                    "depth": 3,
+                    "id": "mes-5"
+                  },
+                  {
+                    "title": "Tracking",
+                    "depth": 3,
+                    "id": "tracking"
+                  }
+                ]
+              },
+              {
+                "title": "Recursos",
+                "depth": 2,
+                "id": "recursos"
+              },
+              {
+                "title": "Prioridades",
+                "depth": 2,
+                "id": "prioridades"
+              },
+              {
+                "title": "Kickoff",
+                "depth": 2,
+                "id": "kickoff"
+              },
+              {
+                "title": "Sprints",
+                "depth": 2,
+                "id": "sprints"
+              }
+            ]
+          },
+          {
+            "title": "Metodología",
+            "source": "docs/desarrollo/metodologia.md",
+            "url": "desarrollo/metodologia.html",
+            "slug": "desarrollometodologia",
+            "headings": [
+              {
+                "title": "Sprints",
+                "depth": 3,
+                "id": "sprints"
+              }
+            ]
+          },
+          {
+            "title": "Código",
+            "source": "docs/desarrollo/codigo.md",
+            "url": "desarrollo/codigo.html",
+            "slug": "desarrollocodigo",
+            "headings": [
+              {
+                "title": "Stack",
+                "depth": 2,
+                "id": "stack",
+                "headings": [
+                  {
+                    "title": "Admin",
+                    "depth": 3,
+                    "id": "admin"
+                  },
+                  {
+                    "title": "APIs",
+                    "depth": 3,
+                    "id": "apis"
+                  },
+                  {
+                    "title": "Datos",
+                    "depth": 3,
+                    "id": "datos"
+                  },
+                  {
+                    "title": "API Gateway",
+                    "depth": 3,
+                    "id": "api-gateway"
+                  }
+                ]
+              },
+              {
+                "title": "Convenciones",
+                "depth": 2,
+                "id": "convenciones",
+                "headings": [
+                  {
+                    "title": "Go",
+                    "depth": 3,
+                    "id": "go"
+                  },
+                  {
+                    "title": "PHP",
+                    "depth": 3,
+                    "id": "php"
+                  }
+                ]
+              },
+              {
+                "title": "Testeo",
+                "depth": 2,
+                "id": "testeo",
+                "headings": [
+                  {
+                    "title": "APIs",
+                    "depth": 3,
+                    "id": "apis"
+                  },
+                  {
+                    "title": "Admin",
+                    "depth": 3,
+                    "id": "admin"
+                  }
+                ]
+              },
+              {
+                "title": "Repositorio",
+                "depth": 2,
+                "id": "repositorio",
+                "headings": [
+                  {
+                    "title": "Ramas",
+                    "depth": 3,
+                    "id": "ramas"
+                  },
+                  {
+                    "title": "Releases",
+                    "depth": 3,
+                    "id": "releases"
+                  },
+                  {
+                    "title": "Estructura de carpetas",
+                    "depth": 3,
+                    "id": "estructura-de-carpetas"
+                  }
+                ]
+              }
+            ]
           }
         ]
       }
@@ -60,9 +285,234 @@
           "id": "licencia"
         }
       ]
+    },
+    "analisis-funcional/index.html": {
+      "source": "docs/analisis-funcional/README.md",
+      "title": "Análisis Funcional - Hermes",
+      "pageTitle": "Análisis Funcional",
+      "slug": "analisis-funcional",
+      "headings": [
+        {
+          "title": "Requerimientos",
+          "depth": 2,
+          "id": "requerimientos",
+          "headings": [
+            {
+              "title": "Funcionales",
+              "depth": 3,
+              "id": "funcionales"
+            },
+            {
+              "title": "No funcionales",
+              "depth": 3,
+              "id": "no-funcionales"
+            }
+          ]
+        },
+        {
+          "title": "Actores",
+          "depth": 2,
+          "id": "actores"
+        },
+        {
+          "title": "Casos de uso",
+          "depth": 2,
+          "id": "casos-de-uso",
+          "headings": [
+            {
+              "title": "Usuario",
+              "depth": 3,
+              "id": "usuario"
+            },
+            {
+              "title": "Soporte",
+              "depth": 3,
+              "id": "soporte"
+            },
+            {
+              "title": "Admin",
+              "depth": 3,
+              "id": "admin"
+            }
+          ]
+        }
+      ]
+    },
+    "desarrollo/gestion.html": {
+      "source": "docs/desarrollo/gestion.md",
+      "title": "Gestión - Hermes",
+      "pageTitle": "Gestión",
+      "slug": "desarrollogestion",
+      "headings": [
+        {
+          "title": "Planeamiento",
+          "depth": 2,
+          "id": "planeamiento",
+          "headings": [
+            {
+              "title": "Mes 1",
+              "depth": 3,
+              "id": "mes-1"
+            },
+            {
+              "title": "Mes 2",
+              "depth": 3,
+              "id": "mes-2"
+            },
+            {
+              "title": "Mes 3",
+              "depth": 3,
+              "id": "mes-3"
+            },
+            {
+              "title": "Mes 4",
+              "depth": 3,
+              "id": "mes-4"
+            },
+            {
+              "title": "Mes 5",
+              "depth": 3,
+              "id": "mes-5"
+            },
+            {
+              "title": "Tracking",
+              "depth": 3,
+              "id": "tracking"
+            }
+          ]
+        },
+        {
+          "title": "Recursos",
+          "depth": 2,
+          "id": "recursos"
+        },
+        {
+          "title": "Prioridades",
+          "depth": 2,
+          "id": "prioridades"
+        },
+        {
+          "title": "Kickoff",
+          "depth": 2,
+          "id": "kickoff"
+        },
+        {
+          "title": "Sprints",
+          "depth": 2,
+          "id": "sprints"
+        }
+      ]
+    },
+    "desarrollo/metodologia.html": {
+      "source": "docs/desarrollo/metodologia.md",
+      "title": "Metodología - Hermes",
+      "pageTitle": "Metodología",
+      "slug": "desarrollometodologia",
+      "headings": [
+        {
+          "title": "Sprints",
+          "depth": 3,
+          "id": "sprints"
+        }
+      ]
+    },
+    "desarrollo/codigo.html": {
+      "source": "docs/desarrollo/codigo.md",
+      "title": "Código - Hermes",
+      "pageTitle": "Código",
+      "slug": "desarrollocodigo",
+      "headings": [
+        {
+          "title": "Stack",
+          "depth": 2,
+          "id": "stack",
+          "headings": [
+            {
+              "title": "Admin",
+              "depth": 3,
+              "id": "admin"
+            },
+            {
+              "title": "APIs",
+              "depth": 3,
+              "id": "apis"
+            },
+            {
+              "title": "Datos",
+              "depth": 3,
+              "id": "datos"
+            },
+            {
+              "title": "API Gateway",
+              "depth": 3,
+              "id": "api-gateway"
+            }
+          ]
+        },
+        {
+          "title": "Convenciones",
+          "depth": 2,
+          "id": "convenciones",
+          "headings": [
+            {
+              "title": "Go",
+              "depth": 3,
+              "id": "go"
+            },
+            {
+              "title": "PHP",
+              "depth": 3,
+              "id": "php"
+            }
+          ]
+        },
+        {
+          "title": "Testeo",
+          "depth": 2,
+          "id": "testeo",
+          "headings": [
+            {
+              "title": "APIs",
+              "depth": 3,
+              "id": "apis"
+            },
+            {
+              "title": "Admin",
+              "depth": 3,
+              "id": "admin"
+            }
+          ]
+        },
+        {
+          "title": "Repositorio",
+          "depth": 2,
+          "id": "repositorio",
+          "headings": [
+            {
+              "title": "Ramas",
+              "depth": 3,
+              "id": "ramas"
+            },
+            {
+              "title": "Releases",
+              "depth": 3,
+              "id": "releases"
+            },
+            {
+              "title": "Estructura de carpetas",
+              "depth": 3,
+              "id": "estructura-de-carpetas"
+            }
+          ]
+        }
+      ]
     }
   },
   "sources": {
-    "README.md": "index.html"
+    "README.md": "index.html",
+    "docs/analisis-funcional/README.md": "analisis-funcional/index.html",
+    "docs/desarrollo/gestion.md": "desarrollo/gestion.html",
+    "docs/desarrollo/metodologia.md": "desarrollo/metodologia.html",
+    "docs/desarrollo/codigo.md": "desarrollo/codigo.html"
   }
 }

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../assets/style.css?t=615badd5">
+    <script src="../assets/script.js?t=42463e55"></script>
+    <title>Análisis Funcional - Hermes</title>
+    <meta name="viewport" content="width=device-width">
+  </head>
+  <body class="-menu-visible">
+    <div class="doc-layout">
+      <div class="toggle menu-toggle js-menu-toggle"></div>
+      <div class="menu toc-menu">
+        <li class="menu-item -level-0 -parent">
+          <ul class="submenu">
+            <li class="menu-item -level-1"><a class="link title  link-index" href="../index.html">Hermes</a>
+            </li>
+            <li class="menu-item -level-1"><a class="link title -active link-analisis-funcional" href="../analisis-funcional/index.html">Análisis Funcional</a>
+              <ul class="headings heading-list">
+                <li class="heading-item -depth-2"><a class="hlink link-requerimientos" href="#requerimientos">Requerimientos</a>
+                  <ul class="heading-list -depth-2">
+                    <li class="heading-item -depth-3"><a class="hlink link-funcionales" href="#funcionales">Funcionales</a>
+                    </li>
+                    <li class="heading-item -depth-3"><a class="hlink link-no-funcionales" href="#no-funcionales">No funcionales</a>
+                    </li>
+                  </ul>
+                </li>
+                <li class="heading-item -depth-2"><a class="hlink link-actores" href="#actores">Actores</a>
+                </li>
+                <li class="heading-item -depth-2"><a class="hlink link-casos-de-uso" href="#casos-de-uso">Casos de uso</a>
+                  <ul class="heading-list -depth-2">
+                    <li class="heading-item -depth-3"><a class="hlink link-usuario" href="#usuario">Usuario</a>
+                    </li>
+                    <li class="heading-item -depth-3"><a class="hlink link-soporte" href="#soporte">Soporte</a>
+                    </li>
+                    <li class="heading-item -depth-3"><a class="hlink link-admin" href="#admin">Admin</a>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li class="menu-item -level-1 -parent"><span class="title">Desarrollo</span>
+              <ul class="submenu">
+                <li class="menu-item -level-2"><a class="link title  link-desarrollogestion" href="../desarrollo/gestion.html">Gestión</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-desarrollometodologia" href="../desarrollo/metodologia.html">Metodología</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-desarrollocodigo" href="../desarrollo/codigo.html">Código</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </div>
+      <div class="body page-analisis-funcional">
+        <div class="header-nav">
+          <div class="right">
+          </div>
+        </div>
+        <div class="markdown-body"><h1 id="analisis-funcional">An&#xE1;lisis Funcional</h1>
+<h2 id="requerimientos">Requerimientos</h2>
+<h3 id="funcionales">Funcionales</h3>
+<ol>
+<li>Registrar las calificaciones y comentarios enviados desde cada app</li>
+<li>Generar estad&#xED;sticas diarias, mensuales, anuales y pod per&#xED;odo custom</li>
+<li>Generar gr&#xE1;ficos a partir de las estad&#xED;sticas</li>
+<li>Interactuar con el p&#xFA;blico calificador</li>
+<li>Mostrar calificaciones y comentarios de cada app</li>
+<li>Administrar el contenido</li>
+<li>Administrar usuarios y permisos</li>
+<li>Registrar los accesos y acciones realizados por cada usuario</li>
+<li>Disponibilizar una API para las estad&#xED;sticas</li>
+</ol>
+<h4 id="estadisticas">Estad&#xED;sticas</h4>
+<p>TBD</p>
+<h3 id="no-funcionales">No funcionales</h3>
+<ol>
+<li>Alta disponiblidad</li>
+<li>F&#xE1;cil de extender</li>
+<li>F&#xE1;cil de mantener</li>
+</ol>
+<h2 id="actores">Actores</h2>
+<ol>
+<li>Usuario</li>
+<li>Soporte</li>
+<li>Admin</li>
+<li>Desarrollador</li>
+<li>P&#xFA;blico</li>
+</ol>
+<h2 id="casos-de-uso">Casos de uso</h2>
+<h3 id="usuario">Usuario</h3>
+<ol>
+<li>Seleccionar app</li>
+<li>Ver calificaciones y comentarios</li>
+<li>Ver mensajes</li>
+<li>Filtrar mensajes</li>
+<li>Ordenar mensajes</li>
+<li>Buscar mensajes</li>
+<li>Filtrar calificaciones</li>
+<li>Ordenar calificaciones</li>
+<li>Buscar comentarios</li>
+<li>Ver estad&#xED;sticas (gr&#xE1;ficos)</li>
+<li>Seleccionar m&#xE9;trica</li>
+<li>Cambiar per&#xED;odo de estad&#xED;sticas</li>
+<li>Ver usuario</li>
+<li>Cambiar contrase&#xF1;a</li>
+</ol>
+<h3 id="soporte">Soporte</h3>
+<p>Todos los de Usuario, m&#xE1;s:</p>
+<ul>
+<li>Enviar mensaje al calificador</li>
+</ul>
+<h3 id="admin">Admin</h3>
+<p>Todos los de Usuario y Soporte, m&#xE1;s:</p>
+<ul>
+<li>Ver historial del usuario</li>
+<li>Ver log de actividades</li>
+<li>Filtrar log de actividades</li>
+<li>Agregar usuarios</li>
+<li>Asignar usuarios</li>
+<li>Borrar usuarios</li>
+<li>Borrar calificaciones</li>
+</ul>
+
+        </div>
+        <div class="footer-nav">
+          <div class="left"><a href="../index.html"><span class="title">Hermes</span></a></div>
+          <div class="right"><a href="../desarrollo/gestion.html"><span class="label">Next: </span><span class="title">Gestión</span></a></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
