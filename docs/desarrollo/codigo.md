@@ -72,6 +72,10 @@ Cuando ya se estén taggeando releases cada nuevo merge a master supondrá la cr
 
 Esta rama se utilizará para servir la documentación a través de Github Pages.
 
+### Commits
+
+Los mensajes de los commits deberán ser breves, concisos y estar escritos en inglés.
+
 ### Releases
 
 Se seguirá el esquema SemVer (semantic versioning): major.minor.patch.
