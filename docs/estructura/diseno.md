@@ -15,18 +15,18 @@ La lógica de negocio también estará encapsulada en un servicio aparte.
 Se estructurarán en capas:
 
 ```
-		   Base de datos
+           Base de datos
  _________________________________
-|							      |
-|			  Modelos			  |
+|                                 |
+|             Modelos             |
 |_________________________________|
-|								  |
-|		    Controlador           |
+|                                 |
+|           Controlador           |
 |_________________________________|
-|				 |				  |
+|                |                |
 |     Parser     |     Builder	  |
 |________________|________________|
-	 Requests		  Responses
+     Requests         Responses
 ```
 
 Las funcionalidades comunes se extraerán en packages para ser utilizadas en ambas APIs.
