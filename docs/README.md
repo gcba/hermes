@@ -5,6 +5,8 @@ Hermes
 * [Análisis Funcional](analisis-funcional/README.md)
 * Estructura
     * [Arquitectura](estructura/arquitectura.md)
+    * [Diseño](estructura/diseno.md)
+    * [APIs](estructura/apis.md)
 * Desarrollo
     * [Gestión](desarrollo/gestion.md)
     * [Metodología](desarrollo/metodologia.md)
