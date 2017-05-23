@@ -177,7 +177,14 @@
               {
                 "title": "API de estadísticas",
                 "depth": 2,
-                "id": "api-de-estadisticas"
+                "id": "api-de-estadisticas",
+                "headings": [
+                  {
+                    "title": "Endpoints",
+                    "depth": 3,
+                    "id": "endpoints"
+                  }
+                ]
               }
             ]
           }
@@ -538,7 +545,14 @@
         {
           "title": "API de estadísticas",
           "depth": 2,
-          "id": "api-de-estadisticas"
+          "id": "api-de-estadisticas",
+          "headings": [
+            {
+              "title": "Endpoints",
+              "depth": 3,
+              "id": "endpoints"
+            }
+          ]
         }
       ]
     },
