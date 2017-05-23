@@ -167,7 +167,6 @@ return [
          * Package Service Providers...
          */
         Laravel\Tinker\TinkerServiceProvider::class,
-        Orchid\Providers\FoundationServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -177,6 +176,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        Backpack\Base\BaseServiceProvider::class,
 
     ],
 
@@ -226,11 +226,6 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'Dashboard' =>  Orchid\Facades\Dashboard::class,
-        'Alert' =>  Orchid\Alert\Facades\Alert::class,
-        'Setting' =>  Orchid\Settings\Facades\Setting::class,
-        'Active' => Watson\Active\Facades\Active::class,
-        'Image' => Intervention\Image\Facades\Image::class,
 
     ],
 

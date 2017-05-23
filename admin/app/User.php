@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Orchid\Core\Models\User as UserOrchid;
+use Backpack\Base\app\Notifications\ResetPasswordNotification as ResetPasswordNotification;
 
-class User extends UserOrchid
+class User extends Authenticatable
 {
     use Notifiable;
 
