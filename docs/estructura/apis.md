@@ -23,3 +23,7 @@ Las normas aquí descriptas deben aplicarse de manera uniforme y exhaustiva.
 ## API de estadísticas
 
 Esta API será de sólo lectura, con un enfoque de obtención y transformación de  datos cuantitativos. Tiene por fin poder responder preguntas relacionadas con los datos de forma confiable, flexible y expresiva.
+
+### Endpoints
+
+Dado que se trata de una API GraphQL, sólo es necesario un endpoint.
