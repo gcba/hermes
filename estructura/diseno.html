@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../assets/style.css?t=615badd5">
+    <script src="../assets/script.js?t=42463e55"></script>
+    <title>Diseño - Hermes</title>
+    <meta name="viewport" content="width=device-width">
+  </head>
+  <body class="-menu-visible">
+    <div class="doc-layout">
+      <div class="toggle menu-toggle js-menu-toggle"></div>
+      <div class="menu toc-menu">
+        <li class="menu-item -level-0 -parent">
+          <ul class="submenu">
+            <li class="menu-item -level-1"><a class="link title  link-index" href="../index.html">Hermes</a>
+            </li>
+            <li class="menu-item -level-1"><a class="link title  link-analisis-funcional" href="../analisis-funcional/index.html">Análisis Funcional</a>
+            </li>
+            <li class="menu-item -level-1 -parent"><span class="title">Estructura</span>
+              <ul class="submenu">
+                <li class="menu-item -level-2"><a class="link title  link-estructuraarquitectura" href="../estructura/arquitectura.html">Arquitectura</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title -active link-estructuradiseno" href="../estructura/diseno.html">Diseño</a>
+                  <ul class="headings heading-list">
+                    <li class="heading-item -depth-2"><a class="hlink link-modelo-de-datos" href="#modelo-de-datos">Modelo de datos</a>
+                      <ul class="heading-list -depth-2">
+                        <li class="heading-item -depth-3"><a class="hlink link-entidades" href="#entidades">Entidades</a>
+                        </li>
+                      </ul>
+                    </li>
+                    <li class="heading-item -depth-2"><a class="hlink link-admin" href="#admin">Admin</a>
+                    </li>
+                    <li class="heading-item -depth-2"><a class="hlink link-apis" href="#apis">APIs</a>
+                    </li>
+                  </ul>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-estructuraapis" href="../estructura/apis.html">APIs</a>
+                </li>
+              </ul>
+            </li>
+            <li class="menu-item -level-1 -parent"><span class="title">Desarrollo</span>
+              <ul class="submenu">
+                <li class="menu-item -level-2"><a class="link title  link-desarrollogestion" href="../desarrollo/gestion.html">Gestión</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-desarrollometodologia" href="../desarrollo/metodologia.html">Metodología</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-desarrollocodigo" href="../desarrollo/codigo.html">Código</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </div>
+      <div class="body page-estructuradiseno">
+        <div class="header-nav">
+          <div class="right">
+          </div>
+        </div>
+        <div class="markdown-body"><h1 id="diseno">Dise&#xF1;o</h1>
+<h2 id="modelo-de-datos">Modelo de datos</h2>
+<h3 id="entidades">Entidades</h3>
+<h2 id="admin">Admin</h2>
+<p>Se seguir&#xE1;n las convenciones y estructuras por defecto de Laravel, pero se buscar&#xE1; mantener livianos los controladores. Toda funcionalidad que resulte de utilidad com&#xFA;n ser&#xE1; extractada a un servicio aparte.</p>
+<p>La l&#xF3;gica de negocio tambi&#xE9;n estar&#xE1; encapsulada en un servicio aparte.</p>
+<h2 id="apis">APIs</h2>
+<p>Se estructurar&#xE1;n en capas:</p>
+<pre><code>		   Base de datos
+ _________________________________
+|							      |
+|			  Modelos			  |
+|_________________________________|
+|								  |
+|		    Controlador           |
+|_________________________________|
+|				 |				  |
+|     Parser     |     Builder	  |
+|________________|________________|
+	 Requests		  Responses
+</code></pre>
+<p>Las funcionalidades comunes se extraer&#xE1;n en packages para ser utilizadas en ambas APIs.</p>
+<p>Controlador, Parser y Builder, al ser &#xFA;nicos trabajar&#xE1;n con una abstracci&#xF3;n de las operaciones que se terminar&#xE1; concretando con las llamadas a los Modelos. Para ello se utilizar&#xE1; una implementaci&#xF3;n del patr&#xF3;n Visitor.</p>
+<p>En el caso de la API de estad&#xED;sticas, el Controlador implementar&#xE1; una estructura similar a pipes and filters, a fin de obtener los datos necesarios y efectuar todas las transformaciones en el orden correcto. Dada su naturaleza, esta API no ser&#xE1; REST sino Graphql.</p>
+<p>Por el contrario, la API de calificaciones ser&#xE1; netamente REST.</p>
+
+        </div>
+        <div class="footer-nav">
+          <div class="left"><a href="../estructura/arquitectura.html"><span class="title">Arquitectura</span></a></div>
+          <div class="right"><a href="../estructura/apis.html"><span class="label">Next: </span><span class="title">APIs</span></a></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

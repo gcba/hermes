@@ -125,6 +125,61 @@
                 ]
               }
             ]
+          },
+          {
+            "title": "Diseño",
+            "source": "docs/estructura/diseno.md",
+            "url": "estructura/diseno.html",
+            "slug": "estructuradiseno",
+            "headings": [
+              {
+                "title": "Modelo de datos",
+                "depth": 2,
+                "id": "modelo-de-datos",
+                "headings": [
+                  {
+                    "title": "Entidades",
+                    "depth": 3,
+                    "id": "entidades"
+                  }
+                ]
+              },
+              {
+                "title": "Admin",
+                "depth": 2,
+                "id": "admin"
+              },
+              {
+                "title": "APIs",
+                "depth": 2,
+                "id": "apis"
+              }
+            ]
+          },
+          {
+            "title": "APIs",
+            "source": "docs/estructura/apis.md",
+            "url": "estructura/apis.html",
+            "slug": "estructuraapis",
+            "headings": [
+              {
+                "title": "API de calificaciones",
+                "depth": 2,
+                "id": "api-de-calificaciones",
+                "headings": [
+                  {
+                    "title": "Principios",
+                    "depth": 3,
+                    "id": "principios"
+                  }
+                ]
+              },
+              {
+                "title": "API de estadísticas",
+                "depth": 2,
+                "id": "api-de-estadisticas"
+              }
+            ]
           }
         ]
       },
@@ -432,6 +487,61 @@
         }
       ]
     },
+    "estructura/diseno.html": {
+      "source": "docs/estructura/diseno.md",
+      "title": "Diseño - Hermes",
+      "pageTitle": "Diseño",
+      "slug": "estructuradiseno",
+      "headings": [
+        {
+          "title": "Modelo de datos",
+          "depth": 2,
+          "id": "modelo-de-datos",
+          "headings": [
+            {
+              "title": "Entidades",
+              "depth": 3,
+              "id": "entidades"
+            }
+          ]
+        },
+        {
+          "title": "Admin",
+          "depth": 2,
+          "id": "admin"
+        },
+        {
+          "title": "APIs",
+          "depth": 2,
+          "id": "apis"
+        }
+      ]
+    },
+    "estructura/apis.html": {
+      "source": "docs/estructura/apis.md",
+      "title": "APIs - Hermes",
+      "pageTitle": "APIs",
+      "slug": "estructuraapis",
+      "headings": [
+        {
+          "title": "API de calificaciones",
+          "depth": 2,
+          "id": "api-de-calificaciones",
+          "headings": [
+            {
+              "title": "Principios",
+              "depth": 3,
+              "id": "principios"
+            }
+          ]
+        },
+        {
+          "title": "API de estadísticas",
+          "depth": 2,
+          "id": "api-de-estadisticas"
+        }
+      ]
+    },
     "desarrollo/gestion.html": {
       "source": "docs/desarrollo/gestion.md",
       "title": "Gestión - Hermes",
@@ -611,6 +721,8 @@
     "README.md": "index.html",
     "docs/analisis-funcional/README.md": "analisis-funcional/index.html",
     "docs/estructura/arquitectura.md": "estructura/arquitectura.html",
+    "docs/estructura/diseno.md": "estructura/diseno.html",
+    "docs/estructura/apis.md": "estructura/apis.html",
     "docs/desarrollo/gestion.md": "desarrollo/gestion.html",
     "docs/desarrollo/metodologia.md": "desarrollo/metodologia.html",
     "docs/desarrollo/codigo.md": "desarrollo/codigo.html"
