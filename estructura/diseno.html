@@ -65,18 +65,18 @@
 <p>La l&#xF3;gica de negocio tambi&#xE9;n estar&#xE1; encapsulada en un servicio aparte.</p>
 <h2 id="apis">APIs</h2>
 <p>Se estructurar&#xE1;n en capas:</p>
-<pre><code>		   Base de datos
+<pre><code>           Base de datos
  _________________________________
-|							      |
-|			  Modelos			  |
+|                                 |
+|             Modelos             |
 |_________________________________|
-|								  |
-|		    Controlador           |
+|                                 |
+|           Controlador           |
 |_________________________________|
-|				 |				  |
+|                |                |
 |     Parser     |     Builder	  |
 |________________|________________|
-	 Requests		  Responses
+     Requests         Responses
 </code></pre>
 <p>Las funcionalidades comunes se extraer&#xE1;n en packages para ser utilizadas en ambas APIs.</p>
 <p>Controlador, Parser y Builder, al ser &#xFA;nicos trabajar&#xE1;n con una abstracci&#xF3;n de las operaciones que se terminar&#xE1; concretando con las llamadas a los Modelos. Para ello se utilizar&#xE1; una implementaci&#xF3;n del patr&#xF3;n Visitor.</p>
