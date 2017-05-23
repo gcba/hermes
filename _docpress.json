@@ -287,6 +287,11 @@
                     "id": "ramas"
                   },
                   {
+                    "title": "Commits",
+                    "depth": 3,
+                    "id": "commits"
+                  },
+                  {
                     "title": "Releases",
                     "depth": 3,
                     "id": "releases"
@@ -581,6 +586,11 @@
               "title": "Ramas",
               "depth": 3,
               "id": "ramas"
+            },
+            {
+              "title": "Commits",
+              "depth": 3,
+              "id": "commits"
             },
             {
               "title": "Releases",
