@@ -4,107 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "0f6cd2204ef49a57fd88d9bbfeb30bd9",
+    "content-hash": "96098e473b028cdb2529580554a1ae3e",
     "packages": [
-        {
-            "name": "almasaeed2010/adminlte",
-            "version": "v2.3.11",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/almasaeed2010/AdminLTE.git",
-                "reference": "2be703222af2edcb87e562d3da2299e4352bff8a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/almasaeed2010/AdminLTE/zipball/2be703222af2edcb87e562d3da2299e4352bff8a",
-                "reference": "2be703222af2edcb87e562d3da2299e4352bff8a",
-                "shasum": ""
-            },
-            "type": "library",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Abdullah Almsaeed",
-                    "email": "abdullah@almsaeedstudio.com"
-                }
-            ],
-            "description": "AdminLTE - admin control panel and dashboard that's based on Bootstrap 3",
-            "homepage": "http://almsaeedstudio.com/",
-            "keywords": [
-                "JS",
-                "admin",
-                "back-end",
-                "css",
-                "less",
-                "responsive",
-                "template",
-                "theme",
-                "web"
-            ],
-            "time": "2017-01-08T21:03:57+00:00"
-        },
-        {
-            "name": "backpack/base",
-            "version": "0.7.19",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Laravel-Backpack/Base.git",
-                "reference": "1e81a3130a927b643bab1e2e0eb8cbeeef603039"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Laravel-Backpack/Base/zipball/1e81a3130a927b643bab1e2e0eb8cbeeef603039",
-                "reference": "1e81a3130a927b643bab1e2e0eb8cbeeef603039",
-                "shasum": ""
-            },
-            "require": {
-                "almasaeed2010/adminlte": "2.3.*",
-                "illuminate/support": "~5.1",
-                "jenssegers/date": "^3.2",
-                "laravel/framework": "5.3.*|5.4.*",
-                "prologue/alerts": "^0.4.1"
-            },
-            "require-dev": {
-                "backpack/generators": "^1.1",
-                "laracasts/generators": "^1.1",
-                "phpunit/phpunit": "4.*",
-                "scrutinizer/ocular": "~1.1",
-                "squizlabs/php_codesniffer": "~2.3"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Backpack\\Base\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Cristian Tabacitu",
-                    "email": "hello@tabacitu.ro",
-                    "homepage": "http://www.tabacitu.ro",
-                    "role": "Chief Architect & Developer"
-                }
-            ],
-            "description": "Laravel Backpack's base package, which offers admin authentication and a blank admin panel using AdminLTE",
-            "homepage": "https://github.com/laravel-backpack/base",
-            "keywords": [
-                "backpack",
-                "base"
-            ],
-            "time": "2017-04-25T13:55:39+00:00"
-        },
         {
             "name": "dnoegel/php-xdg-base-dir",
             "version": "0.1",
@@ -333,63 +234,6 @@
                 }
             ],
             "time": "2015-04-20T18:58:01+00:00"
-        },
-        {
-            "name": "jenssegers/date",
-            "version": "v3.2.10",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/jenssegers/date.git",
-                "reference": "ddc073e6cbba95bf298bf2bf43f2ebb2ec47b050"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/jenssegers/date/zipball/ddc073e6cbba95bf298bf2bf43f2ebb2ec47b050",
-                "reference": "ddc073e6cbba95bf298bf2bf43f2ebb2ec47b050",
-                "shasum": ""
-            },
-            "require": {
-                "nesbot/carbon": "^1.0",
-                "php": ">=5.4",
-                "symfony/translation": "^2.7|^3.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^4.0|^5.0|^6.0",
-                "satooshi/php-coveralls": "^1.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.1-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Jenssegers\\Date\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Jens Segers",
-                    "homepage": "https://jenssegers.com"
-                }
-            ],
-            "description": "A date library to help you work with dates in different languages",
-            "homepage": "https://github.com/jenssegers/date",
-            "keywords": [
-                "carbon",
-                "date",
-                "datetime",
-                "i18n",
-                "laravel",
-                "time",
-                "translation"
-            ],
-            "time": "2017-04-20T14:50:49+00:00"
         },
         {
             "name": "laravel/framework",
@@ -934,56 +778,6 @@
                 "random"
             ],
             "time": "2017-03-13T16:27:32+00:00"
-        },
-        {
-            "name": "prologue/alerts",
-            "version": "0.4.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/prologuephp/alerts.git",
-                "reference": "2a7184a9f39ab6f6dde85dbe0b9c783241bf52ea"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/prologuephp/alerts/zipball/2a7184a9f39ab6f6dde85dbe0b9c783241bf52ea",
-                "reference": "2a7184a9f39ab6f6dde85dbe0b9c783241bf52ea",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/config": "~5",
-                "illuminate/session": "~5",
-                "illuminate/support": "~5",
-                "php": ">=5.4.0"
-            },
-            "require-dev": {
-                "mockery/mockery": "~0.9",
-                "phpunit/phpunit": "~4.1"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Prologue\\Alerts\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Dries Vints",
-                    "email": "dries.vints@gmail.com",
-                    "homepage": "http://driesvints.com",
-                    "role": "Maintainer"
-                }
-            ],
-            "description": "Prologue Alerts is a package that handles global site messages.",
-            "keywords": [
-                "alerts",
-                "laravel",
-                "messages"
-            ],
-            "time": "2017-01-24T13:22:25+00:00"
         },
         {
             "name": "psr/log",
