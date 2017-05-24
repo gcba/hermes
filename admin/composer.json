@@ -7,12 +7,10 @@
     "require": {
         "php": ">=5.6.4",
         "backpack/base": "^0.7.19",
-        "backpack/crud": "^3.2",
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0"
     },
     "require-dev": {
-        "backpack/generators": "^1.1",
         "fzaninotto/faker": "~1.4",
         "mockery/mockery": "0.9.*",
         "phpunit/phpunit": "~5.7"
