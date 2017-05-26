@@ -163,6 +163,18 @@
             "slug": "estructuraapis",
             "headings": [
               {
+                "title": "Disposiciones comunes",
+                "depth": 2,
+                "id": "disposiciones-comunes",
+                "headings": [
+                  {
+                    "title": "Autenticación",
+                    "depth": 3,
+                    "id": "autenticacion"
+                  }
+                ]
+              },
+              {
                 "title": "API de calificaciones",
                 "depth": 2,
                 "id": "api-de-calificaciones",
@@ -535,6 +547,18 @@
       "pageTitle": "APIs",
       "slug": "estructuraapis",
       "headings": [
+        {
+          "title": "Disposiciones comunes",
+          "depth": 2,
+          "id": "disposiciones-comunes",
+          "headings": [
+            {
+              "title": "Autenticación",
+              "depth": 3,
+              "id": "autenticacion"
+            }
+          ]
+        },
         {
           "title": "API de calificaciones",
           "depth": 2,
