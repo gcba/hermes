@@ -1,5 +1,11 @@
 # APIs
 
+## Disposiciones comunes
+
+### Autenticación
+
+Delegada en la API Gateway.
+
 ## API de calificaciones
 
 La API de calificaciones es primariamente de escritura. Tiene por fin poder agregar nuevas calificaciones y comentarios.
