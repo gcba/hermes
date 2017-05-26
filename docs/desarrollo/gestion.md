@@ -57,4 +57,6 @@ Se contará con un solo desarrollador a medio tiempo, por lo que será de suma i
 
 ## Kickoff
 
+El día Martes 30 de Mayo de 2017 se da comienzo a la implementación del modelo de datos.
+
 ## Sprints
