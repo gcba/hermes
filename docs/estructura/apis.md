@@ -20,10 +20,20 @@ En donde resulte más apropiado (en vistas de las prioridades y necesidades del 
 
 Las normas aquí descriptas deben aplicarse de manera uniforme y exhaustiva.
 
+### Endpoints
+
+`POST /ratings`: crear una nueva calificación (que puede incluir un comentario o no)
+
+`OPTIONS /ratings`: obtener la información necesaria (capos, tipos de datos, etc) necesaria para hacer un POST exitoso al endpoint.
+
 ## API de estadísticas
 
 Esta API será de sólo lectura, con un enfoque de obtención y transformación de  datos cuantitativos. Tiene por fin poder responder preguntas relacionadas con los datos de forma confiable, flexible y expresiva.
 
 ### Endpoints
 
-Dado que se trata de una API GraphQL, sólo es necesario un endpoint.
+Dado que se trata de una API GraphQL, sólo es necesario un endpoint. En él se admiten los métodos GET y POST.
+
+`GET /stats`
+
+`POST /stats`
