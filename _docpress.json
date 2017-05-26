@@ -171,6 +171,11 @@
                     "title": "Principios",
                     "depth": 3,
                     "id": "principios"
+                  },
+                  {
+                    "title": "Endpoints",
+                    "depth": 3,
+                    "id": "endpoints"
                   }
                 ]
               },
@@ -539,6 +544,11 @@
               "title": "Principios",
               "depth": 3,
               "id": "principios"
+            },
+            {
+              "title": "Endpoints",
+              "depth": 3,
+              "id": "endpoints"
             }
           ]
         },

@@ -29,6 +29,8 @@
                       <ul class="heading-list -depth-2">
                         <li class="heading-item -depth-3"><a class="hlink link-principios" href="#principios">Principios</a>
                         </li>
+                        <li class="heading-item -depth-3"><a class="hlink link-endpoints" href="#endpoints">Endpoints</a>
+                        </li>
                       </ul>
                     </li>
                     <li class="heading-item -depth-2"><a class="hlink link-api-de-estadisticas" href="#api-de-estadisticas">API de estadísticas</a>
@@ -73,10 +75,15 @@
 </ul>
 <p>####&#xA0;3. Consistencia</p>
 <p>Las normas aqu&#xED; descriptas deben aplicarse de manera uniforme y exhaustiva.</p>
+<h3 id="endpoints">Endpoints</h3>
+<p><code>POST /ratings</code>: crear una nueva calificaci&#xF3;n (que puede incluir un comentario o no)</p>
+<p><code>OPTIONS /ratings</code>: obtener la informaci&#xF3;n necesaria (capos, tipos de datos, etc) necesaria para hacer un POST exitoso al endpoint.</p>
 <h2 id="api-de-estadisticas">API de estad&#xED;sticas</h2>
 <p>Esta API ser&#xE1; de s&#xF3;lo lectura, con un enfoque de obtenci&#xF3;n y transformaci&#xF3;n de  datos cuantitativos. Tiene por fin poder responder preguntas relacionadas con los datos de forma confiable, flexible y expresiva.</p>
 <h3 id="endpoints">Endpoints</h3>
-<p>Dado que se trata de una API GraphQL, s&#xF3;lo es necesario un endpoint.</p>
+<p>Dado que se trata de una API GraphQL, s&#xF3;lo es necesario un endpoint. En &#xE9;l se admiten los m&#xE9;todos GET y POST.</p>
+<p><code>GET /stats</code></p>
+<p><code>POST /stats</code></p>
 
         </div>
         <div class="footer-nav">
