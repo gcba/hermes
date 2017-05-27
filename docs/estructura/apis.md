@@ -28,9 +28,13 @@ Las normas aquí descriptas deben aplicarse de manera uniforme y exhaustiva.
 
 ### Endpoints
 
-`POST /ratings`: crear una nueva calificación (que puede incluir un comentario o no)
+`POST /ratings`
 
-`OPTIONS /ratings`: obtener la información necesaria (capos, tipos de datos, etc) necesaria para hacer un POST exitoso al endpoint.
+Crear una nueva calificación (que puede incluir un comentario o no)
+
+`OPTIONS /ratings`
+
+ Obtener la información necesaria (campos, tipos de datos, etc) necesaria para hacer un POST exitoso al endpoint.
 
 ## API de estadísticas
 
