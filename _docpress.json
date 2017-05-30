@@ -151,9 +151,9 @@
             "slug": "estructuradatos",
             "headings": [
               {
-                "title": "Entidades",
+                "title": "Tablas",
                 "depth": 2,
-                "id": "entidades",
+                "id": "tablas",
                 "headings": [
                   {
                     "title": "User",
@@ -334,7 +334,14 @@
               {
                 "title": "Sprints",
                 "depth": 2,
-                "id": "sprints"
+                "id": "sprints",
+                "headings": [
+                  {
+                    "title": "Sprint 1",
+                    "depth": 3,
+                    "id": "sprint-1"
+                  }
+                ]
               }
             ]
           },
@@ -599,9 +606,9 @@
       "slug": "estructuradatos",
       "headings": [
         {
-          "title": "Entidades",
+          "title": "Tablas",
           "depth": 2,
-          "id": "entidades",
+          "id": "tablas",
           "headings": [
             {
               "title": "User",
@@ -777,7 +784,14 @@
         {
           "title": "Sprints",
           "depth": 2,
-          "id": "sprints"
+          "id": "sprints",
+          "headings": [
+            {
+              "title": "Sprint 1",
+              "depth": 3,
+              "id": "sprint-1"
+            }
+          ]
         }
       ]
     },
