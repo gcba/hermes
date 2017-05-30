@@ -161,7 +161,7 @@ Las calificaciones de las apps.
 |created_at      |datetime              |       |       |       |       |
 |modified_at     |datetime              |       |X      |       |       |
 
-### Messages
+### Message
 
 Los mensajes de las conversaciones con los usuarios de las apps que enviaron calificaciones con comentarios.
 
