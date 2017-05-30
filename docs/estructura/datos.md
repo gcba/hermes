@@ -10,6 +10,11 @@ Consta de 12 tablas, sin contar las necesarias para roles y permisos (no aparece
 
 El usuario del backend.
 
+#### Relaciones
+
+- **One-to-many** con User, a través de `modified_by`
+- **Many-to-many** con App, a través de la tabla `User_App`
+
 |Campos          |Tipo                  | FK?   | Null? |Unique?|Index? |
 |----------------|----------------------|:-----:|:-----:|:-----:|:-----:|
 |id              |int (PK)              |       |       |       |       |
@@ -36,6 +41,12 @@ El usuario de las apps que envía calificaciones y comentarios.
 
 Las apps sobre las que se envían calificaciones y comentarios.
 
+#### Relaciones
+
+- **One-to-many** con User, a través de `modified_by`
+- **Many-to-many** con User, a través de la tabla `User_App`
+- **Many-to-many** con Platform, a través de la tabla `App_Platform`
+
 |Campos          |Tipo                  | FK?   | Null? |Unique?|Index? |
 |----------------|----------------------|:-----:|:-----:|:-----:|:-----:|
 |id              |int (PK)              |       |       |       |       |
@@ -59,6 +70,10 @@ Tabla intermedia para la relación many-to-many entre User y App.
 
 La plataforma donde corren las apps y de donde provienen las calificaciones y comentarios.
 
+#### Relaciones
+
+- **Many-to-many** con App, a través de la tabla `App_Platform`
+
 |Campos          |Tipo                  | FK?   | Null? |Unique?|Index? |
 |----------------|----------------------|:-----:|:-----:|:-----:|:-----:|
 |id              |int (PK)              |       |       |       |       |
@@ -79,6 +94,10 @@ Tabla intermedia para la relación many-to-many entre App y Platform.
 ### Device
 
 En el caso de las aplicaciones móviles, el dispositivo desde donde se enviaron las calificaciones y comentarios.
+
+#### Relaciones
+
+- **One-to-many** con Brand, a través de `brand_id`
 
 |Campos          |Tipo                  | FK?   | Null? |Unique?|Index? |
 |----------------|----------------------|:-----:|:-----:|:-----:|:-----:|
@@ -117,6 +136,14 @@ En el caso de las aplicaciones móviles, la marca del dispositivo.
 
 Las calificaciones de las apps.
 
+#### Relaciones
+
+- **One-to-many** con App, a través de `app_id`
+- **One-to-many** con AppUser, a través de `appuser_id`
+- **One-to-many** con Platform, a través de `platform_id`
+- **One-to-many** con Device, a través de `device_id`
+- **One-to-many** con Browser, a través de `browser_id`
+
 |Campos          |Tipo                  | FK?   | Null? |Unique?|Index? |
 |----------------|----------------------|:-----:|:-----:|:-----:|:-----:|
 |id              |int (PK)              |       |       |       |       |
@@ -138,6 +165,12 @@ Las calificaciones de las apps.
 
 Los mensajes de las conversaciones con los usuarios de las apps que enviaron calificaciones con comentarios.
 
+#### Relaciones
+
+- **One-to-many** con Rating, a través de `rating_id`
+- **One-to-many** con AppUser, a través de `appuser_id`
+- **One-to-many** con User, a través de `user_id`
+
 |Campos          |Tipo                  | FK?   | Null? |Unique?|Index? |
 |----------------|----------------------|:-----:|:-----:|:-----:|:-----:|
 |id              |int (PK)              |       |       |       |       |
@@ -153,6 +186,10 @@ Los mensajes de las conversaciones con los usuarios de las apps que enviaron cal
 
 Los valores de configuración del backend.
 
+#### Relaciones
+
+- **One-to-many** con User, a través de `modified_by`
+
 |Campos          |Tipo                  | FK?   | Null? |Unique?|Index? |
 |----------------|----------------------|:-----:|:-----:|:-----:|:-----:|
 |id              |int (PK)              |       |       |       |       |
@@ -161,3 +198,8 @@ Los valores de configuración del backend.
 |created_at      |datetime              |       |       |       |       |
 |modified_at     |datetime              |       |X      |       |       |
 |modified_by     |int                   |X      |X      |       |       |
+
+
+## Timestamps
+
+Los campos `created_at` y `modified_at` son creados automáticamente por Laravel y no serán modificados.
