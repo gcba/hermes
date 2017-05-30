@@ -191,6 +191,11 @@
                     "id": "device"
                   },
                   {
+                    "title": "Browser",
+                    "depth": 3,
+                    "id": "browser"
+                  },
+                  {
                     "title": "Brand",
                     "depth": 3,
                     "id": "brand"
@@ -632,6 +637,11 @@
               "title": "Device",
               "depth": 3,
               "id": "device"
+            },
+            {
+              "title": "Browser",
+              "depth": 3,
+              "id": "browser"
             },
             {
               "title": "Brand",

@@ -41,6 +41,8 @@
                         </li>
                         <li class="heading-item -depth-3"><a class="hlink link-device" href="#device">Device</a>
                         </li>
+                        <li class="heading-item -depth-3"><a class="hlink link-browser" href="#browser">Browser</a>
+                        </li>
                         <li class="heading-item -depth-3"><a class="hlink link-brand" href="#brand">Brand</a>
                         </li>
                         <li class="heading-item -depth-3"><a class="hlink link-rating" href="#rating">Rating</a>
@@ -77,9 +79,10 @@
         </div>
         <div class="markdown-body"><h1 id="modelo-de-datos">Modelo de datos</h1>
 <p><img src="https://github.com/gcba/hermes/raw/master/docs/images/schema.png" alt="Schema"></p>
-<p>Consta de 11 tablas, sin contar las necesarias para roles y permisos (no aparecen en la imagen) dado que &#xE9;stas son creadas y manejadas por un componente de autorizaci&#xF3;n.</p>
+<p>Consta de 12 tablas, sin contar las necesarias para roles y permisos (no aparecen en la imagen) dado que &#xE9;stas son creadas y manejadas por un componente de autorizaci&#xF3;n.</p>
 <h2 id="entidades">Entidades</h2>
 <h3 id="user">User</h3>
+<p>El usuario del backend.</p>
 <table>
 <thead>
 <tr>
@@ -151,6 +154,7 @@
 </tbody>
 </table>
 <h3 id="appuser">AppUser</h3>
+<p>El usuario de las apps que env&#xED;a calificaciones y comentarios.</p>
 <table>
 <thead>
 <tr>
@@ -206,6 +210,7 @@
 </tbody>
 </table>
 <h3 id="app">App</h3>
+<p>Las apps sobre las que se env&#xED;an calificaciones y comentarios.</p>
 <table>
 <thead>
 <tr>
@@ -269,6 +274,7 @@
 </tbody>
 </table>
 <h3 id="user_app">User_App</h3>
+<p>Tabla intermedia para la relaci&#xF3;n many-to-many entre User y App.</p>
 <table>
 <thead>
 <tr>
@@ -308,6 +314,7 @@
 </tbody>
 </table>
 <h3 id="platform">Platform</h3>
+<p>La plataforma donde corren las apps y de donde provienen las calificaciones y comentarios.</p>
 <table>
 <thead>
 <tr>
@@ -355,6 +362,7 @@
 </tbody>
 </table>
 <h3 id="app_platform">App_Platform</h3>
+<p>Tabla intermedia para la relaci&#xF3;n many-to-many entre App y Platform.</p>
 <table>
 <thead>
 <tr>
@@ -394,6 +402,7 @@
 </tbody>
 </table>
 <h3 id="device">Device</h3>
+<p>En el caso de las aplicaciones m&#xF3;viles, el dispositivo desde donde se enviaron las calificaciones y comentarios.</p>
 <table>
 <thead>
 <tr>
@@ -472,7 +481,56 @@
 </tr>
 </tbody>
 </table>
+<h3 id="browser">Browser</h3>
+<p>En el caso de las aplicaciones web, el browser desde donde se enviaron las calificaciones y comentarios.</p>
+<table>
+<thead>
+<tr>
+<th>Campos</th>
+<th>Tipo</th>
+<th style="text-align:center">FK?</th>
+<th style="text-align:center">Null?</th>
+<th style="text-align:center">Unique?</th>
+<th style="text-align:center">Index?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>int (PK)</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>name</td>
+<td>varchar(15)</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">X</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>datetime</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>modified_at</td>
+<td>datetime</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">X</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
 <h3 id="brand">Brand</h3>
+<p>En el caso de las aplicaciones m&#xF3;viles, la marca del dispositivo.</p>
 <table>
 <thead>
 <tr>
@@ -520,6 +578,7 @@
 </tbody>
 </table>
 <h3 id="rating">Rating</h3>
+<p>Las calificaciones de las apps.</p>
 <table>
 <thead>
 <tr>
@@ -573,6 +632,14 @@
 <td style="text-align:center"></td>
 </tr>
 <tr>
+<td>browser_version</td>
+<td>varchar(15)</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">X</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
 <td>has_message</td>
 <td>bool NULL</td>
 <td style="text-align:center"></td>
@@ -613,6 +680,14 @@
 <td style="text-align:center">X</td>
 </tr>
 <tr>
+<td>browser_id</td>
+<td>int</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">X</td>
+</tr>
+<tr>
 <td>created_at</td>
 <td>datetime</td>
 <td style="text-align:center"></td>
@@ -631,6 +706,7 @@
 </tbody>
 </table>
 <h3 id="messages">Messages</h3>
+<p>Los mensajes de las conversaciones con los usuarios de las apps que enviaron calificaciones con comentarios.</p>
 <table>
 <thead>
 <tr>
@@ -710,6 +786,7 @@
 </tbody>
 </table>
 <h3 id="config">Config</h3>
+<p>Los valores de configuraci&#xF3;n del backend.</p>
 <table>
 <thead>
 <tr>
