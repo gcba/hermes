@@ -26,6 +26,30 @@
                 <li class="menu-item -level-2"><a class="link title -active link-estructuradatos" href="../estructura/datos.html">Datos</a>
                   <ul class="headings heading-list">
                     <li class="heading-item -depth-2"><a class="hlink link-entidades" href="#entidades">Entidades</a>
+                      <ul class="heading-list -depth-2">
+                        <li class="heading-item -depth-3"><a class="hlink link-user" href="#user">User</a>
+                        </li>
+                        <li class="heading-item -depth-3"><a class="hlink link-appuser" href="#appuser">AppUser</a>
+                        </li>
+                        <li class="heading-item -depth-3"><a class="hlink link-app" href="#app">App</a>
+                        </li>
+                        <li class="heading-item -depth-3"><a class="hlink link-user_app" href="#user_app">User_App</a>
+                        </li>
+                        <li class="heading-item -depth-3"><a class="hlink link-platform" href="#platform">Platform</a>
+                        </li>
+                        <li class="heading-item -depth-3"><a class="hlink link-app_platform" href="#app_platform">App_Platform</a>
+                        </li>
+                        <li class="heading-item -depth-3"><a class="hlink link-device" href="#device">Device</a>
+                        </li>
+                        <li class="heading-item -depth-3"><a class="hlink link-brand" href="#brand">Brand</a>
+                        </li>
+                        <li class="heading-item -depth-3"><a class="hlink link-rating" href="#rating">Rating</a>
+                        </li>
+                        <li class="heading-item -depth-3"><a class="hlink link-messages" href="#messages">Messages</a>
+                        </li>
+                        <li class="heading-item -depth-3"><a class="hlink link-config" href="#config">Config</a>
+                        </li>
+                      </ul>
                     </li>
                   </ul>
                 </li>
@@ -52,7 +76,694 @@
           </div>
         </div>
         <div class="markdown-body"><h1 id="modelo-de-datos">Modelo de datos</h1>
+<p><img src="https://github.com/gcba/hermes/raw/master/docs/images/schema.png" alt="Schema"></p>
+<p>Consta de 11 tablas, sin contar las necesarias para roles y permisos (no aparecen en la imagen) dado que &#xE9;stas son creadas y manejadas por una librer&#xED;a de autorizaci&#xF3;n.</p>
 <h2 id="entidades">Entidades</h2>
+<h3 id="user">User</h3>
+<table>
+<thead>
+<tr>
+<th>Campos</th>
+<th>Tipo</th>
+<th style="text-align:center">FK?</th>
+<th style="text-align:center">Null?</th>
+<th style="text-align:center">Unique?</th>
+<th style="text-align:center">Index?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>int (PK)</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>name</td>
+<td>varchar(70)</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>email</td>
+<td>varchar(100)</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">X</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>datetime</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>modified_at</td>
+<td>datetime</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">X</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>modified_by</td>
+<td>int</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+<h3 id="appuser">AppUser</h3>
+<table>
+<thead>
+<tr>
+<th>Campos</th>
+<th>Tipo</th>
+<th style="text-align:center">FK?</th>
+<th style="text-align:center">Null?</th>
+<th style="text-align:center">Unique?</th>
+<th style="text-align:center">Index?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>int (PK)</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>name</td>
+<td>varchar(70)</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>email</td>
+<td>varchar(100)</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">X</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">X</td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>datetime</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>modified_at</td>
+<td>datetime</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">X</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+<h3 id="app">App</h3>
+<table>
+<thead>
+<tr>
+<th>Campos</th>
+<th>Tipo</th>
+<th style="text-align:center">FK?</th>
+<th style="text-align:center">Null?</th>
+<th style="text-align:center">Unique?</th>
+<th style="text-align:center">Index?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>int (PK)</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>name</td>
+<td>varchar(50)</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+</tr>
+<tr>
+<td>type</td>
+<td>char</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>datetime</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>modified_at</td>
+<td>datetime</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">X</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>modified_by</td>
+<td>int</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+<h3 id="user_app">User_App</h3>
+<table>
+<thead>
+<tr>
+<th>Campos</th>
+<th>Tipo</th>
+<th style="text-align:center">FK?</th>
+<th style="text-align:center">Null?</th>
+<th style="text-align:center">Unique?</th>
+<th style="text-align:center">Index?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>int (PK)</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>user_id</td>
+<td>int</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">X</td>
+</tr>
+<tr>
+<td>app_id</td>
+<td>int</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">X</td>
+</tr>
+</tbody>
+</table>
+<h3 id="platform">Platform</h3>
+<table>
+<thead>
+<tr>
+<th>Campos</th>
+<th>Tipo</th>
+<th style="text-align:center">FK?</th>
+<th style="text-align:center">Null?</th>
+<th style="text-align:center">Unique?</th>
+<th style="text-align:center">Index?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>int (PK)</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>name</td>
+<td>varchar(15)</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">X</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>datetime</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>modified_at</td>
+<td>datetime</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">X</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+<h3 id="app_platform">App_Platform</h3>
+<table>
+<thead>
+<tr>
+<th>Campos</th>
+<th>Tipo</th>
+<th style="text-align:center">FK?</th>
+<th style="text-align:center">Null?</th>
+<th style="text-align:center">Unique?</th>
+<th style="text-align:center">Index?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>int (PK)</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>app_id</td>
+<td>int</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">X</td>
+</tr>
+<tr>
+<td>platform_id</td>
+<td>int</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">X</td>
+</tr>
+</tbody>
+</table>
+<h3 id="device">Device</h3>
+<table>
+<thead>
+<tr>
+<th>Campos</th>
+<th>Tipo</th>
+<th style="text-align:center">FK?</th>
+<th style="text-align:center">Null?</th>
+<th style="text-align:center">Unique?</th>
+<th style="text-align:center">Index?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>int (PK)</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>name</td>
+<td>varchar(30)</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+</tr>
+<tr>
+<td>screen_width</td>
+<td>int</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>screen_heigth</td>
+<td>int</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>ppi</td>
+<td>int</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">X</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>brand_id</td>
+<td>int</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">X</td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>datetime</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>modified_at</td>
+<td>datetime</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">X</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+<h3 id="brand">Brand</h3>
+<table>
+<thead>
+<tr>
+<th>Campos</th>
+<th>Tipo</th>
+<th style="text-align:center">FK?</th>
+<th style="text-align:center">Null?</th>
+<th style="text-align:center">Unique?</th>
+<th style="text-align:center">Index?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>int (PK)</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>name</td>
+<td>varchar(30)</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">X</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>datetime</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>modified_at</td>
+<td>datetime</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">X</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+<h3 id="rating">Rating</h3>
+<table>
+<thead>
+<tr>
+<th>Campos</th>
+<th>Tipo</th>
+<th style="text-align:center">FK?</th>
+<th style="text-align:center">Null?</th>
+<th style="text-align:center">Unique?</th>
+<th style="text-align:center">Index?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>int (PK)</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>rating</td>
+<td>smallint</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>description</td>
+<td>varchar(30)</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">X</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>app_version</td>
+<td>varchar(15)</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">X</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>platform_version</td>
+<td>varchar(15)</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>has_message</td>
+<td>bool NULL</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">X</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">X</td>
+</tr>
+<tr>
+<td>app_id</td>
+<td>int</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">X</td>
+</tr>
+<tr>
+<td>appuser_id</td>
+<td>int</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">X</td>
+</tr>
+<tr>
+<td>platform_id</td>
+<td>int</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">X</td>
+</tr>
+<tr>
+<td>device_id</td>
+<td>int</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">X</td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>datetime</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>modified_at</td>
+<td>datetime</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">X</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+<h3 id="messages">Messages</h3>
+<table>
+<thead>
+<tr>
+<th>Campos</th>
+<th>Tipo</th>
+<th style="text-align:center">FK?</th>
+<th style="text-align:center">Null?</th>
+<th style="text-align:center">Unique?</th>
+<th style="text-align:center">Index?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>int (PK)</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>message</td>
+<td>text</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>direction</td>
+<td>char</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">S&#xED;</td>
+</tr>
+<tr>
+<td>rating_id</td>
+<td>int</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">X</td>
+</tr>
+<tr>
+<td>appuser_id</td>
+<td>int</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">X</td>
+</tr>
+<tr>
+<td>user_id</td>
+<td>int</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">X</td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>datetime</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>modified_at</td>
+<td>datetime</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">X</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+<h3 id="config">Config</h3>
+<table>
+<thead>
+<tr>
+<th>Campos</th>
+<th>Tipo</th>
+<th style="text-align:center">FK?</th>
+<th style="text-align:center">Null?</th>
+<th style="text-align:center">Unique?</th>
+<th style="text-align:center">Index?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>int (PK)</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>key</td>
+<td>varchar(30)</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">X</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>value</td>
+<td>varchar(254)</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">X</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>datetime</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>modified_at</td>
+<td>datetime</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">X</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>modified_by</td>
+<td>int</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
 
         </div>
         <div class="footer-nav">

@@ -153,7 +153,64 @@
               {
                 "title": "Entidades",
                 "depth": 2,
-                "id": "entidades"
+                "id": "entidades",
+                "headings": [
+                  {
+                    "title": "User",
+                    "depth": 3,
+                    "id": "user"
+                  },
+                  {
+                    "title": "AppUser",
+                    "depth": 3,
+                    "id": "appuser"
+                  },
+                  {
+                    "title": "App",
+                    "depth": 3,
+                    "id": "app"
+                  },
+                  {
+                    "title": "User_App",
+                    "depth": 3,
+                    "id": "user_app"
+                  },
+                  {
+                    "title": "Platform",
+                    "depth": 3,
+                    "id": "platform"
+                  },
+                  {
+                    "title": "App_Platform",
+                    "depth": 3,
+                    "id": "app_platform"
+                  },
+                  {
+                    "title": "Device",
+                    "depth": 3,
+                    "id": "device"
+                  },
+                  {
+                    "title": "Brand",
+                    "depth": 3,
+                    "id": "brand"
+                  },
+                  {
+                    "title": "Rating",
+                    "depth": 3,
+                    "id": "rating"
+                  },
+                  {
+                    "title": "Messages",
+                    "depth": 3,
+                    "id": "messages"
+                  },
+                  {
+                    "title": "Config",
+                    "depth": 3,
+                    "id": "config"
+                  }
+                ]
               }
             ]
           },
@@ -539,7 +596,64 @@
         {
           "title": "Entidades",
           "depth": 2,
-          "id": "entidades"
+          "id": "entidades",
+          "headings": [
+            {
+              "title": "User",
+              "depth": 3,
+              "id": "user"
+            },
+            {
+              "title": "AppUser",
+              "depth": 3,
+              "id": "appuser"
+            },
+            {
+              "title": "App",
+              "depth": 3,
+              "id": "app"
+            },
+            {
+              "title": "User_App",
+              "depth": 3,
+              "id": "user_app"
+            },
+            {
+              "title": "Platform",
+              "depth": 3,
+              "id": "platform"
+            },
+            {
+              "title": "App_Platform",
+              "depth": 3,
+              "id": "app_platform"
+            },
+            {
+              "title": "Device",
+              "depth": 3,
+              "id": "device"
+            },
+            {
+              "title": "Brand",
+              "depth": 3,
+              "id": "brand"
+            },
+            {
+              "title": "Rating",
+              "depth": 3,
+              "id": "rating"
+            },
+            {
+              "title": "Messages",
+              "depth": 3,
+              "id": "messages"
+            },
+            {
+              "title": "Config",
+              "depth": 3,
+              "id": "config"
+            }
+          ]
         }
       ]
     },
