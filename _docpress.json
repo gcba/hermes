@@ -216,6 +216,11 @@
                     "id": "config"
                   }
                 ]
+              },
+              {
+                "title": "Timestamps",
+                "depth": 2,
+                "id": "timestamps"
               }
             ]
           },
@@ -671,6 +676,11 @@
               "id": "config"
             }
           ]
+        },
+        {
+          "title": "Timestamps",
+          "depth": 2,
+          "id": "timestamps"
         }
       ]
     },
