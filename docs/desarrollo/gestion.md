@@ -10,31 +10,31 @@ Durante las primeras dos semanas se estima la realización del análisis funcion
 
 En las últimas dos semanas se implementará el modelo de datos y la autenticación en las APIs.
 
-Horas: 80
+**Horas: 80**
 
 ### Mes 2
 
 En el segundo mes se implementará la funcionalidad CRUD del Admin y los endpoints de la API de calificaciones.
 
-Horas: 80
+**Horas: 80**
 
 ### Mes 3
 
 En el tercer mes se implementarán las funciones de conversaciones con los usuarios en el Admin, y se desarrollará la API de estadísticas.
 
-Horas: 80
+**Horas: 80**
 
 ### Mes 4
 
 En el cuarto mes se implementarán los SDKs para Java, Swift y Javascript.
 
-Horas: 80
+**Horas: 80**
 
 ### Mes 5
 
 En el último mes se realizarán refactorizaciones, correcciones de bugs y testeos intensivos.
 
-Horas: 80
+**Horas: 80**
 
 ### Tracking
 
@@ -58,26 +58,3 @@ Se contará con un solo desarrollador a medio tiempo, por lo que será de suma i
 ## Kickoff
 
 El día Martes 30 de Mayo de 2017 se da comienzo a la implementación del modelo de datos.
-
-## Sprints
-
-### Sprint 1
-
-#### Duración
-
-Del lunes 29/05/2017 al 02/06/2017.
-
-#### Tareas
-
-##### Admin
-
-1.1 Implementar el modelo User
-1.2 Implementar el modelo AppUser
-1.3 Implementar el modelo App
-1.4 Implementar el modelo Platform
-1.5 Implementar el modelo Device
-1.6 Implementar el modelo Browser
-1.7 Implementar el modelo Brand
-1.8 Implementar el modelo Rating
-1.9 Implementar el modelo Messages
-1.10 Implementar el modelo Config
