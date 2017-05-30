@@ -2,11 +2,13 @@
 
 ![Schema](https://github.com/gcba/hermes/raw/master/docs/images/schema.png)
 
-Consta de 11 tablas, sin contar las necesarias para roles y permisos (no aparecen en la imagen) dado que éstas son creadas y manejadas por un componente de autorización.
+Consta de 12 tablas, sin contar las necesarias para roles y permisos (no aparecen en la imagen) dado que éstas son creadas y manejadas por un componente de autorización.
 
 ## Entidades
 
 ### User
+
+El usuario del backend.
 
 |Campos          |Tipo                  | FK?   | Null? |Unique?|Index? |
 |----------------|----------------------|:-----:|:-----:|:-----:|:-----:|
@@ -20,6 +22,8 @@ Consta de 11 tablas, sin contar las necesarias para roles y permisos (no aparece
 
 ### AppUser
 
+El usuario de las apps que envía calificaciones y comentarios.
+
 |Campos          |Tipo                  | FK?   | Null? |Unique?|Index? |
 |----------------|----------------------|:-----:|:-----:|:-----:|:-----:|
 |id              |int (PK)              |       |       |       |       |
@@ -29,6 +33,8 @@ Consta de 11 tablas, sin contar las necesarias para roles y permisos (no aparece
 |modified_at     |datetime              |       |X      |       |       |
 
 ### App
+
+Las apps sobre las que se envían calificaciones y comentarios.
 
 |Campos          |Tipo                  | FK?   | Null? |Unique?|Index? |
 |----------------|----------------------|:-----:|:-----:|:-----:|:-----:|
@@ -41,6 +47,8 @@ Consta de 11 tablas, sin contar las necesarias para roles y permisos (no aparece
 
 ### User_App
 
+Tabla intermedia para la relación many-to-many entre User y App.
+
 |Campos          |Tipo                  | FK?   | Null? |Unique?|Index? |
 |----------------|----------------------|:-----:|:-----:|:-----:|:-----:|
 |id              |int (PK)              |       |       |       |       |
@@ -48,6 +56,8 @@ Consta de 11 tablas, sin contar las necesarias para roles y permisos (no aparece
 |app_id          |int                   |X      |       |       |X      |
 
 ### Platform
+
+La plataforma donde corren las apps y de donde provienen las calificaciones y comentarios.
 
 |Campos          |Tipo                  | FK?   | Null? |Unique?|Index? |
 |----------------|----------------------|:-----:|:-----:|:-----:|:-----:|
@@ -58,6 +68,8 @@ Consta de 11 tablas, sin contar las necesarias para roles y permisos (no aparece
 
 ### App_Platform
 
+Tabla intermedia para la relación many-to-many entre App y Platform.
+
 |Campos          |Tipo                  | FK?   | Null? |Unique?|Index? |
 |----------------|----------------------|:-----:|:-----:|:-----:|:-----:|
 |id              |int (PK)              |       |       |       |       |
@@ -65,6 +77,8 @@ Consta de 11 tablas, sin contar las necesarias para roles y permisos (no aparece
 |platform_id     |int                   |X      |       |       |X      |
 
 ### Device
+
+En el caso de las aplicaciones móviles, el dispositivo desde donde se enviaron las calificaciones y comentarios.
 
 |Campos          |Tipo                  | FK?   | Null? |Unique?|Index? |
 |----------------|----------------------|:-----:|:-----:|:-----:|:-----:|
@@ -77,7 +91,20 @@ Consta de 11 tablas, sin contar las necesarias para roles y permisos (no aparece
 |created_at      |datetime              |       |       |       |       |
 |modified_at     |datetime              |       |X      |       |       |
 
+### Browser
+
+En el caso de las aplicaciones web, el browser desde donde se enviaron las calificaciones y comentarios.
+
+|Campos          |Tipo                  | FK?   | Null? |Unique?|Index? |
+|----------------|----------------------|:-----:|:-----:|:-----:|:-----:|
+|id              |int (PK)              |       |       |       |       |
+|name            |varchar(15)           |       |       |X      |       |
+|created_at      |datetime              |       |       |       |       |
+|modified_at     |datetime              |       |X      |       |       |
+
 ### Brand
+
+En el caso de las aplicaciones móviles, la marca del dispositivo.
 
 |Campos          |Tipo                  | FK?   | Null? |Unique?|Index? |
 |----------------|----------------------|:-----:|:-----:|:-----:|:-----:|
@@ -88,6 +115,8 @@ Consta de 11 tablas, sin contar las necesarias para roles y permisos (no aparece
 
 ### Rating
 
+Las calificaciones de las apps.
+
 |Campos          |Tipo                  | FK?   | Null? |Unique?|Index? |
 |----------------|----------------------|:-----:|:-----:|:-----:|:-----:|
 |id              |int (PK)              |       |       |       |       |
@@ -95,15 +124,19 @@ Consta de 11 tablas, sin contar las necesarias para roles y permisos (no aparece
 |description     |varchar(30)           |       |X      |       |       |
 |app_version     |varchar(15)           |       |X      |       |       |
 |platform_version|varchar(15)           |       |       |       |       |
+|browser_version |varchar(15)           |       |X      |       |       |
 |has_message     |bool NULL             |       |X      |       |X      |
 |app_id          |int                   |X      |       |       |X      |
 |appuser_id      |int                   |X      |       |       |X      |
 |platform_id     |int                   |X      |X      |       |X      |
 |device_id       |int                   |X      |X      |       |X      |
+|browser_id      |int                   |X      |X      |       |X      |
 |created_at      |datetime              |       |       |       |       |
 |modified_at     |datetime              |       |X      |       |       |
 
 ### Messages
+
+Los mensajes de las conversaciones con los usuarios de las apps que enviaron calificaciones con comentarios.
 
 |Campos          |Tipo                  | FK?   | Null? |Unique?|Index? |
 |----------------|----------------------|:-----:|:-----:|:-----:|:-----:|
@@ -117,6 +150,8 @@ Consta de 11 tablas, sin contar las necesarias para roles y permisos (no aparece
 |modified_at     |datetime              |       |X      |       |       |
 
 ### Config
+
+Los valores de configuración del backend.
 
 |Campos          |Tipo                  | FK?   | Null? |Unique?|Index? |
 |----------------|----------------------|:-----:|:-----:|:-----:|:-----:|
