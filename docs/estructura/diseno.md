@@ -1,9 +1,5 @@
 # Diseño
 
-## Modelo de datos
-
-### Entidades
-
 ## Admin
 
 Se seguirán las convenciones y estructuras por defecto de Laravel, pero se buscará mantener livianos los controladores. Toda funcionalidad que resulte de utilidad común será extractada a un servicio aparte.
