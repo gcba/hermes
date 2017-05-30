@@ -206,9 +206,9 @@
                     "id": "rating"
                   },
                   {
-                    "title": "Messages",
+                    "title": "Message",
                     "depth": 3,
-                    "id": "messages"
+                    "id": "message"
                   },
                   {
                     "title": "Config",
@@ -666,9 +666,9 @@
               "id": "rating"
             },
             {
-              "title": "Messages",
+              "title": "Message",
               "depth": 3,
-              "id": "messages"
+              "id": "message"
             },
             {
               "title": "Config",
