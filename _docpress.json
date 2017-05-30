@@ -133,18 +133,6 @@
             "slug": "estructuradiseno",
             "headings": [
               {
-                "title": "Modelo de datos",
-                "depth": 2,
-                "id": "modelo-de-datos",
-                "headings": [
-                  {
-                    "title": "Entidades",
-                    "depth": 3,
-                    "id": "entidades"
-                  }
-                ]
-              },
-              {
                 "title": "Admin",
                 "depth": 2,
                 "id": "admin"
@@ -153,6 +141,19 @@
                 "title": "APIs",
                 "depth": 2,
                 "id": "apis"
+              }
+            ]
+          },
+          {
+            "title": "Datos",
+            "source": "docs/estructura/datos.md",
+            "url": "estructura/datos.html",
+            "slug": "estructuradatos",
+            "headings": [
+              {
+                "title": "Entidades",
+                "depth": 2,
+                "id": "entidades"
               }
             ]
           },
@@ -518,18 +519,6 @@
       "slug": "estructuradiseno",
       "headings": [
         {
-          "title": "Modelo de datos",
-          "depth": 2,
-          "id": "modelo-de-datos",
-          "headings": [
-            {
-              "title": "Entidades",
-              "depth": 3,
-              "id": "entidades"
-            }
-          ]
-        },
-        {
           "title": "Admin",
           "depth": 2,
           "id": "admin"
@@ -538,6 +527,19 @@
           "title": "APIs",
           "depth": 2,
           "id": "apis"
+        }
+      ]
+    },
+    "estructura/datos.html": {
+      "source": "docs/estructura/datos.md",
+      "title": "Datos - Hermes",
+      "pageTitle": "Datos",
+      "slug": "estructuradatos",
+      "headings": [
+        {
+          "title": "Entidades",
+          "depth": 2,
+          "id": "entidades"
         }
       ]
     },
@@ -770,9 +772,11 @@
     "docs/analisis-funcional/README.md": "analisis-funcional/index.html",
     "docs/estructura/arquitectura.md": "estructura/arquitectura.html",
     "docs/estructura/diseno.md": "estructura/diseno.html",
+    "docs/estructura/datos.md": "estructura/datos.html",
     "docs/estructura/apis.md": "estructura/apis.html",
     "docs/desarrollo/gestion.md": "desarrollo/gestion.html",
     "docs/desarrollo/metodologia.md": "desarrollo/metodologia.html",
-    "docs/desarrollo/codigo.md": "desarrollo/codigo.html"
+    "docs/desarrollo/codigo.md": "desarrollo/codigo.html",
+    "docs/images/schema.png": "images/schema.png"
   }
 }
