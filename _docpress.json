@@ -279,91 +279,6 @@
         "title": "Desarrollo",
         "sections": [
           {
-            "title": "Gestión",
-            "source": "docs/desarrollo/gestion.md",
-            "url": "desarrollo/gestion.html",
-            "slug": "desarrollogestion",
-            "headings": [
-              {
-                "title": "Planeamiento",
-                "depth": 2,
-                "id": "planeamiento",
-                "headings": [
-                  {
-                    "title": "Mes 1",
-                    "depth": 3,
-                    "id": "mes-1"
-                  },
-                  {
-                    "title": "Mes 2",
-                    "depth": 3,
-                    "id": "mes-2"
-                  },
-                  {
-                    "title": "Mes 3",
-                    "depth": 3,
-                    "id": "mes-3"
-                  },
-                  {
-                    "title": "Mes 4",
-                    "depth": 3,
-                    "id": "mes-4"
-                  },
-                  {
-                    "title": "Mes 5",
-                    "depth": 3,
-                    "id": "mes-5"
-                  },
-                  {
-                    "title": "Tracking",
-                    "depth": 3,
-                    "id": "tracking"
-                  }
-                ]
-              },
-              {
-                "title": "Recursos",
-                "depth": 2,
-                "id": "recursos"
-              },
-              {
-                "title": "Prioridades",
-                "depth": 2,
-                "id": "prioridades"
-              },
-              {
-                "title": "Kickoff",
-                "depth": 2,
-                "id": "kickoff"
-              },
-              {
-                "title": "Sprints",
-                "depth": 2,
-                "id": "sprints",
-                "headings": [
-                  {
-                    "title": "Sprint 1",
-                    "depth": 3,
-                    "id": "sprint-1"
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "title": "Metodología",
-            "source": "docs/desarrollo/metodologia.md",
-            "url": "desarrollo/metodologia.html",
-            "slug": "desarrollometodologia",
-            "headings": [
-              {
-                "title": "Sprints",
-                "depth": 3,
-                "id": "sprints"
-              }
-            ]
-          },
-          {
             "title": "Código",
             "source": "docs/desarrollo/codigo.md",
             "url": "desarrollo/codigo.html",
@@ -454,6 +369,104 @@
                     "title": "Estructura de carpetas",
                     "depth": 3,
                     "id": "estructura-de-carpetas"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "title": "Gestión",
+            "source": "docs/desarrollo/gestion.md",
+            "url": "desarrollo/gestion.html",
+            "slug": "desarrollogestion",
+            "headings": [
+              {
+                "title": "Planeamiento",
+                "depth": 2,
+                "id": "planeamiento",
+                "headings": [
+                  {
+                    "title": "Mes 1",
+                    "depth": 3,
+                    "id": "mes-1"
+                  },
+                  {
+                    "title": "Mes 2",
+                    "depth": 3,
+                    "id": "mes-2"
+                  },
+                  {
+                    "title": "Mes 3",
+                    "depth": 3,
+                    "id": "mes-3"
+                  },
+                  {
+                    "title": "Mes 4",
+                    "depth": 3,
+                    "id": "mes-4"
+                  },
+                  {
+                    "title": "Mes 5",
+                    "depth": 3,
+                    "id": "mes-5"
+                  },
+                  {
+                    "title": "Tracking",
+                    "depth": 3,
+                    "id": "tracking"
+                  }
+                ]
+              },
+              {
+                "title": "Recursos",
+                "depth": 2,
+                "id": "recursos"
+              },
+              {
+                "title": "Prioridades",
+                "depth": 2,
+                "id": "prioridades"
+              },
+              {
+                "title": "Kickoff",
+                "depth": 2,
+                "id": "kickoff"
+              }
+            ]
+          },
+          {
+            "title": "Metodología",
+            "source": "docs/desarrollo/metodologia.md",
+            "url": "desarrollo/metodologia.html",
+            "slug": "desarrollometodologia",
+            "headings": [
+              {
+                "title": "Sprints",
+                "depth": 3,
+                "id": "sprints"
+              }
+            ]
+          },
+          {
+            "title": "Sprints",
+            "source": "docs/desarrollo/sprints.md",
+            "url": "desarrollo/sprints.html",
+            "slug": "desarrollosprints",
+            "headings": [
+              {
+                "title": "Sprint 1",
+                "depth": 2,
+                "id": "sprint-1",
+                "headings": [
+                  {
+                    "title": "Duración",
+                    "depth": 3,
+                    "id": "duracion"
+                  },
+                  {
+                    "title": "Tareas",
+                    "depth": 3,
+                    "id": "tareas"
                   }
                 ]
               }
@@ -733,91 +746,6 @@
         }
       ]
     },
-    "desarrollo/gestion.html": {
-      "source": "docs/desarrollo/gestion.md",
-      "title": "Gestión - Hermes",
-      "pageTitle": "Gestión",
-      "slug": "desarrollogestion",
-      "headings": [
-        {
-          "title": "Planeamiento",
-          "depth": 2,
-          "id": "planeamiento",
-          "headings": [
-            {
-              "title": "Mes 1",
-              "depth": 3,
-              "id": "mes-1"
-            },
-            {
-              "title": "Mes 2",
-              "depth": 3,
-              "id": "mes-2"
-            },
-            {
-              "title": "Mes 3",
-              "depth": 3,
-              "id": "mes-3"
-            },
-            {
-              "title": "Mes 4",
-              "depth": 3,
-              "id": "mes-4"
-            },
-            {
-              "title": "Mes 5",
-              "depth": 3,
-              "id": "mes-5"
-            },
-            {
-              "title": "Tracking",
-              "depth": 3,
-              "id": "tracking"
-            }
-          ]
-        },
-        {
-          "title": "Recursos",
-          "depth": 2,
-          "id": "recursos"
-        },
-        {
-          "title": "Prioridades",
-          "depth": 2,
-          "id": "prioridades"
-        },
-        {
-          "title": "Kickoff",
-          "depth": 2,
-          "id": "kickoff"
-        },
-        {
-          "title": "Sprints",
-          "depth": 2,
-          "id": "sprints",
-          "headings": [
-            {
-              "title": "Sprint 1",
-              "depth": 3,
-              "id": "sprint-1"
-            }
-          ]
-        }
-      ]
-    },
-    "desarrollo/metodologia.html": {
-      "source": "docs/desarrollo/metodologia.md",
-      "title": "Metodología - Hermes",
-      "pageTitle": "Metodología",
-      "slug": "desarrollometodologia",
-      "headings": [
-        {
-          "title": "Sprints",
-          "depth": 3,
-          "id": "sprints"
-        }
-      ]
-    },
     "desarrollo/codigo.html": {
       "source": "docs/desarrollo/codigo.md",
       "title": "Código - Hermes",
@@ -913,6 +841,104 @@
           ]
         }
       ]
+    },
+    "desarrollo/gestion.html": {
+      "source": "docs/desarrollo/gestion.md",
+      "title": "Gestión - Hermes",
+      "pageTitle": "Gestión",
+      "slug": "desarrollogestion",
+      "headings": [
+        {
+          "title": "Planeamiento",
+          "depth": 2,
+          "id": "planeamiento",
+          "headings": [
+            {
+              "title": "Mes 1",
+              "depth": 3,
+              "id": "mes-1"
+            },
+            {
+              "title": "Mes 2",
+              "depth": 3,
+              "id": "mes-2"
+            },
+            {
+              "title": "Mes 3",
+              "depth": 3,
+              "id": "mes-3"
+            },
+            {
+              "title": "Mes 4",
+              "depth": 3,
+              "id": "mes-4"
+            },
+            {
+              "title": "Mes 5",
+              "depth": 3,
+              "id": "mes-5"
+            },
+            {
+              "title": "Tracking",
+              "depth": 3,
+              "id": "tracking"
+            }
+          ]
+        },
+        {
+          "title": "Recursos",
+          "depth": 2,
+          "id": "recursos"
+        },
+        {
+          "title": "Prioridades",
+          "depth": 2,
+          "id": "prioridades"
+        },
+        {
+          "title": "Kickoff",
+          "depth": 2,
+          "id": "kickoff"
+        }
+      ]
+    },
+    "desarrollo/metodologia.html": {
+      "source": "docs/desarrollo/metodologia.md",
+      "title": "Metodología - Hermes",
+      "pageTitle": "Metodología",
+      "slug": "desarrollometodologia",
+      "headings": [
+        {
+          "title": "Sprints",
+          "depth": 3,
+          "id": "sprints"
+        }
+      ]
+    },
+    "desarrollo/sprints.html": {
+      "source": "docs/desarrollo/sprints.md",
+      "title": "Sprints - Hermes",
+      "pageTitle": "Sprints",
+      "slug": "desarrollosprints",
+      "headings": [
+        {
+          "title": "Sprint 1",
+          "depth": 2,
+          "id": "sprint-1",
+          "headings": [
+            {
+              "title": "Duración",
+              "depth": 3,
+              "id": "duracion"
+            },
+            {
+              "title": "Tareas",
+              "depth": 3,
+              "id": "tareas"
+            }
+          ]
+        }
+      ]
     }
   },
   "sources": {
@@ -922,9 +948,10 @@
     "docs/estructura/diseno.md": "estructura/diseno.html",
     "docs/estructura/datos.md": "estructura/datos.html",
     "docs/estructura/apis.md": "estructura/apis.html",
+    "docs/desarrollo/codigo.md": "desarrollo/codigo.html",
     "docs/desarrollo/gestion.md": "desarrollo/gestion.html",
     "docs/desarrollo/metodologia.md": "desarrollo/metodologia.html",
-    "docs/desarrollo/codigo.md": "desarrollo/codigo.html",
+    "docs/desarrollo/sprints.md": "desarrollo/sprints.html",
     "docs/images/schema.png": "images/schema.png"
   }
 }
