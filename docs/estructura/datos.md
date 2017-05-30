@@ -2,7 +2,7 @@
 
 ![Schema](https://github.com/gcba/hermes/raw/master/docs/images/schema.png)
 
-Consta de 11 tablas, sin contar las necesarias para roles y permisos (no aparecen en la imagen) dado que éstas son creadas y manejadas por una librería de autorización.
+Consta de 11 tablas, sin contar las necesarias para roles y permisos (no aparecen en la imagen) dado que éstas son creadas y manejadas por un componente de autorización.
 
 ## Entidades
 
@@ -13,6 +13,7 @@ Consta de 11 tablas, sin contar las necesarias para roles y permisos (no aparece
 |id              |int (PK)              |       |       |       |       |
 |name            |varchar(70)           |       |       |       |       |
 |email           |varchar(100)          |       |       |X      |       |
+|password        |binary(60)            |       |       |       |       |
 |created_at      |datetime              |       |       |       |       |
 |modified_at     |datetime              |       |X      |       |       |
 |modified_by     |int                   |X      |X      |       |       |
