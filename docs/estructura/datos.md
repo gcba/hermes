@@ -4,7 +4,7 @@
 
 Consta de 12 tablas, sin contar las necesarias para roles y permisos (no aparecen en la imagen) dado que éstas son creadas y manejadas por un componente de autorización.
 
-## Entidades
+## Tablas
 
 ### User
 

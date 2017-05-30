@@ -60,3 +60,24 @@ Se contará con un solo desarrollador a medio tiempo, por lo que será de suma i
 El día Martes 30 de Mayo de 2017 se da comienzo a la implementación del modelo de datos.
 
 ## Sprints
+
+### Sprint 1
+
+#### Duración
+
+Del lunes 29/05/2017 al 02/06/2017.
+
+#### Tareas
+
+##### Admin
+
+1.1 Implementar el modelo User
+1.2 Implementar el modelo AppUser
+1.3 Implementar el modelo App
+1.4 Implementar el modelo Platform
+1.5 Implementar el modelo Device
+1.6 Implementar el modelo Browser
+1.7 Implementar el modelo Brand
+1.8 Implementar el modelo Rating
+1.9 Implementar el modelo Messages
+1.10 Implementar el modelo Config
