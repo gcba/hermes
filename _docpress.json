@@ -226,6 +226,11 @@
                 "title": "Timestamps",
                 "depth": 2,
                 "id": "timestamps"
+              },
+              {
+                "title": "Borrado",
+                "depth": 2,
+                "id": "borrado"
               }
             ]
           },
@@ -709,6 +714,11 @@
           "title": "Timestamps",
           "depth": 2,
           "id": "timestamps"
+        },
+        {
+          "title": "Borrado",
+          "depth": 2,
+          "id": "borrado"
         }
       ]
     },
