@@ -21,12 +21,6 @@ class CreateMessagesTable extends Migration
             $table->integer('rating_id')->unsigned();
             $table->foreign('rating_id')->references('id')->on('ratings')->onDelete('cascade');
             $table->index('rating_id');
-            $table->integer('appuser_id')->unsigned();
-            $table->foreign('appuser_id')->references('id')->on('appusers')->onDelete('cascade');
-            $table->index('appuser_id');
-            $table->integer('app_id')->unsigned();
-            $table->foreign('app_id')->references('id')->on('apps')->onDelete('cascade');
-            $table->index('app_id');
             $table->timestamps();
         });
     }

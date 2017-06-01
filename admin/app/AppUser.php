@@ -26,14 +26,6 @@ class AppUser extends Model
     }
 
     /**
-     * Get the messages that belong to this app user.
-     */
-    public function messages()
-    {
-        return $this->hasMany('App\Message');
-    }
-
-    /**
      * Get the apps of the app user.
      */
      public function apps() {
