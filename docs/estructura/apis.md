@@ -12,7 +12,7 @@ La API de calificaciones es primariamente de escritura. Tiene por fin poder agre
 
 ### Principios
 
-#### 1.  Mostly RESTful
+#### 1. Mostly RESTful
 
 En donde resulte más apropiado (en vistas de las prioridades y necesidades del caso) se adoptará otro enfoque.
 
@@ -22,7 +22,7 @@ En donde resulte más apropiado (en vistas de las prioridades y necesidades del 
 - Se emplearán nombres concretos y autodescriptivos.
 - Sólo se proveerán responses JSON.
 
-#### 3. Consistencia
+#### 3. Consistencia
 
 Las normas aquí descriptas deben aplicarse de manera uniforme y exhaustiva.
 
