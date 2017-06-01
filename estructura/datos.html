@@ -35,6 +35,8 @@
                         </li>
                         <li class="heading-item -depth-3"><a class="hlink link-user_app" href="#user_app">User_App</a>
                         </li>
+                        <li class="heading-item -depth-3"><a class="hlink link-appuser_app" href="#appuser_app">AppUser_App</a>
+                        </li>
                         <li class="heading-item -depth-3"><a class="hlink link-platform" href="#platform">Platform</a>
                         </li>
                         <li class="heading-item -depth-3"><a class="hlink link-app_platform" href="#app_platform">App_Platform</a>
@@ -83,7 +85,7 @@
         </div>
         <div class="markdown-body"><h1 id="modelo-de-datos">Modelo de datos</h1>
 <p><img src="https://github.com/gcba/hermes/raw/master/docs/images/schema.png" alt="Schema"></p>
-<p>Consta de 12 tablas, sin contar las necesarias para roles y permisos (no aparecen en la imagen) dado que &#xE9;stas son creadas y manejadas por un componente de autorizaci&#xF3;n.</p>
+<p>Consta de 13 tablas, sin contar las necesarias para roles y permisos (no aparecen en la imagen) dado que &#xE9;stas son creadas y manejadas autom&#xE1;ticamente por un componente de autorizaci&#xF3;n.</p>
 <h2 id="tablas">Tablas</h2>
 <h3 id="user">User</h3>
 <p>El usuario del backend.</p>
@@ -130,7 +132,7 @@
 </tr>
 <tr>
 <td>password</td>
-<td>binary(60)</td>
+<td>varchar(60)</td>
 <td style="text-align:center"></td>
 <td style="text-align:center"></td>
 <td style="text-align:center"></td>
@@ -163,6 +165,10 @@
 </tbody>
 </table>
 <h3 id="appuser">AppUser</h3>
+<h4 id="relaciones">Relaciones</h4>
+<ul>
+<li><strong>Many-to-many</strong> con App, a trav&#xE9;s de la tabla <code>AppUser_App</code></li>
+</ul>
 <p>El usuario de las apps que env&#xED;a calificaciones y comentarios.</p>
 <table>
 <thead>
@@ -178,7 +184,7 @@
 <tbody>
 <tr>
 <td>id</td>
-<td>int (PK)</td>
+<td>bigint (PK)</td>
 <td style="text-align:center"></td>
 <td style="text-align:center"></td>
 <td style="text-align:center"></td>
@@ -225,6 +231,7 @@
 <li><strong>One-to-many</strong> con User, a trav&#xE9;s de <code>modified_by</code></li>
 <li><strong>Many-to-many</strong> con User, a trav&#xE9;s de la tabla <code>User_App</code></li>
 <li><strong>Many-to-many</strong> con Platform, a trav&#xE9;s de la tabla <code>App_Platform</code></li>
+<li><strong>Many-to-many</strong> con AppUser, a trav&#xE9;s de la tabla <code>AppUser_App</code></li>
 </ul>
 <table>
 <thead>
@@ -312,6 +319,46 @@
 </tr>
 <tr>
 <td>user_id</td>
+<td>int</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">X</td>
+</tr>
+<tr>
+<td>app_id</td>
+<td>int</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">X</td>
+</tr>
+</tbody>
+</table>
+<h3 id="appuser_app">AppUser_App</h3>
+<p>Tabla intermedia para la relaci&#xF3;n many-to-many entre AppUser y App.</p>
+<table>
+<thead>
+<tr>
+<th>Campos</th>
+<th>Tipo</th>
+<th style="text-align:center">FK?</th>
+<th style="text-align:center">Null?</th>
+<th style="text-align:center">Unique?</th>
+<th style="text-align:center">Index?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>int (PK)</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>appuser_id</td>
 <td>int</td>
 <td style="text-align:center">X</td>
 <td style="text-align:center"></td>
@@ -624,7 +671,7 @@
 <tbody>
 <tr>
 <td>id</td>
-<td>int (PK)</td>
+<td>bigint (PK)</td>
 <td style="text-align:center"></td>
 <td style="text-align:center"></td>
 <td style="text-align:center"></td>
@@ -672,9 +719,9 @@
 </tr>
 <tr>
 <td>has_message</td>
-<td>bool NULL</td>
+<td>bool</td>
 <td style="text-align:center"></td>
-<td style="text-align:center">X</td>
+<td style="text-align:center"></td>
 <td style="text-align:center"></td>
 <td style="text-align:center">X</td>
 </tr>
@@ -742,7 +789,7 @@
 <ul>
 <li><strong>One-to-many</strong> con Rating, a trav&#xE9;s de <code>rating_id</code></li>
 <li><strong>One-to-many</strong> con AppUser, a trav&#xE9;s de <code>appuser_id</code></li>
-<li><strong>One-to-many</strong> con User, a trav&#xE9;s de <code>user_id</code></li>
+<li><strong>One-to-many</strong> con Apps, a trav&#xE9;s de <code>app_id</code></li>
 </ul>
 <table>
 <thead>
@@ -758,7 +805,7 @@
 <tbody>
 <tr>
 <td>id</td>
-<td>int (PK)</td>
+<td>bigint (PK)</td>
 <td style="text-align:center"></td>
 <td style="text-align:center"></td>
 <td style="text-align:center"></td>
@@ -797,7 +844,7 @@
 <td style="text-align:center">X</td>
 </tr>
 <tr>
-<td>user_id</td>
+<td>app_id</td>
 <td>int</td>
 <td style="text-align:center">X</td>
 <td style="text-align:center"></td>
@@ -843,6 +890,14 @@
 <tr>
 <td>id</td>
 <td>int (PK)</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>name</td>
+<td>varchar(30)</td>
 <td style="text-align:center"></td>
 <td style="text-align:center"></td>
 <td style="text-align:center"></td>

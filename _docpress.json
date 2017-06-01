@@ -176,6 +176,11 @@
                     "id": "user_app"
                   },
                   {
+                    "title": "AppUser_App",
+                    "depth": 3,
+                    "id": "appuser_app"
+                  },
+                  {
                     "title": "Platform",
                     "depth": 3,
                     "id": "platform"
@@ -464,6 +469,11 @@
                     "id": "duracion"
                   },
                   {
+                    "title": "Objetivo",
+                    "depth": 3,
+                    "id": "objetivo"
+                  },
+                  {
                     "title": "Tareas",
                     "depth": 3,
                     "id": "tareas"
@@ -647,6 +657,11 @@
               "title": "User_App",
               "depth": 3,
               "id": "user_app"
+            },
+            {
+              "title": "AppUser_App",
+              "depth": 3,
+              "id": "appuser_app"
             },
             {
               "title": "Platform",
@@ -930,6 +945,11 @@
               "title": "Duración",
               "depth": 3,
               "id": "duracion"
+            },
+            {
+              "title": "Objetivo",
+              "depth": 3,
+              "id": "objetivo"
             },
             {
               "title": "Tareas",
