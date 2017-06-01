@@ -16,6 +16,28 @@ class App extends Model
     ];
 
     /**
+     * Get the ratings that belong to this app.
+     */
+    public function ratings()
+    {
+        return $this->hasMany('App\Rating');
+    }
+
+    /**
+     * Get the users that belong to the app.
+     */
+     public function users() {
+        return $this->belongsToMany('App\User');
+     }
+
+    /**
+     * Get the app users of the app.
+     */
+     public function appUsers() {
+        return $this->belongsToMany('App\AppUser');
+     }
+
+    /**
      * Get the platforms the app is in.
      */
      public function platforms() {

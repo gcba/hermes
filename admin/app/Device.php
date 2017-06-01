@@ -16,6 +16,14 @@ class Device extends Model
     ];
 
     /**
+     * Get the ratings that belong to this device.
+     */
+    public function ratings()
+    {
+        return $this->hasMany('App\Rating');
+    }
+
+    /**
      * Get the device's brand.
      */
      public function brand() {
