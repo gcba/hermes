@@ -1,6 +1,6 @@
 # Metodología
 
-Dado que sólo se cuenta con un solo desarrollador se adoptará un enfoque simplificado. El desarrollo se hará por sprints de 1 semana de duración, comenzando el lunes y terminando el viernes.
+Dado que sólo se cuenta con un solo desarrollador se adoptará un enfoque simplificado. El desarrollo se hará por sprints de 1 semana de duración.
 
 ### Sprints
 
