@@ -16,7 +16,14 @@ class App extends Model
     ];
 
     /**
-     * Get the user that last modified the App.
+     * Get the platforms the app is in.
+     */
+     public function platforms() {
+        return $this->belongsToMany('App\Platform');
+     }
+
+    /**
+     * Get the user that last modified the app.
      */
      public function modifiedBy() {
         return $this->belongsTo('App\User', 'modified_by');
