@@ -15,12 +15,14 @@ class CreateDevicesTable extends Migration
     {
         Schema::create('devices', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name', 30);
+            $table->string('name', 30)->unique();
+            $table->index('name');
             $table->integer('screen_width');
             $table->integer('screen_height');
             $table->integer('ppi')->nullable();
             $table->integer('brand_id')->unsigned()->nullable();
             $table->foreign('brand_id')->references('id')->on('brands')->onDelete('set null');
+            $table->index('brand_id');
             $table->timestamps();
         });
     }

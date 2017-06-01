@@ -15,7 +15,7 @@ class CreateBrowsersTable extends Migration
     {
         Schema::create('browsers', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name', 15);
+            $table->string('name', 15)->unique();
             $table->timestamps();
         });
     }

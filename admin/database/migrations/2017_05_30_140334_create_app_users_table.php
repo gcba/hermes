@@ -17,6 +17,7 @@ class CreateAppUsersTable extends Migration
             $table->bigIncrements('id');
             $table->string('name', 70);
             $table->string('email', 100)->nullable();
+            $table->index('email');
             $table->timestamps();
         });
     }

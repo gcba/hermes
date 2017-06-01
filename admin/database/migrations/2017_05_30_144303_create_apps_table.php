@@ -15,7 +15,8 @@ class CreateAppsTable extends Migration
     {
         Schema::create('apps', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name', 50);
+            $table->string('name', 50)->unique();
+            $table->index('name');
             $table->char('type', 1);
             $table->timestamps();
             $table->integer('modified_by')->unsigned()->nullable();

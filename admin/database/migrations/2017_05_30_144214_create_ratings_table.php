@@ -21,16 +21,22 @@ class CreateRatingsTable extends Migration
             $table->string('platform_version', 15);
             $table->string('browser_version', 15)->nullable();
             $table->boolean('has_message');
+            $table->index('has_message');
             $table->integer('app_id')->unsigned();
             $table->foreign('app_id')->references('id')->on('apps')->onDelete('cascade');
+            $table->index('app_id');
             $table->integer('appuser_id')->unsigned();
             $table->foreign('appuser_id')->references('id')->on('appusers')->onDelete('cascade');
+            $table->index('appuser_id');
             $table->integer('platform_id')->unsigned()->nullable();
             $table->foreign('platform_id')->references('id')->on('platforms')->onDelete('set null');
+            $table->index('platform_id');
             $table->integer('device_id')->unsigned()->nullable();
             $table->foreign('device_id')->references('id')->on('devices')->onDelete('set null');
+            $table->index('device_id');
             $table->integer('browser_id')->unsigned()->nullable();
             $table->foreign('browser_id')->references('id')->on('browsers')->onDelete('set null');
+            $table->index('browser_id');
             $table->timestamps();
         });
     }
