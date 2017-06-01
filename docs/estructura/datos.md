@@ -183,8 +183,6 @@ Los mensajes de las conversaciones con los usuarios de las apps que enviaron cal
 #### Relaciones
 
 - **One-to-many** con Rating, a través de `rating_id`
-- **One-to-many** con AppUser, a través de `appuser_id`
-- **One-to-many** con Apps, a través de `app_id`
 
 |Campos          |Tipo                  | FK?   | Null? |Unique?|Index? |
 |----------------|----------------------|:-----:|:-----:|:-----:|:-----:|
@@ -192,8 +190,6 @@ Los mensajes de las conversaciones con los usuarios de las apps que enviaron cal
 |message         |text                  |       |       |       |       |
 |direction       |char                  |       |       |       |Sí     |
 |rating_id       |int                   |X      |       |       |X      |
-|appuser_id      |int                   |X      |       |       |X      |
-|app_id          |int                   |X      |       |       |X      |
 |created_at      |datetime              |       |       |       |       |
 |modified_at     |datetime              |       |X      |       |       |
 
@@ -219,3 +215,7 @@ Los valores de configuración del backend.
 ## Timestamps
 
 Los campos `created_at` y `modified_at` son creados automáticamente por Laravel y no serán modificados.
+
+## Borrado
+
+Será físico, en todos los casos.
