@@ -24,6 +24,14 @@ class App extends Model
     }
 
     /**
+     * Get the messages that belong to this app.
+     */
+    public function messages()
+    {
+        return $this->hasMany('App\Message');
+    }
+
+    /**
      * Get the users that belong to the app.
      */
      public function users() {

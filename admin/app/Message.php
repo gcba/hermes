@@ -12,7 +12,7 @@ class Message extends Model
      * @var array
      */
     protected $fillable = [
-        'message', 'direction', 'rating_id', 'appuser_id', 'user_id',
+        'message', 'direction', 'rating_id', 'appuser_id', 'app_id',
     ];
 
     /**
@@ -32,10 +32,10 @@ class Message extends Model
     }
 
     /**
-     * Get the user the message belongs to.
+     * Get the app the message belongs to.
      */
-    public function user()
+    public function app()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\App');
     }
 }
