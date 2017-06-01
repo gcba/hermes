@@ -41,4 +41,11 @@ class User extends Authenticatable
      public function apps() {
         return $this->belongsToMany('App\App');
      }
+
+     /**
+     * Get the user that last modified the app.
+     */
+     public function modifiedBy() {
+        return $this->belongsTo('App\User', 'modified_by');
+     }
 }
