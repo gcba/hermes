@@ -12,7 +12,7 @@ class Config extends Model
      * @var array
      */
     protected $fillable = [
-        'key', 'value', 'modified_by'
+        'name', 'key', 'value', 'modified_by'
     ];
 
     /**
