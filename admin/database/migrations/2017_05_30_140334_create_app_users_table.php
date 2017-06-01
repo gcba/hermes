@@ -14,7 +14,9 @@ class CreateAppUsersTable extends Migration
     public function up()
     {
         Schema::create('app_users', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
+            $table->string('name');
+            $table->string('email');
             $table->timestamps();
         });
     }
