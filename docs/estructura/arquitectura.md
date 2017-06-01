@@ -16,7 +16,7 @@ Controlador, Parser y Generador serán únicos para toda la aplicación, con pos
 
 ### Admin y APIs
 
-Tanto el Admin como las APIs compartirán una máquina virtual. El Admin no estará expuesto en forma directa, sino detrás de Nginx. En el caso de las APIs un API Gateway tomará el lugar de Nginx.
+Tanto el Admin como las APIs compartirán una máquina virtual. El Admin no estará expuesto en forma directa, sino detrás de Nginx. En el caso de las APIs un API Gateway recibirá las todas las requests desde Nginx y las distribuirá a la API correspondiente.
 
 ### Base de datos
 

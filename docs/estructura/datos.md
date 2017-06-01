@@ -211,7 +211,6 @@ Los valores de configuración del backend.
 |modified_at     |datetime              |       |X      |       |       |
 |modified_by     |int                   |X      |X      |       |       |
 
-
 ## Timestamps
 
 Los campos `created_at` y `modified_at` son creados automáticamente por Laravel y no serán modificados.

@@ -4,19 +4,19 @@
 
 ### Admin
 
-PHP 7.1 con Laravel 5.4
+PHP 7.1 con Laravel 5.4.
 
-### APIs
+### APIs
 
-Go 1.8 con Echo y Gorm
+Go 1.8 con Echo y Gorm.
 
 ### Datos
 
-Postgresql, Redis e InfluxDB
+Postgresql, Redis e InfluxDB.
 
 ### API Gateway
 
-Tyk
+Tyk.
 
 ## Convenciones
 
