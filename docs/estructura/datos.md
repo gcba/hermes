@@ -2,7 +2,7 @@
 
 ![Schema](https://github.com/gcba/hermes/raw/master/docs/images/schema.png)
 
-Consta de 12 tablas, sin contar las necesarias para roles y permisos (no aparecen en la imagen) dado que éstas son creadas y manejadas por un componente de autorización.
+Consta de 13 tablas, sin contar las necesarias para roles y permisos (no aparecen en la imagen) dado que éstas son creadas y manejadas automáticamente por un componente de autorización.
 
 ## Tablas
 
@@ -20,18 +20,22 @@ El usuario del backend.
 |id              |int (PK)              |       |       |       |       |
 |name            |varchar(70)           |       |       |       |       |
 |email           |varchar(100)          |       |       |X      |       |
-|password        |binary(60)            |       |       |       |       |
+|password        |varchar(60)           |       |       |       |       |
 |created_at      |datetime              |       |       |       |       |
 |modified_at     |datetime              |       |X      |       |       |
 |modified_by     |int                   |X      |X      |       |       |
 
 ### AppUser
 
+#### Relaciones
+
+- **Many-to-many** con App, a través de la tabla `AppUser_App`
+
 El usuario de las apps que envía calificaciones y comentarios.
 
 |Campos          |Tipo                  | FK?   | Null? |Unique?|Index? |
 |----------------|----------------------|:-----:|:-----:|:-----:|:-----:|
-|id              |int (PK)              |       |       |       |       |
+|id              |bigint (PK)           |       |       |       |       |
 |name            |varchar(70)           |       |       |       |       |
 |email           |varchar(100)          |       |X      |       |X      |
 |created_at      |datetime              |       |       |       |       |
@@ -46,6 +50,7 @@ Las apps sobre las que se envían calificaciones y comentarios.
 - **One-to-many** con User, a través de `modified_by`
 - **Many-to-many** con User, a través de la tabla `User_App`
 - **Many-to-many** con Platform, a través de la tabla `App_Platform`
+- **Many-to-many** con AppUser, a través de la tabla `AppUser_App`
 
 |Campos          |Tipo                  | FK?   | Null? |Unique?|Index? |
 |----------------|----------------------|:-----:|:-----:|:-----:|:-----:|
@@ -64,6 +69,16 @@ Tabla intermedia para la relación many-to-many entre User y App.
 |----------------|----------------------|:-----:|:-----:|:-----:|:-----:|
 |id              |int (PK)              |       |       |       |       |
 |user_id         |int                   |X      |       |       |X      |
+|app_id          |int                   |X      |       |       |X      |
+
+### AppUser_App
+
+Tabla intermedia para la relación many-to-many entre AppUser y App.
+
+|Campos          |Tipo                  | FK?   | Null? |Unique?|Index? |
+|----------------|----------------------|:-----:|:-----:|:-----:|:-----:|
+|id              |int (PK)              |       |       |       |       |
+|appuser_id      |int                   |X      |       |       |X      |
 |app_id          |int                   |X      |       |       |X      |
 
 ### Platform
@@ -146,13 +161,13 @@ Las calificaciones de las apps.
 
 |Campos          |Tipo                  | FK?   | Null? |Unique?|Index? |
 |----------------|----------------------|:-----:|:-----:|:-----:|:-----:|
-|id              |int (PK)              |       |       |       |       |
+|id              |bigint (PK)           |       |       |       |       |
 |rating          |smallint              |       |       |       |       |
 |description     |varchar(30)           |       |X      |       |       |
 |app_version     |varchar(15)           |       |X      |       |       |
 |platform_version|varchar(15)           |       |       |       |       |
 |browser_version |varchar(15)           |       |X      |       |       |
-|has_message     |bool NULL             |       |X      |       |X      |
+|has_message     |bool                  |       |       |       |X      |
 |app_id          |int                   |X      |       |       |X      |
 |appuser_id      |int                   |X      |       |       |X      |
 |platform_id     |int                   |X      |X      |       |X      |
@@ -169,16 +184,16 @@ Los mensajes de las conversaciones con los usuarios de las apps que enviaron cal
 
 - **One-to-many** con Rating, a través de `rating_id`
 - **One-to-many** con AppUser, a través de `appuser_id`
-- **One-to-many** con User, a través de `user_id`
+- **One-to-many** con Apps, a través de `app_id`
 
 |Campos          |Tipo                  | FK?   | Null? |Unique?|Index? |
 |----------------|----------------------|:-----:|:-----:|:-----:|:-----:|
-|id              |int (PK)              |       |       |       |       |
+|id              |bigint (PK)           |       |       |       |       |
 |message         |text                  |       |       |       |       |
 |direction       |char                  |       |       |       |Sí     |
 |rating_id       |int                   |X      |       |       |X      |
 |appuser_id      |int                   |X      |       |       |X      |
-|user_id         |int                   |X      |       |       |X      |
+|app_id          |int                   |X      |       |       |X      |
 |created_at      |datetime              |       |       |       |       |
 |modified_at     |datetime              |       |X      |       |       |
 
@@ -193,6 +208,7 @@ Los valores de configuración del backend.
 |Campos          |Tipo                  | FK?   | Null? |Unique?|Index? |
 |----------------|----------------------|:-----:|:-----:|:-----:|:-----:|
 |id              |int (PK)              |       |       |       |       |
+|name            |varchar(30)           |       |       |       |       |
 |key             |varchar(30)           |       |       |X      |       |
 |value           |varchar(254)          |       |X      |       |       |
 |created_at      |datetime              |       |       |       |       |
