@@ -13,5 +13,6 @@ type Device struct {
     ScreenWidth int
     ScreenHeight int
     PPI int
+    Brand Brand
     BrandID int
 }
