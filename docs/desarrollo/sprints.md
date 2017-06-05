@@ -73,9 +73,9 @@ Crear los modelos y packages en la API de calificaciones, y los seeds del Admin.
 #### API de calificaciones
 
 1. Crear el package de modelos
-2. Crear el package de controlador
-3. Crear el package de response generator
-4. Crear el package de parser
+2. Crear el package del controlador
+3. Crear el package del response generator
+4. Crear el package del parser
 5. Crear el modelo Ratings
 6. Configurar la autenticación en Tyk
 
