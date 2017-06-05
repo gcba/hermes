@@ -6,5 +6,5 @@ import (
 )
 
 type Brand struct {
-
+    gorm.Model
 }

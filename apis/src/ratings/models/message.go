@@ -6,5 +6,5 @@ import (
 )
 
 type Message struct {
-
+    gorm.Model
 }

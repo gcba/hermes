@@ -6,5 +6,5 @@ import (
 )
 
 type Rating struct {
-
+    gorm.Model
 }

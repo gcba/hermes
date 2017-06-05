@@ -6,5 +6,5 @@ import (
 )
 
 type Device struct {
-
+    gorm.Model
 }

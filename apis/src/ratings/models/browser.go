@@ -6,5 +6,5 @@ import (
 )
 
 type Browser struct {
-
+    gorm.Model
 }

@@ -6,5 +6,5 @@ import (
 )
 
 type AppUser struct {
-
+    gorm.Model
 }
