@@ -12,7 +12,7 @@ class App extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'type', 'modified_by'
+        'name', 'type', 'key', 'modified_by'
     ];
 
     /**

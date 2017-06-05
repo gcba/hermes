@@ -22,7 +22,7 @@ class Rating extends Model
         'appuser_id',
         'platform_id',
         'device_id',
-        'browser_id',
+        'browser_id'
     ];
 
     /**

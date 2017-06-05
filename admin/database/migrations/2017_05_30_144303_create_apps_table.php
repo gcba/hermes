@@ -18,6 +18,7 @@ class CreateAppsTable extends Migration
             $table->string('name', 50)->unique();
             $table->index('name');
             $table->char('type', 1);
+            $table->char('key', 32)->unique();
             $table->timestamps();
             $table->integer('modified_by')->unsigned()->nullable();
             $table->foreign('modified_by')->references('id')->on('users')->onDelete('set null');

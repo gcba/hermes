@@ -12,7 +12,7 @@ class Platform extends Model
      * @var array
      */
     protected $fillable = [
-        'name',
+        'name', 'key'
     ];
 
     /**
