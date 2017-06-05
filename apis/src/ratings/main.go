@@ -8,8 +8,6 @@ import (
 )
 
 func main() {
-	// os.Getenv("S3_BUCKET")
-
 	e := echo.New()
 	e.GET("/", func(c echo.Context) error {
 		return c.String(http.StatusOK, "Hello, World!")
