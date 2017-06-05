@@ -1,5 +1,5 @@
 hash: 21852dbc96520afd9c7de17267bca1c870e95d41f6452e9cba519393df394578
-updated: 2017-05-16T09:35:28.317842186-03:00
+updated: 2017-06-05T10:14:20.856781712-03:00
 imports:
 - name: github.com/jinzhu/gorm
   version: 9acaa33324bbcc78239a1c913d4f1292c12177b9
@@ -21,12 +21,12 @@ imports:
 - name: github.com/valyala/fasttemplate
   version: dcecefd839c4193db0d35b88ec65b4c12d360ab0
 - name: golang.org/x/crypto
-  version: ab89591268e0c8b748cbe4047b00197516011af5
+  version: e1a4589e7d3ea14a3352255d04b6f1a418845e5e
   subpackages:
   - acme
   - acme/autocert
 - name: golang.org/x/sys
-  version: 1e99a4f9d247b28c670884b9a8d6801f39a47b77
+  version: b90f89a1e7a9c1f6b918820b3daa7f08488c8594
   subpackages:
   - unix
 testImports: []
