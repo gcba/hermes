@@ -1,8 +1,10 @@
-hash: 0f150df12077415bb7ae5cc2a684d071747c7fb3bc3d7971cc8907b041893c42
-updated: 2017-05-16T09:38:58.3090378-03:00
+hash: df08342318f21aace2a5e52a64d15cc1e3b09a43c9491939aee01e34ebf281da
+updated: 2017-06-05T13:18:29.739522071-03:00
 imports:
 - name: github.com/jinzhu/gorm
   version: 9acaa33324bbcc78239a1c913d4f1292c12177b9
+- name: github.com/joho/godotenv
+  version: 726cc8b906e3d31c70a9671c90a13716a8d3f50d
 - name: github.com/labstack/echo
   version: 1049c9613cd371b7ea8f219404c9a821734781ed
   subpackages:
@@ -21,12 +23,12 @@ imports:
 - name: github.com/valyala/fasttemplate
   version: dcecefd839c4193db0d35b88ec65b4c12d360ab0
 - name: golang.org/x/crypto
-  version: ab89591268e0c8b748cbe4047b00197516011af5
+  version: e1a4589e7d3ea14a3352255d04b6f1a418845e5e
   subpackages:
   - acme
   - acme/autocert
 - name: golang.org/x/sys
-  version: 1e99a4f9d247b28c670884b9a8d6801f39a47b77
+  version: b90f89a1e7a9c1f6b918820b3daa7f08488c8594
   subpackages:
   - unix
 testImports: []
