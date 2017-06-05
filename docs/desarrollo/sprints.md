@@ -2,13 +2,14 @@
 
 ## Sprint 1
 
-### Duración
+### Días
 
-Del lunes 29/05/2017 al 02/06/2017.
+- Martes 30/05
+- Jueves 01/06
 
 ### Objetivo
 
-Crear los modelos y migraciones.
+Crear los modelos y migraciones en el Admin.
 
 ### Tareas
 
@@ -53,3 +54,48 @@ Crear los modelos y migraciones.
 19. Implementar las migraciones de Messages
 
 20. Implementar las migraciones de Config
+
+
+## Sprint 2
+
+### Días
+
+- Lunes 05/06
+- Miércoles 07/06
+- Viernes 09/06
+
+### Objetivo
+
+Crear los modelos y packages en la API de ratings, y los seeds del Admin.
+
+### Tareas
+
+#### API de ratings
+
+1. Crear el package de modelos
+2. Crear el package de controlador
+3. Crear el package de response generator
+4. Crear el package de parser
+5. Crear el modelo de Ratings
+
+#### Admin
+
+1. Crear los seeds de User
+
+2. Crear los seeds de AppUser
+
+3. Crear los seeds de App
+
+4. Crear los seeds de Platform
+
+5. Crear los seeds de Device
+
+6. Crear los seeds de Browser
+
+7. Crear los seeds de Brand
+
+8. Crear los seeds de Rating
+
+9. Crear los seeds de Messages
+
+10. Crear los seeds de Config
