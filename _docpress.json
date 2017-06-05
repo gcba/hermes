@@ -468,52 +468,60 @@
             ]
           },
           {
-            "title": "Sprints",
-            "source": "docs/desarrollo/sprints.md",
-            "url": "desarrollo/sprints.html",
-            "slug": "desarrollosprints",
+            "title": "Sprint 1",
+            "source": "docs/desarrollo/sprint1.md",
+            "url": "desarrollo/sprint1.html",
+            "slug": "desarrollosprint1",
             "headings": [
               {
-                "title": "Sprint 1",
+                "title": "Días",
                 "depth": 2,
-                "id": "sprint-1",
-                "headings": [
-                  {
-                    "title": "Días",
-                    "depth": 3,
-                    "id": "dias"
-                  },
-                  {
-                    "title": "Objetivo",
-                    "depth": 3,
-                    "id": "objetivo"
-                  },
-                  {
-                    "title": "Tareas",
-                    "depth": 3,
-                    "id": "tareas"
-                  }
-                ]
+                "id": "dias"
               },
               {
-                "title": "Sprint 2",
+                "title": "Objetivo",
                 "depth": 2,
-                "id": "sprint-2",
+                "id": "objetivo"
+              },
+              {
+                "title": "Tareas",
+                "depth": 2,
+                "id": "tareas",
                 "headings": [
                   {
-                    "title": "Días",
+                    "title": "Admin",
                     "depth": 3,
-                    "id": "dias"
-                  },
+                    "id": "admin"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "title": "Sprint 2",
+            "source": "docs/desarrollo/sprint2.md",
+            "url": "desarrollo/sprint2.html",
+            "slug": "desarrollosprint2",
+            "headings": [
+              {
+                "title": "Días",
+                "depth": 2,
+                "id": "dias"
+              },
+              {
+                "title": "Objetivo",
+                "depth": 2,
+                "id": "objetivo"
+              },
+              {
+                "title": "Tareas",
+                "depth": 2,
+                "id": "tareas",
+                "headings": [
                   {
-                    "title": "Objetivo",
+                    "title": "API de calificaciones",
                     "depth": 3,
-                    "id": "objetivo"
-                  },
-                  {
-                    "title": "Tareas",
-                    "depth": 3,
-                    "id": "tareas"
+                    "id": "api-de-calificaciones"
                   }
                 ]
               }
@@ -982,53 +990,61 @@
         }
       ]
     },
-    "desarrollo/sprints.html": {
-      "source": "docs/desarrollo/sprints.md",
-      "title": "Sprints - Hermes",
-      "pageTitle": "Sprints",
-      "slug": "desarrollosprints",
+    "desarrollo/sprint1.html": {
+      "source": "docs/desarrollo/sprint1.md",
+      "title": "Sprint 1 - Hermes",
+      "pageTitle": "Sprint 1",
+      "slug": "desarrollosprint1",
       "headings": [
         {
-          "title": "Sprint 1",
+          "title": "Días",
           "depth": 2,
-          "id": "sprint-1",
-          "headings": [
-            {
-              "title": "Días",
-              "depth": 3,
-              "id": "dias"
-            },
-            {
-              "title": "Objetivo",
-              "depth": 3,
-              "id": "objetivo"
-            },
-            {
-              "title": "Tareas",
-              "depth": 3,
-              "id": "tareas"
-            }
-          ]
+          "id": "dias"
         },
         {
-          "title": "Sprint 2",
+          "title": "Objetivo",
           "depth": 2,
-          "id": "sprint-2",
+          "id": "objetivo"
+        },
+        {
+          "title": "Tareas",
+          "depth": 2,
+          "id": "tareas",
           "headings": [
             {
-              "title": "Días",
+              "title": "Admin",
               "depth": 3,
-              "id": "dias"
-            },
+              "id": "admin"
+            }
+          ]
+        }
+      ]
+    },
+    "desarrollo/sprint2.html": {
+      "source": "docs/desarrollo/sprint2.md",
+      "title": "Sprint 2 - Hermes",
+      "pageTitle": "Sprint 2",
+      "slug": "desarrollosprint2",
+      "headings": [
+        {
+          "title": "Días",
+          "depth": 2,
+          "id": "dias"
+        },
+        {
+          "title": "Objetivo",
+          "depth": 2,
+          "id": "objetivo"
+        },
+        {
+          "title": "Tareas",
+          "depth": 2,
+          "id": "tareas",
+          "headings": [
             {
-              "title": "Objetivo",
+              "title": "API de calificaciones",
               "depth": 3,
-              "id": "objetivo"
-            },
-            {
-              "title": "Tareas",
-              "depth": 3,
-              "id": "tareas"
+              "id": "api-de-calificaciones"
             }
           ]
         }
@@ -1045,7 +1061,8 @@
     "docs/desarrollo/codigo.md": "desarrollo/codigo.html",
     "docs/desarrollo/gestion.md": "desarrollo/gestion.html",
     "docs/desarrollo/metodologia.md": "desarrollo/metodologia.html",
-    "docs/desarrollo/sprints.md": "desarrollo/sprints.html",
+    "docs/desarrollo/sprint1.md": "desarrollo/sprint1.html",
+    "docs/desarrollo/sprint2.md": "desarrollo/sprint2.html",
     "docs/images/schema.png": "images/schema.png"
   }
 }
