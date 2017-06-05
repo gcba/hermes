@@ -12,4 +12,5 @@ Hermes
     * [Código](desarrollo/codigo.md)
     * [Gestión](desarrollo/gestion.md)
     * [Metodología](desarrollo/metodologia.md)
-    * [Sprints](desarrollo/sprints.md)
+    * [Sprint 1](desarrollo/sprint1.md)
+    * [Sprint 2](desarrollo/sprint2.md)
