@@ -144,7 +144,7 @@
 </tr>
 <tr>
 <td>created_at</td>
-<td>datetime</td>
+<td>timestamp</td>
 <td style="text-align:center"></td>
 <td style="text-align:center"></td>
 <td style="text-align:center"></td>
@@ -152,7 +152,7 @@
 </tr>
 <tr>
 <td>modified_at</td>
-<td>datetime</td>
+<td>timestamp</td>
 <td style="text-align:center"></td>
 <td style="text-align:center">X</td>
 <td style="text-align:center"></td>
@@ -212,7 +212,7 @@
 </tr>
 <tr>
 <td>created_at</td>
-<td>datetime</td>
+<td>timestamp</td>
 <td style="text-align:center"></td>
 <td style="text-align:center"></td>
 <td style="text-align:center"></td>
@@ -220,7 +220,7 @@
 </tr>
 <tr>
 <td>modified_at</td>
-<td>datetime</td>
+<td>timestamp</td>
 <td style="text-align:center"></td>
 <td style="text-align:center">X</td>
 <td style="text-align:center"></td>
@@ -274,8 +274,16 @@
 <td style="text-align:center"></td>
 </tr>
 <tr>
+<td>key</td>
+<td>char(32)</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">X</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
 <td>created_at</td>
-<td>datetime</td>
+<td>timestamp</td>
 <td style="text-align:center"></td>
 <td style="text-align:center"></td>
 <td style="text-align:center"></td>
@@ -283,7 +291,7 @@
 </tr>
 <tr>
 <td>modified_at</td>
-<td>datetime</td>
+<td>timestamp</td>
 <td style="text-align:center"></td>
 <td style="text-align:center">X</td>
 <td style="text-align:center"></td>
@@ -414,8 +422,16 @@
 <td style="text-align:center"></td>
 </tr>
 <tr>
+<td>key</td>
+<td>char(32)</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">X</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
 <td>created_at</td>
-<td>datetime</td>
+<td>timestamp</td>
 <td style="text-align:center"></td>
 <td style="text-align:center"></td>
 <td style="text-align:center"></td>
@@ -423,7 +439,7 @@
 </tr>
 <tr>
 <td>modified_at</td>
-<td>datetime</td>
+<td>timestamp</td>
 <td style="text-align:center"></td>
 <td style="text-align:center">X</td>
 <td style="text-align:center"></td>
@@ -523,7 +539,7 @@
 </tr>
 <tr>
 <td>ppi</td>
-<td>int</td>
+<td>real</td>
 <td style="text-align:center"></td>
 <td style="text-align:center">X</td>
 <td style="text-align:center"></td>
@@ -539,7 +555,7 @@
 </tr>
 <tr>
 <td>created_at</td>
-<td>datetime</td>
+<td>timestamp</td>
 <td style="text-align:center"></td>
 <td style="text-align:center"></td>
 <td style="text-align:center"></td>
@@ -547,7 +563,7 @@
 </tr>
 <tr>
 <td>modified_at</td>
-<td>datetime</td>
+<td>timestamp</td>
 <td style="text-align:center"></td>
 <td style="text-align:center">X</td>
 <td style="text-align:center"></td>
@@ -587,7 +603,7 @@
 </tr>
 <tr>
 <td>created_at</td>
-<td>datetime</td>
+<td>timestamp</td>
 <td style="text-align:center"></td>
 <td style="text-align:center"></td>
 <td style="text-align:center"></td>
@@ -595,7 +611,7 @@
 </tr>
 <tr>
 <td>modified_at</td>
-<td>datetime</td>
+<td>timestamp</td>
 <td style="text-align:center"></td>
 <td style="text-align:center">X</td>
 <td style="text-align:center"></td>
@@ -635,7 +651,7 @@
 </tr>
 <tr>
 <td>created_at</td>
-<td>datetime</td>
+<td>timestamp</td>
 <td style="text-align:center"></td>
 <td style="text-align:center"></td>
 <td style="text-align:center"></td>
@@ -643,7 +659,7 @@
 </tr>
 <tr>
 <td>modified_at</td>
-<td>datetime</td>
+<td>timestamp</td>
 <td style="text-align:center"></td>
 <td style="text-align:center">X</td>
 <td style="text-align:center"></td>
@@ -666,6 +682,7 @@
 <tr>
 <th>Campos</th>
 <th>Tipo</th>
+<th style="text-align:center">Default</th>
 <th style="text-align:center">FK?</th>
 <th style="text-align:center">Null?</th>
 <th style="text-align:center">Unique?</th>
@@ -680,10 +697,12 @@
 <td style="text-align:center"></td>
 <td style="text-align:center"></td>
 <td style="text-align:center"></td>
+<td style="text-align:center"></td>
 </tr>
 <tr>
 <td>rating</td>
 <td>smallint</td>
+<td style="text-align:center"></td>
 <td style="text-align:center"></td>
 <td style="text-align:center"></td>
 <td style="text-align:center"></td>
@@ -693,6 +712,7 @@
 <td>description</td>
 <td>varchar(30)</td>
 <td style="text-align:center"></td>
+<td style="text-align:center"></td>
 <td style="text-align:center">X</td>
 <td style="text-align:center"></td>
 <td style="text-align:center"></td>
@@ -700,6 +720,7 @@
 <tr>
 <td>app_version</td>
 <td>varchar(15)</td>
+<td style="text-align:center"></td>
 <td style="text-align:center"></td>
 <td style="text-align:center">X</td>
 <td style="text-align:center"></td>
@@ -712,10 +733,12 @@
 <td style="text-align:center"></td>
 <td style="text-align:center"></td>
 <td style="text-align:center"></td>
+<td style="text-align:center"></td>
 </tr>
 <tr>
 <td>browser_version</td>
 <td>varchar(15)</td>
+<td style="text-align:center"></td>
 <td style="text-align:center"></td>
 <td style="text-align:center">X</td>
 <td style="text-align:center"></td>
@@ -724,6 +747,7 @@
 <tr>
 <td>has_message</td>
 <td>bool</td>
+<td style="text-align:center">false</td>
 <td style="text-align:center"></td>
 <td style="text-align:center"></td>
 <td style="text-align:center"></td>
@@ -732,6 +756,7 @@
 <tr>
 <td>app_id</td>
 <td>int</td>
+<td style="text-align:center"></td>
 <td style="text-align:center">X</td>
 <td style="text-align:center"></td>
 <td style="text-align:center"></td>
@@ -740,6 +765,7 @@
 <tr>
 <td>appuser_id</td>
 <td>int</td>
+<td style="text-align:center"></td>
 <td style="text-align:center">X</td>
 <td style="text-align:center"></td>
 <td style="text-align:center"></td>
@@ -748,6 +774,7 @@
 <tr>
 <td>platform_id</td>
 <td>int</td>
+<td style="text-align:center"></td>
 <td style="text-align:center">X</td>
 <td style="text-align:center">X</td>
 <td style="text-align:center"></td>
@@ -756,6 +783,7 @@
 <tr>
 <td>device_id</td>
 <td>int</td>
+<td style="text-align:center"></td>
 <td style="text-align:center">X</td>
 <td style="text-align:center">X</td>
 <td style="text-align:center"></td>
@@ -764,6 +792,7 @@
 <tr>
 <td>browser_id</td>
 <td>int</td>
+<td style="text-align:center"></td>
 <td style="text-align:center">X</td>
 <td style="text-align:center">X</td>
 <td style="text-align:center"></td>
@@ -771,7 +800,8 @@
 </tr>
 <tr>
 <td>created_at</td>
-<td>datetime</td>
+<td>timestamp</td>
+<td style="text-align:center"></td>
 <td style="text-align:center"></td>
 <td style="text-align:center"></td>
 <td style="text-align:center"></td>
@@ -779,7 +809,8 @@
 </tr>
 <tr>
 <td>modified_at</td>
-<td>datetime</td>
+<td>timestamp</td>
+<td style="text-align:center"></td>
 <td style="text-align:center"></td>
 <td style="text-align:center">X</td>
 <td style="text-align:center"></td>
@@ -839,7 +870,7 @@
 </tr>
 <tr>
 <td>created_at</td>
-<td>datetime</td>
+<td>timestamp</td>
 <td style="text-align:center"></td>
 <td style="text-align:center"></td>
 <td style="text-align:center"></td>
@@ -847,7 +878,7 @@
 </tr>
 <tr>
 <td>modified_at</td>
-<td>datetime</td>
+<td>timestamp</td>
 <td style="text-align:center"></td>
 <td style="text-align:center">X</td>
 <td style="text-align:center"></td>
@@ -907,7 +938,7 @@
 </tr>
 <tr>
 <td>created_at</td>
-<td>datetime</td>
+<td>timestamp</td>
 <td style="text-align:center"></td>
 <td style="text-align:center"></td>
 <td style="text-align:center"></td>
@@ -915,7 +946,7 @@
 </tr>
 <tr>
 <td>modified_at</td>
-<td>datetime</td>
+<td>timestamp</td>
 <td style="text-align:center"></td>
 <td style="text-align:center">X</td>
 <td style="text-align:center"></td>
