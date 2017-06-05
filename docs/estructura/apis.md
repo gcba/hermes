@@ -28,6 +28,10 @@ Las normas aquí descriptas deben aplicarse de manera uniforme y exhaustiva.
 
 ### Endpoints
 
+`OPTIONS /`
+
+Obtener los endpoints de la API.
+
 `POST /ratings`
 
 Crear una nueva calificación (que puede incluir un comentario o no)
@@ -35,6 +39,39 @@ Crear una nueva calificación (que puede incluir un comentario o no)
 `OPTIONS /ratings`
 
  Obtener la información necesaria (campos, tipos de datos, etc) necesaria para hacer un POST exitoso al endpoint.
+
+### Responses
+
+#### POST
+
+```json
+{
+   "meta": {
+       ...
+   }
+}
+```
+
+#### OPTIONS
+
+```json
+{
+   "meta": {
+       ...
+   },
+   "methods": [
+       {
+           "verb": ...,
+           "url": ...,
+           "headers": {
+               ...
+           },
+           "parameters": {
+               ...
+           }
+       },
+   ]
+}
 
 ## API de estadísticas
 
