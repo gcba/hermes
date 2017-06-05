@@ -266,6 +266,11 @@
                     "title": "Endpoints",
                     "depth": 3,
                     "id": "endpoints"
+                  },
+                  {
+                    "title": "Responses",
+                    "depth": 3,
+                    "id": "responses"
                   }
                 ]
               },
@@ -469,9 +474,31 @@
                 "id": "sprint-1",
                 "headings": [
                   {
-                    "title": "Duración",
+                    "title": "Días",
                     "depth": 3,
-                    "id": "duracion"
+                    "id": "dias"
+                  },
+                  {
+                    "title": "Objetivo",
+                    "depth": 3,
+                    "id": "objetivo"
+                  },
+                  {
+                    "title": "Tareas",
+                    "depth": 3,
+                    "id": "tareas"
+                  }
+                ]
+              },
+              {
+                "title": "Sprint 2",
+                "depth": 2,
+                "id": "sprint-2",
+                "headings": [
+                  {
+                    "title": "Días",
+                    "depth": 3,
+                    "id": "dias"
                   },
                   {
                     "title": "Objetivo",
@@ -754,6 +781,11 @@
               "title": "Endpoints",
               "depth": 3,
               "id": "endpoints"
+            },
+            {
+              "title": "Responses",
+              "depth": 3,
+              "id": "responses"
             }
           ]
         },
@@ -952,9 +984,31 @@
           "id": "sprint-1",
           "headings": [
             {
-              "title": "Duración",
+              "title": "Días",
               "depth": 3,
-              "id": "duracion"
+              "id": "dias"
+            },
+            {
+              "title": "Objetivo",
+              "depth": 3,
+              "id": "objetivo"
+            },
+            {
+              "title": "Tareas",
+              "depth": 3,
+              "id": "tareas"
+            }
+          ]
+        },
+        {
+          "title": "Sprint 2",
+          "depth": 2,
+          "id": "sprint-2",
+          "headings": [
+            {
+              "title": "Días",
+              "depth": 3,
+              "id": "dias"
             },
             {
               "title": "Objetivo",

@@ -39,6 +39,8 @@
                         </li>
                         <li class="heading-item -depth-3"><a class="hlink link-endpoints" href="#endpoints">Endpoints</a>
                         </li>
+                        <li class="heading-item -depth-3"><a class="hlink link-responses" href="#responses">Responses</a>
+                        </li>
                       </ul>
                     </li>
                     <li class="heading-item -depth-2"><a class="hlink link-api-de-estadisticas" href="#api-de-estadisticas">API de estadísticas</a>
@@ -89,16 +91,50 @@
 <h4 id="3.-consistencia">3. Consistencia</h4>
 <p>Las normas aqu&#xED; descriptas deben aplicarse de manera uniforme y exhaustiva.</p>
 <h3 id="endpoints">Endpoints</h3>
+<p><code>OPTIONS /</code></p>
+<p>Obtener los endpoints de la API.</p>
 <p><code>POST /ratings</code></p>
 <p>Crear una nueva calificaci&#xF3;n (que puede incluir un comentario o no)</p>
 <p><code>OPTIONS /ratings</code></p>
 <p>Obtener la informaci&#xF3;n necesaria (campos, tipos de datos, etc) necesaria para hacer un POST exitoso al endpoint.</p>
-<h2 id="api-de-estadisticas">API de estad&#xED;sticas</h2>
-<p>Esta API ser&#xE1; de s&#xF3;lo lectura, con un enfoque de obtenci&#xF3;n y transformaci&#xF3;n de  datos cuantitativos. Tiene por fin poder responder preguntas relacionadas con los datos de forma confiable, flexible y expresiva.</p>
-<h3 id="endpoints">Endpoints</h3>
-<p>Dado que se trata de una API GraphQL, s&#xF3;lo es necesario un endpoint. En &#xE9;l se admiten los m&#xE9;todos GET y POST.</p>
-<p><code>GET /stats</code></p>
-<p><code>POST /stats</code></p>
+<h3 id="responses">Responses</h3>
+<h4 id="post">POST</h4>
+<pre><code class="lang-json">{
+   &quot;meta&quot;: {
+       ...
+   }
+}
+</code></pre>
+<h4 id="options">OPTIONS</h4>
+<pre><code class="lang-json">{
+   &quot;meta&quot;: {
+       ...
+   },
+   &quot;methods&quot;: [
+       {
+           &quot;verb&quot;: ...,
+           &quot;url&quot;: ...,
+           &quot;headers&quot;: {
+               ...
+           },
+           &quot;parameters&quot;: {
+               ...
+           }
+       },
+   ]
+}
+
+## API de estad&#xED;sticas
+
+Esta API ser&#xE1; de s&#xF3;lo lectura, con un enfoque de obtenci&#xF3;n y transformaci&#xF3;n de  datos cuantitativos. Tiene por fin poder responder preguntas relacionadas con los datos de forma confiable, flexible y expresiva.
+
+### Endpoints
+
+Dado que se trata de una API GraphQL, s&#xF3;lo es necesario un endpoint. En &#xE9;l se admiten los m&#xE9;todos GET y POST.
+
+`GET /stats`
+
+`POST /stats`</code></pre>
 
         </div>
         <div class="footer-nav">
