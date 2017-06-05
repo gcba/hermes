@@ -7,4 +7,6 @@ import (
 
 type Browser struct {
     gorm.Model
+
+    Name string `gorm:"size:15"`
 }
