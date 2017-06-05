@@ -76,8 +76,13 @@ Crear los modelos y modules en la API de calificaciones, y los seeds del Admin. 
 2. Crear el module del controlador
 3. Crear el module del response generator
 4. Crear el module del parser
-5. Crear el modelo Ratings
-6. Configurar la autenticación en Tyk
+5. Crear el modelo Rating
+6. Crear el modelo Message
+7. Crear el modelo AppUser
+8. Crear el modelo Device
+9. Crear el modelo Brand
+10. Crear el modelo Browser
+11. Configurar la autenticación en Tyk
 
 #### Admin
 
