@@ -162,7 +162,7 @@ Las calificaciones de las apps.
 - **One-to-many** con Browser, a través de `browser_id`
 
 |Campos          |Tipo                  |Default| FK?   | Null? |Unique?|Index? |
-|----------------|----------------------|:-----:|:-----:|:-----:|:-----:|:-----:|
+|----------------|----------------------|-------|:-----:|:-----:|:-----:|:-----:|
 |id              |bigint (PK)           |       |       |       |       |       |
 |rating          |smallint              |       |       |       |       |       |
 |description     |varchar(30)           |       |       |X      |       |       |
