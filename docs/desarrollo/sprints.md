@@ -66,7 +66,7 @@ Crear los modelos y migraciones en el Admin.
 
 ### Objetivo
 
-Crear los modelos y packages en la API de ratings, y los seeds del Admin.
+Crear los modelos y packages en la API de ratings, y los seeds del Admin. Configurar la autenticación de la API de ratings.
 
 ### Tareas
 
@@ -77,6 +77,7 @@ Crear los modelos y packages en la API de ratings, y los seeds del Admin.
 3. Crear el package de response generator
 4. Crear el package de parser
 5. Crear el modelo de Ratings
+6. Configurar la autenticación en Tyk
 
 #### Admin
 
