@@ -7,4 +7,6 @@ import (
 
 type Brand struct {
     gorm.Model
+
+    Name string `gorm:"size:30"`
 }
