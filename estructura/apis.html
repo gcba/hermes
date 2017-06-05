@@ -39,6 +39,8 @@
                         </li>
                         <li class="heading-item -depth-3"><a class="hlink link-endpoints" href="#endpoints">Endpoints</a>
                         </li>
+                        <li class="heading-item -depth-3"><a class="hlink link-request" href="#request">Request</a>
+                        </li>
                         <li class="heading-item -depth-3"><a class="hlink link-responses" href="#responses">Responses</a>
                         </li>
                       </ul>
@@ -97,6 +99,28 @@
 <p>Crear una nueva calificaci&#xF3;n (que puede incluir un comentario o no)</p>
 <p><code>OPTIONS /ratings</code></p>
 <p>Obtener la informaci&#xF3;n necesaria (campos, tipos de datos, etc) necesaria para hacer un POST exitoso al endpoint.</p>
+<h3 id="request">Request</h3>
+<p><code>POST /ratings</code>: s&#xF3;lo JSON body. Por lo tanto se requerir&#xE1; el header <code>Content-Type: application/json</code>.</p>
+<pre><code class="lang-json">{
+    &quot;rating&quot;: int,
+    &quot;comment&quot;: string, // optional
+    &quot;platform&quot;: string,
+    &quot;browser&quot;: string, // optional
+    &quot;user&quot;: { // optional
+        &quot;name&quot;: string,
+        &quot;email&quot;: string
+    },
+    &quot;device&quot;: { // optional
+        &quot;name&quot;: string,
+        &quot;brand&quot;: string,
+        &quot;screen&quot;: {
+            &quot;width&quot;: int,
+            &quot;height&quot;: int,
+            &quot;PPI&quot;: float
+        }
+    }
+}
+</code></pre>
 <h3 id="responses">Responses</h3>
 <h4 id="post">POST</h4>
 <pre><code class="lang-json">{
