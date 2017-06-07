@@ -43,7 +43,7 @@ class RatingsTableSeeder extends Seeder
 
                  foreach ($apps as $app) {
                     foreach ($appusers as $appuser) {
-                        $willLeaveRating = array_rand([true, false]);
+                        $willLeaveRating = array_rand([true, false, true]);
 
                         if ($willLeaveRating) {
                             $description;
