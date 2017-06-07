@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 use App\Device;
 use App\Brand;
+use App\Platform;
 
 class DeviceTableSeeder extends Seeder
 {
@@ -18,12 +19,16 @@ class DeviceTableSeeder extends Seeder
             $samsung = Brand::where('name', 'Samsung')->firstOrFail();
             $google = Brand::where('name', 'Google')->firstOrFail();
 
+            $ios = Platform::where('name', 'iOS')->firstOrFail();
+            $android = Platform::where('name', 'Android')->firstOrFail();
+
             Device::create([
                 'name'           => 'iPhone 6s',
                 'screen_width'   => 750,
                 'screen_height'  => 1334,
                 'ppi'            => 326,
-                'brand_id'       => $apple.id
+                'brand_id'       => $apple.id,
+                'platform_id'    => $ios.id
             ]);
 
             Device::create([
@@ -31,7 +36,8 @@ class DeviceTableSeeder extends Seeder
                 'screen_width'   => 1440,
                 'screen_height'  => 2560,
                 'ppi'            => 557,
-                'brand_id'       => $samsung.id
+                'brand_id'       => $samsung.id,
+                'platform_id'    => $android.id
             ]);
 
             Device::create([
@@ -39,7 +45,8 @@ class DeviceTableSeeder extends Seeder
                 'screen_width'   => 1440,
                 'screen_height'  => 2560,
                 'ppi'            => 534,
-                'brand_id'       => $google.id
+                'brand_id'       => $google.id,
+                'platform_id'    => $android.id
             ]);
 
             Device::create([
@@ -47,15 +54,17 @@ class DeviceTableSeeder extends Seeder
                 'screen_width'   => 750,
                 'screen_height'  => 1334,
                 'ppi'            => 326,
-                'brand_id'       => $apple.id
+                'brand_id'       => $apple.id,
+                'platform_id'    => $ios.id
             ]);
 
             Device::create([
-                'name'           => 'Galaxy S8',
-                'screen_width'   => 1440,
-                'screen_height'  => 2960,
-                'ppi'            => 570,
-                'brand_id'       => $samsung.id
+                'name'           => 'Galaxy J7',
+                'screen_width'   => 720,
+                'screen_height'  => 1280,
+                'ppi'            => 267,
+                'brand_id'       => $samsung.id,
+                'platform_id'    => $android.id
             ]);
         }
     }
