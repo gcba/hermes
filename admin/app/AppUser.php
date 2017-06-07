@@ -31,4 +31,11 @@ class AppUser extends Model
      public function apps() {
         return $this->belongsToMany('App\App');
      }
+
+     /**
+     * Get the platform that belong to the appuser.
+     */
+     public function platforms() {
+        return $this->belongsToMany('App\Platform');
+     }
 }

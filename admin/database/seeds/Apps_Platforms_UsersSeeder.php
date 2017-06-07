@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use TCG\Voyager\Models\User;
 use TCG\Voyager\Models\Role;
 use App\App;
 use App\Platform;
@@ -59,17 +60,18 @@ class Apps_Platforms_UsersSeeder extends Seeder
 
             $appusers = AppUser::all();
 
-            $ios->appusers()->attach($appuser[0]->id);
-            $ios->appusers()->attach($appuser[1]->id);
-            $ios->appusers()->attach($appuser[3]->id);
+            $ios->appusers()->attach($appusers[0]->id);
+            $ios->appusers()->attach($appusers[1]->id);
+            $ios->appusers()->attach($appusers[3]->id);
 
-            $android->appusers()->attach($appuser[2]->id);
-            $android->appusers()->attach($appuser[4]->id);
-            $android->appusers()->attach($appuser[5]->id);
+            $android->appusers()->attach($appusers[2]->id);
+            $android->appusers()->attach($appusers[4]->id);
+            $android->appusers()->attach($appusers[5]->id);
 
             // Let's attach Users to Apps
 
-            $supportUsers = Role::where('name', 'support')->firstOrFail()->users();
+            $supportRole = Role::where('name', 'support')->firstOrFail();
+            $supportUsers = User::where('role_id', $supportRole->id)->get();
 
             $supportUsers[0]->apps()->attach($denunciaVial->id);
             $supportUsers[1]->apps()->attach($miBa->id);
