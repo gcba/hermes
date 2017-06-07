@@ -26,15 +26,12 @@ class UsersTableSeeder extends Seeder
                 'role_id'        => $adminRole->id
             ]);
 
-            $admin = User::where('name', 'Admin')->firstOrFail();
-
             User::create([
                 'name'           => 'Juan Fernández',
                 'email'          => 'juan@fernandez.com',
                 'password'       => bcrypt('password'),
                 'remember_token' => str_random(60),
-                'role_id'        => $supportRole->id,
-                'created_by'     => $user.id
+                'role_id'        => $supportRole->id
             ]);
 
             User::create([
@@ -42,8 +39,7 @@ class UsersTableSeeder extends Seeder
                 'email'          => 'juan@fernandez.com',
                 'password'       => bcrypt('password'),
                 'remember_token' => str_random(60),
-                'role_id'        => $userRole->id,
-                'created_by'     => $user.id∂
+                'role_id'        => $userRole->id
             ]);
         }
     }
