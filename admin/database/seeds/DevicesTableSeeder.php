@@ -5,7 +5,7 @@ use App\Device;
 use App\Brand;
 use App\Platform;
 
-class DeviceTableSeeder extends Seeder
+class DevicesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -27,8 +27,8 @@ class DeviceTableSeeder extends Seeder
                 'screen_width'   => 750,
                 'screen_height'  => 1334,
                 'ppi'            => 326,
-                'brand_id'       => $apple.id,
-                'platform_id'    => $ios.id
+                'brand_id'       => $apple->id,
+                'platform_id'    => $ios->id
             ]);
 
             Device::create([
@@ -36,8 +36,8 @@ class DeviceTableSeeder extends Seeder
                 'screen_width'   => 1440,
                 'screen_height'  => 2560,
                 'ppi'            => 557,
-                'brand_id'       => $samsung.id,
-                'platform_id'    => $android.id
+                'brand_id'       => $samsung->id,
+                'platform_id'    => $android->id
             ]);
 
             Device::create([
@@ -45,8 +45,8 @@ class DeviceTableSeeder extends Seeder
                 'screen_width'   => 1440,
                 'screen_height'  => 2560,
                 'ppi'            => 534,
-                'brand_id'       => $google.id,
-                'platform_id'    => $android.id
+                'brand_id'       => $google->id,
+                'platform_id'    => $android->id
             ]);
 
             Device::create([
@@ -54,8 +54,8 @@ class DeviceTableSeeder extends Seeder
                 'screen_width'   => 750,
                 'screen_height'  => 1334,
                 'ppi'            => 326,
-                'brand_id'       => $apple.id,
-                'platform_id'    => $ios.id
+                'brand_id'       => $apple->id,
+                'platform_id'    => $ios->id
             ]);
 
             Device::create([
@@ -63,8 +63,8 @@ class DeviceTableSeeder extends Seeder
                 'screen_width'   => 720,
                 'screen_height'  => 1280,
                 'ppi'            => 267,
-                'brand_id'       => $samsung.id,
-                'platform_id'    => $android.id
+                'brand_id'       => $samsung->id,
+                'platform_id'    => $android->id
             ]);
         }
     }

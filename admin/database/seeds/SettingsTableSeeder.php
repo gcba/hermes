@@ -14,10 +14,10 @@ class SettingsTableSeeder extends Seeder
         if (!$setting->exists) {
             $setting->fill([
                 'display_name' => 'Site Title',
-                'value'        => 'Site Title',
+                'value'        => '',
                 'details'      => '',
                 'type'         => 'text',
-                'order'        => 1,
+                'order'        => 1
             ])->save();
         }
 
@@ -25,10 +25,10 @@ class SettingsTableSeeder extends Seeder
         if (!$setting->exists) {
             $setting->fill([
                 'display_name' => 'Site Description',
-                'value'        => 'Site Description',
+                'value'        => '',
                 'details'      => '',
                 'type'         => 'text',
-                'order'        => 2,
+                'order'        => 2
             ])->save();
         }
 
@@ -39,7 +39,7 @@ class SettingsTableSeeder extends Seeder
                 'value'        => '',
                 'details'      => '',
                 'type'         => 'image',
-                'order'        => 3,
+                'order'        => 3
             ])->save();
         }
 
@@ -50,7 +50,7 @@ class SettingsTableSeeder extends Seeder
                 'value'        => '',
                 'details'      => '',
                 'type'         => 'image',
-                'order'        => 9,
+                'order'        => 9
             ])->save();
         }
 
@@ -58,10 +58,10 @@ class SettingsTableSeeder extends Seeder
         if (!$setting->exists) {
             $setting->fill([
                 'display_name' => 'Admin Title',
-                'value'        => 'Voyager',
+                'value'        => 'Hermes',
                 'details'      => '',
                 'type'         => 'text',
-                'order'        => 4,
+                'order'        => 4
             ])->save();
         }
 
@@ -69,10 +69,10 @@ class SettingsTableSeeder extends Seeder
         if (!$setting->exists) {
             $setting->fill([
                 'display_name' => 'Admin Description',
-                'value'        => 'Welcome to Voyager. The Missing Admin for Laravel',
+                'value'        => 'Gestión de feedback de las apps de la Ciudad',
                 'details'      => '',
                 'type'         => 'text',
-                'order'        => 5,
+                'order'        => 5
             ])->save();
         }
 
@@ -83,7 +83,7 @@ class SettingsTableSeeder extends Seeder
                 'value'        => '',
                 'details'      => '',
                 'type'         => 'image',
-                'order'        => 6,
+                'order'        => 6
             ])->save();
         }
 
@@ -94,7 +94,7 @@ class SettingsTableSeeder extends Seeder
                 'value'        => '',
                 'details'      => '',
                 'type'         => 'image',
-                'order'        => 7,
+                'order'        => 7
             ])->save();
         }
 
@@ -105,7 +105,7 @@ class SettingsTableSeeder extends Seeder
                 'value'        => '',
                 'details'      => '',
                 'type'         => 'text',
-                'order'        => 9,
+                'order'        => 9
             ])->save();
         }
     }

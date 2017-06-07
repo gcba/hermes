@@ -12,7 +12,7 @@ class Device extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'screen_width', 'screen_height', 'ppi'
+        'name', 'screen_width', 'screen_height', 'ppi', 'brand_id', 'platform_id'
     ];
 
     /**

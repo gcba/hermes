@@ -6,7 +6,7 @@ use App\App;
 use App\Platform;
 use App\AppUser;
 
-class PlatformTableSeeder extends Seeder
+class Apps_Platforms_UsersSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -47,13 +47,13 @@ class PlatformTableSeeder extends Seeder
 
             // Let's attach Apps to Platforms
 
-            $ios.apps()->attach($denunciaVial.id);
-            $ios.apps()->attach($miBa.id);
-            $ios.apps()->attach($masSimple.id);
+            $ios.apps()->attach($denunciaVial->id);
+            $ios.apps()->attach($miBa->id);
+            $ios.apps()->attach($masSimple->id);
 
-            $android.apps()->attach($denunciaVial.id);
-            $android.apps()->attach($miBa.id);
-            $android.apps()->attach($masSimple.id);
+            $android.apps()->attach($denunciaVial->id);
+            $android.apps()->attach($miBa->id);
+            $android.apps()->attach($masSimple->id);
 
             // Let's attach AppUsers to Platforms
 
@@ -64,13 +64,13 @@ class PlatformTableSeeder extends Seeder
             $appuser5 = AppUser::where('email', 'juliana@perez.com')->firstOrFail();
             $appuser6 = AppUser::where('email', 'valentina@echeverria.com')->firstOrFail();
 
-            $ios.appusers()->attach($appuser1.id);
-            $ios.appusers()->attach($appuser2.id);
-            $ios.appusers()->attach($appuser4.id);
+            $ios.appusers()->attach($appuser1->id);
+            $ios.appusers()->attach($appuser2->id);
+            $ios.appusers()->attach($appuser4->id);
 
-            $android.appusers()->attach($appuser3.id);
-            $android.appusers()->attach($appuser5.id);
-            $android.appusers()->attach($appuser6.id);
+            $android.appusers()->attach($appuser3->id);
+            $android.appusers()->attach($appuser5->id);
+            $android.appusers()->attach($appuser6->id);
 
             // Let's attach Users to Apps
 
@@ -78,9 +78,9 @@ class PlatformTableSeeder extends Seeder
             $support2 = User::where('email', 'martina@gimenez.com')->firstOrFail();
             $support3 = User::where('email', 'paula@carrizo.com')->firstOrFail();
 
-            $support1.apps()->attach($denunciaVial.id);
-            $support2.apps()->attach($miBa.id);
-            $support3.apps()->attach($masSimple.id);
+            $support1.apps()->attach($denunciaVial->id);
+            $support2.apps()->attach($miBa->id);
+            $support3.apps()->attach($masSimple->id);
         }
     }
 }

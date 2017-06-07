@@ -3,7 +3,7 @@
 use Illuminate\Database\Seeder;
 use App\Browser;
 
-class BrowserTableSeeder extends Seeder
+class BrowsersTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
