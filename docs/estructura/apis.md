@@ -48,11 +48,13 @@ Crear una nueva calificación (que puede incluir un comentario o no)
 {
     "rating": int,
     "comment": string, // optional
-    "platform": string,
-    "browser": string, // optional
     "user": { // optional
         "name": string,
         "email": string
+    },
+    "platform": {
+        "name": string,
+        "version": string
     },
     "device": { // optional
         "name": string,
@@ -62,6 +64,10 @@ Crear una nueva calificación (que puede incluir un comentario o no)
             "height": int,
             "PPI": float
         }
+    },
+    "browser": { // optional
+        "name": string,
+        "version": string
     }
 }
 ```
