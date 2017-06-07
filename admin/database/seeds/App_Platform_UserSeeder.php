@@ -1,8 +1,10 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use TCG\Voyager\Models\User;
 use App\App;
 use App\Platform;
+use App\AppUser;
 
 class PlatformTableSeeder extends Seeder
 {
@@ -50,6 +52,33 @@ class PlatformTableSeeder extends Seeder
             $android.apps()->attach($denunciaVial.id);
             $android.apps()->attach($miBa.id);
             $android.apps()->attach($masSimple.id);
+
+            // Let's attach AppUsers to Platforms
+
+            $appuser1 = AppUser::where('email', 'mariano@gomez.com')->firstOrFail();
+            $appuser2 = AppUser::where('email', 'esteban@sosa.com')->firstOrFail();
+            $appuser3 = AppUser::where('email', 'german@alvarez.com')->firstOrFail();
+            $appuser4 = AppUser::where('email', 'mariela@dominguez.com')->firstOrFail();
+            $appuser5 = AppUser::where('email', 'juliana@perez.com')->firstOrFail();
+            $appuser6 = AppUser::where('email', 'valentina@echeverria.com')->firstOrFail();
+
+            $ios.appusers()->attach($appuser1.id);
+            $ios.appusers()->attach($appuser2.id);
+            $ios.appusers()->attach($appuser4.id);
+
+            $android.appusers()->attach($appuser3.id);
+            $android.appusers()->attach($appuser5.id);
+            $android.appusers()->attach($appuser6.id);
+
+            // Let's attach Users to Apps
+
+            $support1 = User::where('email', 'juan@fernandez.com')->firstOrFail();
+            $support2 = User::where('email', 'martina@gimenez.com')->firstOrFail();
+            $support3 = User::where('email', 'paula@carrizo.com')->firstOrFail();
+
+            $support1.apps()->attach($denunciaVial.id);
+            $support2.apps()->attach($miBa.id);
+            $support3.apps()->attach($masSimple.id);
         }
     }
 }

@@ -27,6 +27,21 @@ class AppUsersTableSeeder extends Seeder
                 'name'  => 'Germán Álvarez',
                 'email' => 'german@alvarez.com'
             ]);
+
+            AppUser::create([
+                'name'  => 'Mariela Domínguez',
+                'email' => 'mariela@dominguez.com'
+            ]);
+
+            AppUser::create([
+                'name'  => 'Juliana Pérez',
+                'email' => 'juliana@perez.com'
+            ]);
+
+            AppUser::create([
+                'name'  => 'Valentina Echeverría',
+                'email' => 'valentina@echeverria.com'
+            ]);
         }
     }
 }
