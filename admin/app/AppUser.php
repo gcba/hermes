@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class AppUser extends Model
 {
-    protected $table = 'appuser';
+    protected $table = 'appusers';
 
     /**
      * The attributes that are mass assignable.
