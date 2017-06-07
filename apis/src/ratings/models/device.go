@@ -13,4 +13,6 @@ type Device struct {
 	PPI          int
 	Brand        Brand
 	BrandID      int
+	Platform     Platform
+	PlatformID   int
 }

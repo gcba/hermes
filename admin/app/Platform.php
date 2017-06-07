@@ -16,14 +16,21 @@ class Platform extends Model
     ];
 
     /**
-     * Get the ratings that belong to this platform.
+     * Get the ratings that belong to the platform.
      */
     public function ratings()
     {
         return $this->hasMany('App\Rating');
     }
 
-    /**
+     /**
+     * Get the devices that belong to the platform.
+     */
+     public function devices() {
+        return $this->hasMany('App\Device');
+     }
+
+     /**
      * Get the apps that belong to the platform.
      */
      public function apps() {

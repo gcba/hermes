@@ -7,7 +7,7 @@ import (
 type Message struct {
 	gorm.Model
 
-	Message   `sql:"type:text"`
-	Direction `sql:"type:enum('in','out')`
+	Message   string `sql:"type:text"`
+	Direction string `sql:"type:enum('in','out')"`
 	RatingID  int
 }
