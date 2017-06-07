@@ -14,18 +14,18 @@ class AppUsersTableSeeder extends Seeder
     {
         if (AppUser::count() == 0) {
             AppUser::create([
-                'name'           => 'Mariano Gómez',
-                'email'          => 'mariano@gomez.com'
+                'name'  => 'Mariano Gómez',
+                'email' => 'mariano@gomez.com'
             ]);
 
             AppUser::create([
-                'name'           => 'Esteban Sosa',
-                'email'          => 'esteban@sosa.com'
+                'name'  => 'Esteban Sosa',
+                'email' => 'esteban@sosa.com'
             ]);
 
             AppUser::create([
-                'name'           => 'Germán Álvarez',
-                'email'          => 'german@alvarez.com'
+                'name'  => 'Germán Álvarez',
+                'email' => 'german@alvarez.com'
             ]);
         }
     }
