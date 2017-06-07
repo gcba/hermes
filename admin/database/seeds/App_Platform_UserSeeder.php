@@ -45,6 +45,8 @@ class PlatformTableSeeder extends Seeder
                 'key'  => md5("789123")
             ]);
 
+            // Let's attach Apps to Platforms
+
             $ios.apps()->attach($denunciaVial.id);
             $ios.apps()->attach($miBa.id);
             $ios.apps()->attach($masSimple.id);
