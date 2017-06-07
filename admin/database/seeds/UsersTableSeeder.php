@@ -52,7 +52,7 @@ class UsersTableSeeder extends Seeder
 
             User::create([
                 'name'           => 'Miguel Rodríguez',
-                'email'          => 'juan@fernandez.com',
+                'email'          => 'miguel@rodriguez.com',
                 'password'       => bcrypt('password'),
                 'remember_token' => str_random(60),
                 'role_id'        => $userRole->id

@@ -19,12 +19,14 @@ class DatabaseSeeder extends Seeder
         $this->call(PermissionsTableSeeder::class);
         $this->call(PermissionRoleTableSeeder::class);
         $this->call(SettingsTableSeeder::class);
-
         $this->call(UsersTableSeeder::class);
+
         $this->call(AppUsersTableSeeder::class);
         $this->call(Apps_Platforms_UsersSeeder::class);
         $this->call(BrowsersTableSeeder::class);
         $this->call(BrandsTableSeeder::class);
         $this->call(DevicesTableSeeder::class);
+        $this->call(RatingsTableSeeder::class);
+        $this->call(MessagesTableSeeder::class);
     }
 }
