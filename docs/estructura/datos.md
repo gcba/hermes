@@ -2,7 +2,7 @@
 
 ![Schema](https://github.com/gcba/hermes/raw/master/docs/images/schema.png)
 
-Consta de 13 tablas, sin contar las necesarias para roles y permisos (no aparecen en la imagen) dado que éstas son creadas y manejadas automáticamente por un componente de autorización.
+Consta de 14 tablas, sin contar las necesarias para roles y permisos (no aparecen en la imagen) dado que éstas son creadas y manejadas automáticamente por un componente de autorización.
 
 ## Tablas
 
@@ -21,8 +21,8 @@ El usuario del backend.
 |name            |varchar(70)           |       |       |       |       |
 |email           |varchar(100)          |       |       |X      |       |
 |password        |varchar(60)           |       |       |       |       |
-|created_at      |timestamp              |       |       |       |       |
-|modified_at     |timestamp              |       |X      |       |       |
+|created_at      |timestamp             |       |       |       |       |
+|modified_at     |timestamp             |       |X      |       |       |
 |modified_by     |int                   |X      |X      |       |       |
 
 ### AppUser
@@ -30,6 +30,7 @@ El usuario del backend.
 #### Relaciones
 
 - **Many-to-many** con App, a través de la tabla `AppUser_App`
+- **Many-to-many** con Platform, a través de la tabla `AppUser_Platform`
 
 El usuario de las apps que envía calificaciones y comentarios.
 
@@ -62,6 +63,23 @@ Las apps sobre las que se envían calificaciones y comentarios.
 |modified_at     |timestamp             |       |X      |       |       |
 |modified_by     |int                   |X      |X      |       |       |
 
+### Platform
+
+La plataforma donde corren las apps y de donde provienen las calificaciones y comentarios.
+
+#### Relaciones
+
+- **Many-to-many** con App, a través de la tabla `App_Platform`
+- **Many-to-many** con AppUser, a través de la tabla `AppUser_Platform`
+
+|Campos          |Tipo                  | FK?   | Null? |Unique?|Index? |
+|----------------|----------------------|:-----:|:-----:|:-----:|:-----:|
+|id              |int (PK)              |       |       |       |       |
+|name            |varchar(15)           |       |       |X      |       |
+|key             |char(32)              |       |       |X      |       |
+|created_at      |timestamp             |       |       |       |       |
+|modified_at     |timestamp             |       |X      |       |       |
+
 ### User_App
 
 Tabla intermedia para la relación many-to-many entre User y App.
@@ -71,6 +89,16 @@ Tabla intermedia para la relación many-to-many entre User y App.
 |id              |int (PK)              |       |       |       |       |
 |user_id         |int                   |X      |       |       |X      |
 |app_id          |int                   |X      |       |       |X      |
+
+### App_Platform
+
+Tabla intermedia para la relación many-to-many entre App y Platform.
+
+|Campos          |Tipo                  | FK?   | Null? |Unique?|Index? |
+|----------------|----------------------|:-----:|:-----:|:-----:|:-----:|
+|id              |int (PK)              |       |       |       |       |
+|app_id          |int                   |X      |       |       |X      |
+|platform_id     |int                   |X      |       |       |X      |
 
 ### AppUser_App
 
@@ -82,30 +110,14 @@ Tabla intermedia para la relación many-to-many entre AppUser y App.
 |appuser_id      |int                   |X      |       |       |X      |
 |app_id          |int                   |X      |       |       |X      |
 
-### Platform
+### AppUser_Platform
 
-La plataforma donde corren las apps y de donde provienen las calificaciones y comentarios.
-
-#### Relaciones
-
-- **Many-to-many** con App, a través de la tabla `App_Platform`
+Tabla intermedia para la relación many-to-many entre AppUser y Platform.
 
 |Campos          |Tipo                  | FK?   | Null? |Unique?|Index? |
 |----------------|----------------------|:-----:|:-----:|:-----:|:-----:|
 |id              |int (PK)              |       |       |       |       |
-|name            |varchar(15)           |       |       |X      |       |
-|key             |char(32)              |       |       |X      |       |
-|created_at      |timestamp             |       |       |       |       |
-|modified_at     |timestamp             |       |X      |       |       |
-
-### App_Platform
-
-Tabla intermedia para la relación many-to-many entre App y Platform.
-
-|Campos          |Tipo                  | FK?   | Null? |Unique?|Index? |
-|----------------|----------------------|:-----:|:-----:|:-----:|:-----:|
-|id              |int (PK)              |       |       |       |       |
-|app_id          |int                   |X      |       |       |X      |
+|appuser_id      |int                   |X      |       |       |X      |
 |platform_id     |int                   |X      |       |       |X      |
 
 ### Device
@@ -124,6 +136,7 @@ En el caso de las aplicaciones móviles, el dispositivo desde donde se enviaron 
 |screen_heigth   |int                   |       |       |       |       |
 |ppi             |real                  |       |X      |       |       |
 |brand_id        |int                   |X      |X      |       |X      |
+|platform_id     |int                   |X      |X      |       |X      |
 |created_at      |timestamp             |       |       |       |       |
 |modified_at     |timestamp             |       |X      |       |       |
 
@@ -195,7 +208,7 @@ Los mensajes de las conversaciones con los usuarios de las apps que enviaron cal
 |created_at      |timestamp             |       |       |       |       |
 |modified_at     |timestamp             |       |X      |       |       |
 
-### Config
+### Setting
 
 Los valores de configuración del backend.
 
