@@ -31,8 +31,6 @@ class CreateAppUserTable extends Migration
      */
     public function down()
     {
-        Schema::table('app_user', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('app_user');
     }
 }

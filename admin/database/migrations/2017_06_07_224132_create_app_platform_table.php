@@ -31,8 +31,6 @@ class CreateAppPlatformTable extends Migration
      */
     public function down()
     {
-        Schema::table('app_platform', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('app_platform');
     }
 }
