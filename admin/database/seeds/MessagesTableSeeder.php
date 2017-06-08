@@ -14,7 +14,7 @@ class MessagesTableSeeder extends Seeder
     public function run()
     {
         if (Message::count() == 0) {
-            $ratingsWithMessages = Rating::where('has_message', true)->findOrFail();
+            $ratingsWithMessages = Rating::where('has_message', true)->get();
 
             foreach ($ratingsWithMessages as $rating) {
                 $message = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit sed eiusmod tempor incidunt ';

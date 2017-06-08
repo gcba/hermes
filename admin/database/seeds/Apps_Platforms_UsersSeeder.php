@@ -73,9 +73,11 @@ class Apps_Platforms_UsersSeeder extends Seeder
             $supportRole = Role::where('name', 'support')->firstOrFail();
             $supportUsers = User::where('role_id', $supportRole->id)->get();
 
-            $supportUsers[0]->apps()->attach($denunciaVial->id);
-            $supportUsers[1]->apps()->attach($miBa->id);
-            $supportUsers[2]->apps()->attach($masSimple->id);
+            foreach ($supportUsers as $support) {
+                $support->apps()->attach($denunciaVial->id);
+                $support->apps()->attach($miBa->id);
+                $support->apps()->attach($masSimple->id);
+            }
         }
     }
 }

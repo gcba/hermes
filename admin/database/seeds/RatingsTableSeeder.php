@@ -5,6 +5,7 @@ use App\Rating;
 use App\AppUser;
 use App\App;
 use App\Platform;
+use App\Device;
 
 class RatingsTableSeeder extends Seeder
 {
@@ -21,10 +22,19 @@ class RatingsTableSeeder extends Seeder
 
             $ios = Platform::where('name', 'iOS')->firstOrFail();
             $android = Platform::where('name', 'Android')->firstOrFail();
+            $iosDevices = Device::where('platform_id', $ios->id)->get()->toArray();
+            $androidDevices = Device::where('platform_id', $android->id)->get()->toArray();
+
+            $ratingOptions = [1, 2, 3, 4, 5];
+            $booleanOptions = [true, false];
+            $platformOptions = ['iOS', 'Android'];
+            $iosVersionOptions = ['8.0', '9.0'];
+            $androidVersionOptions = ['5.1', '6.0'];
+            $appVersionOptions = ['1.0', '2.0'];
 
             foreach ($apps as $app) {
                 foreach ($appusers as $appuser) {
-                    $rating = array_rand([1, 2, 3, 4, 5]);
+                    $rating = $ratingOptions[array_rand($ratingOptions)];
                     $description;
 
                     switch ($rating) {
@@ -45,17 +55,19 @@ class RatingsTableSeeder extends Seeder
                             break;
                     }
 
-                    $hasMessage = array_rand([true, false]);
-                    $platform = array_rand(['iOS', 'Android']);
+                    $hasMessage = $booleanOptions[array_rand($booleanOptions)];
+                    $platform = $platformOptions[array_rand($platformOptions)];
                     $platformId = $platform == "iOS" ? $ios->id : $android->id;
-                    $platformVersion = $platform == "iOS" ? array_rand(['8.0', '9.0']) : array_rand(['5.1', '6.0']);
-                    $devices = $platform == "iOS" ? array_rand($ios->devices()) : array_rand($android->devices());
-                    $deviceId = array_rand($devices)->id;
+                    $platformVersion = $platform == "iOS" ?
+                        $iosVersionOptions[array_rand($iosVersionOptions)] :
+                        $androidVersionOptions[array_rand($androidVersionOptions)];
+                    $devices = $platform == "iOS" ? $iosDevices : $androidDevices;
+                    $deviceId = $devices[array_rand($devices)]['id'];
 
                     Rating::create([
-                        'rating' => $i,
+                        'rating' => $rating,
                         'description' => $description,
-                        'app_version' => array_rand(['1.0', '2.0']),
+                        'app_version' => $appVersionOptions[array_rand($appVersionOptions)],
                         'platform_version' => $platformVersion,
                         'has_message' => $hasMessage,
                         'app_id' => $app->id,
