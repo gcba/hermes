@@ -171,9 +171,19 @@
                     "id": "app"
                   },
                   {
+                    "title": "Platform",
+                    "depth": 3,
+                    "id": "platform"
+                  },
+                  {
                     "title": "User_App",
                     "depth": 3,
                     "id": "user_app"
+                  },
+                  {
+                    "title": "App_Platform",
+                    "depth": 3,
+                    "id": "app_platform"
                   },
                   {
                     "title": "AppUser_App",
@@ -181,14 +191,9 @@
                     "id": "appuser_app"
                   },
                   {
-                    "title": "Platform",
+                    "title": "AppUser_Platform",
                     "depth": 3,
-                    "id": "platform"
-                  },
-                  {
-                    "title": "App_Platform",
-                    "depth": 3,
-                    "id": "app_platform"
+                    "id": "appuser_platform"
                   },
                   {
                     "title": "Device",
@@ -216,9 +221,9 @@
                     "id": "message"
                   },
                   {
-                    "title": "Config",
+                    "title": "Setting",
                     "depth": 3,
-                    "id": "config"
+                    "id": "setting"
                   }
                 ]
               },
@@ -699,9 +704,19 @@
               "id": "app"
             },
             {
+              "title": "Platform",
+              "depth": 3,
+              "id": "platform"
+            },
+            {
               "title": "User_App",
               "depth": 3,
               "id": "user_app"
+            },
+            {
+              "title": "App_Platform",
+              "depth": 3,
+              "id": "app_platform"
             },
             {
               "title": "AppUser_App",
@@ -709,14 +724,9 @@
               "id": "appuser_app"
             },
             {
-              "title": "Platform",
+              "title": "AppUser_Platform",
               "depth": 3,
-              "id": "platform"
-            },
-            {
-              "title": "App_Platform",
-              "depth": 3,
-              "id": "app_platform"
+              "id": "appuser_platform"
             },
             {
               "title": "Device",
@@ -744,9 +754,9 @@
               "id": "message"
             },
             {
-              "title": "Config",
+              "title": "Setting",
               "depth": 3,
-              "id": "config"
+              "id": "setting"
             }
           ]
         },
