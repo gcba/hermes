@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use TCG\Voyager\Models\Role;
-use TCG\Voyager\Models\User;
+use App\User;
 
 class UsersTableSeeder extends Seeder
 {
