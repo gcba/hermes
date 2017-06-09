@@ -1,11 +1,13 @@
 package models
 
 import (
-	"github.com/jinzhu/gorm"
+	"time"
 )
 
 type Brand struct {
-	gorm.Model
-
+	ID   uint   `gorm:"primary_key"`
 	Name string `gorm:"size:30"`
+
+	CreatedAt time.Time
+	UpdatedAt time.Time
 }

@@ -1,17 +1,19 @@
 package models
 
 import (
-	"github.com/jinzhu/gorm"
+	"time"
 )
 
 type AppUser struct {
-	gorm.Model
-
+	ID    uint   `gorm:"primary_key"`
 	Name  string `gorm:"size:70"`
 	Email string `gorm:"size:100"`
+
+	CreatedAt time.Time
+	UpdatedAt time.Time
 }
 
-// set AppUser's table name to be `appuser`
+// TableName sets AppUser's table name to be `appuser`
 func (AppUser) TableName() string {
 	return "appuser"
 }

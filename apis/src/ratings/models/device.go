@@ -1,12 +1,11 @@
 package models
 
 import (
-	"github.com/jinzhu/gorm"
+	"time"
 )
 
 type Device struct {
-	gorm.Model
-
+	ID           uint   `gorm:"primary_key"`
 	Name         string `gorm:"size:30"`
 	ScreenWidth  int
 	ScreenHeight int
@@ -15,4 +14,7 @@ type Device struct {
 	BrandID      int
 	Platform     Platform
 	PlatformID   int
+
+	CreatedAt time.Time
+	UpdatedAt time.Time
 }

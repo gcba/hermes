@@ -1,12 +1,11 @@
 package models
 
 import (
-	"github.com/jinzhu/gorm"
+	"time"
 )
 
 type Rating struct {
-	gorm.Model
-
+	ID              uint `gorm:"primary_key"`
 	Rating          int8
 	Description     string `gorm:"size:30"`
 	AppVersion      string `gorm:"size:15"`
@@ -18,4 +17,7 @@ type Rating struct {
 	PlatformID      int
 	DeviceID        int
 	BrowserID       int
+
+	CreatedAt time.Time
+	UpdatedAt time.Time
 }
