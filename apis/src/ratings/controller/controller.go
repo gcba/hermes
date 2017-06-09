@@ -3,6 +3,7 @@ package controller
 import (
 	"fmt"
 	"os"
+	"path/filepath"
 
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres" // postgres driver
@@ -10,34 +11,33 @@ import (
 )
 
 // Load environment
-const env string = os.Getenv("API_RATINGS_ENV")
+var env string = os.Getenv("API_RATINGS_ENV")
 
 // Load read database settings
-const readDBName string = os.Getenv("API_RATINGS_READDB_NAME")
-const readDBHost string = os.Getenv("API_RATINGS_READDB_HOST")
-const readDBUser string = os.Getenv("API_RATINGS_READDB_USER")
-const readDBPassword string = os.Getenv("API_RATINGS_READDB_PASSWORD")
+var readDBName string = os.Getenv("API_RATINGS_READDB_NAME")
+var readDBHost string = os.Getenv("API_RATINGS_READDB_HOST")
+var readDBUser string = os.Getenv("API_RATINGS_READDB_USER")
+var readDBPassword string = os.Getenv("API_RATINGS_READDB_PASSWORD")
 
 // Load write database settings
-const writeDBName string = os.Getenv("API_RATINGS_WRITEDB_NAME")
-const writeDBHost string = os.Getenv("API_RATINGS_WRITEDB_HOST")
-const writeDBUser string = os.Getenv("API_RATINGS_WRITEDB_USER")
-const writeDBPassword string = os.Getenv("API_RATINGS_WRITEDB_PASSWORD")
+var writeDBName string = os.Getenv("API_RATINGS_WRITEDB_NAME")
+var writeDBHost string = os.Getenv("API_RATINGS_WRITEDB_HOST")
+var writeDBUser string = os.Getenv("API_RATINGS_WRITEDB_USER")
+var writeDBPassword string = os.Getenv("API_RATINGS_WRITEDB_PASSWORD")
 
 func connectDB(driver string, credentials string) *gorm.DB {
 	db, err := gorm.Open(driver, credentials)
 	if err != nil {
-		panic("Failed to connect to " + driver + " database")
+		panic("Failed to connect to " + driver + " database. Error: " + err.Error())
 	}
-	defer db.Close()
 
 	return db
 }
 
-// GetReadDB connects to the read database and return a pointer to the connection
+// GetReadDB connects to the read database and returns a pointer to the connection
 func GetReadDB() *gorm.DB {
 	if env != "PRODUCTION" {
-		return connectDB("sqlite3", readDBHost+'/'+readDBName)
+		return connectDB("sqlite3", filepath.Join(readDBHost, readDBName))
 	}
 
 	credentials := fmt.Sprintf(
@@ -45,16 +45,15 @@ func GetReadDB() *gorm.DB {
 		readDBHost,
 		readDBUser,
 		readDBName,
-		readDBPassword
-		)
+		readDBPassword)
 
 	return connectDB("postgres", credentials)
 }
 
-// GetWriteDB connects to the write database and return a pointer to the connection
+// GetWriteDB connects to the write database and returns a pointer to the connection
 func GetWriteDB() *gorm.DB {
 	if env != "PRODUCTION" {
-		return connectDB("sqlite3", writeDBHost+'/'+writeDBName)
+		return connectDB("sqlite3", filepath.Join(writeDBHost, writeDBName))
 	}
 
 	credentials := fmt.Sprintf(
@@ -62,8 +61,7 @@ func GetWriteDB() *gorm.DB {
 		writeDBHost,
 		writeDBUser,
 		writeDBName,
-		writeDBPassword
-		)
+		writeDBPassword)
 
 	return connectDB("postgres", credentials)
 }
