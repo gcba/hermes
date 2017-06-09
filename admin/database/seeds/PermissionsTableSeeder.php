@@ -13,8 +13,12 @@ class PermissionsTableSeeder extends Seeder
         $keys = [
             'browse_admin',
             'browse_database',
-            'browse_media',
+            // 'browse_media',
             'browse_settings',
+            'browse_apps',
+            'browse_appusers',
+            'browse_ratings',
+            'browse_messages'
         ];
 
         foreach ($keys as $key) {
@@ -29,5 +33,21 @@ class PermissionsTableSeeder extends Seeder
         Permission::generateFor('roles');
 
         Permission::generateFor('users');
+
+        Permission::generateFor('appusers');
+
+        Permission::generateFor('apps');
+
+        Permission::generateFor('platforms');
+
+        Permission::generateFor('brands');
+
+        Permission::generateFor('browsers');
+
+        Permission::generateFor('devices');
+
+        Permission::generateFor('messages');
+
+        Permission::generateFor('ratings');
     }
 }
