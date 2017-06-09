@@ -12,12 +12,13 @@ import (
 // Load environment
 const env string = os.Getenv("API_RATINGS_ENV")
 
-// Load database settings
+// Load read database settings
 const readDBName string = os.Getenv("API_RATINGS_READDB_NAME")
 const readDBHost string = os.Getenv("API_RATINGS_READDB_HOST")
 const readDBUser string = os.Getenv("API_RATINGS_READDB_USER")
 const readDBPassword string = os.Getenv("API_RATINGS_READDB_PASSWORD")
 
+// Load write database settings
 const writeDBName string = os.Getenv("API_RATINGS_WRITEDB_NAME")
 const writeDBHost string = os.Getenv("API_RATINGS_WRITEDB_HOST")
 const writeDBUser string = os.Getenv("API_RATINGS_WRITEDB_USER")
@@ -40,7 +41,7 @@ func GetReadDB() *gorm.DB {
 	}
 
 	credentials := fmt.Sprintf(
-		"host=%s user=%s dbname=%s sslmode=disable password=%s",
+		"host=%s user=%s dbname=%s sslmode=disable password=%s", // TODO: Handle sslmode
 		readDBHost,
 		readDBUser,
 		readDBName,
@@ -57,7 +58,7 @@ func GetWriteDB() *gorm.DB {
 	}
 
 	credentials := fmt.Sprintf(
-		"host=%s user=%s dbname=%s sslmode=disable password=%s",
+		"host=%s user=%s dbname=%s sslmode=disable password=%s", // TODO: Handle sslmode
 		writeDBHost,
 		writeDBUser,
 		writeDBName,
