@@ -36,8 +36,8 @@ func getReadDB() *gorm.DB {
 
 func getWriteDB() *gorm.DB {
 	if env != "PRODUCTION" {
-		return connectDB("Write Database", "../"+writeDatabaseURL, readDatabasePort)
+		return connectDB("Write Database", "../"+writeDatabaseURL, writeDatabasePort)
 	}
 
-	return connectDB("Write Database", "../"+writeDatabaseURL, readDatabasePort)
+	return connectDB("Write Database", "../"+writeDatabaseURL, writeDatabasePort)
 }
