@@ -7,24 +7,37 @@ import (
 	_ "github.com/jinzhu/gorm/dialects/sqlite" // sqlite driver
 )
 
-func connectDB() *gorm.DB {
-	env := os.Getenv("API_RATINGS_ENV")
+// Load environment
+const env string = os.Getenv("API_RATINGS_ENV")
 
-	if env != "PRODUCTION" {
-		db, err := gorm.Open("../../../../admin/database", "database.sqlite")
-		if err != nil {
-			panic("Failed to connect to database")
-		}
-		defer db.Close()
+// Load database settings
+const readDatabaseURL string = os.Getenv("API_RATINGS_READ_DB_URL")
+const readDatabasePort string = os.Getenv("API_RATINGS_READ_DB_PORT")
+const writeDatabaseURL string = os.Getenv("API_RATINGS_WRITE_DB_URL")
+const writeDatabasePort string = os.Getenv("API_RATINGS_WRITE_DB_PORT")
 
-		return db
-	}
-
-	db, err := gorm.Open("../../../../admin/database", "database.sqlite")
+func connectDB(name string, url string, port string) *gorm.DB {
+	db, err := gorm.Open(url, port)
 	if err != nil {
-		panic("Failed to connect to database")
+		panic("Failed to connect to " + name)
 	}
 	defer db.Close()
 
 	return db
+}
+
+func getReadDB() *gorm.DB {
+	if env != "PRODUCTION" {
+		return connectDB("Read Database", "../"+readDatabaseURL, readDatabasePort)
+	}
+
+	return connectDB("Read Database", "../"+readDatabaseURL, readDatabasePort)
+}
+
+func getWriteDB() *gorm.DB {
+	if env != "PRODUCTION" {
+		return connectDB("Write Database", "../"+writeDatabaseURL, readDatabasePort)
+	}
+
+	return connectDB("Write Database", "../"+writeDatabaseURL, readDatabasePort)
 }
