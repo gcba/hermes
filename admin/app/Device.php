@@ -36,4 +36,11 @@ class Device extends Model
      public function platform() {
         return $this->belongsTo('App\Platform');
      }
+
+     /**
+     * Get the app users that belong to the device.
+     */
+     public function appusers() {
+        return $this->belongsToMany('App\AppUser');
+     }
 }
