@@ -20,8 +20,8 @@ class CreateRatingsTable extends Migration
             $table->string('app_version', 15)->nullable();
             $table->string('platform_version', 15)->nullable();
             $table->string('browser_version', 15)->nullable();
-            $table->boolean('has_message');
-            $table->index('has_message')->default(false);
+            $table->boolean('has_message')->default(false);
+            $table->index('has_message');
             $table->integer('app_id')->unsigned();
             $table->foreign('app_id')->references('id')->on('apps')->onDelete('cascade');
             $table->index('app_id');

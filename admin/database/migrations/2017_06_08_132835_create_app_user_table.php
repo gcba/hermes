@@ -15,6 +15,8 @@ class CreateAppUserTable extends Migration
     {
         Schema::create('app_user', function (Blueprint $table) {
             $table->increments('id');
+            $table->boolean('is_owner')->default(false);
+            $table->index('is_owner');
             $table->integer('app_id')->unsigned();
             $table->foreign('app_id')->references('id')->on('apps')->onDelete('cascade');
             $table->index('app_id');
