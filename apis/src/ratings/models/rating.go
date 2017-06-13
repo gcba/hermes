@@ -5,19 +5,20 @@ import (
 )
 
 type Rating struct {
-	ID              uint `gorm:"primary_key"`
-	Rating          int8
+	ID              uint   `gorm:"primary_key"`
+	Rating          int8   `gorm:"not null"`
 	Description     string `gorm:"size:30"`
 	AppVersion      string `gorm:"size:15"`
 	PlatformVersion string `gorm:"size:15"`
 	BrowserVersion  string `gorm:"size:15"`
-	HasMessage      bool
-	AppID           int
-	AppUserID       int `gorm:"column:appuser_id"`
+	HasMessage      bool   `gorm:"not null"`
+	AppID           int    `gorm:"not null"`
+	RangeID         int    `gorm:"not null"`
+	AppUserID       int    `gorm:"column:appuser_id"`
 	PlatformID      int
 	DeviceID        int
 	BrowserID       int
 
-	CreatedAt time.Time
+	CreatedAt time.Time `gorm:"not null"`
 	UpdatedAt time.Time
 }

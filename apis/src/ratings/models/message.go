@@ -6,10 +6,10 @@ import (
 
 type Message struct {
 	ID        uint   `gorm:"primary_key"`
-	Message   string `sql:"type:text"`
-	Direction string `sql:"type:enum('in','out')"`
-	RatingID  int
+	Message   string `sql:"type:text;not null"`
+	Direction string `sql:"type:enum('in','out');not null"`
+	RatingID  int    `gorm:"not null"`
 
-	CreatedAt time.Time
+	CreatedAt time.Time `gorm:"not null"`
 	UpdatedAt time.Time
 }
