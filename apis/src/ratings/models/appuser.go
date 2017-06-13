@@ -5,9 +5,10 @@ import (
 )
 
 type AppUser struct {
-	ID    uint   `gorm:"primary_key"`
-	Name  string `gorm:"size:70"`
-	Email string `gorm:"size:100"`
+	ID     uint   `gorm:"primary_key"`
+	Name   string `gorm:"size:70"`
+	Email  string `gorm:"size:100"`
+	MiBAID uint   `gorm:"column:miba_id"`
 
 	CreatedAt time.Time
 	UpdatedAt time.Time
