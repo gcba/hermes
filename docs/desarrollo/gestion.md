@@ -53,7 +53,7 @@ Se contará con un solo desarrollador a medio tiempo, por lo que será de suma i
 ## Prioridades
 
 - Admin (CRUD)
-- API de estadísticas
+- API de calificaciones
 
 ## Kickoff
 
