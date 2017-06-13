@@ -25,6 +25,9 @@ class CreateRatingsTable extends Migration
             $table->integer('app_id')->unsigned();
             $table->foreign('app_id')->references('id')->on('apps')->onDelete('cascade');
             $table->index('app_id');
+            $table->integer('range_id')->unsigned();
+            $table->foreign('range_id')->references('id')->on('ranges')->onDelete('cascade');
+            $table->index('range_id');
             $table->integer('appuser_id')->unsigned()->nullable();
             $table->foreign('appuser_id')->references('id')->on('appusers')->onDelete('cascade');
             $table->index('appuser_id');
