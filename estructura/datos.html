@@ -37,7 +37,7 @@
                         </li>
                         <li class="heading-item -depth-3"><a class="hlink link-device" href="#device">Device</a>
                         </li>
-                        <li class="heading-item -depth-3"><a class="hlink link-user_app" href="#user_app">User_App</a>
+                        <li class="heading-item -depth-3"><a class="hlink link-app_user" href="#app_user">App_User</a>
                         </li>
                         <li class="heading-item -depth-3"><a class="hlink link-app_platform" href="#app_platform">App_Platform</a>
                         </li>
@@ -104,7 +104,7 @@
 <h4 id="relaciones">Relaciones</h4>
 <ul>
 <li><strong>One-to-many</strong> con User, a trav&#xE9;s de <code>modified_by</code></li>
-<li><strong>Many-to-many</strong> con App, a trav&#xE9;s de la tabla <code>User_App</code></li>
+<li><strong>Many-to-many</strong> con App, a trav&#xE9;s de la tabla <code>App_User</code></li>
 </ul>
 <table>
 <thead>
@@ -251,7 +251,7 @@
 <h4 id="relaciones">Relaciones</h4>
 <ul>
 <li><strong>One-to-many</strong> con User, a trav&#xE9;s de <code>modified_by</code></li>
-<li><strong>Many-to-many</strong> con User, a trav&#xE9;s de la tabla <code>User_App</code></li>
+<li><strong>Many-to-many</strong> con User, a trav&#xE9;s de la tabla <code>App_User</code></li>
 <li><strong>Many-to-many</strong> con Platform, a trav&#xE9;s de la tabla <code>App_Platform</code></li>
 <li><strong>Many-to-many</strong> con AppUser, a trav&#xE9;s de la tabla <code>AppUser_App</code></li>
 </ul>
@@ -479,7 +479,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="user_app">User_App</h3>
+<h3 id="app_user">App_User</h3>
 <p>Tabla intermedia para la relaci&#xF3;n many-to-many entre User y App.</p>
 <table>
 <thead>

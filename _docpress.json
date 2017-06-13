@@ -181,9 +181,9 @@
                     "id": "device"
                   },
                   {
-                    "title": "User_App",
+                    "title": "App_User",
                     "depth": 3,
-                    "id": "user_app"
+                    "id": "app_user"
                   },
                   {
                     "title": "App_Platform",
@@ -764,9 +764,9 @@
               "id": "device"
             },
             {
-              "title": "User_App",
+              "title": "App_User",
               "depth": 3,
-              "id": "user_app"
+              "id": "app_user"
             },
             {
               "title": "App_Platform",
