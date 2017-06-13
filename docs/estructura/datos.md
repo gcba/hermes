@@ -13,7 +13,7 @@ El usuario del backend.
 #### Relaciones
 
 - **One-to-many** con User, a través de `modified_by`
-- **Many-to-many** con App, a través de la tabla `User_App`
+- **Many-to-many** con App, a través de la tabla `App_User`
 
 |Campos          |Tipo                  | FK?   | Null? |Unique?|Index? |
 |----------------|----------------------|:-----:|:-----:|:-----:|:-----:|
@@ -51,7 +51,7 @@ Las apps sobre las que se envían calificaciones y comentarios.
 #### Relaciones
 
 - **One-to-many** con User, a través de `modified_by`
-- **Many-to-many** con User, a través de la tabla `User_App`
+- **Many-to-many** con User, a través de la tabla `App_User`
 - **Many-to-many** con Platform, a través de la tabla `App_Platform`
 - **Many-to-many** con AppUser, a través de la tabla `AppUser_App`
 
@@ -103,7 +103,7 @@ En el caso de las aplicaciones móviles, el dispositivo desde donde se enviaron 
 |created_at      |timestamp             |       |       |       |       |
 |modified_at     |timestamp             |       |X      |       |       |
 
-### User_App
+### App_User
 
 Tabla intermedia para la relación many-to-many entre User y App.
 
