@@ -36,7 +36,7 @@ El usuario de las apps que envía calificaciones y comentarios.
 
 |Campos          |Tipo                  | FK?   | Null? |Unique?|Index? |
 |----------------|----------------------|:-----:|:-----:|:-----:|:-----:|
-|id              |bigint (PK)           |       |       |       |       |
+|id              |int (PK)              |       |       |       |       |
 |name            |varchar(70)           |       |       |       |       |
 |email           |varchar(100)          |       |X      |       |X      |
 |created_at      |timestamp             |       |       |       |       |
@@ -176,7 +176,7 @@ Las calificaciones de las apps.
 
 |Campos          |Tipo                  |Default| FK?   | Null? |Unique?|Index? |
 |----------------|----------------------|-------|:-----:|:-----:|:-----:|:-----:|
-|id              |bigint (PK)           |       |       |       |       |       |
+|id              |int (PK)              |       |       |       |       |       |
 |rating          |smallint              |       |       |       |       |       |
 |description     |varchar(30)           |       |       |X      |       |       |
 |app_version     |varchar(15)           |       |       |X      |       |       |
@@ -201,7 +201,7 @@ Los mensajes de las conversaciones con los usuarios de las apps que enviaron cal
 
 |Campos          |Tipo                  | FK?   | Null? |Unique?|Index? |
 |----------------|----------------------|:-----:|:-----:|:-----:|:-----:|
-|id              |bigint (PK)           |       |       |       |       |
+|id              |int (PK)              |       |       |       |       |
 |message         |text                  |       |       |       |       |
 |direction       |char                  |       |       |       |Sí     |
 |rating_id       |int                   |X      |       |       |X      |
