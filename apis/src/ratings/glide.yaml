@@ -11,3 +11,4 @@ import:
 - package: github.com/lib/pq
 - package: github.com/facebookgo/grace
 - package: github.com/facebookgo/httpdown
+- package: github.com/dchest/uniuri
