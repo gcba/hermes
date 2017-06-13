@@ -26,11 +26,11 @@ TBD
 
 ## Actores
 
-1. Usuario
-2. Soporte
-3. Admin
-4. Desarrollador
-5. Público
+1. Usuario (Admin)
+2. Soporte (Admin)
+3. Admin (Admin)
+4. Desarrollador: Integra la aplicación con la API de calificaciones.
+5. Público: Califica aplicaciones.
 
 ## Casos de uso
 

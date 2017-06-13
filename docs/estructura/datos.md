@@ -31,6 +31,7 @@ El usuario del backend.
 
 - **Many-to-many** con App, a través de la tabla `AppUser_App`
 - **Many-to-many** con Platform, a través de la tabla `AppUser_Platform`
+- **Many-to-many** con Device, a través de la tabla `AppUser_Device`
 
 El usuario de las apps que envía calificaciones y comentarios.
 
@@ -38,7 +39,8 @@ El usuario de las apps que envía calificaciones y comentarios.
 |----------------|----------------------|:-----:|:-----:|:-----:|:-----:|
 |id              |int (PK)              |       |       |       |       |
 |name            |varchar(70)           |       |       |       |       |
-|email           |varchar(100)          |       |X      |       |X      |
+|email           |varchar(100)          |       |       |       |X      |
+|miba_id         |int                   |       |       |X      |X      |
 |created_at      |timestamp             |       |       |       |       |
 |modified_at     |timestamp             |       |X      |       |       |
 
@@ -80,15 +82,37 @@ La plataforma donde corren las apps y de donde provienen las calificaciones y co
 |created_at      |timestamp             |       |       |       |       |
 |modified_at     |timestamp             |       |X      |       |       |
 
-### User_App
+### Device
 
-Tabla intermedia para la relación many-to-many entre User y App.
+En el caso de las aplicaciones móviles, el dispositivo desde donde se enviaron las calificaciones y comentarios.
+
+#### Relaciones
+
+- **One-to-many** con Brand, a través de `brand_id`
+- **Many-to-many** con AppUser, a través de la tabla `AppUser_Device`
 
 |Campos          |Tipo                  | FK?   | Null? |Unique?|Index? |
 |----------------|----------------------|:-----:|:-----:|:-----:|:-----:|
 |id              |int (PK)              |       |       |       |       |
-|user_id         |int                   |X      |       |       |X      |
-|app_id          |int                   |X      |       |       |X      |
+|name            |varchar(30)           |       |       |X      |X      |
+|screen_width    |int                   |       |       |       |       |
+|screen_heigth   |int                   |       |       |       |       |
+|ppi             |real                  |       |X      |       |       |
+|brand_id        |int                   |X      |X      |       |X      |
+|platform_id     |int                   |X      |X      |       |X      |
+|created_at      |timestamp             |       |       |       |       |
+|modified_at     |timestamp             |       |X      |       |       |
+
+### User_App
+
+Tabla intermedia para la relación many-to-many entre User y App.
+
+|Campos          |Tipo                  |Default| FK?   | Null? |Unique?|Index? |
+|----------------|----------------------|-------|:-----:|:-----:|:-----:|:-----:|
+|id              |int (PK)              |       |       |       |       |       |
+|is_owner        |bool                  |false  |       |       |       |       |
+|user_id         |int                   |       |X      |       |       |X      |
+|app_id          |int                   |       |X      |       |       |X      |
 
 ### App_Platform
 
@@ -120,25 +144,15 @@ Tabla intermedia para la relación many-to-many entre AppUser y Platform.
 |appuser_id      |int                   |X      |       |       |X      |
 |platform_id     |int                   |X      |       |       |X      |
 
-### Device
+### AppUser_Device
 
-En el caso de las aplicaciones móviles, el dispositivo desde donde se enviaron las calificaciones y comentarios.
-
-#### Relaciones
-
-- **One-to-many** con Brand, a través de `brand_id`
+Tabla intermedia para la relación many-to-many entre AppUser y Device.
 
 |Campos          |Tipo                  | FK?   | Null? |Unique?|Index? |
 |----------------|----------------------|:-----:|:-----:|:-----:|:-----:|
 |id              |int (PK)              |       |       |       |       |
-|name            |varchar(30)           |       |       |X      |X      |
-|screen_width    |int                   |       |       |       |       |
-|screen_heigth   |int                   |       |       |       |       |
-|ppi             |real                  |       |X      |       |       |
-|brand_id        |int                   |X      |X      |       |X      |
-|platform_id     |int                   |X      |X      |       |X      |
-|created_at      |timestamp             |       |       |       |       |
-|modified_at     |timestamp             |       |X      |       |       |
+|appuser_id      |int                   |X      |       |       |X      |
+|device_id       |int                   |X      |       |       |X      |
 
 ### Browser
 
@@ -169,6 +183,7 @@ Las calificaciones de las apps.
 #### Relaciones
 
 - **One-to-many** con App, a través de `app_id`
+- **One-to-many** con Range, a través de `range_id`
 - **One-to-many** con AppUser, a través de `appuser_id`
 - **One-to-many** con Platform, a través de `platform_id`
 - **One-to-many** con Device, a través de `device_id`
@@ -180,11 +195,12 @@ Las calificaciones de las apps.
 |rating          |smallint              |       |       |       |       |       |
 |description     |varchar(30)           |       |       |X      |       |       |
 |app_version     |varchar(15)           |       |       |X      |       |       |
-|platform_version|varchar(15)           |       |       |       |       |       |
+|platform_version|varchar(15)           |       |       |X      |       |       |
 |browser_version |varchar(15)           |       |       |X      |       |       |
 |has_message     |bool                  |false  |       |       |       |X      |
 |app_id          |int                   |       |X      |       |       |X      |
-|appuser_id      |int                   |       |X      |       |       |X      |
+|range_id        |int                   |       |X      |       |       |X      |
+|appuser_id      |int                   |       |X      |X      |       |X      |
 |platform_id     |int                   |       |X      |X      |       |X      |
 |device_id       |int                   |       |X      |X      |       |X      |
 |browser_id      |int                   |       |X      |X      |       |X      |
@@ -203,10 +219,28 @@ Los mensajes de las conversaciones con los usuarios de las apps que enviaron cal
 |----------------|----------------------|:-----:|:-----:|:-----:|:-----:|
 |id              |int (PK)              |       |       |       |       |
 |message         |text                  |       |       |       |       |
-|direction       |char                  |       |       |       |Sí     |
+|direction       |char                  |       |       |       |X      |
 |rating_id       |int                   |X      |       |       |X      |
 |created_at      |timestamp             |       |       |       |       |
 |modified_at     |timestamp             |       |X      |       |       |
+
+### Range
+
+Los rangos de calificaciones de cada app.
+
+#### Relaciones
+
+- **One-to-many** con App, a través de `app_id`
+
+|Campos          |Tipo                  | FK?   | Null? |Unique?|Index? |
+|----------------|----------------------|:-----:|:-----:|:-----:|:-----:|
+|id              |int (PK)              |       |       |       |       |
+|from            |smallint              |       |       |       |       |
+|to              |smallint              |       |       |       |       |
+|app_id          |int                   |X      |       |       |X      |
+|created_at      |timestamp             |       |       |       |       |
+|modified_at     |timestamp             |       |X      |       |       |
+
 
 ### Setting
 
