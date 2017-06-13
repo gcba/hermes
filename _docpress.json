@@ -531,6 +531,36 @@
                 ]
               }
             ]
+          },
+          {
+            "title": "Sprint 3",
+            "source": "docs/desarrollo/sprint3.md",
+            "url": "desarrollo/sprint3.html",
+            "slug": "desarrollosprint3",
+            "headings": [
+              {
+                "title": "Días",
+                "depth": 2,
+                "id": "dias"
+              },
+              {
+                "title": "Objetivo",
+                "depth": 2,
+                "id": "objetivo"
+              },
+              {
+                "title": "Tareas",
+                "depth": 2,
+                "id": "tareas",
+                "headings": [
+                  {
+                    "title": "API de calificaciones",
+                    "depth": 3,
+                    "id": "api-de-calificaciones"
+                  }
+                ]
+              }
+            ]
           }
         ]
       }
@@ -1059,6 +1089,36 @@
           ]
         }
       ]
+    },
+    "desarrollo/sprint3.html": {
+      "source": "docs/desarrollo/sprint3.md",
+      "title": "Sprint 3 - Hermes",
+      "pageTitle": "Sprint 3",
+      "slug": "desarrollosprint3",
+      "headings": [
+        {
+          "title": "Días",
+          "depth": 2,
+          "id": "dias"
+        },
+        {
+          "title": "Objetivo",
+          "depth": 2,
+          "id": "objetivo"
+        },
+        {
+          "title": "Tareas",
+          "depth": 2,
+          "id": "tareas",
+          "headings": [
+            {
+              "title": "API de calificaciones",
+              "depth": 3,
+              "id": "api-de-calificaciones"
+            }
+          ]
+        }
+      ]
     }
   },
   "sources": {
@@ -1073,6 +1133,7 @@
     "docs/desarrollo/metodologia.md": "desarrollo/metodologia.html",
     "docs/desarrollo/sprint1.md": "desarrollo/sprint1.html",
     "docs/desarrollo/sprint2.md": "desarrollo/sprint2.html",
+    "docs/desarrollo/sprint3.md": "desarrollo/sprint3.html",
     "docs/images/schema.png": "images/schema.png"
   }
 }
