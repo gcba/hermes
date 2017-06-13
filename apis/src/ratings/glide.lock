@@ -1,5 +1,5 @@
-hash: faa8db683d216045c1cc94d7c272aa954a66e0099b467da1705a295e85ea53b5
-updated: 2017-06-13T14:46:37.467489711-03:00
+hash: 1be06fe2a69ae45eee40971699ce39596937d86cb839563bc610281d02106b18
+updated: 2017-06-13T19:06:17.204642516-03:00
 imports:
 - name: github.com/dchest/uniuri
   version: 8902c56451e9b58ff940bbe5fec35d5f9c04584a
@@ -27,6 +27,8 @@ imports:
   version: 726cc8b906e3d31c70a9671c90a13716a8d3f50d
   subpackages:
   - autoload
+- name: github.com/k0kubun/pp
+  version: 027a6d1765d673d337e687394dbe780dd64e2a1e
 - name: github.com/labstack/echo
   version: 1049c9613cd371b7ea8f219404c9a821734781ed
   subpackages:
@@ -81,5 +83,3 @@ testImports:
   version: d8ed2627bdf02c080bf22230dbb337003b7aba2d
   subpackages:
   - difflib
-- name: github.com/ventu-io/go-shortid
-  version: 935de6796a71e222e8a8a141ead882d70b6ba6d0

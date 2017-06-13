@@ -12,3 +12,5 @@ import:
 - package: github.com/facebookgo/grace
 - package: github.com/facebookgo/httpdown
 - package: github.com/dchest/uniuri
+- package: github.com/k0kubun/pp
+  version: ^2.3.0
