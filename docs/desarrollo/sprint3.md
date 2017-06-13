@@ -32,3 +32,28 @@ Crear los endpoints de la API de calificaciones. Agregar tests para los modelos 
 9. Agregar tests de Platform
 
 10. Agregar tests de Rating
+
+11. Agregar el campo miba_id a AppUser
+
+### Admin
+
+1. Hacer nulleables los campos platform_version, browser_version y appuser_id de Rating
+
+2. Hacer no nulleable el campo email de AppUser
+
+3. Agregar el campo is_owner a la tabla User_App
+
+4. Agregar la tabla intermedia AppUser_Device
+
+5. Agregar el modelo Range
+
+6. Agregar el campo range_id a Rating
+
+7. Agregar las migraciones de Range
+
+8. Agregar los seeds de Range
+
+### Doumentación
+
+1. Crear tabla documentando roles y permisos
+
