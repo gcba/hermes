@@ -18,14 +18,14 @@ class CreateRatingsTable extends Migration
             $table->smallInteger('rating');
             $table->string('description', 30)->nullable();
             $table->string('app_version', 15)->nullable();
-            $table->string('platform_version', 15);
+            $table->string('platform_version', 15)->nullable();
             $table->string('browser_version', 15)->nullable();
             $table->boolean('has_message');
             $table->index('has_message')->default(false);
             $table->integer('app_id')->unsigned();
             $table->foreign('app_id')->references('id')->on('apps')->onDelete('cascade');
             $table->index('app_id');
-            $table->integer('appuser_id')->unsigned();
+            $table->integer('appuser_id')->unsigned()->nullable();
             $table->foreign('appuser_id')->references('id')->on('appusers')->onDelete('cascade');
             $table->index('appuser_id');
             $table->integer('platform_id')->unsigned()->nullable();
