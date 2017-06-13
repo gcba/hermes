@@ -1,10 +1,19 @@
-hash: 0a910e3f8d04c1b327457abc7595e227749bae457301ef2f97947ad1e5ffde75
-updated: 2017-06-13T12:21:02.644615835-03:00
+hash: 7b4b44eba665a63cb5100f574f4e2289e0e7a51b809c13b76426a0f723fe2a17
+updated: 2017-06-13T13:15:22.771432021-03:00
 imports:
 - name: github.com/dgrijalva/jwt-go
   version: a539ee1a749a2b895533f979515ac7e6e0f5b650
+- name: github.com/facebookgo/clock
+  version: 600d898af40aa09a7a93ecb9265d87b0504b6f03
 - name: github.com/facebookgo/grace
   version: 4afe952a37a495ae4ac0c1d4ce5f66e91058d149
+  subpackages:
+  - gracehttp
+  - gracenet
+- name: github.com/facebookgo/httpdown
+  version: a3b1354551a26449fbe05f5d855937f6e7acbd71
+- name: github.com/facebookgo/stats
+  version: 1b76add642e42c6ffba7211ad7b3939ce654526e
 - name: github.com/jinzhu/gorm
   version: 9acaa33324bbcc78239a1c913d4f1292c12177b9
   subpackages:
