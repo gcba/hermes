@@ -6,6 +6,7 @@ use App\AppUser;
 use App\App;
 use App\Platform;
 use App\Device;
+use App\Range;
 
 class RatingsTableSeeder extends Seeder
 {
@@ -19,6 +20,7 @@ class RatingsTableSeeder extends Seeder
         if (Rating::count() == 0) {
             $appusers = AppUser::all();
             $apps = App::all();
+            $ranges = Range::all()->toArray();
 
             $ios = Platform::where('name', 'iOS')->firstOrFail();
             $android = Platform::where('name', 'Android')->firstOrFail();
@@ -56,6 +58,7 @@ class RatingsTableSeeder extends Seeder
                     }
 
                     $hasMessage = $booleanOptions[array_rand($booleanOptions)];
+                    $range = $ranges[array_rand($ranges)];
                     $platform = $platformOptions[array_rand($platformOptions)];
                     $platformId = $platform == "iOS" ? $ios->id : $android->id;
                     $platformVersion = $platform == "iOS" ?
@@ -71,6 +74,7 @@ class RatingsTableSeeder extends Seeder
                         'platform_version' => $platformVersion,
                         'has_message' => $hasMessage,
                         'app_id' => $app->id,
+                        'range_id' => $range->id,
                         'appuser_id' => $appuser->id,
                         'platform_id' => $platformId,
                         'device_id' => $deviceId
