@@ -19,6 +19,7 @@ class Rating extends Model
         'browser_version',
         'has_message',
         'app_id',
+        'range_id',
         'appuser_id',
         'platform_id',
         'device_id',
@@ -31,6 +32,14 @@ class Rating extends Model
     public function app()
     {
         return $this->belongsTo('App\App');
+    }
+
+    /**
+     * Get the range the rating belongs to.
+     */
+    public function rating()
+    {
+        return $this->belongsTo('App\Rating');
     }
 
     /**
