@@ -16,7 +16,7 @@ func TestGetPlatform(t *testing.T) {
 	defer readDb.Close()
 
 	name := uniuri.New()
-	key := "7C6F0035B18C3D5J" + strings.toUpper(uniuri.New())
+	key := "7C6F0035B18C3D5J" + strings.ToUpper(uniuri.New())
 
 	platform := Platform{Name: name, Key: key}
 	result := writeDb.Create(&platform)
