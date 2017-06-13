@@ -26,17 +26,19 @@ func TestCreateBrand(t *testing.T) {
 }
 
 func TestGetBrand(t *testing.T) {
-	db := controller.GetReadDB()
-	defer db.Close()
-
-	var result Brand
+	writeDb := controller.GetWriteDB()
+	defer writeDb.Close()
+	readDb := controller.GetReadDB()
+	defer readDb.Close()
 
 	name := uniuri.New()
 	brand := Brand{Name: name}
-	creation := db.Create(&brand)
+	record := writeDb.Create(&brand)
 
-	if value, ok := creation.Value.(*Brand); ok {
-		db.Where(&brand).First(&result)
+	if value, ok := record.Value.(*Brand); ok {
+		var result Brand
+
+		readDb.First(&result, value.ID)
 		require.Equal(t, name, result.Name)
 	} else {
 		t.Fatal("Value is not a Brand")
