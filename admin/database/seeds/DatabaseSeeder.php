@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
         $this->call(BrowsersTableSeeder::class);
         $this->call(BrandsTableSeeder::class);
         $this->call(DevicesTableSeeder::class);
+        $this->call(RangesTableSeeder::class);
         $this->call(RatingsTableSeeder::class);
         $this->call(MessagesTableSeeder::class);
     }

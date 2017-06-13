@@ -74,7 +74,7 @@ class RatingsTableSeeder extends Seeder
                         'platform_version' => $platformVersion,
                         'has_message' => $hasMessage,
                         'app_id' => $app->id,
-                        'range_id' => $range->id,
+                        'range_id' => $range["id"],
                         'appuser_id' => $appuser->id,
                         'platform_id' => $platformId,
                         'device_id' => $deviceId

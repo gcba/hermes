@@ -35,7 +35,7 @@ class Apps_Platforms_UsersSeeder extends Seeder
                 'type' => 'M',
                 'key'  => md5("123456")
             ]);
-            $miBa = App::create([
+            $miBA = App::create([
                 'name' => 'Mi BA',
                 'type' => 'M',
                 'key'  => md5("654321")
@@ -49,11 +49,11 @@ class Apps_Platforms_UsersSeeder extends Seeder
             // Let's attach Apps to Platforms
 
             $ios->apps()->attach($denunciaVial->id);
-            $ios->apps()->attach($miBa->id);
+            $ios->apps()->attach($miBA->id);
             $ios->apps()->attach($masSimple->id);
 
             $android->apps()->attach($denunciaVial->id);
-            $android->apps()->attach($miBa->id);
+            $android->apps()->attach($miBA->id);
             $android->apps()->attach($masSimple->id);
 
             // Let's attach AppUsers to Platforms
@@ -77,7 +77,7 @@ class Apps_Platforms_UsersSeeder extends Seeder
             foreach ($supportUsers as $support) {
                 $isOwner = $booleanOptions[array_rand($booleanOptions)];
 
-                $support->apps()->attach([$denunciaVial->id, $miBa->id, $masSimple->id], ['is_owner' => $isOwner]);
+                $support->apps()->attach([$denunciaVial->id, $miBA->id, $masSimple->id], ['is_owner' => $isOwner]);
             }
         }
     }
