@@ -1,6 +1,10 @@
-hash: a0525203012c5178b5cc497bbdb0c50ad956c2d9d7eb85137e1edf2f4277dcb7
-updated: 2017-06-09T17:42:14.795039127-03:00
+hash: 0a910e3f8d04c1b327457abc7595e227749bae457301ef2f97947ad1e5ffde75
+updated: 2017-06-13T12:21:02.644615835-03:00
 imports:
+- name: github.com/dgrijalva/jwt-go
+  version: a539ee1a749a2b895533f979515ac7e6e0f5b650
+- name: github.com/facebookgo/grace
+  version: 4afe952a37a495ae4ac0c1d4ce5f66e91058d149
 - name: github.com/jinzhu/gorm
   version: 9acaa33324bbcc78239a1c913d4f1292c12177b9
   subpackages:
@@ -16,11 +20,14 @@ imports:
   version: 1049c9613cd371b7ea8f219404c9a821734781ed
   subpackages:
   - '...'
+  - middleware
 - name: github.com/labstack/gommon
   version: 1121fd3e243c202482226a7afe4dcd07ffc4139a
   subpackages:
+  - bytes
   - color
   - log
+  - random
 - name: github.com/lib/pq
   version: 8837942c3e09574accbc5f150e2c5e057189cace
   subpackages:
@@ -47,7 +54,7 @@ imports:
   - acme
   - acme/autocert
 - name: golang.org/x/net
-  version: 59a0b19b5533c7977ddeb86b017bf507ed407b12
+  version: dfe83d419c9403b40b19d08cdba2afec27b002f7
   subpackages:
   - context
 - name: golang.org/x/sys
