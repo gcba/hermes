@@ -176,6 +176,11 @@
                     "id": "platform"
                   },
                   {
+                    "title": "Device",
+                    "depth": 3,
+                    "id": "device"
+                  },
+                  {
                     "title": "User_App",
                     "depth": 3,
                     "id": "user_app"
@@ -196,9 +201,9 @@
                     "id": "appuser_platform"
                   },
                   {
-                    "title": "Device",
+                    "title": "AppUser_Device",
                     "depth": 3,
-                    "id": "device"
+                    "id": "appuser_device"
                   },
                   {
                     "title": "Browser",
@@ -219,6 +224,11 @@
                     "title": "Message",
                     "depth": 3,
                     "id": "message"
+                  },
+                  {
+                    "title": "Range",
+                    "depth": 3,
+                    "id": "range"
                   },
                   {
                     "title": "Setting",
@@ -739,6 +749,11 @@
               "id": "platform"
             },
             {
+              "title": "Device",
+              "depth": 3,
+              "id": "device"
+            },
+            {
               "title": "User_App",
               "depth": 3,
               "id": "user_app"
@@ -759,9 +774,9 @@
               "id": "appuser_platform"
             },
             {
-              "title": "Device",
+              "title": "AppUser_Device",
               "depth": 3,
-              "id": "device"
+              "id": "appuser_device"
             },
             {
               "title": "Browser",
@@ -782,6 +797,11 @@
               "title": "Message",
               "depth": 3,
               "id": "message"
+            },
+            {
+              "title": "Range",
+              "depth": 3,
+              "id": "range"
             },
             {
               "title": "Setting",

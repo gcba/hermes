@@ -35,6 +35,8 @@
                         </li>
                         <li class="heading-item -depth-3"><a class="hlink link-platform" href="#platform">Platform</a>
                         </li>
+                        <li class="heading-item -depth-3"><a class="hlink link-device" href="#device">Device</a>
+                        </li>
                         <li class="heading-item -depth-3"><a class="hlink link-user_app" href="#user_app">User_App</a>
                         </li>
                         <li class="heading-item -depth-3"><a class="hlink link-app_platform" href="#app_platform">App_Platform</a>
@@ -43,7 +45,7 @@
                         </li>
                         <li class="heading-item -depth-3"><a class="hlink link-appuser_platform" href="#appuser_platform">AppUser_Platform</a>
                         </li>
-                        <li class="heading-item -depth-3"><a class="hlink link-device" href="#device">Device</a>
+                        <li class="heading-item -depth-3"><a class="hlink link-appuser_device" href="#appuser_device">AppUser_Device</a>
                         </li>
                         <li class="heading-item -depth-3"><a class="hlink link-browser" href="#browser">Browser</a>
                         </li>
@@ -52,6 +54,8 @@
                         <li class="heading-item -depth-3"><a class="hlink link-rating" href="#rating">Rating</a>
                         </li>
                         <li class="heading-item -depth-3"><a class="hlink link-message" href="#message">Message</a>
+                        </li>
+                        <li class="heading-item -depth-3"><a class="hlink link-range" href="#range">Range</a>
                         </li>
                         <li class="heading-item -depth-3"><a class="hlink link-setting" href="#setting">Setting</a>
                         </li>
@@ -177,6 +181,7 @@
 <ul>
 <li><strong>Many-to-many</strong> con App, a trav&#xE9;s de la tabla <code>AppUser_App</code></li>
 <li><strong>Many-to-many</strong> con Platform, a trav&#xE9;s de la tabla <code>AppUser_Platform</code></li>
+<li><strong>Many-to-many</strong> con Device, a trav&#xE9;s de la tabla <code>AppUser_Device</code></li>
 </ul>
 <p>El usuario de las apps que env&#xED;a calificaciones y comentarios.</p>
 <table>
@@ -211,8 +216,16 @@
 <td>email</td>
 <td>varchar(100)</td>
 <td style="text-align:center"></td>
-<td style="text-align:center">X</td>
 <td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">X</td>
+</tr>
+<tr>
+<td>miba_id</td>
+<td>int</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">X</td>
 <td style="text-align:center">X</td>
 </tr>
 <tr>
@@ -373,8 +386,13 @@
 </tr>
 </tbody>
 </table>
-<h3 id="user_app">User_App</h3>
-<p>Tabla intermedia para la relaci&#xF3;n many-to-many entre User y App.</p>
+<h3 id="device">Device</h3>
+<p>En el caso de las aplicaciones m&#xF3;viles, el dispositivo desde donde se enviaron las calificaciones y comentarios.</p>
+<h4 id="relaciones">Relaciones</h4>
+<ul>
+<li><strong>One-to-many</strong> con Brand, a trav&#xE9;s de <code>brand_id</code></li>
+<li><strong>Many-to-many</strong> con AppUser, a trav&#xE9;s de la tabla <code>AppUser_Device</code></li>
+</ul>
 <table>
 <thead>
 <tr>
@@ -396,8 +414,108 @@
 <td style="text-align:center"></td>
 </tr>
 <tr>
+<td>name</td>
+<td>varchar(30)</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+</tr>
+<tr>
+<td>screen_width</td>
+<td>int</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>screen_heigth</td>
+<td>int</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>ppi</td>
+<td>real</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">X</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>brand_id</td>
+<td>int</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">X</td>
+</tr>
+<tr>
+<td>platform_id</td>
+<td>int</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">X</td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>timestamp</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>modified_at</td>
+<td>timestamp</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">X</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+<h3 id="user_app">User_App</h3>
+<p>Tabla intermedia para la relaci&#xF3;n many-to-many entre User y App.</p>
+<table>
+<thead>
+<tr>
+<th>Campos</th>
+<th>Tipo</th>
+<th>Default</th>
+<th style="text-align:center">FK?</th>
+<th style="text-align:center">Null?</th>
+<th style="text-align:center">Unique?</th>
+<th style="text-align:center">Index?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>int (PK)</td>
+<td></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>is_owner</td>
+<td>bool</td>
+<td>false</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
 <td>user_id</td>
 <td>int</td>
+<td></td>
 <td style="text-align:center">X</td>
 <td style="text-align:center"></td>
 <td style="text-align:center"></td>
@@ -406,6 +524,7 @@
 <tr>
 <td>app_id</td>
 <td>int</td>
+<td></td>
 <td style="text-align:center">X</td>
 <td style="text-align:center"></td>
 <td style="text-align:center"></td>
@@ -533,12 +652,8 @@
 </tr>
 </tbody>
 </table>
-<h3 id="device">Device</h3>
-<p>En el caso de las aplicaciones m&#xF3;viles, el dispositivo desde donde se enviaron las calificaciones y comentarios.</p>
-<h4 id="relaciones">Relaciones</h4>
-<ul>
-<li><strong>One-to-many</strong> con Brand, a trav&#xE9;s de <code>brand_id</code></li>
-</ul>
+<h3 id="appuser_device">AppUser_Device</h3>
+<p>Tabla intermedia para la relaci&#xF3;n many-to-many entre AppUser y Device.</p>
 <table>
 <thead>
 <tr>
@@ -560,68 +675,20 @@
 <td style="text-align:center"></td>
 </tr>
 <tr>
-<td>name</td>
-<td>varchar(30)</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-<td style="text-align:center">X</td>
-<td style="text-align:center">X</td>
-</tr>
-<tr>
-<td>screen_width</td>
-<td>int</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td>screen_heigth</td>
-<td>int</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td>ppi</td>
-<td>real</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">X</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td>brand_id</td>
+<td>appuser_id</td>
 <td>int</td>
 <td style="text-align:center">X</td>
-<td style="text-align:center">X</td>
+<td style="text-align:center"></td>
 <td style="text-align:center"></td>
 <td style="text-align:center">X</td>
 </tr>
 <tr>
-<td>platform_id</td>
+<td>device_id</td>
 <td>int</td>
 <td style="text-align:center">X</td>
-<td style="text-align:center">X</td>
 <td style="text-align:center"></td>
-<td style="text-align:center">X</td>
-</tr>
-<tr>
-<td>created_at</td>
-<td>timestamp</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td>modified_at</td>
-<td>timestamp</td>
 <td style="text-align:center"></td>
 <td style="text-align:center">X</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
 </tr>
 </tbody>
 </table>
@@ -726,6 +793,7 @@
 <h4 id="relaciones">Relaciones</h4>
 <ul>
 <li><strong>One-to-many</strong> con App, a trav&#xE9;s de <code>app_id</code></li>
+<li><strong>One-to-many</strong> con Range, a trav&#xE9;s de <code>range_id</code></li>
 <li><strong>One-to-many</strong> con AppUser, a trav&#xE9;s de <code>appuser_id</code></li>
 <li><strong>One-to-many</strong> con Platform, a trav&#xE9;s de <code>platform_id</code></li>
 <li><strong>One-to-many</strong> con Device, a trav&#xE9;s de <code>device_id</code></li>
@@ -785,7 +853,7 @@
 <td>varchar(15)</td>
 <td></td>
 <td style="text-align:center"></td>
-<td style="text-align:center"></td>
+<td style="text-align:center">X</td>
 <td style="text-align:center"></td>
 <td style="text-align:center"></td>
 </tr>
@@ -817,11 +885,20 @@
 <td style="text-align:center">X</td>
 </tr>
 <tr>
-<td>appuser_id</td>
+<td>range_id</td>
 <td>int</td>
 <td></td>
 <td style="text-align:center">X</td>
 <td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">X</td>
+</tr>
+<tr>
+<td>appuser_id</td>
+<td>int</td>
+<td></td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
 <td style="text-align:center"></td>
 <td style="text-align:center">X</td>
 </tr>
@@ -912,10 +989,78 @@
 <td style="text-align:center"></td>
 <td style="text-align:center"></td>
 <td style="text-align:center"></td>
-<td style="text-align:center">S&#xED;</td>
+<td style="text-align:center">X</td>
 </tr>
 <tr>
 <td>rating_id</td>
+<td>int</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">X</td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>timestamp</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>modified_at</td>
+<td>timestamp</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">X</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+<h3 id="range">Range</h3>
+<p>Los rangos de calificaciones de cada app.</p>
+<h4 id="relaciones">Relaciones</h4>
+<ul>
+<li><strong>One-to-many</strong> con App, a trav&#xE9;s de <code>app_id</code></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Campos</th>
+<th>Tipo</th>
+<th style="text-align:center">FK?</th>
+<th style="text-align:center">Null?</th>
+<th style="text-align:center">Unique?</th>
+<th style="text-align:center">Index?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>int (PK)</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>from</td>
+<td>smallint</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>to</td>
+<td>smallint</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>app_id</td>
 <td>int</td>
 <td style="text-align:center">X</td>
 <td style="text-align:center"></td>
