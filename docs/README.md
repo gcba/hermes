@@ -14,3 +14,4 @@ Hermes
     * [Metodología](desarrollo/metodologia.md)
     * [Sprint 1](desarrollo/sprint1.md)
     * [Sprint 2](desarrollo/sprint2.md)
+    * [Sprint 3](desarrollo/sprint3.md)
