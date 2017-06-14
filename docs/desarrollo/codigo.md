@@ -12,7 +12,7 @@ Go 1.8 con Echo y Gorm.
 
 ### Datos
 
-Postgresql, Redis e InfluxDB.
+PostgreSQL y Redis.
 
 ### API Gateway
 
