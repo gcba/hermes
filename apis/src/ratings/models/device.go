@@ -21,23 +21,15 @@ type Device struct {
 }
 
 // GetDevice gets a device by name and brand id
-func GetDevice(name string, brand uint, db *gorm.DB) (Device, error) {
+func GetDevice(name string, brand uint, db *gorm.DB) *DB {
 	var result Device
 
 	query := "SELECT id, name FROM devices WHERE name LIKE ? AND brand_id = ?" // TODO: Set ILIKE
 
-	if err := db.Raw(query, name, brand).Scan(&result).Error; err != nil {
-		return Device{}, err
-	}
-
-	return result, nil
+	return db.Raw(query, name, brand).Scan(&result)
 }
 
 // CreateDevice creates a new device
-func CreateDevice(device *Device, db *gorm.DB) error {
-	if err := db.Create(device).Error; err != nil {
-		return err
-	}
-
-	return nil
+func CreateDevice(device *Device, db *gorm.DB) *DB {
+	return db.Create(device)
 }

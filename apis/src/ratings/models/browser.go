@@ -14,23 +14,15 @@ type Browser struct {
 }
 
 // GetBrowser gets a browser by name
-func GetBrowser(name string, db *gorm.DB) (Browser, error) {
+func GetBrowser(name string, db *gorm.DB) *DB {
 	var result Browser
 
 	query := "SELECT id FROM browsers WHERE name LIKE ?" // TODO: Set ILIKE
 
-	if err := db.Raw(query, name).Scan(&result).Error; err != nil {
-		return Browser{}, err
-	}
-
-	return result, nil
+	return db.Raw(query, name).Scan(&result)
 }
 
 // CreateBrowser creates a new browser
-func CreateBrowser(browser *Browser, db *gorm.DB) error {
-	if err := db.Create(browser).Error; err != nil {
-		return err
-	}
-
-	return nil
+func CreateBrowser(browser *Browser, db *gorm.DB) *DB {
+	return db.Create(browser)
 }

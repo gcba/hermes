@@ -2,6 +2,8 @@ package models
 
 import (
 	"time"
+
+	"github.com/jinzhu/gorm"
 )
 
 type Rating struct {
@@ -25,4 +27,9 @@ type Rating struct {
 	BrowserID       uint
 
 	CreatedAt time.Time `gorm:"not null"`
+}
+
+// CreateRating creates a new rating
+func CreateRating(rating *Rating, db *gorm.DB) *DB {
+	return db.Create(rating)
 }

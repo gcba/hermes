@@ -20,13 +20,14 @@ func (AppUser) TableName() string {
 	return "appusers"
 }
 
-// GetAppUser gets an app user by email addreess
-func GetAppUser(mibaID uint, db *gorm.DB) (AppUser, error) {
+// GetAppUser gets an app user by MiBA id
+func GetAppUser(mibaID string, db *gorm.DB) *DB { // TODO: Check actual mibaID type
 	var result AppUser
 
-	if err := db.Where(&AppUser{MiBAID: mibaID}).First(&result).Error; err != nil {
-		return AppUser{}, err
-	}
+	return db.Where(&AppUser{MiBAID: mibaID}).First(&result)
+}
 
-	return result, nil
+// CreateAppUser creates a new app user
+func CreateAppUser(appuser *AppUser, db *gorm.DB) *DB {
+	return db.Create(appuser)
 }
