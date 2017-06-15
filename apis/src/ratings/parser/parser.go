@@ -36,14 +36,15 @@ type (
 	}
 
 	Request struct {
-		Rating   int      `json:"rating"`
-		Comment  string   `json:"comment"`
-		App      string   `json:"app"`   // The app key
-		Range    string   `json:"range"` // The range key
-		User     user     `json:"user"`
-		Platform platform `json:"platform"`
-		Device   device   `json:"device"`
-		Browser  browser  `json:"browser"`
+		Rating      int      `json:"rating"`
+		Description string   `json:"description"`
+		Comment     string   `json:"comment"`
+		App         string   `json:"app"`   // The app key
+		Range       string   `json:"range"` // The range key
+		User        user     `json:"user"`
+		Platform    platform `json:"platform"`
+		Device      device   `json:"device"`
+		Browser     browser  `json:"browser"`
 	}
 )
 
