@@ -79,7 +79,7 @@
      Requests         Responses
 </code></pre>
 <p>Las funcionalidades comunes se extraer&#xE1;n en packages para ser utilizadas en ambas APIs.</p>
-<p>Controlador, Parser y Builder, al ser &#xFA;nicos trabajar&#xE1;n con una abstracci&#xF3;n de las operaciones que se terminar&#xE1; concretando con las llamadas a los Modelos. Para ello se utilizar&#xE1; una implementaci&#xF3;n del patr&#xF3;n Visitor.</p>
+<p>Parser y Builder, al ser &#xFA;nicos trabajar&#xE1;n con una abstracci&#xF3;n de las operaciones que se terminar&#xE1;n concretando en el Controlador con las llamadas a los Modelos.</p>
 <p>En el caso de la API de estad&#xED;sticas, el Controlador implementar&#xE1; una estructura similar a Pipes and Filters, a fin de obtener los datos necesarios y efectuar todas las transformaciones en el orden correcto. Dada su naturaleza, esta API no ser&#xE1; REST sino Graphql.</p>
 <p>Por el contrario, la API de calificaciones ser&#xE1; netamente REST.</p>
 
