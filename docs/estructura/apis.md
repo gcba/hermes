@@ -47,6 +47,7 @@ Crear una nueva calificación (que puede incluir un comentario o no)
 ```json
 {
     "rating": int,
+    "description": string,
     "comment": string, // optional
     "app": string,
     "range": string,
