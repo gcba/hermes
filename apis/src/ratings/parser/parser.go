@@ -12,8 +12,8 @@ type Request struct {
 	App     string `json:"app"`   // The app key
 	Range   string `json:"range"` // The range key
 	User    struct {
-		Name  string `json:"name"`
-		Email string `json:"email"`
+		Name   string `json:"name"`
+		MiBAID uint   `json:"mibaId"`
 	}
 	Platform struct {
 		Key     string `json:"key"`
