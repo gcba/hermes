@@ -28,9 +28,10 @@ TBD
 
 1. Usuario (Admin)
 2. Soporte (Admin)
-3. Admin (Admin)
-4. Desarrollador: Integra la aplicación con la API de calificaciones.
-5. Público: Califica aplicaciones.
+3. Supervisor (Admin)
+4. Admin (Admin)
+5. Desarrollador: Integra la aplicación con la API de calificaciones.
+6. Público: Califica aplicaciones.
 
 ## Casos de uso
 
@@ -57,9 +58,9 @@ Todos los de Usuario, más:
 
 - Enviar mensaje al calificador
 
-### Admin
+### Supervisor
 
-Todos los de Usuario y Soporte, más:
+Todos los de Soporte, más:
 
 - Ver historial del usuario
 - Ver log de actividades
@@ -67,4 +68,108 @@ Todos los de Usuario y Soporte, más:
 - Agregar usuarios
 - Asignar usuarios
 - Borrar usuarios
+- Crear apps
+- Borrar apps
+- Crear rangos
+- Asignar rangos
+- Crear plataformas
+
+### Admin
+
+Todos los de Usuario, Supervisor y Soporte, más:
+
+- Borrar plataformas
+- Borrar rangos
 - Borrar calificaciones
+
+## Roles y Permisos (Admin)
+
+### Apps
+
+|Permisos              | Usuario    | Soporte    | Supervisor | Admin      | Granularidad? |
+|----------------------|:----------:|:----------:|:----------:|:----------:|---------------|
+|Ver                   |X           |X           |X           |X           |Por app        |
+|Crear                 |            |            |X           |X           |               |
+|Editar                |            |            |X           |X           |               |
+|Borrar                |            |            |X           |X           |               |
+
+### Users
+
+|Permisos              | Usuario    | Soporte    | Supervisor | Admin      | Granularidad? |
+|----------------------|:----------:|:----------:|:----------:|:----------:|---------------|
+|Ver                   |            |            |X           |X           |               |
+|Crear                 |            |            |X           |X           |               |
+|Editar                |            |            |X           |X           |               |
+|Borrar                |            |            |X           |X           |               |
+
+### AppUsers
+
+|Permisos              | Usuario    | Soporte    | Supervisor | Admin      | Granularidad? |
+|----------------------|:----------:|:----------:|:----------:|:----------:|---------------|
+|Ver                   |X           |X           |X           |X           |Por app        |
+|Crear                 |            |            |            |            |               |
+|Editar                |            |            |            |            |               |
+|Borrar                |            |            |            |X           |               |
+
+### Ratings
+
+|Permisos              | Usuario    | Soporte    | Supervisor | Admin      | Granularidad? |
+|----------------------|:----------:|:----------:|:----------:|:----------:|---------------|
+|Ver                   |X           |X           |X           |X           |Por app        |
+|Crear                 |            |            |            |            |               |
+|Editar                |            |            |            |            |               |
+|Borrar                |            |            |            |X           |               |
+
+### Messages
+
+|Permisos              | Usuario    | Soporte    | Supervisor | Admin      | Granularidad? |
+|----------------------|:----------:|:----------:|:----------:|:----------:|---------------|
+|Ver                   |X           |X           |X           |X           |Por app        |
+|Crear                 |            |X           |X           |X           |               |
+|Editar                |            |            |            |            |               |
+|Borrar                |            |            |            |X           |               |
+
+### Ranges
+
+|Permisos              | Usuario    | Soporte    | Supervisor | Admin      | Granularidad? |
+|----------------------|:----------:|:----------:|:----------:|:----------:|---------------|
+|Ver                   |X           |X           |X           |X           |Por app        |
+|Crear                 |            |            |X           |X           |               |
+|Editar                |            |            |            |            |               |
+|Borrar                |            |            |            |X           |               |
+
+### Platforms
+
+|Permisos              | Usuario    | Soporte    | Supervisor | Admin      | Granularidad? |
+|----------------------|:----------:|:----------:|:----------:|:----------:|---------------|
+|Ver                   |X           |X           |X           |X           |Por app        |
+|Crear                 |            |            |X           |X           |               |
+|Editar                |            |            |X           |X           |               |
+|Borrar                |            |            |            |X           |               |
+
+### Devices
+
+|Permisos              | Usuario    | Soporte    | Supervisor | Admin      | Granularidad? |
+|----------------------|:----------:|:----------:|:----------:|:----------:|---------------|
+|Ver                   |X           |X           |X           |X           |Por app        |
+|Crear                 |            |            |            |            |               |
+|Editar                |            |            |            |            |               |
+|Borrar                |            |            |            |X           |               |
+
+### Browsers
+
+|Permisos              | Usuario    | Soporte    | Supervisor | Admin      | Granularidad? |
+|----------------------|:----------:|:----------:|:----------:|:----------:|---------------|
+|Ver                   |X           |X           |X           |X           |Por app        |
+|Crear                 |            |            |            |            |               |
+|Editar                |            |            |            |            |               |
+|Borrar                |            |            |            |X           |               |
+
+### Brands
+
+|Permisos              | Usuario    | Soporte    | Supervisor | Admin      | Granularidad? |
+|----------------------|:----------:|:----------:|:----------:|:----------:|---------------|
+|Ver                   |X           |X           |X           |X           |Por app        |
+|Crear                 |            |            |            |            |               |
+|Editar                |            |            |            |            |               |
+|Borrar                |            |            |            |X           |               |
