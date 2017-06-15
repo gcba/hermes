@@ -14,11 +14,11 @@ type Platform struct {
 	CreatedAt time.Time `gorm:"not null"`
 }
 
-// GetPlatform gets a platform by name
+// GetPlatform gets a platform by key
 func GetPlatform(name string, db *gorm.DB) (Platform, error) {
 	var result Platform
 
-	query := "SELECT id FROM platforms WHERE name LIKE ?" // TODO: Set ILIKE
+	query := "SELECT id FROM platforms WHERE key = ?" // TODO: Set ILIKE
 
 	if err := db.Raw(query, name).Scan(&result).Error; err != nil {
 		return Platform{}, err
