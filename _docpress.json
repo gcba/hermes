@@ -31,51 +31,115 @@
       },
       {
         "title": "Análisis Funcional",
-        "source": "docs/analisis-funcional/README.md",
-        "url": "analisis-funcional/index.html",
-        "slug": "analisis-funcional",
-        "headings": [
+        "sections": [
           {
             "title": "Requerimientos",
-            "depth": 2,
-            "id": "requerimientos",
+            "source": "docs/analisis-funcional/requerimientos.md",
+            "url": "analisis-funcional/requerimientos.html",
+            "slug": "analisis-funcionalrequerimientos",
             "headings": [
               {
                 "title": "Funcionales",
-                "depth": 3,
-                "id": "funcionales"
+                "depth": 2,
+                "id": "funcionales",
+                "headings": [
+                  {
+                    "title": "Estadísticas",
+                    "depth": 3,
+                    "id": "estadisticas"
+                  }
+                ]
               },
               {
                 "title": "No funcionales",
-                "depth": 3,
+                "depth": 2,
                 "id": "no-funcionales"
               }
             ]
           },
           {
-            "title": "Actores",
-            "depth": 2,
-            "id": "actores"
-          },
-          {
             "title": "Casos de uso",
-            "depth": 2,
-            "id": "casos-de-uso",
+            "source": "docs/analisis-funcional/casos-uso.md",
+            "url": "analisis-funcional/casos-uso.html",
+            "slug": "analisis-funcionalcasos-uso",
             "headings": [
               {
                 "title": "Usuario",
-                "depth": 3,
+                "depth": 2,
                 "id": "usuario"
               },
               {
                 "title": "Soporte",
-                "depth": 3,
+                "depth": 2,
                 "id": "soporte"
               },
               {
+                "title": "Supervisor",
+                "depth": 2,
+                "id": "supervisor"
+              },
+              {
                 "title": "Admin",
-                "depth": 3,
+                "depth": 2,
                 "id": "admin"
+              }
+            ]
+          },
+          {
+            "title": "Roles y permisos",
+            "source": "docs/analisis-funcional/roles-permisos.md",
+            "url": "analisis-funcional/roles-permisos.html",
+            "slug": "analisis-funcionalroles-permisos",
+            "headings": [
+              {
+                "title": "Apps",
+                "depth": 2,
+                "id": "apps"
+              },
+              {
+                "title": "Users",
+                "depth": 2,
+                "id": "users"
+              },
+              {
+                "title": "AppUsers",
+                "depth": 2,
+                "id": "appusers"
+              },
+              {
+                "title": "Ratings",
+                "depth": 2,
+                "id": "ratings"
+              },
+              {
+                "title": "Messages",
+                "depth": 2,
+                "id": "messages"
+              },
+              {
+                "title": "Ranges",
+                "depth": 2,
+                "id": "ranges"
+              },
+              {
+                "title": "Platforms",
+                "depth": 2,
+                "id": "platforms"
+              },
+              {
+                "title": "Devices",
+                "depth": 2,
+                "id": "devices"
+              },
+              {
+                "title": "Browsers",
+                "depth": 2,
+                "id": "browsers"
+              },
+              {
+                "title": "Brands",
+                "depth": 2,
+                "id": "brands"
               }
             ]
           }
@@ -615,55 +679,114 @@
         }
       ]
     },
-    "analisis-funcional/index.html": {
-      "source": "docs/analisis-funcional/README.md",
-      "title": "Análisis Funcional - Hermes",
-      "pageTitle": "Análisis Funcional",
-      "slug": "analisis-funcional",
+    "analisis-funcional/requerimientos.html": {
+      "source": "docs/analisis-funcional/requerimientos.md",
+      "title": "Requerimientos - Hermes",
+      "pageTitle": "Requerimientos",
+      "slug": "analisis-funcionalrequerimientos",
       "headings": [
         {
-          "title": "Requerimientos",
+          "title": "Funcionales",
           "depth": 2,
-          "id": "requerimientos",
+          "id": "funcionales",
           "headings": [
             {
-              "title": "Funcionales",
+              "title": "Estadísticas",
               "depth": 3,
-              "id": "funcionales"
-            },
-            {
-              "title": "No funcionales",
-              "depth": 3,
-              "id": "no-funcionales"
+              "id": "estadisticas"
             }
           ]
         },
         {
-          "title": "Actores",
+          "title": "No funcionales",
           "depth": 2,
-          "id": "actores"
+          "id": "no-funcionales"
+        }
+      ]
+    },
+    "analisis-funcional/casos-uso.html": {
+      "source": "docs/analisis-funcional/casos-uso.md",
+      "title": "Casos de uso - Hermes",
+      "pageTitle": "Casos de uso",
+      "slug": "analisis-funcionalcasos-uso",
+      "headings": [
+        {
+          "title": "Usuario",
+          "depth": 2,
+          "id": "usuario"
         },
         {
-          "title": "Casos de uso",
+          "title": "Soporte",
           "depth": 2,
-          "id": "casos-de-uso",
-          "headings": [
-            {
-              "title": "Usuario",
-              "depth": 3,
-              "id": "usuario"
-            },
-            {
-              "title": "Soporte",
-              "depth": 3,
-              "id": "soporte"
-            },
-            {
-              "title": "Admin",
-              "depth": 3,
-              "id": "admin"
-            }
-          ]
+          "id": "soporte"
+        },
+        {
+          "title": "Supervisor",
+          "depth": 2,
+          "id": "supervisor"
+        },
+        {
+          "title": "Admin",
+          "depth": 2,
+          "id": "admin"
+        }
+      ]
+    },
+    "analisis-funcional/roles-permisos.html": {
+      "source": "docs/analisis-funcional/roles-permisos.md",
+      "title": "Roles y permisos - Hermes",
+      "pageTitle": "Roles y permisos",
+      "slug": "analisis-funcionalroles-permisos",
+      "headings": [
+        {
+          "title": "Apps",
+          "depth": 2,
+          "id": "apps"
+        },
+        {
+          "title": "Users",
+          "depth": 2,
+          "id": "users"
+        },
+        {
+          "title": "AppUsers",
+          "depth": 2,
+          "id": "appusers"
+        },
+        {
+          "title": "Ratings",
+          "depth": 2,
+          "id": "ratings"
+        },
+        {
+          "title": "Messages",
+          "depth": 2,
+          "id": "messages"
+        },
+        {
+          "title": "Ranges",
+          "depth": 2,
+          "id": "ranges"
+        },
+        {
+          "title": "Platforms",
+          "depth": 2,
+          "id": "platforms"
+        },
+        {
+          "title": "Devices",
+          "depth": 2,
+          "id": "devices"
+        },
+        {
+          "title": "Browsers",
+          "depth": 2,
+          "id": "browsers"
+        },
+        {
+          "title": "Brands",
+          "depth": 2,
+          "id": "brands"
         }
       ]
     },
@@ -1163,7 +1286,9 @@
   },
   "sources": {
     "README.md": "index.html",
-    "docs/analisis-funcional/README.md": "analisis-funcional/index.html",
+    "docs/analisis-funcional/requerimientos.md": "analisis-funcional/requerimientos.html",
+    "docs/analisis-funcional/casos-uso.md": "analisis-funcional/casos-uso.html",
+    "docs/analisis-funcional/roles-permisos.md": "analisis-funcional/roles-permisos.html",
     "docs/estructura/arquitectura.md": "estructura/arquitectura.html",
     "docs/estructura/diseno.md": "estructura/diseno.html",
     "docs/estructura/datos.md": "estructura/datos.html",

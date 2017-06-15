@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../assets/style.css?t=615badd5">
+    <script src="../assets/script.js?t=42463e55"></script>
+    <title>Roles y permisos - Hermes</title>
+    <meta name="viewport" content="width=device-width">
+  </head>
+  <body class="-menu-visible">
+    <div class="doc-layout">
+      <div class="toggle menu-toggle js-menu-toggle"></div>
+      <div class="menu toc-menu">
+        <li class="menu-item -level-0 -parent">
+          <ul class="submenu">
+            <li class="menu-item -level-1"><a class="link title  link-index" href="../index.html">Hermes</a>
+            </li>
+            <li class="menu-item -level-1 -parent"><span class="title">Análisis Funcional</span>
+              <ul class="submenu">
+                <li class="menu-item -level-2"><a class="link title  link-analisis-funcionalrequerimientos" href="../analisis-funcional/requerimientos.html">Requerimientos</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-analisis-funcionalcasos-uso" href="../analisis-funcional/casos-uso.html">Casos de uso</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title -active link-analisis-funcionalroles-permisos" href="../analisis-funcional/roles-permisos.html">Roles y permisos</a>
+                  <ul class="headings heading-list">
+                    <li class="heading-item -depth-2"><a class="hlink link-apps" href="#apps">Apps</a>
+                    </li>
+                    <li class="heading-item -depth-2"><a class="hlink link-users" href="#users">Users</a>
+                    </li>
+                    <li class="heading-item -depth-2"><a class="hlink link-appusers" href="#appusers">AppUsers</a>
+                    </li>
+                    <li class="heading-item -depth-2"><a class="hlink link-ratings" href="#ratings">Ratings</a>
+                    </li>
+                    <li class="heading-item -depth-2"><a class="hlink link-messages" href="#messages">Messages</a>
+                    </li>
+                    <li class="heading-item -depth-2"><a class="hlink link-ranges" href="#ranges">Ranges</a>
+                    </li>
+                    <li class="heading-item -depth-2"><a class="hlink link-platforms" href="#platforms">Platforms</a>
+                    </li>
+                    <li class="heading-item -depth-2"><a class="hlink link-devices" href="#devices">Devices</a>
+                    </li>
+                    <li class="heading-item -depth-2"><a class="hlink link-browsers" href="#browsers">Browsers</a>
+                    </li>
+                    <li class="heading-item -depth-2"><a class="hlink link-brands" href="#brands">Brands</a>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li class="menu-item -level-1 -parent"><span class="title">Estructura</span>
+              <ul class="submenu">
+                <li class="menu-item -level-2"><a class="link title  link-estructuraarquitectura" href="../estructura/arquitectura.html">Arquitectura</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-estructuradiseno" href="../estructura/diseno.html">Diseño</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-estructuradatos" href="../estructura/datos.html">Datos</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-estructuraapis" href="../estructura/apis.html">APIs</a>
+                </li>
+              </ul>
+            </li>
+            <li class="menu-item -level-1 -parent"><span class="title">Desarrollo</span>
+              <ul class="submenu">
+                <li class="menu-item -level-2"><a class="link title  link-desarrollocodigo" href="../desarrollo/codigo.html">Código</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-desarrollogestion" href="../desarrollo/gestion.html">Gestión</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-desarrollometodologia" href="../desarrollo/metodologia.html">Metodología</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-desarrollosprint1" href="../desarrollo/sprint1.html">Sprint 1</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-desarrollosprint2" href="../desarrollo/sprint2.html">Sprint 2</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-desarrollosprint3" href="../desarrollo/sprint3.html">Sprint 3</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </div>
+      <div class="body page-analisis-funcionalroles-permisos">
+        <div class="header-nav">
+          <div class="right">
+          </div>
+        </div>
+        <div class="markdown-body"><h1 id="roles-y-permisos-(admin)">Roles y Permisos (Admin)</h1>
+<h2 id="apps">Apps</h2>
+<table>
+<thead>
+<tr>
+<th>Permisos</th>
+<th style="text-align:center">Usuario</th>
+<th style="text-align:center">Soporte</th>
+<th style="text-align:center">Supervisor</th>
+<th style="text-align:center">Admin</th>
+<th>Granularidad</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ver</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td>Por app</td>
+</tr>
+<tr>
+<td>Crear</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td></td>
+</tr>
+<tr>
+<td>Editar</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td></td>
+</tr>
+<tr>
+<td>Borrar</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="users">Users</h2>
+<table>
+<thead>
+<tr>
+<th>Permisos</th>
+<th style="text-align:center">Usuario</th>
+<th style="text-align:center">Soporte</th>
+<th style="text-align:center">Supervisor</th>
+<th style="text-align:center">Admin</th>
+<th>Granularidad</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ver</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td></td>
+</tr>
+<tr>
+<td>Crear</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td></td>
+</tr>
+<tr>
+<td>Editar</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td></td>
+</tr>
+<tr>
+<td>Borrar</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="appusers">AppUsers</h2>
+<table>
+<thead>
+<tr>
+<th>Permisos</th>
+<th style="text-align:center">Usuario</th>
+<th style="text-align:center">Soporte</th>
+<th style="text-align:center">Supervisor</th>
+<th style="text-align:center">Admin</th>
+<th>Granularidad</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ver</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td>Por app</td>
+</tr>
+<tr>
+<td>Crear</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td></td>
+</tr>
+<tr>
+<td>Editar</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td></td>
+</tr>
+<tr>
+<td>Borrar</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">X</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="ratings">Ratings</h2>
+<table>
+<thead>
+<tr>
+<th>Permisos</th>
+<th style="text-align:center">Usuario</th>
+<th style="text-align:center">Soporte</th>
+<th style="text-align:center">Supervisor</th>
+<th style="text-align:center">Admin</th>
+<th>Granularidad</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ver</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td>Por app</td>
+</tr>
+<tr>
+<td>Crear</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td></td>
+</tr>
+<tr>
+<td>Editar</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td></td>
+</tr>
+<tr>
+<td>Borrar</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">X</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="messages">Messages</h2>
+<table>
+<thead>
+<tr>
+<th>Permisos</th>
+<th style="text-align:center">Usuario</th>
+<th style="text-align:center">Soporte</th>
+<th style="text-align:center">Supervisor</th>
+<th style="text-align:center">Admin</th>
+<th>Granularidad</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ver</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td>Por app</td>
+</tr>
+<tr>
+<td>Crear</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td></td>
+</tr>
+<tr>
+<td>Editar</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td></td>
+</tr>
+<tr>
+<td>Borrar</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">X</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="ranges">Ranges</h2>
+<table>
+<thead>
+<tr>
+<th>Permisos</th>
+<th style="text-align:center">Usuario</th>
+<th style="text-align:center">Soporte</th>
+<th style="text-align:center">Supervisor</th>
+<th style="text-align:center">Admin</th>
+<th>Granularidad</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ver</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td>Por app</td>
+</tr>
+<tr>
+<td>Crear</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td></td>
+</tr>
+<tr>
+<td>Editar</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td></td>
+</tr>
+<tr>
+<td>Borrar</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">X</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="platforms">Platforms</h2>
+<table>
+<thead>
+<tr>
+<th>Permisos</th>
+<th style="text-align:center">Usuario</th>
+<th style="text-align:center">Soporte</th>
+<th style="text-align:center">Supervisor</th>
+<th style="text-align:center">Admin</th>
+<th>Granularidad</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ver</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td>Por app</td>
+</tr>
+<tr>
+<td>Crear</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td></td>
+</tr>
+<tr>
+<td>Editar</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td></td>
+</tr>
+<tr>
+<td>Borrar</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">X</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="devices">Devices</h2>
+<table>
+<thead>
+<tr>
+<th>Permisos</th>
+<th style="text-align:center">Usuario</th>
+<th style="text-align:center">Soporte</th>
+<th style="text-align:center">Supervisor</th>
+<th style="text-align:center">Admin</th>
+<th>Granularidad</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ver</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td>Por app</td>
+</tr>
+<tr>
+<td>Crear</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td></td>
+</tr>
+<tr>
+<td>Editar</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td></td>
+</tr>
+<tr>
+<td>Borrar</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">X</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="browsers">Browsers</h2>
+<table>
+<thead>
+<tr>
+<th>Permisos</th>
+<th style="text-align:center">Usuario</th>
+<th style="text-align:center">Soporte</th>
+<th style="text-align:center">Supervisor</th>
+<th style="text-align:center">Admin</th>
+<th>Granularidad</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ver</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td>Por app</td>
+</tr>
+<tr>
+<td>Crear</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td></td>
+</tr>
+<tr>
+<td>Editar</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td></td>
+</tr>
+<tr>
+<td>Borrar</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">X</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="brands">Brands</h2>
+<table>
+<thead>
+<tr>
+<th>Permisos</th>
+<th style="text-align:center">Usuario</th>
+<th style="text-align:center">Soporte</th>
+<th style="text-align:center">Supervisor</th>
+<th style="text-align:center">Admin</th>
+<th>Granularidad</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ver</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td>Por app</td>
+</tr>
+<tr>
+<td>Crear</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td></td>
+</tr>
+<tr>
+<td>Editar</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td></td>
+</tr>
+<tr>
+<td>Borrar</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">X</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+        </div>
+        <div class="footer-nav">
+          <div class="left"><a href="../analisis-funcional/casos-uso.html"><span class="title">Casos de uso</span></a></div>
+          <div class="right"><a href="../estructura/arquitectura.html"><span class="label">Next: </span><span class="title">Arquitectura</span></a></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
