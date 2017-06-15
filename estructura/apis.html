@@ -107,12 +107,14 @@
 <p><code>POST /ratings</code>: s&#xF3;lo JSON body. Por lo tanto se requerir&#xE1; el header <code>Content-Type: application/json</code>.</p>
 <pre><code class="lang-json">{
     &quot;rating&quot;: int,
+    &quot;description&quot;: string,
     &quot;comment&quot;: string, // optional
     &quot;app&quot;: string,
     &quot;range&quot;: string,
     &quot;user&quot;: { // optional
         &quot;name&quot;: string,
-        &quot;mibaId&quot;: int
+        &quot;email&quot;: string,
+        &quot;mibaId&quot;: string
     },
     &quot;platform&quot;: {
         &quot;key&quot;: string,
@@ -149,11 +151,7 @@
    &quot;methods&quot;: [
        {
            &quot;verb&quot;: ...,
-           &quot;url&quot;: ...,
            &quot;headers&quot;: {
-               ...
-           },
-           &quot;parameters&quot;: {
                ...
            }
        },
