@@ -98,6 +98,7 @@ Crear una nueva calificación (que puede incluir un comentario o no)
    "methods": [
        {
            "verb": ...,
+           "endpoint": ...,
            "headers": {
                ...
            }
