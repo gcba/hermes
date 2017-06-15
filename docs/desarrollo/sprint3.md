@@ -53,7 +53,7 @@ Crear los endpoints de la API de calificaciones. Agregar tests para los modelos 
 
 8. Agregar los seeds de Range
 
-### Doumentación
+### Documentación
 
 1. Crear tabla documentando roles y permisos
 

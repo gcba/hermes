@@ -2,7 +2,7 @@
 
 ![Schema](https://github.com/gcba/hermes/raw/master/docs/images/schema.png)
 
-Consta de 14 tablas, sin contar las necesarias para roles y permisos (no aparecen en la imagen) dado que éstas son creadas y manejadas automáticamente por un componente de autorización.
+Consta de 16 tablas, sin contar las necesarias para roles y permisos (no aparecen en la imagen) dado que éstas son creadas y manejadas automáticamente por un componente de autorización.
 
 ## Tablas
 
@@ -60,7 +60,7 @@ Las apps sobre las que se envían calificaciones y comentarios.
 |id              |int (PK)              |       |       |       |       |
 |name            |varchar(50)           |       |       |X      |X      |
 |type            |char                  |       |       |       |       |
-|key             |char(32)              |       |       |X      |       |
+|key             |char(32)              |       |       |X      |X      |
 |created_at      |timestamp             |       |       |       |       |
 |modified_at     |timestamp             |       |X      |       |       |
 |modified_by     |int                   |X      |X      |       |       |
@@ -78,7 +78,7 @@ La plataforma donde corren las apps y de donde provienen las calificaciones y co
 |----------------|----------------------|:-----:|:-----:|:-----:|:-----:|
 |id              |int (PK)              |       |       |       |       |
 |name            |varchar(15)           |       |       |X      |       |
-|key             |char(32)              |       |       |X      |       |
+|key             |char(32)              |       |       |X      |X      |
 |created_at      |timestamp             |       |       |       |       |
 |modified_at     |timestamp             |       |X      |       |       |
 
@@ -237,6 +237,7 @@ Los rangos de calificaciones de cada app.
 |id              |int (PK)              |       |       |       |       |
 |from            |smallint              |       |       |       |       |
 |to              |smallint              |       |       |       |       |
+|key             |char(32)              |       |       |X      |X      |
 |app_id          |int                   |X      |       |       |X      |
 |created_at      |timestamp             |       |       |       |       |
 |modified_at     |timestamp             |       |X      |       |       |
