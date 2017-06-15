@@ -23,9 +23,9 @@ type Request struct {
 		Name   string `json:"name"`
 		Brand  string `json:"brand"`
 		Screen struct {
-			Width  int     `json:"width"`
-			Height int     `json:"height"`
-			PPI    float32 `json:"ppi"`
+			Width  int `json:"width"`
+			Height int `json:"height"`
+			PPI    int `json:"ppi"`
 		}
 	}
 	Browser struct {
