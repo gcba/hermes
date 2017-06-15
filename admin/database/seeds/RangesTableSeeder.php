@@ -21,18 +21,21 @@ class RangesTableSeeder extends Seeder
             Range::create([
                 'from' => 0,
                 'to' => 5,
+                'key'  => md5("123456"),
                 'app_id' => $denunciaVial->id
             ]);
 
             Range::create([
                 'from' => 0,
                 'to' => 10,
+                'key'  => md5("654321"),
                 'app_id' => $miBA->id
             ]);
 
             Range::create([
                 'from' => -5,
                 'to' => 5,
+                'key'  => md5("987654"),
                 'app_id' => $masSimple->id
             ]);
         }
