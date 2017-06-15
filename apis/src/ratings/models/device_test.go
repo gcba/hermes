@@ -21,7 +21,7 @@ func TestCreateDevice(t *testing.T) {
 		ScreenHeight: 1280,
 		PPI: 320,
 		BrandID: 1,
-		PlatformID: 1
+		PlatformID: 2
 	}
 
 	result := db.Create(&device)
