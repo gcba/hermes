@@ -18,7 +18,8 @@ class CreateAppUsersTable extends Migration
             $table->string('name', 70);
             $table->string('email', 100);
             $table->index('email');
-            $table->integer('miba_id');
+            $table->integer('miba_id')->unique();
+            $table->index('miba_id');
             $table->timestamps();
         });
     }
