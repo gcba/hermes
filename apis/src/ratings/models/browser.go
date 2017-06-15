@@ -25,3 +25,12 @@ func GetBrowser(name string, db *gorm.DB) (Browser, error) {
 
 	return result, nil
 }
+
+// CreateBrowser creates a new browser
+func CreateBrowser(browser *Browser, db *gorm.DB) error {
+	if err := db.Create(browser).Error; err != nil {
+		return err
+	}
+
+	return nil
+}
