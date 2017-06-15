@@ -64,7 +64,7 @@ Crear una nueva calificación (que puede incluir un comentario o no)
         "screen": {
             "width": int,
             "height": int,
-            "PPI": float
+            "ppi": float
         }
     },
     "browser": { // optional
