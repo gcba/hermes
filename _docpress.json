@@ -574,9 +574,9 @@
                     "id": "admin"
                   },
                   {
-                    "title": "Doumentación",
+                    "title": "Documentación",
                     "depth": 3,
-                    "id": "doumentacion"
+                    "id": "documentacion"
                   }
                 ]
               }
@@ -1152,9 +1152,9 @@
               "id": "admin"
             },
             {
-              "title": "Doumentación",
+              "title": "Documentación",
               "depth": 3,
-              "id": "doumentacion"
+              "id": "documentacion"
             }
           ]
         }
