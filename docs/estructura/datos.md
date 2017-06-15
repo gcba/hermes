@@ -97,7 +97,7 @@ En el caso de las aplicaciones móviles, el dispositivo desde donde se enviaron 
 |name            |varchar(30)           |       |       |X      |X      |
 |screen_width    |int                   |       |       |       |       |
 |screen_heigth   |int                   |       |       |       |       |
-|ppi             |real                  |       |X      |       |       |
+|ppi             |int                   |       |X      |       |       |
 |brand_id        |int                   |X      |X      |       |X      |
 |platform_id     |int                   |X      |X      |       |X      |
 |created_at      |timestamp             |       |       |       |       |
