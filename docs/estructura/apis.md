@@ -53,7 +53,7 @@ Crear una nueva calificación (que puede incluir un comentario o no)
     "user": { // optional
         "name": string,
         "email": string,
-        "mibaId": int
+        "mibaId": string
     },
     "platform": {
         "key": string,
