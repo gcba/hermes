@@ -18,7 +18,9 @@ func main() {
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
 
-	e.POST("/ratings", controller.Create)
+	e.POST("/ratings", controller.PostRating)
+	e.OPTIONS("/ratings", controller.OptionsRating)
+	e.OPTIONS("/", controller.OptionsRoot)
 
 	fmt.Println("Started server on port", port)
 

@@ -12,7 +12,7 @@ import (
 )
 
 // Create saves a new rating to the database
-func Create(context echo.Context) error {
+func PostRating(context echo.Context) error {
 	request, err := parser.Parse(context)
 
 	if err != nil {
@@ -30,12 +30,34 @@ func Create(context echo.Context) error {
 
 	if !ok {
 		// TODO: Dispatch error response
-		fmt.Println("Error creating new rating :(")
 
-		return context.JSON(http.StatusOK, rating)
+		return errors.New("Rating creation failed")
 	}
 
-	return context.JSON(http.StatusOK, rating)
+	return context.JSON(http.StatusOK, &rating)
+}
+
+func OptionsRating(context echo.Context) error {
+	meta := responses.Meta{
+		Code: 200,
+		Message: "Request completed successfully"
+	}
+
+	headers := responses.Header{
+		ContentType: "application/json; charset=utf-8"
+	}
+
+	method := responses.Method{
+		Verb: "POST",
+		Headers: headers
+	}
+
+	response := responses.Options{
+		Meta:  meta
+		Methods: []Method{method}
+	}
+
+  	return c.JSON(http.StatusOK, &response)
 }
 
 func getBaseFields(request *parser.Request, db *gorm.DB) (models.App, models.Range, models.Platform) {
