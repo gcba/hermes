@@ -2,6 +2,8 @@ package models
 
 import (
 	"time"
+
+	"github.com/jinzhu/gorm"
 )
 
 type AppUser struct {
@@ -16,4 +18,15 @@ type AppUser struct {
 // TableName sets AppUser's table name to be `appuser`
 func (AppUser) TableName() string {
 	return "appusers"
+}
+
+// GetAppUser gets an app user by email addreess
+func GetAppUser(mibaID uint, db *gorm.DB) (AppUser, error) {
+	var result AppUser
+
+	if err := db.Where(&AppUser{MiBAID: mibaID}).First(&result).Error; err != nil {
+		return AppUser{}, err
+	}
+
+	return result, nil
 }

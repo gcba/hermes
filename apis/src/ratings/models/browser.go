@@ -2,6 +2,8 @@ package models
 
 import (
 	"time"
+
+	"github.com/jinzhu/gorm"
 )
 
 type Browser struct {
@@ -9,4 +11,17 @@ type Browser struct {
 	Name string `gorm:"size:15;not null"`
 
 	CreatedAt time.Time `gorm:"not null"`
+}
+
+// GetBrowser gets a browser by name
+func GetBrowser(name string, db *gorm.DB) (Browser, error) {
+	var result Browser
+
+	query := "SELECT id FROM browsers WHERE name LIKE ?" // TODO: Set ILIKE
+
+	if err := db.Raw(query, name).Scan(&result).Error; err != nil {
+		return Browser{}, err
+	}
+
+	return result, nil
 }

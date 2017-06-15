@@ -12,8 +12,7 @@ type Rating struct {
 	PlatformVersion string `gorm:"size:15"`
 	BrowserVersion  string `gorm:"size:15"`
 	HasMessage      bool   `gorm:"not null;DEFAULT:false"`
-	App             App
-	AppID           uint `gorm:"not null"`
+	AppID           uint   `gorm:"not null"`
 	Range           Range
 	RangeID         uint `gorm:"not null"`
 	AppUser         AppUser
