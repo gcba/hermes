@@ -27,7 +27,7 @@ Se estructurarán en capas:
 
 Las funcionalidades comunes se extraerán en packages para ser utilizadas en ambas APIs.
 
-Controlador, Parser y Builder, al ser únicos trabajarán con una abstracción de las operaciones que se terminará concretando con las llamadas a los Modelos. Para ello se utilizará una implementación del patrón Visitor.
+Parser y Builder, al ser únicos trabajarán con una abstracción de las operaciones que se terminarán concretando en el Controlador con las llamadas a los Modelos.
 
 En el caso de la API de estadísticas, el Controlador implementará una estructura similar a Pipes and Filters, a fin de obtener los datos necesarios y efectuar todas las transformaciones en el orden correcto. Dada su naturaleza, esta API no será REST sino Graphql.
 
