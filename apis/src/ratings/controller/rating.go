@@ -3,15 +3,17 @@ package controller
 import (
 	"net/http"
 
+	"ratings/parser"
+
 	"github.com/labstack/echo"
 )
 
-func CreateRating(c echo.Context) error {
-	r := new(Request)
+func CreateRating(context echo.Context) error {
+	request, err := parser.Parse(context)
 
-	if err := c.Bind(r); err != nil {
+	if err != nil {
 		return err
 	}
 
-	return c.JSON(http.StatusOK, r)
+	return context.JSON(http.StatusOK, request)
 }

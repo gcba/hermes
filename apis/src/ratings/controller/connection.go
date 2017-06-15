@@ -10,36 +10,6 @@ import (
 	_ "github.com/jinzhu/gorm/dialects/sqlite"   // sqlite driver
 )
 
-type (
-	Request struct {
-		Rating  int    `json:"rating"`
-		Comment string `json:"comment"`
-		App     string `json:"app"`   // The app key
-		Range   string `json:"range"` // The range key
-		User    struct {
-			Name  string `json:"name"`
-			Email string `json:"email"`
-		}
-		Platform struct {
-			Key     string `json:"key"`
-			Version string `json:"version"`
-		}
-		Device struct {
-			Name   string `json:"name"`
-			Brand  string `json:"brand"`
-			Screen struct {
-				Width  int     `json:"width"`
-				Height int     `json:"height"`
-				PPI    float32 `json:"ppi"`
-			}
-		}
-		Browser struct {
-			Name    string `json:"name"`
-			Version string `json:"version"`
-		}
-	}
-)
-
 // Load environment
 var env string = os.Getenv("API_RATINGS_ENV")
 
