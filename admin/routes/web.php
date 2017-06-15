@@ -18,22 +18,3 @@ Route::get('/', function () {
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });
-
-Route::group(['prefix' => 'admin'], function () {
-    Voyager::routes();
-});
-
-
-Route::group(['prefix' => 'admin'], function () {
-    Voyager::routes();
-});
-
-
-Route::group(['prefix' => 'admin'], function () {
-    Voyager::routes();
-});
-
-
-Route::group(['prefix' => 'admin'], function () {
-    Voyager::routes();
-});
