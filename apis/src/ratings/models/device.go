@@ -32,3 +32,12 @@ func GetDevice(name string, brand uint, db *gorm.DB) (Device, error) {
 
 	return result, nil
 }
+
+// CreateDevice creates a new device
+func CreateDevice(device *Device, db *gorm.DB) error {
+	if err := db.Create(device).Error; err != nil {
+		return err
+	}
+
+	return nil
+}
