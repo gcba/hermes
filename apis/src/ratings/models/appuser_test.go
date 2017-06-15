@@ -4,6 +4,7 @@ import (
 	"ratings/controller"
 	"testing"
 
+	_ "github.com/joho/godotenv/autoload" // Loads config from .env file
 	"github.com/dchest/uniuri"
 	"github.com/stretchr/testify/require"
 )

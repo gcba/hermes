@@ -11,9 +11,9 @@ type Device struct {
 	ScreenHeight int    `gorm:"not null"`
 	PPI          int
 	Brand        Brand
-	BrandID      int
+	BrandID      uint
 	Platform     Platform
-	PlatformID   int
+	PlatformID   uint
 
 	CreatedAt time.Time `gorm:"not null"`
 }
