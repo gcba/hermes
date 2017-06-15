@@ -271,8 +271,8 @@ func newRating(request *parser.Request, appRecord *models.App, rangeRecord *mode
 		PlatformVersion: request.Platform.Version,
 		BrowserVersion: request.Browser.Version,
 		HasMessage: hasMessage,
-		AppID: appRecord.ID
-		RangeID: rangeRecord.ID
+		AppID: appRecord.ID,
+		RangeID: rangeRecord.ID,
 		PlatformID: platformRecord.ID
 	}
 
