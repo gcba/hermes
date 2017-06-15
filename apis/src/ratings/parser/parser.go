@@ -6,33 +6,45 @@ import (
 	"github.com/labstack/echo"
 )
 
-type Request struct {
-	Rating  int    `json:"rating"`
-	Comment string `json:"comment"`
-	App     string `json:"app"`   // The app key
-	Range   string `json:"range"` // The range key
-	User    struct {
+type (
+	user struct {
 		Name   string `json:"name"`
 		MiBAID uint   `json:"mibaId"`
 	}
-	Platform struct {
+
+	platform struct {
 		Key     string `json:"key"`
 		Version string `json:"version"`
 	}
-	Device struct {
+
+	device struct {
 		Name   string `json:"name"`
 		Brand  string `json:"brand"`
-		Screen struct {
-			Width  int `json:"width"`
-			Height int `json:"height"`
-			PPI    int `json:"ppi"`
-		}
+		Screen screen `json:"screen"`
 	}
-	Browser struct {
+
+	screen struct {
+		Width  int `json:"width"`
+		Height int `json:"height"`
+		PPI    int `json:"ppi"`
+	}
+
+	browser struct {
 		Name    string `json:"name"`
 		Version string `json:"version"`
 	}
-}
+
+	Request struct {
+		Rating   int      `json:"rating"`
+		Comment  string   `json:"comment"`
+		App      string   `json:"app"`   // The app key
+		Range    string   `json:"range"` // The range key
+		User     user     `json:"user"`
+		Platform platform `json:"platform"`
+		Device   device   `json:"device"`
+		Browser  browser  `json:"browser"`
+	}
+)
 
 func Parse(context echo.Context) (*Request, error) {
 	request := new(Request)
