@@ -2,7 +2,6 @@ Hermes
 ======
 
 * [Hermes](../README.md)
-* [Análisis Funcional](analisis-funcional/README.md)
 * Análisis Funcional
     * [Requerimientos](analisis-funcional/requerimientos.md)
     * [Casos de uso](analisis-funcional/casos-uso.md)
