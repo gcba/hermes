@@ -9,6 +9,7 @@ import (
 type (
 	user struct {
 		Name   string `json:"name"`
+		Email  string `json:"email"`
 		MiBAID uint   `json:"mibaId"`
 	}
 
