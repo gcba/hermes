@@ -47,14 +47,15 @@ func OptionsRating(context echo.Context) error {
 		ContentType: "application/json; charset=utf-8"
 	}
 
-	method := responses.Method{
+	postRatings := responses.Method{
 		Verb: "POST",
+		Endpoint: "/ratings",
 		Headers: headers
 	}
 
 	response := responses.Options{
 		Meta:  meta
-		Methods: []Method{method}
+		Methods: []Method{postRatings}
 	}
 
   	return c.JSON(http.StatusOK, &response)

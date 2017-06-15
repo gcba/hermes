@@ -7,6 +7,7 @@ type {
 
 	Method struct {
 		Verb string `json:"verb"`
+		Endpoint string `json:"endpoint"`
 		Headers Headers `json:"headers"`
 	}
 
