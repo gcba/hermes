@@ -2,6 +2,8 @@ package models
 
 import (
 	"time"
+
+	"github.com/jinzhu/gorm"
 )
 
 type Range struct {
@@ -12,4 +14,17 @@ type Range struct {
 	AppID uint   `gorm:"not null"`
 
 	CreatedAt time.Time `gorm:"not null"`
+}
+
+// GetRange gets a range by key
+func GetRange(key string, db *gorm.DB) (Range, error) {
+	var result Range
+
+	query := "SELECT id FROM ranges WHERE key = ?"
+
+	if err := db.Raw(query, key).Scan(&result).Error; err != nil {
+		return Range{}, err
+	}
+
+	return result, nil
 }
