@@ -19,7 +19,7 @@ class CreateDevicesTable extends Migration
             $table->index('name');
             $table->integer('screen_width');
             $table->integer('screen_height');
-            $table->float('ppi')->nullable();
+            $table->integer('ppi')->nullable();
             $table->integer('brand_id')->unsigned()->nullable();
             $table->foreign('brand_id')->references('id')->on('brands')->onDelete('set null');
             $table->index('brand_id');
