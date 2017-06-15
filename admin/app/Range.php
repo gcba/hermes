@@ -12,7 +12,7 @@ class Range extends Model
      * @var array
      */
     protected $fillable = [
-        'from', 'to', 'app_id'
+        'from', 'to', 'key', 'app_id'
     ];
 
     /**
