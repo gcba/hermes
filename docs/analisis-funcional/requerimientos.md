@@ -3,7 +3,7 @@
 ## Funcionales
 
 1. Registrar las calificaciones y comentarios enviados desde cada app
-2. Generar estadísticas diarias, mensuales, anuales y pod período custom
+2. Generar estadísticas diarias, mensuales, anuales y por período custom
 3. Generar gráficos a partir de las estadísticas
 4. Interactuar con el público calificador
 5. Mostrar calificaciones y comentarios de cada app
