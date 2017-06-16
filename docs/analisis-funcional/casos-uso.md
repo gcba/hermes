@@ -1,6 +1,6 @@
 # Casos de uso
 
-# Actores
+## Actores
 
 1. Usuario (Admin)
 2. Soporte (Admin)
@@ -9,7 +9,7 @@
 5. Desarrollador: Integra la aplicación con la API de calificaciones.
 6. Público: Califica aplicaciones.
 
-## Usuario
+### Usuario
 
 1. Seleccionar app
 2. Ver calificaciones y comentarios
@@ -26,13 +26,13 @@
 13. Ver usuario
 14. Cambiar contraseña
 
-## Soporte
+### Soporte
 
 Todos los de Usuario, más:
 
 - Enviar mensaje al calificador
 
-## Supervisor
+### Supervisor
 
 Todos los de Soporte, más:
 
@@ -48,7 +48,7 @@ Todos los de Soporte, más:
 - Asignar rangos
 - Crear plataformas
 
-## Admin
+### Admin
 
 Todos los de Usuario, Supervisor y Soporte, más:
 
