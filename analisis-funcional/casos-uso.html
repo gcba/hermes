@@ -21,13 +21,17 @@
                 </li>
                 <li class="menu-item -level-2"><a class="link title -active link-analisis-funcionalcasos-uso" href="../analisis-funcional/casos-uso.html">Casos de uso</a>
                   <ul class="headings heading-list">
-                    <li class="heading-item -depth-2"><a class="hlink link-usuario" href="#usuario">Usuario</a>
-                    </li>
-                    <li class="heading-item -depth-2"><a class="hlink link-soporte" href="#soporte">Soporte</a>
-                    </li>
-                    <li class="heading-item -depth-2"><a class="hlink link-supervisor" href="#supervisor">Supervisor</a>
-                    </li>
-                    <li class="heading-item -depth-2"><a class="hlink link-admin" href="#admin">Admin</a>
+                    <li class="heading-item -depth-2"><a class="hlink link-actores" href="#actores">Actores</a>
+                      <ul class="heading-list -depth-2">
+                        <li class="heading-item -depth-3"><a class="hlink link-usuario" href="#usuario">Usuario</a>
+                        </li>
+                        <li class="heading-item -depth-3"><a class="hlink link-soporte" href="#soporte">Soporte</a>
+                        </li>
+                        <li class="heading-item -depth-3"><a class="hlink link-supervisor" href="#supervisor">Supervisor</a>
+                        </li>
+                        <li class="heading-item -depth-3"><a class="hlink link-admin" href="#admin">Admin</a>
+                        </li>
+                      </ul>
                     </li>
                   </ul>
                 </li>
@@ -72,7 +76,7 @@
           </div>
         </div>
         <div class="markdown-body"><h1 id="casos-de-uso">Casos de uso</h1>
-<h1 id="actores">Actores</h1>
+<h2 id="actores">Actores</h2>
 <ol>
 <li>Usuario (Admin)</li>
 <li>Soporte (Admin)</li>
@@ -81,7 +85,7 @@
 <li>Desarrollador: Integra la aplicaci&#xF3;n con la API de calificaciones.</li>
 <li>P&#xFA;blico: Califica aplicaciones.</li>
 </ol>
-<h2 id="usuario">Usuario</h2>
+<h3 id="usuario">Usuario</h3>
 <ol>
 <li>Seleccionar app</li>
 <li>Ver calificaciones y comentarios</li>
@@ -98,12 +102,12 @@
 <li>Ver usuario</li>
 <li>Cambiar contrase&#xF1;a</li>
 </ol>
-<h2 id="soporte">Soporte</h2>
+<h3 id="soporte">Soporte</h3>
 <p>Todos los de Usuario, m&#xE1;s:</p>
 <ul>
 <li>Enviar mensaje al calificador</li>
 </ul>
-<h2 id="supervisor">Supervisor</h2>
+<h3 id="supervisor">Supervisor</h3>
 <p>Todos los de Soporte, m&#xE1;s:</p>
 <ul>
 <li>Ver historial del usuario</li>
@@ -118,7 +122,7 @@
 <li>Asignar rangos</li>
 <li>Crear plataformas</li>
 </ul>
-<h2 id="admin">Admin</h2>
+<h3 id="admin">Admin</h3>
 <p>Todos los de Usuario, Supervisor y Soporte, m&#xE1;s:</p>
 <ul>
 <li>Borrar plataformas</li>

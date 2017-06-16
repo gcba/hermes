@@ -64,24 +64,31 @@
             "slug": "analisis-funcionalcasos-uso",
             "headings": [
               {
-                "title": "Usuario",
+                "title": "Actores",
                 "depth": 2,
-                "id": "usuario"
-              },
-              {
-                "title": "Soporte",
-                "depth": 2,
-                "id": "soporte"
-              },
-              {
-                "title": "Supervisor",
-                "depth": 2,
-                "id": "supervisor"
-              },
-              {
-                "title": "Admin",
-                "depth": 2,
-                "id": "admin"
+                "id": "actores",
+                "headings": [
+                  {
+                    "title": "Usuario",
+                    "depth": 3,
+                    "id": "usuario"
+                  },
+                  {
+                    "title": "Soporte",
+                    "depth": 3,
+                    "id": "soporte"
+                  },
+                  {
+                    "title": "Supervisor",
+                    "depth": 3,
+                    "id": "supervisor"
+                  },
+                  {
+                    "title": "Admin",
+                    "depth": 3,
+                    "id": "admin"
+                  }
+                ]
               }
             ]
           },
@@ -711,24 +718,31 @@
       "slug": "analisis-funcionalcasos-uso",
       "headings": [
         {
-          "title": "Usuario",
+          "title": "Actores",
           "depth": 2,
-          "id": "usuario"
-        },
-        {
-          "title": "Soporte",
-          "depth": 2,
-          "id": "soporte"
-        },
-        {
-          "title": "Supervisor",
-          "depth": 2,
-          "id": "supervisor"
-        },
-        {
-          "title": "Admin",
-          "depth": 2,
-          "id": "admin"
+          "id": "actores",
+          "headings": [
+            {
+              "title": "Usuario",
+              "depth": 3,
+              "id": "usuario"
+            },
+            {
+              "title": "Soporte",
+              "depth": 3,
+              "id": "soporte"
+            },
+            {
+              "title": "Supervisor",
+              "depth": 3,
+              "id": "supervisor"
+            },
+            {
+              "title": "Admin",
+              "depth": 3,
+              "id": "admin"
+            }
+          ]
         }
       ]
     },
