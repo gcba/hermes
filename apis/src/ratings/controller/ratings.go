@@ -58,7 +58,7 @@ func OptionsRating(context echo.Context) error {
 		Methods: []Method{postRatings}
 	}
 
-  	return c.JSON(http.StatusOK, &response)
+  	return context.JSON(http.StatusOK, &response)
 }
 
 func getBaseFields(request *parser.Request, db *gorm.DB) (models.App, models.Range, models.Platform) {
