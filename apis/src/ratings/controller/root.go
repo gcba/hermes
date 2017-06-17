@@ -40,5 +40,5 @@ func OptionsRoot(context echo.Context) error {
 		Methods: []Method{optionsRatings, postRatings}
 	}
 
-  	return c.JSON(http.StatusOK, &response)
+  	return context.JSON(http.StatusOK, &response)
 }
