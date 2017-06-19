@@ -62,7 +62,7 @@ func OptionsRating(context echo.Context) error {
 }
 
 func getBaseFields(request *parser.Request, db *gorm.DB) (models.App, models.Range, models.Platform) {
-	appRecord, appErr := models.GetApp(request.App, db)
+	appRecord, appErr := models.GetApp(request.App.Key, db)
 
 	if appErr != nil {
 		// TODO: Dispatch error response
@@ -267,7 +267,7 @@ func newRating(request *parser.Request, appRecord *models.App, rangeRecord *mode
 	rating := Rating{
 		Rating: request.Rating,
 		Description: request.Description,
-		AppVersion: request.Description,
+		AppVersion: request.App.Version,
 		PlatformVersion: request.Platform.Version,
 		BrowserVersion: request.Browser.Version,
 		HasMessage: hasMessage,

@@ -7,6 +7,11 @@ import (
 )
 
 type (
+	app struct {
+		Key     string `json:"key";validate:"required,len=32,alphanum"`
+		Version string `json:"version";validate:"required,alphanum,gte=1,lte=15"`
+	}
+
 	user struct {
 		Name   string `json:"name";validate:"required,alphanum,gte=3,lte=70"`
 		Email  string `json:"email";validate:"required,email,gte=3,lte=100"`
@@ -39,10 +44,10 @@ type (
 		Rating      int8     `json:"rating";validate:"required,numeric,min=-127,max=127"`
 		Description string   `json:"description";validate:"alphanum,gte=3,lte=30,omitempty"`
 		Comment     string   `json:"comment";validate:"alphanum,gte=3,lte=1000,omitempty"`
-		App         string   `json:"app";validate:"required",len=32,alphanum`   // The app key
 		Range       string   `json:"range";validate:"required,len=32,alphanum"` // The range key
+		App         app      `json:"app";validate:"required,dive,required"`
+		Platform    platform `json:"platform";validate:"required,dive,required"`
 		User        *user    `json:"user";validate:"omitempty"`
-		Platform    platform `json:"platform";validate:"required,dive,required"` // The platform key
 		Device      *device  `json:"device";validate:"omitempty"`
 		Browser     *browser `json:"browser";validate:"omitempty"`
 	}
