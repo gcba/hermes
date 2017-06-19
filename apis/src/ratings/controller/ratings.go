@@ -11,27 +11,23 @@ import (
 	"github.com/labstack/echo"
 )
 
-// Create saves a new rating to the database
+type databases struct {
+	Read *gorm.DB,
+	Write *gorm.DB
+}
+
+// PostRating saves a new rating to the database
 func PostRating(context echo.Context) error {
-	request, err := parser.Parse(context)
+	request := parser.Parse(context)
+	dbs := &databases{Read: &GetReadDB(), Write: &GetWriteDB()}
 
-	if err != nil {
-		return err
-	}
+	defer dbs.Read.Close()
+	defer dbs.Write.Close()
 
-	readDb := GetReadDB()
-	defer readDb.Close()
-	writeDb := GetWriteDB()
-	defer writeDb.Close()
+	if rating, ok := newRating(request, dbs, context); !ok {
+		err := "Rating creation failed"
 
-	appRecord, rangeRecord, platformRecord := getBaseFields(request, readDb)
-
-	if rating, ok := newRating(request, appRecord, rangeRecord, platformRecord, readDb, writeDb)
-
-	if !ok {
-		// TODO: Dispatch error response
-
-		return errors.New("Rating creation failed")
+		return responses.ErrorResponse(http.StatusInternalServerError, err, context)
 	}
 
 	return responses.PostResponse(http.StatusOK, context)
@@ -41,31 +37,6 @@ func OptionsRating(context echo.Context) error {
 	endpoints := []responses.Endpoint{responses.Endpoints["PostRatings"]}
 
   	return responses.OptionsResponse(endpoints, context)
-}
-
-func getBaseFields(request *parser.Request, db *gorm.DB) (models.App, models.Range, models.Platform) {
-	appRecord, appErr := models.GetApp(request.App.Key, db)
-
-	if appErr != nil {
-		// TODO: Dispatch error response
-		fmt.Println("Error getting app:", appErr)
-	}
-
-	rangeRecord, rangeErr := models.GetRange(request.Range, db)
-
-	if rangeErr != nil {
-		// TODO: Dispatch error response
-		fmt.Println("Error getting range:", rangeErr)
-	}
-
-	platformRecord, platformErr := models.GetPlatform(request.Platform.Key, db)
-
-	if platformErr != nil {
-		// TODO: Dispatch error response
-		fmt.Println("Error getting platform:", platformErr)
-	}
-
-	return appRecord, rangeRecord, platformRecord
 }
 
 func hasAppUser(request *parser.Request) bool {
@@ -78,6 +49,18 @@ func hasAppUser(request *parser.Request) bool {
 	return true
 }
 
+func addAppUser(request *parser.Request, rating *models.Rating, dbs *databases) {
+	if hasAppUser(request) {
+		appUser, ok := getAppUser(request, dbs); !ok {
+			err := "Error trying to get an app user from the database"
+
+			return responses.ErrorResponse(http.StatusInternalServerError, err, context)
+		}
+
+		rating.AppUserID = appUser.ID
+	}
+}
+
 func hasDevice(request *parser.Request) bool {
 	device := request.Device
 
@@ -86,6 +69,22 @@ func hasDevice(request *parser.Request) bool {
 	}
 
 	return true
+}
+
+func addDevice(request *parser.Request, rating *models.Rating, dbs *databases) {
+	brand, brandOk := getBrand(request, dbs); !brandOk {
+		err := "Error trying to get a brand from the database"
+
+		return responses.ErrorResponse(http.StatusInternalServerError, err, context)
+	}
+
+	device, deviceOk := getDevice(request, brand, platform, dbs); !deviceOk {
+		err := "Error trying to get a device from the database"
+
+		return responses.ErrorResponse(http.StatusInternalServerError, err, context)
+	}
+
+	rating.DeviceID = device.ID
 }
 
 func hasBrowser(request *parser.Request) bool {
@@ -98,12 +97,58 @@ func hasBrowser(request *parser.Request) bool {
 	return true
 }
 
-func getBrowser(request *parser.Request, readDB *gorm.DB, writeDB *gorm.DB) (models.Browser, bool) { // TODO: Move this to models
-	getResult := models.GetBrowser(request.Browser.Name, readDB)
+func addBrowser(request *parser.Request, rating *models.Rating, dbs *databases) {
+	browser, ok := getBrowser(request, dbs); !ok {
+		err := "Error trying to get a browser from the database"
+
+		return responses.ErrorResponse(http.StatusInternalServerError, err, context)
+	}
+
+	rating.BrowserID = browser.ID
+}
+
+func getApp(request *parser.Request, db *gorm.DB, context echo.Context) models.App {
+	app, appErr := models.GetApp(request.App.Key, db)
+
+	if appErr != nil {
+		err := fmt.Sprintf("Error getting app: %s", appErr)
+
+		return responses.ErrorResponse(http.StatusInternalServerError, err, context)
+	}
+
+	return app
+}
+
+func getPlatform(request *parser.Request, db *gorm.DB, context echo.Context) models.Platform {
+	platform, platformErr := models.GetPlatform(request.Platform.Key, db)
+
+	if platformErr != nil {
+		err := fmt.Sprintf("Error getting platform: %s", platform)
+
+		return responses.ErrorResponse(http.StatusInternalServerError, err, context)
+	}
+
+	return platform
+}
+
+func getRange(request *parser.Request, db *gorm.DB, context echo.Context) models.Range {
+	rangeRecord, rangeErr := models.GetRange(request.Range, db)
+
+	if rangeErr != nil {
+		err := fmt.Sprintf("Error getting range: %s", rangeErr)
+
+		return responses.ErrorResponse(http.StatusInternalServerError, err, context)
+	}
+
+	return rangeRecord
+}
+
+func getBrowser(request *parser.Request, dbs *databases) (models.Browser, bool) {
+	getResult := models.GetBrowser(request.Browser.Name, dbs.Read)
 
 	if getResult.RecordNotFound() {
 		browser := Browser{Name: request.Browser.Name}
-		createResult := models.CreateBrowser(&browser, writeDB)
+		createResult := models.CreateBrowser(&browser, dbs.Write)
 
 		if len(createResult.GetErrors()) > 0 {
 			// TODO: Handle errors
@@ -130,12 +175,12 @@ func getBrowser(request *parser.Request, readDB *gorm.DB, writeDB *gorm.DB) (mod
 	return getResult.Value, true
 }
 
-func getBrand(request *parser.Request, readDB *gorm.DB, writeDB *gorm.DB) (models.Brand, bool) { // TODO: Move this to models
-	getResult := models.GetBrand(request.Browser.Name, readDB)
+func getBrand(request *parser.Request, dbs *databases) (models.Brand, bool) {
+	getResult := models.GetBrand(request.Browser.Name, dbs.Read)
 
 	if getResult.RecordNotFound() {
 		brand := Brand{Name: request.Brand}
-		createResult := models.CreateBrand(&brand, writeDB)
+		createResult := models.CreateBrand(&brand, dbs.Write)
 
 		if len(createResult.GetErrors()) > 0 {
 			// TODO: Handle errors
@@ -162,8 +207,8 @@ func getBrand(request *parser.Request, readDB *gorm.DB, writeDB *gorm.DB) (model
 	return getResult.Value, true
 }
 
-func getDevice(request *parser.Request, brandRecord *models.Brand, platformRecord *models.Platform, readDB *gorm.DB, writeDB *gorm.DB) (models.Device, bool) { // TODO: Move this to models
-	getResult := models.GetDevice(request.Device.Name, request.Brand, readDB)
+func getDevice(request *parser.Request, brand *models.Brand, platform *models.Platform, dbs *databases) (models.Device, bool) {
+	getResult := models.GetDevice(request.Device.Name, request.Brand, dbs.Read)
 
 	if getResult.RecordNotFound() {
 		device := Device{
@@ -171,11 +216,11 @@ func getDevice(request *parser.Request, brandRecord *models.Brand, platformRecor
 				ScreenWidth: request.Device.Screen.Width,
 				ScreenHeight: request.Device.Screen.Height,
 				PPI: request.Device.Screen.PPI,
-				BrandID: brandRecord.ID,
-				PlatformID: platformRecord.ID
+				BrandID: brand.ID,
+				PlatformID: platform.ID
 			}
 
-		createResult := models.CreateDevice(&device, writeDB)
+		createResult := models.CreateDevice(&device, dbs.Write)
 
 		if len(createResult.GetErrors()) > 0 {
 			// TODO: Handle errors
@@ -202,8 +247,8 @@ func getDevice(request *parser.Request, brandRecord *models.Brand, platformRecor
 	return getResult.Value, true
 }
 
-func getAppUser(request *parser.Request, readDB *gorm.DB, writeDB *gorm.DB) (models.AppUser, bool) { // TODO: Move this to models
-	getResult := models.GetAppUser(request.User.MiBAID, readDB)
+func getAppUser(request *parser.Request, dbs *databases) (models.AppUser, bool) {
+	getResult := models.GetAppUser(request.User.MiBAID, dbs.Read)
 
 	if getResult.RecordNotFound() {
 		appuser := AppUser{
@@ -212,7 +257,7 @@ func getAppUser(request *parser.Request, readDB *gorm.DB, writeDB *gorm.DB) (mod
 			MiBAID: request.User.MiBAID
 		}
 
-		createResult := models.CreateAppUser(&appuser, writeDB)
+		createResult := models.CreateAppUser(&appuser, dbs.Write)
 
 		if len(createResult.GetErrors()) > 0 {
 			// TODO: Handle errors
@@ -239,74 +284,41 @@ func getAppUser(request *parser.Request, readDB *gorm.DB, writeDB *gorm.DB) (mod
 	return getResult.Value, true
 }
 
-func newRating(request *parser.Request, appRecord *models.App, rangeRecord *models.Range, platformRecord *models.Platform, writeDb *gorm.DB, readDb *gorm.DB) (models.Rating, bool) {
+func newRating(request *parser.Request, dbs *databases, context echo.Context) (models.Rating, bool) {
+	app := getApp(request, dbs.Read, context)
+	platform := getPlatform(request, dbs.Read, context)
+	rangeRecord := getRange(request, dbs.Read, context)
 	hasMessage := false
 
 	if len(request.Comment) > 0 {
 		hasMessage = true
 	}
 
-	rating := Rating{
+	rating := &Rating{
 		Rating: request.Rating,
 		Description: request.Description,
 		AppVersion: request.App.Version,
 		PlatformVersion: request.Platform.Version,
 		BrowserVersion: request.Browser.Version,
 		HasMessage: hasMessage,
-		AppID: appRecord.ID,
+		AppID: app.ID,
 		RangeID: rangeRecord.ID,
-		PlatformID: platformRecord.ID
+		PlatformID: platform.ID
 	}
 
 	if hasAppUser(request) {
-		appUser, ok := getAppUser(request, readDb)
-
-		if !ok {
-			// TODO: Handle error
-			fmt.Println("Could not get AppUser")
-
-			return Rating{}, false
-		}
-
-		rating.AppUserID = appUser.ID
-	}
-
-	if hasBrowser(request) {
-		browser, ok := getBrowser(request, readDb)
-
-		if !ok {
-			// TODO: Handle error
-			fmt.Println("Could not get Browser")
-
-			return Rating{}, false
-		}
-
-		rating.BrowserID = browser.ID
+		addAppUser(request, rating, dbs)
 	}
 
 	if hasDevice(request) {
-		brand, brandOk := getBrand(request, readDb)
-
-		if !brandOk {
-			// TODO: Handle error
-			fmt.Println("Could not get Brand")
-
-			return Rating{}, false
-		}
-
-		device, deviceOk := getDevice(request, brand, platformRecord, readDb)
-
-		if !deviceOk {
-			// TODO: Handle error
-			fmt.Println("Could not get Device")
-
-			return Rating{}, false
-		}
-
-		rating.DeviceID = device.ID
+		addDevice(request, rating, dbs)
 	}
 
-	createResult := models.CreateRating(&rating, writeDb)
+	if hasBrowser(request) {
+		addBrowser(request, rating, dbs)
+	}
+
+	createResult := models.CreateRating(rating, dbs.Write)
 
 	if len(createResult.GetErrors()) > 0 {
 		// TODO: Handle errors

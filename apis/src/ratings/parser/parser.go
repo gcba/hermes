@@ -1,7 +1,7 @@
 package parser
 
 import (
-	"fmt"
+	"net/http"
 
 	"github.com/go-playground/validator"
 	"github.com/labstack/echo"
@@ -62,20 +62,20 @@ func (rv *RequestValidator) Validate(request interface{}) error {
 	return rv.validator.Struct(request)
 }
 
-func Parse(context echo.Context) (*Request, error) {
+func Parse(context echo.Context) *Request {
 	request := new(Request)
 
 	if err := context.Bind(request); err != nil {
-		fmt.Println("Error parsing request:", err) // TODO: Return error response
+		errorMessage := Sprintf("Error parsing request: %s", err.Error())
 
-		return request, err
+		return responses.ErrorResponse(http.StatusBadRequest, errorMessage, context)
 	}
 
 	if err = context.Validate(request); err != nil {
-		fmt.Println("Error validating request:", err) // TODO: Return error response
+		errorMessage := Sprintf("Error validating request: %s", err.Error())
 
-		return request, err
+		return responses.ErrorResponse(http.StatusUnprocessableEntity, errorMessage, context)
 	}
 
-	return request, nil
+	return request
 }
