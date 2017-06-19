@@ -17,27 +17,22 @@ func OptionsRoot(context echo.Context) error {
 		Message: "Request completed successfully"
 	}
 
-	optionsHeaders := responses.Header{}
-
-	postHeaders := responses.Header{
-		ContentType: "application/json; charset=utf-8"
-	}
-
 	optionsRatings := responses.Endpoint{
 		Method: "OPTIONS",
-		Path: "/ratings",
-		Headers: optionsHeaders
+		Path: "/ratings"
 	}
 
 	postRatings := responses.Endpoint{
 		Method: "POST",
 		Path: "/ratings",
-		Headers: postHeaders
+		Headers: &responses.Header{
+			ContentType: "application/json; charset=utf-8"
+		}
 	}
 
 	response := responses.Options{
 		Meta:  meta
-		Endpoints: []Endpoint{optionsRatings, postRatings}
+		Endpoints: []responses.Endpoint{optionsRatings, postRatings}
 	}
 
   	return context.JSON(http.StatusOK, &response)

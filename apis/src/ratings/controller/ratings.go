@@ -43,19 +43,17 @@ func OptionsRating(context echo.Context) error {
 		Message: "Request completed successfully"
 	}
 
-	headers := responses.Header{
-		ContentType: "application/json; charset=utf-8"
-	}
-
 	postRatings := responses.Endpoint{
 		Method: "POST",
 		Path: "/ratings",
-		Headers: headers
+		Headers: &responses.Header{
+			ContentType: "application/json; charset=utf-8"
+		}
 	}
 
 	response := responses.Options{
 		Meta:  meta
-		Endpoints: []Endpoint{postRatings}
+		Endpoints: []responses.Endpoint{postRatings}
 	}
 
   	return context.JSON(http.StatusOK, &response)
