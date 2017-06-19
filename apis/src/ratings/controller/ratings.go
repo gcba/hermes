@@ -38,13 +38,8 @@ func PostRating(context echo.Context) error {
 }
 
 func OptionsRating(context echo.Context) error {
-	meta := responses.Meta{
-		Code: 200,
-		Message: "Request completed successfully"
-	}
-
 	response := responses.Options{
-		Meta:  meta
+		Meta:  responses.Response200,
 		Endpoints: []responses.Endpoint{responses.PostRatings}
 	}
 
