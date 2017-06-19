@@ -1,5 +1,5 @@
 // Place your settings in this file to overwrite default and user settings.
 {
-    "go.gopath": "/Users/ritazerrizuela/go/src",
+    "go.gopath": "/Users/ritazerrizuela/go",
     "go.goroot": "/usr/local"
 }
