@@ -49,8 +49,11 @@ Crear una nueva calificación (que puede incluir un comentario o no)
     "rating": int,
     "description": string,
     "comment": string, // optional
-    "app": string,
     "range": string,
+    "app": {
+        "key:" string,
+        "version": string
+    },
     "user": { // optional
         "name": string,
         "email": string,
