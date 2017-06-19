@@ -34,7 +34,7 @@ func PostRating(context echo.Context) error {
 		return errors.New("Rating creation failed")
 	}
 
-	return context.JSON(http.StatusOK, &rating)
+	return responses.PostResponse(http.StatusOK, context)
 }
 
 func OptionsRating(context echo.Context) error {
