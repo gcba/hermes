@@ -6,6 +6,6 @@ type Meta struct {
 }
 
 type Error struct {
-	Type        int    `json:"type"`
+	Type        string `json:"type"`
 	Description string `json:"description"`
 }
