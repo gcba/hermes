@@ -71,5 +71,11 @@ func Parse(context echo.Context) (*Request, error) {
 		return request, err
 	}
 
+	if err = context.Validate(request); err != nil {
+		fmt.Println("Error validating request:", err) // TODO: Return error response
+
+		return request, err
+	}
+
 	return request, nil
 }
