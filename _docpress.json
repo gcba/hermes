@@ -678,6 +678,11 @@
                     "title": "API de calificaciones",
                     "depth": 3,
                     "id": "api-de-calificaciones"
+                  },
+                  {
+                    "title": "Admin",
+                    "depth": 3,
+                    "id": "admin"
                   }
                 ]
               }
@@ -1352,6 +1357,11 @@
               "title": "API de calificaciones",
               "depth": 3,
               "id": "api-de-calificaciones"
+            },
+            {
+              "title": "Admin",
+              "depth": 3,
+              "id": "admin"
             }
           ]
         }
