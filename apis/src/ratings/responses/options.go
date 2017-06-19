@@ -12,13 +12,23 @@ type {
 	}
 
 	Options struct {
-		Meta Meta `json:"meta"`
+		Meta      Meta       `json:"meta"`
 		Endpoints []Endpoint `json:"endpoints"`
 	}
 }
 
-const OptionsRating = Endpoint{
+const OptionsRoot = Endpoint{
 	Method: "OPTIONS",
+	Path: "/"
+}
+
+const OptionsRatings = Endpoint{
+	Method: "OPTIONS",
+	Path: "/ratings"
+}
+
+const PostRatings = Endpoint{
+	Method: "POST",
 	Path: "/ratings",
 	Headers: &Headers{
 		ContentType: "application/json; charset=utf-8"
