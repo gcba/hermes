@@ -16,3 +16,5 @@ import:
   version: ^2.3.0
 - package: github.com/go-playground/validator
   version: ^9.4.0
+- package: github.com/go-playground/universal-translator
+  version: ^0.16.0
