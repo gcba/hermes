@@ -354,9 +354,9 @@
                     "id": "endpoints"
                   },
                   {
-                    "title": "Request",
+                    "title": "Requests",
                     "depth": 3,
-                    "id": "request"
+                    "id": "requests"
                   },
                   {
                     "title": "Responses",
@@ -1038,9 +1038,9 @@
               "id": "endpoints"
             },
             {
-              "title": "Request",
+              "title": "Requests",
               "depth": 3,
-              "id": "request"
+              "id": "requests"
             },
             {
               "title": "Responses",

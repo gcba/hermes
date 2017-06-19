@@ -47,7 +47,7 @@
                         </li>
                         <li class="heading-item -depth-3"><a class="hlink link-endpoints" href="#endpoints">Endpoints</a>
                         </li>
-                        <li class="heading-item -depth-3"><a class="hlink link-request" href="#request">Request</a>
+                        <li class="heading-item -depth-3"><a class="hlink link-requests" href="#requests">Requests</a>
                         </li>
                         <li class="heading-item -depth-3"><a class="hlink link-responses" href="#responses">Responses</a>
                         </li>
@@ -113,7 +113,7 @@
 <p>Crear una nueva calificaci&#xF3;n (que puede incluir un comentario o no)</p>
 <p><code>OPTIONS /ratings</code></p>
 <p>Obtener la informaci&#xF3;n necesaria (campos, tipos de datos, etc) necesaria para hacer un POST exitoso al endpoint.</p>
-<h3 id="request">Request</h3>
+<h3 id="requests">Requests</h3>
 <p><code>POST /ratings</code>: s&#xF3;lo JSON body. Por lo tanto se requerir&#xE1; el header <code>Content-Type: application/json</code>.</p>
 <pre><code class="lang-json">{
     &quot;rating&quot;: int,
@@ -151,23 +151,39 @@
 <h3 id="responses">Responses</h3>
 <h4 id="post">POST</h4>
 <pre><code class="lang-json">{
-   &quot;meta&quot;: {
-       ...
+   <span class="hljs-attr">&quot;meta&quot;</span>: {
+       <span class="hljs-attr">&quot;code&quot;</span>: ...,
+       <span class="hljs-attr">&quot;message&quot;</span>: ...
    }
 }
 </code></pre>
 <h4 id="options">OPTIONS</h4>
 <pre><code class="lang-json">{
    &quot;meta&quot;: {
-       ...
+       &quot;code&quot;: ...,
+       &quot;message&quot;: ...
    },
-   &quot;methods&quot;: [
+   &quot;endpoints&quot;: [
        {
-           &quot;verb&quot;: ...,
-           &quot;endpoint&quot;: ...,
+           &quot;method&quot;: ...,
+           &quot;path&quot;: ...,
            &quot;headers&quot;: {
                ...
            }
+       },
+   ]
+}
+</code></pre>
+<h4 id="errores">Errores</h4>
+<pre><code class="lang-json">{
+   <span class="hljs-attr">&quot;meta&quot;</span>: {
+       <span class="hljs-attr">&quot;code&quot;</span>: ...,
+       <span class="hljs-attr">&quot;message&quot;</span>: ...
+   },
+   <span class="hljs-attr">&quot;errors&quot;</span>: [
+       {
+           <span class="hljs-attr">&quot;type&quot;</span>: ...,
+           <span class="hljs-attr">&quot;description&quot;</span>: ...
        },
    ]
 }
