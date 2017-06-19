@@ -16,7 +16,7 @@ type {
 	}
 
 	Options struct {
-		Meta      Meta       `json:"meta"`
+		Meta      meta       `json:"meta"`
 		Endpoints []Endpoint `json:"endpoints"`
 	}
 }

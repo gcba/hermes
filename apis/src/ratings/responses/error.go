@@ -7,7 +7,7 @@ type (
 	}
 
 	Error struct {
-		Meta   Meta        `json:"meta"`
+		Meta   meta        `json:"meta"`
 		Errors []ErrorType `json:"errors"`
 	}
 )

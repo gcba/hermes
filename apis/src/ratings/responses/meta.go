@@ -4,58 +4,58 @@ import (
 	"net/http"
 )
 
-type Meta struct {
+type meta struct {
 	Code    int    `json:"code"`
 	Message string `json:"message"`
 }
 
 const (
-	meta200 = Meta{
+	meta200 = meta{
 		Code: http.StatusOK,
 		Message: "OK"
 	}
 
-	meta201 = Meta{
+	meta201 = meta{
 		Code: http.StatusCreated,
 		Message: "Created"
 	}
 
-	meta400 = Meta{
+	meta400 = meta{
 		Code: http.StatusBadRequest,
 		Message: "Bad Request"
 	}
 
-	meta401 = Meta{
+	meta401 = meta{
 		Code: http.StatusUnauthorized,
 		Message: "Unauthorized"
 	}
 
-	meta403 = Meta{
+	meta403 = meta{
 		Code: http.StatusForbidden,
 		Message: "Forbidden"
 	}
 
-	meta404 = Meta{
+	meta404 = meta{
 		Code: http.StatusNotFound,
 		Message: "Not Found"
 	}
 
-	meta422 = Meta{
+	meta422 = meta{
 		Code: http.StatusUnprocessableEntity,
 		Message: "Unprocessable Entity"
 	}
 
-	meta500 = Meta{
+	meta500 = meta{
 		Code: http.StatusInternalServerError,
 		Message: "Internal Server Error"
 	}
 
-	meta501 = Meta{
+	meta501 = meta{
 		Code: http.NotImplemented,
 		Message: "Not Implemented"
 	}
 
-	metas = map[int]Meta{
+	metas = map[int]meta{
 		http.StatusOK: meta200,
 		http.StatusCreated: meta201,
 		http.StatusBadRequest: meta400,
