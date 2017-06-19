@@ -17,20 +17,26 @@ type {
 	}
 }
 
-const OptionsRoot = Endpoint{
-	Method: "OPTIONS",
-	Path: "/"
-}
-
-const OptionsRatings = Endpoint{
-	Method: "OPTIONS",
-	Path: "/ratings"
-}
-
-const PostRatings = Endpoint{
-	Method: "POST",
-	Path: "/ratings",
-	Headers: &headers{
-		ContentType: "application/json; charset=utf-8"
+const (
+	OptionsRoot = Endpoint{
+		Method: "OPTIONS",
+		Path: "/"
 	}
+
+	OptionsRatings = Endpoint{
+		Method: "OPTIONS",
+		Path: "/ratings"
+	}
+
+	PostRatings = Endpoint{
+		Method: "POST",
+		Path: "/ratings",
+		Headers: &headers{
+			ContentType: "application/json; charset=utf-8"
+		}
+	}
+)
+
+func OptionsResponse(status int) *Options {
+
 }
