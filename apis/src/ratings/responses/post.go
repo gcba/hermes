@@ -4,6 +4,6 @@ type Post struct {
 	Meta Meta `json:"meta"`
 }
 
-func PostResponse() {
+func PostResponse(status int) *Post {
 
 }
