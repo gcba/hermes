@@ -1,5 +1,9 @@
 package responses
 
+import (
+	"net/http"
+)
+
 type {
 	headers struct {
 		ContentType string `json:"Content-Type"`
@@ -45,9 +49,9 @@ const (
 
 func OptionsResponse(endpoints []Endpoint, context echo.Context) error {
 	response := Options{
-		Meta: Meta200,
+		Meta: metas[http.StatusOk],
 		Endpoints: endpoints
 	}
 
-  	return context.JSON(Meta200.Code, &response)
+  	return context.JSON(http.StatusOk, &response)
 }

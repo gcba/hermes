@@ -10,48 +10,60 @@ type Meta struct {
 }
 
 const (
-	Meta200 = Meta{
+	meta200 = Meta{
 		Code: http.StatusOK,
 		Message: "OK"
 	}
 
-	Meta201 = Meta{
+	meta201 = Meta{
 		Code: http.StatusCreated,
 		Message: "Created"
 	}
 
-	Meta400 = Meta{
+	meta400 = Meta{
 		Code: http.StatusBadRequest,
 		Message: "Bad Request"
 	}
 
-	Meta401 = Meta{
+	meta401 = Meta{
 		Code: http.StatusUnauthorized,
 		Message: "Unauthorized"
 	}
 
-	Meta403 = Meta{
+	meta403 = Meta{
 		Code: http.StatusForbidden,
 		Message: "Forbidden"
 	}
 
-	Meta404 = Meta{
+	meta404 = Meta{
 		Code: http.StatusNotFound,
 		Message: "Not Found"
 	}
 
-	Meta422 = Meta{
+	meta422 = Meta{
 		Code: http.StatusUnprocessableEntity,
 		Message: "Unprocessable Entity"
 	}
 
-	Meta500 = Meta{
+	meta500 = Meta{
 		Code: http.StatusInternalServerError,
 		Message: "Internal Server Error"
 	}
 
-	Meta501 = Meta{
+	meta501 = Meta{
 		Code: http.NotImplemented,
 		Message: "Not Implemented"
+	}
+
+	metas = map[int]Meta{
+		http.StatusOK: meta200,
+		http.StatusCreated: meta201,
+		http.StatusBadRequest: meta400,
+		http.StatusUnauthorized: meta401,
+		http.StatusForbidden: meta403,
+		http.StatusNotFound: meta404,
+		http.StatusUnprocessableEntity: meta422,
+		http.StatusInternalServerError: meta500,
+		http.NotImplemented: meta501
 	}
 )
