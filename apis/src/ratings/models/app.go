@@ -16,14 +16,8 @@ type App struct {
 }
 
 // GetApp gets an app by key
-func GetApp(key string, db *gorm.DB) (App, error) {
+func GetApp(key string, db *gorm.DB) *gorm.DB {
 	var result App
 
-	query := "SELECT id FROM apps WHERE key = ?"
-
-	if err := db.Raw(query, key).Scan(&result).Error; err != nil {
-		return App{}, err
-	}
-
-	return result, nil
+	return db.Where(&App{Key: key}).First(&result)
 }

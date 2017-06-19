@@ -1,5 +1,5 @@
-hash: 2a396201bdf48c6b9a68881d61e358420802af6b2ae55c5ca9efb0c59dac2e92
-updated: 2017-06-19T10:46:46.130072827-03:00
+hash: 83a75ea970d3b1be1d553ecbb0c09a5adb04cafb290cccae1a75d8a489792a82
+updated: 2017-06-19T17:43:47.619123176-03:00
 imports:
 - name: github.com/dchest/uniuri
   version: 8902c56451e9b58ff940bbe5fec35d5f9c04584a
@@ -16,6 +16,12 @@ imports:
   version: a3b1354551a26449fbe05f5d855937f6e7acbd71
 - name: github.com/facebookgo/stats
   version: 1b76add642e42c6ffba7211ad7b3939ce654526e
+- name: github.com/go-playground/locales
+  version: 1e5f1161c6416a5ff48840eb8724a394e48cc534
+  subpackages:
+  - currency
+- name: github.com/go-playground/universal-translator
+  version: b32fa301c9fe55953584134cb6853a13c87ec0a1
 - name: github.com/go-playground/validator
   version: fb68f39656d7ebf8aa339ad4917aa0c260ecc237
 - name: github.com/jinzhu/gorm

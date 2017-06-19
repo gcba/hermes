@@ -14,15 +14,15 @@ type Brand struct {
 }
 
 // GetBrand gets a brand by name
-func GetBrand(name string, db *gorm.DB) *DB {
+func GetBrand(name string, db *gorm.DB) *gorm.DB {
 	var result Brand
 
 	query := "SELECT id FROM brands WHERE name LIKE ?" // TODO: Set ILIKE
 
-	return db.Raw(query, name).Scan(&result)∂
+	return db.Raw(query, name).Scan(&result)
 }
 
 // CreateBrand creates a new brand
-func CreateBrand(brand *Brand, db *gorm.DB) *DB {
+func CreateBrand(brand *Brand, db *gorm.DB) *gorm.DB {
 	return db.Create(brand)
 }
