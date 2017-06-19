@@ -22,15 +22,17 @@ Implementar el sistema de responses y manejo de errores en la API de calificacio
 
 4. Agregar middlewares de seguridad
 
-5. Usar NULL como valor por defecto en los campos nulleables
+5. Agregar validaciones a las requests
 
-6. Agregar tests de Range
+6. Usar NULL como valor por defecto en los campos nulleables
 
-7. Agregar tests del endpoint POST /ratings
+7. Agregar tests de Range
 
-8. Agregar tests del endpoint OPTIONS /ratings
+8. Agregar tests del endpoint POST /ratings
 
-9. Agregar tests del endpoint OPTIONS /
+9. Agregar tests del endpoint OPTIONS /ratings
+
+10. Agregar tests del endpoint OPTIONS /
 
 ### Admin
 
