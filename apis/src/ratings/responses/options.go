@@ -1,14 +1,14 @@
 package responses
 
 type {
-	Headers struct {
+	headers struct {
 		ContentType string `json:"Content-Type"`
 	}
 
 	Endpoint struct {
 		Method  string   `json:"method"`
 		Path    string   `json:"path"`
-		Headers *Headers `json:"headers"`
+		Headers *headers `json:"headers"`
 	}
 
 	Options struct {
@@ -30,7 +30,7 @@ const OptionsRatings = Endpoint{
 const PostRatings = Endpoint{
 	Method: "POST",
 	Path: "/ratings",
-	Headers: &Headers{
+	Headers: &headers{
 		ContentType: "application/json; charset=utf-8"
 	}
 }
