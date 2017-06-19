@@ -25,11 +25,6 @@ const (
 		Message: "Bad Request"
 	}
 
-	meta401 = meta{
-		Code: http.StatusUnauthorized,
-		Message: "Unauthorized"
-	}
-
 	meta403 = meta{
 		Code: http.StatusForbidden,
 		Message: "Forbidden"
@@ -59,7 +54,6 @@ const (
 		http.StatusOK: meta200,
 		http.StatusCreated: meta201,
 		http.StatusBadRequest: meta400,
-		http.StatusUnauthorized: meta401,
 		http.StatusForbidden: meta403,
 		http.StatusNotFound: meta404,
 		http.StatusUnprocessableEntity: meta422,
