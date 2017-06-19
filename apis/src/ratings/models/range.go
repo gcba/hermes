@@ -17,14 +17,8 @@ type Range struct {
 }
 
 // GetRange gets a range by key
-func GetRange(key string, db *gorm.DB) (Range, error) {
+func GetRange(key string, db *gorm.DB) *gorm.DB {
 	var result Range
 
-	query := "SELECT id FROM ranges WHERE key = ?"
-
-	if err := db.Raw(query, key).Scan(&result).Error; err != nil {
-		return Range{}, err
-	}
-
-	return result, nil
+	return db.Where(&Range{Key: key}).First(&result)
 }

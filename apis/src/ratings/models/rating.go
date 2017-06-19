@@ -25,6 +25,6 @@ type Rating struct {
 }
 
 // CreateRating creates a new rating
-func CreateRating(rating *Rating, db *gorm.DB) *DB {
+func CreateRating(rating *Rating, db *gorm.DB) *gorm.DB {
 	return db.Create(rating)
 }

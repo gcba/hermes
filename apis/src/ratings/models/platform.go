@@ -15,14 +15,8 @@ type Platform struct {
 }
 
 // GetPlatform gets a platform by key
-func GetPlatform(name string, db *gorm.DB) (Platform, error) {
+func GetPlatform(key string, db *gorm.DB) *gorm.DB {
 	var result Platform
 
-	query := "SELECT id FROM platforms WHERE key = ?" // TODO: Set ILIKE
-
-	if err := db.Raw(query, name).Scan(&result).Error; err != nil {
-		return Platform{}, err
-	}
-
-	return result, nil
+	return db.Where(&Platform{Key: key}).First(&result)
 }

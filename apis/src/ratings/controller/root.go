@@ -1,21 +1,15 @@
 package controller
 
 import (
-	"fmt"
-	"net/http"
+	"ratings/responses"
 
-	"ratings/models"
-	"ratings/parser"
-
-	"github.com/jinzhu/gorm"
 	"github.com/labstack/echo"
 )
 
 func OptionsRoot(context echo.Context) error {
 	endpoints := []responses.Endpoint{
 		responses.Endpoints["OptionsRatings"],
-		responses.Endpoints["PostRatings"]
-	}
+		responses.Endpoints["PostRatings"]}
 
-  	return responses.OptionsResponse(endpoints, context)
+	return responses.OptionsResponse(endpoints, context)
 }

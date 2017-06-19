@@ -14,7 +14,7 @@ type Browser struct {
 }
 
 // GetBrowser gets a browser by name
-func GetBrowser(name string, db *gorm.DB) *DB {
+func GetBrowser(name string, db *gorm.DB) *gorm.DB {
 	var result Browser
 
 	query := "SELECT id FROM browsers WHERE name LIKE ?" // TODO: Set ILIKE
@@ -23,6 +23,6 @@ func GetBrowser(name string, db *gorm.DB) *DB {
 }
 
 // CreateBrowser creates a new browser
-func CreateBrowser(browser *Browser, db *gorm.DB) *DB {
+func CreateBrowser(browser *Browser, db *gorm.DB) *gorm.DB {
 	return db.Create(browser)
 }

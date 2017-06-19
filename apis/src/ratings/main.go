@@ -4,7 +4,6 @@ import (
 	"fmt"
 
 	"ratings/controller"
-	"ratings/parser"
 
 	"github.com/facebookgo/grace/gracehttp"
 	"github.com/go-playground/validator"
@@ -13,6 +12,14 @@ import (
 	"github.com/labstack/echo/middleware"
 )
 
+type RequestValidator struct {
+	validator *validator.Validate
+}
+
+func (rv *RequestValidator) Validate(request interface{}) error {
+	return rv.validator.Struct(request)
+}
+
 func main() {
 	e := echo.New()
 	port := "3000"
@@ -20,7 +27,7 @@ func main() {
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
 
-	e.Validator = &parser.RequestValidator{validator: validator.New()}
+	e.Validator = &RequestValidator{validator: validator.New()} // TODO: Move this to parser.AttachValidator()
 
 	e.OPTIONS("/", controller.OptionsRoot)
 	e.OPTIONS("/ratings", controller.OptionsRatings)

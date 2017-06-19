@@ -2,9 +2,11 @@ package responses
 
 import (
 	"net/http"
+
+	"github.com/labstack/echo"
 )
 
-type {
+type (
 	headers struct {
 		ContentType string `json:"Content-Type"`
 	}
@@ -19,39 +21,33 @@ type {
 		Meta      meta       `json:"meta"`
 		Endpoints []Endpoint `json:"endpoints"`
 	}
-}
+)
 
-const (
+var (
 	optionsRoot = Endpoint{
 		Method: "OPTIONS",
-		Path: "/"
-	}
+		Path:   "/"}
 
 	optionsRatings = Endpoint{
 		Method: "OPTIONS",
-		Path: "/ratings"
-	}
+		Path:   "/ratings"}
 
 	postRatings = Endpoint{
 		Method: "POST",
-		Path: "/ratings",
+		Path:   "/ratings",
 		Headers: &headers{
-			ContentType: "application/json; charset=utf-8"
-		}
-	}
+			ContentType: "application/json; charset=utf-8"}}
 
 	Endpoints = map[string]Endpoint{
-		"OptionsRoot": optionsRoot,
+		"OptionsRoot":    optionsRoot,
 		"OptionsRatings": optionsRatings,
-		"PostRatings": postRatings
-	}
+		"PostRatings":    postRatings}
 )
 
 func OptionsResponse(endpoints []Endpoint, context echo.Context) error {
 	response := Options{
-		Meta: metas[http.StatusOk],
-		Endpoints: endpoints
-	}
+		Meta:      metas[http.StatusOK],
+		Endpoints: endpoints}
 
-  	return context.JSON(http.StatusOk, &response)
+	return context.JSON(http.StatusOK, &response)
 }
