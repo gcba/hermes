@@ -13,7 +13,7 @@ import (
 
 func OptionsRoot(context echo.Context) error {
 	response := responses.Options{
-		Meta:  responses.Response200,
+		Meta:  responses.Meta200,
 		Endpoints: []responses.Endpoint{
 			responses.OptionsRatings,
 			responses.PostRatings

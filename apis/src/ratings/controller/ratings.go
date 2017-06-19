@@ -39,7 +39,7 @@ func PostRating(context echo.Context) error {
 
 func OptionsRating(context echo.Context) error {
 	response := responses.Options{
-		Meta:  responses.Response200,
+		Meta:  responses.Meta200,
 		Endpoints: []responses.Endpoint{responses.PostRatings}
 	}
 

@@ -5,47 +5,47 @@ type Meta struct {
 	Message string `json:"message"`
 }
 
-const Response200 = Meta{
+const Meta200 = Meta{
 	Code: 200, // OK
 	Message: "OK"
 }
 
-const Response201 = Meta{
+const Meta201 = Meta{
 	Code: 201, // Created
 	Message: "Created"
 }
 
-const Response400 = Meta{
+const Meta400 = Meta{
 	Code: 400, // Bad Request
 	Message: "Bad Request"
 }
 
-const Response401 = Meta{
+const Meta401 = Meta{
 	Code: 401, // Unauthorized
 	Message: "Unauthorized"
 }
 
-const Response403 = Meta{
+const Meta403 = Meta{
 	Code: 403, // Forbidden
 	Message: "Forbidden"
 }
 
-const Response404 = Meta{
+const Meta404 = Meta{
 	Code: 404, // Not Found
 	Message: "Not Found"
 }
 
-const Response422 = Meta{
+const Meta422 = Meta{
 	Code: 422, // Unprocessable Entity
 	Message: "Unprocessable Entity"
 }
 
-const Response500 = Meta{
+const Meta500 = Meta{
 	Code: 500, // Internal Server Error
 	Message: "Internal Server Error"
 }
 
-const Response501 = Meta{
+const Meta501 = Meta{
 	Code: 501, // Not Implemented
 	Message: "Not Implemented"
 }
