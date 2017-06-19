@@ -652,6 +652,36 @@
                 ]
               }
             ]
+          },
+          {
+            "title": "Sprint 4",
+            "source": "docs/desarrollo/sprint4.md",
+            "url": "desarrollo/sprint4.html",
+            "slug": "desarrollosprint4",
+            "headings": [
+              {
+                "title": "Días",
+                "depth": 2,
+                "id": "dias"
+              },
+              {
+                "title": "Objetivo",
+                "depth": 2,
+                "id": "objetivo"
+              },
+              {
+                "title": "Tareas",
+                "depth": 2,
+                "id": "tareas",
+                "headings": [
+                  {
+                    "title": "API de calificaciones",
+                    "depth": 3,
+                    "id": "api-de-calificaciones"
+                  }
+                ]
+              }
+            ]
           }
         ]
       }
@@ -1296,6 +1326,36 @@
           ]
         }
       ]
+    },
+    "desarrollo/sprint4.html": {
+      "source": "docs/desarrollo/sprint4.md",
+      "title": "Sprint 4 - Hermes",
+      "pageTitle": "Sprint 4",
+      "slug": "desarrollosprint4",
+      "headings": [
+        {
+          "title": "Días",
+          "depth": 2,
+          "id": "dias"
+        },
+        {
+          "title": "Objetivo",
+          "depth": 2,
+          "id": "objetivo"
+        },
+        {
+          "title": "Tareas",
+          "depth": 2,
+          "id": "tareas",
+          "headings": [
+            {
+              "title": "API de calificaciones",
+              "depth": 3,
+              "id": "api-de-calificaciones"
+            }
+          ]
+        }
+      ]
     }
   },
   "sources": {
@@ -1313,6 +1373,7 @@
     "docs/desarrollo/sprint1.md": "desarrollo/sprint1.html",
     "docs/desarrollo/sprint2.md": "desarrollo/sprint2.html",
     "docs/desarrollo/sprint3.md": "desarrollo/sprint3.html",
+    "docs/desarrollo/sprint4.md": "desarrollo/sprint4.html",
     "docs/images/schema.png": "images/schema.png"
   }
 }
