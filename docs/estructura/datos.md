@@ -267,4 +267,4 @@ Los campos `created_at` y `modified_at` son creados automáticamente por Laravel
 
 ## Borrado
 
-Será físico, en todos los casos.
+Será físico en todos los casos.
