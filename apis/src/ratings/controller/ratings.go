@@ -38,12 +38,9 @@ func PostRating(context echo.Context) error {
 }
 
 func OptionsRating(context echo.Context) error {
-	response := responses.Options{
-		Meta:  responses.Meta200,
-		Endpoints: []responses.Endpoint{responses.PostRatings}
-	}
+	endpoints := []responses.Endpoint{responses.Endpoints["postRatings"]}
 
-  	return context.JSON(http.StatusOK, &response)
+  	return responses.OptionsResponse(endpoints, context)
 }
 
 func getBaseFields(request *parser.Request, db *gorm.DB) (models.App, models.Range, models.Platform) {

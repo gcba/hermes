@@ -18,25 +18,36 @@ type {
 }
 
 const (
-	OptionsRoot = Endpoint{
+	optionsRoot = Endpoint{
 		Method: "OPTIONS",
 		Path: "/"
 	}
 
-	OptionsRatings = Endpoint{
+	optionsRatings = Endpoint{
 		Method: "OPTIONS",
 		Path: "/ratings"
 	}
 
-	PostRatings = Endpoint{
+	postRatings = Endpoint{
 		Method: "POST",
 		Path: "/ratings",
 		Headers: &headers{
 			ContentType: "application/json; charset=utf-8"
 		}
 	}
+
+	Endpoints = map[string]Endpoint{
+		"optionsRoot": optionsRoot,
+		"optionsRatings": optionsRatings,
+		"postRatings": postRatings
+	}
 )
 
-func OptionsResponse(status int) *Options {
+func OptionsResponse(endpoints []Endpoint, context echo.Context) error {
+	response := Options{
+		Meta: Meta200,
+		Endpoints: endpoints
+	}
 
+  	return context.JSON(Meta200.Code, &response)
 }

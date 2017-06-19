@@ -12,13 +12,10 @@ import (
 )
 
 func OptionsRoot(context echo.Context) error {
-	response := responses.Options{
-		Meta:  responses.Meta200,
-		Endpoints: []responses.Endpoint{
-			responses.OptionsRatings,
-			responses.PostRatings
-		}
+	endpoints := []responses.Endpoint{
+		responses.Endpoints["optionsRatings"],
+		responses.Endpoints["postRatings"]
 	}
 
-  	return context.JSON(http.StatusOK, &response)
+  	return responses.OptionsResponse(endpoints, context)
 }
