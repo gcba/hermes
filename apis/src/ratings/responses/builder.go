@@ -1,17 +1,11 @@
 package responses
 
-import (
-	"fmt"
-	"net/http"
-
-	"ratings/models"
-	"ratings/parser"
-
-	"github.com/jinzhu/gorm"
-	"github.com/labstack/echo"
-)
-
 type Meta struct {
-	Code int `json:"code"`
+	Code    int    `json:"code"`
 	Message string `json:"message"`
+}
+
+type Error struct {
+	Type        int    `json:"type"`
+	Description string `json:"description"`
 }
