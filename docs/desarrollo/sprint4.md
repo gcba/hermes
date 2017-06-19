@@ -42,7 +42,7 @@ Implementar el sistema de responses y manejo de errores en la API de calificacio
 
 4. Implementar los permisos de Browser
 
-5. implementar los permisos de Device
+5. Implementar los permisos de Device
 
 6. Implementar los permisos de Message
 
