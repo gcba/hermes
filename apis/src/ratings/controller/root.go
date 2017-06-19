@@ -23,21 +23,21 @@ func OptionsRoot(context echo.Context) error {
 		ContentType: "application/json; charset=utf-8"
 	}
 
-	optionsRatings := responses.Method{
-		Verb: "OPTIONS",
-		Endpoint: "/ratings",
+	optionsRatings := responses.Endpoint{
+		Method: "OPTIONS",
+		Path: "/ratings",
 		Headers: optionsHeaders
 	}
 
-	postRatings := responses.Method{
-		Verb: "POST",
-		Endpoint: "/ratings",
+	postRatings := responses.Endpoint{
+		Method: "POST",
+		Path: "/ratings",
 		Headers: postHeaders
 	}
 
 	response := responses.Options{
 		Meta:  meta
-		Methods: []Method{optionsRatings, postRatings}
+		Endpoints: []Endpoint{optionsRatings, postRatings}
 	}
 
   	return context.JSON(http.StatusOK, &response)

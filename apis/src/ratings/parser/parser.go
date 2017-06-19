@@ -3,6 +3,7 @@ package parser
 import (
 	"fmt"
 
+	"github.com/go-playground/validator"
 	"github.com/labstack/echo"
 )
 
@@ -51,13 +52,27 @@ type (
 		Device      *device  `json:"device";validate:"omitempty"`
 		Browser     *browser `json:"browser";validate:"omitempty"`
 	}
+
+	RequestValidator struct {
+		validator *validator.Validate
+	}
 )
+
+func (rv *RequestValidator) Validate(request interface{}) error {
+	return rv.validator.Struct(request)
+}
 
 func Parse(context echo.Context) (*Request, error) {
 	request := new(Request)
 
 	if err := context.Bind(request); err != nil {
-		fmt.Println("Error parsing request:", err)
+		fmt.Println("Error parsing request:", err) // TODO: Return error response
+
+		return request, err
+	}
+
+	if err = context.Validate(request); err != nil {
+		fmt.Println("Error validating request:", err) // TODO: Return error response
 
 		return request, err
 	}
