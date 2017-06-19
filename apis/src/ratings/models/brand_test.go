@@ -1,7 +1,7 @@
 package models
 
 import (
-	"ratings/controller"
+	"ratings/database"
 	"testing"
 
 	"github.com/dchest/uniuri"
@@ -10,7 +10,7 @@ import (
 )
 
 func TestCreateBrand(t *testing.T) {
-	db := controller.GetWriteDB()
+	db := database.GetWriteDB()
 	defer db.Close()
 
 	name := uniuri.New()
@@ -27,9 +27,9 @@ func TestCreateBrand(t *testing.T) {
 }
 
 func TestGetBrand(t *testing.T) {
-	writeDb := controller.GetWriteDB()
+	writeDb := database.GetWriteDB()
 	defer writeDb.Close()
-	readDb := controller.GetReadDB()
+	readDb := database.GetReadDB()
 	defer readDb.Close()
 
 	name := uniuri.New()

@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net/http"
 
+	"ratings/DB"
 	"ratings/models"
 	"ratings/parser"
 	"ratings/responses"
@@ -21,8 +22,8 @@ type databases struct {
 // PostRatings saves a new rating to the database
 func PostRatings(context echo.Context) error {
 	request := parser.Parse(context)
-	readDB := GetReadDB()
-	writeDB := GetWriteDB()
+	readDB := DB.GetReadDB()
+	writeDB := DB.GetWriteDB()
 	dbs := &databases{Read: readDB, Write: writeDB}
 
 	defer readDB.Close()

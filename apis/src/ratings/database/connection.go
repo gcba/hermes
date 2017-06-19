@@ -1,4 +1,4 @@
-package controller
+package database
 
 import (
 	"fmt"
@@ -11,19 +11,19 @@ import (
 )
 
 // Load environment
-var env string = os.Getenv("API_RATINGS_ENV")
+var env = os.Getenv("API_RATINGS_ENV")
 
 // Load read database settings
-var readDBName string = os.Getenv("API_RATINGS_READDB_NAME")
-var readDBHost string = os.Getenv("API_RATINGS_READDB_HOST")
-var readDBUser string = os.Getenv("API_RATINGS_READDB_USER")
-var readDBPassword string = os.Getenv("API_RATINGS_READDB_PASSWORD")
+var readDBName = os.Getenv("API_RATINGS_READDB_NAME")
+var readDBHost = os.Getenv("API_RATINGS_READDB_HOST")
+var readDBUser = os.Getenv("API_RATINGS_READDB_USER")
+var readDBPassword = os.Getenv("API_RATINGS_READDB_PASSWORD")
 
 // Load write database settings
-var writeDBName string = os.Getenv("API_RATINGS_WRITEDB_NAME")
-var writeDBHost string = os.Getenv("API_RATINGS_WRITEDB_HOST")
-var writeDBUser string = os.Getenv("API_RATINGS_WRITEDB_USER")
-var writeDBPassword string = os.Getenv("API_RATINGS_WRITEDB_PASSWORD")
+var writeDBName = os.Getenv("API_RATINGS_WRITEDB_NAME")
+var writeDBHost = os.Getenv("API_RATINGS_WRITEDB_HOST")
+var writeDBUser = os.Getenv("API_RATINGS_WRITEDB_USER")
+var writeDBPassword = os.Getenv("API_RATINGS_WRITEDB_PASSWORD")
 
 func connectDB(driver string, credentials string) *gorm.DB {
 	db, err := gorm.Open(driver, credentials)

@@ -1,21 +1,21 @@
 package models
 
 import (
-	"ratings/controller"
+	"ratings/database"
 	"testing"
 
-	_ "github.com/joho/godotenv/autoload" // Loads config from .env file
 	"github.com/dchest/uniuri"
+	_ "github.com/joho/godotenv/autoload" // Loads config from .env file
 	"github.com/stretchr/testify/require"
 )
 
 func TestCreateAppUser(t *testing.T) {
-	db := controller.GetWriteDB()
+	db := database.GetWriteDB()
 	defer db.Close()
 
 	name := uniuri.New()
 	email := "test@test.com"
-	mibaID := uint(2)
+	mibaID := uniuri.New()[10:len(name)]
 
 	appuser := AppUser{Name: name, Email: email, MiBAID: mibaID}
 	result := db.Create(&appuser)
@@ -32,16 +32,16 @@ func TestCreateAppUser(t *testing.T) {
 }
 
 func TestGetAppUser(t *testing.T) {
-	writeDb := controller.GetWriteDB()
+	writeDb := database.GetWriteDB()
 	defer writeDb.Close()
-	readDb := controller.GetReadDB()
+	readDb := database.GetReadDB()
 	defer readDb.Close()
 
 	var result AppUser
 
 	name := uniuri.New()
 	email := "test@test.com"
-	mibaID := uint(2)
+	mibaID := uniuri.New()[10:len(name)]
 
 	appuser := AppUser{Name: name, Email: email, MiBAID: mibaID}
 	record := writeDb.Create(&appuser)

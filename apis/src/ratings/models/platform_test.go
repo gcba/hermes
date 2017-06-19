@@ -1,7 +1,7 @@
 package models
 
 import (
-	"ratings/controller"
+	"ratings/database"
 	"strings"
 	"testing"
 
@@ -11,9 +11,9 @@ import (
 )
 
 func TestGetPlatform(t *testing.T) {
-	writeDb := controller.GetWriteDB()
+	writeDb := database.GetWriteDB()
 	defer writeDb.Close()
-	readDb := controller.GetReadDB()
+	readDb := database.GetReadDB()
 	defer readDb.Close()
 
 	name := uniuri.New()
