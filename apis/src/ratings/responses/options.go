@@ -41,9 +41,9 @@ const (
 	}
 
 	Endpoints = map[string]Endpoint{
-		"optionsRoot": optionsRoot,
-		"optionsRatings": optionsRatings,
-		"postRatings": postRatings
+		"OptionsRoot": optionsRoot,
+		"OptionsRatings": optionsRatings,
+		"PostRatings": postRatings
 	}
 )
 

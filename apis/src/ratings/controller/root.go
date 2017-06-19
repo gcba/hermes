@@ -13,8 +13,8 @@ import (
 
 func OptionsRoot(context echo.Context) error {
 	endpoints := []responses.Endpoint{
-		responses.Endpoints["optionsRatings"],
-		responses.Endpoints["postRatings"]
+		responses.Endpoints["OptionsRatings"],
+		responses.Endpoints["PostRatings"]
 	}
 
   	return responses.OptionsResponse(endpoints, context)

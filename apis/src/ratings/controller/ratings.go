@@ -38,7 +38,7 @@ func PostRating(context echo.Context) error {
 }
 
 func OptionsRating(context echo.Context) error {
-	endpoints := []responses.Endpoint{responses.Endpoints["postRatings"]}
+	endpoints := []responses.Endpoint{responses.Endpoints["PostRatings"]}
 
   	return responses.OptionsResponse(endpoints, context)
 }
