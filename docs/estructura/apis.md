@@ -40,7 +40,7 @@ Crear una nueva calificación (que puede incluir un comentario o no)
 
  Obtener la información necesaria (campos, tipos de datos, etc) necesaria para hacer un POST exitoso al endpoint.
 
-### Request
+### Requests
 
 `POST /ratings`: sólo JSON body. Por lo tanto se requerirá el header `Content-Type: application/json`.
 
@@ -86,7 +86,8 @@ Crear una nueva calificación (que puede incluir un comentario o no)
 ```json
 {
    "meta": {
-       ...
+       "code": ...,
+       "message": ...
    }
 }
 ```
@@ -96,15 +97,33 @@ Crear una nueva calificación (que puede incluir un comentario o no)
 ```json
 {
    "meta": {
-       ...
+       "code": ...,
+       "message": ...
    },
-   "methods": [
+   "endpoints": [
        {
-           "verb": ...,
-           "endpoint": ...,
+           "method": ...,
+           "path": ...,
            "headers": {
                ...
            }
+       },
+   ]
+}
+```
+
+#### Errores
+
+```json
+{
+   "meta": {
+       "code": ...,
+       "message": ...
+   },
+   "errors": [
+       {
+           "type": ...,
+           "description": ...
        },
    ]
 }
