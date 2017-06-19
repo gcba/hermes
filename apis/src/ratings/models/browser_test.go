@@ -1,16 +1,16 @@
 package models
 
 import (
-	"ratings/controller"
+	"ratings/database"
 	"testing"
 
-	_ "github.com/joho/godotenv/autoload" // Loads config from .env file
 	"github.com/dchest/uniuri"
+	_ "github.com/joho/godotenv/autoload" // Loads config from .env file
 	"github.com/stretchr/testify/require"
 )
 
 func TestCreateBrowser(t *testing.T) {
-	db := controller.GetWriteDB()
+	db := database.GetWriteDB()
 	defer db.Close()
 
 	name := uniuri.New()
@@ -27,9 +27,9 @@ func TestCreateBrowser(t *testing.T) {
 }
 
 func TestGetBrowser(t *testing.T) {
-	writeDb := controller.GetWriteDB()
+	writeDb := database.GetWriteDB()
 	defer writeDb.Close()
-	readDb := controller.GetReadDB()
+	readDb := database.GetReadDB()
 	defer readDb.Close()
 
 	name := uniuri.New()

@@ -1,25 +1,24 @@
 package models
 
 import (
-	"ratings/controller"
+	"ratings/database"
 	"testing"
 
-	_ "github.com/joho/godotenv/autoload" // Loads config from .env file
 	"github.com/dchest/uniuri"
+	_ "github.com/joho/godotenv/autoload" // Loads config from .env file
 	"github.com/stretchr/testify/require"
 )
 
 func TestCreateMessage(t *testing.T) {
-	db := controller.GetWriteDB()
+	db := database.GetWriteDB()
 	defer db.Close()
 
 	content := uniuri.New()
 
 	message := Message{
-		Message: content,
+		Message:   content,
 		Direction: "in",
-		RatingID: 1
-	}
+		RatingID:  1}
 
 	result := db.Create(&message)
 
@@ -27,8 +26,8 @@ func TestCreateMessage(t *testing.T) {
 
 	if value, ok := result.Value.(*Message); ok {
 		require.Equal(t, content, value.Message)
-		require.Equal(t, device.Direction, value.Direction)
-		require.Equal(t, device.RatingID, value.RatingID)
+		require.Equal(t, message.Direction, value.Direction)
+		require.Equal(t, message.RatingID, value.RatingID)
 	} else {
 		t.Fatal("Value is not a Message")
 	}

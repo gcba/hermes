@@ -1,28 +1,27 @@
 package models
 
 import (
-	"ratings/controller"
+	"ratings/database"
 	"testing"
 
-	_ "github.com/joho/godotenv/autoload" // Loads config from .env file
 	"github.com/dchest/uniuri"
+	_ "github.com/joho/godotenv/autoload" // Loads config from .env file
 	"github.com/stretchr/testify/require"
 )
 
 func TestCreateDevice(t *testing.T) {
-	db := controller.GetWriteDB()
+	db := database.GetWriteDB()
 	defer db.Close()
 
 	name := uniuri.New()
 
 	device := Device{
-		Name: name,
-		ScreenWidth: 720,
+		Name:         name,
+		ScreenWidth:  720,
 		ScreenHeight: 1280,
-		PPI: 320,
-		BrandID: 1,
-		PlatformID: 2
-	}
+		PPI:          320,
+		BrandID:      1,
+		PlatformID:   2}
 
 	result := db.Create(&device)
 
@@ -41,21 +40,20 @@ func TestCreateDevice(t *testing.T) {
 }
 
 func TestGetDevice(t *testing.T) {
-	writeDb := controller.GetWriteDB()
+	writeDb := database.GetWriteDB()
 	defer writeDb.Close()
-	readDb := controller.GetReadDB()
+	readDb := database.GetReadDB()
 	defer readDb.Close()
 
 	name := uniuri.New()
 
 	device := Device{
-		Name: name,
-		ScreenWidth: 960,
+		Name:         name,
+		ScreenWidth:  960,
 		ScreenHeight: 1600,
-		PPI: 430,
-		BrandID: 2,
-		PlatformID: 2
-	}
+		PPI:          430,
+		BrandID:      2,
+		PlatformID:   2}
 
 	record := writeDb.Create(&device)
 
