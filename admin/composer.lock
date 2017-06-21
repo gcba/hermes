@@ -828,21 +828,21 @@
         },
         {
             "name": "larapack/doctrine-support",
-            "version": "v0.1.1",
+            "version": "v0.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/larapack/doctrine-support.git",
-                "reference": "a1c155fbe96e6e06bb2561341b3aceefa3302c35"
+                "reference": "f6297c7aa8f10d60e9f247eb439400018af0e5da"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/larapack/doctrine-support/zipball/a1c155fbe96e6e06bb2561341b3aceefa3302c35",
-                "reference": "a1c155fbe96e6e06bb2561341b3aceefa3302c35",
+                "url": "https://api.github.com/repos/larapack/doctrine-support/zipball/f6297c7aa8f10d60e9f247eb439400018af0e5da",
+                "reference": "f6297c7aa8f10d60e9f247eb439400018af0e5da",
                 "shasum": ""
             },
             "require": {
                 "doctrine/dbal": "^2.5",
-                "illuminate/support": "5.3.*|5.4.*"
+                "illuminate/support": "5.3.*|5.4.*|5.5.x-dev"
             },
             "type": "library",
             "autoload": {
@@ -869,20 +869,20 @@
                 "laravel",
                 "support"
             ],
-            "time": "2017-01-25T11:39:40+00:00"
+            "time": "2017-06-15T14:42:22+00:00"
         },
         {
             "name": "laravel/framework",
-            "version": "v5.4.26",
+            "version": "v5.4.27",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "a7ebbfab64111e24f8e584db64e2be9279ded357"
+                "reference": "66f5e1b37cbd66e730ea18850ded6dc0ad570404"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/a7ebbfab64111e24f8e584db64e2be9279ded357",
-                "reference": "a7ebbfab64111e24f8e584db64e2be9279ded357",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/66f5e1b37cbd66e730ea18850ded6dc0ad570404",
+                "reference": "66f5e1b37cbd66e730ea18850ded6dc0ad570404",
                 "shasum": ""
             },
             "require": {
@@ -998,7 +998,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2017-06-13T18:58:49+00:00"
+            "time": "2017-06-15T19:08:25+00:00"
         },
         {
             "name": "laravel/tinker",
@@ -1148,16 +1148,16 @@
         },
         {
             "name": "monolog/monolog",
-            "version": "1.22.1",
+            "version": "1.23.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "1e044bc4b34e91743943479f1be7a1d5eb93add0"
+                "reference": "fd8c787753b3a2ad11bc60c063cff1358a32a3b4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/1e044bc4b34e91743943479f1be7a1d5eb93add0",
-                "reference": "1e044bc4b34e91743943479f1be7a1d5eb93add0",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/fd8c787753b3a2ad11bc60c063cff1358a32a3b4",
+                "reference": "fd8c787753b3a2ad11bc60c063cff1358a32a3b4",
                 "shasum": ""
             },
             "require": {
@@ -1178,7 +1178,7 @@
                 "phpunit/phpunit-mock-objects": "2.3.0",
                 "ruflin/elastica": ">=0.90 <3.0",
                 "sentry/sentry": "^0.13",
-                "swiftmailer/swiftmailer": "~5.3"
+                "swiftmailer/swiftmailer": "^5.3|^6.0"
             },
             "suggest": {
                 "aws/aws-sdk-php": "Allow sending log messages to AWS services like DynamoDB",
@@ -1222,7 +1222,7 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2017-03-13T07:08:03+00:00"
+            "time": "2017-06-19T01:22:40+00:00"
         },
         {
             "name": "mtdowling/cron-expression",
@@ -1519,16 +1519,16 @@
         },
         {
             "name": "psy/psysh",
-            "version": "v0.8.6",
+            "version": "v0.8.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bobthecow/psysh.git",
-                "reference": "7028d6d525fb183d50b249b7c07598e3d386b27d"
+                "reference": "be969b9dc89dcaefdb9a3117fa91fa38bca19f50"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/7028d6d525fb183d50b249b7c07598e3d386b27d",
-                "reference": "7028d6d525fb183d50b249b7c07598e3d386b27d",
+                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/be969b9dc89dcaefdb9a3117fa91fa38bca19f50",
+                "reference": "be969b9dc89dcaefdb9a3117fa91fa38bca19f50",
                 "shasum": ""
             },
             "require": {
@@ -1588,7 +1588,7 @@
                 "interactive",
                 "shell"
             ],
-            "time": "2017-06-04T10:34:20+00:00"
+            "time": "2017-06-20T12:51:31+00:00"
         },
         {
             "name": "ramsey/uuid",
@@ -2476,16 +2476,16 @@
         },
         {
             "name": "tcg/voyager",
-            "version": "v0.11.12",
+            "version": "v0.11.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/the-control-group/voyager.git",
-                "reference": "10622dc41248ac45747376a873ce3519f92d6f0d"
+                "reference": "b415614fd2003876cf3a4031bb0055eb9cc16c05"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/the-control-group/voyager/zipball/10622dc41248ac45747376a873ce3519f92d6f0d",
-                "reference": "10622dc41248ac45747376a873ce3519f92d6f0d",
+                "url": "https://api.github.com/repos/the-control-group/voyager/zipball/b415614fd2003876cf3a4031bb0055eb9cc16c05",
+                "reference": "b415614fd2003876cf3a4031bb0055eb9cc16c05",
                 "shasum": ""
             },
             "require": {
@@ -2529,7 +2529,7 @@
                 "laravel",
                 "panel"
             ],
-            "time": "2017-05-24T09:21:25+00:00"
+            "time": "2017-06-21T13:04:15+00:00"
         },
         {
             "name": "tijsverkoyen/css-to-inline-styles",
