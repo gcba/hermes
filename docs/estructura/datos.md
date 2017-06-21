@@ -267,4 +267,6 @@ Los campos `created_at` y `modified_at` son creados automáticamente por Laravel
 
 ## Borrado
 
-Será físico en todos los casos.
+Será lógico para `Platform`, `Device`, `Browser`, `Brand`, `Rating`, `Range`, `AppUser`, `App`
+
+Será físico para `User` y `Message`.
