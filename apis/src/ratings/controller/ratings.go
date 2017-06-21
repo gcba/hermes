@@ -30,6 +30,8 @@ type (
 func OptionsRatings(context echo.Context) error {
 	endpoints := []responses.Endpoint{responses.Endpoints["PostRatings"]}
 
+	context.Response().Header().Set(echo.HeaderAllow, "OPTIONS POST")
+
 	return responses.OptionsResponse(endpoints, context)
 }
 
@@ -385,22 +387,22 @@ func newMessage(rating uint, db *gorm.DB, frame *frame) error {
 *
  */
 func newRating(dbs *databases, frame *frame) error {
-	app, errApp := getApp(dbs.read, frame)
+	app, appErr := getApp(dbs.read, frame)
 
-	if errApp != nil {
-		return errApp
+	if appErr != nil {
+		return appErr
 	}
 
-	platform, errPlatform := getPlatform(dbs.read, frame)
+	platform, platformErr := getPlatform(dbs.read, frame)
 
-	if errPlatform != nil {
-		return errPlatform
+	if platformErr != nil {
+		return platformErr
 	}
 
-	rangeRecord, errRange := getRange(dbs.read, frame)
+	rangeRecord, rangeErr := getRange(dbs.read, frame)
 
-	if errRange != nil {
-		return errRange
+	if rangeErr != nil {
+		return rangeErr
 	}
 
 	hasMessage := false
