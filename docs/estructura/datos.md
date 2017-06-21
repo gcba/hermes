@@ -200,8 +200,8 @@ Las calificaciones de las apps.
 |has_message     |bool                  |false  |       |       |       |X      |
 |app_id          |int                   |       |X      |       |       |X      |
 |range_id        |int                   |       |X      |       |       |X      |
+|platform_id     |int                   |       |X      |       |       |X      |
 |appuser_id      |int                   |       |X      |X      |       |X      |
-|platform_id     |int                   |       |X      |X      |       |X      |
 |device_id       |int                   |       |X      |X      |       |X      |
 |browser_id      |int                   |       |X      |X      |       |X      |
 |created_at      |timestamp             |       |       |       |       |       |
