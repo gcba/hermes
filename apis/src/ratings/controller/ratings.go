@@ -409,9 +409,9 @@ func newRating(dbs *databases, frame *frame) error {
 		hasMessage = true
 	}
 
-	if frame.request.Rating < rangeRecord.From || frame.request.Rating > rangeRecord.To {
+	if (frame.request.Rating <= rangeRecord.From) || (frame.request.Rating >= rangeRecord.To) {
 		errorMessage := fmt.Sprintf(
-			"Error validating rating: %v is not in range(%v,%v)",
+			"Error validating rating: %v is not in range(%v, %v)",
 			frame.request.Rating,
 			rangeRecord.From,
 			rangeRecord.To)
