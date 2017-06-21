@@ -34,6 +34,12 @@ Implementar el sistema de responses y manejo de errores en la API de calificacio
 
 10. Agregar tests del endpoint OPTIONS /
 
+11. Buscar app user por email o miba_id
+
+12. Escapar el mensaje del app user
+
+13. Agregar el header Allow a las responses OPTIONS
+
 ### Admin
 
 1. Implementar los permisos de App
@@ -55,3 +61,5 @@ Implementar el sistema de responses y manejo de errores en la API de calificacio
 9. Implementar los permisos de Rating
 
 10. Implementar los permisos de User
+
+11. Implementar el borrado lógico: para Platform, Device, Browser, Brand, Rating, Range, AppUser y App
