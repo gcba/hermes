@@ -18,3 +18,5 @@ import:
   version: ^9.4.0
 - package: github.com/go-playground/universal-translator
   version: ^0.16.0
+- package: github.com/leebenson/conform
+- package: github.com/etgryphon/stringUp

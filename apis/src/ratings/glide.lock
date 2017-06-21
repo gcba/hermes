@@ -1,10 +1,12 @@
-hash: 83a75ea970d3b1be1d553ecbb0c09a5adb04cafb290cccae1a75d8a489792a82
-updated: 2017-06-21T11:00:27.443804553-03:00
+hash: 1de4225d776bb69253b7f5d50581aec80d0d29668e50cdf14412c645293104bf
+updated: 2017-06-21T20:37:03.431785463-03:00
 imports:
 - name: github.com/dchest/uniuri
   version: 8902c56451e9b58ff940bbe5fec35d5f9c04584a
 - name: github.com/dgrijalva/jwt-go
   version: a539ee1a749a2b895533f979515ac7e6e0f5b650
+- name: github.com/etgryphon/stringUp
+  version: 31534ccd8cac1d3d205c906ea5722928b045ed8c
 - name: github.com/facebookgo/clock
   version: 600d898af40aa09a7a93ecb9265d87b0504b6f03
 - name: github.com/facebookgo/grace
@@ -38,7 +40,7 @@ imports:
 - name: github.com/k0kubun/pp
   version: 027a6d1765d673d337e687394dbe780dd64e2a1e
 - name: github.com/labstack/echo
-  version: 7676f85ef9d4a50797e17b30c4b0b1cb3c7c532a
+  version: 935a60782cbbc55110e7bd4b33120e4567cbee43
   subpackages:
   - '...'
   - middleware
@@ -49,6 +51,8 @@ imports:
   - color
   - log
   - random
+- name: github.com/leebenson/conform
+  version: 0a64df23bde7011cd4c24145349fffd0cae89543
 - name: github.com/lib/pq
   version: 8837942c3e09574accbc5f150e2c5e057189cace
   subpackages:
