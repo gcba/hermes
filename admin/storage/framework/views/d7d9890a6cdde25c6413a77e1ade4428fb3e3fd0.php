@@ -1,66 +1,48 @@
 <!DOCTYPE html>
 <html>
 <head>
-    
-    <title><?php echo $__env->yieldContent('page_title',Voyager::setting('admin_title') . " - " . Voyager::setting('admin_description')); ?></title>
+    <title><?php echo $__env->yieldContent('page_title', setting('admin_title') . " - " . setting('admin_description')); ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>"/>
-    <!-- Fonts -->
-    <link href='https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400|Lato:300,400,700,900' rel='stylesheet'
-          type='text/css'>
 
-    <!-- CSS Libs -->
-    <link rel="stylesheet" type="text/css" href="<?php echo e(voyager_asset('lib/css/bootstrap.min.css')); ?>">
-    <link rel="stylesheet" type="text/css" href="<?php echo e(voyager_asset('lib/css/animate.min.css')); ?>">
-    <link rel="stylesheet" type="text/css" href="<?php echo e(voyager_asset('lib/css/bootstrap-switch.min.css')); ?>">
-    <link rel="stylesheet" type="text/css" href="<?php echo e(voyager_asset('lib/css/checkbox3.min.css')); ?>">
-    <link rel="stylesheet" type="text/css" href="<?php echo e(voyager_asset('lib/css/jquery.dataTables.min.css')); ?>">
-    <link rel="stylesheet" type="text/css" href="<?php echo e(voyager_asset('lib/css/dataTables.bootstrap.css')); ?>">
-    <link rel="stylesheet" type="text/css" href="<?php echo e(voyager_asset('lib/css/select2.min.css')); ?>">
-    <link rel="stylesheet" type="text/css" href="<?php echo e(voyager_asset('lib/css/toastr.min.css')); ?>">
-    <link rel="stylesheet" type="text/css" href="<?php echo e(voyager_asset('lib/css/perfect-scrollbar.min.css')); ?>">
-    <link rel="stylesheet" type="text/css" href="<?php echo e(voyager_asset('css/bootstrap-toggle.min.css')); ?>">
-    <link rel="stylesheet" type="text/css" href="<?php echo e(voyager_asset('js/icheck/icheck.css')); ?>">
-    <link rel="stylesheet" type="text/css" href="<?php echo e(voyager_asset('js/datetimepicker/bootstrap-datetimepicker.min.css')); ?>">
-    <!-- CSS App -->
-    <link rel="stylesheet" type="text/css" href="<?php echo e(voyager_asset('css/style.css')); ?>">
-    <link rel="stylesheet" type="text/css" href="<?php echo e(voyager_asset('css/themes/flat-blue.css')); ?>">
-
-    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,300italic">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="<?php echo e(voyager_asset('images/logo-icon.png')); ?>" type="image/x-icon">
 
-    <!-- CSS Fonts -->
-    <link rel="stylesheet" href="<?php echo e(voyager_asset('fonts/voyager/styles.css')); ?>">
-    <script type="text/javascript" src="<?php echo e(voyager_asset('lib/js/jquery.min.js')); ?>"></script>
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.0/themes/smoothness/jquery-ui.css">
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.0/jquery-ui.min.js"></script>
+    
+
+    <!-- App CSS -->
+    <link rel="stylesheet" href="<?php echo e(voyager_asset('css/app.css')); ?>">
 
     <?php echo $__env->yieldContent('css'); ?>
 
-    <!-- Voyager CSS -->
-    <link rel="stylesheet" href="<?php echo e(voyager_asset('css/voyager.css')); ?>">
-
     <!-- Few Dynamic Styles -->
     <style type="text/css">
-        .flat-blue .side-menu .navbar-header, .widget .btn-primary, .widget .btn-primary:focus, .widget .btn-primary:hover, .widget .btn-primary:active, .widget .btn-primary.active, .widget .btn-primary:active:focus{
+        .voyager .side-menu .navbar-header {
             background:<?php echo e(config('voyager.primary_color','#22A7F0')); ?>;
             border-color:<?php echo e(config('voyager.primary_color','#22A7F0')); ?>;
         }
-        .breadcrumb a{
+        .widget .btn-primary{
+            border-color:<?php echo e(config('voyager.primary_color','#22A7F0')); ?>;
+        }
+        .widget .btn-primary:focus, .widget .btn-primary:hover, .widget .btn-primary:active, .widget .btn-primary.active, .widget .btn-primary:active:focus{
+            background:<?php echo e(config('voyager.primary_color','#22A7F0')); ?>;
+        }
+        .voyager .breadcrumb a{
             color:<?php echo e(config('voyager.primary_color','#22A7F0')); ?>;
         }
     </style>
 
     <?php if(!empty(config('voyager.additional_css'))): ?><!-- Additional CSS -->
-    <?php $__currentLoopData = config('voyager.additional_css'); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $css): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?><link rel="stylesheet" type="text/css" href="<?php echo e(asset($css)); ?>"><?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+        <?php $__currentLoopData = config('voyager.additional_css'); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $css): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?><link rel="stylesheet" type="text/css" href="<?php echo e(asset($css)); ?>"><?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
     <?php endif; ?>
 
     <?php echo $__env->yieldContent('head'); ?>
 </head>
 
-<body class="flat-blue">
+<body class="voyager <?php if(isset($dataType) && isset($dataType->slug)): ?><?php echo e($dataType->slug); ?><?php endif; ?>">
 
 <div id="voyager-loader">
     <?php $admin_loader_img = Voyager::setting('admin_loader', ''); ?>
@@ -124,31 +106,14 @@ if ((substr(Auth::user()->avatar, 0, 7) == 'http://') || (substr(Auth::user()->a
     })();
 </script>
 <!-- Javascript Libs -->
-<script type="text/javascript" src="<?php echo e(voyager_asset('lib/js/bootstrap.min.js')); ?>"></script>
-<script type="text/javascript" src="<?php echo e(voyager_asset('lib/js/bootstrap-switch.min.js')); ?>"></script>
-<script type="text/javascript" src="<?php echo e(voyager_asset('lib/js/jquery.matchHeight-min.js')); ?>"></script>
-<script type="text/javascript" src="<?php echo e(voyager_asset('lib/js/jquery.dataTables.min.js')); ?>"></script>
-<script type="text/javascript" src="<?php echo e(voyager_asset('lib/js/dataTables.bootstrap.min.js')); ?>"></script>
-<script type="text/javascript" src="<?php echo e(voyager_asset('lib/js/toastr.min.js')); ?>"></script>
-<script type="text/javascript" src="<?php echo e(voyager_asset('lib/js/perfect-scrollbar.jquery.min.js')); ?>"></script>
-<script type="text/javascript" src="<?php echo e(voyager_asset('js/select2/select2.min.js')); ?>"></script>
-<script type="text/javascript" src="<?php echo e(voyager_asset('js/bootstrap-toggle.min.js')); ?>"></script>
-<script type="text/javascript" src="<?php echo e(voyager_asset('js/jquery.cookie.js')); ?>"></script>
-<script type="text/javascript" src="<?php echo e(voyager_asset('js/moment-with-locales.min.js')); ?>"></script>
-<script type="text/javascript" src="<?php echo e(voyager_asset('js/datetimepicker/bootstrap-datetimepicker.min.js')); ?>"></script>
-<!-- Javascript -->
-<script type="text/javascript" src="<?php echo e(voyager_asset('js/readmore.min.js')); ?>"></script>
-<script type="text/javascript" src="<?php echo e(voyager_asset('js/val.js')); ?>"></script>
+
+
 <script type="text/javascript" src="<?php echo e(voyager_asset('js/app.js')); ?>"></script>
-<script type="text/javascript" src="<?php echo e(voyager_asset('js/helpers.js')); ?>"></script>
-<?php if(!empty(config('voyager.additional_js'))): ?><!-- Additional Javascript -->
-<?php $__currentLoopData = config('voyager.additional_js'); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $js): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?><script type="text/javascript" src="<?php echo e(asset($js)); ?>"></script><?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-<?php endif; ?>
+
 
 <script>
     <?php if(Session::has('alerts')): ?>
         let alerts = <?php echo json_encode(Session::get('alerts')); ?>;
-
         displayAlerts(alerts, toastr);
     <?php endif; ?>
 
@@ -168,5 +133,10 @@ if ((substr(Auth::user()->avatar, 0, 7) == 'http://') || (substr(Auth::user()->a
     <?php endif; ?>
 </script>
 <?php echo $__env->yieldContent('javascript'); ?>
+
+<?php if(!empty(config('voyager.additional_js'))): ?><!-- Additional Javascript -->
+    <?php $__currentLoopData = config('voyager.additional_js'); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $js): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?><script type="text/javascript" src="<?php echo e(asset($js)); ?>"></script><?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+<?php endif; ?>
+
 </body>
 </html>

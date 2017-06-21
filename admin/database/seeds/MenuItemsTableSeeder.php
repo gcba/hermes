@@ -97,7 +97,7 @@ class MenuItemsTableSeeder extends Seeder
 
             $menuItem = MenuItem::firstOrNew([
                 'menu_id'    => $menu->id,
-                'title'      => 'Editor de Menús',
+                'title'      => 'Menús',
                 'url'        => route('voyager.menus.index', [], false),
             ]);
             if (!$menuItem->exists) {
@@ -112,7 +112,7 @@ class MenuItemsTableSeeder extends Seeder
 
             $menuItem = MenuItem::firstOrNew([
                 'menu_id'    => $menu->id,
-                'title'      => 'Base de Datos',
+                'title'      => 'DB',
                 'url'        => route('voyager.database.index', [], false),
             ]);
             if (!$menuItem->exists) {

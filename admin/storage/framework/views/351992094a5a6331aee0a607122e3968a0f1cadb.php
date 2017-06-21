@@ -6,7 +6,8 @@
 
         <?php if(Voyager::can('add_'.$dataType->name)): ?>
             <a href="<?php echo e(route('voyager.'.$dataType->slug.'.create')); ?>" class="btn btn-success">
-                <i class="voyager-plus"></i> Add New
+                <i class="voyager-plus"></i> <?php echo e(__('voyager.generic.add_new')); ?>
+
             </a>
         <?php endif; ?>
     </h1>
@@ -14,7 +15,7 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('content'); ?>
-    <div class="page-content container-fluid">
+    <div class="page-content browse container-fluid">
         <?php echo $__env->make('voyager::alerts', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
         <div class="row">
             <div class="col-md-12">
@@ -26,7 +27,7 @@
                                     <?php $__currentLoopData = $dataType->browseRows; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rows): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <th><?php echo e($rows->display_name); ?></th>
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                    <th class="actions">Actions</th>
+                                    <th class="actions"><?php echo e(__('voyager.generic.actions')); ?></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -103,18 +104,18 @@
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     <td class="no-sort no-click" id="bread-actions">
                                         <?php if(Voyager::can('delete_'.$dataType->name)): ?>
-                                            <a href="javascript:;" title="Delete" class="btn btn-sm btn-danger pull-right delete" data-id="<?php echo e($data->id); ?>" id="delete-<?php echo e($data->id); ?>">
-                                                <i class="voyager-trash"></i> <span class="hidden-xs hidden-sm">Delete</span>
+                                            <a href="javascript:;" title="<?php echo e(__('voyager.generic.delete')); ?>" class="btn btn-sm btn-danger pull-right delete" data-id="<?php echo e($data->id); ?>" id="delete-<?php echo e($data->id); ?>">
+                                                <i class="voyager-trash"></i> <span class="hidden-xs hidden-sm"><?php echo e(__('voyager.generic.delete')); ?></span>
                                             </a>
                                         <?php endif; ?>
                                         <?php if(Voyager::can('edit_'.$dataType->name)): ?>
-                                            <a href="<?php echo e(route('voyager.'.$dataType->slug.'.edit', $data->id)); ?>" title="Edit" class="btn btn-sm btn-primary pull-right edit">
-                                                <i class="voyager-edit"></i> <span class="hidden-xs hidden-sm">Edit</span>
+                                            <a href="<?php echo e(route('voyager.'.$dataType->slug.'.edit', $data->id)); ?>" title="<?php echo e(__('voyager.generic.edit')); ?>" class="btn btn-sm btn-primary pull-right edit">
+                                                <i class="voyager-edit"></i> <span class="hidden-xs hidden-sm"><?php echo e(__('voyager.generic.edit')); ?></span>
                                             </a>
                                         <?php endif; ?>
                                         <?php if(Voyager::can('read_'.$dataType->name)): ?>
-                                            <a href="<?php echo e(route('voyager.'.$dataType->slug.'.show', $data->id)); ?>" title="View" class="btn btn-sm btn-warning pull-right">
-                                                <i class="voyager-eye"></i> <span class="hidden-xs hidden-sm">View</span>
+                                            <a href="<?php echo e(route('voyager.'.$dataType->slug.'.show', $data->id)); ?>" title="<?php echo e(__('voyager.generic.view')); ?>" class="btn btn-sm btn-warning pull-right">
+                                                <i class="voyager-eye"></i> <span class="hidden-xs hidden-sm"><?php echo e(__('voyager.generic.view')); ?></span>
                                             </a>
                                         <?php endif; ?>
                                     </td>
@@ -124,7 +125,12 @@
                         </table>
                         <?php if(isset($dataType->server_side) && $dataType->server_side): ?>
                             <div class="pull-left">
-                                <div role="status" class="show-res" aria-live="polite">Showing <?php echo e($dataTypeContent->firstItem()); ?> to <?php echo e($dataTypeContent->lastItem()); ?> of <?php echo e($dataTypeContent->total()); ?> entries</div>
+                                <div role="status" class="show-res" aria-live="polite"><?php echo e(__(
+                                    'voyager.generic.showing_entries', $dataTypeContent->total(), [
+                                        'from' => $dataTypeContent->firstItem(),
+                                        'to' => $dataTypeContent->lastItem(),
+                                        'all' => $dataTypeContent->total()
+                                    ])); ?></div>
                             </div>
                             <div class="pull-right">
                                 <?php echo e($dataTypeContent->links()); ?>
@@ -141,10 +147,9 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                    <button type="button" class="close" data-dismiss="modal" aria-label="<?php echo e(__('voyager.generic.close')); ?>"><span
                                 aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title"><i class="voyager-trash"></i> Are you sure you want to delete
-                        this <?php echo e(strtolower($dataType->display_name_singular)); ?>?</h4>
+                    <h4 class="modal-title"><i class="voyager-trash"></i> <?php echo e(__('voyager.generic.delete_question')); ?> <?php echo e(strtolower($dataType->display_name_singular)); ?>?</h4>
                 </div>
                 <div class="modal-footer">
                     <form action="<?php echo e(route('voyager.'.$dataType->slug.'.index')); ?>" id="delete_form" method="POST">
@@ -153,9 +158,9 @@
                         <?php echo e(csrf_field()); ?>
 
                         <input type="submit" class="btn btn-danger pull-right delete-confirm"
-                                 value="Yes, delete this <?php echo e(strtolower($dataType->display_name_singular)); ?>">
+                                 value="<?php echo e(__('voyager.generic.delete_confirm')); ?> <?php echo e(strtolower($dataType->display_name_singular)); ?>">
                     </form>
-                    <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-default pull-right" data-dismiss="modal"><?php echo e(__('voyager.generic.cancel')); ?></button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
@@ -180,7 +185,9 @@
         $(document).ready(function () {
             <?php if(!$dataType->server_side): ?>
                 var table = $('#dataTable').DataTable({
-                    "order": []
+                    "order": [],
+                    "language": <?php echo json_encode(__('voyager.datatable'), true); ?>
+
                     <?php if(config('dashboard.data_tables.responsive')): ?>, responsive: true <?php endif; ?>
                 });
             <?php endif; ?>

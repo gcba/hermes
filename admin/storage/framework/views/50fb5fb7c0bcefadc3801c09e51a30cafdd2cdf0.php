@@ -4,17 +4,17 @@
             <button class="hamburger btn-link">
                 <span class="hamburger-inner"></span>
             </button>
-            <a id="sidebar-anchor" class="voyager-anchor btn-link navbar-link hidden-xs" 
-                title="Yarr! Drop the anchors! (and keep the sidebar open)" 
-                data-unstick="Unstick the sidebar" 
+            <a id="sidebar-anchor" class="voyager-anchor btn-link navbar-link hidden-xs"
+                title="<?php echo e(__('voyager.generic.keep_sidebar_open')); ?>"
+                data-unstick="<?php echo e(__('voyager.generic.unstick_sidebar')); ?>"
             data-toggle="tooltip" data-placement="bottom"></a>
 
             <ol class="breadcrumb hidden-xs">
                 <?php if(count(Request::segments()) == 1): ?>
-                    <li class="active"><i class="voyager-boat"></i> Dashboard</li>
+                    <li class="active"><i class="voyager-boat"></i> <?php echo e(__('voyager.generic.dashboard')); ?></li>
                 <?php else: ?>
                     <li class="active">
-                        <a href="<?php echo e(route('voyager.dashboard')); ?>"><i class="voyager-boat"></i> Dashboard</a>
+                        <a href="<?php echo e(route('voyager.dashboard')); ?>"><i class="voyager-boat"></i> <?php echo e(__('voyager.generic.dashboard')); ?></a>
                     </li>
                 <?php endif; ?>
                 <?php $breadcrumb_url = url(''); ?>

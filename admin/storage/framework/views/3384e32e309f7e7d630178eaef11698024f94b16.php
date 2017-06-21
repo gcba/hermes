@@ -16,14 +16,14 @@
             </div><!-- .navbar-header -->
 
             <div class="panel widget center bgimage"
-                 style="background-image:url(<?php echo e(Voyager::image( Voyager::setting('admin_bg_image'), config('voyager.assets_path') . '/images/bg.jpg' )); ?>);">
+                 style="background-image:url(<?php echo e(Voyager::image( Voyager::setting('admin_bg_image'), config('voyager.assets_path') . '/images/bg.jpg' )); ?>); background-size: 140%; background-position: 0px;">
                 <div class="dimmer"></div>
                 <div class="panel-content">
                     <img src="<?php echo e($user_avatar); ?>" class="avatar" alt="<?php echo e(Auth::user()->name); ?> avatar">
                     <h4><?php echo e(ucwords(Auth::user()->name)); ?></h4>
                     <p><?php echo e(Auth::user()->email); ?></p>
 
-                    <a href="<?php echo e(route('voyager.profile')); ?>" class="btn btn-primary">Profile</a>
+                    <a href="<?php echo e(route('voyager.profile')); ?>" class="btn btn-primary"><?php echo e(__('voyager.generic.profile')); ?></a>
                     <div style="clear:both"></div>
                 </div>
             </div>
