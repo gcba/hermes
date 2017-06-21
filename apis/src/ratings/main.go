@@ -26,6 +26,8 @@ func main() {
 
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
+	e.Use(middleware.Secure())
+	e.Use(middleware.BodyLimit("10K"))
 
 	e.Validator = &RequestValidator{validator: validator.New()} // TODO: Move this to parser.AttachValidator()
 
