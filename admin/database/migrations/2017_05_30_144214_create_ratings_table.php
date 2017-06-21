@@ -18,8 +18,8 @@ class CreateRatingsTable extends Migration
             $table->smallInteger('rating');
             $table->string('description', 30)->nullable();
             $table->string('app_version', 15)->nullable();
-            $table->string('platform_version', 15)->nullable();
             $table->string('browser_version', 15)->nullable();
+            $table->string('platform_version', 15);
             $table->boolean('has_message')->default(false);
             $table->index('has_message');
             $table->integer('app_id')->unsigned();
