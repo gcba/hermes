@@ -11,7 +11,7 @@ type Device struct {
 	Name         string `gorm:"size:30;not null"`
 	ScreenWidth  int    `gorm:"not null"`
 	ScreenHeight int    `gorm:"not null"`
-	PPI          uint   `gorm:"DEFAULT:NULL"`
+	PPI          int    `gorm:"DEFAULT:NULL"`
 	Brand        *Brand
 	BrandID      uint `gorm:"DEFAULT:NULL"`
 	Platform     *Platform
