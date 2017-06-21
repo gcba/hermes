@@ -19,6 +19,13 @@ type databases struct {
 	Write *gorm.DB
 }
 
+// OptionsRatings returns the response of the `OPTIONS /ratings` endpoint
+func OptionsRatings(context echo.Context) error {
+	endpoints := []responses.Endpoint{responses.Endpoints["PostRatings"]}
+
+	return responses.OptionsResponse(endpoints, context)
+}
+
 // PostRatings saves a new rating to the database
 func PostRatings(context echo.Context) error {
 	request := parser.Parse(context)
@@ -34,13 +41,6 @@ func PostRatings(context echo.Context) error {
 	}
 
 	return responses.PostResponse(http.StatusOK, context)
-}
-
-// OptionsRatings returns the response of the `OPTIONS /ratings` endpoint
-func OptionsRatings(context echo.Context) error {
-	endpoints := []responses.Endpoint{responses.Endpoints["PostRatings"]}
-
-	return responses.OptionsResponse(endpoints, context)
 }
 
 func handleError(err error, context echo.Context) {
@@ -83,7 +83,6 @@ func getApp(request *parser.Request, db *gorm.DB, context echo.Context) models.A
 * Platform
 *
  */
-
 func getPlatform(request *parser.Request, db *gorm.DB, context echo.Context) models.Platform {
 	result := models.GetPlatform(request.Platform.Key, db)
 	errorList := result.GetErrors()
@@ -104,7 +103,6 @@ func getPlatform(request *parser.Request, db *gorm.DB, context echo.Context) mod
 * Range
 *
  */
-
 func getRange(request *parser.Request, db *gorm.DB, context echo.Context) models.Range {
 	result := models.GetRange(request.Range, db)
 	errorList := result.GetErrors()
@@ -125,7 +123,6 @@ func getRange(request *parser.Request, db *gorm.DB, context echo.Context) models
 * AppUser
 *
  */
-
 func hasAppUser(request *parser.Request) bool {
 	appuser := request.User
 
@@ -185,7 +182,6 @@ func attachAppUser(request *parser.Request, rating *models.Rating, dbs *database
 * Browser
 *
  */
-
 func hasBrowser(request *parser.Request) bool {
 	browser := request.Browser
 
@@ -239,7 +235,6 @@ func attachBrowser(request *parser.Request, rating *models.Rating, dbs *database
 * Device
 *
  */
-
 func hasDevice(request *parser.Request) bool {
 	device := request.Device
 
@@ -340,7 +335,6 @@ func getBrand(request *parser.Request, dbs *databases, context echo.Context) mod
 * Rating
 *
  */
-
 func newRating(request *parser.Request, dbs *databases, context echo.Context) error {
 	app := getApp(request, dbs.Read, context)
 	platform := getPlatform(request, dbs.Read, context)
@@ -382,10 +376,41 @@ func newRating(request *parser.Request, dbs *databases, context echo.Context) er
 	} else if value, ok := result.Value.(models.Rating); ok {
 		fmt.Println("Created a new Rating:", value)
 
+		if hasMessage && err := newMessage(request.Comment, value.ID, dbs.Write, context); err != nil {
+			return err
+		}
+
 		return nil
 	} else {
 		handleError(errors.New("Error trying to create a rating"), context)
 	}
 
 	return errors.New("Could not create a new rating")
+}
+
+/*
+*
+* Message
+*
+ */
+func newMessage(content string, rating uint, db *gorm.DB, context echo.Context) error {
+	message := &models.Rating{
+		Message:   content,
+		Direction: "in",
+		RatingID:  rating}
+
+	result := models.CreateMessage(message, db)
+	errorList := result.GetErrors()
+
+	if len(errorList) > 0 {
+		handleErrors(errorList, context)
+	} else if value, ok := result.Value.(models.Message); ok {
+		fmt.Println("Created a new Message:", value)
+
+		return nil
+	} else {
+		handleError(errors.New("Error trying to create a message"), context)
+	}
+
+	return errors.New("Could not create a new message")
 }

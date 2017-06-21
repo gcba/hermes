@@ -16,7 +16,7 @@ type Rating struct {
 	HasMessage      bool   `gorm:"not null;DEFAULT:false"`
 	AppID           uint   `gorm:"not null"`
 	RangeID         uint   `gorm:"not null"`
-	AppUserID       uint   `gorm:"DEFAULT:NULL"`
+	AppUserID       uint   `gorm:"column:appuser_id;DEFAULT:NULL"`
 	PlatformID      uint   `gorm:"DEFAULT:NULL"`
 	DeviceID        uint   `gorm:"DEFAULT:NULL"`
 	BrowserID       uint   `gorm:"DEFAULT:NULL"`

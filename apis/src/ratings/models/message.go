@@ -2,6 +2,8 @@ package models
 
 import (
 	"time"
+
+	"github.com/jinzhu/gorm"
 )
 
 type Message struct {
@@ -11,4 +13,9 @@ type Message struct {
 	RatingID  uint   `gorm:"not null"`
 
 	CreatedAt time.Time `gorm:"not null"`
+}
+
+// CreateMessage creates a new message
+func CreateMessage(message *Message, db *gorm.DB) *gorm.DB {
+	return db.Create(message)
 }
