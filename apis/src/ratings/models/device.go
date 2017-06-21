@@ -11,11 +11,11 @@ type Device struct {
 	Name         string `gorm:"size:30;not null"`
 	ScreenWidth  int    `gorm:"not null"`
 	ScreenHeight int    `gorm:"not null"`
-	PPI          int
-	Brand        Brand
-	BrandID      uint
-	Platform     Platform
-	PlatformID   uint
+	PPI          uint   `gorm:"DEFAULT:NULL"`
+	Brand        *Brand
+	BrandID      uint `gorm:"DEFAULT:NULL"`
+	Platform     *Platform
+	PlatformID   uint `gorm:"DEFAULT:NULL"`
 
 	CreatedAt time.Time `gorm:"not null"`
 }
