@@ -43,7 +43,7 @@
 |Ver                   |X           |X           |X           |X           |Por app        |
 |Crear                 |            |X           |X           |X           |               |
 |Editar                |            |            |            |            |               |
-|Borrar                |            |            |            |X           |               |
+|Borrar                |            |X           |X           |X           |               |
 
 ## Ranges
 
