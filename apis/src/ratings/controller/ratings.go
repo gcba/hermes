@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"net/http"
+	"strings"
 
 	"ratings/database"
 	"ratings/models"
@@ -134,8 +135,11 @@ func getRange(db *gorm.DB, frame *frame) (models.Range, error) {
  */
 func hasAppUser(request *parser.Request) bool {
 	appuser := request.User
+	nameLength := len(strings.TrimSpace(appuser.Name))
+	emailLength := len(strings.TrimSpace(appuser.Email))
+	mibaIDLength := len(strings.TrimSpace(appuser.MiBAID))
 
-	if appuser.Name == "" || appuser.Email == "" || appuser.MiBAID == "" {
+	if nameLength == 0 || (emailLength == 0 && mibaIDLength == 0) {
 		return false
 	}
 
@@ -143,7 +147,14 @@ func hasAppUser(request *parser.Request) bool {
 }
 
 func getAppUser(dbs *databases, frame *frame) (models.AppUser, error) {
-	getResult := models.GetAppUser(frame.request.User.MiBAID, dbs.read)
+	var getResult *gorm.DB
+
+	if hasMibaID := len(strings.TrimSpace(frame.request.User.MiBAID)); hasMibaID > 0 {
+		getResult = models.GetAppUser(frame.request.User.MiBAID, dbs.read)
+	} else {
+		getResult = models.GetAppUserByEmail(frame.request.User.Email, dbs.read)
+	}
+
 	getErrorList := getResult.GetErrors()
 
 	if getResult.RecordNotFound() {
@@ -197,7 +208,7 @@ func attachAppUser(rating *models.Rating, dbs *databases, frame *frame) error {
 func hasBrowser(request *parser.Request) bool {
 	browser := request.Browser
 
-	if browser.Name == "" {
+	if len(strings.TrimSpace(browser.Name)) == 0 {
 		return false
 	}
 
@@ -254,8 +265,10 @@ func attachBrowser(rating *models.Rating, dbs *databases, frame *frame) error {
  */
 func hasDevice(request *parser.Request) bool {
 	device := request.Device
+	nameLength := len(strings.TrimSpace(device.Name))
+	brandLength := len(strings.TrimSpace(device.Brand))
 
-	if device.Name == "" || device.Brand == "" {
+	if nameLength == 0 && brandLength == 0 {
 		return false
 	}
 
