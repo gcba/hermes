@@ -29,7 +29,7 @@ type (
 	device struct {
 		Name   string `json:"name" validate:"required,alphanum,gte=1,lte=30"`
 		Brand  string `json:"brand" validate:"required,alphanum,gte=1,lte=30"`
-		Screen screen `json:"screen" validate:"required,dive,required"`
+		Screen screen `json:"screen" validate:"required"`
 	}
 
 	screen struct {
@@ -49,8 +49,8 @@ type (
 		Description string   `json:"description" validate:"alphanum,gte=3,lte=30,omitempty"`
 		Comment     string   `json:"comment" validate:"alphanum,gte=3,lte=1000,omitempty"`
 		Range       string   `json:"range" validate:"required,len=32,alphanum"` // The range key
-		App         app      `json:"app" validate:"required,dive,required"`
-		Platform    platform `json:"platform" validate:"required,dive,required"`
+		App         app      `json:"app" validate:"required"`
+		Platform    platform `json:"platform" validate:"required"`
 		User        *user    `json:"user" validate:"omitempty"`
 		Device      *device  `json:"device" validate:"omitempty"`
 		Browser     *browser `json:"browser" validate:"omitempty"`
