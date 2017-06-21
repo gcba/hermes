@@ -195,8 +195,8 @@ Las calificaciones de las apps.
 |rating          |smallint              |       |       |       |       |       |
 |description     |varchar(30)           |       |       |X      |       |       |
 |app_version     |varchar(15)           |       |       |X      |       |       |
-|platform_version|varchar(15)           |       |       |X      |       |       |
 |browser_version |varchar(15)           |       |       |X      |       |       |
+|platform_version|varchar(15)           |       |       |       |       |       |
 |has_message     |bool                  |false  |       |       |       |X      |
 |app_id          |int                   |       |X      |       |       |X      |
 |range_id        |int                   |       |X      |       |       |X      |
