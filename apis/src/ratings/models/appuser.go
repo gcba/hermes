@@ -27,6 +27,13 @@ func GetAppUser(mibaID string, db *gorm.DB) *gorm.DB { // TODO: Check actual mib
 	return db.Where(&AppUser{MiBAID: mibaID}).First(&result)
 }
 
+// GetAppUserByEmail gets an app user by email
+func GetAppUserByEmail(email string, db *gorm.DB) *gorm.DB {
+	var result AppUser
+
+	return db.Where(&AppUser{Email: email}).First(&result)
+}
+
 // CreateAppUser creates a new app user
 func CreateAppUser(appuser *AppUser, db *gorm.DB) *gorm.DB {
 	return db.Create(appuser)
