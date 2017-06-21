@@ -1,5 +1,5 @@
-hash: 83a75ea970d3b1be1d553ecbb0c09a5adb04cafb290cccae1a75d8a489792a82
-updated: 2017-06-19T17:43:47.619123176-03:00
+hash: 02c7ea06235b993862660c9fd9747f469f8b48d1096a76cc5d73a66f96a5c620
+updated: 2017-06-21T10:51:12.832027288-03:00
 imports:
 - name: github.com/dchest/uniuri
   version: 8902c56451e9b58ff940bbe5fec35d5f9c04584a
@@ -38,7 +38,7 @@ imports:
 - name: github.com/k0kubun/pp
   version: 027a6d1765d673d337e687394dbe780dd64e2a1e
 - name: github.com/labstack/echo
-  version: 1049c9613cd371b7ea8f219404c9a821734781ed
+  version: 7676f85ef9d4a50797e17b30c4b0b1cb3c7c532a
   subpackages:
   - '...'
   - middleware
@@ -65,6 +65,8 @@ imports:
   subpackages:
   - assert
   - require
+- name: github.com/unrolled/secure
+  version: 179957f53e4db0bcd04dd42c95b07b1d12c34f5e
 - name: github.com/valyala/bytebufferpool
   version: e746df99fe4a3986f4d4f79e13c1e0117ce9c2f7
 - name: github.com/valyala/fasttemplate
