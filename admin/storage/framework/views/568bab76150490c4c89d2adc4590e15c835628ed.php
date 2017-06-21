@@ -132,13 +132,10 @@
     </style>
 <?php $__env->stopSection(); ?>
 
-<?php $__env->startSection('head'); ?>
-    <script type="text/javascript" src="<?php echo e(voyager_asset('lib/js/jsonarea/jsonarea.min.js')); ?>"></script>
-<?php $__env->stopSection(); ?>
-
 <?php $__env->startSection('page_header'); ?>
     <h1 class="page-title">
-        <i class="voyager-settings"></i> Settings
+        <i class="voyager-settings"></i> <?php echo e(__('voyager.generic.settings')); ?>
+
     </h1>
 <?php $__env->stopSection(); ?>
 
@@ -148,13 +145,13 @@
         <?php echo $__env->make('voyager::alerts', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
         <?php if(config('voyager.show_dev_tips')): ?>
         <div class="alert alert-info">
-            <strong>How To Use:</strong>
-            <p>You can get the value of each setting anywhere on your site by calling <code>Voyager::setting('key')</code></p>
+            <strong><?php echo e(__('voyager.generic.how_to_use')); ?>:</strong>
+            <p><?php echo e(__('voyager.settings.usage_help')); ?> <code>Voyager::setting('key')</code></p>
         </div>
         <?php endif; ?>
     </div>
 
-    <div class="page-content container-fluid">
+    <div class="page-content settings container-fluid">
         <form action="<?php echo e(route('voyager.settings.update')); ?>" method="POST" enctype="multipart/form-data">
             <?php echo e(method_field("PUT")); ?>
 
@@ -245,7 +242,7 @@
                     <?php endif; ?>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </div>
-            <button type="submit" class="btn btn-primary pull-right">Save Settings</button>
+            <button type="submit" class="btn btn-primary pull-right"><?php echo e(__('voyager.settings.save')); ?></button>
         </form>
 
         <div style="clear:both"></div>
@@ -253,63 +250,52 @@
         <div class="panel" style="margin-top:10px;">
             <div class="panel-heading new-setting">
                 <hr>
-                <h3 class="panel-title"><i class="voyager-plus"></i> New Setting</h3>
+                <h3 class="panel-title"><i class="voyager-plus"></i> <?php echo e(__('voyager.settings.new')); ?></h3>
             </div>
             <div class="panel-body">
                 <form action="<?php echo e(route('voyager.settings.store')); ?>" method="POST">
                     <?php echo e(csrf_field()); ?>
 
                     <div class="col-md-4">
-                        <label for="display_name">Name</label>
-                        <input type="text" class="form-control" name="display_name" placeholder="Setting name ex: Admin Title" required="required">
+                        <label for="display_name"><?php echo e(__('voyager.generic.name')); ?></label>
+                        <input type="text" class="form-control" name="display_name" placeholder="<?php echo e(__('voyager.settings.help_name')); ?>" required="required">
                     </div>
                     <div class="col-md-4">
-                        <label for="key">Key</label>
-                        <input type="text" class="form-control" name="key" placeholder="Setting key ex: admin_title" required="required">
+                        <label for="key"><?php echo e(__('voyager.generic.key')); ?></label>
+                        <input type="text" class="form-control" name="key" placeholder="<?php echo e(__('voyager.settings.help_key')); ?>" required="required">
                     </div>
                     <div class="col-md-4">
-                        <label for="asdf">Type</label>
+                        <label for="asdf"><?php echo e(__('voyager.generic.type')); ?></label>
                         <select name="type" class="form-control" required="required">
-                            <option value="">Choose type</option>
-                            <option value="text">Text Box</option>
-                            <option value="text_area">Text Area</option>
-                            <option value="rich_text_box">Rich Textbox</option>
-                            <option value="code_editor">Code Editor</option>
-                            <option value="checkbox">Check Box</option>
-                            <option value="radio_btn">Radio Button</option>
-                            <option value="select_dropdown">Select Dropdown</option>
-                            <option value="file">File</option>
-                            <option value="image">Image</option>
+                            <option value=""><?php echo e(__('voyager.generic.choose_type')); ?></option>
+                            <option value="text"><?php echo e(__('voyager.form.type_textbox')); ?></option>
+                            <option value="text_area"><?php echo e(__('voyager.form.type_textarea')); ?></option>
+                            <option value="rich_text_box"><?php echo e(__('voyager.form.type_richtextbox')); ?></option>
+                            <option value="code_editor"><?php echo e(__('voyager.form.type_codeeditor')); ?></option>
+                            <option value="checkbox"><?php echo e(__('voyager.form.type_checkbox')); ?></option>
+                            <option value="radio_btn"><?php echo e(__('voyager.form.type_radiobutton')); ?></option>
+                            <option value="select_dropdown"><?php echo e(__('voyager.form.type_selectdropdown')); ?></option>
+                            <option value="file"><?php echo e(__('voyager.form.type_file')); ?></option>
+                            <option value="image"><?php echo e(__('voyager.form.type_image')); ?></option>
                         </select>
                     </div>
                     <div class="col-md-12">
-                        <a id="toggle_options"><i class="voyager-double-down"></i> OPTIONS</a>
+                        <a id="toggle_options"><i class="voyager-double-down"></i> <?php echo e(strtoupper(__('voyager.generic.options'))); ?></a>
                         <div class="new-settings-options">
-                            <label for="options">Options
-                                <small>(optional, only applies to certain types like dropdown box or radio button)
-                                </small>
+                            <label for="options"><?php echo e(__('voyager.generic.options')); ?>
+
+                                <small><?php echo e(__('voyager.settings.help_option')); ?></small>
                             </label>
                             <div id="options_editor" class="form-control min_height_200" data-language="json"></div>
                             <textarea id="options_textarea" name="details" class="hidden"></textarea>
-                            <div id="valid_options" class="alert-success alert" style="display:none">Valid Json</div>
-                            <div id="invalid_options" class="alert-danger alert" style="display:none">Invalid Json</div>
+                            <div id="valid_options" class="alert-success alert" style="display:none"><?php echo e(__('voyager.json.valid')); ?></div>
+                            <div id="invalid_options" class="alert-danger alert" style="display:none"><?php echo e(__('voyager.json.invalid')); ?></div>
                         </div>
                     </div>
-                    <script>
-                        $('document').ready(function () {
-                            $('#toggle_options').click(function () {
-                                $('.new-settings-options').toggle();
-                                if ($('#toggle_options .voyager-double-down').length) {
-                                    $('#toggle_options .voyager-double-down').removeClass('voyager-double-down').addClass('voyager-double-up');
-                                } else {
-                                    $('#toggle_options .voyager-double-up').removeClass('voyager-double-up').addClass('voyager-double-down');
-                                }
-                            });
-                        });
-                    </script>
                     <div style="clear:both"></div>
                     <button type="submit" class="btn btn-primary pull-right new-setting-btn">
-                        <i class="voyager-plus"></i> Add New Setting
+                        <i class="voyager-plus"></i> <?php echo e(__('voyager.settings.add_new')); ?>
+
                     </button>
                     <div style="clear:both"></div>
                 </form>
@@ -321,11 +307,12 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="<?php echo e(__('voyager.generic.close')); ?>">
                         <span aria-hidden="true">&times;</span>
                     </button>
                     <h4 class="modal-title">
-                        <i class="voyager-trash"></i> Are you sure you want to delete the <span id="delete_setting_title"></span> Setting?
+                        <i class="voyager-trash"></i> <?php echo __('voyager.settings.delete_question', ['setting' => '<span id="delete_setting_title"></span>']); ?>
+
                     </h4>
                 </div>
                 <div class="modal-footer">
@@ -334,16 +321,28 @@
 
                         <?php echo e(csrf_field()); ?>
 
-                        <input type="submit" class="btn btn-danger pull-right delete-confirm" value="Yes, Delete This Setting">
+                        <input type="submit" class="btn btn-danger pull-right delete-confirm" value="<?php echo e(__('voyager.settings.delete_confirm')); ?>">
                     </form>
-                    <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-default pull-right" data-dismiss="modal"><?php echo e(__('voyager.generic.cancel')); ?></button>
                 </div>
             </div>
         </div>
     </div>
 
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('javascript'); ?>
     <script>
         $('document').ready(function () {
+            $('#toggle_options').click(function () {
+                $('.new-settings-options').toggle();
+                if ($('#toggle_options .voyager-double-down').length) {
+                    $('#toggle_options .voyager-double-down').removeClass('voyager-double-down').addClass('voyager-double-up');
+                } else {
+                    $('#toggle_options .voyager-double-up').removeClass('voyager-double-up').addClass('voyager-double-down');
+                }
+            });
+
             $('.voyager-trash').click(function () {
                 var display = $(this).data('display-name') + '/' + $(this).data('display-key');
 
@@ -355,9 +354,7 @@
             $('.toggleswitch').bootstrapToggle();
         });
     </script>
-<?php $__env->stopSection(); ?>
 
-<?php $__env->startSection('javascript'); ?>
     <iframe id="form_target" name="form_target" style="display:none"></iframe>
     <form id="my_form" action="<?php echo e(route('voyager.upload')); ?>" target="form_target" method="POST" enctype="multipart/form-data" style="width:0;height:0;overflow:hidden">
         <?php echo e(csrf_field()); ?>
@@ -366,16 +363,13 @@
         <input type="hidden" name="type_slug" id="type_slug" value="settings">
     </form>
 
-    <script src="<?php echo e(voyager_asset('lib/js/tinymce/tinymce.min.js')); ?>"></script>
-    <script src="<?php echo e(voyager_asset('js/voyager_tinymce.js')); ?>"></script>
-    <script src="<?php echo e(voyager_asset('lib/js/ace/ace.js')); ?>"></script>
-    <script src="<?php echo e(voyager_asset('js/voyager_ace_editor.js')); ?>"></script>
     <script>
         var options_editor = ace.edit('options_editor');
         options_editor.getSession().setMode("ace/mode/json");
 
         var options_textarea = document.getElementById('options_textarea');
         options_editor.getSession().on('change', function() {
+            console.log(options_editor.getValue());
             options_textarea.value = options_editor.getValue();
         });
     </script>

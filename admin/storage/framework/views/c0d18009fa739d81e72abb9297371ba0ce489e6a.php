@@ -1,13 +1,9 @@
-<?php $__env->startSection('css'); ?>
-    <script type="text/javascript" src="<?php echo e(voyager_asset('js/vue21.min.js')); ?>"></script>
-    <link rel="stylesheet" href="<?php echo e(voyager_asset('css/database.css')); ?>">
-<?php $__env->stopSection(); ?>
-
 <?php $__env->startSection('page_header'); ?>
     <h1 class="page-title">
-        <i class="voyager-data"></i> Database
+        <i class="voyager-data"></i> <?php echo e(__('voyager.generic.database')); ?>
+
         <a href="<?php echo e(route('voyager.database.create')); ?>" class="btn btn-success"><i class="voyager-plus"></i>
-            Create New Table</a>
+            <?php echo e(__('voyager.database.create_new_table')); ?></a>
     </h1>
 <?php $__env->stopSection(); ?>
 
@@ -21,9 +17,9 @@
                 <table class="table table-striped database-tables">
                     <thead>
                         <tr>
-                            <th>Table Name</th>
-                            <th>BREAD/CRUD Actions</th>
-                            <th style="text-align:right">Table Actions</th>
+                            <th><?php echo e(__('voyager.database.table_name')); ?></th>
+                            <th><?php echo e(__('voyager.database.bread_crud_actions')); ?></th>
+                            <th style="text-align:right"><?php echo e(__('voyager.database.table_actions')); ?></th>
                         </tr>
                     </thead>
 
@@ -49,16 +45,19 @@
                             <?php if($table->dataTypeId): ?>
                                 <a href="<?php echo e(route('voyager.database.bread.edit', $table->name)); ?>"
                                    class="btn-sm btn-default edit">
-                                   Edit BREAD
+                                   <?php echo e(__('voyager.database.edit_bread')); ?>
+
                                 </a>
                                 <div data-id="<?php echo e($table->dataTypeId); ?>" data-name="<?php echo e($table->name); ?>"
                                      class="btn-sm btn-danger delete" style="display:inline">
-                                     Delete BREAD
+                                     <?php echo e(__('voyager.database.delete_bread')); ?>
+
                                 </div>
                             <?php else: ?>
                                 <a href="<?php echo e(route('voyager.database.bread.create', ['name' => $table->name])); ?>"
                                    class="btn-sm btn-default">
-                                    <i class="voyager-plus"></i> Add BREAD to this table
+                                    <i class="voyager-plus"></i> <?php echo e(__('voyager.database.add_bread')); ?>
+
                                 </a>
                             <?php endif; ?>
                             </div>
@@ -67,16 +66,19 @@
                         <td class="actions">
                             <a class="btn-danger btn-sm pull-right delete_table <?php if($table->dataTypeId): ?> remove-bread-warning <?php endif; ?>"
                                data-table="<?php echo e($table->name); ?>" style="display:inline; cursor:pointer;">
-                               <i class="voyager-trash"></i> Delete
+                               <i class="voyager-trash"></i> <?php echo e(__('voyager.generic.delete')); ?>
+
                             </a>
                             <a href="<?php echo e(route('voyager.database.edit', $table->name)); ?>"
                                class="btn-sm btn-primary pull-right" style="display:inline; margin-right:10px;">
-                               <i class="voyager-edit"></i> Edit
+                               <i class="voyager-edit"></i> <?php echo e(__('voyager.generic.edit')); ?>
+
                             </a>
                             <a href="<?php echo e(route('voyager.database.show', $table->name)); ?>"
                                data-name="<?php echo e($table->name); ?>"
                                class="btn-sm btn-warning pull-right desctable" style="display:inline; margin-right:10px;">
-                               <i class="voyager-eye"></i> View
+                               <i class="voyager-eye"></i> <?php echo e(__('voyager.generic.edit')); ?>
+
                             </a>
                         </td>
                     </tr>
@@ -90,19 +92,18 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                    <button type="button" class="close" data-dismiss="modal" aria-label="<?php echo e(__('voyager.generic.close')); ?>"><span
                                 aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title"><i class="voyager-trash"></i> Are you sure you want to delete the BREAD for
-                        the <span id="delete_builder_name"></span> table?</h4>
+                    <h4 class="modal-title"><i class="voyager-trash"></i>  <?php echo e(__('voyager.database.delete_table_bread_quest', ['table' => '<span id="delete_builder_name"></span>'])); ?></h4>
                 </div>
                 <div class="modal-footer">
                     <form action="<?php echo e(route('voyager.database.bread.delete', ['id' => null])); ?>" id="delete_builder_form" method="POST">
                         <?php echo e(method_field('DELETE')); ?>
 
                         <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
-                        <input type="submit" class="btn btn-danger" value="Yes, remove the BREAD">
+                        <input type="submit" class="btn btn-danger" value="<?php echo e(__('voyager.database.delete_table_bread_conf')); ?>">
                     </form>
-                    <button type="button" class="btn btn-outline pull-right" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-outline pull-right" data-dismiss="modal"><?php echo e(__('voyager.generic.cancel')); ?></button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
@@ -112,19 +113,19 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                    <button type="button" class="close" data-dismiss="modal" aria-label="<?php echo e(__('voyager.generic.close')); ?>"><span
                                 aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title"><i class="voyager-trash"></i> Are you sure you want to delete the <span
-                                id="delete_table_name"></span> table?</h4>
+                    <h4 class="modal-title"><i class="voyager-trash"></i> <?php echo e(__('voyager.database.delete_table_bread_quest', ['table' => '<span id="delete_builder_name"></span>'])); ?></h4>
                 </div>
                 <div class="modal-footer">
                     <form action="<?php echo e(route('voyager.database.destroy', ['database' => '__database'])); ?>" id="delete_table_form" method="POST">
                         <?php echo e(method_field('DELETE')); ?>
 
                         <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
-                        <input type="submit" class="btn btn-danger pull-right" value="Yes, delete this table">
+                        <input type="submit" class="btn btn-danger pull-right" value="<?php echo e(__('voyager.database.delete_table_confirm')); ?>">
                         <button type="button" class="btn btn-outline pull-right" style="margin-right:10px;"
-                                data-dismiss="modal">Cancel
+                                data-dismiss="modal"><?php echo e(__('voyager.generic.cancel')); ?>
+
                         </button>
                     </form>
 
@@ -137,7 +138,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                    <button type="button" class="close" data-dismiss="modal" aria-label="<?php echo e(__('voyager.generic.close')); ?>"><span
                                 aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title"><i class="voyager-data"></i> {{ table.name }}</h4>
                 </div>
@@ -145,12 +146,12 @@
                     <table class="table table-striped">
                         <thead>
                         <tr>
-                            <th>Field</th>
-                            <th>Type</th>
-                            <th>Null</th>
-                            <th>Key</th>
-                            <th>Default</th>
-                            <th>Extra</th>
+                            <th><?php echo e(__('voyager.database.field')); ?></th>
+                            <th><?php echo e(__('voyager.database.type')); ?></th>
+                            <th><?php echo e(__('voyager.database.null')); ?></th>
+                            <th><?php echo e(__('voyager.database.key')); ?></th>
+                            <th><?php echo e(__('voyager.database.default')); ?></th>
+                            <th><?php echo e(__('voyager.database.extra')); ?></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -166,7 +167,7 @@
                     </table>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-outline pull-right" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-outline pull-right" data-dismiss="modal"><?php echo e(__('voyager.generic.close')); ?></button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
