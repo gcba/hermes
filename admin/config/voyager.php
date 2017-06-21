@@ -142,20 +142,6 @@ return [
             'url'   => 'admin/users',
             'image' => '/images/widget-backgrounds/02.png',
         ],
-        [
-            'name'  => 'Post',
-            'icon'  => 'voyager-news',
-            'model' => TCG\Voyager\Models\Post::class,
-            'url'   => 'admin/posts',
-            'image' => '/images/widget-backgrounds/03.png',
-        ],
-        [
-            'name'  => 'Page',
-            'icon'  => 'voyager-file-text',
-            'model' => TCG\Voyager\Models\Page::class,
-            'url'   => 'admin/pages',
-            'image' => '/images/widget-backgrounds/04.png',
-        ],
     ],
 
     /*
@@ -192,8 +178,6 @@ return [
 
         'widgets' => [
             'TCG\\Voyager\\Widgets\\UserDimmer',
-            'TCG\\Voyager\\Widgets\\PostDimmer',
-            'TCG\\Voyager\\Widgets\\PageDimmer',
         ],
 
     ],

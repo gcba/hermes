@@ -4,7 +4,7 @@
 
 <?php $__env->startSection('page_header'); ?>
     <h1 class="page-title">
-        <i class="<?php echo e($dataType->icon); ?>"></i> <?php if(isset($dataTypeContent->id)): ?><?php echo e('Edit'); ?><?php else: ?><?php echo e('New'); ?><?php endif; ?> <?php echo e($dataType->display_name_singular); ?>
+        <i class="<?php echo e($dataType->icon); ?>"></i> <?php if(isset($dataTypeContent->id)): ?><?php echo e(__('voyager.generic.edit')); ?><?php else: ?><?php echo e(__('voyager.generic.new')); ?><?php endif; ?> <?php echo e($dataType->display_name_singular); ?>
 
     </h1>
 <?php $__env->stopSection(); ?>
@@ -17,7 +17,7 @@
                 <div class="panel panel-bordered">
 
                     <div class="panel-heading">
-                        <h3 class="panel-title"><?php if(isset($dataTypeContent->id)): ?><?php echo e('Edit'); ?><?php else: ?><?php echo e('Add New'); ?><?php endif; ?> <?php echo e($dataType->display_name_singular); ?></h3>
+                        <h3 class="panel-title"><?php if(isset($dataTypeContent->id)): ?><?php echo e(__('voyager.generic.edit')); ?><?php else: ?><?php echo e(__('voyager.generic.add_new')); ?><?php endif; ?> <?php echo e($dataType->display_name_singular); ?></h3>
                     </div>
                     <!-- /.box-header -->
                     <!-- form start -->
@@ -36,32 +36,32 @@
 
                         <div class="panel-body">
                             <div class="form-group">
-                                <label for="name">Name</label>
+                                <label for="name"><?php echo e(__('voyager.generic.name')); ?></label>
                                 <input type="text" class="form-control" name="name"
-                                    placeholder="Name" id="name"
+                                    placeholder="<?php echo e(__('voyager.generic.name')); ?>" id="name"
                                     value="<?php if(isset($dataTypeContent->name)): ?><?php echo e(old('name', $dataTypeContent->name)); ?><?php else: ?><?php echo e(old('name')); ?><?php endif; ?>">
                             </div>
 
                             <div class="form-group">
-                                <label for="name">Email</label>
+                                <label for="name"><?php echo e(__('voyager.generic.email')); ?></label>
                                 <input type="text" class="form-control" name="email"
-                                       placeholder="Email" id="email"
+                                       placeholder="<?php echo e(__('voyager.generic.email')); ?>" id="email"
                                        value="<?php if(isset($dataTypeContent->email)): ?><?php echo e(old('email', $dataTypeContent->email)); ?><?php else: ?><?php echo e(old('email')); ?><?php endif; ?>">
                             </div>
 
                             <div class="form-group">
-                                <label for="password">Password</label>
+                                <label for="password"><?php echo e(__('voyager.profile.password')); ?></label>
                                 <?php if(isset($dataTypeContent->password)): ?>
                                     <br>
-                                    <small>Leave empty to keep the same</small>
+                                    <small><?php echo e(__('voyager.profile.password_hint')); ?></small>
                                 <?php endif; ?>
                                 <input type="password" class="form-control" name="password"
-                                       placeholder="Password" id="password"
+                                       placeholder="<?php echo e(__('voyager.profile.password')); ?>" id="password"
                                        value="">
                             </div>
 
                             <div class="form-group">
-                                <label for="password">Avatar</label>
+                                <label for="password"><?php echo e(__('voyager.profile.avatar')); ?></label>
                                 <?php if(isset($dataTypeContent->avatar)): ?>
                                     <img src="<?php echo e(Voyager::image( $dataTypeContent->avatar )); ?>"
                                          style="width:200px; height:auto; clear:both; display:block; padding:2px; border:1px solid #ddd; margin-bottom:10px;">
@@ -70,7 +70,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="role">User Role</label>
+                                <label for="role"><?php echo e(__('voyager.profile.user_role')); ?></label>
                                 <select name="role_id" id="role" class="form-control">
                                     <?php $roles = TCG\Voyager\Models\Role::all(); ?>
                                     <?php $__currentLoopData = $roles; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $role): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
@@ -84,7 +84,7 @@
                         </div><!-- panel-body -->
 
                         <div class="panel-footer">
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-primary"><?php echo e(__('voyager.generic.submit')); ?></button>
                         </div>
                     </form>
 
