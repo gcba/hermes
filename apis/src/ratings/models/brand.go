@@ -1,7 +1,6 @@
 package models
 
 import (
-	"reflect"
 	"time"
 
 	"github.com/jinzhu/gorm"
@@ -31,14 +30,4 @@ func GetBrand(name string, db *gorm.DB) *gorm.DB {
 // CreateBrand creates a new brand
 func CreateBrand(brand *Brand, db *gorm.DB) *gorm.DB {
 	return db.Create(brand)
-}
-
-func isPostgres(db *gorm.DB) bool {
-	driver := reflect.ValueOf(db.DB().Driver())
-
-	if driver.Type().String() == "*pq.Driver" {
-		return true
-	}
-
-	return false
 }
