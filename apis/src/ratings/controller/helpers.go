@@ -4,7 +4,6 @@ import (
 	"errors"
 	"fmt"
 	"net/http"
-	"strings"
 
 	"ratings/models"
 	"ratings/parser"
@@ -107,7 +106,7 @@ func getRange(db *gorm.DB, frame *frame) (models.Range, error) {
  */
 func hasAppUser(request *parser.Request) bool {
 	appuser := request.User
-	nameLength := len(strings.TrimSpace(appuser.Name))
+	nameLength := len(appuser.Name)
 	emailLength := len(appuser.Email)
 	mibaIDLength := len(appuser.MiBAID)
 
@@ -131,7 +130,7 @@ func getAppUser(dbs *databases, frame *frame) (models.AppUser, error) {
 
 	if getResult.RecordNotFound() {
 		appuser := &models.AppUser{
-			Name:   strings.TrimSpace(frame.request.User.Name),
+			Name:   frame.request.User.Name,
 			Email:  frame.request.User.Email,
 			MiBAID: frame.request.User.MiBAID}
 
@@ -180,7 +179,7 @@ func attachAppUser(rating *models.Rating, dbs *databases, frame *frame) error {
 func hasBrowser(request *parser.Request) bool {
 	browser := request.Browser
 
-	if len(strings.TrimSpace(browser.Name)) == 0 {
+	if len(browser.Name) == 0 {
 		return false
 	}
 
@@ -192,9 +191,7 @@ func getBrowser(dbs *databases, frame *frame) (models.Browser, error) {
 	getErrorList := getResult.GetErrors()
 
 	if getResult.RecordNotFound() {
-		browser := &models.Browser{
-			Name: strings.TrimSpace(frame.request.Browser.Name)}
-
+		browser := &models.Browser{Name: frame.request.Browser.Name}
 		createResult := models.CreateBrowser(browser, dbs.write)
 		createErrorList := createResult.GetErrors()
 
@@ -239,8 +236,8 @@ func attachBrowser(rating *models.Rating, dbs *databases, frame *frame) error {
  */
 func hasDevice(request *parser.Request) bool {
 	device := request.Device
-	nameLength := len(strings.TrimSpace(device.Name))
-	brandLength := len(strings.TrimSpace(device.Brand))
+	nameLength := len(device.Name)
+	brandLength := len(device.Brand)
 
 	if nameLength == 0 && brandLength == 0 {
 		return false
@@ -255,7 +252,7 @@ func getDevice(brand *models.Brand, platform *models.Platform, dbs *databases, f
 
 	if getResult.RecordNotFound() {
 		device := &models.Device{
-			Name:         strings.TrimSpace(frame.request.Device.Name),
+			Name:         frame.request.Device.Name,
 			ScreenWidth:  frame.request.Device.Screen.Width,
 			ScreenHeight: frame.request.Device.Screen.Height,
 			PPI:          frame.request.Device.Screen.PPI,
@@ -315,9 +312,7 @@ func getBrand(dbs *databases, frame *frame) (models.Brand, error) {
 	getErrorList := getResult.GetErrors()
 
 	if getResult.RecordNotFound() {
-		brand := &models.Brand{
-			Name: strings.TrimSpace(frame.request.Device.Brand)}
-
+		brand := &models.Brand{Name: frame.request.Device.Brand}
 		createResult := models.CreateBrand(brand, dbs.write)
 		createErrorList := createResult.GetErrors()
 
@@ -343,4 +338,17 @@ func getBrand(dbs *databases, frame *frame) (models.Brand, error) {
 
 		return models.Brand{}, err
 	}
+}
+
+func validateRating(from uint8, to uint8, frame *frame) error {
+	if (frame.request.Rating <= from) || (frame.request.Rating >= to) {
+		errorMessage := fmt.Sprintf("Error validating rating: %v is not in range(%v, %v)",
+			frame.request.Rating,
+			from,
+			to)
+
+		return responses.ErrorResponse(http.StatusUnprocessableEntity, errorMessage, frame.context)
+	}
+
+	return nil
 }
