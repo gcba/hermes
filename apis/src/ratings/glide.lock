@@ -1,5 +1,5 @@
-hash: 1ef59bc3779c5aed8630346e32f6590e1b5037df9e2158f7596233e7e27b8b25
-updated: 2017-06-21T23:08:04.979784367-03:00
+hash: 25842d6bbbe4ab5b98fc03fa158a15c4cdbd941417d6351f501fac80af16650c
+updated: 2017-06-21T23:18:22.051006815-03:00
 imports:
 - name: github.com/dchest/uniuri
   version: 8902c56451e9b58ff940bbe5fec35d5f9c04584a
@@ -66,6 +66,8 @@ imports:
   version: fc9e8d8ef48496124e79ae0df75490096eccf6fe
 - name: github.com/mattn/go-sqlite3
   version: cf7286f069c3ef596efcc87781a4653a2e7607bd
+- name: github.com/microcosm-cc/bluemonday
+  version: e79763773ab6222ca1d5a7cbd9d62d83c1f77081
 - name: github.com/stretchr/testify
   version: f6abca593680b2315d2075e0f5e2a9751e3f431a
   subpackages:
@@ -84,6 +86,8 @@ imports:
   version: feeb485667d1fdabe727840fe00adc22431bc86e
   subpackages:
   - context
+  - html
+  - html/atom
 - name: golang.org/x/sys
   version: fb4cac33e3196ff7f507ab9b2d2a44b0142f5b5a
   subpackages:

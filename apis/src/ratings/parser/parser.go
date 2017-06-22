@@ -7,9 +7,9 @@ import (
 
 	"ratings/responses"
 
-	"github.com/kennygrant/sanitize"
 	"github.com/labstack/echo"
 	"github.com/leebenson/conform"
+	"github.com/microcosm-cc/bluemonday"
 )
 
 type (
@@ -73,7 +73,7 @@ func Parse(context echo.Context) (*Request, error) {
 	}
 
 	conform.Strings(request)
-	escapeComment(request)
+	sanitizeComment(request)
 
 	return request, nil
 }
@@ -98,7 +98,8 @@ func validate(request *Request, context echo.Context) error {
 	return nil
 }
 
-func escapeComment(request *Request) {
-	request.Comment = sanitize.HTML(request.Comment)
-	request.Comment = template.JSEscapeString(request.Comment)
+func sanitizeComment(request *Request) {
+	sanitizer := bluemonday.StrictPolicy()
+
+	request.Comment = sanitizer.Sanitize(request.Comment)
 }
