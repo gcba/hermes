@@ -21,3 +21,4 @@ import:
 - package: github.com/leebenson/conform
 - package: github.com/etgryphon/stringUp
 - package: github.com/microcosm-cc/bluemonday
+- package: github.com/gavv/httpexpect

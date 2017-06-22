@@ -1,5 +1,5 @@
-hash: 25842d6bbbe4ab5b98fc03fa158a15c4cdbd941417d6351f501fac80af16650c
-updated: 2017-06-21T23:18:22.051006815-03:00
+hash: 5be126ba7414b9989c28aa330a80cdc437db958498965123254fe331505107bf
+updated: 2017-06-22T18:06:45.341458493-03:00
 imports:
 - name: github.com/dchest/uniuri
   version: 8902c56451e9b58ff940bbe5fec35d5f9c04584a
@@ -18,6 +18,8 @@ imports:
   version: a3b1354551a26449fbe05f5d855937f6e7acbd71
 - name: github.com/facebookgo/stats
   version: 1b76add642e42c6ffba7211ad7b3939ce654526e
+- name: github.com/gavv/httpexpect
+  version: d852bb8255b678d369ba96dc7647bac47e092c96
 - name: github.com/go-playground/locales
   version: 1e5f1161c6416a5ff48840eb8724a394e48cc534
   subpackages:
@@ -39,8 +41,6 @@ imports:
   - autoload
 - name: github.com/k0kubun/pp
   version: 027a6d1765d673d337e687394dbe780dd64e2a1e
-- name: github.com/kennygrant/sanitize
-  version: 6a0bfdde8629a3a3a7418a7eae45c54154692514
 - name: github.com/labstack/echo
   version: 935a60782cbbc55110e7bd4b33120e4567cbee43
   subpackages:
