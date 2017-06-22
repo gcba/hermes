@@ -37,7 +37,7 @@ class BrandDataRowsTableSeeder extends Seeder
                 'required'     => 1,
                 'browse'       => 1,
                 'read'         => 1,
-                'edit'         => 1,
+                'edit'         => 0,
                 'add'          => 0,
                 'delete'       => 0,
                 'details'      => '',
