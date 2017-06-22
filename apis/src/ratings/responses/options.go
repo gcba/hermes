@@ -26,11 +26,15 @@ type (
 var (
 	optionsRoot = Endpoint{
 		Method: "OPTIONS",
-		Path:   "/"}
+		Path:   "/",
+		Headers: &headers{
+			ContentType: "application/json; charset=utf-8"}}
 
 	optionsRatings = Endpoint{
 		Method: "OPTIONS",
-		Path:   "/ratings"}
+		Path:   "/ratings",
+		Headers: &headers{
+			ContentType: "application/json; charset=utf-8"}}
 
 	postRatings = Endpoint{
 		Method: "POST",
