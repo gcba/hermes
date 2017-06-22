@@ -65,7 +65,7 @@ class AppUserDataRowsTableSeeder extends Seeder
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'text',
-                'display_name' => 'ID MiBA',
+                'display_name' => 'id miBA',
                 'required'     => 1,
                 'browse'       => 1,
                 'read'         => 1,
@@ -108,5 +108,21 @@ class AppUserDataRowsTableSeeder extends Seeder
                 'order'        => 6,
             ])->save();
         }
+    }
+
+    /**
+     * [dataRow description].
+     *
+     * @param [type] $type  [description]
+     * @param [type] $field [description]
+     *
+     * @return [type] [description]
+     */
+    protected function dataRow($type, $field)
+    {
+        return DataRow::firstOrNew([
+                'data_type_id' => $type->id,
+                'field'        => $field,
+            ]);
     }
 }
