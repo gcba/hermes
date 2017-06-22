@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"strconv"
 
 	"ratings/controller"
 
@@ -9,6 +10,7 @@ import (
 	"github.com/go-playground/validator"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
+	"net/http"
 )
 
 type RequestValidator struct {
@@ -19,23 +21,29 @@ func (rv *RequestValidator) Validate(request interface{}) error {
 	return rv.validator.Struct(request)
 }
 
-func main() {
+func Handler(port int) http.Handler {
 	e := echo.New()
-	port := "3000"
 
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
 	e.Use(middleware.Secure())
 	e.Use(middleware.BodyLimit("10K"))
 
+	e.Server.Addr = ":" + strconv.Itoa(port)
 	e.Validator = &RequestValidator{validator: validator.New()} // TODO: Move this to parser.AttachValidator()
 
 	e.OPTIONS("/", controller.OptionsRoot)
 	e.OPTIONS("/ratings", controller.OptionsRatings)
 	e.POST("/ratings", controller.PostRatings)
 
-	fmt.Println("Started server on port", port)
+	return e
+}
 
-	e.Server.Addr = ":" + port
-	e.Logger.Fatal(gracehttp.Serve(e.Server))
+func main() {
+	port := 3000
+	handler := Handler(port).(*echo.Echo) // Casting via type assertion
+
+	fmt.Println("Started server on port", strconv.Itoa(port))
+
+	handler.Logger.Fatal(gracehttp.Serve(handler.Server))
 }
