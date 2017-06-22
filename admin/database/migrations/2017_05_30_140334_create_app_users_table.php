@@ -31,6 +31,6 @@ class CreateAppUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('app_users');
+        Schema::dropIfExists('appusers');
     }
 }
