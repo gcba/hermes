@@ -1,5 +1,5 @@
-hash: 1de4225d776bb69253b7f5d50581aec80d0d29668e50cdf14412c645293104bf
-updated: 2017-06-21T20:37:03.431785463-03:00
+hash: 1ef59bc3779c5aed8630346e32f6590e1b5037df9e2158f7596233e7e27b8b25
+updated: 2017-06-21T23:08:04.979784367-03:00
 imports:
 - name: github.com/dchest/uniuri
   version: 8902c56451e9b58ff940bbe5fec35d5f9c04584a
@@ -39,6 +39,8 @@ imports:
   - autoload
 - name: github.com/k0kubun/pp
   version: 027a6d1765d673d337e687394dbe780dd64e2a1e
+- name: github.com/kennygrant/sanitize
+  version: 6a0bfdde8629a3a3a7418a7eae45c54154692514
 - name: github.com/labstack/echo
   version: 935a60782cbbc55110e7bd4b33120e4567cbee43
   subpackages:
@@ -59,11 +61,11 @@ imports:
   - hstore
   - oid
 - name: github.com/mattn/go-colorable
-  version: ded68f7a9561c023e790de24279db7ebf473ea80
+  version: 941b50ebc6efddf4c41c8e4537a5f68a4e686b24
 - name: github.com/mattn/go-isatty
   version: fc9e8d8ef48496124e79ae0df75490096eccf6fe
 - name: github.com/mattn/go-sqlite3
-  version: 83772a7051f5e30d8e59746a9e43dfa706b72f3b
+  version: cf7286f069c3ef596efcc87781a4653a2e7607bd
 - name: github.com/stretchr/testify
   version: f6abca593680b2315d2075e0f5e2a9751e3f431a
   subpackages:
@@ -74,16 +76,16 @@ imports:
 - name: github.com/valyala/fasttemplate
   version: dcecefd839c4193db0d35b88ec65b4c12d360ab0
 - name: golang.org/x/crypto
-  version: e1a4589e7d3ea14a3352255d04b6f1a418845e5e
+  version: adbae1b6b6fb4b02448a0fc0dbbc9ba2b95b294d
   subpackages:
   - acme
   - acme/autocert
 - name: golang.org/x/net
-  version: dfe83d419c9403b40b19d08cdba2afec27b002f7
+  version: feeb485667d1fdabe727840fe00adc22431bc86e
   subpackages:
   - context
 - name: golang.org/x/sys
-  version: b90f89a1e7a9c1f6b918820b3daa7f08488c8594
+  version: fb4cac33e3196ff7f507ab9b2d2a44b0142f5b5a
   subpackages:
   - unix
 testImports:
