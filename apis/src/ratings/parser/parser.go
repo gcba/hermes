@@ -48,7 +48,7 @@ type (
 	// Request holds the mapped fields from the request's JSON body
 	Request struct {
 		Rating      uint8    `json:"rating" validate:"required,numeric,min=-127,max=127"`
-		Description string   `json:"description" validate:"alphanum,gte=3,lte=30,omitempty" conform:"trim"`
+		Description string   `json:"description" validate:"alphanum,gte=3,lte=30,omitempty" conform:"trim,title"`
 		Comment     string   `json:"comment" validate:"gte=3,lte=1000,omitempty" conform:"trim,ucfirst"`
 		Range       string   `json:"range" validate:"required,len=32,alphanum,excludesall= " conform:"lower"`
 		App         app      `json:"app" validate:"required"`
