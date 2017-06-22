@@ -15,6 +15,9 @@ class DatabaseSeeder extends Seeder
         $this->call(DataRowsTableSeeder::class);
         $this->call(AppDataRowsTableSeeder::class);
         $this->call(AppUserDataRowsTableSeeder::class);
+        $this->call(BrandDataRowsTableSeeder::class);
+        $this->call(BrowserDataRowsTableSeeder::class);
+        $this->call(PlatformDataRowsTableSeeder::class);
         $this->call(MenusTableSeeder::class);
         $this->call(MenuItemsTableSeeder::class);
         $this->call(RolesTableSeeder::class);
