@@ -2,7 +2,6 @@ package parser
 
 import (
 	"fmt"
-	"html/template"
 	"net/http"
 
 	"ratings/responses"
@@ -73,7 +72,7 @@ func Parse(context echo.Context) (*Request, error) {
 	}
 
 	conform.Strings(request)
-	sanitizeComment(request)
+	escape(request)
 
 	return request, nil
 }
@@ -98,8 +97,9 @@ func validate(request *Request, context echo.Context) error {
 	return nil
 }
 
-func sanitizeComment(request *Request) {
+func escape(request *Request) {
 	sanitizer := bluemonday.StrictPolicy()
 
 	request.Comment = sanitizer.Sanitize(request.Comment)
+	request.Description = sanitizer.Sanitize(request.Description)
 }
