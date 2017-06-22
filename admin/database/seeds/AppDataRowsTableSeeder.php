@@ -97,7 +97,7 @@ class AppDataRowsTableSeeder extends Seeder
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'text',
-                'display_name' => 'última modificación por',
+                'display_name' => 'modificado por',
                 'required'     => 0,
                 'browse'       => 1,
                 'read'         => 1,
