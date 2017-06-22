@@ -22,7 +22,7 @@ func GetBrand(name string, db *gorm.DB) *gorm.DB {
 	if isPostgres(db) {
 		query = "SELECT id FROM brands WHERE name ILIKE ?"
 	} else {
-		query = "SELECT id FROM brands WHERE name ILIKE ?"
+		query = "SELECT id FROM brands WHERE name LIKE ?"
 	}
 
 	return db.Raw(query, name).Scan(&result)
