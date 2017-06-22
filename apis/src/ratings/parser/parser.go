@@ -1,13 +1,13 @@
 package parser
 
 import (
-	"bytes"
 	"fmt"
 	"html/template"
 	"net/http"
 
 	"ratings/responses"
 
+	"github.com/kennygrant/sanitize"
 	"github.com/labstack/echo"
 	"github.com/leebenson/conform"
 )
@@ -73,10 +73,7 @@ func Parse(context echo.Context) (*Request, error) {
 	}
 
 	conform.Strings(request)
-
-	if err := escapeComment(request, context); err != nil {
-		return request, err
-	}
+	escapeComment(request)
 
 	return request, nil
 }
@@ -101,25 +98,7 @@ func validate(request *Request, context echo.Context) error {
 	return nil
 }
 
-func escapeComment(request *Request, context echo.Context) error {
-	comment := bytes.NewBufferString("")
-	commentTemplate, commentTemplateErr := template.New("Comment").Parse(`{{define "C"}{{.}}{{end}}`)
-
-	if commentTemplateErr != nil {
-		errorMessage := fmt.Sprintf("Error escaping comment: %s", commentTemplateErr.Error())
-
-		return responses.ErrorResponse(http.StatusInternalServerError, errorMessage, context)
-	}
-
-	commentErr := commentTemplate.ExecuteTemplate(comment, "C", request.Comment)
-
-	if commentErr != nil {
-		errorMessage := fmt.Sprintf("Error escaping comment: %s", commentErr.Error())
-
-		return responses.ErrorResponse(http.StatusInternalServerError, errorMessage, context)
-	}
-
-	request.Comment = comment.String()
-
-	return nil
+func escapeComment(request *Request) {
+	request.Comment = sanitize.HTML(request.Comment)
+	request.Comment = template.JSEscapeString(request.Comment)
 }
