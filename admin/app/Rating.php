@@ -19,9 +19,9 @@ class Rating extends Model
         'browser_version',
         'has_message',
         'app_id',
+        'platform_id',
         'range_id',
         'appuser_id',
-        'platform_id',
         'device_id',
         'browser_id'
     ];
