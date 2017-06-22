@@ -43,7 +43,7 @@ func PostRatings(context echo.Context) error {
 		return err
 	}
 
-	return responses.PostResponse(http.StatusOK, frame.context)
+	return responses.PostResponse(frame.context)
 }
 
 /*
