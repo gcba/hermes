@@ -2,7 +2,6 @@ package controller
 
 import (
 	"errors"
-	"net/http"
 
 	"ratings/database"
 	"ratings/models"
