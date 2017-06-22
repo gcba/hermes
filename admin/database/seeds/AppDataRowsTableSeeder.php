@@ -12,13 +12,6 @@ class AppDataRowsTableSeeder extends Seeder
     public function run()
     {
         $appDataType = DataType::where('slug', 'apps')->firstOrFail();
-        // $brandDataType = DataType::where('slug', 'brands')->firstOrFail();
-        // $browserDataType = DataType::where('slug', 'browsers')->firstOrFail();
-        // $deviceDataType = DataType::where('slug', 'devices')->firstOrFail();
-        // $messageDataType = DataType::where('slug', 'messages')->firstOrFail();
-        // $platformDataType = DataType::where('slug', 'platforms')->firstOrFail();
-        // $rangeDataType = DataType::where('slug', 'ranges')->firstOrFail();
-        // $ratingDataType = DataType::where('slug', 'ratings')->firstOrFail();
 
         $dataRow = $this->dataRow($appDataType, 'id');
         if (!$dataRow->exists) {
