@@ -2,14 +2,13 @@ package parser
 
 import (
 	"fmt"
-	"html/template"
 	"net/http"
 
 	"ratings/responses"
 
-	"github.com/kennygrant/sanitize"
 	"github.com/labstack/echo"
 	"github.com/leebenson/conform"
+	"github.com/microcosm-cc/bluemonday"
 )
 
 type (
@@ -73,7 +72,7 @@ func Parse(context echo.Context) (*Request, error) {
 	}
 
 	conform.Strings(request)
-	escapeComment(request)
+	escape(request)
 
 	return request, nil
 }
@@ -98,7 +97,9 @@ func validate(request *Request, context echo.Context) error {
 	return nil
 }
 
-func escapeComment(request *Request) {
-	request.Comment = sanitize.HTML(request.Comment)
-	request.Comment = template.JSEscapeString(request.Comment)
+func escape(request *Request) {
+	sanitizer := bluemonday.StrictPolicy()
+
+	request.Comment = sanitizer.Sanitize(request.Comment)
+	request.Description = sanitizer.Sanitize(request.Description)
 }
