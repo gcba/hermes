@@ -19,6 +19,13 @@ class Range extends Model
     ];
 
     /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = ['deleted_at'];
+
+    /**
      * Get the app this range belongs to.
      */
     public function app()
