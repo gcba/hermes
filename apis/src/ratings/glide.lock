@@ -1,6 +1,8 @@
-hash: 5be126ba7414b9989c28aa330a80cdc437db958498965123254fe331505107bf
-updated: 2017-06-22T18:06:45.341458493-03:00
+hash: 5c8177a4510468e4cd6c69f7a7795dabf9bd110fa38ee84fe766f5e252292c54
+updated: 2017-06-22T19:24:01.420896056-03:00
 imports:
+- name: github.com/ajg/form
+  version: cc2954064ec9ea8d93917f0f87456e11d7b881ad
 - name: github.com/dchest/uniuri
   version: 8902c56451e9b58ff940bbe5fec35d5f9c04584a
 - name: github.com/dgrijalva/jwt-go
@@ -88,6 +90,7 @@ imports:
   - context
   - html
   - html/atom
+  - publicsuffix
 - name: golang.org/x/sys
   version: fb4cac33e3196ff7f507ab9b2d2a44b0142f5b5a
   subpackages:
@@ -97,7 +100,52 @@ testImports:
   version: 04cdfd42973bb9c8589fd6a731800cf222fde1a9
   subpackages:
   - spew
+- name: github.com/fatih/structs
+  version: 7e5a8eef611ee84dd359503f3969f80df4c50723
+- name: github.com/gavv/monotime
+  version: 47d58efa69556a936a3c15eb2ed42706d968ab01
+- name: github.com/google/go-querystring
+  version: 53e6ce116135b80d037921a7fdd5138cf32d7a8a
+  subpackages:
+  - query
+- name: github.com/imkira/go-interpol
+  version: 5accad8134979a6ac504d456a6c7f1c53da237ca
+- name: github.com/klauspost/compress
+  version: f3dce52e0576655d55fd69e74b63da96ad1108f3
+  subpackages:
+  - flate
+  - gzip
+  - zlib
+- name: github.com/klauspost/cpuid
+  version: 09cded8978dc9e80714c4d85b0322337b0a1e5e0
+- name: github.com/moul/http2curl
+  version: 4e24498b31dba4683efb9d35c1c8a91e2eda28c8
 - name: github.com/pmezard/go-difflib
   version: d8ed2627bdf02c080bf22230dbb337003b7aba2d
   subpackages:
   - difflib
+- name: github.com/sergi/go-diff
+  version: 24e2351369ec4949b2ed0dc5c477afdd4c4034e8
+  repo: https://github.com/sergi/go-diff
+  subpackages:
+  - diffmatchpatch
+- name: github.com/valyala/fasthttp
+  version: 6ac0fd1a910c94aefb171ae56941833831e7c7fe
+  subpackages:
+  - fasthttputil
+  - stackless
+- name: github.com/xeipuuv/gojsonpointer
+  version: 6fe8760cad3569743d51ddbb243b26f8456742dc
+- name: github.com/xeipuuv/gojsonreference
+  version: e02fc20de94c78484cd5ffb007f8af96be030a45
+- name: github.com/xeipuuv/gojsonschema
+  version: 0c8571ac0ce161a5feb57375a9cdf148c98c0f70
+- name: github.com/yalp/jsonpath
+  version: 31a79c7593bb93eb10b163650d4a3e6ca190e4dc
+- name: github.com/yudai/gojsondiff
+  version: 9209d1532c51cabe0439993586a71c207b09a0ac
+  subpackages:
+  - formatter
+- name: github.com/yudai/golcs
+  version: d1c525dea8ce39ea9a783d33cf08932305373f2c
+  repo: https://github.com/yudai/golcs
