@@ -17,6 +17,7 @@ class CreateBrowsersTable extends Migration
             $table->increments('id');
             $table->string('name', 15)->unique();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

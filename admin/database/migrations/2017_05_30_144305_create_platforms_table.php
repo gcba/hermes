@@ -19,6 +19,7 @@ class CreatePlatformsTable extends Migration
             $table->char('key', 32)->unique();
             $table->index('key');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

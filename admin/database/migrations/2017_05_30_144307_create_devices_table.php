@@ -27,6 +27,7 @@ class CreateDevicesTable extends Migration
             $table->foreign('platform_id')->references('id')->on('platforms')->onDelete('set null');
             $table->index('platform_id');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

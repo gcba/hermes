@@ -21,6 +21,7 @@ class CreateAppUsersTable extends Migration
             $table->char('miba_id', 10)->unique();
             $table->index('miba_id');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

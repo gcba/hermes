@@ -41,6 +41,7 @@ class CreateRatingsTable extends Migration
             $table->foreign('browser_id')->references('id')->on('browsers')->onDelete('set null');
             $table->index('browser_id');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -23,6 +23,7 @@ class CreateAppsTable extends Migration
             $table->timestamps();
             $table->integer('modified_by')->unsigned()->nullable();
             $table->foreign('modified_by')->references('id')->on('users')->onDelete('set null');
+            $table->softDeletes();
         });
     }
 
