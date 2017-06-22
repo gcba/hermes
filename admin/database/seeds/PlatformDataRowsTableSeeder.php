@@ -4,7 +4,7 @@ use Illuminate\Database\Seeder;
 use TCG\Voyager\Models\DataRow;
 use TCG\Voyager\Models\DataType;
 
-class PlatformRowsTableSeeder extends Seeder
+class PlatformDataRowsTableSeeder extends Seeder
 {
     /**
      * Auto generated seed file.
@@ -67,8 +67,8 @@ class PlatformRowsTableSeeder extends Seeder
                 'type'         => 'timestamp',
                 'display_name' => 'última modificación',
                 'required'     => 0,
-                'browse'       => 0,
-                'read'         => 0,
+                'browse'       => 1,
+                'read'         => 1,
                 'edit'         => 0,
                 'add'          => 0,
                 'delete'       => 0,
