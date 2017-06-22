@@ -4,7 +4,6 @@ import (
 	"errors"
 	"fmt"
 	"net/http"
-	"strings"
 
 	"ratings/database"
 	"ratings/models"
@@ -54,7 +53,7 @@ func PostRatings(context echo.Context) error {
  */
 func newMessage(rating uint, db *gorm.DB, frame *frame) error {
 	message := &models.Message{
-		Message:   strings.TrimSpace(frame.request.Comment),
+		Message:   frame.request.Comment,
 		Direction: "in",
 		RatingID:  rating}
 
@@ -96,25 +95,19 @@ func newRating(dbs *databases, frame *frame) error {
 		return rangeErr
 	}
 
+	if err := validateRating(rangeRecord.From, rangeRecord.To, frame); err != nil {
+		return err
+	}
+
 	hasMessage := false
 
 	if len(frame.request.Comment) > 0 {
 		hasMessage = true
 	}
 
-	if (frame.request.Rating <= rangeRecord.From) || (frame.request.Rating >= rangeRecord.To) {
-		errorMessage := fmt.Sprintf(
-			"Error validating rating: %v is not in range(%v, %v)",
-			frame.request.Rating,
-			rangeRecord.From,
-			rangeRecord.To)
-
-		return responses.ErrorResponse(http.StatusUnprocessableEntity, errorMessage, frame.context)
-	}
-
 	rating := &models.Rating{
 		Rating:          frame.request.Rating,
-		Description:     strings.TrimSpace(frame.request.Description),
+		Description:     frame.request.Description,
 		AppVersion:      frame.request.App.Version,
 		PlatformVersion: frame.request.Platform.Version,
 		BrowserVersion:  frame.request.Browser.Version,
