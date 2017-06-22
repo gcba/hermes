@@ -15,9 +15,9 @@ func main() {
 	port := 3000
 
 	routes := map[string]echo.HandlerFunc{
-		"OptionsRoot":   controller.OptionsRoot,
-		"OptionsRating": controller.OptionsRatings,
-		"PostRatings":   controller.PostRatings}
+		"OptionsRoot":    controller.OptionsRoot,
+		"OptionsRatings": controller.OptionsRatings,
+		"PostRatings":    controller.PostRatings}
 
 	handler := handler.Handler(port, routes).(*echo.Echo) // Casting via type assertion
 

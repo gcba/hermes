@@ -13,9 +13,9 @@ import (
 
 func TestOptionsRoot(t *testing.T) {
 	routes := map[string]echo.HandlerFunc{
-		"OptionsRoot":   OptionsRoot,
-		"OptionsRating": OptionsRatings,
-		"PostRatings":   PostRatings}
+		"OptionsRoot":    OptionsRoot,
+		"OptionsRatings": OptionsRatings,
+		"PostRatings":    PostRatings}
 
 	handler := handler.Handler(3000, routes)
 	server := httptest.NewServer(handler)
