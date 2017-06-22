@@ -2,15 +2,16 @@ package responses
 
 import (
 	"github.com/labstack/echo"
+	"net/http"
 )
 
 type Post struct {
 	Meta meta `json:"meta"`
 }
 
-func PostResponse(status int, context echo.Context) error {
+func PostResponse(context echo.Context) error {
 	response := Post{
-		Meta: metas[status]}
+		Meta: metas[http.StatusCreated]}
 
-	return context.JSON(status, &response)
+	return context.JSON(http.StatusCreated, &response)
 }
