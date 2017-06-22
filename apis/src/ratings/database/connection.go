@@ -2,12 +2,21 @@ package database
 
 import (
 	"fmt"
+	"log"
 	"os"
+	"path"
+	"path/filepath"
 
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres" // postgres driver
 	_ "github.com/jinzhu/gorm/dialects/sqlite"   // sqlite driver
+	"github.com/joho/godotenv"
 )
+
+// Load enviroment variables
+var rootPath, _ = filepath.Abs("../")
+var envPath = path.Join(rootPath, ".env")
+var envErr = godotenv.Load(envPath)
 
 // Load environment
 var env = os.Getenv("API_RATINGS_ENV")
@@ -23,16 +32,6 @@ var writeDBName = os.Getenv("API_RATINGS_WRITEDB_NAME")
 var writeDBHost = os.Getenv("API_RATINGS_WRITEDB_HOST")
 var writeDBUser = os.Getenv("API_RATINGS_WRITEDB_USER")
 var writeDBPassword = os.Getenv("API_RATINGS_WRITEDB_PASSWORD")
-
-func connectDB(driver string, credentials string) *gorm.DB {
-	db, err := gorm.Open(driver, credentials)
-
-	if err != nil {
-		panic("Failed to connect to " + driver + " database. Error: " + err.Error())
-	}
-
-	return db
-}
 
 // GetReadDB connects to the read database and returns a pointer to the connection
 func GetReadDB() *gorm.DB {
@@ -78,4 +77,18 @@ func GetWriteDB() *gorm.DB {
 		writeDBPassword)
 
 	return connectDB("postgres", credentials)
+}
+
+func connectDB(driver string, credentials string) *gorm.DB {
+	if envErr != nil {
+		log.Fatal("Error loading .env file: ", envErr.Error())
+	}
+
+	db, dbErr := gorm.Open(driver, credentials)
+
+	if dbErr != nil {
+		log.Fatal("Failed to connect to " + driver + " database. Error: " + dbErr.Error())
+	}
+
+	return db
 }

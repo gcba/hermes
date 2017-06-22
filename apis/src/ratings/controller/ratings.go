@@ -2,7 +2,6 @@ package controller
 
 import (
 	"errors"
-	"fmt"
 	"net/http"
 
 	"ratings/database"
@@ -63,7 +62,7 @@ func newMessage(rating uint, db *gorm.DB, frame *frame) error {
 	if len(errorList) > 0 {
 		return errorsResponse(errorList, frame.context)
 	} else if value, ok := result.Value.(models.Message); ok {
-		fmt.Println("Created a new Message:", value)
+		frame.context.Logger().Info("Created a new Message:", value)
 
 		return nil
 	} else {
@@ -140,7 +139,7 @@ func newRating(dbs *databases, frame *frame) error {
 	if len(errorList) > 0 {
 		return errorsResponse(errorList, frame.context)
 	} else if value, ok := result.Value.(models.Rating); ok {
-		fmt.Println("Created a new Rating:", value)
+		frame.context.Logger().Info("Created a new Rating:", value)
 
 		if hasMessage {
 			if err := newMessage(value.ID, dbs.write, frame); err != nil {

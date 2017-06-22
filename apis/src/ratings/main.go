@@ -7,7 +7,6 @@ import (
 
 	"github.com/facebookgo/grace/gracehttp"
 	"github.com/go-playground/validator"
-	_ "github.com/joho/godotenv/autoload" // Loads config from .env file
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
 )

@@ -2,7 +2,6 @@ package controller
 
 import (
 	"errors"
-	"fmt"
 	"net/http"
 
 	"ratings/models"
@@ -140,7 +139,7 @@ func getAppUser(dbs *databases, frame *frame) (models.AppUser, error) {
 		if len(createErrorList) > 0 {
 			return models.AppUser{}, errorsResponse(createErrorList, frame.context)
 		} else if value, ok := createResult.Value.(models.AppUser); ok {
-			fmt.Println("Created a new AppUser:", createResult.Value)
+			frame.context.Logger().Info("Created a new AppUser:", createResult.Value)
 
 			return value, nil
 		} else {
@@ -198,7 +197,7 @@ func getBrowser(dbs *databases, frame *frame) (models.Browser, error) {
 		if len(createErrorList) > 0 {
 			return models.Browser{}, errorsResponse(createErrorList, frame.context)
 		} else if value, ok := createResult.Value.(models.Browser); ok {
-			fmt.Println("Created a new Browser:", createResult.Value)
+			frame.context.Logger().Info("Created a new Browser:", createResult.Value)
 
 			return value, nil
 		} else {
@@ -265,7 +264,7 @@ func getDevice(brand *models.Brand, platform *models.Platform, dbs *databases, f
 		if len(createErrorList) > 0 {
 			return models.Device{}, errorsResponse(createErrorList, frame.context)
 		} else if value, ok := createResult.Value.(models.Device); ok {
-			fmt.Println("Created a new Device:", createResult.Value)
+			frame.context.Logger().Info("Created a new Device:", createResult.Value)
 
 			return value, nil
 		} else {
@@ -319,7 +318,7 @@ func getBrand(dbs *databases, frame *frame) (models.Brand, error) {
 		if len(createErrorList) > 0 {
 			return models.Brand{}, errorsResponse(createErrorList, frame.context)
 		} else if value, ok := createResult.Value.(models.Brand); ok {
-			fmt.Println("Created a new Brand:", createResult.Value)
+			frame.context.Logger().Info("Created a new Brand:", createResult.Value)
 
 			return value, nil
 		} else {
