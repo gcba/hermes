@@ -3,7 +3,6 @@ package database
 import (
 	"fmt"
 	"os"
-	"path/filepath"
 
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres" // postgres driver
@@ -27,6 +26,7 @@ var writeDBPassword = os.Getenv("API_RATINGS_WRITEDB_PASSWORD")
 
 func connectDB(driver string, credentials string) *gorm.DB {
 	db, err := gorm.Open(driver, credentials)
+
 	if err != nil {
 		panic("Failed to connect to " + driver + " database. Error: " + err.Error())
 	}
@@ -37,7 +37,14 @@ func connectDB(driver string, credentials string) *gorm.DB {
 // GetReadDB connects to the read database and returns a pointer to the connection
 func GetReadDB() *gorm.DB {
 	if env != "PRODUCTION" {
-		return connectDB("sqlite3", filepath.Join(readDBHost, readDBName))
+		credentials := fmt.Sprintf(
+			"host=%s user=%s dbname=%s sslmode=disable password=%s", // TODO: Handle sslmode
+			readDBHost,
+			readDBUser,
+			readDBName,
+			readDBPassword)
+
+		return connectDB("postgres", credentials)
 	}
 
 	credentials := fmt.Sprintf(
@@ -53,7 +60,16 @@ func GetReadDB() *gorm.DB {
 // GetWriteDB connects to the write database and returns a pointer to the connection
 func GetWriteDB() *gorm.DB {
 	if env != "PRODUCTION" {
-		return connectDB("sqlite3", filepath.Join(writeDBHost, writeDBName))
+		credentials := fmt.Sprintf(
+			"host=%s user=%s dbname=%s sslmode=disable password=%s", // TODO: Handle sslmode
+			readDBHost,
+			readDBUser,
+			readDBName,
+			readDBPassword)
+
+		fmt.Println(credentials)
+
+		return connectDB("postgres", credentials)
 	}
 
 	credentials := fmt.Sprintf(
