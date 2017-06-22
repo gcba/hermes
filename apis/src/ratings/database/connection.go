@@ -67,8 +67,6 @@ func GetWriteDB() *gorm.DB {
 			readDBName,
 			readDBPassword)
 
-		fmt.Println(credentials)
-
 		return connectDB("postgres", credentials)
 	}
 
