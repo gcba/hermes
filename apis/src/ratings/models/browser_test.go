@@ -14,6 +14,8 @@ func TestCreateBrowser(t *testing.T) {
 	defer db.Close()
 
 	name := uniuri.New()
+	name = name[3:len(name)]
+
 	browser := Browser{Name: name}
 	result := db.Create(&browser)
 
@@ -33,6 +35,8 @@ func TestGetBrowser(t *testing.T) {
 	defer readDb.Close()
 
 	name := uniuri.New()
+	name = name[3:len(name)]
+
 	browser := Browser{Name: name}
 	record := writeDb.Create(&browser)
 
