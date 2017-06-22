@@ -4,7 +4,7 @@ use Illuminate\Database\Seeder;
 use TCG\Voyager\Models\DataRow;
 use TCG\Voyager\Models\DataType;
 
-class DeviceRowsTableSeeder extends Seeder
+class DeviceDataRowsTableSeeder extends Seeder
 {
     /**
      * Auto generated seed file.
