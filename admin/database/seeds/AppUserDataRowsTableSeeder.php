@@ -45,7 +45,7 @@ class AppUserDataRowsTableSeeder extends Seeder
             ])->save();
         }
 
-        $dataRow = $this->dataRow($userDataType, 'email');
+        $dataRow = $this->dataRow($appuserDataType, 'email');
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'text',

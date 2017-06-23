@@ -28,12 +28,12 @@ class CreateRatingsTable extends Migration
             $table->integer('range_id')->unsigned();
             $table->foreign('range_id')->references('id')->on('ranges')->onDelete('cascade');
             $table->index('range_id');
-            $table->integer('appuser_id')->unsigned();
+            $table->integer('appuser_id')->unsigned()->nullable();
             $table->foreign('appuser_id')->references('id')->on('appusers')->onDelete('cascade');
+            $table->index('appuser_id');
             $table->integer('platform_id')->unsigned();
             $table->foreign('platform_id')->references('id')->on('platforms')->onDelete('set null');
             $table->index('platform_id');
-            $table->index('appuser_id');
             $table->integer('device_id')->unsigned()->nullable();
             $table->foreign('device_id')->references('id')->on('devices')->onDelete('set null');
             $table->index('device_id');

@@ -11,6 +11,7 @@ import (
 
 	"github.com/jinzhu/gorm"
 	"github.com/labstack/echo"
+	// "github.com/k0kubun/pp"
 )
 
 type (
@@ -44,19 +45,16 @@ func errorsResponse(errors []error, context echo.Context) error {
 * App
 *
  */
-func getApp(db *gorm.DB, frame *frame) (models.App, error) {
+func getApp(db *gorm.DB, frame *frame) (*models.App, error) {
 	result := models.GetApp(frame.request.App.Key, db)
+
 	errorList := result.GetErrors()
 
 	if len(errorList) > 0 {
-		return models.App{}, errorsResponse(errorList, frame.context)
-	} else if value, ok := result.Value.(models.App); ok {
-		return value, nil
-	} else {
-		err := errorResponse(errors.New("Error trying to get an app from the database"), frame.context)
-
-		return models.App{}, err
+		return &models.App{}, errorsResponse(errorList, frame.context)
 	}
+
+	return result.Value.(*models.App), nil
 }
 
 /*
@@ -64,19 +62,15 @@ func getApp(db *gorm.DB, frame *frame) (models.App, error) {
 * Platform
 *
  */
-func getPlatform(db *gorm.DB, frame *frame) (models.Platform, error) {
+func getPlatform(db *gorm.DB, frame *frame) (*models.Platform, error) {
 	result := models.GetPlatform(frame.request.Platform.Key, db)
 	errorList := result.GetErrors()
 
 	if len(errorList) > 0 {
-		return models.Platform{}, errorsResponse(errorList, frame.context)
-	} else if value, ok := result.Value.(models.Platform); ok {
-		return value, nil
-	} else {
-		err := errorResponse(errors.New("Error trying to get a platform from the database"), frame.context)
-
-		return models.Platform{}, err
+		return &models.Platform{}, errorsResponse(errorList, frame.context)
 	}
+
+	return result.Value.(*models.Platform), nil
 }
 
 /*
@@ -84,19 +78,15 @@ func getPlatform(db *gorm.DB, frame *frame) (models.Platform, error) {
 * Range
 *
  */
-func getRange(db *gorm.DB, frame *frame) (models.Range, error) {
+func getRange(db *gorm.DB, frame *frame) (*models.Range, error) {
 	result := models.GetRange(frame.request.Range, db)
 	errorList := result.GetErrors()
 
 	if len(errorList) > 0 {
-		return models.Range{}, errorsResponse(errorList, frame.context)
-	} else if value, ok := result.Value.(models.Range); ok {
-		return value, nil
-	} else {
-		err := errorResponse(errors.New("Error trying to get a range from the database"), frame.context)
-
-		return models.Range{}, err
+		return &models.Range{}, errorsResponse(errorList, frame.context)
 	}
+
+	return result.Value.(*models.Range), nil
 }
 
 /*
@@ -105,6 +95,10 @@ func getRange(db *gorm.DB, frame *frame) (models.Range, error) {
 *
  */
 func hasAppUser(request *parser.Request) bool {
+	if request.User == nil {
+		return false
+	}
+
 	appuser := request.User
 	nameLength := len(appuser.Name)
 	emailLength := len(appuser.Email)
@@ -117,7 +111,7 @@ func hasAppUser(request *parser.Request) bool {
 	return true
 }
 
-func getAppUser(dbs *databases, frame *frame) (models.AppUser, error) {
+func getAppUser(dbs *databases, frame *frame) (*models.AppUser, error) {
 	var getResult *gorm.DB
 
 	if hasMibaID := len(frame.request.User.MiBAID); hasMibaID > 0 {
@@ -138,27 +132,17 @@ func getAppUser(dbs *databases, frame *frame) (models.AppUser, error) {
 		createErrorList := createResult.GetErrors()
 
 		if len(createErrorList) > 0 {
-			return models.AppUser{}, errorsResponse(createErrorList, frame.context)
-		} else if value, ok := createResult.Value.(models.AppUser); ok {
-			frame.context.Logger().Info("Created a new AppUser:", createResult.Value)
-
-			return value, nil
-		} else {
-			err := errorResponse(errors.New("Error trying to create an app user"), frame.context)
-
-			return models.AppUser{}, err
+			return &models.AppUser{}, errorsResponse(createErrorList, frame.context)
 		}
+
+		return createResult.Value.(*models.AppUser), nil
 	}
 
 	if len(getErrorList) > 0 {
-		return models.AppUser{}, errorsResponse(getErrorList, frame.context)
-	} else if value, ok := getResult.Value.(models.AppUser); ok {
-		return value, nil
-	} else {
-		err := errorResponse(errors.New("Error trying to get an app user from the database"), frame.context)
-
-		return models.AppUser{}, err
+		return &models.AppUser{}, errorsResponse(getErrorList, frame.context)
 	}
+
+	return getResult.Value.(*models.AppUser), nil
 }
 
 func attachAppUser(rating *models.Rating, dbs *databases, frame *frame) error {
@@ -177,6 +161,10 @@ func attachAppUser(rating *models.Rating, dbs *databases, frame *frame) error {
 *
  */
 func hasBrowser(request *parser.Request) bool {
+	if request.Browser == nil {
+		return false
+	}
+
 	browser := request.Browser
 
 	if len(browser.Name) == 0 {
@@ -186,7 +174,7 @@ func hasBrowser(request *parser.Request) bool {
 	return true
 }
 
-func getBrowser(dbs *databases, frame *frame) (models.Browser, error) {
+func getBrowser(dbs *databases, frame *frame) (*models.Browser, error) {
 	getResult := models.GetBrowser(frame.request.Browser.Name, dbs.read)
 	getErrorList := getResult.GetErrors()
 
@@ -196,37 +184,34 @@ func getBrowser(dbs *databases, frame *frame) (models.Browser, error) {
 		createErrorList := createResult.GetErrors()
 
 		if len(createErrorList) > 0 {
-			return models.Browser{}, errorsResponse(createErrorList, frame.context)
-		} else if value, ok := createResult.Value.(models.Browser); ok {
-			frame.context.Logger().Info("Created a new Browser:", createResult.Value)
-
-			return value, nil
-		} else {
-			err := errorResponse(errors.New("Error trying to create a browser"), frame.context)
-
-			return models.Browser{}, err
+			return &models.Browser{}, errorsResponse(createErrorList, frame.context)
 		}
+
+		return createResult.Value.(*models.Browser), nil
 	}
 
 	if len(getErrorList) > 0 {
-		return models.Browser{}, errorsResponse(getErrorList, frame.context)
-	} else if value, ok := getResult.Value.(models.Browser); ok {
-		return value, nil
-	} else {
-		err := errorResponse(errors.New("Error trying to get a browser from the database"), frame.context)
-
-		return models.Browser{}, err
+		return &models.Browser{}, errorsResponse(getErrorList, frame.context)
 	}
+
+	return getResult.Value.(*models.Browser), nil
 }
 
 func attachBrowser(rating *models.Rating, dbs *databases, frame *frame) error {
 	browser, err := getBrowser(dbs, frame)
 
-	if err != nil {
-		rating.BrowserID = browser.ID
+	if len(frame.request.Browser.Version) > 0 {
+		if err != nil {
+			rating.BrowserID = browser.ID
+			rating.BrowserVersion = frame.request.Browser.Version
+
+			return err
+		}
+
+		return nil
 	}
 
-	return err
+	return errors.New("Browser present in request, but with no version")
 }
 
 /*
@@ -235,18 +220,22 @@ func attachBrowser(rating *models.Rating, dbs *databases, frame *frame) error {
 *
  */
 func hasDevice(request *parser.Request) bool {
+	if request.Device == nil {
+		return false
+	}
+
 	device := request.Device
 	nameLength := len(device.Name)
 	brandLength := len(device.Brand)
 
-	if nameLength == 0 && brandLength == 0 {
+	if nameLength == 0 || brandLength == 0 || device.Screen.Width == 0 || device.Screen.Height == 0 {
 		return false
 	}
 
 	return true
 }
 
-func getDevice(brand *models.Brand, platform *models.Platform, dbs *databases, frame *frame) (models.Device, error) {
+func getDevice(brand *models.Brand, platform *models.Platform, dbs *databases, frame *frame) (*models.Device, error) {
 	getResult := models.GetDevice(frame.request.Device.Name, brand.ID, dbs.read)
 	getErrorList := getResult.GetErrors()
 
@@ -263,34 +252,24 @@ func getDevice(brand *models.Brand, platform *models.Platform, dbs *databases, f
 		createErrorList := createResult.GetErrors()
 
 		if len(createErrorList) > 0 {
-			return models.Device{}, errorsResponse(createErrorList, frame.context)
-		} else if value, ok := createResult.Value.(models.Device); ok {
-			frame.context.Logger().Info("Created a new Device:", createResult.Value)
-
-			return value, nil
-		} else {
-			err := errorResponse(errors.New("Error trying to create a device"), frame.context)
-
-			return models.Device{}, err
+			return &models.Device{}, errorsResponse(createErrorList, frame.context)
 		}
+
+		return createResult.Value.(*models.Device), nil
 	}
 
 	if len(getErrorList) > 0 {
-		return models.Device{}, errorsResponse(getErrorList, frame.context)
-	} else if value, ok := getResult.Value.(models.Device); ok {
-		return value, nil
-	} else {
-		err := errorResponse(errors.New("Error trying to get a device from the database"), frame.context)
-
-		return models.Device{}, err
+		return &models.Device{}, errorsResponse(getErrorList, frame.context)
 	}
+
+	return getResult.Value.(*models.Device), nil
 }
 
 func attachDevice(rating *models.Rating, platform *models.Platform, dbs *databases, frame *frame) error {
 	brand, brandErr := getBrand(dbs, frame)
 
 	if brandErr != nil {
-		device, deviceErr := getDevice(&brand, platform, dbs, frame)
+		device, deviceErr := getDevice(brand, platform, dbs, frame)
 
 		if deviceErr != nil {
 			rating.DeviceID = device.ID
@@ -307,7 +286,7 @@ func attachDevice(rating *models.Rating, platform *models.Platform, dbs *databas
 * Brand
 *
  */
-func getBrand(dbs *databases, frame *frame) (models.Brand, error) {
+func getBrand(dbs *databases, frame *frame) (*models.Brand, error) {
 	getResult := models.GetBrand(frame.request.Browser.Name, dbs.read)
 	getErrorList := getResult.GetErrors()
 
@@ -317,30 +296,20 @@ func getBrand(dbs *databases, frame *frame) (models.Brand, error) {
 		createErrorList := createResult.GetErrors()
 
 		if len(createErrorList) > 0 {
-			return models.Brand{}, errorsResponse(createErrorList, frame.context)
-		} else if value, ok := createResult.Value.(models.Brand); ok {
-			frame.context.Logger().Info("Created a new Brand:", createResult.Value)
-
-			return value, nil
-		} else {
-			err := errorResponse(errors.New("Error trying to create a brand"), frame.context)
-
-			return models.Brand{}, err
+			return &models.Brand{}, errorsResponse(createErrorList, frame.context)
 		}
+
+		return createResult.Value.(*models.Brand), nil
 	}
 
 	if len(getErrorList) > 0 {
-		return models.Brand{}, errorsResponse(getErrorList, frame.context)
-	} else if value, ok := getResult.Value.(models.Brand); ok {
-		return value, nil
-	} else {
-		err := errorResponse(errors.New("Error trying to get a brand from the database"), frame.context)
-
-		return models.Brand{}, err
+		return &models.Brand{}, errorsResponse(getErrorList, frame.context)
 	}
+
+	return getResult.Value.(*models.Brand), nil
 }
 
-func validateRating(from uint8, to uint8, frame *frame) error {
+func validateRating(from int8, to int8, frame *frame) error {
 	if (frame.request.Rating <= from) || (frame.request.Rating >= to) {
 		errorMessage := fmt.Sprintf("Error validating rating: %v is not in range(%v, %v)",
 			frame.request.Rating,

@@ -13,16 +13,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(DataTypesTableSeeder::class);
         $this->call(DataRowsTableSeeder::class);
-        $this->call(AppDataRowsTableSeeder::class);
-        $this->call(AppUserDataRowsTableSeeder::class);
-        $this->call(BrandDataRowsTableSeeder::class);
-        $this->call(BrowserDataRowsTableSeeder::class);
-        $this->call(PlatformDataRowsTableSeeder::class);
-        $this->call(RangeDataRowsTableSeeder::class);
-        $this->call(DeviceDataRowsTableSeeder::class);
-        $this->call(MessageDataRowsTableSeeder::class);
-        $this->call(RatingDataRowsTableSeeder::class);
-        $this->call(UserDataRowsTableSeeder::class);
+
         $this->call(MenusTableSeeder::class);
         $this->call(MenuItemsTableSeeder::class);
         $this->call(RolesTableSeeder::class);
@@ -38,5 +29,16 @@ class DatabaseSeeder extends Seeder
         $this->call(DevicesTableSeeder::class);
         $this->call(RatingsTableSeeder::class);
         $this->call(MessagesTableSeeder::class);
+
+        $this->call(AppDataRowsTableSeeder::class);
+        $this->call(AppUserDataRowsTableSeeder::class);
+        $this->call(BrandDataRowsTableSeeder::class);
+        $this->call(BrowserDataRowsTableSeeder::class);
+        $this->call(PlatformDataRowsTableSeeder::class);
+        $this->call(RangeDataRowsTableSeeder::class);
+        $this->call(DeviceDataRowsTableSeeder::class);
+        $this->call(MessageDataRowsTableSeeder::class);
+        $this->call(RatingDataRowsTableSeeder::class);
+        $this->call(UserDataRowsTableSeeder::class);
     }
 }

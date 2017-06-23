@@ -38,7 +38,7 @@ class DataTypesTableSeeder extends Seeder
             ])->save();
         }
 
-        $dataType = $this->dataType('slug', 'app-users');
+        $dataType = $this->dataType('slug', 'appusers');
         if (!$dataType->exists) {
             $dataType->fill([
                 'name'                  => 'appusers',

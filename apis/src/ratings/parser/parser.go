@@ -14,7 +14,7 @@ import (
 type (
 	app struct {
 		Key     string `json:"key" validate:"required,len=32,alphanum,excludesall= " conform:"lower"`
-		Version string `json:"version" validate:"required,alphanum,gte=1,lte=15,excludesall= " conform:"lower"`
+		Version string `json:"version" validate:"required,gte=1,lte=15,excludesall= " conform:"lower"`
 	}
 
 	user struct {
@@ -25,7 +25,7 @@ type (
 
 	platform struct {
 		Key     string `json:"key" validate:"required,len=32,alphanum,excludesall= " conform:"lower"`
-		Version string `json:"version" validate:"required,alphanum,gte=1,lte=15,excludesall= " conform:"lower"`
+		Version string `json:"version" validate:"required,gte=1,lte=15,excludesall= " conform:"lower"`
 	}
 
 	device struct {
@@ -42,14 +42,14 @@ type (
 
 	browser struct {
 		Name    string `json:"name" validate:"required,alphanum,gte=1,lte=15" conform:"trim"`
-		Version string `json:"version" validate:"required,alphanum,gte=1,lte=15,excludesall= " conform:"lower"`
+		Version string `json:"version" validate:"required,gte=1,lte=15,excludesall= " conform:"lower"`
 	}
 
 	// Request holds the mapped fields from the request's JSON body
 	Request struct {
-		Rating      uint8    `json:"rating" validate:"required,numeric,min=-127,max=127"`
-		Description string   `json:"description" validate:"alphanum,gte=3,lte=30,omitempty" conform:"trim,title"`
-		Comment     string   `json:"comment" validate:"gte=3,lte=1000,omitempty" conform:"trim,ucfirst"`
+		Rating      int8     `json:"rating" validate:"required,min=-127,max=127"`
+		Description string   `json:"description" validate:"omitempty,alphanum,gte=3,lte=30" conform:"trim,title"`
+		Comment     string   `json:"comment" validate:"omitempty,gte=3,lte=1000" conform:"trim,ucfirst"`
 		Range       string   `json:"range" validate:"required,len=32,alphanum,excludesall= " conform:"lower"`
 		App         app      `json:"app" validate:"required"`
 		Platform    platform `json:"platform" validate:"required"`
@@ -64,10 +64,14 @@ func Parse(context echo.Context) (*Request, error) {
 	request := new(Request)
 
 	if err := bind(request, context); err != nil {
+		fmt.Println("\n\nError binding request: ", err.Error())
+
 		return request, err
 	}
 
 	if err := validate(request, context); err != nil {
+		fmt.Println("\n\nError validating request: ", err.Error())
+
 		return request, err
 	}
 

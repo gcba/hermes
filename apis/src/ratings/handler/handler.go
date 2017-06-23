@@ -21,9 +21,9 @@ func Handler(port int, handlers map[string]echo.HandlerFunc) http.Handler {
 	e := echo.New()
 
 	e.Use(middleware.Logger())
-	e.Use(middleware.Recover())
-	e.Use(middleware.Secure())
-	e.Use(middleware.BodyLimit("10K"))
+	// e.Use(middleware.Recover())
+	// e.Use(middleware.Secure())
+	// e.Use(middleware.BodyLimit("10K"))
 
 	e.Server.Addr = ":" + strconv.Itoa(port)
 	e.Validator = &RequestValidator{validator: validator.New()} // TODO: Move this to parser.AttachValidator()

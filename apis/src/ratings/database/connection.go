@@ -14,24 +14,26 @@ import (
 )
 
 // Load enviroment variables
-var rootPath, _ = filepath.Abs("../")
-var envPath = path.Join(rootPath, ".env")
-var envErr = godotenv.Load(envPath)
+var (
+	rootPath, _ = filepath.Abs(".")
+	envPath     = path.Join(rootPath, ".env")
+	envErr      = godotenv.Load(envPath)
 
-// Load environment
-var env = os.Getenv("API_RATINGS_ENV")
+	// Load environment
+	env = os.Getenv("API_RATINGS_ENV")
 
-// Load read database settings
-var readDBName = os.Getenv("API_RATINGS_READDB_NAME")
-var readDBHost = os.Getenv("API_RATINGS_READDB_HOST")
-var readDBUser = os.Getenv("API_RATINGS_READDB_USER")
-var readDBPassword = os.Getenv("API_RATINGS_READDB_PASSWORD")
+	// Load read database settings
+	readDBName     = os.Getenv("API_RATINGS_READDB_NAME")
+	readDBHost     = os.Getenv("API_RATINGS_READDB_HOST")
+	readDBUser     = os.Getenv("API_RATINGS_READDB_USER")
+	readDBPassword = os.Getenv("API_RATINGS_READDB_PASSWORD")
 
-// Load write database settings
-var writeDBName = os.Getenv("API_RATINGS_WRITEDB_NAME")
-var writeDBHost = os.Getenv("API_RATINGS_WRITEDB_HOST")
-var writeDBUser = os.Getenv("API_RATINGS_WRITEDB_USER")
-var writeDBPassword = os.Getenv("API_RATINGS_WRITEDB_PASSWORD")
+	// Load write database settings
+	writeDBName     = os.Getenv("API_RATINGS_WRITEDB_NAME")
+	writeDBHost     = os.Getenv("API_RATINGS_WRITEDB_HOST")
+	writeDBUser     = os.Getenv("API_RATINGS_WRITEDB_USER")
+	writeDBPassword = os.Getenv("API_RATINGS_WRITEDB_PASSWORD")
+)
 
 // GetReadDB connects to the read database and returns a pointer to the connection
 func GetReadDB() *gorm.DB {

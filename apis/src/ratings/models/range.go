@@ -8,8 +8,8 @@ import (
 
 type Range struct {
 	ID    uint   `gorm:"primary_key;AUTO_INCREMENT"`
-	From  uint8  `gorm:"not null"`
-	To    uint8  `gorm:"not null"`
+	From  int8   `gorm:"not null"`
+	To    int8   `gorm:"not null"`
 	Key   string `gorm:"type:char(32);not null"`
 	AppID uint   `gorm:"not null"`
 
