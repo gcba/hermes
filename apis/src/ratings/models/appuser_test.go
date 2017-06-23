@@ -15,7 +15,7 @@ func TestCreateAppUser(t *testing.T) {
 
 	name := uniuri.New()
 	email := "test@test.com"
-	mibaID := uniuri.New()[10:len(name)]
+	mibaID := uniuri.New()[6:len(name)]
 
 	appuser := AppUser{Name: name, Email: email, MiBAID: mibaID}
 	result := db.Create(&appuser)
@@ -41,7 +41,7 @@ func TestGetAppUser(t *testing.T) {
 
 	name := uniuri.New()
 	email := "test@test.com"
-	mibaID := uniuri.New()[10:len(name)]
+	mibaID := uniuri.New()[6:len(name)]
 
 	appuser := AppUser{Name: name, Email: email, MiBAID: mibaID}
 	record := writeDb.Create(&appuser)

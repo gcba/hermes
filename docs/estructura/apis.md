@@ -54,14 +54,14 @@ Crear una nueva calificación (que puede incluir un comentario o no)
         "key:" string,
         "version": string
     },
+    "platform": {
+        "key": string,
+        "version": string
+    },
     "user": { // optional
         "name": string,
         "email": string,
         "mibaId": string
-    },
-    "platform": {
-        "key": string,
-        "version": string
     },
     "device": { // optional
         "name": string,

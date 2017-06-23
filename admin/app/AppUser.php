@@ -3,9 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class AppUser extends Model
 {
+    use SoftDeletes;
+
     protected $table = 'appusers';
 
     /**
@@ -16,6 +19,13 @@ class AppUser extends Model
     protected $fillable = [
         'name', 'email', 'miba_id'
     ];
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = ['deleted_at'];
 
     /**
      * Get the ratings that belong to this app user.

@@ -8,7 +8,7 @@ import (
 
 type Rating struct {
 	ID              uint   `gorm:"primary_key;AUTO_INCREMENT"`
-	Rating          uint8  `gorm:"not null"`
+	Rating          int8   `gorm:"not null"`
 	Description     string `gorm:"size:30;DEFAULT:NULL"`
 	AppVersion      string `gorm:"size:15;DEFAULT:NULL"`
 	PlatformVersion string `gorm:"size:15;DEFAULT:NULL"`

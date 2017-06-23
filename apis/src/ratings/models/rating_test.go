@@ -26,8 +26,8 @@ func TestCreateRating(t *testing.T) {
 		RangeID:         2,
 		PlatformID:      3,
 		AppUserID:       4,
-		DeviceID:        5,
-		BrowserID:       6}
+		DeviceID:        3,
+		BrowserID:       2}
 
 	result := db.Create(&rating)
 

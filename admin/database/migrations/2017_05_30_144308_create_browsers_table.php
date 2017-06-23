@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAppUsersTable extends Migration
+class CreateBrowsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,9 @@ class CreateAppUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('appusers', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('name', 70);
-            $table->string('email', 100);
-            $table->index('email');
-            $table->char('miba_id', 10)->unique();
-            $table->index('miba_id');
+        Schema::create('browsers', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name', 15)->unique();
             $table->timestamps();
             $table->softDeletes();
         });
@@ -32,6 +28,6 @@ class CreateAppUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('appusers');
+        Schema::dropIfExists('browsers');
     }
 }

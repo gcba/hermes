@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAppsTable extends Migration
+class CreateRangesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,16 @@ class CreateAppsTable extends Migration
      */
     public function up()
     {
-        Schema::create('apps', function (Blueprint $table) {
+        Schema::create('ranges', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name', 50)->unique();
-            $table->index('name');
-            $table->char('type', 1);
+            $table->integer('from');
+            $table->integer('to');
             $table->char('key', 32)->unique();
             $table->index('key');
+            $table->integer('app_id')->unsigned();
+            $table->foreign('app_id')->references('id')->on('apps')->onDelete('cascade');
+            $table->index('app_id');
             $table->timestamps();
-            $table->integer('modified_by')->unsigned()->nullable();
-            $table->foreign('modified_by')->references('id')->on('users')->onDelete('set null');
             $table->softDeletes();
         });
     }
@@ -34,6 +34,6 @@ class CreateAppsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('apps');
+        Schema::dropIfExists('ranges');
     }
 }

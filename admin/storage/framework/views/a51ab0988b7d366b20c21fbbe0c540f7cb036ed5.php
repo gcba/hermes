@@ -17,7 +17,7 @@
                         <a href="<?php echo e(route('voyager.dashboard')); ?>"><i class="voyager-boat"></i> Dashboard</a>
                     </li>
                 <?php endif; ?>
-                <?php $breadcrumb_url = ''; ?>
+                <?php $breadcrumb_url = url(''); ?>
                 <?php for($i = 1; $i <= count(Request::segments()); $i++): ?>
                     <?php $breadcrumb_url .= '/' . Request::segment($i); ?>
                     <?php if(Request::segment($i) != ltrim(route('voyager.dashboard', [], false), '/') && !is_numeric(Request::segment($i))): ?>

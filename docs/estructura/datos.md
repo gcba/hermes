@@ -40,7 +40,7 @@ El usuario de las apps que envía calificaciones y comentarios.
 |id              |int (PK)              |       |       |       |       |
 |name            |varchar(70)           |       |       |       |       |
 |email           |varchar(100)          |       |       |       |X      |
-|miba_id         |int                   |       |       |X      |X      |
+|miba_id         |char(10)              |       |       |X      |X      |
 |created_at      |timestamp             |       |       |       |       |
 |modified_at      |timestamp            |       |X      |       |       |
 

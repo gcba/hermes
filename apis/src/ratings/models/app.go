@@ -9,7 +9,7 @@ import (
 type App struct {
 	ID   uint   `gorm:"primary_key"`
 	Name string `gorm:"size:30;not null"`
-	Type rune   `gorm:"type:char;not null"`
+	Type string `gorm:"type:char;not null"`
 	Key  string `gorm:"type:char(32);not null"`
 
 	CreatedAt time.Time `gorm:"not null"`

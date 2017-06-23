@@ -3,9 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Rating extends Model
 {
+    use SoftDeletes;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -19,12 +22,19 @@ class Rating extends Model
         'browser_version',
         'has_message',
         'app_id',
+        'platform_id',
         'range_id',
         'appuser_id',
-        'platform_id',
         'device_id',
         'browser_id'
     ];
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = ['deleted_at'];
 
     /**
      * Get the app the rating belongs to.

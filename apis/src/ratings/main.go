@@ -2,41 +2,26 @@ package main
 
 import (
 	"fmt"
+	"strconv"
 
 	"ratings/controller"
+	"ratings/handler"
 
 	"github.com/facebookgo/grace/gracehttp"
-	"github.com/go-playground/validator"
-	_ "github.com/joho/godotenv/autoload" // Loads config from .env file
 	"github.com/labstack/echo"
-	"github.com/labstack/echo/middleware"
 )
 
-type RequestValidator struct {
-	validator *validator.Validate
-}
-
-func (rv *RequestValidator) Validate(request interface{}) error {
-	return rv.validator.Struct(request)
-}
-
 func main() {
-	e := echo.New()
-	port := "3000"
+	port := 3000
 
-	e.Use(middleware.Logger())
-	e.Use(middleware.Recover())
-	e.Use(middleware.Secure())
-	e.Use(middleware.BodyLimit("10K"))
+	routes := map[string]echo.HandlerFunc{
+		"OptionsRoot":    controller.OptionsRoot,
+		"OptionsRatings": controller.OptionsRatings,
+		"PostRatings":    controller.PostRatings}
 
-	e.Validator = &RequestValidator{validator: validator.New()} // TODO: Move this to parser.AttachValidator()
+	handler := handler.Handler(port, routes).(*echo.Echo) // Casting via type assertion
 
-	e.OPTIONS("/", controller.OptionsRoot)
-	e.OPTIONS("/ratings", controller.OptionsRatings)
-	e.POST("/ratings", controller.PostRatings)
+	fmt.Println("Started server on port", strconv.Itoa(port))
 
-	fmt.Println("Started server on port", port)
-
-	e.Server.Addr = ":" + port
-	e.Logger.Fatal(gracehttp.Serve(e.Server))
+	handler.Logger.Fatal(gracehttp.Serve(handler.Server))
 }
