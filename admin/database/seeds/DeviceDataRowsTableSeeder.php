@@ -157,7 +157,7 @@ class DeviceDataRowsTableSeeder extends Seeder
             ])->save();
         }
 
-        $dataRow = $this->dataRow($appDataType, 'deleted_at');
+        $dataRow = $this->dataRow($deviceDataType, 'deleted_at');
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'timestamp',

@@ -125,7 +125,7 @@ class RangeDataRowsTableSeeder extends Seeder
             ])->save();
         }
 
-        $dataRow = $this->dataRow($appDataType, 'deleted_at');
+        $dataRow = $this->dataRow($rangeDataType, 'deleted_at');
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'timestamp',

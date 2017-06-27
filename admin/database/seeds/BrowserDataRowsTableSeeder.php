@@ -77,7 +77,7 @@ class BrowserDataRowsTableSeeder extends Seeder
             ])->save();
         }
 
-        $dataRow = $this->dataRow($appDataType, 'deleted_at');
+        $dataRow = $this->dataRow($browserDataType, 'deleted_at');
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'timestamp',
