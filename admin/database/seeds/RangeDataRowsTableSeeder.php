@@ -124,6 +124,22 @@ class RangeDataRowsTableSeeder extends Seeder
                 'order'        => 7,
             ])->save();
         }
+
+        $dataRow = $this->dataRow($appDataType, 'deleted_at');
+        if (!$dataRow->exists) {
+            $dataRow->fill([
+                'type'         => 'timestamp',
+                'display_name' => 'borrado',
+                'required'     => 0,
+                'browse'       => 0,
+                'read'         => 0,
+                'edit'         => 0,
+                'add'          => 0,
+                'delete'       => 0,
+                'details'      => '',
+                'order'        => 8,
+            ])->save();
+        }
     }
 
     /**
