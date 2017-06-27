@@ -108,6 +108,22 @@ class AppUserDataRowsTableSeeder extends Seeder
                 'order'        => 6,
             ])->save();
         }
+
+        $dataRow = $this->dataRow($appuserDataType, 'deleted_at');
+        if (!$dataRow->exists) {
+            $dataRow->fill([
+                'type'         => 'timestamp',
+                'display_name' => 'borrado',
+                'required'     => 0,
+                'browse'       => 0,
+                'read'         => 0,
+                'edit'         => 0,
+                'add'          => 0,
+                'delete'       => 0,
+                'details'      => '',
+                'order'        => 7,
+            ])->save();
+        }
     }
 
     /**

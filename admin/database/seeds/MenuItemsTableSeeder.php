@@ -16,15 +16,15 @@ class MenuItemsTableSeeder extends Seeder
         if (file_exists(base_path('routes/web.php'))) {
             require base_path('routes/web.php');
 
-            $menu = Menu::where('name', 'admin')->firstOrFail();
+            $adminMenu = Menu::where('name', 'admin')->firstOrFail();
 
-            $menuItem = MenuItem::firstOrNew([
-                'menu_id'    => $menu->id,
+            $adminMenuItem = MenuItem::firstOrNew([
+                'menu_id'    => $adminMenu->id,
                 'title'      => 'Dashboard',
                 'url'        => route('voyager.dashboard', [], false),
             ]);
-            if (!$menuItem->exists) {
-                $menuItem->fill([
+            if (!$adminMenuItem->exists) {
+                $adminMenuItem->fill([
                     'target'     => '_self',
                     'icon_class' => 'voyager-boat',
                     'color'      => null,
@@ -34,13 +34,13 @@ class MenuItemsTableSeeder extends Seeder
             }
 
             /*
-            $menuItem = MenuItem::firstOrNew([
-                'menu_id'    => $menu->id,
+            $adminMenuItem = MenuItem::firstOrNew([
+                'menu_id'    => $adminMenu->id,
                 'title'      => 'Media',
                 'url'        => route('voyager.media.index', [], false),
             ]);
-            if (!$menuItem->exists) {
-                $menuItem->fill([
+            if (!$adminMenuItem->exists) {
+                $adminMenuItem->fill([
                     'target'     => '_self',
                     'icon_class' => 'voyager-images',
                     'color'      => null,
@@ -50,13 +50,13 @@ class MenuItemsTableSeeder extends Seeder
             }
             */
 
-            $menuItem = MenuItem::firstOrNew([
-                'menu_id'    => $menu->id,
+            $adminMenuItem = MenuItem::firstOrNew([
+                'menu_id'    => $adminMenu->id,
                 'title'      => 'Usuarios',
                 'url'        => route('voyager.users.index', [], false),
             ]);
-            if (!$menuItem->exists) {
-                $menuItem->fill([
+            if (!$adminMenuItem->exists) {
+                $adminMenuItem->fill([
                     'target'     => '_self',
                     'icon_class' => 'voyager-person',
                     'color'      => null,
@@ -65,23 +65,74 @@ class MenuItemsTableSeeder extends Seeder
                 ])->save();
             }
 
-            $menuItem = MenuItem::firstOrNew([
-                'menu_id'    => $menu->id,
+            $adminMenuItem = MenuItem::firstOrNew([
+                'menu_id'    => $adminMenu->id,
+                'title'      => 'Aplicaciones',
+                'route'      => 'voyager.apps.index',
+                'url'        => null,
+                'parameters' => null,
+            ]);
+            if (!$adminMenuItem->exists) {
+                $adminMenuItem->fill([
+                    'target'     => '_self',
+                    'icon_class' => 'voyager-categories',
+                    'color'      => null,
+                    'parent_id'  => null,
+                    'order'      => 4,
+                ])->save();
+            }
+
+            $adminMenuItem = MenuItem::firstOrNew([
+                'menu_id'    => $adminMenu->id,
+                'title'      => 'Plataformas',
+                'route'      => 'voyager.platforms.index',
+                'url'        => null,
+                'parameters' => null,
+            ]);
+            if (!$adminMenuItem->exists) {
+                $adminMenuItem->fill([
+                    'target'     => '_self',
+                    'icon_class' => 'voyager-laptop',
+                    'color'      => null,
+                    'parent_id'  => null,
+                    'order'      => 5,
+                ])->save();
+            }
+
+            $adminMenuItem = MenuItem::firstOrNew([
+                'menu_id'    => $adminMenu->id,
+                'title'      => 'Rangos',
+                'route'      => 'voyager.ranges.index',
+                'url'        => null,
+                'parameters' => null,
+            ]);
+            if (!$adminMenuItem->exists) {
+                $adminMenuItem->fill([
+                    'target'     => '_self',
+                    'icon_class' => 'voyager-star-half',
+                    'color'      => null,
+                    'parent_id'  => null,
+                    'order'      => 6,
+                ])->save();
+            }
+
+            $adminMenuItem = MenuItem::firstOrNew([
+                'menu_id'    => $adminMenu->id,
                 'title'      => 'Roles',
                 'url'        => route('voyager.roles.index', [], false),
             ]);
-            if (!$menuItem->exists) {
-                $menuItem->fill([
+            if (!$adminMenuItem->exists) {
+                $adminMenuItem->fill([
                     'target'     => '_self',
                     'icon_class' => 'voyager-lock',
                     'color'      => null,
                     'parent_id'  => null,
-                    'order'      => 2,
+                    'order'      => 7,
                 ])->save();
             }
 
             $toolsMenuItem = MenuItem::firstOrNew([
-                'menu_id'    => $menu->id,
+                'menu_id'    => $adminMenu->id,
                 'title'      => 'Herramientas',
                 'url'        => '',
             ]);
@@ -91,52 +142,52 @@ class MenuItemsTableSeeder extends Seeder
                     'icon_class' => 'voyager-tools',
                     'color'      => null,
                     'parent_id'  => null,
+                    'order'      => 8,
+                ])->save();
+            }
+
+            $adminMenuItem = MenuItem::firstOrNew([
+                'menu_id'    => $adminMenu->id,
+                'title'      => 'Menús',
+                'url'        => route('voyager.menus.index', [], false),
+            ]);
+            if (!$adminMenuItem->exists) {
+                $adminMenuItem->fill([
+                    'target'     => '_self',
+                    'icon_class' => 'voyager-list',
+                    'color'      => null,
+                    'parent_id'  => $toolsMenuItem->id,
                     'order'      => 9,
                 ])->save();
             }
 
-            $menuItem = MenuItem::firstOrNew([
-                'menu_id'    => $menu->id,
-                'title'      => 'Menús',
-                'url'        => route('voyager.menus.index', [], false),
+            $adminMenuItem = MenuItem::firstOrNew([
+                'menu_id'    => $adminMenu->id,
+                'title'      => 'DB',
+                'url'        => route('voyager.database.index', [], false),
             ]);
-            if (!$menuItem->exists) {
-                $menuItem->fill([
+            if (!$adminMenuItem->exists) {
+                $adminMenuItem->fill([
                     'target'     => '_self',
-                    'icon_class' => 'voyager-list',
+                    'icon_class' => 'voyager-data',
                     'color'      => null,
                     'parent_id'  => $toolsMenuItem->id,
                     'order'      => 10,
                 ])->save();
             }
 
-            $menuItem = MenuItem::firstOrNew([
-                'menu_id'    => $menu->id,
-                'title'      => 'DB',
-                'url'        => route('voyager.database.index', [], false),
-            ]);
-            if (!$menuItem->exists) {
-                $menuItem->fill([
-                    'target'     => '_self',
-                    'icon_class' => 'voyager-data',
-                    'color'      => null,
-                    'parent_id'  => $toolsMenuItem->id,
-                    'order'      => 11,
-                ])->save();
-            }
-
-            $menuItem = MenuItem::firstOrNew([
-                'menu_id'    => $menu->id,
+            $adminMenuItem = MenuItem::firstOrNew([
+                'menu_id'    => $adminMenu->id,
                 'title'      => 'Configuración',
                 'url'        => route('voyager.settings.index', [], false),
             ]);
-            if (!$menuItem->exists) {
-                $menuItem->fill([
+            if (!$adminMenuItem->exists) {
+                $adminMenuItem->fill([
                     'target'     => '_self',
                     'icon_class' => 'voyager-settings',
                     'color'      => null,
                     'parent_id'  => null,
-                    'order'      => 12,
+                    'order'      => 11,
                 ])->save();
             }
         }
