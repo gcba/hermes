@@ -32,4 +32,11 @@ class Range extends Model
     {
         return $this->belongsTo('App\App');
     }
+
+    /**
+     * Get a readable range name.
+     */
+    public function name() {
+        return $this->from . " a " . $this->to;
+    }
 }
