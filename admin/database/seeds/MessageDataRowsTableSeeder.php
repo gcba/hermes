@@ -54,8 +54,8 @@ class MessageDataRowsTableSeeder extends Seeder
                 'browse'       => 1,
                 'read'         => 1,
                 'edit'         => 0,
-                'add'          => 1,
-                'delete'       => 1,
+                'add'          => 0,
+                'delete'       => 0,
                 'details'      => '',
                 'order'        => 3,
             ])->save();
