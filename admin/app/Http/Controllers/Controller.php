@@ -55,9 +55,8 @@ class Controller extends BreadController
             }
         }
 
-        $result = $id ?
-            $data->updateOrCreate(['id' => $id], $data->toArray()) :
-            $data->updateOrCreate($data->toArray());
+        if ($id) $result = $data->updateOrCreate(['id' => $id], $data->toArray());
+        else $result = $data->updateOrCreate($data->toArray());
 
         // Save translations
         if (count($translations) > 0) {
