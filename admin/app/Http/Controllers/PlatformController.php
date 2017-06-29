@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Platform;
 use Illuminate\Http\Request;
 use TCG\Voyager\Http\Controllers\VoyagerBreadController;
+use TCG\Voyager\Facades\Voyager;
 
 class PlatformController extends VoyagerBreadController
 {
@@ -36,6 +37,36 @@ class PlatformController extends VoyagerBreadController
      */
     public function store(Request $request)
     {
+        // From VoyagerBreadController.php, with customizations
+
+        $slug = $this->getSlug($request);
+
+        $dataType = Voyager::model('DataType')->where('slug', '=', $slug)->first();
+
+        // Check permission
+        Voyager::canOrFail('add_'.$dataType->name);
+
+        //Validate fields with ajax
+        $val = $this->validateBread($request->all(), $dataType->addRows);
+
+        if ($val->fails()) {
+            return response()->json(['errors' => $val->messages()]);
+        }
+
+        if (!$request->ajax()) {
+            $model = new $dataType->model_name();
+            $model->key = md5(date("Y-m-d H:i:s"));
+
+            $data = $this->insertUpdateData($request, $slug, $dataType->addRows, $model);
+
+            return redirect()
+                ->route("voyager.{$dataType->slug}.edit", ['id' => $data->id])
+                ->with([
+                        'message'    => "Successfully Added New {$dataType->display_name_singular}",
+                        'alert-type' => 'success',
+                    ]);
+        }
+
         return parent::store($request);
     }
 
