@@ -23,7 +23,8 @@ class UsersTableSeeder extends Seeder
                 'email'          => 'admin@admin.com',
                 'password'       => bcrypt('password'),
                 'remember_token' => str_random(60),
-                'role_id'        => $adminRole->id
+                'role_id'        => $adminRole->id,
+                'avatar'         => 'users/default.png'
             ]);
 
             User::create([
@@ -31,7 +32,8 @@ class UsersTableSeeder extends Seeder
                 'email'          => 'juan@fernandez.com',
                 'password'       => bcrypt('password'),
                 'remember_token' => str_random(60),
-                'role_id'        => $supportRole->id
+                'role_id'        => $supportRole->id,
+                'avatar'         => 'users/default.png'
             ]);
 
             User::create([
@@ -39,7 +41,8 @@ class UsersTableSeeder extends Seeder
                 'email'          => 'martina@gimenez.com',
                 'password'       => bcrypt('password'),
                 'remember_token' => str_random(60),
-                'role_id'        => $supportRole->id
+                'role_id'        => $supportRole->id,
+                'avatar'         => 'users/default.png'
             ]);
 
             User::create([
@@ -47,7 +50,8 @@ class UsersTableSeeder extends Seeder
                 'email'          => 'paula@carrizo.com',
                 'password'       => bcrypt('password'),
                 'remember_token' => str_random(60),
-                'role_id'        => $supportRole->id
+                'role_id'        => $supportRole->id,
+                'avatar'         => 'users/default.png'
             ]);
 
             User::create([
@@ -55,7 +59,8 @@ class UsersTableSeeder extends Seeder
                 'email'          => 'miguel@rodriguez.com',
                 'password'       => bcrypt('password'),
                 'remember_token' => str_random(60),
-                'role_id'        => $userRole->id
+                'role_id'        => $userRole->id,
+                'avatar'         => 'users/default.png'
             ]);
 
             User::create([
@@ -63,7 +68,8 @@ class UsersTableSeeder extends Seeder
                 'email'          => 'sofia@estevez.com',
                 'password'       => bcrypt('password'),
                 'remember_token' => str_random(60),
-                'role_id'        => $userRole->id
+                'role_id'        => $userRole->id,
+                'avatar'         => 'users/default.png'
             ]);
 
             User::create([
@@ -71,7 +77,8 @@ class UsersTableSeeder extends Seeder
                 'email'          => 'nicolas@uriarte.com',
                 'password'       => bcrypt('password'),
                 'remember_token' => str_random(60),
-                'role_id'        => $userRole->id
+                'role_id'        => $userRole->id,
+                'avatar'         => 'users/default.png'
             ]);
         }
     }
