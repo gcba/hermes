@@ -2,19 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Foundation\Bus\DispatchesJobs;
-use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
-use Intervention\Image\Constraint;
-use Intervention\Image\Facades\Image;
 use TCG\Voyager\Facades\Voyager;
-use TCG\Voyager\Traits\AlertsMessages;
 use TCG\Voyager\Http\Controllers\VoyagerBreadController as BreadController;
 use Validator;
-use Log;
 
 class Controller extends BreadController
 {
