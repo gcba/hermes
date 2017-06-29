@@ -26,6 +26,23 @@ class App extends Model
     protected $dates = ['deleted_at'];
 
     /**
+     * Boot function for using with User Events
+     *
+     * @return void
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model)
+        {
+            if (!$model->key) {
+                $model->attributes['key'] = md5(date("Y-m-d H:i:s"));
+            }
+        });
+    }
+
+    /**
      * Get the ratings that belong to this app.
      */
     public function ratings()

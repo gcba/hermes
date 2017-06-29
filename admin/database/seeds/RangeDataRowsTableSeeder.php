@@ -17,7 +17,7 @@ class RangeDataRowsTableSeeder extends Seeder
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'number',
-                'display_name' => 'id',
+                'display_name' => 'ID',
                 'required'     => 1,
                 'browse'       => 0,
                 'read'         => 0,
@@ -33,14 +33,14 @@ class RangeDataRowsTableSeeder extends Seeder
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'number',
-                'display_name' => 'desde',
+                'display_name' => 'Desde',
                 'required'     => 1,
                 'browse'       => 1,
                 'read'         => 1,
                 'edit'         => 1,
                 'add'          => 1,
                 'delete'       => 1,
-                'details'      => '',
+                'details'      => '{"validation":{"rules":["required","integer","max:127","min:-127"],"messages":{"required":"Falta el campo :attribute.","integer":"El campo :attribute debe ser numérico.","max":"El campo :attribute puede ser hasta :max.","min":"El campo :attribute debe ser al menos :min."}}}',
                 'order'        => 2,
             ])->save();
         }
@@ -49,14 +49,14 @@ class RangeDataRowsTableSeeder extends Seeder
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'number',
-                'display_name' => 'hasta',
+                'display_name' => 'Hasta',
                 'required'     => 1,
                 'browse'       => 1,
                 'read'         => 1,
                 'edit'         => 1,
                 'add'          => 1,
                 'delete'       => 1,
-                'details'      => '',
+                'details'      => '{"validation":{"rules":["required","integer","max:127","min:-127"],"messages":{"required":"Falta el campo :attribute.","integer":"El campo :attribute debe ser numérico.","max":"El campo :attribute puede ser hasta :max.","min":"El campo :attribute debe ser al menos :min."}}}',
                 'order'        => 3,
             ])->save();
         }
@@ -65,7 +65,7 @@ class RangeDataRowsTableSeeder extends Seeder
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'text',
-                'display_name' => 'key',
+                'display_name' => 'Key',
                 'required'     => 1,
                 'browse'       => 1,
                 'read'         => 1,
@@ -77,27 +77,27 @@ class RangeDataRowsTableSeeder extends Seeder
             ])->save();
         }
 
-        $dataRow = $this->dataRow($rangeDataType, 'app_id');
+        $dataRow = $this->dataRow($rangeDataType, 'updated_at');
         if (!$dataRow->exists) {
             $dataRow->fill([
-                'type'         => 'number',
-                'display_name' => 'app',
-                'required'     => 1,
-                'browse'       => 1,
+                'type'         => 'timestamp',
+                'display_name' => 'Última modificación',
+                'required'     => 0,
+                'browse'       => 0,
                 'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 1,
+                'edit'         => 0,
+                'add'          => 0,
+                'delete'       => 0,
                 'details'      => '',
                 'order'        => 5,
             ])->save();
         }
 
-        $dataRow = $this->dataRow($rangeDataType, 'updated_at');
+        $dataRow = $this->dataRow($rangeDataType, 'created_at');
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'timestamp',
-                'display_name' => 'última modificación',
+                'display_name' => 'Creación',
                 'required'     => 0,
                 'browse'       => 0,
                 'read'         => 1,
@@ -109,27 +109,11 @@ class RangeDataRowsTableSeeder extends Seeder
             ])->save();
         }
 
-        $dataRow = $this->dataRow($rangeDataType, 'created_at');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'timestamp',
-                'display_name' => 'creación',
-                'required'     => 0,
-                'browse'       => 0,
-                'read'         => 1,
-                'edit'         => 0,
-                'add'          => 0,
-                'delete'       => 0,
-                'details'      => '',
-                'order'        => 7,
-            ])->save();
-        }
-
         $dataRow = $this->dataRow($rangeDataType, 'deleted_at');
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'timestamp',
-                'display_name' => 'borrado',
+                'display_name' => 'Borrado',
                 'required'     => 0,
                 'browse'       => 0,
                 'read'         => 0,
@@ -137,7 +121,7 @@ class RangeDataRowsTableSeeder extends Seeder
                 'add'          => 0,
                 'delete'       => 0,
                 'details'      => '',
-                'order'        => 8,
+                'order'        => 7,
             ])->save();
         }
     }

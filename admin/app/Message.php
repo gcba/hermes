@@ -16,6 +16,23 @@ class Message extends Model
     ];
 
     /**
+     * Boot function for using with User Events
+     *
+     * @return void
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model)
+        {
+            if (!$model->key) {
+                $model->attributes['direction'] = 'out';
+            }
+        });
+    }
+
+    /**
      * Get the rating the message belongs to.
      */
     public function rating()

@@ -15,7 +15,7 @@ class Range extends Model
      * @var array
      */
     protected $fillable = [
-        'from', 'to', 'key', 'app_id'
+        'from', 'to', 'key'
     ];
 
     /**
@@ -26,17 +26,33 @@ class Range extends Model
     protected $dates = ['deleted_at'];
 
     /**
-     * Get the app this range belongs to.
+     * The accessors that should be included among the fields.
+     *
+     * @var array
      */
-    public function app()
+    protected $appends = ['name'];
+
+    /**
+     * Boot function for using with User Events
+     *
+     * @return void
+     */
+    protected static function boot()
     {
-        return $this->belongsTo('App\App');
+        parent::boot();
+
+        static::creating(function ($model)
+        {
+            if (!$model->key) {
+                $model->attributes['key'] = md5(date("Y-m-d H:i:s"));
+            }
+        });
     }
 
     /**
      * Get a readable range name.
      */
-    public function name() {
-        return $this->from . " a " . $this->to;
+    public function getNameAttribute() {
+        return $this->from . "/" . $this->to;
     }
 }

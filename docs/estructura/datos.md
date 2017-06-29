@@ -22,8 +22,8 @@ El usuario del backend.
 |email           |varchar(100)          |       |       |X      |       |
 |password        |varchar(60)           |       |       |       |       |
 |created_at      |timestamp             |       |       |       |       |
-|modified_at      |timestamp            |       |X      |       |       |
-|modified_by      |int                  |X      |X      |       |       |
+|modified_at     |timestamp             |       |X      |       |       |
+|modified_by     |int                   |X      |X      |       |       |
 
 ### AppUser
 
@@ -42,7 +42,7 @@ El usuario de las apps que envía calificaciones y comentarios.
 |email           |varchar(100)          |       |       |       |X      |
 |miba_id         |char(10)              |       |       |X      |X      |
 |created_at      |timestamp             |       |       |       |       |
-|modified_at      |timestamp            |       |X      |       |       |
+|modified_at     |timestamp             |       |X      |       |       |
 
 ### App
 
@@ -62,8 +62,8 @@ Las apps sobre las que se envían calificaciones y comentarios.
 |type            |char                  |       |       |       |       |
 |key             |char(32)              |       |       |X      |X      |
 |created_at      |timestamp             |       |       |       |       |
-|modified_at      |timestamp            |       |X      |       |       |
-|modified_by      |int                  |X      |X      |       |       |
+|modified_at     |timestamp             |       |X      |       |       |
+|modified_by     |int                   |X      |X      |       |       |
 
 ### Platform
 
@@ -80,7 +80,7 @@ La plataforma donde corren las apps y de donde provienen las calificaciones y co
 |name            |varchar(15)           |       |       |X      |       |
 |key             |char(32)              |       |       |X      |X      |
 |created_at      |timestamp             |       |       |       |       |
-|modified_at      |timestamp            |       |X      |       |       |
+|modified_at     |timestamp             |       |X      |       |       |
 
 ### Device
 
@@ -101,7 +101,7 @@ En el caso de las aplicaciones móviles, el dispositivo desde donde se enviaron 
 |brand_id        |int                   |X      |X      |       |X      |
 |platform_id     |int                   |X      |X      |       |X      |
 |created_at      |timestamp             |       |       |       |       |
-|modified_at      |timestamp            |       |X      |       |       |
+|modified_at     |timestamp             |       |X      |       |       |
 
 ### App_User
 
@@ -163,7 +163,7 @@ En el caso de las aplicaciones web, el browser desde donde se enviaron las calif
 |id              |int (PK)              |       |       |       |       |
 |name            |varchar(15)           |       |       |X      |       |
 |created_at      |timestamp             |       |       |       |       |
-|modified_at      |timestamp            |       |X      |       |       |
+|modified_at     |timestamp             |       |X      |       |       |
 
 ### Brand
 
@@ -174,7 +174,7 @@ En el caso de las aplicaciones móviles, la marca del dispositivo.
 |id              |int (PK)              |       |       |       |       |
 |name            |varchar(30)           |       |       |X      |       |
 |created_at      |timestamp             |       |       |       |       |
-|modified_at      |timestamp            |       |X      |       |       |
+|modified_at     |timestamp             |       |X      |       |       |
 
 ### Rating
 
@@ -205,7 +205,7 @@ Las calificaciones de las apps.
 |device_id       |int                   |       |X      |X      |       |X      |
 |browser_id      |int                   |       |X      |X      |       |X      |
 |created_at      |timestamp             |       |       |       |       |       |
-|modified_at      |timestamp            |       |       |X      |       |       |
+|modified_at     |timestamp             |       |       |X      |       |       |
 
 ### Message
 
@@ -222,15 +222,11 @@ Los mensajes de las conversaciones con los usuarios de las apps que enviaron cal
 |direction       |char                  |       |       |       |X      |
 |rating_id       |int                   |X      |       |       |X      |
 |created_at      |timestamp             |       |       |       |       |
-|modified_at      |timestamp            |       |X      |       |       |
+|modified_at     |timestamp             |       |X      |       |       |
 
 ### Range
 
 Los rangos de calificaciones de cada app.
-
-#### Relaciones
-
-- **One-to-many** con App, a través de `app_id`
 
 |Campos          |Tipo                  | FK?   | Null? |Unique?|Index? |
 |----------------|----------------------|:-----:|:-----:|:-----:|:-----:|
@@ -238,9 +234,8 @@ Los rangos de calificaciones de cada app.
 |from            |smallint              |       |       |       |       |
 |to              |smallint              |       |       |       |       |
 |key             |char(32)              |       |       |X      |X      |
-|app_id          |int                   |X      |       |       |X      |
 |created_at      |timestamp             |       |       |       |       |
-|modified_at      |timestamp            |       |X      |       |       |
+|modified_at     |timestamp             |       |X      |       |       |
 
 
 ### Setting
@@ -258,8 +253,8 @@ Los valores de configuración del backend.
 |key             |varchar(30)           |       |       |X      |       |
 |value           |varchar(254)          |       |X      |       |       |
 |created_at      |timestamp             |       |       |       |       |
-|modified_at      |timestamp            |       |X      |       |       |
-|modified_by      |int                  |X      |X      |       |       |
+|modified_at     |timestamp             |       |X      |       |       |
+|modified_by     |int                   |X      |X      |       |       |
 
 ## Timestamps
 

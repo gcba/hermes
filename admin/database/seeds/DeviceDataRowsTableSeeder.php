@@ -17,7 +17,7 @@ class DeviceDataRowsTableSeeder extends Seeder
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'number',
-                'display_name' => 'id',
+                'display_name' => 'ID',
                 'required'     => 1,
                 'browse'       => 0,
                 'read'         => 0,
@@ -29,11 +29,11 @@ class DeviceDataRowsTableSeeder extends Seeder
             ])->save();
         }
 
-        $dataRow = $this->dataRow($deviceDataType, 'name');
+        $dataRow = $this->dataRow($deviceDataType, 'brand_id');
         if (!$dataRow->exists) {
             $dataRow->fill([
-                'type'         => 'text',
-                'display_name' => 'nombre',
+                'type'         => 'number',
+                'display_name' => 'Marca',
                 'required'     => 1,
                 'browse'       => 1,
                 'read'         => 1,
@@ -45,11 +45,11 @@ class DeviceDataRowsTableSeeder extends Seeder
             ])->save();
         }
 
-        $dataRow = $this->dataRow($deviceDataType, 'screen_width');
+        $dataRow = $this->dataRow($deviceDataType, 'name');
         if (!$dataRow->exists) {
             $dataRow->fill([
-                'type'         => 'number',
-                'display_name' => 'ancho pantalla',
+                'type'         => 'text',
+                'display_name' => 'Nombre',
                 'required'     => 1,
                 'browse'       => 1,
                 'read'         => 1,
@@ -61,11 +61,11 @@ class DeviceDataRowsTableSeeder extends Seeder
             ])->save();
         }
 
-        $dataRow = $this->dataRow($deviceDataType, 'screen_height');
+        $dataRow = $this->dataRow($deviceDataType, 'screen_width');
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'number',
-                'display_name' => 'altura pantalla',
+                'display_name' => 'Ancho pantalla',
                 'required'     => 1,
                 'browse'       => 1,
                 'read'         => 1,
@@ -77,11 +77,11 @@ class DeviceDataRowsTableSeeder extends Seeder
             ])->save();
         }
 
-        $dataRow = $this->dataRow($deviceDataType, 'ppi');
+        $dataRow = $this->dataRow($deviceDataType, 'screen_height');
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'number',
-                'display_name' => 'ppi',
+                'display_name' => 'Altura pantalla',
                 'required'     => 1,
                 'browse'       => 1,
                 'read'         => 1,
@@ -93,11 +93,11 @@ class DeviceDataRowsTableSeeder extends Seeder
             ])->save();
         }
 
-        $dataRow = $this->dataRow($deviceDataType, 'brand_id');
+        $dataRow = $this->dataRow($deviceDataType, 'ppi');
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'number',
-                'display_name' => 'marca',
+                'display_name' => 'PPI',
                 'required'     => 1,
                 'browse'       => 1,
                 'read'         => 1,
@@ -113,7 +113,7 @@ class DeviceDataRowsTableSeeder extends Seeder
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'number',
-                'display_name' => 'plataforma',
+                'display_name' => 'Plataforma',
                 'required'     => 1,
                 'browse'       => 1,
                 'read'         => 1,
@@ -129,7 +129,7 @@ class DeviceDataRowsTableSeeder extends Seeder
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'timestamp',
-                'display_name' => 'última modificación',
+                'display_name' => 'Última modificación',
                 'required'     => 0,
                 'browse'       => 0,
                 'read'         => 1,
@@ -145,7 +145,7 @@ class DeviceDataRowsTableSeeder extends Seeder
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'timestamp',
-                'display_name' => 'creación',
+                'display_name' => 'Creación',
                 'required'     => 0,
                 'browse'       => 0,
                 'read'         => 1,
@@ -161,7 +161,7 @@ class DeviceDataRowsTableSeeder extends Seeder
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'timestamp',
-                'display_name' => 'borrado',
+                'display_name' => 'Borrado',
                 'required'     => 0,
                 'browse'       => 0,
                 'read'         => 0,

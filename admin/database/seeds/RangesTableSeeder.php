@@ -2,7 +2,6 @@
 
 use Illuminate\Database\Seeder;
 use App\Range;
-use App\App;
 
 class RangesTableSeeder extends Seeder
 {
@@ -14,29 +13,22 @@ class RangesTableSeeder extends Seeder
     public function run()
     {
         if (Range::count() == 0) {
-            $denunciaVial = App::where('name', 'Denuncia Vial')->firstOrFail();
-            $miBA = App::where('name', 'Mi BA')->firstOrFail();
-            $masSimple = App::where('name', 'Más Simple')->firstOrFail();
-
             Range::create([
                 'from' => 0,
                 'to' => 5,
-                'key'  => md5("123456"),
-                'app_id' => $denunciaVial->id
+                'key'  => md5("123456")
             ]);
 
             Range::create([
                 'from' => 0,
                 'to' => 10,
-                'key'  => md5("654321"),
-                'app_id' => $miBA->id
+                'key'  => md5("654321")
             ]);
 
             Range::create([
                 'from' => -5,
                 'to' => 5,
-                'key'  => md5("987654"),
-                'app_id' => $masSimple->id
+                'key'  => md5("987654")
             ]);
         }
     }
