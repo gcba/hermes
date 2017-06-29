@@ -116,7 +116,7 @@ class DataTypesTableSeeder extends Seeder
                 'display_name_plural'   => 'Platforms',
                 'icon'                  => 'voyager-laptop',
                 'model_name'            => 'App\\Platform',
-                'controller'            => '',
+                'controller'            => 'PlatformController',
                 'generate_permissions'  => 1,
                 'description'           => 'Plataformas donde andan las aplicaciones',
             ])->save();
