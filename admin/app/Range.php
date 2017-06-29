@@ -26,6 +26,13 @@ class Range extends Model
     protected $dates = ['deleted_at'];
 
     /**
+     * The accessors that should be included among the fields.
+     *
+     * @var array
+     */
+    protected $appends = ['name'];
+
+    /**
      * Boot function for using with User Events
      *
      * @return void
@@ -46,6 +53,6 @@ class Range extends Model
      * Get a readable range name.
      */
     public function getNameAttribute() {
-        return $this->from . " a " . $this->to;
+        return $this->from . "/" . $this->to;
     }
 }
