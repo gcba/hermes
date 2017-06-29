@@ -16,12 +16,10 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         DB::listen(function ($query) {
-          //Log::debug($query->sql);
-          //Log::debug($query->bindings);
             DB::listen(function ($query) {
                 if (strpos($query->sql, 'insert into') !== false) {
-                    \Debugbar::info($query->sql);
-                    \Debugbar::info($query->bindings);
+                    // \Debugbar::info($query->sql);
+                    // \Debugbar::info($query->bindings);
                 }
             });
         });
