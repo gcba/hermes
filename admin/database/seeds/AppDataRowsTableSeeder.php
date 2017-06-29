@@ -48,7 +48,7 @@ class AppDataRowsTableSeeder extends Seeder
         $dataRow = $this->dataRow($appDataType, 'type');
         if (!$dataRow->exists) {
             $dataRow->fill([
-                'type'         => 'radiobutton',
+                'type'         => 'radio_btn',
                 'display_name' => 'Tipo',
                 'required'     => 1,
                 'browse'       => 1,
@@ -56,7 +56,7 @@ class AppDataRowsTableSeeder extends Seeder
                 'edit'         => 1,
                 'add'          => 1,
                 'delete'       => 1,
-                'details'      => '',
+                'details'      => '{"default":"M","options":{"M":"Móvil","W":"Web"},"validation":{"rules":["required"],"messages":{"required":"Falta el campo :attribute."}}}',
                 'order'        => 3,
             ])->save();
         }
