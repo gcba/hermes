@@ -205,7 +205,7 @@ Las calificaciones de las apps.
 |device_id       |int                   |       |X      |X      |       |X      |
 |browser_id      |int                   |       |X      |X      |       |X      |
 |created_at      |timestamp             |       |       |       |       |       |
-|modified_at      |timestamp            |       |       |X      |       |       |
+|modified_at     |timestamp             |       |       |X      |       |       |
 
 ### Message
 
@@ -222,15 +222,11 @@ Los mensajes de las conversaciones con los usuarios de las apps que enviaron cal
 |direction       |char                  |       |       |       |X      |
 |rating_id       |int                   |X      |       |       |X      |
 |created_at      |timestamp             |       |       |       |       |
-|modified_at      |timestamp            |       |X      |       |       |
+|modified_at     |timestamp             |       |X      |       |       |
 
 ### Range
 
 Los rangos de calificaciones de cada app.
-
-#### Relaciones
-
-- **One-to-many** con App, a través de `app_id`
 
 |Campos          |Tipo                  | FK?   | Null? |Unique?|Index? |
 |----------------|----------------------|:-----:|:-----:|:-----:|:-----:|
@@ -238,9 +234,8 @@ Los rangos de calificaciones de cada app.
 |from            |smallint              |       |       |       |       |
 |to              |smallint              |       |       |       |       |
 |key             |char(32)              |       |       |X      |X      |
-|app_id          |int                   |X      |       |       |X      |
 |created_at      |timestamp             |       |       |       |       |
-|modified_at      |timestamp            |       |X      |       |       |
+|modified_at     |timestamp             |       |X      |       |       |
 
 
 ### Setting
