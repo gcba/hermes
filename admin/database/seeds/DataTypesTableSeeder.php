@@ -32,7 +32,7 @@ class DataTypesTableSeeder extends Seeder
                 'display_name_plural'   => 'Apps',
                 'icon'                  => 'voyager-categories',
                 'model_name'            => 'App\\App',
-                'controller'            => 'AppController',
+                'controller'            => '',
                 'generate_permissions'  => 1,
                 'description'           => 'App',
             ])->save();
@@ -116,7 +116,7 @@ class DataTypesTableSeeder extends Seeder
                 'display_name_plural'   => 'Platforms',
                 'icon'                  => 'voyager-laptop',
                 'model_name'            => 'App\\Platform',
-                'controller'            => 'PlatformController',
+                'controller'            => '',
                 'generate_permissions'  => 1,
                 'description'           => 'Plataformas donde andan las aplicaciones',
             ])->save();
@@ -130,7 +130,7 @@ class DataTypesTableSeeder extends Seeder
                 'display_name_plural'   => 'Ranges',
                 'icon'                  => 'voyager-star-half',
                 'model_name'            => 'App\\Range',
-                'controller'            => 'RangeController',
+                'controller'            => '',
                 'generate_permissions'  => 1,
                 'description'           => 'Rangos de calificaciones',
             ])->save();
