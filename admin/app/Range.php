@@ -45,7 +45,7 @@ class Range extends Model
     /**
      * Get a readable range name.
      */
-    public function name() {
+    public function getNameAttribute() {
         return $this->from . " a " . $this->to;
     }
 }
