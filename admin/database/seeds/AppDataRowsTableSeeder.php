@@ -17,7 +17,7 @@ class AppDataRowsTableSeeder extends Seeder
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'number',
-                'display_name' => 'id',
+                'display_name' => 'ID',
                 'required'     => 1,
                 'browse'       => 0,
                 'read'         => 0,
@@ -33,7 +33,7 @@ class AppDataRowsTableSeeder extends Seeder
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'text',
-                'display_name' => 'nombre',
+                'display_name' => 'Nombre',
                 'required'     => 1,
                 'browse'       => 1,
                 'read'         => 1,
@@ -49,7 +49,7 @@ class AppDataRowsTableSeeder extends Seeder
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'radiobutton',
-                'display_name' => 'tipo',
+                'display_name' => 'Tipo',
                 'required'     => 1,
                 'browse'       => 1,
                 'read'         => 1,
@@ -65,7 +65,7 @@ class AppDataRowsTableSeeder extends Seeder
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'text',
-                'display_name' => 'key',
+                'display_name' => 'Key',
                 'required'     => 1,
                 'browse'       => 1,
                 'read'         => 1,
@@ -81,7 +81,7 @@ class AppDataRowsTableSeeder extends Seeder
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'timestamp',
-                'display_name' => 'última modificación',
+                'display_name' => 'Última modificación',
                 'required'     => 0,
                 'browse'       => 0,
                 'read'         => 1,
@@ -97,7 +97,7 @@ class AppDataRowsTableSeeder extends Seeder
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'text',
-                'display_name' => 'modificado por',
+                'display_name' => 'Modificado por',
                 'required'     => 0,
                 'browse'       => 0,
                 'read'         => 1,
@@ -113,7 +113,7 @@ class AppDataRowsTableSeeder extends Seeder
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'timestamp',
-                'display_name' => 'creación',
+                'display_name' => 'Creación',
                 'required'     => 0,
                 'browse'       => 0,
                 'read'         => 1,
@@ -129,7 +129,7 @@ class AppDataRowsTableSeeder extends Seeder
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'timestamp',
-                'display_name' => 'borrado',
+                'display_name' => 'Borrado',
                 'required'     => 0,
                 'browse'       => 0,
                 'read'         => 0,

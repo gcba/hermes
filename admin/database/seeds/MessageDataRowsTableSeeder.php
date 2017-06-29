@@ -17,7 +17,7 @@ class MessageDataRowsTableSeeder extends Seeder
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'number',
-                'display_name' => 'id',
+                'display_name' => 'ID',
                 'required'     => 1,
                 'browse'       => 0,
                 'read'         => 0,
@@ -33,7 +33,7 @@ class MessageDataRowsTableSeeder extends Seeder
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'text',
-                'display_name' => 'mensaje',
+                'display_name' => 'Mensaje',
                 'required'     => 1,
                 'browse'       => 1,
                 'read'         => 1,
@@ -49,7 +49,7 @@ class MessageDataRowsTableSeeder extends Seeder
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'text',
-                'display_name' => 'sentido',
+                'display_name' => 'Sentido',
                 'required'     => 1,
                 'browse'       => 1,
                 'read'         => 1,
@@ -65,7 +65,7 @@ class MessageDataRowsTableSeeder extends Seeder
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'number',
-                'display_name' => 'calificación',
+                'display_name' => 'Calificación',
                 'required'     => 1,
                 'browse'       => 1,
                 'read'         => 1,
@@ -81,7 +81,7 @@ class MessageDataRowsTableSeeder extends Seeder
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'timestamp',
-                'display_name' => 'última modificación',
+                'display_name' => 'Última modificación',
                 'required'     => 0,
                 'browse'       => 0,
                 'read'         => 1,
@@ -97,7 +97,7 @@ class MessageDataRowsTableSeeder extends Seeder
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'timestamp',
-                'display_name' => 'creación',
+                'display_name' => 'Creación',
                 'required'     => 0,
                 'browse'       => 0,
                 'read'         => 1,

@@ -17,7 +17,7 @@ class UserDataRowsTableSeeder extends Seeder
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'number',
-                'display_name' => 'id',
+                'display_name' => 'ID',
                 'required'     => 1,
                 'browse'       => 0,
                 'read'         => 0,
@@ -33,7 +33,7 @@ class UserDataRowsTableSeeder extends Seeder
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'text',
-                'display_name' => 'nombre',
+                'display_name' => 'Nombre',
                 'required'     => 1,
                 'browse'       => 1,
                 'read'         => 1,
@@ -49,7 +49,7 @@ class UserDataRowsTableSeeder extends Seeder
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'text',
-                'display_name' => 'email',
+                'display_name' => 'Email',
                 'required'     => 1,
                 'browse'       => 1,
                 'read'         => 1,
@@ -65,7 +65,7 @@ class UserDataRowsTableSeeder extends Seeder
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'password',
-                'display_name' => 'password',
+                'display_name' => 'Password',
                 'required'     => 1,
                 'browse'       => 0,
                 'read'         => 0,
@@ -77,43 +77,43 @@ class UserDataRowsTableSeeder extends Seeder
             ])->save();
         }
 
-        $dataRow = $this->dataRow($userDataType, 'remember_token');
+        $dataRow = $this->dataRow($userDataType, 'avatar');
         if (!$dataRow->exists) {
             $dataRow->fill([
-                'type'         => 'text',
-                'display_name' => 'remember_token',
+                'type'         => 'image',
+                'display_name' => 'Avatar',
                 'required'     => 0,
-                'browse'       => 0,
-                'read'         => 0,
-                'edit'         => 0,
-                'add'          => 0,
-                'delete'       => 0,
+                'browse'       => 1,
+                'read'         => 1,
+                'edit'         => 1,
+                'add'          => 1,
+                'delete'       => 1,
                 'details'      => '',
                 'order'        => 5,
             ])->save();
         }
 
-        $dataRow = $this->dataRow($userDataType, 'created_at');
+        $dataRow = $this->dataRow($userDataType, 'role_id');
         if (!$dataRow->exists) {
             $dataRow->fill([
-                'type'         => 'timestamp',
-                'display_name' => 'creación',
-                'required'     => 0,
-                'browse'       => 0,
+                'type'         => 'text',
+                'display_name' => 'Rol',
+                'required'     => 1,
+                'browse'       => 1,
                 'read'         => 1,
-                'edit'         => 0,
-                'add'          => 0,
-                'delete'       => 0,
+                'edit'         => 1,
+                'add'          => 1,
+                'delete'       => 1,
                 'details'      => '',
                 'order'        => 6,
             ])->save();
         }
 
-        $dataRow = $this->dataRow($userDataType, 'updated_at');
+        $dataRow = $this->dataRow($userDataType, 'remember_token');
         if (!$dataRow->exists) {
             $dataRow->fill([
-                'type'         => 'timestamp',
-                'display_name' => 'última modificación',
+                'type'         => 'text',
+                'display_name' => 'Recordar token',
                 'required'     => 0,
                 'browse'       => 0,
                 'read'         => 0,
@@ -125,14 +125,14 @@ class UserDataRowsTableSeeder extends Seeder
             ])->save();
         }
 
-        $dataRow = $this->dataRow($userDataType, 'modified_by');
+        $dataRow = $this->dataRow($userDataType, 'updated_at');
         if (!$dataRow->exists) {
             $dataRow->fill([
-                'type'         => 'text',
-                'display_name' => 'modificado por',
+                'type'         => 'timestamp',
+                'display_name' => 'Última modificación',
                 'required'     => 0,
                 'browse'       => 0,
-                'read'         => 1,
+                'read'         => 0,
                 'edit'         => 0,
                 'add'          => 0,
                 'delete'       => 0,
@@ -141,33 +141,33 @@ class UserDataRowsTableSeeder extends Seeder
             ])->save();
         }
 
-        $dataRow = $this->dataRow($userDataType, 'avatar');
+        $dataRow = $this->dataRow($userDataType, 'modified_by');
         if (!$dataRow->exists) {
             $dataRow->fill([
-                'type'         => 'image',
-                'display_name' => 'avatar',
+                'type'         => 'text',
+                'display_name' => 'Modificado por',
                 'required'     => 0,
-                'browse'       => 1,
+                'browse'       => 0,
                 'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 1,
+                'edit'         => 0,
+                'add'          => 0,
+                'delete'       => 0,
                 'details'      => '',
                 'order'        => 9,
             ])->save();
         }
 
-        $dataRow = $this->dataRow($userDataType, 'role_id');
+        $dataRow = $this->dataRow($userDataType, 'created_at');
         if (!$dataRow->exists) {
             $dataRow->fill([
-                'type'         => 'text',
-                'display_name' => 'rol',
-                'required'     => 1,
-                'browse'       => 1,
+                'type'         => 'timestamp',
+                'display_name' => 'Creación',
+                'required'     => 0,
+                'browse'       => 0,
                 'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 1,
+                'edit'         => 0,
+                'add'          => 0,
+                'delete'       => 0,
                 'details'      => '',
                 'order'        => 10,
             ])->save();

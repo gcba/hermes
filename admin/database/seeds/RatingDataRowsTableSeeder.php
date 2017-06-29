@@ -17,7 +17,7 @@ class RatingDataRowsTableSeeder extends Seeder
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'number',
-                'display_name' => 'id',
+                'display_name' => 'ID',
                 'required'     => 1,
                 'browse'       => 0,
                 'read'         => 0,
@@ -33,7 +33,7 @@ class RatingDataRowsTableSeeder extends Seeder
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'number',
-                'display_name' => 'calificación',
+                'display_name' => 'Calificación',
                 'required'     => 1,
                 'browse'       => 1,
                 'read'         => 1,
@@ -49,7 +49,7 @@ class RatingDataRowsTableSeeder extends Seeder
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'text',
-                'display_name' => 'descripción',
+                'display_name' => 'Descripción',
                 'required'     => 0,
                 'browse'       => 1,
                 'read'         => 1,
@@ -65,7 +65,7 @@ class RatingDataRowsTableSeeder extends Seeder
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'text',
-                'display_name' => 'versión app',
+                'display_name' => 'Versión app',
                 'required'     => 0,
                 'browse'       => 1,
                 'read'         => 1,
@@ -81,7 +81,7 @@ class RatingDataRowsTableSeeder extends Seeder
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'text',
-                'display_name' => 'versión browser',
+                'display_name' => 'Versión browser',
                 'required'     => 0,
                 'browse'       => 1,
                 'read'         => 1,
@@ -97,7 +97,7 @@ class RatingDataRowsTableSeeder extends Seeder
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'text',
-                'display_name' => 'mensaje',
+                'display_name' => 'Mensaje',
                 'required'     => 1,
                 'browse'       => 1,
                 'read'         => 1,
@@ -113,7 +113,7 @@ class RatingDataRowsTableSeeder extends Seeder
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'number',
-                'display_name' => 'aplicación',
+                'display_name' => 'Aplicación',
                 'required'     => 1,
                 'browse'       => 1,
                 'read'         => 1,
@@ -129,7 +129,7 @@ class RatingDataRowsTableSeeder extends Seeder
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'number',
-                'display_name' => 'plataforma',
+                'display_name' => 'Plataforma',
                 'required'     => 1,
                 'browse'       => 1,
                 'read'         => 1,
@@ -145,7 +145,7 @@ class RatingDataRowsTableSeeder extends Seeder
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'number',
-                'display_name' => 'rango',
+                'display_name' => 'Rango',
                 'required'     => 1,
                 'browse'       => 1,
                 'read'         => 1,
@@ -161,7 +161,7 @@ class RatingDataRowsTableSeeder extends Seeder
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'number',
-                'display_name' => 'usuario',
+                'display_name' => 'Usuario',
                 'required'     => 0,
                 'browse'       => 1,
                 'read'         => 1,
@@ -177,7 +177,7 @@ class RatingDataRowsTableSeeder extends Seeder
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'number',
-                'display_name' => 'dispositivo',
+                'display_name' => 'Dispositivo',
                 'required'     => 0,
                 'browse'       => 1,
                 'read'         => 1,
@@ -193,7 +193,7 @@ class RatingDataRowsTableSeeder extends Seeder
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'number',
-                'display_name' => 'browser',
+                'display_name' => 'Browser',
                 'required'     => 0,
                 'browse'       => 0,
                 'read'         => 1,
@@ -209,7 +209,7 @@ class RatingDataRowsTableSeeder extends Seeder
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'timestamp',
-                'display_name' => 'última modificación',
+                'display_name' => 'Última modificación',
                 'required'     => 0,
                 'browse'       => 0,
                 'read'         => 1,
@@ -225,7 +225,7 @@ class RatingDataRowsTableSeeder extends Seeder
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'timestamp',
-                'display_name' => 'creación',
+                'display_name' => 'Creación',
                 'required'     => 0,
                 'browse'       => 0,
                 'read'         => 1,
@@ -241,7 +241,7 @@ class RatingDataRowsTableSeeder extends Seeder
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'timestamp',
-                'display_name' => 'borrado',
+                'display_name' => 'Borrado',
                 'required'     => 0,
                 'browse'       => 0,
                 'read'         => 0,
