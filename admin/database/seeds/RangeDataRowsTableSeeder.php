@@ -40,7 +40,7 @@ class RangeDataRowsTableSeeder extends Seeder
                 'edit'         => 1,
                 'add'          => 1,
                 'delete'       => 1,
-                'details'      => '',
+                'details'      => '{"validation":{"rules":["required","max:127","min:-127"],"messages":{"required":"Falta el campo :attribute.","max":"El campo :attribute puede ser hasta :max.","min":"El campo :attribute puede ser desde :min."}}}',
                 'order'        => 2,
             ])->save();
         }
@@ -56,7 +56,7 @@ class RangeDataRowsTableSeeder extends Seeder
                 'edit'         => 1,
                 'add'          => 1,
                 'delete'       => 1,
-                'details'      => '',
+                'details'      => '{"validation":{"rules":["required","max:127","min:-127"],"messages":{"required":"Falta el campo :attribute.","max":"El campo :attribute puede ser hasta :max.","min":"El campo :attribute puede ser desde :min."}}}',
                 'order'        => 3,
             ])->save();
         }
@@ -77,22 +77,6 @@ class RangeDataRowsTableSeeder extends Seeder
             ])->save();
         }
 
-        $dataRow = $this->dataRow($rangeDataType, 'app_id');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'number',
-                'display_name' => 'App',
-                'required'     => 1,
-                'browse'       => 1,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 1,
-                'details'      => '',
-                'order'        => 5,
-            ])->save();
-        }
-
         $dataRow = $this->dataRow($rangeDataType, 'updated_at');
         if (!$dataRow->exists) {
             $dataRow->fill([
@@ -105,7 +89,7 @@ class RangeDataRowsTableSeeder extends Seeder
                 'add'          => 0,
                 'delete'       => 0,
                 'details'      => '',
-                'order'        => 6,
+                'order'        => 5,
             ])->save();
         }
 
@@ -121,7 +105,7 @@ class RangeDataRowsTableSeeder extends Seeder
                 'add'          => 0,
                 'delete'       => 0,
                 'details'      => '',
-                'order'        => 7,
+                'order'        => 6,
             ])->save();
         }
 
@@ -137,7 +121,7 @@ class RangeDataRowsTableSeeder extends Seeder
                 'add'          => 0,
                 'delete'       => 0,
                 'details'      => '',
-                'order'        => 8,
+                'order'        => 7,
             ])->save();
         }
     }

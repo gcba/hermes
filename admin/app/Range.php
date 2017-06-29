@@ -15,7 +15,7 @@ class Range extends Model
      * @var array
      */
     protected $fillable = [
-        'from', 'to', 'key', 'app_id'
+        'from', 'to', 'key'
     ];
 
     /**
@@ -24,14 +24,6 @@ class Range extends Model
      * @var array
      */
     protected $dates = ['deleted_at'];
-
-    /**
-     * Get the app this range belongs to.
-     */
-    public function app()
-    {
-        return $this->belongsTo('App\App');
-    }
 
     /**
      * Get a readable range name.

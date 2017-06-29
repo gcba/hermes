@@ -19,9 +19,6 @@ class CreateRangesTable extends Migration
             $table->integer('to');
             $table->char('key', 32)->unique();
             $table->index('key');
-            $table->integer('app_id')->unsigned();
-            $table->foreign('app_id')->references('id')->on('apps')->onDelete('cascade');
-            $table->index('app_id');
             $table->timestamps();
             $table->softDeletes();
         });
