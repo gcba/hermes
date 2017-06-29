@@ -36,7 +36,7 @@ class RangeController extends \TCG\Voyager\Http\Controllers\VoyagerBreadControll
      */
     public function store(Request $request)
     {
-        return parent::storage($request);
+        return parent::store($request);
     }
 
     /**

@@ -36,7 +36,7 @@ class AppController extends \TCG\Voyager\Http\Controllers\VoyagerBreadController
      */
     public function store(Request $request)
     {
-        return parent::storage($request);
+        return parent::store($request);
     }
 
     /**

@@ -36,7 +36,7 @@ class PlatformController extends \TCG\Voyager\Http\Controllers\VoyagerBreadContr
      */
     public function store(Request $request)
     {
-        return parent::storage($request);
+        return parent::store($request);
     }
 
     /**
