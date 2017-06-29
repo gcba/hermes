@@ -29,6 +29,22 @@ class DeviceDataRowsTableSeeder extends Seeder
             ])->save();
         }
 
+        $dataRow = $this->dataRow($deviceDataType, 'brand_id');
+        if (!$dataRow->exists) {
+            $dataRow->fill([
+                'type'         => 'number',
+                'display_name' => 'Marca',
+                'required'     => 1,
+                'browse'       => 1,
+                'read'         => 1,
+                'edit'         => 0,
+                'add'          => 0,
+                'delete'       => 0,
+                'details'      => '',
+                'order'        => 2,
+            ])->save();
+        }
+
         $dataRow = $this->dataRow($deviceDataType, 'name');
         if (!$dataRow->exists) {
             $dataRow->fill([
@@ -41,7 +57,7 @@ class DeviceDataRowsTableSeeder extends Seeder
                 'add'          => 0,
                 'delete'       => 0,
                 'details'      => '',
-                'order'        => 2,
+                'order'        => 3,
             ])->save();
         }
 
@@ -57,7 +73,7 @@ class DeviceDataRowsTableSeeder extends Seeder
                 'add'          => 0,
                 'delete'       => 0,
                 'details'      => '',
-                'order'        => 3,
+                'order'        => 4,
             ])->save();
         }
 
@@ -73,7 +89,7 @@ class DeviceDataRowsTableSeeder extends Seeder
                 'add'          => 0,
                 'delete'       => 0,
                 'details'      => '',
-                'order'        => 4,
+                'order'        => 5,
             ])->save();
         }
 
@@ -82,22 +98,6 @@ class DeviceDataRowsTableSeeder extends Seeder
             $dataRow->fill([
                 'type'         => 'number',
                 'display_name' => 'PPI',
-                'required'     => 1,
-                'browse'       => 1,
-                'read'         => 1,
-                'edit'         => 0,
-                'add'          => 0,
-                'delete'       => 0,
-                'details'      => '',
-                'order'        => 5,
-            ])->save();
-        }
-
-        $dataRow = $this->dataRow($deviceDataType, 'brand_id');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'number',
-                'display_name' => 'Marca',
                 'required'     => 1,
                 'browse'       => 1,
                 'read'         => 1,
