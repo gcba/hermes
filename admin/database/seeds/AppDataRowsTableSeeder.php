@@ -40,7 +40,7 @@ class AppDataRowsTableSeeder extends Seeder
                 'edit'         => 1,
                 'add'          => 1,
                 'delete'       => 1,
-                'details'      => '',
+                'details'      => '{"validation":{"rules":["required","string","min:3","max:50"],"messages":{"required":"Falta el campo :attribute.","string":"El campo :attribute debe tener texto.","max":"El campo :attribute puede tener hasta :max carácteres.","min":"El campo :attribute debe tener al menos :min carácteres."}}}',
                 'order'        => 2,
             ])->save();
         }
@@ -56,7 +56,7 @@ class AppDataRowsTableSeeder extends Seeder
                 'edit'         => 1,
                 'add'          => 1,
                 'delete'       => 1,
-                'details'      => '{"default":"M","options":{"M":"Móvil","W":"Web"},"validation":{"rules":["required"],"messages":{"required":"Falta el campo :attribute."}}}',
+                'details'      => '{"default":"M","options":{"M":"Móvil","W":"Web"},"validation":{"rules":["required","alpha","size:1"],"messages":{"required":"Falta el campo :attribute.","alpha":"El campo :attribute sólo puede constar de una letra.","size":"El campo :attribute sólo puede constar de una letra."}}}',
                 'order'        => 3,
             ])->save();
         }

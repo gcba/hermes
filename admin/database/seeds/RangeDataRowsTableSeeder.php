@@ -40,7 +40,7 @@ class RangeDataRowsTableSeeder extends Seeder
                 'edit'         => 1,
                 'add'          => 1,
                 'delete'       => 1,
-                'details'      => '{"validation":{"rules":["required","integer","max:127","min:-127"],"messages":{"required":"Falta el campo :attribute.","integer":"El campo :attribute debe ser numérico","max":"El campo :attribute puede ser hasta :max.",min":"El campo :attribute debe ser al menos :min."}}}',
+                'details'      => '{"validation":{"rules":["required","integer","max:127","min:-127"],"messages":{"required":"Falta el campo :attribute.","integer":"El campo :attribute debe ser numérico.","max":"El campo :attribute puede ser hasta :max.","min":"El campo :attribute debe ser al menos :min."}}}',
                 'order'        => 2,
             ])->save();
         }
@@ -56,7 +56,7 @@ class RangeDataRowsTableSeeder extends Seeder
                 'edit'         => 1,
                 'add'          => 1,
                 'delete'       => 1,
-                'details'      => '{"validation":{"rules":["required","integer","max:127","min:-127"],"messages":{"required":"Falta el campo :attribute.","integer":"El campo :attribute debe ser numérico","max":"El campo :attribute puede ser hasta :max.",min":"El campo :attribute debe ser al menos :min."}}}',
+                'details'      => '{"validation":{"rules":["required","integer","max:127","min:-127"],"messages":{"required":"Falta el campo :attribute.","integer":"El campo :attribute debe ser numérico.","max":"El campo :attribute puede ser hasta :max.","min":"El campo :attribute debe ser al menos :min."}}}',
                 'order'        => 3,
             ])->save();
         }
