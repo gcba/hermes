@@ -14,11 +14,17 @@ class PermissionsTableSeeder extends Seeder
             'browse_admin',
             'browse_database',
             // 'browse_media',
-            'browse_settings',
+            // 'browse_settings',
             'browse_apps',
-            'browse_appusers',
+            // 'browse_appusers',
+            'browse_apps',
+            'browse_platforms',
+            'browse_brands',
+            'browse_browsers',
+            'browse_devices',
+            'browse_ranges',
+            'browse_messages',
             'browse_ratings',
-            'browse_messages'
         ];
 
         foreach ($keys as $key) {
@@ -45,6 +51,8 @@ class PermissionsTableSeeder extends Seeder
         Permission::generateFor('browsers');
 
         Permission::generateFor('devices');
+
+        Permission::generateFor('ranges');
 
         Permission::generateFor('messages');
 
