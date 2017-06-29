@@ -21,7 +21,8 @@
             "database"
         ],
         "psr-4": {
-            "App\\": "app/"
+            "App\\": "app/",
+            "TCG\\Voyager\\Http\\Controllers\\": "vendor/tcg/voyager/src/Http/Controllers/"
         }
     },
     "autoload-dev": {

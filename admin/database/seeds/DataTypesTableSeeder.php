@@ -32,7 +32,7 @@ class DataTypesTableSeeder extends Seeder
                 'display_name_plural'   => 'Apps',
                 'icon'                  => 'voyager-categories',
                 'model_name'            => 'App\\App',
-                'controller'            => '',
+                'controller'            => 'AppController',
                 'generate_permissions'  => 1,
                 'description'           => 'App',
             ])->save();
