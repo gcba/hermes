@@ -130,7 +130,7 @@ class DataTypesTableSeeder extends Seeder
                 'display_name_plural'   => 'Ranges',
                 'icon'                  => 'voyager-star-half',
                 'model_name'            => 'App\\Range',
-                'controller'            => '',
+                'controller'            => 'RangeController',
                 'generate_permissions'  => 1,
                 'description'           => 'Rangos de calificaciones',
             ])->save();
