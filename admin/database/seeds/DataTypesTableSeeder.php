@@ -18,7 +18,7 @@ class DataTypesTableSeeder extends Seeder
                 'display_name_plural'   => 'Users',
                 'icon'                  => 'voyager-person',
                 'model_name'            => 'TCG\\Voyager\\Models\\User',
-                'controller'            => '',
+                'controller'            => 'Controller',
                 'generate_permissions'  => 1,
                 'description'           => '',
             ])->save();
@@ -32,7 +32,7 @@ class DataTypesTableSeeder extends Seeder
                 'display_name_plural'   => 'Apps',
                 'icon'                  => 'voyager-categories',
                 'model_name'            => 'App\\App',
-                'controller'            => '',
+                'controller'            => 'Controller',
                 'generate_permissions'  => 1,
                 'description'           => 'App',
             ])->save();
@@ -46,7 +46,7 @@ class DataTypesTableSeeder extends Seeder
                 'display_name_plural'   => 'App Users',
                 'icon'                  => 'voyager-people',
                 'model_name'            => 'App\\AppUser',
-                'controller'            => '',
+                'controller'            => 'Controller',
                 'generate_permissions'  => 1,
                 'description'           => 'Usuarios de las aplicaciones',
             ])->save();
@@ -60,7 +60,7 @@ class DataTypesTableSeeder extends Seeder
                 'display_name_plural'   => 'Brands',
                 'icon'                  => 'voyager-tag',
                 'model_name'            => 'App\\Brand',
-                'controller'            => '',
+                'controller'            => 'Controller',
                 'generate_permissions'  => 1,
                 'description'           => 'Marcas de los dispositivos',
             ])->save();
@@ -74,7 +74,7 @@ class DataTypesTableSeeder extends Seeder
                 'display_name_plural'   => 'Browsers',
                 'icon'                  => 'voyager-browser',
                 'model_name'            => 'App\\Browser',
-                'controller'            => '',
+                'controller'            => 'Controller',
                 'generate_permissions'  => 1,
                 'description'           => 'Navegadores',
             ])->save();
@@ -88,7 +88,7 @@ class DataTypesTableSeeder extends Seeder
                 'display_name_plural'   => 'Devices',
                 'icon'                  => 'voyager-phone',
                 'model_name'            => 'App\\Device',
-                'controller'            => '',
+                'controller'            => 'Controller',
                 'generate_permissions'  => 1,
                 'description'           => 'Dispositivos móviles',
             ])->save();
@@ -102,7 +102,7 @@ class DataTypesTableSeeder extends Seeder
                 'display_name_plural'   => 'Messages',
                 'icon'                  => 'voyager-chat',
                 'model_name'            => 'App\\Message',
-                'controller'            => '',
+                'controller'            => 'Controller',
                 'generate_permissions'  => 1,
                 'description'           => 'Mensajes',
             ])->save();
@@ -116,7 +116,7 @@ class DataTypesTableSeeder extends Seeder
                 'display_name_plural'   => 'Platforms',
                 'icon'                  => 'voyager-laptop',
                 'model_name'            => 'App\\Platform',
-                'controller'            => '',
+                'controller'            => 'Controller',
                 'generate_permissions'  => 1,
                 'description'           => 'Plataformas donde andan las aplicaciones',
             ])->save();
@@ -130,7 +130,7 @@ class DataTypesTableSeeder extends Seeder
                 'display_name_plural'   => 'Ranges',
                 'icon'                  => 'voyager-star-half',
                 'model_name'            => 'App\\Range',
-                'controller'            => '',
+                'controller'            => 'Controller',
                 'generate_permissions'  => 1,
                 'description'           => 'Rangos de calificaciones',
             ])->save();
@@ -144,7 +144,7 @@ class DataTypesTableSeeder extends Seeder
                 'display_name_plural'   => 'Ratings',
                 'icon'                  => 'voyager-star-two',
                 'model_name'            => 'App\\Rating',
-                'controller'            => '',
+                'controller'            => 'Controller',
                 'generate_permissions'  => 1,
                 'description'           => 'Calificaciones',
             ])->save();
@@ -158,7 +158,7 @@ class DataTypesTableSeeder extends Seeder
                 'display_name_plural'   => 'Menus',
                 'icon'                  => 'voyager-list',
                 'model_name'            => 'TCG\\Voyager\\Models\\Menu',
-                'controller'            => '',
+                'controller'            => 'Controller',
                 'generate_permissions'  => 1,
                 'description'           => '',
             ])->save();
@@ -172,7 +172,7 @@ class DataTypesTableSeeder extends Seeder
                 'display_name_plural'   => 'Roles',
                 'icon'                  => 'voyager-lock',
                 'model_name'            => 'TCG\\Voyager\\Models\\Role',
-                'controller'            => '',
+                'controller'            => 'Controller',
                 'generate_permissions'  => 1,
                 'description'           => '',
             ])->save();
