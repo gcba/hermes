@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Range;
 use Illuminate\Http\Request;
-use TCG\Voyager\Http\Controllers;
+use TCG\Voyager\Http\Controllers\VoyagerBreadController;
 
-class RangeController extends \TCG\Voyager\Http\Controllers\VoyagerBreadController
+class RangeController extends VoyagerBreadController
 {
     /**
      * Display a listing of the resource.
