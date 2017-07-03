@@ -9,68 +9,40 @@ use Validator;
 
 class Controller extends BreadController
 {
-    public function insertUpdateData($request, $slug, $rows, $data, $id = null)
+    // From Voyager's VoyagerBreadController.php, customized
+
+    // POST BRE(A)D
+    public function store(Request $request)
     {
-        $multi_select = [];
+        $slug = $this->getSlug($request);
 
-        /*
-         * Prepare Translations and Transform data
-         */
-        $translations = is_bread_translatable($data)
-                        ? $data->prepareTranslations($request)
-                        : [];
+        $dataType = Voyager::model('DataType')->where('slug', '=', $slug)->first();
 
-        foreach ($rows as $row) {
-            $options = json_decode($row->details);
+        // Check permission
+        Voyager::canOrFail('add_'.$dataType->name);
 
-            $content = $this->getContentBasedOnType($request, $slug, $row);
+        //Validate fields with ajax
+        $val = $this->validateBread($request->all(), $dataType->addRows);
 
-            /*
-             * merge ex_images and upload images
-             */
-            if ($row->type == 'multiple_images' && !is_null($content)) {
-                if (isset($data->{$row->field})) {
-                    $ex_files = json_decode($data->{$row->field}, true);
-                    if (!is_null($ex_files)) {
-                        $content = json_encode(array_merge($ex_files, json_decode($content)));
-                    }
-                }
-            }
-
-            if (is_null($content)) {
-                // Only set the content back to the previous value when there is really now input for this field
-                if (is_null($request->input($row->field)) && isset($data->{$row->field})) {
-                    $content = $data->{$row->field};
-                }
-                if ($row->field == 'password') {
-                    $content = $data->{$row->field};
-                }
-            }
-
-            if ($row->type == 'select_multiple' && property_exists($options, 'relationship')) {
-                // Only if select_multiple is working with a relationship
-                $multi_select[] = ['row' => $row->field, 'content' => $content];
-            } else {
-                $data->{$row->field} = $content;
-            }
+        if ($val->fails()) {
+            return response()->json(['errors' => $val->messages()]);
         }
 
-        if ($id) $result = $data->updateOrCreate(['id' => $id], $data->toArray());
-        else $result = $data->updateOrCreate($data->toArray());
+        if (!$request->ajax()) {
+            $data = $this->insertUpdateData($request, $slug, $dataType->addRows, new $dataType->model_name());
 
-        // Save translations
-        if (count($translations) > 0) {
-            $result->saveTranslations($translations);
+            return redirect()
+                ->route("voyager.{$dataType->slug}.index", ['id' => $data->id])
+                ->with([
+                        'message'    => "Ítem creado exitosamente",
+                        'alert-type' => 'success',
+                    ]);
         }
-
-        foreach ($multi_select as $sync_data) {
-            $result->{$sync_data['row']}()->sync($sync_data['content']);
-        }
-
-        return $result;
     }
 
-     // POST BR(E)AD
+    // From Voyager's VoyagerBreadController.php, customized
+
+    // POST BR(E)AD
     public function update(Request $request, $id)
     {
         $slug = $this->getSlug($request);
@@ -93,10 +65,10 @@ class Controller extends BreadController
             $this->insertUpdateData($request, $slug, $dataType->editRows, $data, $id);
 
             return redirect()
-            ->route("voyager.{$dataType->slug}.edit", ['id' => $id])
-            ->with([
-                'message'    => "Successfully Updated {$dataType->display_name_singular}",
-                'alert-type' => 'success',
+                ->route("voyager.{$dataType->slug}.index", ['id' => $id])
+                ->with([
+                    'message'    => "Ítem editado exitosamente",
+                    'alert-type' => 'success',
                 ]);
         }
     }
