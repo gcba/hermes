@@ -717,6 +717,41 @@
                 ]
               }
             ]
+          },
+          {
+            "title": "Sprint 6",
+            "source": "docs/desarrollo/sprint6.md",
+            "url": "desarrollo/sprint6.html",
+            "slug": "desarrollosprint6",
+            "headings": [
+              {
+                "title": "Días",
+                "depth": 2,
+                "id": "dias"
+              },
+              {
+                "title": "Objetivo",
+                "depth": 2,
+                "id": "objetivo"
+              },
+              {
+                "title": "Tareas",
+                "depth": 2,
+                "id": "tareas",
+                "headings": [
+                  {
+                    "title": "Admin",
+                    "depth": 3,
+                    "id": "admin"
+                  },
+                  {
+                    "title": "API de calificaciones",
+                    "depth": 3,
+                    "id": "api-de-calificaciones"
+                  }
+                ]
+              }
+            ]
           }
         ]
       }
@@ -1426,6 +1461,41 @@
           ]
         }
       ]
+    },
+    "desarrollo/sprint6.html": {
+      "source": "docs/desarrollo/sprint6.md",
+      "title": "Sprint 6 - Hermes",
+      "pageTitle": "Sprint 6",
+      "slug": "desarrollosprint6",
+      "headings": [
+        {
+          "title": "Días",
+          "depth": 2,
+          "id": "dias"
+        },
+        {
+          "title": "Objetivo",
+          "depth": 2,
+          "id": "objetivo"
+        },
+        {
+          "title": "Tareas",
+          "depth": 2,
+          "id": "tareas",
+          "headings": [
+            {
+              "title": "Admin",
+              "depth": 3,
+              "id": "admin"
+            },
+            {
+              "title": "API de calificaciones",
+              "depth": 3,
+              "id": "api-de-calificaciones"
+            }
+          ]
+        }
+      ]
     }
   },
   "sources": {
@@ -1445,6 +1515,7 @@
     "docs/desarrollo/sprint3.md": "desarrollo/sprint3.html",
     "docs/desarrollo/sprint4.md": "desarrollo/sprint4.html",
     "docs/desarrollo/sprint5.md": "desarrollo/sprint5.html",
+    "docs/desarrollo/sprint6.md": "desarrollo/sprint6.html",
     "docs/images/schema.png": "images/schema.png"
   }
 }
