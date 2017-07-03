@@ -89,6 +89,7 @@ En el caso de las aplicaciones móviles, el dispositivo desde donde se enviaron 
 #### Relaciones
 
 - **One-to-many** con Brand, a través de `brand_id`
+- **One-to-many** con Platform, a través de `platform_id`
 - **Many-to-many** con AppUser, a través de la tabla `AppUser_Device`
 
 |Campos          |Tipo                  | FK?   | Null? |Unique?|Index? |
