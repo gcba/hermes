@@ -34,6 +34,10 @@ Crear las páginas de CRUD de AppUser, Brand, Browser, Device, Message y Rating 
 
 10. Mostrar u ocultar los botones CRUD según los permisos
 
+11. Agregar la columna 'name' a Range
+
+12. Agregar container de la barra de filtros
+
 ### API de calificaciones
 
 1. Agregar un test de integración para cada caso de error
