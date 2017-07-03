@@ -96,7 +96,7 @@ class UserDataRowsTableSeeder extends Seeder
         $dataRow = $this->dataRow($userDataType, 'role_id');
         if (!$dataRow->exists) {
             $dataRow->fill([
-                'type'         => 'text',
+                'type'         => 'select_dropdown',
                 'display_name' => 'Rol',
                 'required'     => 1,
                 'browse'       => 1,
