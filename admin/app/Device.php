@@ -30,21 +30,35 @@ class Device extends Model
      */
     public function ratings()
     {
-        return $this->hasMany('App\Rating');
+        return $this->hasMany('App\Rating', 'rating_id', 'id');
     }
 
     /**
      * Get the device's brand.
      */
      public function brand() {
-        return $this->belongsTo('App\Brand');
+        return $this->belongsTo('App\Brand', 'brand_id', 'id');
      }
 
      /**
      * Get the platform the device belongs to.
      */
      public function platform() {
-        return $this->belongsTo('App\Platform');
+        return $this->belongsTo('App\Platform', 'id', 'platform_id');
+     }
+
+    /**
+     * For Voyager's CRUD.
+     */
+     public function brandId(){
+        return $this->belongsTo('App\Brand', 'brand_id', 'id');
+    }
+
+     /**
+     * For Voyager's CRUD.
+     */
+     public function platformId(){
+        return $this->belongsTo('App\Platform', 'platform_id', 'id');
      }
 
      /**

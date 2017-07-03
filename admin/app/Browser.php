@@ -30,6 +30,6 @@ class Browser extends Model
      */
     public function ratings()
     {
-        return $this->hasMany('App\Rating');
+        return $this->hasMany('App\Rating', 'rating_id', 'id');
     }
 }

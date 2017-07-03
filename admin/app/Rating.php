@@ -41,7 +41,7 @@ class Rating extends Model
      */
     public function app()
     {
-        return $this->belongsTo('App\App');
+        return $this->belongsTo('App\App', 'app_id', 'id');
     }
 
     /**
@@ -49,7 +49,7 @@ class Rating extends Model
      */
     public function rating()
     {
-        return $this->belongsTo('App\Rating');
+        return $this->belongsTo('App\Rating', 'rating_id', 'id');
     }
 
     /**
@@ -57,7 +57,7 @@ class Rating extends Model
      */
     public function appUser()
     {
-        return $this->belongsTo('App\AppUser', 'appuser_id');
+        return $this->belongsTo('App\AppUser', 'appuser_id', 'id');
     }
 
     /**
@@ -65,7 +65,7 @@ class Rating extends Model
      */
     public function platform()
     {
-        return $this->belongsTo('App\Platform');
+        return $this->belongsTo('App\Platform', 'platform_id', 'id');
     }
 
     /**
@@ -73,7 +73,7 @@ class Rating extends Model
      */
     public function device()
     {
-        return $this->belongsTo('App\Device');
+        return $this->belongsTo('App\Device', 'device_id', 'id');
     }
 
     /**
@@ -81,6 +81,6 @@ class Rating extends Model
      */
     public function browser()
     {
-        return $this->belongsTo('App\Browser');
+        return $this->belongsTo('App\Browser', 'browser_id', 'id');
     }
 }

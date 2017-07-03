@@ -30,6 +30,6 @@ class Brand extends Model
      */
     public function devices()
     {
-        return $this->hasMany('App\Device');
+        return $this->hasMany('App\Device', 'device_id', 'id');
     }
 }

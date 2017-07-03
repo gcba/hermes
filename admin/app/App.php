@@ -47,7 +47,7 @@ class App extends Model
      */
     public function ratings()
     {
-        return $this->hasMany('App\Rating');
+        return $this->hasMany('App\Rating', 'rating_id', 'id');
     }
 
     /**
@@ -75,6 +75,6 @@ class App extends Model
      * Get the user that last modified the app.
      */
      public function modifiedBy() {
-        return $this->belongsTo('App\User', 'modified_by');
+        return $this->belongsTo('App\User', 'modified_by', 'id');
      }
 }

@@ -37,6 +37,6 @@ class Message extends Model
      */
     public function rating()
     {
-        return $this->belongsTo('App\Rating');
+        return $this->belongsTo('App\Rating', 'rating_id', 'id');
     }
 }
