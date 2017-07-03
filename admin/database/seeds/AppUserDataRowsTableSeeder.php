@@ -72,7 +72,7 @@ class AppUserDataRowsTableSeeder extends Seeder
                 'edit'         => 0,
                 'add'          => 0,
                 'delete'       => 0,
-                'details'      => '',
+                'details'      => '{"validation":{"rules":["required","string"],"messages":{"required":"Falta el campo :attribute.","string":"El campo :attribute debe tener texto."}}}',
                 'order'        => 4,
             ])->save();
         }
