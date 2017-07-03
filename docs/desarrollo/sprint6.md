@@ -30,6 +30,8 @@ Crear las páginas de CRUD de AppUser, Brand, Browser, Device, Message y Rating 
 
 8. Redirigir al ítem luego de editarlo
 
+9. Agregar isOwner al CRUD de Users
+
 ### API de calificaciones
 
 1. Agregar un test de integración para cada caso de error
