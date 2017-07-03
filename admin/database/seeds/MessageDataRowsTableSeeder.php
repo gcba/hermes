@@ -40,7 +40,7 @@ class MessageDataRowsTableSeeder extends Seeder
                 'edit'         => 0,
                 'add'          => 1,
                 'delete'       => 1,
-                'details'      => '',
+                'details'      => '{"validation":{"rules":["required","string","min:3","max:1000"],"messages":{"required":"Falta el campo :attribute.","string":"El campo :attribute debe tener texto.","max":"El campo :attribute puede tener hasta :max carácteres.","min":"El campo :attribute debe tener al menos :min carácteres."}}}',
                 'order'        => 2,
             ])->save();
         }
@@ -56,7 +56,7 @@ class MessageDataRowsTableSeeder extends Seeder
                 'edit'         => 0,
                 'add'          => 0,
                 'delete'       => 0,
-                'details'      => '',
+                'details'      => '{"validation":{"rules":["required","string","in:in,out"],"messages":{"required":"Falta el campo :attribute.","string":"El campo :attribute debe tener texto.","in":"El valor del campo :attribute sólo puede ser \'in\' u \'out\'"}}}',
                 'order'        => 3,
             ])->save();
         }
@@ -64,7 +64,7 @@ class MessageDataRowsTableSeeder extends Seeder
         $dataRow = $this->dataRow($messageDataType, 'rating_id');
         if (!$dataRow->exists) {
             $dataRow->fill([
-                'type'         => 'number',
+                'type'         => 'select_dropdown',
                 'display_name' => 'Calificación',
                 'required'     => 1,
                 'browse'       => 1,
@@ -72,7 +72,7 @@ class MessageDataRowsTableSeeder extends Seeder
                 'edit'         => 0,
                 'add'          => 1,
                 'delete'       => 1,
-                'details'      => '',
+                'details'      => '{"validation":{"rules":["required","integer"],"messages":{"required":"Falta el campo :attribute.","integer":"El campo :attribute debe ser un número entero."}},"relationship":{"key":"id","label":"rating","page_slug":"admin/ratings"}}',
                 'order'        => 4,
             ])->save();
         }

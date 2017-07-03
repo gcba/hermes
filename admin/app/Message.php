@@ -39,4 +39,12 @@ class Message extends Model
     {
         return $this->belongsTo('App\Rating', 'rating_id', 'id');
     }
+
+     /**
+     * For Voyager's CRUD.
+     */
+    public function ratingId()
+    {
+        return $this->belongsTo('App\Rating', 'rating_id', 'id');
+    }
 }
