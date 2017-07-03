@@ -32,7 +32,7 @@ class DeviceDataRowsTableSeeder extends Seeder
         $dataRow = $this->dataRow($deviceDataType, 'brand_id');
         if (!$dataRow->exists) {
             $dataRow->fill([
-                'type'         => 'number',
+                'type'         => 'select_dropdown',
                 'display_name' => 'Marca',
                 'required'     => 1,
                 'browse'       => 1,
@@ -40,7 +40,7 @@ class DeviceDataRowsTableSeeder extends Seeder
                 'edit'         => 0,
                 'add'          => 0,
                 'delete'       => 0,
-                'details'      => '',
+                'details'      => '{"validation":{"rules":["integer"],"messages":{"integer":"El campo :attribute debe ser un número entero."}},"relationship":{"key":"id","label":"name","page_slug":"admin/brands"}}',
                 'order'        => 2,
             ])->save();
         }
@@ -56,7 +56,7 @@ class DeviceDataRowsTableSeeder extends Seeder
                 'edit'         => 0,
                 'add'          => 0,
                 'delete'       => 0,
-                'details'      => '',
+                'details'      => '{"validation":{"rules":["required","string","min:1","max:30"],"messages":{"required":"Falta el campo :attribute.","string":"El campo :attribute debe tener texto.","max":"El campo :attribute puede tener hasta :max carácteres.","min":"El campo :attribute debe tener al menos :min carácteres."}}}',
                 'order'        => 3,
             ])->save();
         }
@@ -72,7 +72,7 @@ class DeviceDataRowsTableSeeder extends Seeder
                 'edit'         => 0,
                 'add'          => 0,
                 'delete'       => 0,
-                'details'      => '',
+                'details'      => '{"validation":{"rules":["required","integer","digits_between:3,5"],"messages":{"required":"Falta el campo :attribute.","integer":"El campo :attribute debe ser un número entero.","digits_between":"El campo :attribute debe estar entre :min y :max."}}}',
                 'order'        => 4,
             ])->save();
         }
@@ -88,7 +88,7 @@ class DeviceDataRowsTableSeeder extends Seeder
                 'edit'         => 0,
                 'add'          => 0,
                 'delete'       => 0,
-                'details'      => '',
+                'details'      => '{"validation":{"rules":["required","integer","digits_between:3,5"],"messages":{"required":"Falta el campo :attribute.","integer":"El campo :attribute debe ser un número entero.","digits_between":"El campo :attribute debe estar entre :min y :max."}}}',
                 'order'        => 5,
             ])->save();
         }
@@ -104,7 +104,7 @@ class DeviceDataRowsTableSeeder extends Seeder
                 'edit'         => 0,
                 'add'          => 0,
                 'delete'       => 0,
-                'details'      => '',
+                'details'      => '{"validation":{"rules":["required","integer","digits_between:3,4"],"messages":{"required":"Falta el campo :attribute.","integer":"El campo :attribute debe ser un número entero.","digits_between":"El campo :attribute debe estar entre :min y :max."}}}',
                 'order'        => 6,
             ])->save();
         }
@@ -112,7 +112,7 @@ class DeviceDataRowsTableSeeder extends Seeder
         $dataRow = $this->dataRow($deviceDataType, 'platform_id');
         if (!$dataRow->exists) {
             $dataRow->fill([
-                'type'         => 'number',
+                'type'         => 'select_dropdown',
                 'display_name' => 'Plataforma',
                 'required'     => 1,
                 'browse'       => 1,
@@ -120,7 +120,7 @@ class DeviceDataRowsTableSeeder extends Seeder
                 'edit'         => 0,
                 'add'          => 0,
                 'delete'       => 0,
-                'details'      => '',
+                'details'      => '{"validation":{"rules":["required","integer"],"messages":{"required":"Falta el campo :attribute.","integer":"El campo :attribute debe ser un número entero."}},"relationship":{"key":"id","label":"name","page_slug":"admin/platforms"}}',
                 'order'        => 7,
             ])->save();
         }
