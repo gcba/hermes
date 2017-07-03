@@ -99,7 +99,7 @@ En el caso de las aplicaciones móviles, el dispositivo desde donde se enviaron 
 |screen_height   |int                   |       |       |       |       |
 |ppi             |int                   |       |X      |       |       |
 |brand_id        |int                   |X      |X      |       |X      |
-|platform_id     |int                   |X      |X      |       |X      |
+|platform_id     |int                   |X      |       |       |X      |
 |created_at      |timestamp             |       |       |       |       |
 |modified_at     |timestamp             |       |X      |       |       |
 
