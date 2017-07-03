@@ -15,7 +15,7 @@ class Range extends Model
      * @var array
      */
     protected $fillable = [
-        'from', 'to', 'key'
+        'name', 'from', 'to', 'key'
     ];
 
     /**
@@ -24,13 +24,6 @@ class Range extends Model
      * @var array
      */
     protected $dates = ['deleted_at'];
-
-    /**
-     * The accessors that should be included among the fields.
-     *
-     * @var array
-     */
-    protected $appends = ['name'];
 
     /**
      * Boot function for using with User Events
@@ -46,13 +39,13 @@ class Range extends Model
             if (!$model->key) {
                 $model->attributes['key'] = md5(date("Y-m-d H:i:s"));
             }
-        });
-    }
 
-    /**
-     * Get a readable range name.
-     */
-    public function getNameAttribute() {
-        return $this->from . "/" . $this->to;
+            $model->name = $model->from . "/" . $model->to;
+        });
+
+        static::updating(function ($model)
+        {
+            $model->name = $model->from . "/" . $model->to;
+        });
     }
 }

@@ -15,6 +15,7 @@ class CreateRangesTable extends Migration
     {
         Schema::create('ranges', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name', 11);
             $table->integer('from');
             $table->integer('to');
             $table->char('key', 32)->unique();
