@@ -32,6 +32,8 @@ Crear las páginas de CRUD de AppUser, Brand, Browser, Device, Message y Rating 
 
 9. Agregar isOwner al CRUD de Users
 
+10. Mostrar u ocultar los botones CRUD según los permisos
+
 ### API de calificaciones
 
 1. Agregar un test de integración para cada caso de error
