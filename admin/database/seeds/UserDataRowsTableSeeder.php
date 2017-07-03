@@ -88,7 +88,7 @@ class UserDataRowsTableSeeder extends Seeder
                 'edit'         => 1,
                 'add'          => 1,
                 'delete'       => 1,
-                'details'      => '{"validation":{"rules":["string","min:5","max:250"],"messages":{"string":"El campo :attribute debe tener texto.","max":"El campo :attribute puede tener hasta :max carácteres.","min":"El campo :attribute debe tener al menos :min carácteres."}}}',
+                'details'      => '{"validation":{"rules":["image","dimensions:min_width=100,min_height=100,max_width=300,max_height=300"],"messages":{"image":"El campo :attribute debe ser una imagen.","integer":"El :attribute tener un alto y un ancho ancho entre :min_width y :max_width píxeles."}}}',
                 'order'        => 5,
             ])->save();
         }
