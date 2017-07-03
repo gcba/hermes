@@ -45,17 +45,41 @@ class Rating extends Model
     }
 
     /**
+     * For Voyager's CRUD.
+     */
+    public function appId()
+    {
+        return $this->belongsTo('App\App', 'app_id', 'id');
+    }
+
+    /**
      * Get the range the rating belongs to.
      */
-    public function rating()
+    public function range()
     {
-        return $this->belongsTo('App\Rating', 'rating_id', 'id');
+        return $this->belongsTo('App\Range', 'range_id', 'id');
+    }
+
+     /**
+     * For Voyager's CRUD.
+     */
+    public function rangeId()
+    {
+        return $this->belongsTo('App\Range', 'range_id', 'id');
     }
 
     /**
      * Get the app user the rating belongs to.
      */
-    public function appUser()
+    public function appuser()
+    {
+        return $this->belongsTo('App\AppUser', 'appuser_id', 'id');
+    }
+
+    /**
+     * For Voyager's CRUD.
+     */
+    public function appuserId()
     {
         return $this->belongsTo('App\AppUser', 'appuser_id', 'id');
     }
@@ -69,6 +93,14 @@ class Rating extends Model
     }
 
     /**
+     * For Voyager's CRUD.
+     */
+    public function platformId()
+    {
+        return $this->belongsTo('App\Platform', 'platform_id', 'id');
+    }
+
+    /**
      * Get the device the rating belongs to.
      */
     public function device()
@@ -77,9 +109,25 @@ class Rating extends Model
     }
 
     /**
+     * For Voyager's CRUD.
+     */
+    public function deviceId()
+    {
+        return $this->belongsTo('App\Device', 'device_id', 'id');
+    }
+
+    /**
      * Get the browser the rating belongs to.
      */
     public function browser()
+    {
+        return $this->belongsTo('App\Browser', 'browser_id', 'id');
+    }
+
+    /**
+     * For Voyager's CRUD.
+     */
+    public function browserId()
     {
         return $this->belongsTo('App\Browser', 'browser_id', 'id');
     }

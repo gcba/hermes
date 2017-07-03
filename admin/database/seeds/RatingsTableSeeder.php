@@ -58,13 +58,13 @@ class RatingsTableSeeder extends Seeder
                     }
 
                     $hasMessage = $booleanOptions[array_rand($booleanOptions)];
-                    $range = $ranges[array_rand($ranges)];
+                    $rangeId = $ranges[array_rand($ranges)]['id'];
                     $platform = $platformOptions[array_rand($platformOptions)];
-                    $platformId = $platform == "iOS" ? $ios->id : $android->id;
-                    $platformVersion = $platform == "iOS" ?
+                    $platformId = $platform == 'iOS' ? $ios->id : $android->id;
+                    $platformVersion = $platform == 'iOS' ?
                         $iosVersionOptions[array_rand($iosVersionOptions)] :
                         $androidVersionOptions[array_rand($androidVersionOptions)];
-                    $devices = $platform == "iOS" ? $iosDevices : $androidDevices;
+                    $devices = $platform == 'iOS' ? $iosDevices : $androidDevices;
                     $deviceId = $devices[array_rand($devices)]['id'];
 
                     Rating::create([
@@ -74,7 +74,7 @@ class RatingsTableSeeder extends Seeder
                         'platform_version' => $platformVersion,
                         'has_message' => $hasMessage,
                         'app_id' => $app->id,
-                        'range_id' => $range["id"],
+                        'range_id' => $rangeId,
                         'appuser_id' => $appuser->id,
                         'platform_id' => $platformId,
                         'device_id' => $deviceId
