@@ -23,7 +23,7 @@ class CreateDevicesTable extends Migration
             $table->integer('brand_id')->unsigned()->nullable();
             $table->foreign('brand_id')->references('id')->on('brands')->onDelete('set null');
             $table->index('brand_id');
-            $table->integer('platform_id')->unsigned()->nullable();
+            $table->integer('platform_id')->unsigned();
             $table->foreign('platform_id')->references('id')->on('platforms')->onDelete('set null');
             $table->index('platform_id');
             $table->timestamps();
