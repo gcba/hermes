@@ -81,7 +81,7 @@ class AppDataRowsTableSeeder extends Seeder
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'timestamp',
-                'display_name' => 'Última modificación',
+                'display_name' => 'Última Modificación',
                 'required'     => 0,
                 'browse'       => 0,
                 'read'         => 1,
@@ -97,7 +97,7 @@ class AppDataRowsTableSeeder extends Seeder
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'text',
-                'display_name' => 'Modificado por',
+                'display_name' => 'Modificado Por',
                 'required'     => 0,
                 'browse'       => 0,
                 'read'         => 1,

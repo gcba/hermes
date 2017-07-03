@@ -65,7 +65,7 @@ class AppUserDataRowsTableSeeder extends Seeder
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'text',
-                'display_name' => 'ID miBA',
+                'display_name' => 'ID MiBA',
                 'required'     => 1,
                 'browse'       => 1,
                 'read'         => 1,
@@ -81,7 +81,7 @@ class AppUserDataRowsTableSeeder extends Seeder
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'timestamp',
-                'display_name' => 'Última modificación',
+                'display_name' => 'Última Modificación',
                 'required'     => 0,
                 'browse'       => 0,
                 'read'         => 1,
@@ -99,7 +99,7 @@ class AppUserDataRowsTableSeeder extends Seeder
                 'type'         => 'timestamp',
                 'display_name' => 'Creación',
                 'required'     => 0,
-                'browse'       => 0,
+                'browse'       => 1,
                 'read'         => 1,
                 'edit'         => 0,
                 'add'          => 0,

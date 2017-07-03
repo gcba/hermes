@@ -81,7 +81,7 @@ class MessageDataRowsTableSeeder extends Seeder
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'timestamp',
-                'display_name' => 'Última modificación',
+                'display_name' => 'Última Modificación',
                 'required'     => 0,
                 'browse'       => 0,
                 'read'         => 1,
@@ -99,7 +99,7 @@ class MessageDataRowsTableSeeder extends Seeder
                 'type'         => 'timestamp',
                 'display_name' => 'Creación',
                 'required'     => 0,
-                'browse'       => 0,
+                'browse'       => 1,
                 'read'         => 1,
                 'edit'         => 0,
                 'add'          => 0,

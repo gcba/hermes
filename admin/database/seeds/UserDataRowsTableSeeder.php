@@ -104,7 +104,7 @@ class UserDataRowsTableSeeder extends Seeder
                 'edit'         => 1,
                 'add'          => 1,
                 'delete'       => 1,
-                'details'      => '{"validation":{"rules":["required","integer"],"messages":{"required":"Falta el campo :attribute.","integer":"El campo :attribute debe ser un número entero."}}}}',
+                'details'      => '{"validation":{"rules":["required","integer"],"messages":{"required":"Falta el campo :attribute.","integer":"El campo :attribute debe ser un número entero."}}}',
                 'order'        => 6,
             ])->save();
         }
@@ -113,7 +113,7 @@ class UserDataRowsTableSeeder extends Seeder
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'text',
-                'display_name' => 'Recordar token',
+                'display_name' => 'Recordar Token',
                 'required'     => 0,
                 'browse'       => 0,
                 'read'         => 0,
@@ -129,7 +129,7 @@ class UserDataRowsTableSeeder extends Seeder
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'timestamp',
-                'display_name' => 'Última modificación',
+                'display_name' => 'Última Modificación',
                 'required'     => 0,
                 'browse'       => 0,
                 'read'         => 0,
@@ -145,7 +145,7 @@ class UserDataRowsTableSeeder extends Seeder
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'text',
-                'display_name' => 'Modificado por',
+                'display_name' => 'Modificado Por',
                 'required'     => 0,
                 'browse'       => 0,
                 'read'         => 1,
