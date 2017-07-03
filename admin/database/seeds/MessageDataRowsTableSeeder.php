@@ -32,7 +32,7 @@ class MessageDataRowsTableSeeder extends Seeder
         $dataRow = $this->dataRow($messageDataType, 'message');
         if (!$dataRow->exists) {
             $dataRow->fill([
-                'type'         => 'text',
+                'type'         => 'textarea',
                 'display_name' => 'Mensaje',
                 'required'     => 1,
                 'browse'       => 1,
