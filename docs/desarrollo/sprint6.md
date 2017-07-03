@@ -28,7 +28,7 @@ Crear las páginas de CRUD de AppUser, Brand, Browser, Device, Message y Rating 
 
 7. Redirigir al listado del recurso luego de crear uno nuevo
 
-8. Redirigir al ítem luego de editarlo
+8. Redirigir al listado del recurso luego de editar uno
 
 9. Agregar isOwner al CRUD de Users
 
