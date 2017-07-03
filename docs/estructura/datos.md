@@ -232,6 +232,7 @@ Los rangos de calificaciones de cada app.
 |Campos          |Tipo                  | FK?   | Null? |Unique?|Index? |
 |----------------|----------------------|:-----:|:-----:|:-----:|:-----:|
 |id              |int (PK)              |       |       |       |       |
+|name            |varchar(11)           |       |       |       |       |
 |from            |smallint              |       |       |       |       |
 |to              |smallint              |       |       |       |       |
 |key             |char(32)              |       |       |X      |X      |
