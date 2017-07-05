@@ -2,6 +2,7 @@
 
 namespace App;
 
+use DateTime;
 use Illuminate\Database\Eloquent\Model;
 
 class Message extends Model
@@ -20,12 +21,12 @@ class Message extends Model
      *
      * @return void
      */
-    protected static function boot()
-    {
+    protected static function boot() {
         parent::boot();
 
         static::creating(function ($model) {
             $model->attributes['direction'] = 'out';
+            $model->attributes['updated_at'] = null;
         });
     }
 
@@ -43,12 +44,25 @@ class Message extends Model
         return $this->belongsTo('App\Rating', 'rating_id', 'id');
     }
 
-    public function setMessageAttribute($value)
-    {
+    public function setMessageAttribute($value) {
         $this->attributes['message'] = ucfirst(filter_var(trim($value), FILTER_SANITIZE_SPECIAL_CHARS));
     }
 
     public function getDirectionAttribute(){
         return $this->attributes['direction'] == 'out' ? '➡️' : '⬅️';
+    }
+
+    public function getCreatedAtAttribute(){
+        return $this->formatDate($this->attributes['created_at']);
+    }
+
+    public function getUpdatedAtAttribute(){
+        return $this->attributes['updated_at'] ? $this->formatDate($this->attributes['updated_at']) : '-';
+    }
+
+    private function formatDate($dateString) {
+        $date = new DateTime($dateString);
+
+        return $date->format('d/m/Y H:i:s');
     }
 }
