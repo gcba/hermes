@@ -97,7 +97,7 @@ class RatingDataRowsTableSeeder extends Seeder
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'select_dropdown',
-                'display_name' => 'Aplicación',
+                'display_name' => 'App',
                 'required'     => 1,
                 'browse'       => 1,
                 'read'         => 1,
@@ -113,7 +113,7 @@ class RatingDataRowsTableSeeder extends Seeder
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'text',
-                'display_name' => 'Versión App',
+                'display_name' => 'Versión',
                 'required'     => 0,
                 'browse'       => 1,
                 'read'         => 1,
@@ -136,7 +136,7 @@ class RatingDataRowsTableSeeder extends Seeder
                 'edit'         => 0,
                 'add'          => 0,
                 'delete'       => 0,
-                'details'      => '{"validation":{"rules":["required","integer"],"messages":{"required":"Falta el campo :attribute.","integer":"El campo :attribute debe ser un número entero."}},"relationship":{"key":"id","label":"name","page_slug":"admin/platforms"}}',
+                'details'      => '{"validation":{"rules":["required","integer"],"messages":{"required":"Falta el campo :attribute.","integer":"El campo :attribute debe ser un número entero."}},"relationship":{"key":"id","label":"name"}}',
                 'order'        => 8,
             ])->save();
         }
@@ -145,7 +145,7 @@ class RatingDataRowsTableSeeder extends Seeder
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'text',
-                'display_name' => 'Versión Plataforma',
+                'display_name' => 'Versión',
                 'required'     => 0,
                 'browse'       => 1,
                 'read'         => 1,
@@ -157,11 +157,27 @@ class RatingDataRowsTableSeeder extends Seeder
             ])->save();
         }
 
+        $dataRow = $this->dataRow($ratingDataType, 'browser_id');
+        if (!$dataRow->exists) {
+            $dataRow->fill([
+                'type'         => 'select_dropdown',
+                'display_name' => 'Browser',
+                'required'     => 0,
+                'browse'       => 1,
+                'read'         => 1,
+                'edit'         => 0,
+                'add'          => 0,
+                'delete'       => 0,
+                'details'      => '{"validation":{"rules":["integer","nullable"],"messages":{"integer":"El campo :attribute debe ser un número entero."}},"relationship":{"key":"id","label":"name"}}',
+                'order'        => 10,
+            ])->save();
+        }
+
         $dataRow = $this->dataRow($ratingDataType, 'browser_version');
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'text',
-                'display_name' => 'Versión Browser',
+                'display_name' => 'Versión',
                 'required'     => 0,
                 'browse'       => 1,
                 'read'         => 1,
@@ -169,7 +185,7 @@ class RatingDataRowsTableSeeder extends Seeder
                 'add'          => 0,
                 'delete'       => 0,
                 'details'      => '{"validation":{"rules":["string","min:1","max:15","nullable"],"messages":{"string":"El campo :attribute debe tener texto.","max":"El campo :attribute puede tener hasta :max carácteres.","min":"El campo :attribute debe tener al menos :min carácteres."}}}',
-                'order'        => 10,
+                'order'        => 11,
             ])->save();
         }
 
@@ -185,7 +201,7 @@ class RatingDataRowsTableSeeder extends Seeder
                 'add'          => 0,
                 'delete'       => 0,
                 'details'      => '{"validation":{"rules":["integer","nullable"],"messages":{"integer":"El campo :attribute debe ser un número entero."}},"relationship":{"key":"id","label":"name","page_slug":"admin/appusers"}}',
-                'order'        => 11,
+                'order'        => 12,
             ])->save();
         }
 
@@ -201,22 +217,6 @@ class RatingDataRowsTableSeeder extends Seeder
                 'add'          => 0,
                 'delete'       => 0,
                 'details'      => '{"validation":{"rules":["integer","nullable"],"messages":{"integer":"El campo :attribute debe ser un número entero."}},"relationship":{"key":"id","label":"name","page_slug":"admin/devices"}}',
-                'order'        => 12,
-            ])->save();
-        }
-
-        $dataRow = $this->dataRow($ratingDataType, 'browser_id');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'select_dropdown',
-                'display_name' => 'Browser',
-                'required'     => 0,
-                'browse'       => 0,
-                'read'         => 1,
-                'edit'         => 0,
-                'add'          => 0,
-                'delete'       => 0,
-                'details'      => '{"validation":{"rules":["integer","nullable"],"messages":{"integer":"El campo :attribute debe ser un número entero."}},"relationship":{"key":"id","label":"name","page_slug":"admin/browsers"}}',
                 'order'        => 13,
             ])->save();
         }

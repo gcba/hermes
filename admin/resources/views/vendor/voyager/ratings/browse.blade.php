@@ -168,6 +168,7 @@
             @if (!$dataType->server_side)
                 var table = $('#dataTable').DataTable({
                     "order": [],
+                    // "scrollX": true,
                     "language": {!! json_encode(__('voyager.datatable'), true) !!}
                     @if(config('dashboard.data_tables.responsive')), responsive: true @endif
                 });
@@ -176,6 +177,26 @@
             @if ($isModelTranslatable)
                 $('.side-body').multilingual();
             @endif
+
+            /*
+            let defaultabel = " ";
+
+            yadcf.init(table, [
+                {column_number : 0, exclude: true},
+                {column_number : 1, filter_default_label: defaultabel, filter_type: "select"},
+                {column_number : 2, filter_default_label: defaultabel},
+                {column_number : 3, filter_default_label: defaultabel},
+                {column_number : 4, filter_default_label: defaultabel},
+                {column_number : 5, filter_default_label: defaultabel},
+                {column_number : 6, filter_default_label: defaultabel},
+                {column_number : 7, filter_default_label: defaultabel},
+                {column_number : 8, filter_default_label: defaultabel},
+                {column_number : 9, filter_default_label: defaultabel},
+                {column_number : 10, filter_default_label: defaultabel},
+                {column_number : 11, filter_default_label: defaultabel},
+                {column_number : 12, filter_type: "range_date"}
+            ]);
+            */
         });
 
 

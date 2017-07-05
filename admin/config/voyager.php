@@ -173,7 +173,7 @@ return [
         ],
 
         'data_tables' => [
-            'responsive' => true, // Use responsive extension for jQuery dataTables that are not server-side paginated
+            'responsive' => false, // Use responsive extension for jQuery dataTables that are not server-side paginated
         ],
 
         'widgets' => [
@@ -204,11 +204,13 @@ return [
 
     // Here you can specify additonal assets you would like to be included in the master.blade
     'additional_css' => [
-        //'css/custom.css',
+        'css/bootstrap-datetimepicker.min.css',
+        'css/jquery.dataTables.yadcf.min.css',
     ],
 
     'additional_js' => [
-        //'js/custom.js',
+        'js/bootstrap-datetimepicker.min.js',
+        'js/jquery.dataTables.yadcf.min.js',
     ],
 
 ];
