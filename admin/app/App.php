@@ -86,6 +86,6 @@ class App extends Model
      }
 
      private function sanitizeName($name) {
-         return filter_var(trim($name), FILTER_SANITIZE_SPECIAL_CHARS);
+         return ucfirst(filter_var(trim($name), FILTER_SANITIZE_SPECIAL_CHARS));
     }
 }

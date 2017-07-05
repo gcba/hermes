@@ -53,6 +53,6 @@ class Message extends Model
     }
 
     private function sanitizeMessage($message) {
-         return filter_var(trim($message), FILTER_SANITIZE_SPECIAL_CHARS);
+         return ucfirst(filter_var(trim($message), FILTER_SANITIZE_SPECIAL_CHARS));
     }
 }
