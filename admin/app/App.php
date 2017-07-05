@@ -2,6 +2,7 @@
 
 namespace App;
 
+use DateTime;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -30,14 +31,15 @@ class App extends Model
      *
      * @return void
      */
-    protected static function boot()
-    {
+    protected static function boot() {
         parent::boot();
 
         static::creating(function ($model) {
             if (!$model->key) {
                 $model->attributes['key'] = md5(date("Y-m-d H:i:s"));
             }
+
+            $model->attributes['updated_at'] = null;
         });
     }
 
@@ -86,5 +88,19 @@ class App extends Model
             case 'W': return 'Web';
             default: return $this->attributes['type'];
         }
+    }
+
+    public function getCreatedAtAttribute(){
+        return $this->formatDate($this->attributes['created_at']);
+    }
+
+    public function getUpdatedAtAttribute(){
+        return $this->attributes['updated_at'] ? $this->formatDate($this->attributes['updated_at']) : '-';
+    }
+
+    private function formatDate($dateString) {
+        $date = new DateTime($dateString);
+
+        return $date->format('d/m/Y H:i:s');
     }
 }
