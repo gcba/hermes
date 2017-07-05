@@ -119,4 +119,8 @@ class Rating extends Model
     public function browserId() {
         return $this->belongsTo('App\Browser', 'browser_id', 'id');
     }
+
+    public function getHasMessageAttribute(){
+        return $this->attributes['has_message'] ? '✔️' : '';
+    }
 }

@@ -81,7 +81,7 @@ class RatingDataRowsTableSeeder extends Seeder
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'check',
-                'display_name' => 'Con Mensaje',
+                'display_name' => 'Mensaje',
                 'required'     => 1,
                 'browse'       => 1,
                 'read'         => 1,
