@@ -34,8 +34,7 @@ class Range extends Model
     {
         parent::boot();
 
-        static::creating(function ($model)
-        {
+        static::creating(function ($model) {
             if (!$model->key) {
                 $model->attributes['key'] = md5(date("Y-m-d H:i:s"));
             }
@@ -43,8 +42,7 @@ class Range extends Model
             $model->name = $model->from . "/" . $model->to;
         });
 
-        static::updating(function ($model)
-        {
+        static::updating(function ($model) {
             $model->name = $model->from . "/" . $model->to;
         });
     }

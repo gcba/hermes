@@ -24,35 +24,27 @@ class Message extends Model
     {
         parent::boot();
 
-        static::creating(function ($model)
-        {
+        static::creating(function ($model) {
             $model->attributes['direction'] = 'out';
-            $model->attributes['message'] = sanitizeMessage($model->message);
-        });
-
-        static::updating(function ($model)
-        {
-            $model->attributes['message'] = sanitizeMessage($model->message);
         });
     }
 
     /**
      * Get the rating the message belongs to.
      */
-    public function rating()
-    {
+    public function rating() {
         return $this->belongsTo('App\Rating', 'rating_id', 'id');
     }
 
      /**
      * For Voyager's CRUD.
      */
-    public function ratingId()
-    {
+    public function ratingId() {
         return $this->belongsTo('App\Rating', 'rating_id', 'id');
     }
 
-    private function sanitizeMessage($message) {
-         return ucfirst(filter_var(trim($message), FILTER_SANITIZE_SPECIAL_CHARS));
+    public function setMessageAttribute($value)
+    {
+        $this->attributes['message'] = ucfirst(filter_var(trim($value), FILTER_SANITIZE_SPECIAL_CHARS));
     }
 }

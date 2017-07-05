@@ -28,8 +28,7 @@ class Browser extends Model
     /**
      * Get the ratings that belong to this browser.
      */
-    public function ratings()
-    {
+    public function ratings() {
         return $this->hasMany('App\Rating', 'rating_id', 'id');
     }
 }

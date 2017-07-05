@@ -28,8 +28,7 @@ class Device extends Model
     /**
      * Get the ratings that belong to this device.
      */
-    public function ratings()
-    {
+    public function ratings() {
         return $this->hasMany('App\Rating', 'rating_id', 'id');
     }
 
@@ -50,14 +49,14 @@ class Device extends Model
     /**
      * For Voyager's CRUD.
      */
-     public function brandId(){
+     public function brandId() {
         return $this->belongsTo('App\Brand', 'brand_id', 'id');
     }
 
      /**
      * For Voyager's CRUD.
      */
-     public function platformId(){
+     public function platformId() {
         return $this->belongsTo('App\Platform', 'platform_id', 'id');
      }
 

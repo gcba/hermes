@@ -30,8 +30,7 @@ class AppUser extends Model
     /**
      * Get the ratings that belong to this app user.
      */
-    public function ratings()
-    {
+    public function ratings() {
         return $this->hasMany('App\Rating', 'rating_id', 'id');
     }
 

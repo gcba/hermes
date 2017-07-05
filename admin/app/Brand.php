@@ -28,8 +28,7 @@ class Brand extends Model
     /**
      * Get the devices that belong to this brand.
      */
-    public function devices()
-    {
+    public function devices() {
         return $this->hasMany('App\Device', 'device_id', 'id');
     }
 }

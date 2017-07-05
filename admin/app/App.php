@@ -34,26 +34,17 @@ class App extends Model
     {
         parent::boot();
 
-        static::creating(function ($model)
-        {
+        static::creating(function ($model) {
             if (!$model->key) {
                 $model->attributes['key'] = md5(date("Y-m-d H:i:s"));
             }
-
-            $model->attributes['name'] = sanitizeName($model->name);
-        });
-
-        static::updating(function ($model)
-        {
-            $model->attributes['name'] = sanitizeName($model->name);
         });
     }
 
     /**
      * Get the ratings that belong to this app.
      */
-    public function ratings()
-    {
+    public function ratings() {
         return $this->hasMany('App\Rating', 'rating_id', 'id');
     }
 
@@ -85,7 +76,7 @@ class App extends Model
         return $this->belongsTo('App\User', 'modified_by', 'id');
      }
 
-     private function sanitizeName($name) {
-         return ucfirst(filter_var(trim($name), FILTER_SANITIZE_SPECIAL_CHARS));
+    public function setNameAttribute($value) {
+        $this->attributes['name'] = ucfirst(filter_var(trim($value), FILTER_SANITIZE_SPECIAL_CHARS));
     }
 }

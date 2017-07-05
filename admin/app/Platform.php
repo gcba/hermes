@@ -34,26 +34,17 @@ class Platform extends Model
     {
         parent::boot();
 
-        static::creating(function ($model)
-        {
+        static::creating(function ($model) {
             if (!$model->key) {
                 $model->attributes['key'] = md5(date("Y-m-d H:i:s"));
             }
-
-            $model->attributes['name'] = sanitizeName($model->name);
-        });
-
-        static::updating(function ($model)
-        {
-            $model->attributes['name'] = sanitizeName($model->name);
         });
     }
 
     /**
      * Get the ratings that belong to the platform.
      */
-    public function ratings()
-    {
+    public function ratings() {
         return $this->hasMany('App\Rating', 'rating_id', 'id');
     }
 
@@ -78,7 +69,7 @@ class Platform extends Model
         return $this->belongsToMany('App\AppUser');
      }
 
-     private function sanitizeName($name) {
-         return filter_var(trim($name), FILTER_SANITIZE_SPECIAL_CHARS);
+    public function setNameAttribute($value) {
+        $this->attributes['name'] = filter_var(trim($value), FILTER_SANITIZE_SPECIAL_CHARS);
     }
 }
