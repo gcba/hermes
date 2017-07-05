@@ -4,12 +4,15 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 @stop
 
-@section('page_title', __('voyager.generic.'.(isset($dataTypeContent->id) ? 'edit' : 'add')).' '.$dataType->display_name_singular)
+@if(isset($dataTypeContent->id))
+    @section('page_title', __('voyager.generic.edit').' '.$dataType->display_name_singular)
+@else
+    @section('page_title', __('voyager.generic.add').' '.$dataType->display_name_singular)
+@endif
 
 @section('page_header')
     <h1 class="page-title">
-        <i class="{{ $dataType->icon }}"></i>
-        {{ __('voyager.generic.'.(isset($dataTypeContent->id) ? 'edit' : 'add')).' '.$dataType->display_name_singular }}
+        <i class="{{ $dataType->icon }}"></i> @if(isset($dataTypeContent->id)){{ __('voyager.generic.edit') }}@else{{ __('voyager.generic.new') }}@endif {{ $dataType->display_name_singular }}
     </h1>
     @include('voyager::multilingual.language-selector')
 @stop
@@ -20,6 +23,11 @@
             <div class="col-md-12">
 
                 <div class="panel panel-bordered">
+
+                    <div class="panel-heading">
+                        <h3 class="panel-title">@if(isset($dataTypeContent->id)){{ __('voyager.generic.edit') }}@else{{ __('voyager.generic.add_new') }}@endif {{ $dataType->display_name_singular }}</h3>
+                    </div>
+                    <!-- /.box-header -->
                     <!-- form start -->
                     <form role="form"
                             class="form-edit-add"
@@ -45,12 +53,15 @@
                                 </div>
                             @endif
 
-                            <!-- Adding / Editing -->
-                            @php
-                                $dataTypeRows = $dataType->{(isset($dataTypeContent->id) ? 'editRows' : 'addRows' )};
-                            @endphp
+                            <!-- If we are editing -->
+                            @if(isset($dataTypeContent->id))
+                                <?php $dataTypeRows = $dataType->editRows; ?>
+                            @else
+                                <?php $dataTypeRows = $dataType->addRows; ?>
+                            @endif
 
                             @foreach($dataTypeRows as $row)
+
                                 <!-- GET THE DISPLAY OPTIONS -->
                                 @php
                                     $options = json_decode($row->details);
