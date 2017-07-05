@@ -26,9 +26,13 @@ class Message extends Model
 
         static::creating(function ($model)
         {
-            if (!$model->key) {
-                $model->attributes['direction'] = 'out';
-            }
+            $model->attributes['direction'] = 'out';
+            $model->attributes['message'] = sanitizeMessage($model->message);
+        });
+
+        static::updating(function ($model)
+        {
+            $model->attributes['message'] = sanitizeMessage($model->message);
         });
     }
 
@@ -46,5 +50,9 @@ class Message extends Model
     public function ratingId()
     {
         return $this->belongsTo('App\Rating', 'rating_id', 'id');
+    }
+
+    private function sanitizeMessage($message) {
+         return filter_var(trim($message), FILTER_SANITIZE_SPECIAL_CHARS);
     }
 }
