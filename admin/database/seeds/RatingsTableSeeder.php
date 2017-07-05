@@ -53,7 +53,7 @@ class RatingsTableSeeder extends Seeder
                             $description = 'Bueno';
                             break;
                         case 5:
-                            $description = 'Muy Bueno';
+                            $description = 'Muy bueno';
                             break;
                     }
 
