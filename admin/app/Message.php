@@ -47,4 +47,8 @@ class Message extends Model
     {
         $this->attributes['message'] = ucfirst(filter_var(trim($value), FILTER_SANITIZE_SPECIAL_CHARS));
     }
+
+    public function getDirectionAttribute(){
+        return $this->attributes['direction'] == 'out' ? '➡️' : '⬅️';
+    }
 }
