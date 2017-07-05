@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "505b4a954d1e2a6b03e5cf7476616555",
+    "content-hash": "99b3c4fbaa3c938b5823e95f88d46a93",
     "packages": [
         {
             "name": "arrilot/laravel-widgets",
@@ -2758,55 +2758,6 @@
                 "environment"
             ],
             "time": "2016-09-01T10:05:43+00:00"
-        },
-        {
-            "name": "waavi/sanitizer",
-            "version": "1.0.6",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Waavi/Sanitizer.git",
-                "reference": "02557d33b1a12ed2139815d9eb6b03c5eb29f261"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Waavi/Sanitizer/zipball/02557d33b1a12ed2139815d9eb6b03c5eb29f261",
-                "reference": "02557d33b1a12ed2139815d9eb6b03c5eb29f261",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/support": "~5.3",
-                "nesbot/carbon": "~1.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~4.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Waavi\\Sanitizer\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "William Wallace San Paulo",
-                    "email": "info@waavi.com"
-                }
-            ],
-            "description": "Data sanitizer and Laravel 5 form requests with input sanitation.",
-            "keywords": [
-                "input",
-                "input filter",
-                "input sanitation",
-                "input sanitizer",
-                "laravel",
-                "sanitation",
-                "transform input"
-            ],
-            "time": "2017-04-11T12:25:13+00:00"
         }
     ],
     "packages-dev": [
