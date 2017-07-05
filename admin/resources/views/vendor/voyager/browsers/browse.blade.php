@@ -5,11 +5,6 @@
 @section('page_header')
     <h1 class="page-title">
         <i class="{{ $dataType->icon }}"></i> {{ $dataType->display_name_plural }}
-        @if (Voyager::can('add_'.$dataType->name))
-            <a href="{{ route('voyager.'.$dataType->slug.'.create') }}" class="btn btn-success">
-                <i class="voyager-plus"></i> {{ __('voyager.generic.add_new') }}
-            </a>
-        @endif
     </h1>
     @include('voyager::multilingual.language-selector')
 @stop
