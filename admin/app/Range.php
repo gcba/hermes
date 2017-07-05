@@ -2,6 +2,7 @@
 
 namespace App;
 
+use DateTime;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -30,8 +31,7 @@ class Range extends Model
      *
      * @return void
      */
-    protected static function boot()
-    {
+    protected static function boot() {
         parent::boot();
 
         static::creating(function ($model) {
@@ -40,10 +40,32 @@ class Range extends Model
             }
 
             $model->name = $model->from . "/" . $model->to;
+            $model->attributes['updated_at'] = null;
         });
 
         static::updating(function ($model) {
             $model->name = $model->from . "/" . $model->to;
         });
+    }
+
+    /**
+     * Get the ratings that belong to this brand.
+     */
+    public function ratings() {
+        return $this->hasMany('App\Rating', 'rating_id', 'id');
+    }
+
+    public function getCreatedAtAttribute(){
+        return $this->formatDate($this->attributes['created_at']);
+    }
+
+    public function getUpdatedAtAttribute(){
+        return $this->attributes['updated_at'] ? $this->formatDate($this->attributes['updated_at']) : '-';
+    }
+
+    private function formatDate($dateString) {
+        $date = new DateTime($dateString);
+
+        return $date->format('d/m/Y H:i:s');
     }
 }
