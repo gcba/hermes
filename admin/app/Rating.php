@@ -51,6 +51,13 @@ class Rating extends Model
     }
 
     /**
+     * Get the messages that belong to this rating.
+     */
+    public function messages() {
+        return $this->hasMany('App\Message', 'rating_id', 'id');
+    }
+
+    /**
      * Get the app the rating belongs to.
      */
     public function app() {

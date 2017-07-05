@@ -77,6 +77,7 @@ class UserDataRowsTableSeeder extends Seeder
             ])->save();
         }
 
+        /*
         $dataRow = $this->dataRow($userDataType, 'avatar');
         if (!$dataRow->exists) {
             $dataRow->fill([
@@ -92,6 +93,7 @@ class UserDataRowsTableSeeder extends Seeder
                 'order'        => 5,
             ])->save();
         }
+        */
 
         $dataRow = $this->dataRow($userDataType, 'role_id');
         if (!$dataRow->exists) {
@@ -104,8 +106,24 @@ class UserDataRowsTableSeeder extends Seeder
                 'edit'         => 1,
                 'add'          => 1,
                 'delete'       => 1,
-                'details'      => '{"validation":{"rules":["required","integer"],"messages":{"required":"Falta el campo :attribute.","integer":"El campo :attribute debe ser un número entero."}}}',
+                'details'      => '{"validation":{"rules":["required","integer"],"messages":{"required":"Falta el campo :attribute.","integer":"El campo :attribute debe ser un número entero."},"relationship":{"key":"id","label":"display_name","page_slug":"admin/roles"}}}',
                 'order'        => 6,
+            ])->save();
+        }
+
+        $dataRow = $this->dataRow($userDataType, 'apps');
+        if (!$dataRow->exists) {
+            $dataRow->fill([
+                'type'         => 'select_multiple',
+                'display_name' => 'Aplicaciones',
+                'required'     => 0,
+                'browse'       => 0,
+                'read'         => 1,
+                'edit'         => 1,
+                'add'          => 1,
+                'delete'       => 1,
+                'details'      => '{"relationship":{"key":"id","label":"name","page_slug":"admin/apps"}}',
+                'order'        => 7,
             ])->save();
         }
 
@@ -121,7 +139,7 @@ class UserDataRowsTableSeeder extends Seeder
                 'add'          => 0,
                 'delete'       => 0,
                 'details'      => '',
-                'order'        => 7,
+                'order'        => 8,
             ])->save();
         }
 
@@ -137,7 +155,7 @@ class UserDataRowsTableSeeder extends Seeder
                 'add'          => 0,
                 'delete'       => 0,
                 'details'      => '',
-                'order'        => 8,
+                'order'        => 9,
             ])->save();
         }
 
@@ -153,7 +171,7 @@ class UserDataRowsTableSeeder extends Seeder
                 'add'          => 0,
                 'delete'       => 0,
                 'details'      => '',
-                'order'        => 9,
+                'order'        => 10,
             ])->save();
         }
 
@@ -169,7 +187,7 @@ class UserDataRowsTableSeeder extends Seeder
                 'add'          => 0,
                 'delete'       => 0,
                 'details'      => '',
-                'order'        => 10,
+                'order'        => 11,
             ])->save();
         }
     }

@@ -14,13 +14,13 @@ class CreateAppUserPlatformTable extends Migration
     public function up()
     {
         Schema::create('app_user_platform', function (Blueprint $table) {
-            $table->increments('id');
             $table->integer('app_user_id')->unsigned();
             $table->foreign('app_user_id')->references('id')->on('appusers')->onDelete('cascade');
             $table->index('app_user_id');
             $table->integer('platform_id')->unsigned();
             $table->foreign('platform_id')->references('id')->on('platforms')->onDelete('cascade');
             $table->index('platform_id');
+            $table->primary(['platform_id', 'app_user_id']);
         });
     }
 

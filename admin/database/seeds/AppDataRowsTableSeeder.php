@@ -56,8 +56,40 @@ class AppDataRowsTableSeeder extends Seeder
                 'edit'         => 1,
                 'add'          => 1,
                 'delete'       => 1,
-                'details'      => '{"default":"M","options":{"M":"Móvil","W":"Web"},"validation":{"rules":["required","alpha","size:1"],"messages":{"required":"Falta el campo :attribute.","alpha":"El campo :attribute sólo puede constar de una letra.","size":"El campo :attribute sólo puede constar de una letra."}}}',
+                'details'      => '{"default":"M","options":{"Móvil":"Móvil","Web":"Web"},"validation":{"rules":["required","alpha","size:1"],"messages":{"required":"Falta el campo :attribute.","alpha":"El campo :attribute sólo puede constar de una letra.","size":"El campo :attribute sólo puede constar de una letra."}}}',
                 'order'        => 3,
+            ])->save();
+        }
+
+        $dataRow = $this->dataRow($appDataType, 'platforms');
+        if (!$dataRow->exists) {
+            $dataRow->fill([
+                'type'         => 'select_multiple',
+                'display_name' => 'Plataformas',
+                'required'     => 1,
+                'browse'       => 0,
+                'read'         => 1,
+                'edit'         => 1,
+                'add'          => 1,
+                'delete'       => 1,
+                'details'      => '{"relationship":{"key":"id","label":"name","page_slug":"admin/platforms"}}',
+                'order'        => 4,
+            ])->save();
+        }
+
+        $dataRow = $this->dataRow($appDataType, 'users');
+        if (!$dataRow->exists) {
+            $dataRow->fill([
+                'type'         => 'select_multiple',
+                'display_name' => 'Personal',
+                'required'     => 1,
+                'browse'       => 0,
+                'read'         => 1,
+                'edit'         => 1,
+                'add'          => 1,
+                'delete'       => 1,
+                'details'      => '{"relationship":{"key":"id","label":"name","page_slug":"admin/users"}}',
+                'order'        => 5,
             ])->save();
         }
 
@@ -66,14 +98,14 @@ class AppDataRowsTableSeeder extends Seeder
             $dataRow->fill([
                 'type'         => 'text',
                 'display_name' => 'Key',
-                'required'     => 1,
-                'browse'       => 1,
+                'required'     => 0,
+                'browse'       => 0,
                 'read'         => 1,
                 'edit'         => 0,
                 'add'          => 0,
                 'delete'       => 0,
                 'details'      => '',
-                'order'        => 4,
+                'order'        => 6,
             ])->save();
         }
 
@@ -89,7 +121,7 @@ class AppDataRowsTableSeeder extends Seeder
                 'add'          => 0,
                 'delete'       => 0,
                 'details'      => '',
-                'order'        => 5,
+                'order'        => 7,
             ])->save();
         }
 
@@ -105,7 +137,7 @@ class AppDataRowsTableSeeder extends Seeder
                 'add'          => 0,
                 'delete'       => 0,
                 'details'      => '',
-                'order'        => 6,
+                'order'        => 8,
             ])->save();
         }
 
@@ -121,7 +153,7 @@ class AppDataRowsTableSeeder extends Seeder
                 'add'          => 0,
                 'delete'       => 0,
                 'details'      => '',
-                'order'        => 7,
+                'order'        => 9,
             ])->save();
         }
 
@@ -137,7 +169,7 @@ class AppDataRowsTableSeeder extends Seeder
                 'add'          => 0,
                 'delete'       => 0,
                 'details'      => '',
-                'order'        => 8,
+                'order'        => 10,
             ])->save();
         }
     }

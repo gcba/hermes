@@ -43,7 +43,7 @@ class Device extends Model
      * Get the ratings that belong to this device.
      */
     public function ratings() {
-        return $this->hasMany('App\Rating', 'rating_id', 'id');
+        return $this->hasMany('App\Rating', 'device_id', 'id');
     }
 
     /**

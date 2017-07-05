@@ -43,7 +43,7 @@ class Browser extends Model
      * Get the ratings that belong to this browser.
      */
     public function ratings() {
-        return $this->hasMany('App\Rating', 'rating_id', 'id');
+        return $this->hasMany('App\Rating', 'browser_id', 'id');
     }
 
     public function getCreatedAtAttribute(){

@@ -47,7 +47,7 @@ class App extends Model
      * Get the ratings that belong to this app.
      */
     public function ratings() {
-        return $this->hasMany('App\Rating', 'rating_id', 'id');
+        return $this->hasMany('App\Rating', 'app_id', 'id');
     }
 
     /**
@@ -82,11 +82,21 @@ class App extends Model
         $this->attributes['name'] = ucfirst(filter_var(trim($value), FILTER_SANITIZE_SPECIAL_CHARS));
     }
 
+    public function setTypeAttribute($value) {
+        switch ($value) {
+            case 'Móvil': $this->attributes['type'] = 'M';
+            case 'Web': $this->attributes['type'] = 'W';
+        }
+
+        if (strlen($value) == 1) {
+            $this->attributes['type'] = $value;
+        }
+    }
+
     public function getTypeAttribute(){
         switch ($this->attributes['type']) {
             case 'M': return 'Móvil';
             case 'W': return 'Web';
-            default: return $this->attributes['type'];
         }
     }
 

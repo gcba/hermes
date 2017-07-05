@@ -50,8 +50,8 @@ class PlatformDataRowsTableSeeder extends Seeder
             $dataRow->fill([
                 'type'         => 'text',
                 'display_name' => 'Key',
-                'required'     => 1,
-                'browse'       => 1,
+                'required'     => 0,
+                'browse'       => 0,
                 'read'         => 1,
                 'edit'         => 0,
                 'add'          => 0,

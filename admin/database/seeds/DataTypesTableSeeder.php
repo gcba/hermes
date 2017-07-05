@@ -18,7 +18,7 @@ class DataTypesTableSeeder extends Seeder
                 'display_name_plural'   => 'Users',
                 'slug'                  => 'users',
                 'icon'                  => 'voyager-person',
-                'model_name'            => 'TCG\\Voyager\\Models\\User',
+                'model_name'            => 'App\\User',
                 'controller'            => 'Controller',
                 'generate_permissions'  => 0,
                 'description'           => 'Personal',
@@ -179,7 +179,7 @@ class DataTypesTableSeeder extends Seeder
                 'slug'                  => 'menus',
                 'icon'                  => 'voyager-list',
                 'model_name'            => 'TCG\\Voyager\\Models\\Menu',
-                'controller'            => 'Controller',
+                'controller'            => '',
                 'generate_permissions'  => 0,
                 'description'           => 'Menús',
                 'server_side'           => 0
@@ -197,7 +197,7 @@ class DataTypesTableSeeder extends Seeder
                 'model_name'            => 'TCG\\Voyager\\Models\\Role',
                 'controller'            => 'Controller',
                 'generate_permissions'  => 0,
-                'description'           => 'Roles',
+                'description'           => '',
                 'server_side'           => 0
             ])->save();
         }

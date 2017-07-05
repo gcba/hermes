@@ -45,28 +45,28 @@ class AppUser extends Model
      * Get the ratings that belong to this app user.
      */
     public function ratings() {
-        return $this->hasMany('App\Rating', 'rating_id', 'id');
+        return $this->hasMany('App\Rating', 'appuser_id', 'id');
     }
 
     /**
      * Get the apps of the app user.
      */
      public function apps() {
-        return $this->belongsToMany('App\App');
+        return $this->belongsToMany('App\App', 'app_user_app');
      }
 
      /**
      * Get the platform that belong to the appuser.
      */
      public function platforms() {
-        return $this->belongsToMany('App\Platform');
+        return $this->belongsToMany('App\Platform', 'app_user_platform');
      }
 
      /**
      * Get the devices that belong to the app user.
      */
      public function devices() {
-        return $this->belongsToMany('App\Device');
+        return $this->belongsToMany('App\Device', 'app_user_device');
      }
 
      public function getCreatedAtAttribute(){

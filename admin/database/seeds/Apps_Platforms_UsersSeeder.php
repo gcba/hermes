@@ -77,7 +77,7 @@ class Apps_Platforms_UsersSeeder extends Seeder
             foreach ($supportUsers as $support) {
                 $isOwner = $booleanOptions[array_rand($booleanOptions)];
 
-                $support->apps()->attach([$denunciaVial->id, $miBA->id, $masSimple->id], ['is_owner' => $isOwner]);
+                $support->apps()->attach([$denunciaVial->id, $miBA->id, $masSimple->id]);
             }
         }
     }

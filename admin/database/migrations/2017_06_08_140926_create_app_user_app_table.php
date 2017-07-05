@@ -14,13 +14,13 @@ class CreateAppUserAppTable extends Migration
     public function up()
     {
         Schema::create('app_user_app', function (Blueprint $table) {
-            $table->increments('id');
             $table->integer('app_user_id')->unsigned();
             $table->foreign('app_user_id')->references('id')->on('appusers')->onDelete('cascade');
             $table->index('app_user_id');
             $table->integer('app_id')->unsigned();
             $table->foreign('app_id')->references('id')->on('apps')->onDelete('cascade');
             $table->index('app_id');
+            $table->primary(['app_id', 'app_user_id']);
         });
     }
 

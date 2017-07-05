@@ -61,6 +61,70 @@ class AppUserDataRowsTableSeeder extends Seeder
             ])->save();
         }
 
+        $dataRow = $this->dataRow($appuserDataType, 'ratings');
+        if (!$dataRow->exists) {
+            $dataRow->fill([
+                'type'         => 'select_dropdown',
+                'display_name' => 'Calificaciones',
+                'required'     => 1,
+                'browse'       => 0,
+                'read'         => 1,
+                'edit'         => 0,
+                'add'          => 0,
+                'delete'       => 0,
+                'details'      => '{"relationship":{"key":"id","label":"rating","page_slug":"admin/ratings"}}',
+                'order'        => 4,
+            ])->save();
+        }
+
+        $dataRow = $this->dataRow($appuserDataType, 'apps');
+        if (!$dataRow->exists) {
+            $dataRow->fill([
+                'type'         => 'select_multiple',
+                'display_name' => 'Aplicaciones',
+                'required'     => 1,
+                'browse'       => 0,
+                'read'         => 1,
+                'edit'         => 0,
+                'add'          => 0,
+                'delete'       => 0,
+                'details'      => '{"relationship":{"key":"id","label":"name","page_slug":"admin/apps"}}',
+                'order'        => 5,
+            ])->save();
+        }
+
+        $dataRow = $this->dataRow($appuserDataType, 'platforms');
+        if (!$dataRow->exists) {
+            $dataRow->fill([
+                'type'         => 'select_multiple',
+                'display_name' => 'Plataformas',
+                'required'     => 1,
+                'browse'       => 0,
+                'read'         => 1,
+                'edit'         => 0,
+                'add'          => 0,
+                'delete'       => 0,
+                'details'      => '{"relationship":{"key":"id","label":"name","page_slug":"admin/platforms"}}',
+                'order'        => 6,
+            ])->save();
+        }
+
+        $dataRow = $this->dataRow($appuserDataType, 'devices');
+        if (!$dataRow->exists) {
+            $dataRow->fill([
+                'type'         => 'select_multiple',
+                'display_name' => 'Dispositivos',
+                'required'     => 1,
+                'browse'       => 0,
+                'read'         => 1,
+                'edit'         => 0,
+                'add'          => 0,
+                'delete'       => 0,
+                'details'      => '{"relationship":{"key":"id","label":"name","page_slug":"admin/devices"}}',
+                'order'        => 7,
+            ])->save();
+        }
+
         $dataRow = $this->dataRow($appuserDataType, 'miba_id');
         if (!$dataRow->exists) {
             $dataRow->fill([
@@ -73,7 +137,7 @@ class AppUserDataRowsTableSeeder extends Seeder
                 'add'          => 0,
                 'delete'       => 0,
                 'details'      => '{"validation":{"rules":["required","string"],"messages":{"required":"Falta el campo :attribute.","string":"El campo :attribute debe tener texto."}}}',
-                'order'        => 4,
+                'order'        => 8,
             ])->save();
         }
 
@@ -89,7 +153,7 @@ class AppUserDataRowsTableSeeder extends Seeder
                 'add'          => 0,
                 'delete'       => 0,
                 'details'      => '',
-                'order'        => 5,
+                'order'        => 9,
             ])->save();
         }
 
@@ -105,7 +169,7 @@ class AppUserDataRowsTableSeeder extends Seeder
                 'add'          => 0,
                 'delete'       => 0,
                 'details'      => '',
-                'order'        => 6,
+                'order'        => 10,
             ])->save();
         }
 
@@ -121,7 +185,7 @@ class AppUserDataRowsTableSeeder extends Seeder
                 'add'          => 0,
                 'delete'       => 0,
                 'details'      => '',
-                'order'        => 7,
+                'order'        => 11,
             ])->save();
         }
     }
