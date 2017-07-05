@@ -79,4 +79,12 @@ class App extends Model
     public function setNameAttribute($value) {
         $this->attributes['name'] = ucfirst(filter_var(trim($value), FILTER_SANITIZE_SPECIAL_CHARS));
     }
+
+    public function getTypeAttribute(){
+        switch ($this->attributes['type']) {
+            case 'M': return 'Móvil';
+            case 'W': return 'Web';
+            default: return $this->attributes['type'];
+        }
+    }
 }
