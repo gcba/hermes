@@ -31,15 +31,21 @@ func badRequestMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
 		}
 
 		if !isValidAcceptHeader(context) {
-			// message = "Accept header must equal 'application/json'."
+			message = "Accept header must equal 'application/json'."
 
-			// return responses.ErrorResponse(http.StatusBadRequest, message, context)
+			return responses.ErrorResponse(http.StatusBadRequest, message, context)
 		}
 
 		if context.Request().Method == echo.POST && !hasContentTypeHeader(context) {
-			// message = "Content-Type header must equal 'application/json; charset=UTF-8'."
+			message = "Content-Type header is missing."
 
-			// return responses.ErrorResponse(http.StatusBadRequest, message, context)
+			return responses.ErrorResponse(http.StatusBadRequest, message, context)
+		}
+
+		if context.Request().Method == echo.POST && !isValidContentTypeHeader(context) {
+			message = "Content-Type header must equal 'application/json; charset=UTF-8'."
+
+			return responses.ErrorResponse(http.StatusBadRequest, message, context)
 		}
 
 		return next(context)
@@ -73,6 +79,14 @@ func isValidAcceptHeader(context echo.Context) bool {
 }
 
 func hasContentTypeHeader(context echo.Context) bool {
+	if header := context.Request().Header.Get("Content-Type"); strings.TrimSpace(header) != "" {
+		return true
+	}
+
+	return false
+}
+
+func isValidContentTypeHeader(context echo.Context) bool {
 	validHeader := "application/json; charset=utf-8"
 
 	if header := context.Request().Header.Get("Content-Type"); strings.ToLower(header) == validHeader {
