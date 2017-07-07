@@ -32,7 +32,7 @@ func TestOptionsRatings(t *testing.T) {
 		},
 	})
 
-	json := map[string]interface{}{
+	response := map[string]interface{}{
 		"meta": map[string]interface{}{
 			"code":    200,
 			"message": "OK"},
@@ -40,16 +40,15 @@ func TestOptionsRatings(t *testing.T) {
 			{
 				"method": "POST",
 				"path":   "/ratings",
-				"headers": [][]string{
-					{
-						"Content-Type",
-						"application/json; charset=utf-8"}}}}}
+				"headers": map[string]interface{}{
+					"Content-Type": "application/json; charset=UTF-8"}}}}
 
-	e.OPTIONS("/ratings").WithJSON(json).
-		WithHeader("Content-Type", "application/json; charset=utf-8").
-		WithHeader("Allow", "OPTIONS POST").
-		Expect().
-		Status(http.StatusOK)
+	r := e.OPTIONS("/ratings").Expect()
+
+	r.Status(http.StatusOK)
+	r.Header("Content-Type").Equal("application/json; charset=UTF-8")
+	r.Header("Allow").Equal("OPTIONS POST")
+	r.JSON().Object().Equal(response)
 }
 
 func TestPostRatings(t *testing.T) {
@@ -87,7 +86,7 @@ func TestPostRatings(t *testing.T) {
 	*/
 
 	e.POST("/ratings").WithJSON(jsonRequest).
-		WithHeader("Content-Type", "application/json; charset=utf-8").
+		WithHeader("Content-Type", "application/json; charset=UTF-8").
 		Expect().
 		Status(http.StatusCreated)
 }

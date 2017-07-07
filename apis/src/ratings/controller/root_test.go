@@ -43,7 +43,7 @@ func TestOptionsRoot(t *testing.T) {
 				"headers": [][]string{
 					{
 						"Content-Type",
-						"application/json; charset=utf-8"},
+						"application/json; charset=UTF-8"},
 					{
 						"Allow",
 						"OPTIONS POST"}}},
@@ -53,10 +53,10 @@ func TestOptionsRoot(t *testing.T) {
 				"headers": [][]string{
 					{
 						"Content-Type",
-						"application/json; charset=utf-8"}}}}}
+						"application/json; charset=UTF-8"}}}}}
 
 	e.OPTIONS("/").WithJSON(json).
-		WithHeader("Content-Type", "application/json; charset=utf-8").
+		WithHeader("Content-Type", "application/json; charset=UTF-8").
 		WithHeader("Allow", "OPTIONS").
 		Expect().
 		Status(http.StatusOK)
