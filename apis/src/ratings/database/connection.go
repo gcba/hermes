@@ -78,7 +78,7 @@ func connectDB(driver string, credentials string) *gorm.DB {
 	db, dbErr := gorm.Open(driver, credentials)
 
 	if dbErr != nil {
-		log.Fatal("Failed to connect to " + driver + " database. Error: " + dbErr.Error())
+		log.Println("Failed to connect to " + driver + " database. Error: " + dbErr.Error())
 	}
 
 	return db

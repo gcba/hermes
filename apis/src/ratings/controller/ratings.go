@@ -61,7 +61,7 @@ func newMessage(rating uint, db *gorm.DB, frame *frame) error {
 	errorList := result.GetErrors()
 
 	if len(errorList) > 0 {
-		return errorsResponse(errorList, frame.context)
+		return errorResponse(frame.context)
 	}
 
 	value := result.Value.(*models.Message)
@@ -151,7 +151,7 @@ func newRating(dbs *databases, frame *frame) error {
 	errorList := result.GetErrors()
 
 	if len(errorList) > 0 {
-		return errorsResponse(errorList, frame.context)
+		return errorResponse(frame.context)
 	}
 
 	value := result.Value.(*models.Rating)

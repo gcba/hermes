@@ -26,18 +26,8 @@ type (
 	}
 )
 
-func errorResponse(err error, context echo.Context) error {
-	return responses.ErrorResponse(http.StatusInternalServerError, err.Error(), context)
-}
-
-func errorsResponse(errors []error, context echo.Context) error {
-	stringErrors := make([]string, len(errors))
-
-	for index, err := range errors {
-		stringErrors[index] = err.Error()
-	}
-
-	return responses.ErrorsResponse(http.StatusInternalServerError, stringErrors, context)
+func errorResponse(context echo.Context) error {
+	return responses.ErrorResponse(http.StatusInternalServerError, "", context)
 }
 
 /*
@@ -51,7 +41,7 @@ func getApp(db *gorm.DB, frame *frame) (*models.App, error) {
 	errorList := result.GetErrors()
 
 	if len(errorList) > 0 {
-		return &models.App{}, errorsResponse(errorList, frame.context)
+		return &models.App{}, errorResponse(frame.context)
 	}
 
 	return result.Value.(*models.App), nil
@@ -67,7 +57,7 @@ func getPlatform(db *gorm.DB, frame *frame) (*models.Platform, error) {
 	errorList := result.GetErrors()
 
 	if len(errorList) > 0 {
-		return &models.Platform{}, errorsResponse(errorList, frame.context)
+		return &models.Platform{}, errorResponse(frame.context)
 	}
 
 	return result.Value.(*models.Platform), nil
@@ -83,7 +73,7 @@ func getRange(db *gorm.DB, frame *frame) (*models.Range, error) {
 	errorList := result.GetErrors()
 
 	if len(errorList) > 0 {
-		return &models.Range{}, errorsResponse(errorList, frame.context)
+		return &models.Range{}, errorResponse(frame.context)
 	}
 
 	return result.Value.(*models.Range), nil
@@ -132,14 +122,14 @@ func getAppUser(dbs *databases, frame *frame) (*models.AppUser, error) {
 		createErrorList := createResult.GetErrors()
 
 		if len(createErrorList) > 0 {
-			return &models.AppUser{}, errorsResponse(createErrorList, frame.context)
+			return &models.AppUser{}, errorResponse(frame.context)
 		}
 
 		return createResult.Value.(*models.AppUser), nil
 	}
 
 	if len(getErrorList) > 0 {
-		return &models.AppUser{}, errorsResponse(getErrorList, frame.context)
+		return &models.AppUser{}, errorResponse(frame.context)
 	}
 
 	return getResult.Value.(*models.AppUser), nil
@@ -184,14 +174,14 @@ func getBrowser(dbs *databases, frame *frame) (*models.Browser, error) {
 		createErrorList := createResult.GetErrors()
 
 		if len(createErrorList) > 0 {
-			return &models.Browser{}, errorsResponse(createErrorList, frame.context)
+			return &models.Browser{}, errorResponse(frame.context)
 		}
 
 		return createResult.Value.(*models.Browser), nil
 	}
 
 	if len(getErrorList) > 0 {
-		return &models.Browser{}, errorsResponse(getErrorList, frame.context)
+		return &models.Browser{}, errorResponse(frame.context)
 	}
 
 	return getResult.Value.(*models.Browser), nil
@@ -252,14 +242,14 @@ func getDevice(brand *models.Brand, platform *models.Platform, dbs *databases, f
 		createErrorList := createResult.GetErrors()
 
 		if len(createErrorList) > 0 {
-			return &models.Device{}, errorsResponse(createErrorList, frame.context)
+			return &models.Device{}, errorResponse(frame.context)
 		}
 
 		return createResult.Value.(*models.Device), nil
 	}
 
 	if len(getErrorList) > 0 {
-		return &models.Device{}, errorsResponse(getErrorList, frame.context)
+		return &models.Device{}, errorResponse(frame.context)
 	}
 
 	return getResult.Value.(*models.Device), nil
@@ -296,14 +286,14 @@ func getBrand(dbs *databases, frame *frame) (*models.Brand, error) {
 		createErrorList := createResult.GetErrors()
 
 		if len(createErrorList) > 0 {
-			return &models.Brand{}, errorsResponse(createErrorList, frame.context)
+			return &models.Brand{}, errorResponse(frame.context)
 		}
 
 		return createResult.Value.(*models.Brand), nil
 	}
 
 	if len(getErrorList) > 0 {
-		return &models.Brand{}, errorsResponse(getErrorList, frame.context)
+		return &models.Brand{}, errorResponse(frame.context)
 	}
 
 	return getResult.Value.(*models.Brand), nil
