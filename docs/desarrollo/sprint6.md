@@ -41,5 +41,3 @@ Crear las páginas de CRUD de AppUser, Brand, Browser, Device, Message y Rating 
 ### API de calificaciones
 
 1. Agregar un test de integración para cada caso de error
-
-2. Agregar un test unitario para cada método privado en el controlador
