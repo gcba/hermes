@@ -111,7 +111,6 @@ Tabla intermedia para la relación many-to-many entre User y App.
 |Campos          |Tipo                  |Default| FK?   | Null? |Unique?|Index? |
 |----------------|----------------------|-------|:-----:|:-----:|:-----:|:-----:|
 |id              |int (PK)              |       |       |       |       |       |
-|is_owner        |bool                  |false  |       |       |       |       |
 |user_id         |int                   |       |X      |       |       |X      |
 |app_id          |int                   |       |X      |       |       |X      |
 
