@@ -6,10 +6,16 @@ import (
 	"github.com/labstack/echo"
 )
 
-type Error struct {
-	Meta   meta     `json:"meta"`
-	Errors []string `json:"errors"`
-}
+type (
+	Error struct {
+		Meta   meta     `json:"meta"`
+		Errors []string `json:"errors"`
+	}
+
+	BasicError struct {
+		Meta meta `json:"meta"`
+	}
+)
 
 func ErrorResponse(status int, errorMessage string, context echo.Context) error {
 	if errorMessage == "" {
@@ -23,7 +29,9 @@ func ErrorResponse(status int, errorMessage string, context echo.Context) error 
 
 func ErrorsResponse(status int, errors []string, context echo.Context) error {
 	if len(errors) == 0 {
-		return context.JSON(status, metas[status])
+		response := BasicError{Meta: metas[status]}
+
+		return context.JSON(status, &response)
 	}
 
 	for _, errorMessage := range errors {
