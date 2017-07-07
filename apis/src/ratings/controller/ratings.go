@@ -31,13 +31,11 @@ func PostRatings(context echo.Context) error {
 		return err
 	}
 
-	readDB := database.GetReadDB()
-	writeDB := database.GetWriteDB()
-	dbs := &databases{read: readDB, write: writeDB}
+	dbs := &databases{read: database.GetWriteDB(), write: database.GetReadDB()}
 	frame := &frame{request: request, context: context}
 
-	defer readDB.Close()
-	defer writeDB.Close()
+	defer dbs.read.Close()
+	defer dbs.write.Close()
 
 	if err := newRating(dbs, frame); err != nil {
 		fmt.Println("\n\nRating error: ", err.Error())

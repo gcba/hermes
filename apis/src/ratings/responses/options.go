@@ -28,19 +28,19 @@ var (
 		Method: "OPTIONS",
 		Path:   "/",
 		Headers: &headers{
-			ContentType: "application/json; charset=utf-8"}}
+			ContentType: "application/json; charset=UTF-8"}}
 
 	optionsRatings = Endpoint{
 		Method: "OPTIONS",
 		Path:   "/ratings",
 		Headers: &headers{
-			ContentType: "application/json; charset=utf-8"}}
+			ContentType: "application/json; charset=UTF-8"}}
 
 	postRatings = Endpoint{
 		Method: "POST",
 		Path:   "/ratings",
 		Headers: &headers{
-			ContentType: "application/json; charset=utf-8"}}
+			ContentType: "application/json; charset=UTF-8"}}
 
 	Endpoints = map[string]Endpoint{
 		"OptionsRoot":    optionsRoot,
