@@ -39,7 +39,7 @@ func getApp(db *gorm.DB, frame *frame) (*models.App, error) {
 
 	errorList := result.GetErrors()
 
-	if len(errorList) > 0 {
+	if len(errorList) > 0 || result.Value == nil {
 		return &models.App{}, errorResponse(frame.context)
 	}
 
@@ -55,7 +55,7 @@ func getPlatform(db *gorm.DB, frame *frame) (*models.Platform, error) {
 	result := models.GetPlatform(frame.request.Platform.Key, db)
 	errorList := result.GetErrors()
 
-	if len(errorList) > 0 {
+	if len(errorList) > 0 || result.Value == nil {
 		return &models.Platform{}, errorResponse(frame.context)
 	}
 
@@ -71,7 +71,7 @@ func getRange(db *gorm.DB, frame *frame) (*models.Range, error) {
 	result := models.GetRange(frame.request.Range, db)
 	errorList := result.GetErrors()
 
-	if len(errorList) > 0 {
+	if len(errorList) > 0 || result.Value == nil {
 		return &models.Range{}, errorResponse(frame.context)
 	}
 
