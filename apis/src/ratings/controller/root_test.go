@@ -83,7 +83,7 @@ func TestOptionsRoot_BadRequestError(t *testing.T) {
 		"meta": map[string]interface{}{
 			"code":    http.StatusBadRequest,
 			"message": "Bad Request"},
-		"errors": []interface{}{"Accept header is missing."}}
+		"errors": []interface{}{"Accept header is missing"}}
 
 	r := e.OPTIONS("/").
 		Expect()
