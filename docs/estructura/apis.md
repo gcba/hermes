@@ -120,12 +120,7 @@ Crear una nueva calificación (que puede incluir un comentario o no)
        "code": ...,
        "message": ...
    },
-   "errors": [
-       {
-           "type": ...,
-           "description": ...
-       },
-   ]
+   "errors": [... ]
 }
 ```
 
