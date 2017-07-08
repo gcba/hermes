@@ -17,7 +17,7 @@ type Device struct {
 	Platform     *Platform
 	PlatformID   uint `gorm:"DEFAULT:NULL"`
 
-	CreatedAt time.Time `gorm:"not null"`
+	CreatedAt time.Time `gorm:"not null;type:datetime;default:CURRENT_TIMESTAMP"`
 }
 
 // GetDevice gets a device by name and brand id
@@ -25,10 +25,10 @@ func GetDevice(name string, brand uint, db *gorm.DB) *gorm.DB {
 	var result Device
 
 	if isPostgres(db) {
-		return db.Where("WHERE name ILIKE ? AND brand_id = ?", name, brand).First(&result)
+		return db.Where("name ILIKE ? AND brand_id = ?", name, brand).First(&result)
 	}
 
-	return db.Where("WHERE name LIKE ? AND brand_id = ?", name, brand).First(&result)
+	return db.Where("name LIKE ? AND brand_id = ?", name, brand).First(&result)
 }
 
 // CreateDevice creates a new device

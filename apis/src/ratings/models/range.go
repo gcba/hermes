@@ -13,7 +13,7 @@ type Range struct {
 	Key   string `gorm:"type:char(32);not null"`
 	AppID uint   `gorm:"not null"`
 
-	CreatedAt time.Time `gorm:"not null"`
+	CreatedAt time.Time `gorm:"not null;type:datetime;default:CURRENT_TIMESTAMP"`
 }
 
 // GetRange gets a range by key

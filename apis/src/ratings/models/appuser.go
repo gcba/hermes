@@ -12,7 +12,7 @@ type AppUser struct {
 	Email  string `gorm:"size:100;not null"`
 	MiBAID string `gorm:"column:miba_id;not null"`
 
-	CreatedAt time.Time `gorm:"not null"`
+	CreatedAt time.Time `gorm:"not null;type:datetime;default:CURRENT_TIMESTAMP"`
 }
 
 // TableName sets AppUser's table name to be `appuser`

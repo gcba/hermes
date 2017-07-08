@@ -11,7 +11,7 @@ type Platform struct {
 	Name string `gorm:"size:15;not null"`
 	Key  string `gorm:"type:char(32);not null"`
 
-	CreatedAt time.Time `gorm:"not null"`
+	CreatedAt time.Time `gorm:"not null;type:datetime;default:CURRENT_TIMESTAMP"`
 }
 
 // GetPlatform gets a platform by key

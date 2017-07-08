@@ -12,7 +12,7 @@ type Message struct {
 	Direction string `sql:"type:enum('in','out');not null"`
 	RatingID  uint   `gorm:"not null"`
 
-	CreatedAt time.Time `gorm:"not null"`
+	CreatedAt time.Time `gorm:"not null;type:datetime;default:CURRENT_TIMESTAMP"`
 }
 
 // CreateMessage creates a new message

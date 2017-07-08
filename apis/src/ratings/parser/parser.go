@@ -18,7 +18,7 @@ type (
 	}
 
 	user struct {
-		Name   string `json:"name" validate:"required,gte=2,slte=70" conform:"name"`
+		Name   string `json:"name" validate:"required,gte=2,lte=70" conform:"name"`
 		Email  string `json:"email" validate:"required,email,gte=3,lte=100,excludesall= " conform:"email"`
 		MiBAID string `json:"mibaId" validate:"required,alphanum,gte=1,excludesall= " conform:"lower"`
 	}

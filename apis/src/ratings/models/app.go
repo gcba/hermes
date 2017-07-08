@@ -12,7 +12,7 @@ type App struct {
 	Type string `gorm:"type:char;not null"`
 	Key  string `gorm:"type:char(32);not null"`
 
-	CreatedAt time.Time `gorm:"not null"`
+	CreatedAt time.Time `gorm:"not null;type:datetime;default:CURRENT_TIMESTAMP"`
 }
 
 // GetApp gets an app by key

@@ -137,7 +137,7 @@ func getAppUser(dbs *databases, frame *frame) (*models.AppUser, error) {
 func attachAppUser(rating *models.Rating, dbs *databases, frame *frame) error {
 	appUser, err := getAppUser(dbs, frame)
 
-	if err != nil {
+	if err == nil {
 		rating.AppUserID = appUser.ID
 	}
 
@@ -190,7 +190,7 @@ func attachBrowser(rating *models.Rating, dbs *databases, frame *frame) error {
 	browser, err := getBrowser(dbs, frame)
 
 	if len(frame.request.Browser.Version) > 0 {
-		if err != nil {
+		if err == nil {
 			rating.BrowserID = browser.ID
 			rating.BrowserVersion = frame.request.Browser.Version
 
@@ -257,10 +257,10 @@ func getDevice(brand *models.Brand, platform *models.Platform, dbs *databases, f
 func attachDevice(rating *models.Rating, platform *models.Platform, dbs *databases, frame *frame) error {
 	brand, brandErr := getBrand(dbs, frame)
 
-	if brandErr != nil {
+	if brandErr == nil {
 		device, deviceErr := getDevice(brand, platform, dbs, frame)
 
-		if deviceErr != nil {
+		if deviceErr == nil {
 			rating.DeviceID = device.ID
 		}
 
