@@ -47,6 +47,14 @@ func GetWriteDB() *gorm.DB {
 }
 
 func getDB(host string, port string, db string, user string, password string) *gorm.DB {
+	if len(host) == 0 {
+		host = "localhost"
+	}
+
+	if len(port) == 0 {
+		port = "5432"
+	}
+
 	if env != "PRODUCTION" {
 		credentials := fmt.Sprintf(
 			"host=%s port=%s user=%s dbname=%s sslmode=disable password=%s", // TODO: Handle sslmode

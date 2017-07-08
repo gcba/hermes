@@ -64,13 +64,13 @@ func Parse(context echo.Context) (*Request, error) {
 	request := new(Request)
 
 	if err := bind(request, context); err != nil {
-		fmt.Println("\n\nError binding request: ", err.Error())
+		context.Logger().Error("Error binding request: " + err.Error())
 
 		return request, err
 	}
 
 	if err := validate(request, context); err != nil {
-		fmt.Println("\n\nError validating request: ", err.Error())
+		context.Logger().Error("Error validating request: " + err.Error())
 
 		return request, err
 	}
@@ -85,6 +85,8 @@ func bind(request *Request, context echo.Context) error {
 	if err := context.Bind(request); err != nil {
 		errorMessage := fmt.Sprintf("Error parsing request: %s", err.Error())
 
+		context.Logger().Error(errorMessage)
+
 		return responses.ErrorResponse(http.StatusBadRequest, errorMessage, context)
 	}
 
@@ -94,6 +96,8 @@ func bind(request *Request, context echo.Context) error {
 func validate(request *Request, context echo.Context) error {
 	if err := context.Validate(request); err != nil {
 		errorMessage := fmt.Sprintf("Error validating request: %s", err.Error())
+
+		context.Logger().Error(errorMessage)
 
 		return responses.ErrorResponse(http.StatusUnprocessableEntity, errorMessage, context)
 	}

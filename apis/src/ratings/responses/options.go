@@ -49,11 +49,11 @@ var (
 )
 
 func OptionsResponse(endpoints []Endpoint, context echo.Context) error {
-	response := Options{
-		Meta:      metas[http.StatusOK],
-		Endpoints: endpoints}
-
 	if !context.Response().Committed {
+		response := Options{
+			Meta:      metas[http.StatusOK],
+			Endpoints: endpoints}
+
 		return context.JSON(http.StatusOK, &response)
 	}
 

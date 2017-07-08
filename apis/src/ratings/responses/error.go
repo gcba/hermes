@@ -2,6 +2,7 @@ package responses
 
 import (
 	"net/http"
+	"strings"
 
 	"github.com/labstack/echo"
 )
@@ -18,13 +19,13 @@ type (
 )
 
 func ErrorResponse(status int, errorMessage string, context echo.Context) error {
-	if errorMessage == "" {
-		return ErrorsResponse(status, []string{}, context)
-	}
-
 	context.Logger().Error(errorMessage)
 
 	if !context.Response().Committed {
+		if errorMessage == "" {
+			return ErrorsResponse(status, []string{}, context)
+		}
+
 		return ErrorsResponse(status, []string{errorMessage}, context)
 	}
 
@@ -32,21 +33,15 @@ func ErrorResponse(status int, errorMessage string, context echo.Context) error 
 }
 
 func ErrorsResponse(status int, errorList []string, context echo.Context) error {
-	if len(errorList) == 0 {
-		response := BasicError{Meta: metas[status]}
-
-		return context.JSON(status, &response)
-	}
-
-	errorMessages := ""
-
-	for _, message := range errorList {
-		errorMessages += message + "\n"
-	}
-
-	context.Logger().Error(errorMessages)
+	context.Logger().Error(strings.Join(errorList, ", "))
 
 	if !context.Response().Committed {
+		if len(errorList) == 0 {
+			response := BasicError{Meta: metas[status]}
+
+			return context.JSON(status, &response)
+		}
+
 		response := Error{
 			Meta:   metas[status],
 			Errors: errorList}
@@ -62,9 +57,9 @@ func ErrorHandler(err error, context echo.Context) {
 
 	if he, ok := err.(*echo.HTTPError); ok {
 		status = he.Code
-	} else if context.Echo().Debug {
-		context.Logger().Error(err.Error())
 	}
+
+	context.Logger().Error(err.Error())
 
 	if !context.Response().Committed {
 		ErrorsResponse(status, []string{}, context)

@@ -10,6 +10,7 @@ import (
 	"github.com/go-playground/validator"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
+	"github.com/labstack/gommon/log"
 )
 
 type RequestValidator struct {
@@ -108,6 +109,8 @@ func Handler(port int, handlers map[string]echo.HandlerFunc) http.Handler {
 	e.OPTIONS("/", handlers["OptionsRoot"])
 	e.OPTIONS("/ratings", handlers["OptionsRatings"])
 	e.POST("/ratings", handlers["PostRatings"])
+
+	e.Logger.SetLevel(log.ERROR)
 
 	e.Server.Addr = ":" + strconv.Itoa(port)
 	e.HTTPErrorHandler = responses.ErrorHandler

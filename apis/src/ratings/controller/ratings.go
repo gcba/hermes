@@ -8,8 +8,6 @@ import (
 
 	"github.com/jinzhu/gorm"
 	"github.com/labstack/echo"
-
-	"fmt"
 )
 
 // OptionsRatings returns the response of the `OPTIONS /ratings` endpoint
@@ -26,7 +24,7 @@ func PostRatings(context echo.Context) error {
 	request, err := parser.Parse(context)
 
 	if err != nil {
-		fmt.Println("\n\nError parsing request: ", err.Error())
+		context.Logger().Error("Error parsing request: " + err.Error())
 
 		return err
 	}
@@ -38,7 +36,7 @@ func PostRatings(context echo.Context) error {
 	defer dbs.write.Close()
 
 	if err := newRating(dbs, frame); err != nil {
-		fmt.Println("\n\nRating error: ", err.Error())
+		frame.context.Logger().Error("Rating error: " + err.Error())
 
 		return err
 	}
@@ -80,7 +78,7 @@ func newRating(dbs *databases, frame *frame) error {
 	app, appErr := getApp(dbs.read, frame)
 
 	if appErr != nil {
-		fmt.Println("\n\nError getting app: ", appErr.Error())
+		frame.context.Logger().Error("Error getting app: " + appErr.Error())
 
 		return appErr
 	}
@@ -88,7 +86,7 @@ func newRating(dbs *databases, frame *frame) error {
 	platform, platformErr := getPlatform(dbs.read, frame)
 
 	if platformErr != nil {
-		fmt.Println("\n\nError getting platform: ", platformErr.Error())
+		frame.context.Logger().Error("Error getting platform: " + platformErr.Error())
 
 		return platformErr
 	}
@@ -96,13 +94,13 @@ func newRating(dbs *databases, frame *frame) error {
 	rangeRecord, rangeErr := getRange(dbs.read, frame)
 
 	if rangeErr != nil {
-		fmt.Println("\n\nError getting range: ", rangeErr.Error())
+		frame.context.Logger().Error("Error getting range: " + rangeErr.Error())
 
 		return rangeErr
 	}
 
 	if err := validateRating(rangeRecord.From, rangeRecord.To, frame); err != nil {
-		fmt.Println("\n\nError validating rating: ", err.Error())
+		frame.context.Logger().Error("Error validating rating: " + err.Error())
 
 		return err
 	}
@@ -125,7 +123,7 @@ func newRating(dbs *databases, frame *frame) error {
 
 	if hasAppUser(frame.request) {
 		if err := attachAppUser(rating, dbs, frame); err != nil {
-			fmt.Println("\n\nError attaching appuser: ", err.Error())
+			frame.context.Logger().Error("Error attaching appuser: " + err.Error())
 
 			return err
 		}
@@ -133,7 +131,7 @@ func newRating(dbs *databases, frame *frame) error {
 
 	if hasDevice(frame.request) {
 		if err := attachDevice(rating, platform, dbs, frame); err != nil {
-			fmt.Println("\n\nError attaching device: ", err.Error())
+			frame.context.Logger().Error("Error attaching device: " + err.Error())
 
 			return err
 		}
@@ -141,7 +139,7 @@ func newRating(dbs *databases, frame *frame) error {
 
 	if hasBrowser(frame.request) {
 		if err := attachBrowser(rating, dbs, frame); err != nil {
-			fmt.Println("\n\nError attaching browser: ", err.Error())
+			frame.context.Logger().Error("Error attaching browser: " + err.Error())
 
 			return err
 		}
@@ -158,7 +156,7 @@ func newRating(dbs *databases, frame *frame) error {
 
 	if hasMessage {
 		if err := newMessage(value.ID, dbs.write, frame); err != nil {
-			fmt.Println("\n\nError creating a message: ", err.Error())
+			frame.context.Logger().Error("Error creating a message: " + err.Error())
 
 			return err
 		}

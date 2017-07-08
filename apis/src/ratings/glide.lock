@@ -1,5 +1,5 @@
-hash: 5c8177a4510468e4cd6c69f7a7795dabf9bd110fa38ee84fe766f5e252292c54
-updated: 2017-06-22T19:24:01.420896056-03:00
+hash: 747b5d73dfb3452e07d44cc0179651ae7587dfecd5b40b0b01b9a5a9baaffb52
+updated: 2017-07-08T01:28:58.202791347-03:00
 imports:
 - name: github.com/ajg/form
   version: cc2954064ec9ea8d93917f0f87456e11d7b881ad
@@ -34,7 +34,6 @@ imports:
   version: 9acaa33324bbcc78239a1c913d4f1292c12177b9
   subpackages:
   - dialects/postgres
-  - dialects/sqlite
 - name: github.com/jinzhu/inflection
   version: 1c35d901db3da928c72a72d8458480cc9ade058f
 - name: github.com/joho/godotenv
@@ -66,8 +65,6 @@ imports:
   version: 941b50ebc6efddf4c41c8e4537a5f68a4e686b24
 - name: github.com/mattn/go-isatty
   version: fc9e8d8ef48496124e79ae0df75490096eccf6fe
-- name: github.com/mattn/go-sqlite3
-  version: cf7286f069c3ef596efcc87781a4653a2e7607bd
 - name: github.com/microcosm-cc/bluemonday
   version: e79763773ab6222ca1d5a7cbd9d62d83c1f77081
 - name: github.com/stretchr/testify
@@ -87,7 +84,6 @@ imports:
 - name: golang.org/x/net
   version: feeb485667d1fdabe727840fe00adc22431bc86e
   subpackages:
-  - context
   - html
   - html/atom
   - publicsuffix
@@ -130,7 +126,7 @@ testImports:
   subpackages:
   - diffmatchpatch
 - name: github.com/valyala/fasthttp
-  version: 6ac0fd1a910c94aefb171ae56941833831e7c7fe
+  version: 498431ce67adb2a2154fb1aad7a35736964c2878
   subpackages:
   - fasthttputil
   - stackless
@@ -143,7 +139,7 @@ testImports:
 - name: github.com/yalp/jsonpath
   version: 31a79c7593bb93eb10b163650d4a3e6ca190e4dc
 - name: github.com/yudai/gojsondiff
-  version: 9209d1532c51cabe0439993586a71c207b09a0ac
+  version: 081cda2ee95045a2c26da52c2ba80860838549de
   subpackages:
   - formatter
 - name: github.com/yudai/golcs

@@ -10,9 +10,9 @@ type Post struct {
 }
 
 func PostResponse(context echo.Context) error {
-	response := Post{Meta: metas[http.StatusCreated]}
-
 	if !context.Response().Committed {
+		response := Post{Meta: metas[http.StatusCreated]}
+
 		return context.JSON(http.StatusCreated, &response)
 	}
 
