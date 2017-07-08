@@ -11,7 +11,6 @@ import (
 
 	"github.com/jinzhu/gorm"
 	"github.com/labstack/echo"
-	// "github.com/k0kubun/pp"
 )
 
 type (
@@ -173,14 +172,14 @@ func getBrowser(dbs *databases, frame *frame) (*models.Browser, error) {
 		createResult := models.CreateBrowser(browser, dbs.write)
 		createErrorList := createResult.GetErrors()
 
-		if len(createErrorList) > 0 {
+		if len(createErrorList) > 0 || createResult.Value == nil {
 			return &models.Browser{}, errorResponse(frame.context)
 		}
 
 		return createResult.Value.(*models.Browser), nil
 	}
 
-	if len(getErrorList) > 0 {
+	if len(getErrorList) > 0 || getResult.Value == nil {
 		return &models.Browser{}, errorResponse(frame.context)
 	}
 
@@ -241,14 +240,14 @@ func getDevice(brand *models.Brand, platform *models.Platform, dbs *databases, f
 		createResult := models.CreateDevice(device, dbs.write)
 		createErrorList := createResult.GetErrors()
 
-		if len(createErrorList) > 0 {
+		if len(createErrorList) > 0 || createResult.Value == nil {
 			return &models.Device{}, errorResponse(frame.context)
 		}
 
 		return createResult.Value.(*models.Device), nil
 	}
 
-	if len(getErrorList) > 0 {
+	if len(getErrorList) > 0 || getResult.Value == nil {
 		return &models.Device{}, errorResponse(frame.context)
 	}
 
@@ -285,14 +284,14 @@ func getBrand(dbs *databases, frame *frame) (*models.Brand, error) {
 		createResult := models.CreateBrand(brand, dbs.write)
 		createErrorList := createResult.GetErrors()
 
-		if len(createErrorList) > 0 {
+		if len(createErrorList) > 0 || createResult.Value == nil {
 			return &models.Brand{}, errorResponse(frame.context)
 		}
 
 		return createResult.Value.(*models.Brand), nil
 	}
 
-	if len(getErrorList) > 0 {
+	if len(getErrorList) > 0 || getResult.Value == nil {
 		return &models.Brand{}, errorResponse(frame.context)
 	}
 

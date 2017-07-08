@@ -16,15 +16,12 @@ type Brand struct {
 // GetBrand gets a brand by name
 func GetBrand(name string, db *gorm.DB) *gorm.DB {
 	var result Brand
-	var query string
 
 	if isPostgres(db) {
-		query = "SELECT id FROM brands WHERE name ILIKE ?"
-	} else {
-		query = "SELECT id FROM brands WHERE name LIKE ?"
+		return db.Where("name ILIKE ?", name).First(&result)
 	}
 
-	return db.Raw(query, name).Scan(&result)
+	return db.Where("name LIKE ?", name).First(&result)
 }
 
 // CreateBrand creates a new brand

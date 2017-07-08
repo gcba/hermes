@@ -54,5 +54,7 @@ func ErrorHandler(err error, context echo.Context) {
 		context.Logger().Error(err.Error())
 	}
 
-	ErrorsResponse(status, []string{}, context)
+	if !context.Response().Committed {
+		ErrorsResponse(status, []string{}, context)
+	}
 }

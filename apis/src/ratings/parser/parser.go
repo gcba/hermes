@@ -18,7 +18,7 @@ type (
 	}
 
 	user struct {
-		Name   string `json:"name" validate:"required,alphanum,gte=2,slte=70" conform:"name"`
+		Name   string `json:"name" validate:"required,gte=2,slte=70" conform:"name"`
 		Email  string `json:"email" validate:"required,email,gte=3,lte=100,excludesall= " conform:"email"`
 		MiBAID string `json:"mibaId" validate:"required,alphanum,gte=1,excludesall= " conform:"lower"`
 	}
@@ -29,26 +29,26 @@ type (
 	}
 
 	device struct {
-		Name   string `json:"name" validate:"required,alphanum,gte=1,lte=30" conform:"trim"`
-		Brand  string `json:"brand" validate:"required,alphanum,gte=1,lte=30" conform:"trim"`
+		Name   string `json:"name" validate:"required,gte=1,lte=30" conform:"trim"`
+		Brand  string `json:"brand" validate:"required,gte=1,lte=30" conform:"trim"`
 		Screen screen `json:"screen" validate:"required"`
 	}
 
 	screen struct {
-		Width  int `json:"width" validate:"required,numeric,gt=0"`
-		Height int `json:"height" validate:"required,numeric,gt=0"`
-		PPI    int `json:"ppi" validate:"required,numeric,gt=0"`
+		Width  int `json:"width" validate:"required,gt=0"`
+		Height int `json:"height" validate:"required,gt=0"`
+		PPI    int `json:"ppi" validate:"required,gt=0"`
 	}
 
 	browser struct {
-		Name    string `json:"name" validate:"required,alphanum,gte=1,lte=15" conform:"trim"`
+		Name    string `json:"name" validate:"required,gte=1,lte=15" conform:"trim"`
 		Version string `json:"version" validate:"required,gte=1,lte=15,excludesall= " conform:"lower"`
 	}
 
 	// Request holds the mapped fields from the request's JSON body
 	Request struct {
 		Rating      int8     `json:"rating" validate:"required,min=-127,max=127"`
-		Description string   `json:"description" validate:"omitempty,alphanum,gte=3,lte=30" conform:"trim,title"`
+		Description string   `json:"description" validate:"omitempty,gte=3,lte=30" conform:"trim,title"`
 		Comment     string   `json:"comment" validate:"omitempty,gte=3,lte=1000" conform:"trim,ucfirst"`
 		Range       string   `json:"range" validate:"required,len=32,alphanum,excludesall= " conform:"lower"`
 		App         app      `json:"app" validate:"required"`

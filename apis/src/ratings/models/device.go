@@ -23,15 +23,12 @@ type Device struct {
 // GetDevice gets a device by name and brand id
 func GetDevice(name string, brand uint, db *gorm.DB) *gorm.DB {
 	var result Device
-	var query string
 
 	if isPostgres(db) {
-		query = "SELECT id FROM devices WHERE name ILIKE ? AND brand_id = ?"
-	} else {
-		query = "SELECT id FROM devices WHERE name LIKE ? AND brand_id = ?"
+		return db.Where("WHERE name ILIKE ? AND brand_id = ?", name, brand).First(&result)
 	}
 
-	return db.Raw(query, name, brand).Scan(&result)
+	return db.Where("WHERE name LIKE ? AND brand_id = ?", name, brand).First(&result)
 }
 
 // CreateDevice creates a new device

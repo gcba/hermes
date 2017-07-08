@@ -17,9 +17,11 @@ type Browser struct {
 func GetBrowser(name string, db *gorm.DB) *gorm.DB {
 	var result Browser
 
-	query := "SELECT id FROM browsers WHERE name LIKE ?" // TODO: Set ILIKE
+	if isPostgres(db) {
+		return db.Where("name ILIKE ?", name).First(&result)
+	}
 
-	return db.Raw(query, name).Scan(&result)
+	return db.Where("name LIKE ?", name).First(&result)
 }
 
 // CreateBrowser creates a new browser
