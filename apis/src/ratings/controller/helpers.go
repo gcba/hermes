@@ -276,7 +276,7 @@ func attachDevice(rating *models.Rating, platform *models.Platform, dbs *databas
 *
  */
 func getBrand(dbs *databases, frame *frame) (*models.Brand, error) {
-	getResult := models.GetBrand(frame.request.Browser.Name, dbs.read)
+	getResult := models.GetBrand(frame.request.Device.Brand, dbs.read)
 	getErrorList := getResult.GetErrors()
 
 	if getResult.RecordNotFound() {

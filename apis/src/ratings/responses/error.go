@@ -24,25 +24,37 @@ func ErrorResponse(status int, errorMessage string, context echo.Context) error 
 
 	context.Logger().Error(errorMessage)
 
-	return ErrorsResponse(status, []string{errorMessage}, context)
+	if !context.Response().Committed {
+		return ErrorsResponse(status, []string{errorMessage}, context)
+	}
+
+	return nil
 }
 
-func ErrorsResponse(status int, errors []string, context echo.Context) error {
-	if len(errors) == 0 {
+func ErrorsResponse(status int, errorList []string, context echo.Context) error {
+	if len(errorList) == 0 {
 		response := BasicError{Meta: metas[status]}
 
 		return context.JSON(status, &response)
 	}
 
-	for _, errorMessage := range errors {
-		context.Logger().Error(errorMessage)
+	errorMessages := ""
+
+	for _, message := range errorList {
+		errorMessages += message + "\n"
 	}
 
-	response := Error{
-		Meta:   metas[status],
-		Errors: errors}
+	context.Logger().Error(errorMessages)
 
-	return context.JSON(status, &response)
+	if !context.Response().Committed {
+		response := Error{
+			Meta:   metas[status],
+			Errors: errorList}
+
+		return context.JSON(status, &response)
+	}
+
+	return nil
 }
 
 func ErrorHandler(err error, context echo.Context) {

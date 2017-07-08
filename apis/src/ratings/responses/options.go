@@ -53,5 +53,9 @@ func OptionsResponse(endpoints []Endpoint, context echo.Context) error {
 		Meta:      metas[http.StatusOK],
 		Endpoints: endpoints}
 
-	return context.JSON(http.StatusOK, &response)
+	if !context.Response().Committed {
+		return context.JSON(http.StatusOK, &response)
+	}
+
+	return nil
 }

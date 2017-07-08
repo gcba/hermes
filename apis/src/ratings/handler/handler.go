@@ -25,25 +25,25 @@ func badRequestMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
 		var message string
 
 		if !hasAcceptHeader(context) {
-			message = "Accept header is missing."
+			message = "Accept header is missing"
 
 			return responses.ErrorResponse(http.StatusBadRequest, message, context)
 		}
 
 		if !isValidAcceptHeader(context) {
-			message = "Accept header must equal 'application/json'."
+			message = "Accept header must equal 'application/json'"
 
 			return responses.ErrorResponse(http.StatusBadRequest, message, context)
 		}
 
 		if context.Request().Method == echo.POST && !hasContentTypeHeader(context) {
-			message = "Content-Type header is missing."
+			message = "Content-Type header is missing"
 
 			return responses.ErrorResponse(http.StatusBadRequest, message, context)
 		}
 
 		if context.Request().Method == echo.POST && !isValidContentTypeHeader(context) {
-			message = "Content-Type header must equal 'application/json; charset=UTF-8'."
+			message = "Content-Type header must equal 'application/json; charset=UTF-8'"
 
 			return responses.ErrorResponse(http.StatusBadRequest, message, context)
 		}
