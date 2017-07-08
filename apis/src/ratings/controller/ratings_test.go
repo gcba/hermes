@@ -105,10 +105,10 @@ func TestPostRatings(t *testing.T) {
 		"range":       "e10adc3949ba59abbe56e057f20f883e",
 		"app": map[string]interface{}{
 			"key":     "e10adc3949ba59abbe56e057f20f883e",
-			"version": "2.O"},
+			"version": "2.0"},
 		"platform": map[string]interface{}{
 			"key":     "e10adc3949ba59abbe56e057f20f883e",
-			"version": "9.O"}}
+			"version": "9.0"}}
 
 	response := map[string]interface{}{
 		"meta": map[string]interface{}{
@@ -148,10 +148,10 @@ func TestPostRatings_WithBrowser(t *testing.T) {
 		"range":       "e10adc3949ba59abbe56e057f20f883e",
 		"app": map[string]interface{}{
 			"key":     "e10adc3949ba59abbe56e057f20f883e",
-			"version": "2.O"},
+			"version": "2.0"},
 		"platform": map[string]interface{}{
 			"key":     "e10adc3949ba59abbe56e057f20f883e",
-			"version": "9.O"},
+			"version": "9.0"},
 		"browser": map[string]interface{}{
 			"name":    "Firefox",
 			"version": "59"}}
@@ -194,10 +194,10 @@ func TestPostRatings_WithDevice(t *testing.T) {
 		"range":       "e10adc3949ba59abbe56e057f20f883e",
 		"app": map[string]interface{}{
 			"key":     "e10adc3949ba59abbe56e057f20f883e",
-			"version": "2.O"},
+			"version": "2.0"},
 		"platform": map[string]interface{}{
 			"key":     "e10adc3949ba59abbe56e057f20f883e",
-			"version": "9.O"},
+			"version": "9.0"},
 		"device": map[string]interface{}{
 			"name":  "Moto G",
 			"brand": "Motorola",
@@ -205,6 +205,161 @@ func TestPostRatings_WithDevice(t *testing.T) {
 				"width":  1000,
 				"height": 2000,
 				"ppi":    200}}}
+
+	response := map[string]interface{}{
+		"meta": map[string]interface{}{
+			"code":    http.StatusCreated,
+			"message": "Created"}}
+
+	r := e.POST("/ratings").
+		WithHeader("Content-Type", "application/json; charset=UTF-8").
+		WithHeader("Accept", "application/json").
+		WithJSON(request).
+		Expect()
+
+	r.Status(http.StatusCreated)
+	r.Header("Content-Type").Equal("application/json; charset=UTF-8")
+	r.JSON().Object().Equal(response)
+}
+
+func TestPostRatings_WithAppUser(t *testing.T) {
+	handler := handler.Handler(3000, routes)
+	server := httptest.NewServer(handler)
+
+	defer server.Close()
+
+	server.URL = "http://localhost:3000"
+
+	e := httpexpect.WithConfig(httpexpect.Config{
+		BaseURL:  server.URL,
+		Reporter: httpexpect.NewAssertReporter(t),
+		Printers: []httpexpect.Printer{
+			httpexpect.NewDebugPrinter(t, true),
+		},
+	})
+
+	request := map[string]interface{}{
+		"rating":      uint8(3),
+		"description": "Regular",
+		"range":       "e10adc3949ba59abbe56e057f20f883e",
+		"app": map[string]interface{}{
+			"key":     "e10adc3949ba59abbe56e057f20f883e",
+			"version": "2.0"},
+		"platform": map[string]interface{}{
+			"key":     "e10adc3949ba59abbe56e057f20f883e",
+			"version": "9.0"},
+		"user": map[string]interface{}{
+			"name":   "Miguel Raldes",
+			"email":  "miguel@example.com",
+			"mibaId": "e10adc3949"},
+		"device": map[string]interface{}{
+			"name":  "Moto G",
+			"brand": "Motorola",
+			"screen": map[string]interface{}{
+				"width":  1000,
+				"height": 2000,
+				"ppi":    200}}}
+
+	response := map[string]interface{}{
+		"meta": map[string]interface{}{
+			"code":    http.StatusCreated,
+			"message": "Created"}}
+
+	r := e.POST("/ratings").
+		WithHeader("Content-Type", "application/json; charset=UTF-8").
+		WithHeader("Accept", "application/json").
+		WithJSON(request).
+		Expect()
+
+	r.Status(http.StatusCreated)
+	r.Header("Content-Type").Equal("application/json; charset=UTF-8")
+	r.JSON().Object().Equal(response)
+}
+
+func TestPostRatings_WithMessage(t *testing.T) {
+	handler := handler.Handler(3000, routes)
+	server := httptest.NewServer(handler)
+
+	defer server.Close()
+
+	server.URL = "http://localhost:3000"
+
+	e := httpexpect.WithConfig(httpexpect.Config{
+		BaseURL:  server.URL,
+		Reporter: httpexpect.NewAssertReporter(t),
+		Printers: []httpexpect.Printer{
+			httpexpect.NewDebugPrinter(t, true),
+		},
+	})
+
+	request := map[string]interface{}{
+		"rating":      uint8(3),
+		"description": "Regular",
+		"comment":     "Once upon a time, in a land far far away..",
+		"range":       "e10adc3949ba59abbe56e057f20f883e",
+		"app": map[string]interface{}{
+			"key":     "e10adc3949ba59abbe56e057f20f883e",
+			"version": "2.0"},
+		"platform": map[string]interface{}{
+			"key":     "e10adc3949ba59abbe56e057f20f883e",
+			"version": "9.0"},
+		"user": map[string]interface{}{
+			"name":   "Miguel Raldes",
+			"email":  "miguel@example.com",
+			"mibaId": "e10adc3949"},
+		"device": map[string]interface{}{
+			"name":  "Moto G",
+			"brand": "Motorola",
+			"screen": map[string]interface{}{
+				"width":  1000,
+				"height": 2000,
+				"ppi":    200}}}
+
+	response := map[string]interface{}{
+		"meta": map[string]interface{}{
+			"code":    http.StatusCreated,
+			"message": "Created"}}
+
+	r := e.POST("/ratings").
+		WithHeader("Content-Type", "application/json; charset=UTF-8").
+		WithHeader("Accept", "application/json").
+		WithJSON(request).
+		Expect()
+
+	r.Status(http.StatusCreated)
+	r.Header("Content-Type").Equal("application/json; charset=UTF-8")
+	r.JSON().Object().Equal(response)
+}
+
+func TestPostRatings_WithNewBrowser(t *testing.T) {
+	handler := handler.Handler(3000, routes)
+	server := httptest.NewServer(handler)
+
+	defer server.Close()
+
+	server.URL = "http://localhost:3000"
+
+	e := httpexpect.WithConfig(httpexpect.Config{
+		BaseURL:  server.URL,
+		Reporter: httpexpect.NewAssertReporter(t),
+		Printers: []httpexpect.Printer{
+			httpexpect.NewDebugPrinter(t, true),
+		},
+	})
+
+	request := map[string]interface{}{
+		"rating":      uint8(3),
+		"description": "Regular",
+		"range":       "e10adc3949ba59abbe56e057f20f883e",
+		"app": map[string]interface{}{
+			"key":     "e10adc3949ba59abbe56e057f20f883e",
+			"version": "2.0"},
+		"platform": map[string]interface{}{
+			"key":     "e10adc3949ba59abbe56e057f20f883e",
+			"version": "9.0"},
+		"browser": map[string]interface{}{
+			"name":    "Edge",
+			"version": "5.0"}}
 
 	response := map[string]interface{}{
 		"meta": map[string]interface{}{
@@ -244,10 +399,10 @@ func TestPostRatings_WithoutPlatform(t *testing.T) {
 		"range":       "e10adc3949ba59abbe56e057f20f883e",
 		"app": map[string]interface{}{
 			"key":     "e10adc3949ba59abbe56e057f20f883e",
-			"version": "2.O"},
+			"version": "2.0"},
 		"platform": map[string]interface{}{
 			"key":     "",
-			"version": "9.O"},
+			"version": "9.0"},
 		"device": map[string]interface{}{
 			"name":  "Moto G",
 			"brand": "Motorola",
@@ -295,10 +450,10 @@ func TestPostRatings_BadRequestError(t *testing.T) {
 		"range":       "e10adc3949ba59abbe56e057f20f883e",
 		"app": map[string]interface{}{
 			"key":     "e10adc3949ba59abbe56e057f20f883e",
-			"version": "2.O"},
+			"version": "2.0"},
 		"platform": map[string]interface{}{
 			"key":     "e10adc3949ba59abbe56e057f20f883e",
-			"version": "9.O"}}
+			"version": "9.0"}}
 
 	response := map[string]interface{}{
 		"meta": map[string]interface{}{
