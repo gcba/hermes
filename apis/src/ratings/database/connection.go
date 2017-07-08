@@ -18,9 +18,6 @@ var (
 	envPath     = path.Join(rootPath, ".env")
 	envErr      = godotenv.Load(envPath)
 
-	// Load environment
-	env = os.Getenv("API_RATINGS_ENV")
-
 	// Load read database settings
 	readDBPort     = os.Getenv("API_RATINGS_READDB_PORT")
 	readDBHost     = os.Getenv("API_RATINGS_READDB_HOST")
@@ -53,18 +50,6 @@ func getDB(host string, port string, db string, user string, password string) *g
 
 	if len(port) == 0 {
 		port = "5432"
-	}
-
-	if env != "PRODUCTION" {
-		credentials := fmt.Sprintf(
-			"host=%s port=%s user=%s dbname=%s sslmode=disable password=%s", // TODO: Handle sslmode
-			host,
-			port,
-			user,
-			db,
-			password)
-
-		return connectDB("postgres", credentials)
 	}
 
 	credentials := fmt.Sprintf(
