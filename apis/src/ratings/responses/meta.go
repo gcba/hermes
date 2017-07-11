@@ -9,46 +9,31 @@ type meta struct {
 	Message string `json:"message"`
 }
 
-var (
-	meta200 = meta{
+var metas = map[int]meta{
+	http.StatusOK: meta{
 		Code:    http.StatusOK,
-		Message: "OK"}
-
-	meta201 = meta{
+		Message: "OK"},
+	http.StatusCreated: meta{
 		Code:    http.StatusCreated,
-		Message: "Created"}
-
-	meta400 = meta{
+		Message: "Created"},
+	http.StatusBadRequest: meta{
 		Code:    http.StatusBadRequest,
-		Message: "Bad Request"}
-
-	meta403 = meta{
+		Message: "Bad Request"},
+	http.StatusForbidden: meta{
 		Code:    http.StatusForbidden,
-		Message: "Forbidden"}
-
-	meta404 = meta{
+		Message: "Forbidden"},
+	http.StatusNotFound: meta{
 		Code:    http.StatusNotFound,
-		Message: "Not Found"}
-
-	meta422 = meta{
+		Message: "Not Found"},
+	http.StatusNotAcceptable: meta{
+		Code:    http.StatusNotAcceptable,
+		Message: "Not Acceptable"},
+	http.StatusUnprocessableEntity: meta{
 		Code:    http.StatusUnprocessableEntity,
-		Message: "Unprocessable Entity"}
-
-	meta500 = meta{
+		Message: "Unprocessable Entity"},
+	http.StatusInternalServerError: meta{
 		Code:    http.StatusInternalServerError,
-		Message: "Internal Server Error"}
-
-	meta501 = meta{
+		Message: "Internal Server Error"},
+	http.StatusNotImplemented: meta{
 		Code:    http.StatusNotImplemented,
-		Message: "Not Implemented"}
-
-	metas = map[int]meta{
-		http.StatusOK:                  meta200,
-		http.StatusCreated:             meta201,
-		http.StatusBadRequest:          meta400,
-		http.StatusForbidden:           meta403,
-		http.StatusNotFound:            meta404,
-		http.StatusUnprocessableEntity: meta422,
-		http.StatusInternalServerError: meta500,
-		http.StatusNotImplemented:      meta501}
-)
+		Message: "Not Implemented"}}

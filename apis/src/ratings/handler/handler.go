@@ -5,6 +5,7 @@ import (
 	"strconv"
 	"strings"
 
+	"ratings/parser"
 	"ratings/responses"
 
 	"github.com/go-playground/validator"
@@ -31,22 +32,44 @@ func badRequestMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
 			return responses.ErrorResponse(http.StatusBadRequest, message, context)
 		}
 
+		if !hasAcceptCharsetHeader(context) {
+			message = "Accept-Charset header is missing"
+
+			return responses.ErrorResponse(http.StatusBadRequest, message, context)
+		}
+
+		if !isValidAcceptCharsetHeader(context) {
+			message = "Not accepting UTF-8 encoded responses"
+
+			return responses.ErrorResponse(http.StatusBadRequest, message, context)
+		}
+
+		if context.Request().Method == echo.POST {
+			if !hasContentTypeHeader(context) {
+				message = "Content-Type header is missing"
+
+				return responses.ErrorResponse(http.StatusBadRequest, message, context)
+			}
+
+			if !isValidContentTypeHeader(context) || !isValidCharacterEncoding(context) {
+				message = "Request body must be UTF-8 encoded JSON"
+
+				return responses.ErrorResponse(http.StatusBadRequest, message, context)
+			}
+		}
+
+		return next(context)
+	}
+}
+
+func notAcceptableMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
+	return func(context echo.Context) error {
+		var message string
+
 		if !isValidAcceptHeader(context) {
-			message = "Accept header must equal 'application/json'"
+			message = "Not accepting JSON responses"
 
-			return responses.ErrorResponse(http.StatusBadRequest, message, context)
-		}
-
-		if context.Request().Method == echo.POST && !hasContentTypeHeader(context) {
-			message = "Content-Type header is missing"
-
-			return responses.ErrorResponse(http.StatusBadRequest, message, context)
-		}
-
-		if context.Request().Method == echo.POST && !isValidContentTypeHeader(context) {
-			message = "Content-Type header must equal 'application/json; charset=UTF-8'"
-
-			return responses.ErrorResponse(http.StatusBadRequest, message, context)
+			return responses.ErrorResponse(http.StatusNotAcceptable, message, context)
 		}
 
 		return next(context)
@@ -72,7 +95,9 @@ func hasAcceptHeader(context echo.Context) bool {
 }
 
 func isValidAcceptHeader(context echo.Context) bool {
-	if header := context.Request().Header.Get("Accept"); header == "application/json" || header == "*/*" {
+	accepted := "application/json"
+
+	if header := context.Request().Header.Get("Accept"); strings.Contains(strings.ToLower(header), accepted) || header == "*/*" {
 		return true
 	}
 
@@ -88,9 +113,37 @@ func hasContentTypeHeader(context echo.Context) bool {
 }
 
 func isValidContentTypeHeader(context echo.Context) bool {
-	validHeader := "application/json; charset=utf-8"
+	contentType := "application/json"
 
-	if header := context.Request().Header.Get("Content-Type"); strings.ToLower(header) == validHeader {
+	if header := context.Request().Header.Get("Content-Type"); strings.Contains(strings.ToLower(header), contentType) {
+		return true
+	}
+
+	return false
+}
+
+func hasAcceptCharsetHeader(context echo.Context) bool {
+	if header := context.Request().Header.Get("Accept-Charset"); strings.TrimSpace(header) != "" {
+		return true
+	}
+
+	return false
+}
+
+func isValidAcceptCharsetHeader(context echo.Context) bool {
+	encoding := "utf-8"
+
+	if header := context.Request().Header.Get("Accept-Charset"); strings.Contains(strings.ToLower(header), encoding) {
+		return true
+	}
+
+	return false
+}
+
+func isValidCharacterEncoding(context echo.Context) bool {
+	charset := "charset=utf-8"
+
+	if header := context.Request().Header.Get("Content-Type"); strings.HasSuffix(strings.ToLower(header), charset) {
 		return true
 	}
 
@@ -99,11 +152,15 @@ func isValidContentTypeHeader(context echo.Context) bool {
 
 func Handler(port int, handlers map[string]echo.HandlerFunc) http.Handler {
 	e := echo.New()
+	validate := validator.New()
+
+	parser.RegisterCustomValidators(validate)
 
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
 	e.Use(middleware.Secure())
 	e.Use(notImplementedMiddleware)
+	e.Use(notAcceptableMiddleware)
 	e.Use(badRequestMiddleware)
 
 	e.OPTIONS("/", handlers["OptionsRoot"])
@@ -114,7 +171,7 @@ func Handler(port int, handlers map[string]echo.HandlerFunc) http.Handler {
 
 	e.Server.Addr = ":" + strconv.Itoa(port)
 	e.HTTPErrorHandler = responses.ErrorHandler
-	e.Validator = &RequestValidator{validator: validator.New()}
+	e.Validator = &RequestValidator{validator: validate}
 
 	return e
 }

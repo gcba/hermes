@@ -6,6 +6,7 @@ import (
 
 	"ratings/responses"
 
+	"github.com/go-playground/validator"
 	"github.com/labstack/echo"
 	"github.com/leebenson/conform"
 	"github.com/microcosm-cc/bluemonday"
@@ -18,9 +19,9 @@ type (
 	}
 
 	user struct {
-		Name   string `json:"name" validate:"required,gte=2,lte=70" conform:"name"`
-		Email  string `json:"email" validate:"required,email,gte=3,lte=100,excludesall= " conform:"email"`
-		MiBAID string `json:"mibaId" validate:"required,alphanum,gte=1,excludesall= " conform:"lower"`
+		Name   string `json:"name" validate:"omitempty,gte=2,lte=70" conform:"name"`
+		Email  string `json:"email" validate:"omitempty,email,gte=3,lte=100,excludesall= " conform:"email"`
+		MiBAID string `json:"mibaId" validate:"omitempty,alphanum,gte=1,excludesall= " conform:"lower"`
 	}
 
 	platform struct {
@@ -94,12 +95,21 @@ func bind(request *Request, context echo.Context) error {
 }
 
 func validate(request *Request, context echo.Context) error {
-	if err := context.Validate(request); err != nil {
-		errorMessage := fmt.Sprintf("Error validating request: %s", err.Error())
+	if errs := context.Validate(request); errs != nil {
+		var errorList []string
 
-		context.Logger().Error(errorMessage)
+		if _, ok := errs.(*validator.InvalidValidationError); ok {
+			return responses.ErrorResponse(http.StatusUnprocessableEntity, errs.Error(), context)
+		}
 
-		return responses.ErrorResponse(http.StatusUnprocessableEntity, errorMessage, context)
+		for _, err := range errs.(validator.ValidationErrors) {
+			errorMessage := fmt.Sprintf("Error validating request: %s", err.(error).Error())
+			errorList = append(errorList, errorMessage)
+
+			context.Logger().Error(errorMessage)
+		}
+
+		return responses.ErrorsResponse(http.StatusUnprocessableEntity, errorList, context)
 	}
 
 	return nil
@@ -110,4 +120,17 @@ func escape(request *Request) {
 
 	request.Comment = sanitizer.Sanitize(request.Comment)
 	request.Description = sanitizer.Sanitize(request.Description)
+}
+
+func RegisterCustomValidators(validate *validator.Validate) {
+	validate.RegisterStructValidation(UserCustomValidator, user{})
+}
+
+func UserCustomValidator(sl validator.StructLevel) {
+	item := sl.Current().Interface().(user)
+
+	if len(item.Email) == 0 && len(item.MiBAID) == 0 {
+		sl.ReportError(item.Email, "Email", "email", "email/mibaid", "")
+		sl.ReportError(item.MiBAID, "MiBAID", "baid", "email/mibaid", "")
+	}
 }
