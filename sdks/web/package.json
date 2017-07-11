@@ -27,7 +27,7 @@
     "url": "https://github.com/Widcket/Web SDK.git"
   },
   "scripts": {
-    "build": "rollup src/main.js --format iife --output ratings.js",
+    "build": "rollup src/ratings.js --format umd --name 'ratings' --output ratings.js",
     "test": "tape test/*.js | tap-spec"
   },
   "dependencies": {
