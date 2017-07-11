@@ -1,0 +1,32 @@
+{
+  "name": "PhoneGap SDK",
+  "description": "Ratings API SDK",
+  "version": "1.0.0",
+  "author": "Rita <zeta@widcket.com>",
+  "bugs": {
+    "url": "https://github.com/Widcket/PhoneGap SDK/issues"
+  },
+  "devDependencies": {
+    "semistandard": "*",
+    "tap-spec": "^4.0.2",
+    "tape": "^4.0.0"
+  },
+  "homepage": "https://github.com/Widcket/PhoneGap SDK",
+  "keywords": [
+    "api",
+    "gcba",
+    "hermes",
+    "ratings",
+    "sdk"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Widcket/PhoneGap SDK.git"
+  },
+  "scripts": {
+    "test": "semistandard && tape test/*.js | tap-spec"
+  }
+}
