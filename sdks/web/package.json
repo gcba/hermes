@@ -8,6 +8,7 @@
   },
   "devDependencies": {
     "rollup": "^0.45.1",
+    "rollup-plugin-node-resolve": "^3.0.0",
     "tap-spec": "^4.0.2",
     "tape": "^4.0.0"
   },
@@ -27,7 +28,7 @@
     "url": "https://github.com/Widcket/Web SDK.git"
   },
   "scripts": {
-    "build": "rollup src/main.js --format umd --name 'ratings' --output ratings.js",
+    "build": "rollup -c",
     "test": "tape test/*.js | tap-spec"
   },
   "dependencies": {
