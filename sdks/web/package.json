@@ -1,5 +1,5 @@
 {
-  "name": "Web SDK",
+  "name": "web-sdk",
   "description": "Ratings API SDK",
   "version": "1.0.0",
   "author": "Rita <zeta@widcket.com>",
@@ -7,9 +7,9 @@
     "url": "https://github.com/Widcket/Web SDK/issues"
   },
   "devDependencies": {
-    "semistandard": "*",
     "tap-spec": "^4.0.2",
-    "tape": "^4.0.0"
+    "tape": "^4.0.0",
+    "webpack": "^3.1.0"
   },
   "homepage": "https://github.com/Widcket/Web SDK",
   "keywords": [
@@ -20,13 +20,17 @@
     "sdk"
   ],
   "license": "MIT",
-  "main": "index.js",
+  "main": "ratings.js",
   "private": true,
   "repository": {
     "type": "git",
     "url": "https://github.com/Widcket/Web SDK.git"
   },
   "scripts": {
-    "test": "semistandard && tape test/*.js | tap-spec"
+    "build": "webpack --config webpack.js",
+    "test": "tape test/*.js | tap-spec"
+  },
+  "dependencies": {
+    "mobile-detect": "^1.3.6"
   }
 }
