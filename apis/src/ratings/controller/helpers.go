@@ -224,12 +224,20 @@ func hasDevice(request *parser.Request) bool {
 }
 
 func getDevice(brand *models.Brand, platform *models.Platform, dbs *databases, frame *frame) (*models.Device, error) {
-	getResult := models.GetDevice(frame.request.Device.Name, brand, dbs.read)
+	deviceName := frame.request.Device.Name
+	screenWidth := frame.request.Device.Screen.Width
+	screenHeight := frame.request.Device.Screen.Height
+
+	if frame.request.Device.Name == "Desktop" {
+		deviceName = fmt.Sprintf("Desktop %dx%d", screenWidth, screenHeight)
+	}
+
+	getResult := models.GetDevice(deviceName, brand, dbs.read)
 	getErrorList := getResult.GetErrors()
 
 	if getResult.RecordNotFound() {
 		device := &models.Device{
-			Name:         frame.request.Device.Name,
+			Name:         deviceName,
 			ScreenWidth:  frame.request.Device.Screen.Width,
 			ScreenHeight: frame.request.Device.Screen.Height,
 			PPI:          frame.request.Device.Screen.PPI,
