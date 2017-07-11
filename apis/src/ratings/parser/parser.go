@@ -29,15 +29,15 @@ type (
 	}
 
 	device struct {
-		Name   string `json:"name" validate:"required,gte=1,lte=30" conform:"trim"`
-		Brand  string `json:"brand" validate:"required,gte=1,lte=30" conform:"trim"`
-		Screen screen `json:"screen" validate:"required"`
+		Name   string  `json:"name" validate:"required,gte=1,lte=30" conform:"trim"`
+		Brand  *string `json:"brand" validate:"omitempty,gte=1,lte=30" conform:"trim"`
+		Screen screen  `json:"screen" validate:"required"`
 	}
 
 	screen struct {
-		Width  int `json:"width" validate:"required,gt=0"`
-		Height int `json:"height" validate:"required,gt=0"`
-		PPI    int `json:"ppi" validate:"required,gt=0"`
+		Width  int  `json:"width" validate:"required,gt=0"`
+		Height int  `json:"height" validate:"required,gt=0"`
+		PPI    *int `json:"ppi" validate:"omitempty,gt=0"`
 	}
 
 	browser struct {

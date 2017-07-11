@@ -215,9 +215,8 @@ func hasDevice(request *parser.Request) bool {
 
 	device := request.Device
 	nameLength := len(device.Name)
-	brandLength := len(device.Brand)
 
-	if nameLength == 0 || brandLength == 0 || device.Screen.Width == 0 || device.Screen.Height == 0 {
+	if nameLength == 0 || device.Screen.Width == 0 || device.Screen.Height == 0 {
 		return false
 	}
 
@@ -225,7 +224,7 @@ func hasDevice(request *parser.Request) bool {
 }
 
 func getDevice(brand *models.Brand, platform *models.Platform, dbs *databases, frame *frame) (*models.Device, error) {
-	getResult := models.GetDevice(frame.request.Device.Name, brand.ID, dbs.read)
+	getResult := models.GetDevice(frame.request.Device.Name, brand, dbs.read)
 	getErrorList := getResult.GetErrors()
 
 	if getResult.RecordNotFound() {
@@ -234,8 +233,11 @@ func getDevice(brand *models.Brand, platform *models.Platform, dbs *databases, f
 			ScreenWidth:  frame.request.Device.Screen.Width,
 			ScreenHeight: frame.request.Device.Screen.Height,
 			PPI:          frame.request.Device.Screen.PPI,
-			BrandID:      brand.ID,
 			PlatformID:   platform.ID}
+
+		if brand != nil {
+			device.BrandID = &brand.ID
+		}
 
 		createResult := models.CreateDevice(device, dbs.write)
 		createErrorList := createResult.GetErrors()
@@ -255,19 +257,24 @@ func getDevice(brand *models.Brand, platform *models.Platform, dbs *databases, f
 }
 
 func attachDevice(rating *models.Rating, platform *models.Platform, dbs *databases, frame *frame) error {
-	brand, brandErr := getBrand(dbs, frame)
+	var brand *models.Brand
+	var brandErr error
 
-	if brandErr == nil {
-		device, deviceErr := getDevice(brand, platform, dbs, frame)
+	if frame.request.Device.Brand != nil {
+		brand, brandErr = getBrand(dbs, frame)
 
-		if deviceErr == nil {
-			rating.DeviceID = device.ID
+		if brandErr != nil {
+			return brandErr
 		}
-
-		return deviceErr
 	}
 
-	return brandErr
+	device, deviceErr := getDevice(brand, platform, dbs, frame)
+
+	if deviceErr == nil {
+		rating.DeviceID = device.ID
+	}
+
+	return deviceErr
 }
 
 /*
@@ -276,11 +283,11 @@ func attachDevice(rating *models.Rating, platform *models.Platform, dbs *databas
 *
  */
 func getBrand(dbs *databases, frame *frame) (*models.Brand, error) {
-	getResult := models.GetBrand(frame.request.Device.Brand, dbs.read)
+	getResult := models.GetBrand(*frame.request.Device.Brand, dbs.read)
 	getErrorList := getResult.GetErrors()
 
 	if getResult.RecordNotFound() {
-		brand := &models.Brand{Name: frame.request.Device.Brand}
+		brand := &models.Brand{Name: *frame.request.Device.Brand}
 		createResult := models.CreateBrand(brand, dbs.write)
 		createErrorList := createResult.GetErrors()
 
