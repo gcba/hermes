@@ -9,17 +9,9 @@ const del = require('del');
 const pkg = require('./package.json');
 
 let resolvePlugin = resolve({
-    // use "module" field for ES6 module if possible
-    module: true, // Default: true
-
     // use "jsnext:main" if possible – see
     // https://github.com/rollup/rollup/wiki/jsnext:main
     jsnext: true, // Default: false
-
-    // use "main" field or index.js, even if it's not an ES6 module (needs to be
-    // converted from CommonJS to ES6 – see
-    // https://github.com/rollup/rollup-plugin-commonjs
-    main: true, // Default: true
 
     // some package.json files have a `browser` field which specifies alternative
     // files to load for people bundling for the browser. If that's you, use this
@@ -34,13 +26,6 @@ let resolvePlugin = resolve({
     // whether to prefer built-in modules (e.g. `fs`, `path`) or local ones with the
     // same names
     preferBuiltins: false, // Default: true
-
-    // Lock the module search in this path (like a chroot). Module defined outside
-    // this path will be mark has external
-    jail: '/', // Default: '/'
-
-    // If true, inspect resolved files to check that they are ES2015 modules
-    modulesOnly: false, // Default: false
 });
 
 const bundles = [
@@ -83,11 +68,12 @@ for (const config of bundles) {
 }
 
 promise = promise.then(() => {
-  delete pkg.devDependencies;
-  delete pkg.scripts;
-  delete pkg.eslintConfig;
-  fs.writeFileSync('dist/package.json', JSON.stringify(pkg, null, '  '), 'utf-8');
-  fs.writeFileSync('dist/LICENSE.md', fs.readFileSync('LICENSE.md', 'utf-8'), 'utf-8');
+    delete pkg.devDependencies;
+    delete pkg.scripts;
+    delete pkg.eslintConfig;
+
+    fs.writeFileSync('dist/package.json', JSON.stringify(pkg, null, '  '), 'utf-8');
+    fs.writeFileSync('dist/LICENSE.md', fs.readFileSync('LICENSE.md', 'utf-8'), 'utf-8');
 });
 
 promise.catch(err => console.error(err.stack)); // eslint-disable-line no-console
