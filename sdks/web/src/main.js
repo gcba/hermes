@@ -1,1 +1,1 @@
-import * as MobileDetect from 'mobile-detect';
+import MobileDetect from 'mobile-detect';

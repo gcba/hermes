@@ -1,9 +1,8 @@
-(function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory() :
-	typeof define === 'function' && define.amd ? define(factory) :
-	(factory());
-}(this, (function () { 'use strict';
+function createCommonjsModule(fn, module) {
+	return module = { exports: {} }, fn(module, module.exports), module.exports;
+}
 
+var mobileDetect = createCommonjsModule(function (module) {
 // THIS FILE IS GENERATED - DO NOT EDIT!
 /*!mobile-detect v1.3.6 2017-04-05*/
 /*global module:false, define:false*/
@@ -984,10 +983,10 @@ define(function () {
     return MobileDetect;
 }); // end of call of define()
 })((function (undefined) {
-    if (typeof module !== 'undefined' && module.exports) {
+    if ('object' !== 'undefined' && module.exports) {
         return function (factory) { module.exports = factory(); };
-    } else if (typeof define === 'function' && define.amd) {
-        return define;
+    } else if (typeof undefined === 'function' && undefined.amd) {
+        return undefined;
     } else if (typeof window !== 'undefined') {
         return function (factory) { window.MobileDetect = factory(); };
     } else {
@@ -995,6 +994,5 @@ define(function () {
         throw new Error('unknown environment');
     }
 })());
-
-})));
-//# sourceMappingURL=ratings.js.map
+});
+//# sourceMappingURL=ratings.mjs.map
