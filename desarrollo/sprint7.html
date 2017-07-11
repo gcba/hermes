@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="../assets/style.css?t=615badd5">
     <script src="../assets/script.js?t=42463e55"></script>
-    <title>Sprint 4 - Hermes</title>
+    <title>Sprint 7 - Hermes</title>
     <meta name="viewport" content="width=device-width">
   </head>
   <body class="-menu-visible">
@@ -51,7 +51,13 @@
                 </li>
                 <li class="menu-item -level-2"><a class="link title  link-desarrollosprint3" href="../desarrollo/sprint3.html">Sprint 3</a>
                 </li>
-                <li class="menu-item -level-2"><a class="link title -active link-desarrollosprint4" href="../desarrollo/sprint4.html">Sprint 4</a>
+                <li class="menu-item -level-2"><a class="link title  link-desarrollosprint4" href="../desarrollo/sprint4.html">Sprint 4</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-desarrollosprint5" href="../desarrollo/sprint5.html">Sprint 5</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-desarrollosprint6" href="../desarrollo/sprint6.html">Sprint 6</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title -active link-desarrollosprint7" href="../desarrollo/sprint7.html">Sprint 7</a>
                   <ul class="headings heading-list">
                     <li class="heading-item -depth-2"><a class="hlink link-dias" href="#dias">Días</a>
                     </li>
@@ -59,123 +65,54 @@
                     </li>
                     <li class="heading-item -depth-2"><a class="hlink link-tareas" href="#tareas">Tareas</a>
                       <ul class="heading-list -depth-2">
-                        <li class="heading-item -depth-3"><a class="hlink link-api-de-calificaciones" href="#api-de-calificaciones">API de calificaciones</a>
-                        </li>
-                        <li class="heading-item -depth-3"><a class="hlink link-admin" href="#admin">Admin</a>
+                        <li class="heading-item -depth-3"><a class="hlink link-sdks" href="#sdks">SDKs</a>
                         </li>
                       </ul>
                     </li>
                   </ul>
-                </li>
-                <li class="menu-item -level-2"><a class="link title  link-desarrollosprint5" href="../desarrollo/sprint5.html">Sprint 5</a>
-                </li>
-                <li class="menu-item -level-2"><a class="link title  link-desarrollosprint6" href="../desarrollo/sprint6.html">Sprint 6</a>
-                </li>
-                <li class="menu-item -level-2"><a class="link title  link-desarrollosprint7" href="../desarrollo/sprint7.html">Sprint 7</a>
                 </li>
               </ul>
             </li>
           </ul>
         </li>
       </div>
-      <div class="body page-desarrollosprint4">
+      <div class="body page-desarrollosprint7">
         <div class="header-nav">
           <div class="right">
           </div>
         </div>
-        <div class="markdown-body"><h1 id="sprint-4">Sprint 4</h1>
+        <div class="markdown-body"><h1 id="sprint-6">Sprint 6</h1>
 <h2 id="dias">D&#xED;as</h2>
 <ul>
-<li>Lunes 19/06</li>
-<li>Mi&#xE9;rcoles 21/06</li>
-<li>Viernes 23/06</li>
+<li>Martes 11/07</li>
+<li>Jueves 13/07</li>
 </ul>
 <h2 id="objetivo">Objetivo</h2>
-<p>Implementar el sistema de responses y manejo de errores en la API de calificaciones. Agregar tests de los modelos y endpoints creados en el sprint 3. Implementar los permisos en el Admin.</p>
+<p>Crear los SDKs Javascript para Phonegap y web apps.</p>
 <h2 id="tareas">Tareas</h2>
-<h3 id="api-de-calificaciones">API de calificaciones</h3>
+<h3 id="sdks">SDKs</h3>
 <ol>
 <li>
-<p>Implementar el Response Builder</p>
+<p>Crear el SDK para Phonegap</p>
 </li>
 <li>
-<p>Implementar las responses de &#xE9;xito</p>
-</li>
-<li>
-<p>Implementar las responses de error</p>
-</li>
-<li>
-<p>Agregar middlewares de seguridad</p>
-</li>
-<li>
-<p>Agregar validaciones a las requests</p>
-</li>
-<li>
-<p>Usar NULL como valor por defecto en los campos nulleables</p>
-</li>
-<li>
-<p>Agregar tests de Range</p>
-</li>
-<li>
-<p>Agregar tests del endpoint POST /ratings</p>
-</li>
-<li>
-<p>Agregar tests del endpoint OPTIONS /ratings</p>
-</li>
-<li>
-<p>Agregar tests del endpoint OPTIONS /</p>
-</li>
-<li>
-<p>Buscar app user por email o miba_id</p>
-</li>
-<li>
-<p>Escapar el mensaje del app user</p>
-</li>
-<li>
-<p>Agregar el header Allow a las responses OPTIONS</p>
+<p>Crear el SDK para web</p>
 </li>
 </ol>
-<h3 id="admin">Admin</h3>
-<ol>
+<p>Los SDKs deben ejecutar las siguientes funciones:</p>
+<ul>
 <li>
-<p>Implementar los permisos de App</p>
+<p>Recabar los datos de sistema necesarios para enviar una nueva calificaci&#xF3;n: Nombre del dispositivo, marca, resoluci&#xF3;n, plataforma, browser, versiones.</p>
 </li>
 <li>
-<p>Implementar los permisos de AppUser</p>
+<p>Enviar una nueva calificaci&#xF3;n a la API.</p>
+<p>NOTA: En el mes que comienza con este sprint (mes 3), se desarrollar&#xE1;n las tareas planificadas para el mes 4, y en el mes 4 las planificadas para el mes 3. Es decir, primero se desarrollar&#xE1;n los SDKs para la API de calificaciones y luego la API de estad&#xED;sticas. Se acord&#xF3; este cambio por necesidades de agenda.</p>
 </li>
-<li>
-<p>Implementar los permisos de Brand</p>
-</li>
-<li>
-<p>Implementar los permisos de Browser</p>
-</li>
-<li>
-<p>Implementar los permisos de Device</p>
-</li>
-<li>
-<p>Implementar los permisos de Message</p>
-</li>
-<li>
-<p>Implementar los permisos de Platform</p>
-</li>
-<li>
-<p>Implementar los permisos de Range</p>
-</li>
-<li>
-<p>Implementar los permisos de Rating</p>
-</li>
-<li>
-<p>Implementar los permisos de User</p>
-</li>
-<li>
-<p>Implementar el borrado l&#xF3;gico: para Platform, Device, Browser, Brand, Rating, Range, AppUser y App</p>
-</li>
-</ol>
+</ul>
 
         </div>
         <div class="footer-nav">
-          <div class="left"><a href="../desarrollo/sprint3.html"><span class="title">Sprint 3</span></a></div>
-          <div class="right"><a href="../desarrollo/sprint5.html"><span class="label">Next: </span><span class="title">Sprint 5</span></a></div>
+          <div class="left"><a href="../desarrollo/sprint6.html"><span class="title">Sprint 6</span></a></div>
         </div>
       </div>
     </div>
