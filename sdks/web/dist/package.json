@@ -6,15 +6,6 @@
   "bugs": {
     "url": "https://github.com/Widcket/Web SDK/issues"
   },
-  "devDependencies": {
-    "del": "^3.0.0",
-    "rollup": "^0.45.1",
-    "rollup-plugin-commonjs": "^8.0.2",
-    "rollup-plugin-node-resolve": "^3.0.0",
-    "rollup-plugin-uglify": "^2.0.1",
-    "tap-spec": "^4.0.2",
-    "tape": "^4.0.0"
-  },
   "homepage": "https://github.com/Widcket/Web SDK",
   "keywords": [
     "api",
@@ -32,10 +23,6 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/Widcket/Web SDK.git"
-  },
-  "scripts": {
-    "build": "node build.js",
-    "test": "tape test/*.js | tap-spec"
   },
   "dependencies": {
     "mobile-detect": "^1.3.6"

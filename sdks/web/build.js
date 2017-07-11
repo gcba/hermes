@@ -5,6 +5,7 @@ const rollup = require('rollup');
 const uglify = require('rollup-plugin-uglify');
 const resolve = require('rollup-plugin-node-resolve');
 const commonjs = require('rollup-plugin-commonjs');
+const del = require('del');
 const pkg = require('./package.json');
 
 let resolvePlugin = resolve({
@@ -18,12 +19,12 @@ let resolvePlugin = resolve({
     // use "main" field or index.js, even if it's not an ES6 module (needs to be
     // converted from CommonJS to ES6 – see
     // https://github.com/rollup/rollup-plugin-commonjs
-    main: false, // Default: true
+    main: true, // Default: true
 
     // some package.json files have a `browser` field which specifies alternative
     // files to load for people bundling for the browser. If that's you, use this
     // option, otherwise pkg.browser will be ignored
-    browser: false, // Default: false
+    browser: true, // Default: false
 
     // not all files you want to resolve are .js files
     extensions: [
@@ -67,6 +68,8 @@ const bundles = [
 
 let promise = Promise.resolve();
 
+promise = promise.then(() => del(['dist/*']));
+
 for (const config of bundles) {
     promise = promise.then(() => rollup.rollup({
         entry: 'src/main.js',
@@ -78,5 +81,13 @@ for (const config of bundles) {
         moduleName: config.moduleName
     })));
 }
+
+promise = promise.then(() => {
+  delete pkg.devDependencies;
+  delete pkg.scripts;
+  delete pkg.eslintConfig;
+  fs.writeFileSync('dist/package.json', JSON.stringify(pkg, null, '  '), 'utf-8');
+  fs.writeFileSync('dist/LICENSE.md', fs.readFileSync('LICENSE.md', 'utf-8'), 'utf-8');
+});
 
 promise.catch(err => console.error(err.stack)); // eslint-disable-line no-console
