@@ -7,9 +7,9 @@
     "url": "https://github.com/Widcket/Web SDK/issues"
   },
   "devDependencies": {
+    "rollup": "^0.45.1",
     "tap-spec": "^4.0.2",
-    "tape": "^4.0.0",
-    "webpack": "^3.1.0"
+    "tape": "^4.0.0"
   },
   "homepage": "https://github.com/Widcket/Web SDK",
   "keywords": [
@@ -27,7 +27,7 @@
     "url": "https://github.com/Widcket/Web SDK.git"
   },
   "scripts": {
-    "build": "webpack --config webpack.js",
+    "build": "rollup src/main.js --format iife --output ratings.js",
     "test": "tape test/*.js | tap-spec"
   },
   "dependencies": {
