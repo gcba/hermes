@@ -13,7 +13,7 @@ class Complaint {
 
         this.versions.app = options.appVersion; // TODO: Validate (maybe in a proxy?)
         this.mobileDetect = MobileDetect(options.userAgent || window.navigator.userAgent); // TODO: Validate
-        this.platform = platform.parse(options.userAgent || window.navigator.userAgent);
+        this.platform = platform.parse(options.userAgent || window.navigator.userAgent); // TODO: Validate
     }
 
     get isMobile() { // TODO: Consider converting into proxy

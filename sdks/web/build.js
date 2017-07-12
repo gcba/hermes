@@ -8,7 +8,7 @@ const commonjs = require('rollup-plugin-commonjs');
 const del = require('del');
 const pkg = require('./package.json');
 
-let resolvePlugin = resolve({
+const resolvePlugin = resolve({
     // use "jsnext:main" if possible – see
     // https://github.com/rollup/rollup/wiki/jsnext:main
     jsnext: true, // Default: false
