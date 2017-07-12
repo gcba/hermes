@@ -208,21 +208,6 @@ func attachBrowser(rating *models.Rating, dbs *databases, frame *frame) error {
 * Device
 *
  */
-func hasDevice(request *parser.Request) bool {
-	if request.Device == nil {
-		return false
-	}
-
-	device := request.Device
-	nameLength := len(device.Name)
-
-	if nameLength == 0 || device.Screen.Width == 0 || device.Screen.Height == 0 {
-		return false
-	}
-
-	return true
-}
-
 func getDevice(brand *models.Brand, platform *models.Platform, dbs *databases, frame *frame) (*models.Device, error) {
 	deviceName := frame.request.Device.Name
 	screenWidth := frame.request.Device.Screen.Width
@@ -324,4 +309,19 @@ func validateRating(from int8, to int8, frame *frame) error {
 	}
 
 	return nil
+}
+
+/*
+*
+* Message
+*
+ */
+func hasMessage(request *parser.Request) bool {
+	result := false
+
+	if len(request.Comment) > 0 {
+		result = true
+	}
+
+	return result
 }

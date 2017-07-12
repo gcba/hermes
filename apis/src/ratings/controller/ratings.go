@@ -105,33 +105,25 @@ func newRating(dbs *databases, frame *frame) error {
 		return err
 	}
 
-	hasMessage := false
-
-	if len(frame.request.Comment) > 0 {
-		hasMessage = true
-	}
-
 	rating := &models.Rating{
 		Rating:          frame.request.Rating,
 		Description:     frame.request.Description,
 		AppVersion:      frame.request.App.Version,
 		PlatformVersion: frame.request.Platform.Version,
-		HasMessage:      hasMessage,
+		HasMessage:      hasMessage(frame.request),
 		AppID:           app.ID,
 		RangeID:         rangeRecord.ID,
 		PlatformID:      platform.ID}
 
+	if err := attachDevice(rating, platform, dbs, frame); err != nil {
+		frame.context.Logger().Error("Error attaching device: " + err.Error())
+
+		return err
+	}
+
 	if hasAppUser(frame.request) {
 		if err := attachAppUser(rating, dbs, frame); err != nil {
 			frame.context.Logger().Error("Error attaching appuser: " + err.Error())
-
-			return err
-		}
-	}
-
-	if hasDevice(frame.request) {
-		if err := attachDevice(rating, platform, dbs, frame); err != nil {
-			frame.context.Logger().Error("Error attaching device: " + err.Error())
 
 			return err
 		}
@@ -154,7 +146,7 @@ func newRating(dbs *databases, frame *frame) error {
 
 	value := result.Value.(*models.Rating)
 
-	if hasMessage {
+	if rating.HasMessage {
 		if err := newMessage(value.ID, dbs.write, frame); err != nil {
 			frame.context.Logger().Error("Error creating a message: " + err.Error())
 

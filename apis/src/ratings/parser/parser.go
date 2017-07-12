@@ -54,8 +54,8 @@ type (
 		Range       string   `json:"range" validate:"required,len=32,alphanum,excludesall= " conform:"lower"`
 		App         app      `json:"app" validate:"required"`
 		Platform    platform `json:"platform" validate:"required"`
+		Device      device   `json:"device" validate:"required"`
 		User        *user    `json:"user" validate:"omitempty"`
-		Device      *device  `json:"device" validate:"omitempty"`
 		Browser     *browser `json:"browser" validate:"omitempty"`
 	}
 )
