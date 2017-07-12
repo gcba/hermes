@@ -1,3 +1,5 @@
+'use strict';
+
 import MobileDetect from 'mobile-detect';
 import platform from 'platform';
 
