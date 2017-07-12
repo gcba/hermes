@@ -3,12 +3,12 @@
 const fs = require('fs');
 const rollup = require('rollup');
 const uglify = require('rollup-plugin-uglify');
-const resolve = require('rollup-plugin-node-resolve');
+const nodeResolve = require('rollup-plugin-node-resolve');
 const commonjs = require('rollup-plugin-commonjs');
 const del = require('del');
 const pkg = require('./package.json');
 
-const resolvePlugin = resolve({
+const resolve = nodeResolve({
     // use "jsnext:main" if possible – see
     // https://github.com/rollup/rollup/wiki/jsnext:main
     jsnext: true, // Default: false
@@ -58,7 +58,7 @@ promise = promise.then(() => del(['dist/*']));
 for (const config of bundles) {
     promise = promise.then(() => rollup.rollup({
         entry: 'src/main.js',
-        plugins: [resolvePlugin, commonjs()].concat(config.plugins)
+        plugins: [resolve, commonjs()].concat(config.plugins)
     }).then(bundle => bundle.write({
         dest: `dist/${config.moduleName || 'ratings'}${config.ext}`,
         format: config.format,
