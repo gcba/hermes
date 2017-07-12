@@ -130,3 +130,5 @@ class Complaint {
         return true;
     }
 }
+
+export default Complaint;
