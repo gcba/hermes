@@ -7,13 +7,13 @@
 
 ## Objetivo
 
-Crear los SDKs Javascript para Phonegap y web apps.
+Crear el SDK JavaScript.
 
 ## Tareas
 
 ### SDKs
 
-1. Crear el SDK para Phonegap
+1. Crear el SDK JavaScript
 
 
 El SDK debe ejecutar las siguientes funciones:
