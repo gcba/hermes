@@ -2230,19 +2230,20 @@ class Complaint {
         this.versions = {}; // TODO: Make private modifying the descriptor
         this.screen = {}; // TODO: Make private modifying the descriptor
 
-        this.keys.app = !isValidKey(options.app) || options.app;
-        this.keys.platform = !isValidKey(options.platform) || options.platform;
-        this.keys.range = !isValidKey(options.range) || options.range;
+        this.keys.app = options.app; // TODO: Validate (maybe in a proxy?)
+        this.keys.platform = options.platform; // TODO: Validate (maybe in a proxy?)
+        this.keys.range = options.range; // TODO: Validate (maybe in a proxy?)
 
         this.versions.app = options.appVersion; // TODO: Validate (maybe in a proxy?)
+        this.token = options.token; // TODO: Validate (maybe in a proxy?)
+        this.isMobile = options.isMobile; // TODO: Validate (maybe in a proxy?)
+
         this.mobileDetect = new mobileDetect$1(options.userAgent || window.navigator.userAgent); // TODO: Validate
         this.platform = platform.parse(options.userAgent || window.navigator.userAgent); // TODO: Validate
     }
 
     get isMobile() {
-        const mobile = mobileDetect.mobile();
-
-        return mobile != null;
+        return this.isMobile === undefined || this.isMobile === null ? mobileDetect.mobile() !== null : this.isMobile;
     }
 
     get app() {
@@ -2257,21 +2258,6 @@ class Complaint {
             key: this.keys.platform,
             version: platform.os.split(' ').pop()
         };
-    }
-
-    get user() {
-        const result = {};
-
-        if (this.user.name) result.name = this.user.name;
-        if (this.user.email) result.email = this.result.email;
-        if (this.user.mibaId) result.mibaId = this.user.mibaId;
-
-        if (!result.email && !result.mibaId) throw new Error({
-            name: 'RatingError',
-            message: 'User has no email/mibaId set'
-        });
-
-        return result;
     }
 
     get device() {
@@ -2294,27 +2280,26 @@ class Complaint {
         };
     }
 
+    get user() {
+        const result = {};
+
+        if (this.user.name) result.name = this.user.name;
+        if (this.user.email) result.email = this.result.email;
+        if (this.user.mibaId) result.mibaId = this.user.mibaId;
+
+        if (!result.email && !result.mibaId) throw new Error({
+            name: 'RatingError',
+            message: 'User has no email/mibaId set'
+        });
+
+        return result;
+    }
+
     get browser() {
         return {
             name: platform.name,
             version: platform.version
         };
-    }
-
-    set token(value) { // TODO: Validate / consider converting into proxy
-        this.token = value;
-    }
-
-    set rating(value) { // TODO: Validate (is int?) / consider converting into proxy
-        if (value >= -127 || value <= 127) this.rating = value;
-    }
-
-    set description(value) { // TODO: Validate / consider converting into proxy
-        this.description = value;
-    }
-
-    set comment(value) { // TODO: Validate / consider converting into proxy
-        this.comment = value;
     }
 
     set user(value) { // TODO: Validate keys / consider converting into proxy
@@ -2325,25 +2310,24 @@ class Complaint {
         this.screen = value;
     }
 
-    build() {
-        const result = {
-            rating: this.rating,
-            description: this.comment,
-            comment: this.comment,
+    create(data) {
+        const complaint = {
+            rating: data.rating, // TODO: Validate (is int?) / consider converting into proxy
+            description: data.description, // TODO: Validate keys / consider converting into proxy
+            comment: data.comment, // TODO: Validate keys / consider converting into proxy
             range: this.keys.range,
             app: this.app,
-            platform: this.platform
+            platform: this.platform,
+            device: this.device
         };
 
-        if (this.user) result.user = this.user;
-        if (this.device) result.device = this.device;
-        if (this.browser) result.browser = this.browser;
+        if (this.user) complaint.user = this.user;
+        if (this.browser) complaint.browser = this.browser;
 
-        return result;
+        return this.send(complaint); //  TODO: Return promise
     }
 
-    send() { // TODO: Return success/error codes
-        const complaint = this.build();
+    send(complaint) { // TODO: Return success/error codes --> use promises / make private
 
     }
 
