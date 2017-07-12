@@ -69,9 +69,10 @@ class Complaint {
     }
 
     get browser() { // TODO: Consider converting into proxy
-        const mobile = mobileDetect.mobile();
-
-        return mobile || null;
+        return {
+            name: platform.name,
+            version: platform.version
+        };
     }
 
     set token(value) { // TODO: Validate / consider converting into proxy
