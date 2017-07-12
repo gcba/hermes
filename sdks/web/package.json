@@ -13,7 +13,8 @@
     "rollup-plugin-node-resolve": "^3.0.0",
     "rollup-plugin-uglify": "^2.0.1",
     "tap-spec": "^4.0.2",
-    "tape": "^4.0.0"
+    "tape": "^4.0.0",
+    "uglify-es": "^3.0.24"
   },
   "homepage": "https://github.com/Widcket/Web SDK",
   "keywords": [

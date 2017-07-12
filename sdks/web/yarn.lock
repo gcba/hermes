@@ -741,6 +741,13 @@ trim@0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/trim/-/trim-0.0.1.tgz#5858547f6b290757ee95cccc666fb50084c460dd"
 
+uglify-es@^3.0.24:
+  version "3.0.24"
+  resolved "https://registry.yarnpkg.com/uglify-es/-/uglify-es-3.0.24.tgz#fab5dccff6108df71d9573012ef65c740cb97cdc"
+  dependencies:
+    commander "~2.9.0"
+    source-map "~0.5.1"
+
 uglify-js@^3.0.9:
   version "3.0.24"
   resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-3.0.24.tgz#ee93400ad9857fb7a1671778db83f6a23f033121"
