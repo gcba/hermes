@@ -25,6 +25,7 @@
     "url": "https://github.com/Widcket/Web SDK.git"
   },
   "dependencies": {
-    "mobile-detect": "^1.3.6"
+    "mobile-detect": "^1.3.6",
+    "platform": "^1.3.4"
   }
 }
