@@ -52,11 +52,14 @@ class Complaint {
     }
 
     get device() { // TODO: Consider converting into proxy
-        return {
+        const result = {
             name: this.isMobile ? platform.product : 'Desktop',
-            brand: platform.manufacturer,
             screen: this.screen
         };
+
+        if (this.isMobile && platform.manufacturer) result.brand = platform.manufacturer;
+
+        return result;
     }
 
     get screen() { // TODO: Consider converting into proxy
