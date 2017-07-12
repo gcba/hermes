@@ -201,8 +201,8 @@ Las calificaciones de las apps.
 |app_id          |int                   |       |X      |       |       |X      |
 |range_id        |int                   |       |X      |       |       |X      |
 |platform_id     |int                   |       |X      |       |       |X      |
+|device_id       |int                   |       |X      |       |       |X      |
 |appuser_id      |int                   |       |X      |X      |       |X      |
-|device_id       |int                   |       |X      |X      |       |X      |
 |browser_id      |int                   |       |X      |X      |       |X      |
 |created_at      |timestamp             |       |       |       |       |       |
 |modified_at     |timestamp             |       |       |X      |       |       |
