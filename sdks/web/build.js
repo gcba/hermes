@@ -3,6 +3,7 @@
 const fs = require('fs');
 const rollup = require('rollup');
 const uglify = require('rollup-plugin-uglify');
+const uglifyES = require('uglify-es');
 const nodeResolve = require('rollup-plugin-node-resolve');
 const commonjs = require('rollup-plugin-commonjs');
 const del = require('del');
@@ -45,7 +46,7 @@ const bundles = [
     }, {
         format: 'umd',
         ext: '.min.js',
-        plugins: [uglify()],
+        plugins: [uglify({}, uglifyES.minify)],
         moduleName: 'ratings',
         minify: true
     }
