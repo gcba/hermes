@@ -14,11 +14,11 @@ class Complaint {
         this.keys.range = !isValidKey(options.range) || options.range;
 
         this.versions.app = options.appVersion; // TODO: Validate (maybe in a proxy?)
-        this.mobileDetect = MobileDetect(options.userAgent || window.navigator.userAgent); // TODO: Validate
+        this.mobileDetect = new MobileDetect(options.userAgent || window.navigator.userAgent); // TODO: Validate
         this.platform = platform.parse(options.userAgent || window.navigator.userAgent); // TODO: Validate
     }
 
-    get isMobile() { // TODO: Consider converting into proxy
+    get isMobile() {
         const mobile = mobileDetect.mobile();
 
         return mobile != null;
@@ -53,7 +53,7 @@ class Complaint {
         return result;
     }
 
-    get device() { // TODO: Consider converting into proxy
+    get device() {
         const result = {
             name: this.isMobile ? platform.product : 'Desktop',
             screen: this.screen
@@ -64,7 +64,7 @@ class Complaint {
         return result;
     }
 
-    get screen() { // TODO: Consider converting into proxy
+    get screen() {
         const mobile = mobileDetect.mobile();
 
         return {
@@ -73,7 +73,7 @@ class Complaint {
         };
     }
 
-    get browser() { // TODO: Consider converting into proxy
+    get browser() {
         return {
             name: platform.name,
             version: platform.version
