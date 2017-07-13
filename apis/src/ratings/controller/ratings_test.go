@@ -159,10 +159,10 @@ func TestPostRatings_WithBrowser(t *testing.T) {
 		"range":       "e10adc3949ba59abbe56e057f20f883e",
 		"app": map[string]interface{}{
 			"key":     "e10adc3949ba59abbe56e057f20f883e",
-			"version": "2.0"},
+			"version": "1.0"},
 		"platform": map[string]interface{}{
-			"key":     "e10adc3949ba59abbe56e057f20f883e",
-			"version": "10.0"},
+			"key":     "c33367701511b4f6020ec61ded352059",
+			"version": "6.0"},
 		"device": map[string]interface{}{
 			"name":  "Moto G",
 			"brand": "Motorola",
@@ -213,7 +213,7 @@ func TestPostRatings_WithAppUser(t *testing.T) {
 		"range":       "e10adc3949ba59abbe56e057f20f883e",
 		"app": map[string]interface{}{
 			"key":     "e10adc3949ba59abbe56e057f20f883e",
-			"version": "2.0"},
+			"version": "1.0"},
 		"platform": map[string]interface{}{
 			"key":     "e10adc3949ba59abbe56e057f20f883e",
 			"version": "9.0"},
@@ -271,8 +271,8 @@ func TestPostRatings_WithMessage(t *testing.T) {
 			"key":     "e10adc3949ba59abbe56e057f20f883e",
 			"version": "2.0"},
 		"platform": map[string]interface{}{
-			"key":     "e10adc3949ba59abbe56e057f20f883e",
-			"version": "10.0"},
+			"key":     "c33367701511b4f6020ec61ded352059",
+			"version": "6.0"},
 		"user": map[string]interface{}{
 			"name":   "Miguel Raldes",
 			"email":  "miguel@example.com",
@@ -325,7 +325,7 @@ func TestPostRatings_WithDesktopDevice(t *testing.T) {
 		"range":       "e10adc3949ba59abbe56e057f20f883e",
 		"app": map[string]interface{}{
 			"key":     "e10adc3949ba59abbe56e057f20f883e",
-			"version": "2.0"},
+			"version": "1.0"},
 		"platform": map[string]interface{}{
 			"key":     "e10adc3949ba59abbe56e057f20f883e",
 			"version": "9.0"},
@@ -380,8 +380,8 @@ func TestPostRatings_WithNewBrowser(t *testing.T) {
 			"key":     "e10adc3949ba59abbe56e057f20f883e",
 			"version": "2.0"},
 		"platform": map[string]interface{}{
-			"key":     "e10adc3949ba59abbe56e057f20f883e",
-			"version": "10.0"},
+			"key":     "c33367701511b4f6020ec61ded352059",
+			"version": "6.0"},
 		"device": map[string]interface{}{
 			"name":  "Moto G",
 			"brand": "Motorola",
@@ -432,7 +432,7 @@ func TestPostRatings_WithoutPlatform(t *testing.T) {
 		"range":       "e10adc3949ba59abbe56e057f20f883e",
 		"app": map[string]interface{}{
 			"key":     "e10adc3949ba59abbe56e057f20f883e",
-			"version": "2.0"},
+			"version": "1.0"},
 		"platform": map[string]interface{}{
 			"key":     "",
 			"version": "9.0"},
@@ -540,7 +540,7 @@ func TestPostRatings_WithoutPPI(t *testing.T) {
 		"range":       "e10adc3949ba59abbe56e057f20f883e",
 		"app": map[string]interface{}{
 			"key":     "e10adc3949ba59abbe56e057f20f883e",
-			"version": "2.0"},
+			"version": "1.0"},
 		"platform": map[string]interface{}{
 			"key":     "e10adc3949ba59abbe56e057f20f883e",
 			"version": "9.0"},
@@ -649,7 +649,7 @@ func TestPostRatings_WithoutUserName(t *testing.T) {
 		"range":       "e10adc3949ba59abbe56e057f20f883e",
 		"app": map[string]interface{}{
 			"key":     "e10adc3949ba59abbe56e057f20f883e",
-			"version": "2.0"},
+			"version": "1.0"},
 		"platform": map[string]interface{}{
 			"key":     "e10adc3949ba59abbe56e057f20f883e",
 			"version": "9.0"},
@@ -759,7 +759,7 @@ func TestPostRatings_WithUserMiBAID(t *testing.T) {
 		"range":       "e10adc3949ba59abbe56e057f20f883e",
 		"app": map[string]interface{}{
 			"key":     "e10adc3949ba59abbe56e057f20f883e",
-			"version": "2.0"},
+			"version": "1.0"},
 		"platform": map[string]interface{}{
 			"key":     "e10adc3949ba59abbe56e057f20f883e",
 			"version": "9.0"},
@@ -868,7 +868,7 @@ func TestPostRatings_WithoutUserNameAndMiBAID(t *testing.T) {
 		"range":       "e10adc3949ba59abbe56e057f20f883e",
 		"app": map[string]interface{}{
 			"key":     "e10adc3949ba59abbe56e057f20f883e",
-			"version": "2.0"},
+			"version": "1.0"},
 		"platform": map[string]interface{}{
 			"key":     "e10adc3949ba59abbe56e057f20f883e",
 			"version": "9.0"},
@@ -922,7 +922,7 @@ func TestPostRatings_WithoutUserEmailAndMiBAID(t *testing.T) {
 		"range":       "e10adc3949ba59abbe56e057f20f883e",
 		"app": map[string]interface{}{
 			"key":     "e10adc3949ba59abbe56e057f20f883e",
-			"version": "2.0"},
+			"version": "1.0"},
 		"platform": map[string]interface{}{
 			"key":     "e10adc3949ba59abbe56e057f20f883e",
 			"version": "10.0"},
@@ -1023,7 +1023,7 @@ func TestPostRatings_NotAcceptableError(t *testing.T) {
 		"range":       "e10adc3949ba59abbe56e057f20f883e",
 		"app": map[string]interface{}{
 			"key":     "e10adc3949ba59abbe56e057f20f883e",
-			"version": "2.0"},
+			"version": "1.0"},
 		"platform": map[string]interface{}{
 			"key":     "e10adc3949ba59abbe56e057f20f883e",
 			"version": "9.0"}}
