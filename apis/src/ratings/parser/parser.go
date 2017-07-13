@@ -64,6 +64,9 @@ type (
 func Parse(context echo.Context) (*Request, error) {
 	request := new(Request)
 
+	conform.Strings(request)
+	escape(request)
+
 	if err := bind(request, context); err != nil {
 		context.Logger().Error("Error binding request: " + err.Error())
 
@@ -75,9 +78,6 @@ func Parse(context echo.Context) (*Request, error) {
 
 		return request, err
 	}
-
-	conform.Strings(request)
-	escape(request)
 
 	return request, nil
 }
