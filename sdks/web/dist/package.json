@@ -15,10 +15,10 @@
     "sdk"
   ],
   "license": "MIT",
-  "main": "dist/ratings.js",
+  "main": "src/main.js",
   "module": "dist/ratings.mjs",
   "jsnext": "dist/ratings.mjs",
-  "browser": "dist/ratings.browser.js",
+  "browser": "dist/ratings.js",
   "private": true,
   "repository": {
     "type": "git",
@@ -26,6 +26,8 @@
   },
   "dependencies": {
     "mobile-detect": "^1.3.6",
-    "platform": "^1.3.4"
+    "platform": "^1.3.4",
+    "promise-polyfill": "^6.0.2",
+    "whatwg-fetch": "^2.0.3"
   }
 }

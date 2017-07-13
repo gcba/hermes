@@ -1,7 +1,14 @@
 'use strict';
 
+import 'whatwg-fetch'
+
 import MobileDetect from 'mobile-detect';
+import Promise from 'promise-polyfill';
 import platform from 'platform';
+
+if (!window.Promise) {
+  window.Promise = Promise;
+}
 
 class Complaint {
     constructor(options) {
