@@ -45,8 +45,8 @@ class Complaint {
         this._userAgent = options.userAgent; // TODO: Make private
         this._isMobile = options.isMobile; // TODO: Make private
 
-        this.mobileDetect = new MobileDetect(this.userAgent || window.navigator.userAgent); // TODO: Validate
-        this.platform = platform.parse(this.userAgent || window.navigator.userAgent); // TODO: Validate
+        this.mobileDetect = new MobileDetect(this.userAgent || window.navigator.userAgent);
+        this.platform = platform.parse(this.userAgent || window.navigator.userAgent);
     }
 
     get isMobile() {
@@ -155,7 +155,7 @@ class Complaint {
         if (this.user) complaint.user = this.user;
         if (this.browser) complaint.browser = this.browser;
 
-        return this.send(complaint); //  TODO: Return promise
+        return this.send(complaint);
     }
 
     send(complaint) { // TODO: make private
