@@ -2930,26 +2930,47 @@ if (!window.Promise) {
     window.Promise = promise;
 }
 
+const isString = thing => {
+    return typeof thing === 'string' || thing instanceof String;
+};
+
+const isBool = thing => {
+    return typeof thing === "boolean";
+};
+
+const isInteger = thing => {
+    return typeof val === "number" && isFinite(val) && Math.floor(val) === val;
+};
+
+const errorNamespace = 'RatingError';
+
 class Complaint {
     constructor(options) {
+        // Should fail when:
+        // - Required things are missing
+        // - Things are invalid: format, type
+
         this.keys = {}; // TODO: Make private modifying the descriptor
         this.versions = {}; // TODO: Make private modifying the descriptor
         this.screen = {}; // TODO: Make private modifying the descriptor
 
-        this.keys.app = options.app; // TODO: Validate (maybe in a proxy?)
-        this.keys.platform = options.platform; // TODO: Validate (maybe in a proxy?)
-        this.keys.range = options.range; // TODO: Validate (maybe in a proxy?)
+        this.keys.app = this.validateKey(options.app);
+        this.keys.platform = this.validateKey(options.platform);
+        this.keys.range = this.validateKey(options.range);
 
-        this.versions.app = options.appVersion; // TODO: Validate (maybe in a proxy?)
-        this.token = options.token; // TODO: Validate (maybe in a proxy?)
-        this.isMobile = options.isMobile; // TODO: Validate (maybe in a proxy?)
+        this.versions.app = options.appVersion; // TODO: Validate (maybe in a proxy?) Required
 
-        this.mobileDetect = new mobileDetect$1(options.userAgent || window.navigator.userAgent); // TODO: Validate
-        this.platform = platform.parse(options.userAgent || window.navigator.userAgent); // TODO: Validate
+        this.url = options.api; // TODO: Required
+        this.token = options.token; // TODO: Required
+        this._userAgent = options.userAgent; // TODO: Make private
+        this._isMobile = options.isMobile; // TODO: Make private
+
+        this.mobileDetect = new mobileDetect$1(this.userAgent || window.navigator.userAgent);
+        this.platform = platform.parse(this.userAgent || window.navigator.userAgent);
     }
 
     get isMobile() {
-        return this.isMobile === undefined || this.isMobile === null ? mobileDetect.mobile() !== null : this.isMobile;
+        return this._isMobile === undefined || this._isMobile === null ? mobileDetect.mobile() !== null : this._isMobile;
     }
 
     get app() {
@@ -2994,8 +3015,8 @@ class Complaint {
         if (this.user.mibaId) result.mibaId = this.user.mibaId;
 
         if (!result.email && !result.mibaId) throw new Error({
-            name: 'RatingError',
-            message: 'User has no email/mibaId set'
+            name: errorNamespace,
+            message: 'User has no email or mibaId'
         });
 
         return result;
@@ -3006,6 +3027,24 @@ class Complaint {
             name: platform.name,
             version: platform.version
         };
+    }
+
+    set url(value) {
+        const urlRegex = new RegExp(/^(?:(?:https?|ftp):\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,}))\.?)(?::\d{2,5})?(?:[/?#]\S*)?$/i);
+
+        if (isString(value) && urlRegex.test(trim(value))) this.url = value;else throw new Error({ name: errorNamespace, message: 'Invalid URL' });
+    }
+
+    set token(value) {
+        if (isString(value)) this.token = trim(value);else throw new Error({ name: errorNamespace, message: 'Invalid token' });
+    }
+
+    set _isMobile(value) {
+        if (isBool(value)) this._isMobile = value;else throw new Error({ name: errorNamespace, message: 'Invalid isMobile' });
+    }
+
+    set _userAgent(value) {
+        if (isString(value)) this._userAgent = trim(value);else throw new Error({ name: errorNamespace, message: 'Invalid userAgent' });
     }
 
     set user(value) {
@@ -3020,9 +3059,9 @@ class Complaint {
 
     create(data) {
         const complaint = {
-            rating: data.rating, // TODO: Validate (is int?) / consider converting into proxy
-            description: data.description, // TODO: Validate keys / consider converting into proxy
-            comment: data.comment, // TODO: Validate keys / consider converting into proxy
+            rating: this.validateRating(data.rating),
+            description: this.validateDescription(data.description),
+            comment: this.validateComment(data.comment),
             range: this.keys.range,
             app: this.app,
             platform: this.platform,
@@ -3032,18 +3071,39 @@ class Complaint {
         if (this.user) complaint.user = this.user;
         if (this.browser) complaint.browser = this.browser;
 
-        return this.send(complaint); //  TODO: Return promise
+        return this.send(complaint);
     }
 
-    send(complaint) {// TODO: Return success/error codes --> use promises / make private
+    send(complaint) {
+        // TODO: make private
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json; charset=UTF-8',
+                'Accept': 'application/json',
+                'Accept-Charset': 'utf-8',
+                'Authorization': 'Bearer ' + this.token
+            },
+            body: JSON.stringify(complaint)
+        };
 
+        return fetch(this.url, options);
     }
 
-    isValidKey(key) {
-        // TODO: Consider converting into proxy (for each key)
-        if (key.length != 32) throw new Error({ name: 'RatingError', message: 'Invalid key' });
+    validateKey(key) {
+        if (key.length === 32) return key;else throw new Error({ name: errorNamespace, message: 'Invalid key' });
+    }
 
-        return true;
+    validateRating(value) {
+        if (isInteger(value) && value >= -127 && value <= 127) return value;else throw new Error({ name: errorNamespace, message: 'Invalid rating' });
+    }
+
+    validateDescription(value) {
+        if (isString(value) && trim(value).length >= 3 && trim(value).length <= 30) return value;else throw new Error({ name: errorNamespace, message: 'Invalid description' });
+    }
+
+    validateComment(value) {
+        if (isString(value) && trim(value).length >= 3 && trim(value).length <= 1000) return value;else throw new Error({ name: errorNamespace, message: 'Invalid comment' });
     }
 }
 
