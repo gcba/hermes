@@ -225,8 +225,6 @@ func getDevice(brand *models.Brand, platform *models.Platform, dbs *databases, f
 		checkGetResult := models.GetDevice(checkDeviceName, dbs.read)
 		checkGetErrorList := checkGetResult.GetErrors()
 
-		fmt.Println("\nFIRST CONTROL POINT")
-
 		if checkGetResult.RecordNotFound() {
 			device = &models.Device{
 				Name:         checkDeviceName,
@@ -237,9 +235,9 @@ func getDevice(brand *models.Brand, platform *models.Platform, dbs *databases, f
 				BrandID:      brand.ID}
 		} else if len(checkGetErrorList) > 0 {
 			return &models.Device{}, errorResponse(frame.context)
+		} else {
+			return checkGetResult.Value.(*models.Device), nil
 		}
-
-		return checkGetResult.Value.(*models.Device), nil
 	}
 
 	if device != nil {
