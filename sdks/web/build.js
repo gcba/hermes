@@ -4,12 +4,13 @@ const fs = require('fs');
 const rollup = require('rollup');
 const uglify = require('rollup-plugin-uglify');
 const uglifyES = require('uglify-es');
+const babel = require('rollup-plugin-babel');
 const nodeResolve = require('rollup-plugin-node-resolve');
 const commonjs = require('rollup-plugin-commonjs');
 const del = require('del');
 const pkg = require('./package.json');
 
-const resolve = nodeResolve({
+const resolvePlugin = nodeResolve({
     // use "jsnext:main" if possible – see
     // https://github.com/rollup/rollup/wiki/jsnext:main
     jsnext: true, // Default: false
@@ -29,24 +30,25 @@ const resolve = nodeResolve({
     preferBuiltins: false, // Default: true
 });
 
+const babelPlugin = babel({
+    include: 'src/**',
+    exclude: 'node_modules/**',
+    presets: ['stage-3'],
+    babelrc: false
+});
+
+const uglifyPlugin = uglify({}, uglifyES.minify);
+
 const bundles = [
     {
-        format: 'es',
-        ext: '.mjs',
-        plugins: []
-    }, {
-        format: 'cjs',
-        ext: '.browser.js',
-        plugins: []
-    }, {
         format: 'umd',
         ext: '.js',
-        plugins: [],
+        plugins: [babelPlugin],
         moduleName: 'ratings'
     }, {
         format: 'umd',
         ext: '.min.js',
-        plugins: [uglify({}, uglifyES.minify)],
+        plugins: [babelPlugin, uglifyPlugin],
         moduleName: 'ratings',
         minify: true
     }
@@ -59,7 +61,11 @@ promise = promise.then(() => del(['dist/*']));
 for (const config of bundles) {
     promise = promise.then(() => rollup.rollup({
         entry: 'src/main.js',
-        plugins: [resolve, commonjs()].concat(config.plugins)
+        plugins: [resolvePlugin, commonjs()].concat(config.plugins),
+        onwarn: (warning) => {
+            if (warning.code === 'THIS_IS_UNDEFINED') return;
+            console.warning(warning.message);
+        }
     }).then(bundle => bundle.write({
         dest: `dist/${config.moduleName || 'ratings'}${config.ext}`,
         format: config.format,

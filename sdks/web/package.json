@@ -7,8 +7,10 @@
     "url": "https://github.com/Widcket/Web SDK/issues"
   },
   "devDependencies": {
+    "babel-preset-stage-3": "^6.24.1",
     "del": "^3.0.0",
     "rollup": "^0.45.1",
+    "rollup-plugin-babel": "^2.7.1",
     "rollup-plugin-commonjs": "^8.0.2",
     "rollup-plugin-node-resolve": "^3.0.0",
     "rollup-plugin-uglify": "^2.0.1",
@@ -25,10 +27,10 @@
     "sdk"
   ],
   "license": "MIT",
-  "main": "dist/ratings.js",
+  "main": "src/main.js",
   "module": "dist/ratings.mjs",
   "jsnext": "dist/ratings.mjs",
-  "browser": "dist/ratings.browser.js",
+  "browser": "dist/ratings.js",
   "private": true,
   "repository": {
     "type": "git",
@@ -40,6 +42,8 @@
   },
   "dependencies": {
     "mobile-detect": "^1.3.6",
-    "platform": "^1.3.4"
+    "platform": "^1.3.4",
+    "promise-polyfill": "^6.0.2",
+    "whatwg-fetch": "^2.0.3"
   }
 }
