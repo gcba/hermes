@@ -38,10 +38,10 @@ class Complaint {
 
         this.versions.app = options.appVersion; // TODO: Validate (maybe in a proxy?) Required
 
-        this.url = options.api; // TODO: Validate (maybe in a proxy?) Required
-        this.token = options.token; // TODO: Validate (maybe in a proxy?) Required
+        this.url = options.api; // TODO: Required
+        this.token = options.token; // TODO: Required
         this._userAgent = options.userAgent; // TODO: Make private
-        this._isMobile = options.isMobile; // TODO: Validate (maybe in a proxy?) Make private
+        this._isMobile = options.isMobile; // TODO: Make private
 
         this.mobileDetect = new MobileDetect(this.userAgent || window.navigator.userAgent); // TODO: Validate
         this.platform = platform.parse(this.userAgent || window.navigator.userAgent); // TODO: Validate
@@ -114,6 +114,11 @@ class Complaint {
         else throw new Error({ name: 'RatingError', message: 'Invalid rating' });
     }
 
+    set comment(value) {
+        if (isString(value) && trim(value).length >= 3 && trim(value).length <= 1000) this.comment = trim(value);
+        else throw new Error({ name: 'RatingError', message: 'Invalid comment' });
+    }
+
     set url(value) {
         const urlRegex = new RegExp(/^(?:(?:https?|ftp):\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,}))\.?)(?::\d{2,5})?(?:[/?#]\S*)?$/i);
 
@@ -146,9 +151,9 @@ class Complaint {
 
     create(data) {
         const complaint = {
-            rating: data.rating, // TODO: Validate (is int?) / consider converting into proxy
-            description: data.description, // TODO: Validate keys / consider converting into proxy
-            comment: data.comment, // TODO: Validate keys / consider converting into proxy
+            rating: data.rating,
+            description: data.description, // TODO: Validate / consider converting into proxy
+            comment: data.comment, // TODO: Validate / consider converting into proxy
             range: this.keys.range,
             app: this.app,
             platform: this.platform,
@@ -167,7 +172,8 @@ class Complaint {
             headers: {
                 'Content-Type': 'application/json; charset=UTF-8',
                 'Accept': 'application/json',
-                'Accept-Charset': 'utf-8'
+                'Accept-Charset': 'utf-8',
+                'Authorization': 'Bearer ' + this.token
             },
             body: JSON.stringify(complaint)
         };
