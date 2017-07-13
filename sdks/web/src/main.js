@@ -141,9 +141,9 @@ class Complaint {
 
     create(data) {
         const complaint = {
-            rating: validateRating(data.rating),
-            description: data.description,
-            comment: data.comment,
+            rating: this.validateRating(data.rating),
+            description: this.validateDescription(data.description),
+            comment: this.validateComment(data.comment),
             range: this.keys.range,
             app: this.app,
             platform: this.platform,
