@@ -14,6 +14,10 @@ const isString = (thing) => {
     return typeof thing === 'string' || thing instanceof String;
 }
 
+const isBool = (thing) => {
+    return typeof (thing) === "boolean";
+}
+
 class Complaint {
     constructor(options) {
         // Should fail when:
@@ -110,6 +114,10 @@ class Complaint {
 
     set token(value) {
         if (isString(value)) this.token = trim(value);
+    }
+
+    set _isMobile(value) {
+        return isBool(value);
     }
 
     set _userAgent(value) {
