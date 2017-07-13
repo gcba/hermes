@@ -12,17 +12,23 @@ if (!window.Promise) {
 
 class Complaint {
     constructor(options) {
+        // Should fail when:
+        // - Required things are missing
+        // - Things are invalid: format, type
+
         this.keys = {}; // TODO: Make private modifying the descriptor
         this.versions = {}; // TODO: Make private modifying the descriptor
         this.screen = {}; // TODO: Make private modifying the descriptor
 
-        this.keys.app = options.app; // TODO: Validate (maybe in a proxy?)
-        this.keys.platform = options.platform; // TODO: Validate (maybe in a proxy?)
-        this.keys.range = options.range; // TODO: Validate (maybe in a proxy?)
+        this.keys.app = options.app; // TODO: Validate (maybe in a proxy?) Required
+        this.keys.platform = options.platform; // TODO: Validate (maybe in a proxy?) Required
+        this.keys.range = options.range; // TODO: Validate (maybe in a proxy?) Required
 
-        this.versions.app = options.appVersion; // TODO: Validate (maybe in a proxy?)
-        this.token = options.token; // TODO: Validate (maybe in a proxy?)
-        this.isMobile = options.isMobile; // TODO: Validate (maybe in a proxy?)
+        this.versions.app = options.appVersion; // TODO: Validate (maybe in a proxy?) Required
+
+        this.url = options.api; // TODO: Validate (maybe in a proxy?) Required
+        this.token = options.token; // TODO: Validate (maybe in a proxy?) Required
+        this.isMobile = options.isMobile; // TODO: Validate (maybe in a proxy?) Already has automatic fallback
 
         this.mobileDetect = new MobileDetect(options.userAgent || window.navigator.userAgent); // TODO: Validate
         this.platform = platform.parse(options.userAgent || window.navigator.userAgent); // TODO: Validate
@@ -113,8 +119,18 @@ class Complaint {
         return this.send(complaint); //  TODO: Return promise
     }
 
-    send(complaint) { // TODO: Return success/error codes --> use promises / make private
+    send(complaint) { // TODO: make private
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json; charset=UTF-8',
+                'Accept': 'application/json',
+                'Accept-Charset': 'utf-8'
+            },
+            body: JSON.stringify(complaint)
+        };
 
+        return fetch(this.url, options);
     }
 
     isValidKey(key) { // TODO: Consider converting into proxy (for each key)
