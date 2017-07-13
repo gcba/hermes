@@ -42,7 +42,11 @@ func getApp(db *gorm.DB, frame *frame) (*models.App, error) {
 		return &models.App{}, errorResponse(frame.context)
 	}
 
-	return result.Value.(*models.App), nil
+	if value, ok := result.Value.(*models.App); ok {
+		return value, nil
+	}
+
+	return &models.App{}, errorResponse(frame.context)
 }
 
 /*
@@ -58,7 +62,11 @@ func getPlatform(db *gorm.DB, frame *frame) (*models.Platform, error) {
 		return &models.Platform{}, errorResponse(frame.context)
 	}
 
-	return result.Value.(*models.Platform), nil
+	if value, ok := result.Value.(*models.Platform); ok {
+		return value, nil
+	}
+
+	return &models.Platform{}, errorResponse(frame.context)
 }
 
 /*
@@ -74,7 +82,11 @@ func getRange(db *gorm.DB, frame *frame) (*models.Range, error) {
 		return &models.Range{}, errorResponse(frame.context)
 	}
 
-	return result.Value.(*models.Range), nil
+	if value, ok := result.Value.(*models.Range); ok {
+		return value, nil
+	}
+
+	return &models.Range{}, errorResponse(frame.context)
 }
 
 /*
@@ -123,12 +135,18 @@ func getAppUser(dbs *databases, frame *frame) (*models.AppUser, error) {
 			return &models.AppUser{}, errorResponse(frame.context)
 		}
 
-		return createResult.Value.(*models.AppUser), nil
+		if value, ok := createResult.Value.(*models.AppUser); ok {
+			return value, nil
+		}
 	} else if len(getErrorList) > 0 {
 		return &models.AppUser{}, errorResponse(frame.context)
 	}
 
-	return getResult.Value.(*models.AppUser), nil
+	if value, ok := getResult.Value.(*models.AppUser); ok {
+		return value, nil
+	}
+
+	return &models.AppUser{}, errorResponse(frame.context)
 }
 
 func attachAppUser(rating *models.Rating, dbs *databases, frame *frame) error {
@@ -167,12 +185,18 @@ func getBrowser(dbs *databases, frame *frame) (*models.Browser, error) {
 			return &models.Browser{}, errorResponse(frame.context)
 		}
 
-		return createResult.Value.(*models.Browser), nil
+		if value, ok := createResult.Value.(*models.Browser); ok {
+			return value, nil
+		}
 	} else if len(getErrorList) > 0 || getResult.Value == nil {
 		return &models.Browser{}, errorResponse(frame.context)
 	}
 
-	return getResult.Value.(*models.Browser), nil
+	if value, ok := getResult.Value.(*models.Browser); ok {
+		return value, nil
+	}
+
+	return &models.Browser{}, errorResponse(frame.context)
 }
 
 func attachBrowser(rating *models.Rating, dbs *databases, frame *frame) error {
@@ -194,6 +218,8 @@ func attachBrowser(rating *models.Rating, dbs *databases, frame *frame) error {
 *
  */
 func getDevice(brand *models.Brand, platform *models.Platform, dbs *databases, frame *frame) (*models.Device, error) {
+	var device *models.Device
+
 	deviceName := frame.request.Device.Name
 	screenWidth := frame.request.Device.Screen.Width
 	screenHeight := frame.request.Device.Screen.Height
@@ -204,8 +230,6 @@ func getDevice(brand *models.Brand, platform *models.Platform, dbs *databases, f
 
 	getResult := models.GetDevice(deviceName, dbs.read)
 	getErrorList := getResult.GetErrors()
-
-	var device *models.Device
 
 	if getResult.RecordNotFound() {
 		device = &models.Device{
@@ -236,7 +260,11 @@ func getDevice(brand *models.Brand, platform *models.Platform, dbs *databases, f
 		} else if len(checkGetErrorList) > 0 {
 			return &models.Device{}, errorResponse(frame.context)
 		} else {
-			return checkGetResult.Value.(*models.Device), nil
+			if value, ok := checkGetResult.Value.(*models.Device); ok {
+				return value, nil
+			}
+
+			return &models.Device{}, errorResponse(frame.context)
 		}
 	}
 
@@ -248,12 +276,20 @@ func getDevice(brand *models.Brand, platform *models.Platform, dbs *databases, f
 			return &models.Device{}, errorResponse(frame.context)
 		}
 
-		return createResult.Value.(*models.Device), nil
+		if value, ok := createResult.Value.(*models.Device); ok {
+			return value, nil
+		}
+
+		return &models.Device{}, errorResponse(frame.context)
 	} else if len(getErrorList) > 0 || getResult.Value == nil {
 		return &models.Device{}, errorResponse(frame.context)
 	}
 
-	return getResult.Value.(*models.Device), nil
+	if value, ok := getResult.Value.(*models.Device); ok {
+		return value, nil
+	}
+
+	return &models.Device{}, errorResponse(frame.context)
 }
 
 func attachDevice(rating *models.Rating, platform *models.Platform, dbs *databases, frame *frame) error {
@@ -295,12 +331,18 @@ func getBrand(dbs *databases, frame *frame) (*models.Brand, error) {
 			return &models.Brand{}, errorResponse(frame.context)
 		}
 
-		return createResult.Value.(*models.Brand), nil
+		if value, ok := createResult.Value.(*models.Brand); ok {
+			return value, nil
+		}
 	} else if len(getErrorList) > 0 || getResult.Value == nil {
 		return &models.Brand{}, errorResponse(frame.context)
 	}
 
-	return getResult.Value.(*models.Brand), nil
+	if value, ok := getResult.Value.(*models.Brand); ok {
+		return value, nil
+	}
+
+	return &models.Brand{}, errorResponse(frame.context)
 }
 
 func validateRating(from int8, to int8, frame *frame) error {
