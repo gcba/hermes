@@ -109,16 +109,6 @@ class Complaint {
         };
     }
 
-    set rating(value) {
-        if (isInteger(value) && value >= -127 && value <= 127) this.rating = value;
-        else throw new Error({ name: 'RatingError', message: 'Invalid rating' });
-    }
-
-    set comment(value) {
-        if (isString(value) && trim(value).length >= 3 && trim(value).length <= 1000) this.comment = trim(value);
-        else throw new Error({ name: 'RatingError', message: 'Invalid comment' });
-    }
-
     set url(value) {
         const urlRegex = new RegExp(/^(?:(?:https?|ftp):\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,}))\.?)(?::\d{2,5})?(?:[/?#]\S*)?$/i);
 
@@ -151,9 +141,9 @@ class Complaint {
 
     create(data) {
         const complaint = {
-            rating: data.rating,
-            description: data.description, // TODO: Validate / consider converting into proxy
-            comment: data.comment, // TODO: Validate / consider converting into proxy
+            rating: validateRating(data.rating),
+            description: data.description,
+            comment: data.comment,
             range: this.keys.range,
             app: this.app,
             platform: this.platform,
@@ -181,10 +171,24 @@ class Complaint {
         return fetch(this.url, options);
     }
 
-    isValidKey(key) { // TODO: Consider converting into proxy (for each key)
-        if (key.length != 32) throw new Error({ name: 'RatingError', message: 'Invalid key' });
+    validateKey(key) { // TODO: Consider converting into proxy (for each key)
+        if (key.length === 32) return key;
+        else throw new Error({ name: 'RatingError', message: 'Invalid key' });
+    }
 
-        return true;
+    validateRating(value) {
+        if (isInteger(value) && value >= -127 && value <= 127) return value;
+        else throw new Error({ name: 'RatingError', message: 'Invalid rating' });
+    }
+
+    validateDescription(value) {
+        if (isString(value) && trim(value).length >= 3 && trim(value).length <= 30) return value;
+        else throw new Error({ name: 'RatingError', message: 'Invalid description' });
+    }
+
+    validateComment(value) {
+        if (isString(value) && trim(value).length >= 3 && trim(value).length <= 1000) return value;
+        else throw new Error({ name: 'RatingError', message: 'Invalid comment' });
     }
 }
 
