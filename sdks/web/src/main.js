@@ -29,6 +29,11 @@ const check = {
 };
 
 const validate = {
+    options: (value) => {
+        if (check.isPlainObject(value)) return true;
+
+        fail('Invalid options object');
+    },
     rating: (value) => {
         if (value && check.isInteger(value) && value >= -127 && value <= 127) return value;
 
@@ -81,6 +86,8 @@ const validate = {
 
 class Complaint {
     constructor(options) {
+        validate.options(options);
+
         this._keys = {};
         this._versions = {};
         this._screen = {};
