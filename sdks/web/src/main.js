@@ -3,12 +3,7 @@
 import 'whatwg-fetch'
 
 import MobileDetect from 'mobile-detect';
-import Promise from 'promise-polyfill';
 import platform from 'platform';
-
-if (!window.Promise) {
-  window.Promise = Promise;
-}
 
 const fail = (message) => {
     throw new Error({ name: 'RatingError', message: message });
