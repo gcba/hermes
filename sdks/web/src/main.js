@@ -2,7 +2,7 @@
 
 import 'whatwg-fetch'
 
-import MobileDetect from 'mobile-detect';
+import isMobile from 'ismobilejs';
 import platform from 'platform';
 
 const fail = (message) => {
@@ -95,14 +95,11 @@ class Complaint {
         this._userAgent = options.userAgent ? validate.userAgent(options.userAgent) : window.navigator.userAgent;
         this._isMobile = validate.isMobile(options.isMobile);
 
-        this._mobileDetect = new MobileDetect(this._userAgent);
         this._platform = platform.parse(this._userAgent);
     }
 
     get isMobile() {
-        return (this._isMobile === undefined || this._isMobile === null) ?
-            mobileDetect.mobile() !== null :
-            this._isMobile;
+        return (this._isMobile === undefined || this._isMobile === null) ? isMobile.any() : this._isMobile;
     }
 
     get app() {

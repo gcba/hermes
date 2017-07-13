@@ -41,7 +41,7 @@
     "test": "tape test/*.js | tap-spec"
   },
   "dependencies": {
-    "mobile-detect": "^1.3.6",
+    "ismobilejs": "^0.4.1",
     "platform": "^1.3.4",
     "whatwg-fetch": "^2.0.3"
   }
