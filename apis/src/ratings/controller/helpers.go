@@ -124,9 +124,7 @@ func getAppUser(dbs *databases, frame *frame) (*models.AppUser, error) {
 		}
 
 		return createResult.Value.(*models.AppUser), nil
-	}
-
-	if len(getErrorList) > 0 {
+	} else if len(getErrorList) > 0 {
 		return &models.AppUser{}, errorResponse(frame.context)
 	}
 
@@ -170,9 +168,7 @@ func getBrowser(dbs *databases, frame *frame) (*models.Browser, error) {
 		}
 
 		return createResult.Value.(*models.Browser), nil
-	}
-
-	if len(getErrorList) > 0 || getResult.Value == nil {
+	} else if len(getErrorList) > 0 || getResult.Value == nil {
 		return &models.Browser{}, errorResponse(frame.context)
 	}
 
@@ -206,11 +202,13 @@ func getDevice(brand *models.Brand, platform *models.Platform, dbs *databases, f
 		deviceName = fmt.Sprintf("Desktop %dx%d", screenWidth, screenHeight)
 	}
 
-	getResult := models.GetDevice(deviceName, brand, dbs.read)
+	getResult := models.GetDevice(deviceName, dbs.read)
 	getErrorList := getResult.GetErrors()
 
+	var device *models.Device
+
 	if getResult.RecordNotFound() {
-		device := &models.Device{
+		device = &models.Device{
 			Name:         deviceName,
 			ScreenWidth:  frame.request.Device.Screen.Width,
 			ScreenHeight: frame.request.Device.Screen.Height,
@@ -218,9 +216,33 @@ func getDevice(brand *models.Brand, platform *models.Platform, dbs *databases, f
 			PlatformID:   platform.ID}
 
 		if brand != nil {
-			device.BrandID = &brand.ID
+			device.BrandID = brand.ID
+		}
+	}
+
+	if result, ok := getResult.Value.(*models.Device); (ok && brand != nil) && (result.BrandID != brand.ID) {
+		checkDeviceName := fmt.Sprintf("%v (%v)", deviceName, brand.Name)
+		checkGetResult := models.GetDevice(checkDeviceName, dbs.read)
+		checkGetErrorList := checkGetResult.GetErrors()
+
+		fmt.Println("\nFIRST CONTROL POINT")
+
+		if checkGetResult.RecordNotFound() {
+			device = &models.Device{
+				Name:         checkDeviceName,
+				ScreenWidth:  frame.request.Device.Screen.Width,
+				ScreenHeight: frame.request.Device.Screen.Height,
+				PPI:          frame.request.Device.Screen.PPI,
+				PlatformID:   platform.ID,
+				BrandID:      brand.ID}
+		} else if len(checkGetErrorList) > 0 {
+			return &models.Device{}, errorResponse(frame.context)
 		}
 
+		return checkGetResult.Value.(*models.Device), nil
+	}
+
+	if device != nil {
 		createResult := models.CreateDevice(device, dbs.write)
 		createErrorList := createResult.GetErrors()
 
@@ -229,9 +251,7 @@ func getDevice(brand *models.Brand, platform *models.Platform, dbs *databases, f
 		}
 
 		return createResult.Value.(*models.Device), nil
-	}
-
-	if len(getErrorList) > 0 || getResult.Value == nil {
+	} else if len(getErrorList) > 0 || getResult.Value == nil {
 		return &models.Device{}, errorResponse(frame.context)
 	}
 
@@ -278,9 +298,7 @@ func getBrand(dbs *databases, frame *frame) (*models.Brand, error) {
 		}
 
 		return createResult.Value.(*models.Brand), nil
-	}
-
-	if len(getErrorList) > 0 || getResult.Value == nil {
+	} else if len(getErrorList) > 0 || getResult.Value == nil {
 		return &models.Brand{}, errorResponse(frame.context)
 	}
 

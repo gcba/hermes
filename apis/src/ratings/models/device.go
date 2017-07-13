@@ -12,8 +12,8 @@ type Device struct {
 	ScreenWidth  int    `gorm:"not null"`
 	ScreenHeight int    `gorm:"not null"`
 	PPI          *int   `gorm:"DEFAULT:NULL"`
-	Brand        *Brand
-	BrandID      *uint `gorm:"DEFAULT:NULL"`
+	Brand        Brand
+	BrandID      uint `gorm:"DEFAULT:NULL"`
 	Platform     Platform
 	PlatformID   uint `gorm:"DEFAULT:NULL"`
 
@@ -21,30 +21,7 @@ type Device struct {
 }
 
 // GetDevice gets a device by name and brand id
-func GetDevice(name string, brand *Brand, db *gorm.DB) *gorm.DB {
-	if brand != nil {
-		return getDeviceByNameAndBrand(name, *brand, db)
-	}
-
-	return getDeviceByName(name, db)
-}
-
-// CreateDevice creates a new device
-func CreateDevice(device *Device, db *gorm.DB) *gorm.DB {
-	return db.Create(device)
-}
-
-func getDeviceByNameAndBrand(name string, brand Brand, db *gorm.DB) *gorm.DB {
-	var result Device
-
-	if isPostgres(db) {
-		return db.Where("name ILIKE ? AND brand_id = ?", name, brand.ID).First(&result)
-	}
-
-	return db.Where("name LIKE ? AND brand_id = ?", name, brand).First(&result)
-}
-
-func getDeviceByName(name string, db *gorm.DB) *gorm.DB {
+func GetDevice(name string, db *gorm.DB) *gorm.DB {
 	var result Device
 
 	if isPostgres(db) {
@@ -52,4 +29,9 @@ func getDeviceByName(name string, db *gorm.DB) *gorm.DB {
 	}
 
 	return db.Where("name LIKE ?", name).First(&result)
+}
+
+// CreateDevice creates a new device
+func CreateDevice(device *Device, db *gorm.DB) *gorm.DB {
+	return db.Create(device)
 }

@@ -410,6 +410,60 @@ func TestPostRatings_WithNewBrowser(t *testing.T) {
 	r.JSON().Object().Equal(response)
 }
 
+func TestPostRatings_WithDeviceBrandMismatch(t *testing.T) {
+	handler := handler.Handler(3000, routes)
+	server := httptest.NewServer(handler)
+
+	defer server.Close()
+
+	server.URL = "http://localhost:3000"
+
+	e := httpexpect.WithConfig(httpexpect.Config{
+		BaseURL:  server.URL,
+		Reporter: httpexpect.NewAssertReporter(t),
+		Printers: []httpexpect.Printer{
+			httpexpect.NewDebugPrinter(t, true),
+		},
+	})
+
+	request := map[string]interface{}{
+		"rating":      uint8(2),
+		"description": "Malo",
+		"range":       "e10adc3949ba59abbe56e057f20f883e",
+		"app": map[string]interface{}{
+			"key":     "e10adc3949ba59abbe56e057f20f883e",
+			"version": "2.0"},
+		"platform": map[string]interface{}{
+			"key":     "c33367701511b4f6020ec61ded352059",
+			"version": "6.0"},
+		"device": map[string]interface{}{
+			"name":  "Moto G",
+			"brand": "Samsung",
+			"screen": map[string]interface{}{
+				"width":  1000,
+				"height": 2000,
+				"ppi":    200}},
+		"browser": map[string]interface{}{
+			"name":    "Edge",
+			"version": "5.0"}}
+
+	response := map[string]interface{}{
+		"meta": map[string]interface{}{
+			"code":    http.StatusCreated,
+			"message": "Created"}}
+
+	r := e.POST("/ratings").
+		WithHeader("Content-Type", "application/json; charset=UTF-8").
+		WithHeader("Accept", "application/json").
+		WithHeader("Accept-Charset", "utf-8").
+		WithJSON(request).
+		Expect()
+
+	r.Status(http.StatusCreated)
+	r.Header("Content-Type").Equal("application/json; charset=UTF-8")
+	r.JSON().Object().Equal(response)
+}
+
 func TestPostRatings_WithoutPlatform(t *testing.T) {
 	handler := handler.Handler(3000, routes)
 	server := httptest.NewServer(handler)
