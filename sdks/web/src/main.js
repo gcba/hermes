@@ -34,9 +34,9 @@ class Complaint {
         this.versions = {}; // TODO: Make private modifying the descriptor
         this.screen = {}; // TODO: Make private modifying the descriptor
 
-        this.keys.app = options.app; // TODO: Validate (maybe in a proxy?) Required
-        this.keys.platform = options.platform; // TODO: Validate (maybe in a proxy?) Required
-        this.keys.range = options.range; // TODO: Validate (maybe in a proxy?) Required
+        this.keys.app = this.validateKey(options.app);
+        this.keys.platform = this.validateKey(options.platform);
+        this.keys.range = this.validateKey(options.range);
 
         this.versions.app = options.appVersion; // TODO: Validate (maybe in a proxy?) Required
 
@@ -173,7 +173,7 @@ class Complaint {
         return fetch(this.url, options);
     }
 
-    validateKey(key) { // TODO: Consider converting into proxy (for each key)
+    validateKey(key) {
         if (key.length === 32) return key;
         else throw new Error({ name: errorNamespace, message: 'Invalid key' });
     }
