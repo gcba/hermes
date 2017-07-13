@@ -26,7 +26,7 @@ class Apps_Platforms_UsersSeeder extends Seeder
                 'key'  => md5("654321")
             ]);
             $windows = Platform::create([
-                'name' => 'Windows',
+                'name' => 'Browser',
                 'key'  => md5("789123")
             ]);
 
