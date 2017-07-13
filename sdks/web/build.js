@@ -64,7 +64,7 @@ for (const config of bundles) {
         plugins: [resolvePlugin, commonjs()].concat(config.plugins),
         onwarn: (warning) => {
             if (warning.code === 'THIS_IS_UNDEFINED') return;
-            console.warning(warning.message);
+            console.warn(warning.message);
         }
     }).then(bundle => bundle.write({
         dest: `dist/${config.moduleName || 'ratings'}${config.ext}`,
