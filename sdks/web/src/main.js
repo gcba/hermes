@@ -6,7 +6,7 @@ import isMobile from 'ismobilejs';
 import platform from 'platform';
 
 const fail = (message) => {
-    throw new Error({ name: 'RatingError', message: message });
+    throw new Error(message);
 }
 
 const check = {

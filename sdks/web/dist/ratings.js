@@ -1837,7 +1837,7 @@ var platform = createCommonjsModule(function (module, exports) {
 });
 
 const fail = message => {
-    throw new Error({ name: 'RatingError', message: message });
+    throw new Error(message);
 };
 
 const check = {
