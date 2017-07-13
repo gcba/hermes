@@ -22,6 +22,8 @@ const isInteger = (thing) => {
     return typeof val === "number" && isFinite(val) && Math.floor(val) === val;
 }
 
+const errorNamespace = 'RatingError';
+
 class Complaint {
     constructor(options) {
         // Should fail when:
@@ -95,8 +97,8 @@ class Complaint {
         if (this.user.mibaId) result.mibaId = this.user.mibaId
 
         if (!result.email && !result.mibaId) throw new Error({
-            name: 'RatingError',
-            message: 'User has no email/mibaId set'
+            name: errorNamespace,
+            message: 'User has no email or mibaId'
         });
 
         return result;
@@ -113,22 +115,22 @@ class Complaint {
         const urlRegex = new RegExp(/^(?:(?:https?|ftp):\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,}))\.?)(?::\d{2,5})?(?:[/?#]\S*)?$/i);
 
         if (isString(value) && urlRegex.test(trim(value))) this.url = value;
-        else throw new Error({ name: 'RatingError', message: 'Invalid URL' });
+        else throw new Error({ name: errorNamespace, message: 'Invalid URL' });
     }
 
     set token(value) {
         if (isString(value)) this.token = trim(value);
-        else throw new Error({ name: 'RatingError', message: 'Invalid token' });
+        else throw new Error({ name: errorNamespace, message: 'Invalid token' });
     }
 
     set _isMobile(value) {
         if (isBool(value)) this._isMobile = value;
-        else throw new Error({ name: 'RatingError', message: 'Invalid isMobile' });
+        else throw new Error({ name: errorNamespace, message: 'Invalid isMobile' });
     }
 
     set _userAgent(value) {
         if (isString(value)) this._userAgent = trim(value);
-        else throw new Error({ name: 'RatingError', message: 'Invalid userAgent' });
+        else throw new Error({ name: errorNamespace, message: 'Invalid userAgent' });
     }
 
     set user(value) { // TODO: Validate keys / consider converting into proxy
@@ -173,22 +175,22 @@ class Complaint {
 
     validateKey(key) { // TODO: Consider converting into proxy (for each key)
         if (key.length === 32) return key;
-        else throw new Error({ name: 'RatingError', message: 'Invalid key' });
+        else throw new Error({ name: errorNamespace, message: 'Invalid key' });
     }
 
     validateRating(value) {
         if (isInteger(value) && value >= -127 && value <= 127) return value;
-        else throw new Error({ name: 'RatingError', message: 'Invalid rating' });
+        else throw new Error({ name: errorNamespace, message: 'Invalid rating' });
     }
 
     validateDescription(value) {
         if (isString(value) && trim(value).length >= 3 && trim(value).length <= 30) return value;
-        else throw new Error({ name: 'RatingError', message: 'Invalid description' });
+        else throw new Error({ name: errorNamespace, message: 'Invalid description' });
     }
 
     validateComment(value) {
         if (isString(value) && trim(value).length >= 3 && trim(value).length <= 1000) return value;
-        else throw new Error({ name: 'RatingError', message: 'Invalid comment' });
+        else throw new Error({ name: errorNamespace, message: 'Invalid comment' });
     }
 }
 
