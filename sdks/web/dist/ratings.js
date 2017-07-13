@@ -3009,7 +3009,7 @@ class Complaint {
         this._keys.platform = validate.key(options.platform, 'platform');
         this._keys.range = validate.key(options.range, 'range');
 
-        this.appVersion = validate.appVersion(options.version);
+        this._appVersion = validate.appVersion(options.version);
         this._url = validate.url(options.api);
         this._token = validate.token(options.token);
         this._userAgent = options.userAgent ? validate.userAgent(options.userAgent) : window.navigator.userAgent;
