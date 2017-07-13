@@ -18,6 +18,10 @@ const isBool = (thing) => {
     return typeof (thing) === "boolean";
 }
 
+const isInteger = (thing) => {
+    return typeof val === "number" && isFinite(val) && Math.floor(val) === val;
+}
+
 class Complaint {
     constructor(options) {
         // Should fail when:
@@ -105,6 +109,11 @@ class Complaint {
         };
     }
 
+    set rating(value) {
+        if (isInteger(value) && value >= -127 && value <= 127) this.rating = value;
+        else throw new Error({ name: 'RatingError', message: 'Invalid rating' });
+    }
+
     set url(value) {
         const urlRegex = new RegExp(/^(?:(?:https?|ftp):\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,}))\.?)(?::\d{2,5})?(?:[/?#]\S*)?$/i);
 
@@ -114,14 +123,17 @@ class Complaint {
 
     set token(value) {
         if (isString(value)) this.token = trim(value);
+        else throw new Error({ name: 'RatingError', message: 'Invalid token' });
     }
 
     set _isMobile(value) {
-        return isBool(value);
+        if (isBool(value)) this._isMobile = value;
+        else throw new Error({ name: 'RatingError', message: 'Invalid isMobile' });
     }
 
     set _userAgent(value) {
         if (isString(value)) this._userAgent = trim(value);
+        else throw new Error({ name: 'RatingError', message: 'Invalid userAgent' });
     }
 
     set user(value) { // TODO: Validate keys / consider converting into proxy
