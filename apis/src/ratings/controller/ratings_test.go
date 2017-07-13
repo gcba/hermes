@@ -154,25 +154,25 @@ func TestPostRatings_WithBrowser(t *testing.T) {
 	})
 
 	request := map[string]interface{}{
-		"rating":      uint8(3),
-		"description": "Regular",
+		"rating":      uint8(2),
+		"description": "Malo",
 		"range":       "e10adc3949ba59abbe56e057f20f883e",
 		"app": map[string]interface{}{
 			"key":     "e10adc3949ba59abbe56e057f20f883e",
 			"version": "2.0"},
 		"platform": map[string]interface{}{
 			"key":     "e10adc3949ba59abbe56e057f20f883e",
-			"version": "9.0"},
+			"version": "10.0"},
 		"device": map[string]interface{}{
 			"name":  "Moto G",
 			"brand": "Motorola",
 			"screen": map[string]interface{}{
 				"width":  1000,
 				"height": 2000,
-				"ppi":    200},
-			"browser": map[string]interface{}{
-				"name":    "Firefox",
-				"version": "59"}}}
+				"ppi":    200}},
+		"browser": map[string]interface{}{
+			"name":    "Firefox",
+			"version": "59"}}
 
 	response := map[string]interface{}{
 		"meta": map[string]interface{}{
@@ -208,8 +208,8 @@ func TestPostRatings_WithAppUser(t *testing.T) {
 	})
 
 	request := map[string]interface{}{
-		"rating":      uint8(3),
-		"description": "Regular",
+		"rating":      uint8(1),
+		"description": "Muy Malo",
 		"range":       "e10adc3949ba59abbe56e057f20f883e",
 		"app": map[string]interface{}{
 			"key":     "e10adc3949ba59abbe56e057f20f883e",
@@ -263,16 +263,16 @@ func TestPostRatings_WithMessage(t *testing.T) {
 	})
 
 	request := map[string]interface{}{
-		"rating":      uint8(3),
-		"description": "Regular",
-		"comment":     "Once upon a time, in a land far far away..",
+		"rating":      uint8(5),
+		"description": "Muy Bueno",
+		"comment":     "Once upon a time, in a land far far away...",
 		"range":       "e10adc3949ba59abbe56e057f20f883e",
 		"app": map[string]interface{}{
 			"key":     "e10adc3949ba59abbe56e057f20f883e",
 			"version": "2.0"},
 		"platform": map[string]interface{}{
 			"key":     "e10adc3949ba59abbe56e057f20f883e",
-			"version": "9.0"},
+			"version": "10.0"},
 		"user": map[string]interface{}{
 			"name":   "Miguel Raldes",
 			"email":  "miguel@example.com",
@@ -319,9 +319,9 @@ func TestPostRatings_WithDesktopDevice(t *testing.T) {
 	})
 
 	request := map[string]interface{}{
-		"rating":      uint8(3),
-		"description": "Regular",
-		"comment":     "Once upon a time, in a land far far away..",
+		"rating":      uint8(1),
+		"description": "Muy Malo",
+		"comment":     "Once upon a time, in a land far far away...",
 		"range":       "e10adc3949ba59abbe56e057f20f883e",
 		"app": map[string]interface{}{
 			"key":     "e10adc3949ba59abbe56e057f20f883e",
@@ -373,25 +373,25 @@ func TestPostRatings_WithNewBrowser(t *testing.T) {
 	})
 
 	request := map[string]interface{}{
-		"rating":      uint8(3),
-		"description": "Regular",
+		"rating":      uint8(2),
+		"description": "Malo",
 		"range":       "e10adc3949ba59abbe56e057f20f883e",
 		"app": map[string]interface{}{
 			"key":     "e10adc3949ba59abbe56e057f20f883e",
 			"version": "2.0"},
 		"platform": map[string]interface{}{
 			"key":     "e10adc3949ba59abbe56e057f20f883e",
-			"version": "9.0"},
+			"version": "10.0"},
 		"device": map[string]interface{}{
 			"name":  "Moto G",
 			"brand": "Motorola",
 			"screen": map[string]interface{}{
 				"width":  1000,
 				"height": 2000,
-				"ppi":    200},
-			"browser": map[string]interface{}{
-				"name":    "Edge",
-				"version": "5.0"}}}
+				"ppi":    200}},
+		"browser": map[string]interface{}{
+			"name":    "Edge",
+			"version": "5.0"}}
 
 	response := map[string]interface{}{
 		"meta": map[string]interface{}{
@@ -479,16 +479,16 @@ func TestPostRatings_WithoutBrand(t *testing.T) {
 	})
 
 	request := map[string]interface{}{
-		"rating":      uint8(3),
+		"rating":      uint8(4),
 		"description": "Regular",
-		"comment":     "Once upon a time, in a land far far away..",
+		"comment":     "Once upon a time, in a land far far away...",
 		"range":       "e10adc3949ba59abbe56e057f20f883e",
 		"app": map[string]interface{}{
 			"key":     "e10adc3949ba59abbe56e057f20f883e",
 			"version": "2.0"},
 		"platform": map[string]interface{}{
 			"key":     "e10adc3949ba59abbe56e057f20f883e",
-			"version": "9.0"},
+			"version": "10.0"},
 		"user": map[string]interface{}{
 			"name":   "Miguel Raldes",
 			"email":  "miguel@example.com",
@@ -534,9 +534,9 @@ func TestPostRatings_WithoutPPI(t *testing.T) {
 	})
 
 	request := map[string]interface{}{
-		"rating":      uint8(3),
-		"description": "Regular",
-		"comment":     "Once upon a time, in a land far far away..",
+		"rating":      uint8(5),
+		"description": "Muy Bueno",
+		"comment":     "Once upon a time, in a land far far away...",
 		"range":       "e10adc3949ba59abbe56e057f20f883e",
 		"app": map[string]interface{}{
 			"key":     "e10adc3949ba59abbe56e057f20f883e",
@@ -589,16 +589,16 @@ func TestPostRatings_WithoutBrandAndPPI(t *testing.T) {
 	})
 
 	request := map[string]interface{}{
-		"rating":      uint8(3),
-		"description": "Regular",
-		"comment":     "Once upon a time, in a land far far away..",
+		"rating":      uint8(1),
+		"description": "Muy Malo",
+		"comment":     "Once upon a time, in a land far far away...",
 		"range":       "e10adc3949ba59abbe56e057f20f883e",
 		"app": map[string]interface{}{
 			"key":     "e10adc3949ba59abbe56e057f20f883e",
 			"version": "2.0"},
 		"platform": map[string]interface{}{
 			"key":     "e10adc3949ba59abbe56e057f20f883e",
-			"version": "9.0"},
+			"version": "10.0"},
 		"user": map[string]interface{}{
 			"name":   "Miguel Raldes",
 			"email":  "miguel@example.com",
@@ -643,9 +643,9 @@ func TestPostRatings_WithoutUserName(t *testing.T) {
 	})
 
 	request := map[string]interface{}{
-		"rating":      uint8(3),
-		"description": "Regular",
-		"comment":     "Once upon a time, in a land far far away..",
+		"rating":      uint8(1),
+		"description": "Muy Malo",
+		"comment":     "Once upon a time, in a land far far away...",
 		"range":       "e10adc3949ba59abbe56e057f20f883e",
 		"app": map[string]interface{}{
 			"key":     "e10adc3949ba59abbe56e057f20f883e",
@@ -698,16 +698,16 @@ func TestPostRatings_WithoutUserEmail(t *testing.T) {
 	})
 
 	request := map[string]interface{}{
-		"rating":      uint8(3),
-		"description": "Regular",
-		"comment":     "Once upon a time, in a land far far away..",
+		"rating":      uint8(2),
+		"description": "Malo",
+		"comment":     "Once upon a time, in a land far far away...",
 		"range":       "e10adc3949ba59abbe56e057f20f883e",
 		"app": map[string]interface{}{
 			"key":     "e10adc3949ba59abbe56e057f20f883e",
 			"version": "2.0"},
 		"platform": map[string]interface{}{
 			"key":     "e10adc3949ba59abbe56e057f20f883e",
-			"version": "9.0"},
+			"version": "10.0"},
 		"user": map[string]interface{}{
 			"name":   "Miguel Raldes",
 			"mibaId": "e10adc3949"},
@@ -755,7 +755,7 @@ func TestPostRatings_WithUserMiBAID(t *testing.T) {
 	request := map[string]interface{}{
 		"rating":      uint8(3),
 		"description": "Regular",
-		"comment":     "Once upon a time, in a land far far away..",
+		"comment":     "Once upon a time, in a land far far away...",
 		"range":       "e10adc3949ba59abbe56e057f20f883e",
 		"app": map[string]interface{}{
 			"key":     "e10adc3949ba59abbe56e057f20f883e",
@@ -808,16 +808,16 @@ func TestPostRatings_WithoutUserNameAndEmail(t *testing.T) {
 	})
 
 	request := map[string]interface{}{
-		"rating":      uint8(3),
-		"description": "Regular",
-		"comment":     "Once upon a time, in a land far far away..",
+		"rating":      uint8(4),
+		"description": "Bueno",
+		"comment":     "Once upon a time, in a land far far away...",
 		"range":       "e10adc3949ba59abbe56e057f20f883e",
 		"app": map[string]interface{}{
 			"key":     "e10adc3949ba59abbe56e057f20f883e",
 			"version": "2.0"},
 		"platform": map[string]interface{}{
 			"key":     "e10adc3949ba59abbe56e057f20f883e",
-			"version": "9.0"},
+			"version": "10.0"},
 		"user": map[string]interface{}{
 			"mibaId": "e10adc3949"},
 		"device": map[string]interface{}{
@@ -862,9 +862,9 @@ func TestPostRatings_WithoutUserNameAndMiBAID(t *testing.T) {
 	})
 
 	request := map[string]interface{}{
-		"rating":      uint8(3),
-		"description": "Regular",
-		"comment":     "Once upon a time, in a land far far away..",
+		"rating":      uint8(5),
+		"description": "Muy Bueno",
+		"comment":     "Once upon a time, in a land far far away...",
 		"range":       "e10adc3949ba59abbe56e057f20f883e",
 		"app": map[string]interface{}{
 			"key":     "e10adc3949ba59abbe56e057f20f883e",
@@ -916,16 +916,16 @@ func TestPostRatings_WithoutUserEmailAndMiBAID(t *testing.T) {
 	})
 
 	request := map[string]interface{}{
-		"rating":      uint8(3),
-		"description": "Regular",
-		"comment":     "Once upon a time, in a land far far away..",
+		"rating":      uint8(1),
+		"description": "Muy Malo",
+		"comment":     "Once upon a time, in a land far far away...",
 		"range":       "e10adc3949ba59abbe56e057f20f883e",
 		"app": map[string]interface{}{
 			"key":     "e10adc3949ba59abbe56e057f20f883e",
 			"version": "2.0"},
 		"platform": map[string]interface{}{
 			"key":     "e10adc3949ba59abbe56e057f20f883e",
-			"version": "9.0"},
+			"version": "10.0"},
 		"user": map[string]interface{}{
 			"name": "Miguel Raldes"},
 		"device": map[string]interface{}{
@@ -973,8 +973,8 @@ func TestPostRatings_BadRequestError(t *testing.T) {
 	})
 
 	request := map[string]interface{}{
-		"rating":      uint8(3),
-		"description": "Regular",
+		"rating":      uint8(1),
+		"description": "Muy Malo",
 		"range":       "e10adc3949ba59abbe56e057f20f883e",
 		"app": map[string]interface{}{
 			"key":     "e10adc3949ba59abbe56e057f20f883e",
@@ -1018,8 +1018,8 @@ func TestPostRatings_NotAcceptableError(t *testing.T) {
 	})
 
 	request := map[string]interface{}{
-		"rating":      uint8(3),
-		"description": "Regular",
+		"rating":      uint8(2),
+		"description": "Malo",
 		"range":       "e10adc3949ba59abbe56e057f20f883e",
 		"app": map[string]interface{}{
 			"key":     "e10adc3949ba59abbe56e057f20f883e",

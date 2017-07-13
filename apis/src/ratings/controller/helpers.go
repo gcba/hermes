@@ -1,7 +1,6 @@
 package controller
 
 import (
-	"errors"
 	"fmt"
 	"net/http"
 
@@ -154,12 +153,6 @@ func hasBrowser(request *parser.Request) bool {
 		return false
 	}
 
-	browser := request.Browser
-
-	if len(browser.Name) == 0 {
-		return false
-	}
-
 	return true
 }
 
@@ -189,18 +182,14 @@ func getBrowser(dbs *databases, frame *frame) (*models.Browser, error) {
 func attachBrowser(rating *models.Rating, dbs *databases, frame *frame) error {
 	browser, err := getBrowser(dbs, frame)
 
-	if len(frame.request.Browser.Version) > 0 {
-		if err == nil {
-			rating.BrowserID = browser.ID
-			rating.BrowserVersion = frame.request.Browser.Version
+	if err == nil {
+		rating.BrowserID = browser.ID
+		rating.BrowserVersion = frame.request.Browser.Version
 
-			return err
-		}
-
-		return nil
+		return err
 	}
 
-	return errors.New("Browser present in request, but with no version")
+	return nil
 }
 
 /*
@@ -299,7 +288,7 @@ func getBrand(dbs *databases, frame *frame) (*models.Brand, error) {
 }
 
 func validateRating(from int8, to int8, frame *frame) error {
-	if (frame.request.Rating <= from) || (frame.request.Rating >= to) {
+	if (frame.request.Rating < from) || (frame.request.Rating > to) {
 		errorMessage := fmt.Sprintf("Error validating rating: %v is not in range(%v, %v)",
 			frame.request.Rating,
 			from,
