@@ -32,12 +32,6 @@ func badRequestMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
 			return responses.ErrorResponse(http.StatusBadRequest, message, context)
 		}
 
-		if !isValidAcceptCharsetHeader(context) {
-			message = "Not accepting UTF-8 encoded responses"
-
-			return responses.ErrorResponse(http.StatusBadRequest, message, context)
-		}
-
 		if context.Request().Method == echo.POST {
 			if !hasContentTypeHeader(context) {
 				message = "Content-Type header is missing"
@@ -107,19 +101,10 @@ func hasContentTypeHeader(context echo.Context) bool {
 }
 
 func isValidContentTypeHeader(context echo.Context) bool {
-	contentType := "application/json"
+	text := "text/plain"
+	json := "application/json"
 
-	if header := context.Request().Header.Get("Content-Type"); strings.Contains(strings.ToLower(header), contentType) {
-		return true
-	}
-
-	return false
-}
-
-func isValidAcceptCharsetHeader(context echo.Context) bool {
-	encoding := "utf-8"
-
-	if header := context.Request().Header.Get("Accept-Charset"); strings.Contains(strings.ToLower(header), encoding) {
+	if header := context.Request().Header.Get("Content-Type"); strings.Contains(strings.ToLower(header), text) || strings.Contains(strings.ToLower(header), json) {
 		return true
 	}
 
@@ -142,7 +127,6 @@ func Handler(port int, handlers map[string]echo.HandlerFunc) http.Handler {
 
 	parser.RegisterCustomValidators(validate)
 
-	e.Use(middleware.CORS())
 	e.Use(middleware.Secure())
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())

@@ -50,6 +50,10 @@ var (
 
 func OptionsResponse(endpoints []Endpoint, context echo.Context) error {
 	if !context.Response().Committed {
+		context.Response().Header().Set("Access-Control-Allow-Origin", "*")
+		context.Response().Header().Set("Access-Control-Allow-Methods", "OPTIONS, POST")
+		context.Response().Header().Set("Access-Control-Allow-Headers", "Content-Type, Accept, Authorization")
+
 		response := Options{
 			Meta:      metas[http.StatusOK],
 			Endpoints: endpoints}

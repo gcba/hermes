@@ -14,7 +14,7 @@ import (
 func OptionsRatings(context echo.Context) error {
 	endpoints := []responses.Endpoint{responses.Endpoints["PostRatings"]}
 
-	context.Response().Header().Set(echo.HeaderAllow, "OPTIONS POST")
+	context.Response().Header().Set(echo.HeaderAllow, "OPTIONS, POST")
 
 	return responses.OptionsResponse(endpoints, context)
 }
