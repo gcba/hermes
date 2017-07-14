@@ -17,7 +17,7 @@ const check = {
         return typeof (thing) === 'boolean';
     },
     isInteger: (thing) => {
-        return typeof val === 'number' && isFinite(val) && Math.floor(val) === val;
+        return typeof thing === 'number' && isFinite(thing) && Math.floor(thing) === thing;
     },
     isPlainObject: (thing) => {
         return typeof thing === 'object' &&
@@ -35,7 +35,7 @@ const validate = {
         fail('Invalid options object');
     },
     rating: (value) => {
-        if (value && check.isInteger(value) && value >= -127 && value <= 127) return value;
+        if (check.isInteger(value) && value >= -127 && value <= 127) return value;
 
         fail('Invalid or missing rating');
     },
@@ -106,7 +106,7 @@ class Complaint {
     }
 
     get isMobile() {
-        return (this._isMobile === undefined || this._isMobile === null) ? isMobile.any() : this._isMobile;
+        return (this._isMobile === undefined || this._isMobile === null) ? isMobile.any : this._isMobile;
     }
 
     get app() {
@@ -119,7 +119,7 @@ class Complaint {
     get platform() {
         return {
             key: this._keys.platform,
-            version: this._platform.os.split(' ').pop()
+            version: this._platform.os.version
         };
     }
 
@@ -142,13 +142,17 @@ class Complaint {
     }
 
     get user() {
-        const result = {};
+        if (this._user) {
+            const result = {};
 
-        if (this_.user.name) result.name = this._user.name
-        if (this_.user.email) result.email = this._user.email
-        if (this_.user.mibaId) result.mibaId = this._user.mibaId
+            if (this._user.name) result.name = this._user.name
+            if (this._user.email) result.email = this._user.email
+            if (this._user.mibaId) result.mibaId = this._user.mibaId
 
-        return result;
+            return result;
+        }
+
+        return;
     }
 
     get browser() {
@@ -190,13 +194,13 @@ class Complaint {
             range: this._keys.range,
             app: this.app,
             platform: this.platform,
-            device: this.device
+            device: this.device,
+            browser: this.browser
         };
 
         if (data.description) data.description = validate.description(data.description);
         if (data.comment) data.comment = validate.comment(data.comment);
         if (this.user) complaint.user = this.user;
-        if (this.browser) complaint.browser = this.browser;
 
         return this.send(complaint);
     }
@@ -207,13 +211,13 @@ class Complaint {
             headers: {
                 'Content-Type': 'application/json; charset=UTF-8',
                 'Accept': 'application/json',
-                'Accept-Charset': 'utf-8',
-                'Authorization': 'Bearer ' + this.token
+                'Authorization': 'Bearer ' + this._token
             },
-            body: JSON.stringify(complaint)
+            body: JSON.stringify(complaint),
+            mode: 'no-cors'
         };
 
-        return fetch(this.url, options);
+        return fetch(this._url, options);
     }
 }
 
