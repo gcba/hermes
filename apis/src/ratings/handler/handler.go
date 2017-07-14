@@ -32,12 +32,6 @@ func badRequestMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
 			return responses.ErrorResponse(http.StatusBadRequest, message, context)
 		}
 
-		if !hasAcceptCharsetHeader(context) {
-			message = "Accept-Charset header is missing"
-
-			return responses.ErrorResponse(http.StatusBadRequest, message, context)
-		}
-
 		if !isValidAcceptCharsetHeader(context) {
 			message = "Not accepting UTF-8 encoded responses"
 
@@ -122,14 +116,6 @@ func isValidContentTypeHeader(context echo.Context) bool {
 	return false
 }
 
-func hasAcceptCharsetHeader(context echo.Context) bool {
-	if header := context.Request().Header.Get("Accept-Charset"); strings.TrimSpace(header) != "" {
-		return true
-	}
-
-	return false
-}
-
 func isValidAcceptCharsetHeader(context echo.Context) bool {
 	encoding := "utf-8"
 
@@ -156,9 +142,10 @@ func Handler(port int, handlers map[string]echo.HandlerFunc) http.Handler {
 
 	parser.RegisterCustomValidators(validate)
 
+	e.Use(middleware.CORS())
+	e.Use(middleware.Secure())
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
-	e.Use(middleware.Secure())
 	e.Use(notImplementedMiddleware)
 	e.Use(notAcceptableMiddleware)
 	e.Use(badRequestMiddleware)

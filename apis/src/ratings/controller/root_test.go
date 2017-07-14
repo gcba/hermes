@@ -58,7 +58,6 @@ func TestOptionsRoot(t *testing.T) {
 	e.OPTIONS("/").WithJSON(json).
 		WithHeader("Content-Type", "application/json; charset=UTF-8").
 		WithHeader("Accept", "application/json").
-		WithHeader("Accept-Charset", "utf-8").
 		WithHeader("Allow", "OPTIONS").
 		Expect().
 		Status(http.StatusOK)
@@ -84,11 +83,10 @@ func TestOptionsRoot_BadRequestError(t *testing.T) {
 		"meta": map[string]interface{}{
 			"code":    http.StatusBadRequest,
 			"message": "Bad Request"},
-		"errors": []interface{}{"Accept-Charset header is missing"}}
+		"errors": []interface{}{"Accept header is missing"}}
 
 	r := e.OPTIONS("/").
 		WithHeader("Content-Type", "application/json; charset=UTF-8").
-		WithHeader("Accept", "application/json").
 		Expect()
 
 	r.Status(http.StatusBadRequest)
@@ -119,7 +117,6 @@ func TestOptions_NotFoundError(t *testing.T) {
 
 	r := e.OPTIONS("/example").
 		WithHeader("Accept", "application/json").
-		WithHeader("Accept-Charset", "utf-8").
 		Expect()
 
 	r.Status(http.StatusNotFound)
@@ -150,7 +147,6 @@ func TestOptions_NotImplementedError(t *testing.T) {
 
 	r := e.GET("/").
 		WithHeader("Accept", "application/json").
-		WithHeader("Accept-Charset", "utf-8").
 		Expect()
 
 	r.Status(http.StatusNotImplemented)
