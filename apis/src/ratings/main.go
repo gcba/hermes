@@ -12,7 +12,7 @@ import (
 )
 
 func main() {
-	port := 3000
+	port := 5000
 	routes := map[string]echo.HandlerFunc{
 		"OptionsRoot":    controller.OptionsRoot,
 		"OptionsRatings": controller.OptionsRatings,
