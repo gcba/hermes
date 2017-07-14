@@ -67,8 +67,14 @@ for (const config of bundles) {
     promise = promise.then(() => rollup.rollup(rollupConfig).then(bundle => bundle.write(bundleConfig)));
 
     if (config.ext === '.min.js') {
-        bundleConfig.dest = 'example/js/ratings${config.ext}';
-        promise = promise.then(() => rollup.rollup(rollupConfig).then(bundle => bundle.write(bundleConfig)));
+        let exampleConfig = {
+            dest: `example/js/ratings${config.ext}`,
+            format: bundleConfig.format,
+            sourceMap: false,
+            moduleName: bundleConfig.moduleName
+        };
+
+        promise = promise.then(() => rollup.rollup(rollupConfig).then(bundle => bundle.write(exampleConfig)));
     }
 }
 
