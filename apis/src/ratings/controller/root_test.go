@@ -22,7 +22,7 @@ func TestOptionsRoot(t *testing.T) {
 
 	defer server.Close()
 
-	server.URL = "http://localhost:3000"
+	server.URL = "http://localhost:5000"
 
 	e := httpexpect.WithConfig(httpexpect.Config{
 		BaseURL:  server.URL,
@@ -69,7 +69,7 @@ func TestOptionsRoot_BadRequestError(t *testing.T) {
 
 	defer server.Close()
 
-	server.URL = "http://localhost:3000"
+	server.URL = "http://localhost:5000"
 
 	e := httpexpect.WithConfig(httpexpect.Config{
 		BaseURL:  server.URL,
@@ -100,7 +100,7 @@ func TestOptions_NotFoundError(t *testing.T) {
 
 	defer server.Close()
 
-	server.URL = "http://localhost:3000"
+	server.URL = "http://localhost:5000"
 
 	e := httpexpect.WithConfig(httpexpect.Config{
 		BaseURL:  server.URL,
@@ -130,7 +130,7 @@ func TestOptions_NotImplementedError(t *testing.T) {
 
 	defer server.Close()
 
-	server.URL = "http://localhost:3000"
+	server.URL = "http://localhost:5000"
 
 	e := httpexpect.WithConfig(httpexpect.Config{
 		BaseURL:  server.URL,

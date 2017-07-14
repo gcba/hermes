@@ -22,7 +22,7 @@ func TestOptionsRatings(t *testing.T) {
 
 	defer server.Close()
 
-	server.URL = "http://localhost:3000"
+	server.URL = "http://localhost:5000"
 
 	e := httpexpect.WithConfig(httpexpect.Config{
 		BaseURL:  server.URL,
@@ -60,7 +60,7 @@ func TestOptionsRatings_BadRequestError(t *testing.T) {
 
 	defer server.Close()
 
-	server.URL = "http://localhost:3000"
+	server.URL = "http://localhost:5000"
 
 	e := httpexpect.WithConfig(httpexpect.Config{
 		BaseURL:  server.URL,
@@ -91,7 +91,7 @@ func TestPostRatings(t *testing.T) {
 
 	defer server.Close()
 
-	server.URL = "http://localhost:3000"
+	server.URL = "http://localhost:5000"
 
 	e := httpexpect.WithConfig(httpexpect.Config{
 		BaseURL:  server.URL,
@@ -142,7 +142,7 @@ func TestPostRatings_WithBrowser(t *testing.T) {
 
 	defer server.Close()
 
-	server.URL = "http://localhost:3000"
+	server.URL = "http://localhost:5000"
 
 	e := httpexpect.WithConfig(httpexpect.Config{
 		BaseURL:  server.URL,
@@ -196,7 +196,7 @@ func TestPostRatings_WithAppUser(t *testing.T) {
 
 	defer server.Close()
 
-	server.URL = "http://localhost:3000"
+	server.URL = "http://localhost:5000"
 
 	e := httpexpect.WithConfig(httpexpect.Config{
 		BaseURL:  server.URL,
@@ -251,7 +251,7 @@ func TestPostRatings_WithMessage(t *testing.T) {
 
 	defer server.Close()
 
-	server.URL = "http://localhost:3000"
+	server.URL = "http://localhost:5000"
 
 	e := httpexpect.WithConfig(httpexpect.Config{
 		BaseURL:  server.URL,
@@ -307,7 +307,7 @@ func TestPostRatings_WithDesktopDevice(t *testing.T) {
 
 	defer server.Close()
 
-	server.URL = "http://localhost:3000"
+	server.URL = "http://localhost:5000"
 
 	e := httpexpect.WithConfig(httpexpect.Config{
 		BaseURL:  server.URL,
@@ -361,7 +361,7 @@ func TestPostRatings_WithNewBrowser(t *testing.T) {
 
 	defer server.Close()
 
-	server.URL = "http://localhost:3000"
+	server.URL = "http://localhost:5000"
 
 	e := httpexpect.WithConfig(httpexpect.Config{
 		BaseURL:  server.URL,
@@ -415,7 +415,7 @@ func TestPostRatings_WithDeviceBrandMismatch(t *testing.T) {
 
 	defer server.Close()
 
-	server.URL = "http://localhost:3000"
+	server.URL = "http://localhost:5000"
 
 	e := httpexpect.WithConfig(httpexpect.Config{
 		BaseURL:  server.URL,
@@ -469,7 +469,7 @@ func TestPostRatings_WithoutPlatform(t *testing.T) {
 
 	defer server.Close()
 
-	server.URL = "http://localhost:3000"
+	server.URL = "http://localhost:5000"
 
 	e := httpexpect.WithConfig(httpexpect.Config{
 		BaseURL:  server.URL,
@@ -521,7 +521,7 @@ func TestPostRatings_WithoutBrand(t *testing.T) {
 
 	defer server.Close()
 
-	server.URL = "http://localhost:3000"
+	server.URL = "http://localhost:5000"
 
 	e := httpexpect.WithConfig(httpexpect.Config{
 		BaseURL:  server.URL,
@@ -576,7 +576,7 @@ func TestPostRatings_WithoutPPI(t *testing.T) {
 
 	defer server.Close()
 
-	server.URL = "http://localhost:3000"
+	server.URL = "http://localhost:5000"
 
 	e := httpexpect.WithConfig(httpexpect.Config{
 		BaseURL:  server.URL,
@@ -631,7 +631,7 @@ func TestPostRatings_WithoutBrandAndPPI(t *testing.T) {
 
 	defer server.Close()
 
-	server.URL = "http://localhost:3000"
+	server.URL = "http://localhost:5000"
 
 	e := httpexpect.WithConfig(httpexpect.Config{
 		BaseURL:  server.URL,
@@ -685,7 +685,7 @@ func TestPostRatings_WithoutUserName(t *testing.T) {
 
 	defer server.Close()
 
-	server.URL = "http://localhost:3000"
+	server.URL = "http://localhost:5000"
 
 	e := httpexpect.WithConfig(httpexpect.Config{
 		BaseURL:  server.URL,
@@ -740,7 +740,7 @@ func TestPostRatings_WithoutUserEmail(t *testing.T) {
 
 	defer server.Close()
 
-	server.URL = "http://localhost:3000"
+	server.URL = "http://localhost:5000"
 
 	e := httpexpect.WithConfig(httpexpect.Config{
 		BaseURL:  server.URL,
@@ -795,7 +795,7 @@ func TestPostRatings_WithUserMiBAID(t *testing.T) {
 
 	defer server.Close()
 
-	server.URL = "http://localhost:3000"
+	server.URL = "http://localhost:5000"
 
 	e := httpexpect.WithConfig(httpexpect.Config{
 		BaseURL:  server.URL,
@@ -850,7 +850,7 @@ func TestPostRatings_WithoutUserNameAndEmail(t *testing.T) {
 
 	defer server.Close()
 
-	server.URL = "http://localhost:3000"
+	server.URL = "http://localhost:5000"
 
 	e := httpexpect.WithConfig(httpexpect.Config{
 		BaseURL:  server.URL,
@@ -904,7 +904,7 @@ func TestPostRatings_WithoutUserNameAndMiBAID(t *testing.T) {
 
 	defer server.Close()
 
-	server.URL = "http://localhost:3000"
+	server.URL = "http://localhost:5000"
 
 	e := httpexpect.WithConfig(httpexpect.Config{
 		BaseURL:  server.URL,
@@ -958,7 +958,7 @@ func TestPostRatings_WithoutUserEmailAndMiBAID(t *testing.T) {
 
 	defer server.Close()
 
-	server.URL = "http://localhost:3000"
+	server.URL = "http://localhost:5000"
 
 	e := httpexpect.WithConfig(httpexpect.Config{
 		BaseURL:  server.URL,
@@ -1015,7 +1015,7 @@ func TestPostRatings_BadRequestError(t *testing.T) {
 
 	defer server.Close()
 
-	server.URL = "http://localhost:3000"
+	server.URL = "http://localhost:5000"
 
 	e := httpexpect.WithConfig(httpexpect.Config{
 		BaseURL:  server.URL,
@@ -1059,7 +1059,7 @@ func TestPostRatings_NotAcceptableError(t *testing.T) {
 
 	defer server.Close()
 
-	server.URL = "http://localhost:3000"
+	server.URL = "http://localhost:5000"
 
 	e := httpexpect.WithConfig(httpexpect.Config{
 		BaseURL:  server.URL,
