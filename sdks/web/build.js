@@ -11,22 +11,11 @@ const del = require('del');
 const pkg = require('./package.json');
 
 const resolvePlugin = nodeResolve({
-    // use "jsnext:main" if possible – see
-    // https://github.com/rollup/rollup/wiki/jsnext:main
     jsnext: true, // Default: false
-
-    // some package.json files have a `browser` field which specifies alternative
-    // files to load for people bundling for the browser. If that's you, use this
-    // option, otherwise pkg.browser will be ignored
     browser: true, // Default: false
-
-    // not all files you want to resolve are .js files
     extensions: [
         '.js', '.json'
     ], // Default: ['.js']
-
-    // whether to prefer built-in modules (e.g. `fs`, `path`) or local ones with the
-    // same names
     preferBuiltins: false, // Default: true
 });
 
@@ -59,19 +48,28 @@ let promise = Promise.resolve();
 promise = promise.then(() => del(['dist/*']));
 
 for (const config of bundles) {
-    promise = promise.then(() => rollup.rollup({
+    let rollupConfig = {
         entry: 'src/main.js',
         plugins: [resolvePlugin, commonjs()].concat(config.plugins),
         onwarn: (warning) => {
             if (warning.code === 'THIS_IS_UNDEFINED') return;
             console.warn(warning.message);
         }
-    }).then(bundle => bundle.write({
+    };
+
+    let bundleConfig = {
         dest: `dist/ratings${config.ext}`,
         format: config.format,
         sourceMap: !config.minify,
         moduleName: config.moduleName
-    })));
+    };
+
+    promise = promise.then(() => rollup.rollup(rollupConfig).then(bundle => bundle.write(bundleConfig)));
+
+    if (config.ext === '.min.js') {
+        bundleConfig.dest = 'example/js/ratings${config.ext}';
+        promise = promise.then(() => rollup.rollup(rollupConfig).then(bundle => bundle.write(bundleConfig)));
+    }
 }
 
 promise = promise.then(() => {
