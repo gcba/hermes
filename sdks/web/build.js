@@ -44,12 +44,12 @@ const bundles = [
         format: 'umd',
         ext: '.js',
         plugins: [babelPlugin],
-        moduleName: 'ratings'
+        moduleName: 'Ratings'
     }, {
         format: 'umd',
         ext: '.min.js',
         plugins: [babelPlugin, uglifyPlugin],
-        moduleName: 'ratings',
+        moduleName: 'Ratings',
         minify: true
     }
 ];
@@ -67,7 +67,7 @@ for (const config of bundles) {
             console.warn(warning.message);
         }
     }).then(bundle => bundle.write({
-        dest: `dist/${config.moduleName || 'ratings'}${config.ext}`,
+        dest: `dist/ratings${config.ext}`,
         format: config.format,
         sourceMap: !config.minify,
         moduleName: config.moduleName

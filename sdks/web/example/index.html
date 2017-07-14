@@ -12,16 +12,22 @@
     </head>
     <body uk-height-viewport="expand: true">
         <div class="uk-height-1-1 uk-flex uk-flex-center uk-flex-middle">
-            <div class=" uk-width-1-2 uk-card uk-card-default uk-card-hover uk-grid-collapse" uk-grid>
+            <div class="uk-width-1-2 uk-card uk-card-default uk-card-hover uk-grid-collapse" uk-grid>
                 <div class="uk-card-media-left uk-width-3-5">
-                    <pre>
+                    <pre class="request">
                         <code>
 {
+   "rating": 3,
+   "description": "Regular",
+   "range": "e10adc3949ba59abbe56e057f20f883e",
    "app": {
       "key": "e10adc3949ba59abbe56e057f20f883e",
       "version": "2.0"
    },
-   "description": "Regular",
+   "platform": {
+      "key": "e10adc3949ba59abbe56e057f20f883e",
+      "version": "9.0"
+   },
    "device": {
       "brand": "Motorola",
       "name": "Moto G",
@@ -31,12 +37,10 @@
          "width": 1000
       }
    },
-   "platform": {
-      "key": "",
+    "browser": {
+      "name": "Chrome",
       "version": "9.0"
-   },
-   "range": "e10adc3949ba59abbe56e057f20f883e",
-   "rating": 3
+   }
 }
                         </code>
                     </pre>
@@ -70,6 +74,7 @@
         <script>window.jQuery || document.write('<script src="js/jquery-3.2.1.min.js"><\/script>')</script>
         <script src="js/uikit.min.js"></script>
         <script src="js/uikit-icons.min.js"></script>
+        <script src="js/ratings.min.js"></script>
         <script src="js/main.js"></script>
     </body>
 </html>

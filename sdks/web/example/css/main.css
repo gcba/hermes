@@ -1,6 +1,11 @@
-pre {
+.request {
     overflow: hidden;
     border: none;
     border-radius: 0px;
-    border-right: 1px solid #e5e5e5
+    border-right: 1px solid #e5e5e5;
+    font-size: 0.75rem;
+}
+
+.uk-card {
+    border: 1px solid #e5e5e5
 }
