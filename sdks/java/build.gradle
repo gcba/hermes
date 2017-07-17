@@ -5,7 +5,7 @@ apply plugin: 'java'
 
 jar {
     manifest {
-        attributes('Main-Class': 'ratings.sdk.Rating')
+        attributes('Main-Class': 'gcba.ratings.sdk.Rating')
     }
 }
 
