@@ -1,4 +1,4 @@
-package sdk.ratings;
+package ratings.sdk;
 
 public class SDK {
     public static void main(String[] args) {

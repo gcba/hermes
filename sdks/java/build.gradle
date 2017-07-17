@@ -1,5 +1,13 @@
-group 'sdk.ratings'
+group 'ratings.sdk'
 version '1.0.0'
+
+apply plugin: 'java'
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'ratings.sdk.SDK'
+    }
+}
 
 buildscript {
   repositories {
@@ -11,8 +19,6 @@ buildscript {
 
   }
 }
-
-apply plugin: 'java'
 
 repositories {
   mavenLocal()
