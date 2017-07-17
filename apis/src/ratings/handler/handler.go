@@ -74,6 +74,16 @@ func notImplementedMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
 	}
 }
 
+func corsMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
+	return func(context echo.Context) error {
+		context.Response().Header().Set("Access-Control-Allow-Origin", "*")
+		context.Response().Header().Set("Access-Control-Allow-Methods", "OPTIONS, POST")
+		context.Response().Header().Set("Access-Control-Allow-Headers", "Content-Type, Accept, Authorization")
+
+		return next(context)
+	}
+}
+
 func hasAcceptHeader(context echo.Context) bool {
 	if header := context.Request().Header.Get("Accept"); strings.TrimSpace(header) != "" {
 		return true
@@ -133,6 +143,7 @@ func Handler(port int, handlers map[string]echo.HandlerFunc) http.Handler {
 	e.Use(notImplementedMiddleware)
 	e.Use(notAcceptableMiddleware)
 	e.Use(badRequestMiddleware)
+	e.Use(corsMiddleware)
 
 	e.OPTIONS("/", handlers["OptionsRoot"])
 	e.OPTIONS("/ratings", handlers["OptionsRatings"])
