@@ -15,6 +15,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
+
+    Route::get('ratings', 'Controller@index')->name('voyager.ratings.index');
+    Route::get('ratings.api', 'Controller@ratingsAPI')->name('ratings.api');
 });

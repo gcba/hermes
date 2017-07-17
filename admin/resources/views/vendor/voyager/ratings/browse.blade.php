@@ -165,6 +165,7 @@
     @endif
     <script>
         $(document).ready(function () {
+            /*
             @if (!$dataType->server_side)
                 var table = $('#dataTable').DataTable({
                     "order": [],
@@ -173,30 +174,33 @@
                     @if(config('dashboard.data_tables.responsive')), responsive: true @endif
                 });
             @endif
+            */
 
             @if ($isModelTranslatable)
                 $('.side-body').multilingual();
             @endif
 
-            /*
-            let defaultabel = " ";
-
-            yadcf.init(table, [
-                {column_number : 0, exclude: true},
-                {column_number : 1, filter_default_label: defaultabel, filter_type: "select"},
-                {column_number : 2, filter_default_label: defaultabel},
-                {column_number : 3, filter_default_label: defaultabel},
-                {column_number : 4, filter_default_label: defaultabel},
-                {column_number : 5, filter_default_label: defaultabel},
-                {column_number : 6, filter_default_label: defaultabel},
-                {column_number : 7, filter_default_label: defaultabel},
-                {column_number : 8, filter_default_label: defaultabel},
-                {column_number : 9, filter_default_label: defaultabel},
-                {column_number : 10, filter_default_label: defaultabel},
-                {column_number : 11, filter_default_label: defaultabel},
-                {column_number : 12, filter_type: "range_date"}
-            ]);
-            */
+            $('#dataTable').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: '{!! route('ratings.api') !!}',
+                columns: [
+                    { data: 'rating', name: 'rating' },
+                    { data: 'range_id', name: 'range_id' },
+                    { data: 'description', name: 'description' },
+                    { data: 'has_message', name: 'has_message' },
+                    { data: 'app_id', name: 'app_id' },
+                    { data: 'app_version', name: 'app_version' },
+                    { data: 'browser_id', name: 'browser_id' },
+                    { data: 'appuser_id', name: 'appuser_id' },
+                    { data: 'device_id', name: 'device_id' },
+                    { data: 'created_at', name: 'created_at' },
+                    { data: 'platform_version', name: 'platform_version' },
+                    { data: 'range_id', name: 'range_id' },
+                    { data: 'updated_at', name: 'updated_at' },
+                    { data: 'deleted_at', name: 'deleted_at' }
+                ]
+            });
         });
 
 

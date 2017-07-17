@@ -166,7 +166,7 @@ class DataTypesTableSeeder extends Seeder
                 'controller'            => 'Controller',
                 'generate_permissions'  => 0,
                 'description'           => 'Calificaciones',
-                'server_side'           => 1
+                'server_side'           => 0
             ])->save();
         }
 

@@ -5,10 +5,31 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use TCG\Voyager\Facades\Voyager;
 use TCG\Voyager\Http\Controllers\VoyagerBreadController as BreadController;
+use Yajra\Datatables\Datatables;
 use Validator;
 
 class Controller extends BreadController
 {
+    /**
+    * Process datatables ajax request.
+    *
+    * @return \Illuminate\Http\JsonResponse
+    */
+    public function ratingsAPI(Request $request)
+    {
+        return Datatables::of(\App\Rating::query())->make(true);
+    }
+
+    /**
+    * Process datatables ajax request.
+    *
+    * @return \Illuminate\Http\JsonResponse
+    */
+    public function messagesAPI(Request $request)
+    {
+        return Datatables::of(\App\Message::query())->make(true);
+    }
+
     // From Voyager's VoyagerBreadController.php, customized
 
     // POST BRE(A)D
