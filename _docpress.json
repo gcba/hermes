@@ -782,36 +782,6 @@
                 ]
               }
             ]
-          },
-          {
-            "title": "Sprint 8",
-            "source": "docs/desarrollo/sprint8.md",
-            "url": "desarrollo/sprint8.html",
-            "slug": "desarrollosprint8",
-            "headings": [
-              {
-                "title": "Días",
-                "depth": 2,
-                "id": "dias"
-              },
-              {
-                "title": "Objetivo",
-                "depth": 2,
-                "id": "objetivo"
-              },
-              {
-                "title": "Tareas",
-                "depth": 2,
-                "id": "tareas",
-                "headings": [
-                  {
-                    "title": "SDKs",
-                    "depth": 3,
-                    "id": "sdks"
-                  }
-                ]
-              }
-            ]
           }
         ]
       }
@@ -1586,36 +1556,6 @@
           ]
         }
       ]
-    },
-    "desarrollo/sprint8.html": {
-      "source": "docs/desarrollo/sprint8.md",
-      "title": "Sprint 8 - Hermes",
-      "pageTitle": "Sprint 8",
-      "slug": "desarrollosprint8",
-      "headings": [
-        {
-          "title": "Días",
-          "depth": 2,
-          "id": "dias"
-        },
-        {
-          "title": "Objetivo",
-          "depth": 2,
-          "id": "objetivo"
-        },
-        {
-          "title": "Tareas",
-          "depth": 2,
-          "id": "tareas",
-          "headings": [
-            {
-              "title": "SDKs",
-              "depth": 3,
-              "id": "sdks"
-            }
-          ]
-        }
-      ]
     }
   },
   "sources": {
@@ -1637,7 +1577,6 @@
     "docs/desarrollo/sprint5.md": "desarrollo/sprint5.html",
     "docs/desarrollo/sprint6.md": "desarrollo/sprint6.html",
     "docs/desarrollo/sprint7.md": "desarrollo/sprint7.html",
-    "docs/desarrollo/sprint8.md": "desarrollo/sprint8.html",
     "docs/images/schema.png": "images/schema.png"
   }
 }
