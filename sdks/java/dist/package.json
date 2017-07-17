@@ -1,0 +1,32 @@
+{
+  "name": "web-sdk",
+  "description": "Ratings API SDK",
+  "version": "1.0.0",
+  "author": "Rita <zeta@widcket.com>",
+  "bugs": {
+    "url": "https://github.com/Widcket/Web SDK/issues"
+  },
+  "homepage": "https://github.com/Widcket/Web SDK",
+  "keywords": [
+    "api",
+    "gcba",
+    "hermes",
+    "ratings",
+    "sdk"
+  ],
+  "license": "MIT",
+  "main": "src/main.js",
+  "module": "dist/ratings.mjs",
+  "jsnext": "dist/ratings.mjs",
+  "browser": "dist/ratings.js",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Widcket/Web SDK.git"
+  },
+  "dependencies": {
+    "ismobilejs": "^0.4.1",
+    "platform": "^1.3.4",
+    "whatwg-fetch": "^2.0.3"
+  }
+}

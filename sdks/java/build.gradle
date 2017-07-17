@@ -5,29 +5,25 @@ apply plugin: 'java'
 
 jar {
     manifest {
-        attributes 'Main-Class': 'ratings.sdk.SDK'
+        attributes('Main-Class': 'ratings.sdk.SDK')
     }
 }
 
 buildscript {
   repositories {
-    mavenLocal()
     mavenCentral()
-    maven { url "http://repo.spring.io/release" }
   }
   dependencies {
-
+    classpath('com.google.code.gson:gson:2.8.1')
   }
 }
 
 repositories {
-  mavenLocal()
   mavenCentral()
-  maven { url "http://repo.spring.io/release" }
 }
 
 dependencies {
-
+  compile('com.google.code.gson:gson:2.8.1')
 }
 
 task wrapper(type: Wrapper) {
