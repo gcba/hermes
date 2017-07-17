@@ -206,6 +206,7 @@ return [
     'additional_css' => [
         'css/bootstrap-datetimepicker.min.css',
         'css/jquery.dataTables.yadcf.min.css',
+        'css/custom.css'
     ],
 
     'additional_js' => [

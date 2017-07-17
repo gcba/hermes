@@ -22,7 +22,7 @@ class DataTypesTableSeeder extends Seeder
                 'controller'            => 'Controller',
                 'generate_permissions'  => 0,
                 'description'           => 'Personal',
-                'server_side'           => 0
+                'server_side'           => 1
             ])->save();
         }
 
@@ -38,7 +38,7 @@ class DataTypesTableSeeder extends Seeder
                 'controller'            => 'Controller',
                 'generate_permissions'  => 0,
                 'description'           => 'Aplicaciones',
-                'server_side'           => 0
+                'server_side'           => 1
             ])->save();
         }
 
@@ -54,7 +54,7 @@ class DataTypesTableSeeder extends Seeder
                 'controller'            => 'Controller',
                 'generate_permissions'  => 0,
                 'description'           => 'Usuarios de las aplicaciones',
-                'server_side'           => 0
+                'server_side'           => 1
             ])->save();
         }
 
@@ -70,7 +70,7 @@ class DataTypesTableSeeder extends Seeder
                 'controller'            => 'Controller',
                 'generate_permissions'  => 0,
                 'description'           => 'Marcas de los dispositivos',
-                'server_side'           => 0
+                'server_side'           => 1
             ])->save();
         }
 
@@ -86,7 +86,7 @@ class DataTypesTableSeeder extends Seeder
                 'controller'            => 'Controller',
                 'generate_permissions'  => 0,
                 'description'           => 'Navegadores',
-                'server_side'           => 0
+                'server_side'           => 1
             ])->save();
         }
 
@@ -102,7 +102,7 @@ class DataTypesTableSeeder extends Seeder
                 'controller'            => 'Controller',
                 'generate_permissions'  => 0,
                 'description'           => 'Dispositivos móviles',
-                'server_side'           => 0
+                'server_side'           => 1
             ])->save();
         }
 
@@ -118,7 +118,7 @@ class DataTypesTableSeeder extends Seeder
                 'controller'            => 'Controller',
                 'generate_permissions'  => 0,
                 'description'           => 'Mensajes',
-                'server_side'           => 0
+                'server_side'           => 1
             ])->save();
         }
 
@@ -134,7 +134,7 @@ class DataTypesTableSeeder extends Seeder
                 'controller'            => 'Controller',
                 'generate_permissions'  => 0,
                 'description'           => 'Plataformas donde andan las aplicaciones',
-                'server_side'           => 0
+                'server_side'           => 1
             ])->save();
         }
 
@@ -150,7 +150,7 @@ class DataTypesTableSeeder extends Seeder
                 'controller'            => 'Controller',
                 'generate_permissions'  => 0,
                 'description'           => 'Rangos de calificaciones',
-                'server_side'           => 0
+                'server_side'           => 1
             ])->save();
         }
 
@@ -166,7 +166,7 @@ class DataTypesTableSeeder extends Seeder
                 'controller'            => 'Controller',
                 'generate_permissions'  => 0,
                 'description'           => 'Calificaciones',
-                'server_side'           => 0
+                'server_side'           => 1
             ])->save();
         }
 
@@ -182,7 +182,7 @@ class DataTypesTableSeeder extends Seeder
                 'controller'            => '',
                 'generate_permissions'  => 0,
                 'description'           => 'Menús',
-                'server_side'           => 0
+                'server_side'           => 1
             ])->save();
         }
 
@@ -198,7 +198,7 @@ class DataTypesTableSeeder extends Seeder
                 'controller'            => 'Controller',
                 'generate_permissions'  => 0,
                 'description'           => '',
-                'server_side'           => 0
+                'server_side'           => 1
             ])->save();
         }
     }

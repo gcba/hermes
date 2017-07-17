@@ -48,7 +48,7 @@ type (
 
 	// Request holds the mapped fields from the request's JSON body
 	Request struct {
-		Rating      int8     `json:"rating" validate:"required,min=-127,max=127"`
+		Rating      int8     `json:"rating" validate:"min=-127,max=127"`
 		Description string   `json:"description" validate:"omitempty,gte=3,lte=30" conform:"trim,title"`
 		Comment     string   `json:"comment" validate:"omitempty,gte=3,lte=1000" conform:"trim,ucfirst"`
 		Range       string   `json:"range" validate:"required,len=32,alphanum,excludesall= " conform:"lower"`
@@ -85,10 +85,18 @@ func Parse(context echo.Context) (*Request, error) {
 func bind(request *Request, context echo.Context) error {
 	if err := context.Bind(request); err != nil {
 		errorMessage := fmt.Sprintf("Error parsing request: %s", err.Error())
+		errorCode := http.StatusBadRequest
+
+		if httpError, ok := err.(*echo.HTTPError); ok {
+			if value, isString := httpError.Message.(string); isString {
+				errorMessage = value
+				errorCode = httpError.Code
+			}
+		}
 
 		context.Logger().Error(errorMessage)
 
-		return responses.ErrorResponse(http.StatusBadRequest, errorMessage, context)
+		return responses.ErrorResponse(errorCode, errorMessage, context)
 	}
 
 	return nil
