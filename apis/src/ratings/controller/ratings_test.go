@@ -41,16 +41,15 @@ func TestOptionsRatings(t *testing.T) {
 				"method": "POST",
 				"path":   "/ratings",
 				"headers": map[string]interface{}{
-					"Content-Type": "application/json; charset=UTF-8"}}}}
+					"Content-Type": "application/json; charset=UTF-8",
+					"Accept":       "application/json"}}}}
 
 	r := e.OPTIONS("/ratings").
-		WithHeader("Accept", "application/json").
 		WithHeader("Accept", "application/json").
 		Expect()
 
 	r.Status(http.StatusOK)
-	r.Header("Content-Type").Equal("application/json; charset=UTF-8")
-	r.Header("Allow").Equal("OPTIONS POST")
+	r.Header("Allow").Equal("OPTIONS, POST")
 	r.JSON().Object().Equal(response)
 }
 
@@ -95,7 +94,6 @@ func TestPostRatings(t *testing.T) {
 
 	r := e.POST("/ratings").
 		WithHeader("Content-Type", "application/json; charset=UTF-8").
-		WithHeader("Accept", "application/json").
 		WithHeader("Accept", "application/json").
 		WithJSON(request).
 		Expect()
@@ -150,7 +148,6 @@ func TestPostRatings_WithBrowser(t *testing.T) {
 	r := e.POST("/ratings").
 		WithHeader("Content-Type", "application/json; charset=UTF-8").
 		WithHeader("Accept", "application/json").
-		WithHeader("Accept", "application/json").
 		WithJSON(request).
 		Expect()
 
@@ -204,7 +201,6 @@ func TestPostRatings_WithAppUser(t *testing.T) {
 
 	r := e.POST("/ratings").
 		WithHeader("Content-Type", "application/json; charset=UTF-8").
-		WithHeader("Accept", "application/json").
 		WithHeader("Accept", "application/json").
 		WithJSON(request).
 		Expect()
@@ -261,7 +257,6 @@ func TestPostRatings_WithMessage(t *testing.T) {
 	r := e.POST("/ratings").
 		WithHeader("Content-Type", "application/json; charset=UTF-8").
 		WithHeader("Accept", "application/json").
-		WithHeader("Accept", "application/json").
 		WithJSON(request).
 		Expect()
 
@@ -314,7 +309,6 @@ func TestPostRatings_WithDesktopDevice(t *testing.T) {
 
 	r := e.POST("/ratings").
 		WithHeader("Content-Type", "application/json; charset=UTF-8").
-		WithHeader("Accept", "application/json").
 		WithHeader("Accept", "application/json").
 		WithJSON(request).
 		Expect()
@@ -369,7 +363,6 @@ func TestPostRatings_WithNewBrowser(t *testing.T) {
 	r := e.POST("/ratings").
 		WithHeader("Content-Type", "application/json; charset=UTF-8").
 		WithHeader("Accept", "application/json").
-		WithHeader("Accept", "application/json").
 		WithJSON(request).
 		Expect()
 
@@ -423,7 +416,6 @@ func TestPostRatings_WithDeviceBrandMismatch(t *testing.T) {
 	r := e.POST("/ratings").
 		WithHeader("Content-Type", "application/json; charset=UTF-8").
 		WithHeader("Accept", "application/json").
-		WithHeader("Accept", "application/json").
 		WithJSON(request).
 		Expect()
 
@@ -474,7 +466,6 @@ func TestPostRatings_WithoutPlatform(t *testing.T) {
 
 	r := e.POST("/ratings").
 		WithHeader("Content-Type", "application/json; charset=UTF-8").
-		WithHeader("Accept", "application/json").
 		WithHeader("Accept", "application/json").
 		WithJSON(request).
 		Expect()
@@ -530,7 +521,6 @@ func TestPostRatings_WithoutBrand(t *testing.T) {
 	r := e.POST("/ratings").
 		WithHeader("Content-Type", "application/json; charset=UTF-8").
 		WithHeader("Accept", "application/json").
-		WithHeader("Accept", "application/json").
 		WithJSON(request).
 		Expect()
 
@@ -585,7 +575,6 @@ func TestPostRatings_WithoutPPI(t *testing.T) {
 	r := e.POST("/ratings").
 		WithHeader("Content-Type", "application/json; charset=UTF-8").
 		WithHeader("Accept", "application/json").
-		WithHeader("Accept", "application/json").
 		WithJSON(request).
 		Expect()
 
@@ -638,7 +627,6 @@ func TestPostRatings_WithoutBrandAndPPI(t *testing.T) {
 
 	r := e.POST("/ratings").
 		WithHeader("Content-Type", "application/json; charset=UTF-8").
-		WithHeader("Accept", "application/json").
 		WithHeader("Accept", "application/json").
 		WithJSON(request).
 		Expect()
@@ -694,7 +682,6 @@ func TestPostRatings_WithoutUserName(t *testing.T) {
 	r := e.POST("/ratings").
 		WithHeader("Content-Type", "application/json; charset=UTF-8").
 		WithHeader("Accept", "application/json").
-		WithHeader("Accept", "application/json").
 		WithJSON(request).
 		Expect()
 
@@ -748,7 +735,6 @@ func TestPostRatings_WithoutUserEmail(t *testing.T) {
 
 	r := e.POST("/ratings").
 		WithHeader("Content-Type", "application/json; charset=UTF-8").
-		WithHeader("Accept", "application/json").
 		WithHeader("Accept", "application/json").
 		WithJSON(request).
 		Expect()
@@ -804,7 +790,6 @@ func TestPostRatings_WithUserMiBAID(t *testing.T) {
 	r := e.POST("/ratings").
 		WithHeader("Content-Type", "application/json; charset=UTF-8").
 		WithHeader("Accept", "application/json").
-		WithHeader("Accept", "application/json").
 		WithJSON(request).
 		Expect()
 
@@ -858,7 +843,6 @@ func TestPostRatings_WithoutUserNameAndEmail(t *testing.T) {
 	r := e.POST("/ratings").
 		WithHeader("Content-Type", "application/json; charset=UTF-8").
 		WithHeader("Accept", "application/json").
-		WithHeader("Accept", "application/json").
 		WithJSON(request).
 		Expect()
 
@@ -911,7 +895,6 @@ func TestPostRatings_WithoutUserNameAndMiBAID(t *testing.T) {
 
 	r := e.POST("/ratings").
 		WithHeader("Content-Type", "application/json; charset=UTF-8").
-		WithHeader("Accept", "application/json").
 		WithHeader("Accept", "application/json").
 		WithJSON(request).
 		Expect()
@@ -969,7 +952,6 @@ func TestPostRatings_WithoutUserEmailAndMiBAID(t *testing.T) {
 	r := e.POST("/ratings").
 		WithHeader("Content-Type", "application/json; charset=UTF-8").
 		WithHeader("Accept", "application/json").
-		WithHeader("Accept", "application/json").
 		WithJSON(request).
 		Expect()
 
@@ -1015,7 +997,6 @@ func TestPostRatings_NotAcceptableError(t *testing.T) {
 	r := e.POST("/ratings").
 		WithHeader("Content-Type", "application/json; charset=UTF-8").
 		WithHeader("Accept", "application/xml").
-		WithHeader("Accept", "application/json").
 		WithJSON(request).
 		Expect()
 

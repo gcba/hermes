@@ -32,35 +32,31 @@ func TestOptionsRoot(t *testing.T) {
 		},
 	})
 
-	json := map[string]interface{}{
+	response := map[string]interface{}{
 		"meta": map[string]interface{}{
-			"code":    200,
+			"code":    http.StatusOK,
 			"message": "OK"},
 		"endpoints": []map[string]interface{}{
 			{
 				"method": "OPTIONS",
 				"path":   "/ratings",
-				"headers": [][]string{
-					{
-						"Content-Type",
-						"application/json; charset=UTF-8"},
-					{
-						"Allow",
-						"OPTIONS POST"}}},
+				"headers": map[string]interface{}{
+					"Content-Type": nil,
+					"Accept":       nil}},
 			{
 				"method": "POST",
 				"path":   "/ratings",
-				"headers": [][]string{
-					{
-						"Content-Type",
-						"application/json; charset=UTF-8"}}}}}
+				"headers": map[string]interface{}{
+					"Content-Type": "application/json; charset=UTF-8",
+					"Accept":       "application/json"}}}}
 
-	e.OPTIONS("/").WithJSON(json).
-		WithHeader("Content-Type", "application/json; charset=UTF-8").
+	r := e.OPTIONS("/").
 		WithHeader("Accept", "application/json").
-		WithHeader("Allow", "OPTIONS").
-		Expect().
-		Status(http.StatusOK)
+		Expect()
+
+	r.Status(http.StatusOK)
+	r.Header("Allow").Equal("OPTIONS")
+	r.JSON().Object().Equal(response)
 }
 
 func TestOptions_NotFoundError(t *testing.T) {

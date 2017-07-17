@@ -8,7 +8,8 @@ import (
 
 type (
 	headers struct {
-		ContentType string `json:"Content-Type"`
+		ContentType *string `json:"Content-Type"`
+		Accept      *string `json:"Accept"`
 	}
 
 	Endpoint struct {
@@ -24,23 +25,25 @@ type (
 )
 
 var (
+	contentType = "application/json; charset=UTF-8"
+	accept      = "application/json"
+
 	optionsRoot = Endpoint{
-		Method: "OPTIONS",
-		Path:   "/",
-		Headers: &headers{
-			ContentType: "application/json; charset=UTF-8"}}
+		Method:  "OPTIONS",
+		Path:    "/",
+		Headers: &headers{}}
 
 	optionsRatings = Endpoint{
-		Method: "OPTIONS",
-		Path:   "/ratings",
-		Headers: &headers{
-			ContentType: "application/json; charset=UTF-8"}}
+		Method:  "OPTIONS",
+		Path:    "/ratings",
+		Headers: &headers{}}
 
 	postRatings = Endpoint{
 		Method: "POST",
 		Path:   "/ratings",
 		Headers: &headers{
-			ContentType: "application/json; charset=UTF-8"}}
+			ContentType: &contentType,
+			Accept:      &accept}}
 
 	Endpoints = map[string]Endpoint{
 		"OptionsRoot":    optionsRoot,
