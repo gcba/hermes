@@ -1,7 +1,7 @@
 {
-  "id": "RatingsSDK",
-  "name": "Java",
-  "type": "ratings/sdk",
+  "id": "Ratings",
+  "name": "JavaSDK",
+  "type": "gcba/ratings/sdk",
   "hooks": {
     "build": "gradle -Dorg.gradle.native=false clean build -x test"
   }

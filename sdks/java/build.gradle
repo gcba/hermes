@@ -1,11 +1,11 @@
-group 'ratings.sdk'
+group 'gcba.ratings.sdk'
 version '1.0.0'
 
 apply plugin: 'java'
 
 jar {
     manifest {
-        attributes('Main-Class': 'ratings.sdk.SDK')
+        attributes('Main-Class': 'ratings.sdk.Rating')
     }
 }
 
