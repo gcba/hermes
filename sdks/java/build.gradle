@@ -14,7 +14,7 @@ buildscript {
     mavenCentral()
   }
   dependencies {
-    classpath('com.google.code.gson:gson:2.8.1')
+    classpath('com.google.code.gson:gson:2.8.1', 'com.squareup.okhttp3:okhttp:3.8.1')
   }
 }
 
@@ -23,7 +23,7 @@ repositories {
 }
 
 dependencies {
-  compile('com.google.code.gson:gson:2.8.1')
+  compile('com.google.code.gson:gson:2.8.1', 'com.squareup.okhttp3:okhttp:3.8.1')
 }
 
 task wrapper(type: Wrapper) {
