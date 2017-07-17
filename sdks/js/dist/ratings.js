@@ -1889,7 +1889,11 @@ const validate = {
     url: value => {
         const url = new RegExp(/^(ftp|http|https):\/\/[^ "]+$/);
 
-        if (value && check.isString(value) && value.trim().length > 0 && url.test(value.trim())) return value.trim();
+        if (value && check.isString(value) && value.trim().length > 0 && url.test(value.trim())) {
+            let baseUrl = value.trim();
+
+            return baseUrl[baseUrl.length - 1] === '/' ? baseUrl + 'ratings' : baseUrl + '/ratings';
+        }
 
         fail('Invalid or missing api');
     },
@@ -2031,13 +2035,12 @@ class Complaint {
     send(complaint) {
         const options = {
             method: 'POST',
-            headers: {
+            headers: new Headers({
                 'Content-Type': 'application/json; charset=UTF-8',
                 'Accept': 'application/json',
                 'Authorization': 'Bearer ' + this._token
-            },
-            body: JSON.stringify(complaint),
-            mode: 'no-cors'
+            }),
+            body: JSON.stringify(complaint)
         };
 
         return fetch(this._url, options);
