@@ -1,0 +1,29 @@
+group 'sdk.ratings'
+version '1.0.0'
+
+buildscript {
+  repositories {
+    mavenLocal()
+    mavenCentral()
+    maven { url "http://repo.spring.io/release" }
+  }
+  dependencies {
+
+  }
+}
+
+apply plugin: 'java'
+
+repositories {
+  mavenLocal()
+  mavenCentral()
+  maven { url "http://repo.spring.io/release" }
+}
+
+dependencies {
+
+}
+
+task wrapper(type: Wrapper) {
+  gradleVersion = '2.12'
+}
