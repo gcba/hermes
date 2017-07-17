@@ -32,18 +32,16 @@ func badRequestMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
 			return responses.ErrorResponse(http.StatusBadRequest, message, context)
 		}
 
-		if context.Request().Method == echo.POST {
-			if !hasContentTypeHeader(context) {
-				message = "Content-Type header is missing"
+		if context.Request().Method == echo.OPTIONS && hasContentTypeHeader(context) {
+			message = "OPTIONS requests must have no body"
 
-				return responses.ErrorResponse(http.StatusBadRequest, message, context)
-			}
+			return responses.ErrorResponse(http.StatusBadRequest, message, context)
+		}
 
-			if !isValidContentTypeHeader(context) || !isValidCharacterEncoding(context) {
-				message = "Request body must be UTF-8 encoded JSON"
+		if context.Request().Method == echo.POST && !hasContentTypeHeader(context) {
+			message = "Content-Type header is missing"
 
-				return responses.ErrorResponse(http.StatusBadRequest, message, context)
-			}
+			return responses.ErrorResponse(http.StatusBadRequest, message, context)
 		}
 
 		return next(context)
@@ -58,6 +56,22 @@ func notAcceptableMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
 			message = "Not accepting JSON responses"
 
 			return responses.ErrorResponse(http.StatusNotAcceptable, message, context)
+		}
+
+		return next(context)
+	}
+}
+
+func unsupportedMediaTypeMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
+	return func(context echo.Context) error {
+		var message string
+
+		if context.Request().Method == echo.POST {
+			if !isValidContentTypeHeader(context) || !isValidCharacterEncoding(context) {
+				message = "Request body must be UTF-8 encoded JSON"
+
+				return responses.ErrorResponse(http.StatusUnsupportedMediaType, message, context)
+			}
 		}
 
 		return next(context)
@@ -143,6 +157,7 @@ func Handler(port int, handlers map[string]echo.HandlerFunc) http.Handler {
 	e.Use(notImplementedMiddleware)
 	e.Use(notAcceptableMiddleware)
 	e.Use(badRequestMiddleware)
+	e.Use(unsupportedMediaTypeMiddleware)
 	e.Use(corsMiddleware)
 
 	e.OPTIONS("/", handlers["OptionsRoot"])

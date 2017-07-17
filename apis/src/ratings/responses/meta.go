@@ -28,6 +28,9 @@ var metas = map[int]meta{
 	http.StatusNotAcceptable: meta{
 		Code:    http.StatusNotAcceptable,
 		Message: "Not Acceptable"},
+	http.StatusUnsupportedMediaType: meta{
+		Code:    http.StatusUnsupportedMediaType,
+		Message: "Unsupported Media Type"},
 	http.StatusUnprocessableEntity: meta{
 		Code:    http.StatusUnprocessableEntity,
 		Message: "Unprocessable Entity"},
