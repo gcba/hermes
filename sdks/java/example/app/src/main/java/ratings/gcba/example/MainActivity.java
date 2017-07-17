@@ -2,6 +2,7 @@ package ratings.gcba.example;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import gcba.ratings.sdk.Rating;
 
 public class MainActivity extends AppCompatActivity {
 

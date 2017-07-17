@@ -1,4 +1,4 @@
-package ratings.gcba.sdk;
+package gcba.ratings.sdk;
 
 /**
  * Created by ritazerrizuela on 7/17/17.

@@ -1,4 +1,4 @@
-package ratings.gcba.sdk;
+package gcba.ratings.sdk;
 
 import java.util.HashMap;
 import android.os.Build;
@@ -17,4 +17,8 @@ class Request {
     public HashMap<String, String> device;
     public HashMap<String, Short> screen;
     public HashMap<String, String> user;
+
+    public String toJSON() {
+
+    }
 }
