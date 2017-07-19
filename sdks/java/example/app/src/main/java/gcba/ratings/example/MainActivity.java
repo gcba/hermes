@@ -1,4 +1,4 @@
-package ratings.gcba.example;
+package gcba.ratings.example;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

@@ -1,4 +1,4 @@
-package ratings.gcba.sdk;
+package gcba.ratings.sdk;
 
 import org.junit.Test;
 

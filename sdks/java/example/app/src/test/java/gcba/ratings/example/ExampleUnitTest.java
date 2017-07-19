@@ -1,4 +1,4 @@
-package ratings.gcba.example;
+package gcba.ratings.example;
 
 import org.junit.Test;
 

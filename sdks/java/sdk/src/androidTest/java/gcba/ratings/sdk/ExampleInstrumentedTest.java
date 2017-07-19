@@ -1,4 +1,4 @@
-package ratings.gcba.sdk;
+package gcba.ratings.sdk;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

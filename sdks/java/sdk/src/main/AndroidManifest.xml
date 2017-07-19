@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 
-    package="ratings.gcba.sdk">
+    package="gcba.ratings.sdk">
 
     <application
         android:allowBackup="true"
