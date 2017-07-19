@@ -9,7 +9,7 @@ import android.os.Build;
  * Created by ritazerrizuela on 7/17/17.
  */
 
-class Request {
+final class Request {
     Request(String app, String platform, String range) {
         if (app == null) throw new IllegalArgumentException("app can't be null");
         if (platform == null) throw new IllegalArgumentException("platform can't be null");
