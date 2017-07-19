@@ -17,14 +17,14 @@ final class Request {
         this.user = new HashMap<String, String>();
     }
 
-    public Byte rating;
-    public String description;
-    public String comment;
-    public String range;
-    public HashMap<String, String> app;
-    public HashMap<String, String> platform;
-    public HashMap<String, Object> device;
-    public HashMap<String, String> user;
+    byte rating;
+    String description;
+    String comment;
+    String range;
+    HashMap<String, String> app;
+    HashMap<String, String> platform;
+    HashMap<String, Object> device;
+    HashMap<String, String> user;
 
     private HashMap<String, String> getApp() {
         HashMap<String, String> app = new HashMap<String, String>();

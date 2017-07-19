@@ -1,7 +1,6 @@
 package gcba.ratings.sdk;
 
 import java.util.HashMap;
-import java.util.StringTokenizer;
 
 /**
  * Created by ritazerrizuela on 7/17/17.
@@ -60,6 +59,20 @@ public final class Rating {
         if (mibaId.trim().length() < 1) throw new IllegalArgumentException("mibaId too short");
     }
 
+    private void validateRating(byte rating) {
+        if (rating < -127) throw new IllegalArgumentException("invalid rating");
+    }
+
+    private void validateDescription(String description) {
+        if (description.trim().length() < 3) throw new IllegalArgumentException("description too short");
+        if (description.trim().length() > 30) throw new IllegalArgumentException("description too long");
+    }
+
+    private void validateComment(String comment) {
+        if (comment.trim().length() < 3) throw new IllegalArgumentException("comment too short");
+        if (comment.trim().length() > 1000) throw new IllegalArgumentException("comment too long");
+    }
+
     public void setUser(String name, String email, String mibaId) {
         if (!(name != null || email != null || mibaId != null)) throw new IllegalArgumentException("user parameters can't all be null");
         if (email == null && mibaId == null) throw new IllegalArgumentException("user has no valid email or mibaId");
@@ -80,11 +93,30 @@ public final class Rating {
         }
     }
 
-    public void create() {
+    public void create(byte rating, String description, String comment) {
+        Request request;
 
+        validateRating(rating);
+
+        request = new Request();
+        request.rating = rating;
+
+        if (description != null) {
+            validateDescription(description);
+
+            request.description = description.trim();
+        }
+
+        if (comment != null) {
+            validateComment(comment);
+
+            request.comment = comment.trim();
+        }
+
+        send(request);
     }
 
-    public void send() {
+    private void send(Request request) {
 
     }
 }
