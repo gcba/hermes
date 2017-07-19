@@ -1889,7 +1889,7 @@ const validate = {
     url: value => {
         const url = new RegExp(/^(ftp|http|https):\/\/[^ "]+$/);
 
-        if (value && check.isString(value) && value.trim().length > 0 && url.test(value.trim())) {
+        if (value && check.isString(value) && url.test(value.trim())) {
             let baseUrl = value.trim();
 
             return baseUrl[baseUrl.length - 1] === '/' ? baseUrl + 'ratings' : baseUrl + '/ratings';
