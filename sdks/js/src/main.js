@@ -88,7 +88,7 @@ const validate = {
     }
 };
 
-class Complaint {
+class Rating {
     constructor(options) {
         validate.options(options);
 
@@ -224,4 +224,4 @@ class Complaint {
     }
 }
 
-export default Complaint;
+export default Rating;
