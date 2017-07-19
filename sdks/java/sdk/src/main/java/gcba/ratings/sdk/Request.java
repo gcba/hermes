@@ -10,31 +10,10 @@ import android.os.Build;
  */
 
 final class Request {
-    Request(String app, String platform, String range) {
-        if (app == null) throw new IllegalArgumentException("app can't be null");
-        if (platform == null) throw new IllegalArgumentException("platform can't be null");
-        if (range == null) throw new IllegalArgumentException("range can't be null");
-
-        this.range = range;
-
-        this.app = new HashMap<String, String>();
-        this.app.put("key", app);
-        this.app.put("version", String.valueOf(Build.VERSION.RELEASE));
-
-        this.platform = new HashMap<String, String>();
-        this.platform.put("key", platform);
-        this.platform.put("version", String.valueOf(Build.VERSION.SDK_INT));
-
-        HashMap<String, Integer> screen = new HashMap<String, Integer>();
-        screen.put("width", Resources.getSystem().getDisplayMetrics().widthPixels);
-        screen.put("height", Resources.getSystem().getDisplayMetrics().heightPixels);
-        screen.put("ppi", Math.round(Resources.getSystem().getDisplayMetrics().densityDpi));
-
-        this.device = new HashMap<String, Object>();
-        this.device.put("name", Build.MODEL);
-        this.device.put("brand", Build.BRAND);
-        this.device.put("screen", screen);
-
+    Request() {
+        this.app = getApp();
+        this.platform = getPlatform();
+        this.device = getDevice();
         this.user = new HashMap<String, String>();
     }
 
@@ -46,4 +25,35 @@ final class Request {
     public HashMap<String, String> platform;
     public HashMap<String, Object> device;
     public HashMap<String, String> user;
+
+    private HashMap<String, String> getApp() {
+        HashMap<String, String> app = new HashMap<String, String>();
+
+        app.put("version", String.valueOf(Build.VERSION.RELEASE));
+
+        return app;
+    }
+
+    private HashMap<String, String> getPlatform() {
+        HashMap<String, String> platform = new HashMap<String, String>();
+
+        platform.put("version", String.valueOf(Build.VERSION.SDK_INT));
+
+        return platform;
+    }
+
+    private HashMap<String, Object> getDevice() {
+        HashMap<String, Object> device = new HashMap<String, Object>();
+        HashMap<String, Integer> screen = new HashMap<String, Integer>();
+
+        screen.put("width", Resources.getSystem().getDisplayMetrics().widthPixels);
+        screen.put("height", Resources.getSystem().getDisplayMetrics().heightPixels);
+        screen.put("ppi", Math.round(Resources.getSystem().getDisplayMetrics().densityDpi));
+
+        device.put("name", Build.MODEL);
+        device.put("brand", Build.BRAND);
+        device.put("screen", screen);
+
+        return device;
+    }
 }
