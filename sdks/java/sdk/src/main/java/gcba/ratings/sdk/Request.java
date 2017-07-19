@@ -1,6 +1,8 @@
 package gcba.ratings.sdk;
 
 import java.util.HashMap;
+
+import android.content.res.Resources;
 import android.os.Build;
 
 /**
@@ -19,7 +21,15 @@ class Request {
         this.platform.put("key", platform);
         this.platform.put("version", String.valueOf(Build.VERSION.SDK_INT));
 
+        HashMap<String, Integer> screen = new HashMap<String, Integer>();
+        screen.put("width", Resources.getSystem().getDisplayMetrics().widthPixels);
+        screen.put("height", Resources.getSystem().getDisplayMetrics().heightPixels);
+        screen.put("ppi", Math.round(Resources.getSystem().getDisplayMetrics().densityDpi));
+
         this.device = new HashMap<String, Object>();
+        this.device.put("name", Build.MODEL);
+        this.device.put("brand", Build.BRAND);
+        this.device.put("screen", screen);
 
         this.user = new HashMap<String, String>();
     }
@@ -32,8 +42,4 @@ class Request {
     public HashMap<String, String> platform;
     public HashMap<String, Object> device;
     public HashMap<String, String> user;
-
-    public String toJSON() {
-        return "";
-    }
 }
