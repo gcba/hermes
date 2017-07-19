@@ -5,7 +5,7 @@ package gcba.ratings.sdk;
  */
 
 public final class Rating {
-    public static void main(String[] args) {
-        System.out.println("Hello World!");
+    Rating() {
+
     }
 }

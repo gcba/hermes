@@ -11,6 +11,10 @@ import android.os.Build;
 
 class Request {
     Request(String app, String platform, String range) {
+        if (app == null) throw new IllegalArgumentException("app can't be null");
+        if (platform == null) throw new IllegalArgumentException("platform can't be null");
+        if (range == null) throw new IllegalArgumentException("range can't be null");
+
         this.range = range;
 
         this.app = new HashMap<String, String>();

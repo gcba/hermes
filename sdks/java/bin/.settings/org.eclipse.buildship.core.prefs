@@ -1,0 +1,2 @@
+connection.gradle.distribution=GRADLE_DISTRIBUTION(WRAPPER)
+eclipse.preferences.version=1
