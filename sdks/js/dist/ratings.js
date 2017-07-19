@@ -1914,7 +1914,7 @@ const validate = {
     }
 };
 
-class Complaint {
+class Rating {
     constructor(options) {
         validate.options(options);
 
@@ -2047,7 +2047,7 @@ class Complaint {
     }
 }
 
-return Complaint;
+return Rating;
 
 })));
 //# sourceMappingURL=ratings.js.map
