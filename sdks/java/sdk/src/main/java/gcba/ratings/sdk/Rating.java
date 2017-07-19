@@ -1,5 +1,9 @@
 package gcba.ratings.sdk;
 
+import android.util.Log;
+
+import com.google.gson.Gson;
+
 import java.util.HashMap;
 
 /**
@@ -14,7 +18,7 @@ public final class Rating {
         validateKey(range, "range");
         validateToken(token);
 
-        this.url = api.trim();
+        this.url = getUrl(api.trim());
         this.app = app.trim();
         this.platform = platform.trim();
         this.range = range.trim();
@@ -73,6 +77,10 @@ public final class Rating {
         if (comment.trim().length() > 1000) throw new IllegalArgumentException("comment too long");
     }
 
+    private String getUrl(String url) {
+        return url.charAt(url.length() - 1) == '/' ? url + "ratings"  : url + "/ratings";
+    }
+
     public void setUser(String name, String email, String mibaId) {
         if (!(name != null || email != null || mibaId != null)) throw new IllegalArgumentException("user parameters can't all be null");
         if (email == null && mibaId == null) throw new IllegalArgumentException("user has no valid email or mibaId");
@@ -100,6 +108,10 @@ public final class Rating {
 
         request = new Request();
         request.rating = rating;
+        request.range = range;
+
+        request.app.put("key", app);
+        request.platform.put("key", platform);
 
         if (description != null) {
             validateDescription(description);
@@ -117,6 +129,12 @@ public final class Rating {
     }
 
     private void send(Request request) {
+        Gson gson;
+        String json;
 
+        gson = new Gson();
+        json = gson.toJson(request);
+
+        Log.d("JSON", json);
     }
 }
