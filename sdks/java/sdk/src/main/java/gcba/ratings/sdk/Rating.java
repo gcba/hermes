@@ -1,8 +1,9 @@
 package gcba.ratings.sdk;
 
-import android.util.Log;
-
+import com.goebl.david.Response;
+import com.goebl.david.Webb;
 import com.google.gson.Gson;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 
@@ -11,19 +12,18 @@ import java.util.HashMap;
  */
 
 public final class Rating {
-    Rating(String api, String app, String platform, String range, String token) {
+    public Rating(String api, String app, String platform, String range, String token) {
         validateUrl(api);
         validateKey(app, "app");
         validateKey(platform, "platform");
         validateKey(range, "range");
         validateToken(token);
 
-        this.url = getUrl(api.trim());
+        this.url = api.trim();
         this.app = app.trim();
         this.platform = platform.trim();
         this.range = range.trim();
         this.token = token.trim();
-        this.user = new HashMap<String, String>();
     }
 
     private String url;
@@ -63,7 +63,7 @@ public final class Rating {
         if (mibaId.trim().length() < 1) throw new IllegalArgumentException("mibaId too short");
     }
 
-    private void validateRating(byte rating) {
+    private void validateRating(int rating) {
         if (rating < -127) throw new IllegalArgumentException("invalid rating");
     }
 
@@ -77,34 +77,8 @@ public final class Rating {
         if (comment.trim().length() > 1000) throw new IllegalArgumentException("comment too long");
     }
 
-    private String getUrl(String url) {
-        return url.charAt(url.length() - 1) == '/' ? url + "ratings"  : url + "/ratings";
-    }
-
-    public void setUser(String name, String email, String mibaId) {
-        if (!(name != null || email != null || mibaId != null)) throw new IllegalArgumentException("user parameters can't all be null");
-        if (email == null && mibaId == null) throw new IllegalArgumentException("user has no valid email or mibaId");
-
-        if (name != null) {
-            validateName(name);
-            user.put("name", name.trim());
-        }
-
-        if (email != null) {
-            validateEmail(email);
-            user.put("email", email.trim());
-        }
-
-        if (mibaId != null) {
-            validateMibaId(mibaId);
-            user.put("mibaId", mibaId.trim());
-        }
-    }
-
-    public void create(byte rating, String description, String comment) {
+    private Request getRequest(int rating) {
         Request request;
-
-        validateRating(rating);
 
         request = new Request();
         request.rating = rating;
@@ -112,6 +86,82 @@ public final class Rating {
 
         request.app.put("key", app);
         request.platform.put("key", platform);
+
+        return request;
+    }
+
+    private JSONObject send(Request request) throws Error {
+        Webb webb;
+        Gson gson;
+        String json;
+        Response<JSONObject> response;
+
+        webb = Webb.create();
+        gson = new Gson();
+        json = gson.toJson(request);
+
+        webb.setBaseUri(url);
+
+        try{
+            response = webb
+                    .post("/ratings")
+                    .header("Content-Type", "application/json; charset=UTF-8")
+                    .header("Accept", "application/json")
+                    .header("Authorization", "Bearer " + token)
+                    .body(json)
+                    .retry(3, false)
+                    .asJsonObject();
+        } catch(Error e) {
+            throw e;
+        }
+
+        return response.getBody();
+    }
+
+    public void setUser(String name, String mibaId) {
+        setUser(name, mibaId, null);
+    }
+
+    public void setUser(String name, String mibaId, String email) {
+        HashMap<String, String> newUser;
+
+        if (!(name != null || email != null || mibaId != null)) throw new IllegalArgumentException("user parameters can't all be null");
+        if (email == null && mibaId == null) throw new IllegalArgumentException("user has no valid email or mibaId");
+
+        newUser = new HashMap<String, String>();
+
+        if (name != null) {
+            validateName(name);
+            newUser.put("name", name.trim());
+        }
+
+        if (mibaId != null) {
+            validateMibaId(mibaId);
+            newUser.put("mibaId", mibaId.trim());
+        }
+
+        if (email != null) {
+            validateEmail(email);
+            newUser.put("email", email.trim());
+        }
+
+        user = newUser;
+    }
+
+    public JSONObject create(int rating) {
+        return create(rating, null, null);
+    }
+
+    public JSONObject create(int rating, String description) {
+        return create(rating, description, null);
+    }
+
+    public JSONObject create(int rating, String description, String comment) {
+        Request request;
+
+        validateRating(rating);
+
+        request = getRequest(rating);
 
         if (description != null) {
             validateDescription(description);
@@ -125,16 +175,10 @@ public final class Rating {
             request.comment = comment.trim();
         }
 
-        send(request);
-    }
+        if (user != null) {
+            request.user = user;
+        }
 
-    private void send(Request request) {
-        Gson gson;
-        String json;
-
-        gson = new Gson();
-        json = gson.toJson(request);
-
-        Log.d("JSON", json);
+        return send(request);
     }
 }

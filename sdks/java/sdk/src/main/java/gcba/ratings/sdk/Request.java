@@ -14,10 +14,9 @@ final class Request {
         this.app = getApp();
         this.platform = getPlatform();
         this.device = getDevice();
-        this.user = new HashMap<String, String>();
     }
 
-    byte rating;
+    int rating;
     String description;
     String comment;
     String range;
@@ -29,7 +28,7 @@ final class Request {
     private HashMap<String, String> getApp() {
         HashMap<String, String> app = new HashMap<String, String>();
 
-        app.put("version", String.valueOf(Build.VERSION.RELEASE));
+        app.put("version", String.valueOf(BuildConfig.VERSION_CODE));
 
         return app;
     }
@@ -37,7 +36,7 @@ final class Request {
     private HashMap<String, String> getPlatform() {
         HashMap<String, String> platform = new HashMap<String, String>();
 
-        platform.put("version", String.valueOf(Build.VERSION.SDK_INT));
+        platform.put("version", String.valueOf(Build.VERSION.RELEASE));
 
         return platform;
     }
