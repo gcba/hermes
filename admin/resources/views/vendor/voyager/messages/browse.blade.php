@@ -5,6 +5,11 @@
 @section('page_header')
     <h1 class="page-title">
         <i class="{{ $dataType->icon }}"></i> {{ $dataType->display_name_plural }}
+        @if (Voyager::can('add_'.$dataType->name))
+            <a href="{{ route('voyager.'.$dataType->slug.'.create') }}" class="btn btn-success">
+                <i class="voyager-plus"></i> {{ __('voyager.generic.add_new') }}
+            </a>
+        @endif
     </h1>
     @include('voyager::multilingual.language-selector')
 @stop
@@ -90,20 +95,11 @@
             $('#dataTable').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: '{!! route('ratings.api') !!}',
+                ajax: '{!! route('messages.api') !!}',
                 columns: [
-                    { data: 'rating', name: 'rating' },
-                    { data: 'range_id', name: 'range_id' },
-                    { data: 'description', name: 'description' },
-                    { data: 'has_message', name: 'has_message' },
-                    { data: 'app_id', name: 'app_id' },
-                    { data: 'app_version', name: 'app_version' },
-                    { data: 'platform_id', name: 'platform_id' },
-                    { data: 'platform_version', name: 'platform_version' },
-                    { data: 'browser_id', name: 'browser_id' },
-                    { data: 'browser_version', name: 'browser_version' },
-                    { data: 'appuser_id', name: 'appuser_id' },
-                    { data: 'device_id', name: 'device_id' },
+                    { data: 'message', name: 'message' },
+                    { data: 'direction', name: 'direction' },
+                    { data: 'rating_id', name: 'rating_id' },
                     { data: 'created_at', name: 'created_at' },
                     { data: 'updated_at', name: 'updated_at' }
                 ]

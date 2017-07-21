@@ -10,26 +10,6 @@ use Validator;
 
 class Controller extends BreadController
 {
-    /**
-    * Process datatables ajax request.
-    *
-    * @return \Illuminate\Http\JsonResponse
-    */
-    public function ratingsAPI(Request $request)
-    {
-        return Datatables::of(\App\Rating::query())->make(true);
-    }
-
-    /**
-    * Process datatables ajax request.
-    *
-    * @return \Illuminate\Http\JsonResponse
-    */
-    public function messagesAPI(Request $request)
-    {
-        return Datatables::of(\App\Message::query())->make(true);
-    }
-
     // From Voyager's VoyagerBreadController.php, customized
 
     // POST BRE(A)D
@@ -92,27 +72,5 @@ class Controller extends BreadController
                     'alert-type' => 'success',
                 ]);
         }
-    }
-}
-
-class ServerSideController extends Controller {
-    public function index(Request $request)
-    {
-        $slug = $this->getSlug($request);
-        $dataType = Voyager::model('DataType')->where('slug', '=', $slug)->first();
-
-        // Check permission
-        Voyager::canOrFail('browse_'.$dataType->name);
-
-        $dataTypeContent = collect(new $dataType);
-        $isModelTranslatable = is_bread_translatable($model);
-
-        $view = 'voyager::bread.browse';
-
-        if (view()->exists("voyager::$slug.browse")) {
-            $view = "voyager::$slug.browse";
-        }
-
-        return view($view, compact('dataType', 'dataTypeContent', 'isModelTranslatable'));
     }
 }

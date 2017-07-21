@@ -99,10 +99,10 @@ class DataTypesTableSeeder extends Seeder
                 'slug'                  => 'devices',
                 'icon'                  => 'voyager-phone',
                 'model_name'            => 'App\\Device',
-                'controller'            => 'Controller',
+                'controller'            => 'ServerSideController',
                 'generate_permissions'  => 0,
                 'description'           => 'Dispositivos móviles',
-                'server_side'           => 1
+                'server_side'           => 0
             ])->save();
         }
 
@@ -115,10 +115,10 @@ class DataTypesTableSeeder extends Seeder
                 'slug'                  => 'messages',
                 'icon'                  => 'voyager-chat',
                 'model_name'            => 'App\\Message',
-                'controller'            => 'Controller',
+                'controller'            => 'ServerSideController',
                 'generate_permissions'  => 0,
                 'description'           => 'Mensajes',
-                'server_side'           => 1
+                'server_side'           => 0
             ])->save();
         }
 

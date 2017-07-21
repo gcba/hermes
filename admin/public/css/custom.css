@@ -1,3 +1,7 @@
 .panel {
     padding-left: 20px;
 }
+
+.dataTables_wrapper .row:last-of-type {
+    margin-bottom: 0px;
+}
