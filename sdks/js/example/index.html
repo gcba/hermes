@@ -47,24 +47,26 @@
                 </div>
                 <div class="uk-width-2-5">
                     <div class="uk-card-body">
-                        <form>
+                        <form id="form">
                             <fieldset class="uk-fieldset">
                                 <div class="uk-margin">
-                                    <input class="uk-input" type="number" placeholder="Rating">
+                                    <input id="rating" class="uk-input" type="number" placeholder="Rating" required>
                                 </div>
                                 <div class="uk-margin">
-                                    <input class="uk-input" type="text" placeholder="Descripción">
+                                    <input id="description" class="uk-input" type="text" placeholder="Descripción">
                                 </div>
                                 <div class="uk-margin">
-                                    <input class="uk-input" type="text" placeholder="Comentario">
+                                    <input id="comment" class="uk-input" type="text" placeholder="Comentario">
                                 </div>
                             </fieldset>
-                            <button class="uk-button uk-button-primary uk-width-1-1">
+                            <button id="submit" class="uk-button uk-button-primary uk-width-1-1">
                                 Enviar
                             </button>
                         </form>
-                        <div class="uk-card-media-bottom uk-text-small uk-text-break" uk-alert>
-                            Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet
+                        <div id="result" class="uk-card-media-bottom uk-text-small uk-text-break" uk-alert>
+                            <p id="result-code"><strong>Code:</strong> <span></span></p>
+                            <p id="result-message"><strong>Message:</strong> <span></span></p>
+                            <p id="result-errors"><strong>Errors:</strong> <span ></span></p>
                         </div>
                     </div>
                 </div>
