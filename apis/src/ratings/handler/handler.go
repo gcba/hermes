@@ -2,6 +2,7 @@ package handler
 
 import (
 	"net/http"
+	"os"
 	"strconv"
 	"strings"
 
@@ -148,6 +149,7 @@ func isValidCharacterEncoding(context echo.Context) bool {
 func Handler(port int, handlers map[string]echo.HandlerFunc) http.Handler {
 	e := echo.New()
 	validate := validator.New()
+	env := os.Getenv("API_RATINGS_ENV")
 
 	parser.RegisterCustomValidators(validate)
 
@@ -164,7 +166,12 @@ func Handler(port int, handlers map[string]echo.HandlerFunc) http.Handler {
 	e.OPTIONS("/ratings", handlers["OptionsRatings"])
 	e.POST("/ratings", handlers["PostRatings"])
 
-	e.Logger.SetLevel(log.ERROR)
+	if env == "DEV" {
+		e.Logger.SetLevel(log.DEBUG)
+		e.Debug = true
+	} else {
+		e.Logger.SetLevel(log.ERROR)
+	}
 
 	e.Server.Addr = ":" + strconv.Itoa(port)
 	e.HTTPErrorHandler = responses.ErrorHandler
