@@ -4,20 +4,13 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"path"
-	"path/filepath"
 
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres" // postgres driver
-	"github.com/joho/godotenv"
 )
 
 // Load enviroment variables
 var (
-	rootPath, _ = filepath.Abs(".")
-	envPath     = path.Join(rootPath, ".env")
-	envErr      = godotenv.Load(envPath)
-
 	// Load read database settings
 	readDBPort     = os.Getenv("API_RATINGS_READDB_PORT")
 	readDBHost     = os.Getenv("API_RATINGS_READDB_HOST")
@@ -64,10 +57,6 @@ func getDB(host string, port string, db string, user string, password string) *g
 }
 
 func connectDB(driver string, credentials string) *gorm.DB {
-	if envErr != nil {
-		log.Fatal("Error loading .env file: ", envErr.Error())
-	}
-
 	db, dbErr := gorm.Open(driver, credentials)
 
 	if dbErr != nil {
