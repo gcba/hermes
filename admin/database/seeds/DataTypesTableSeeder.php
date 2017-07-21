@@ -163,7 +163,7 @@ class DataTypesTableSeeder extends Seeder
                 'slug'                  => 'ratings',
                 'icon'                  => 'voyager-star-two',
                 'model_name'            => 'App\\Rating',
-                'controller'            => 'Controller',
+                'controller'            => 'ServerSideController',
                 'generate_permissions'  => 0,
                 'description'           => 'Calificaciones',
                 'server_side'           => 0

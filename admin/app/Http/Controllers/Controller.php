@@ -94,3 +94,25 @@ class Controller extends BreadController
         }
     }
 }
+
+class ServerSideController extends Controller {
+    public function index(Request $request)
+    {
+        $slug = $this->getSlug($request);
+        $dataType = Voyager::model('DataType')->where('slug', '=', $slug)->first();
+
+        // Check permission
+        Voyager::canOrFail('browse_'.$dataType->name);
+
+        $dataTypeContent = collect(new $dataType);
+        $isModelTranslatable = is_bread_translatable($model);
+
+        $view = 'voyager::bread.browse';
+
+        if (view()->exists("voyager::$slug.browse")) {
+            $view = "voyager::$slug.browse";
+        }
+
+        return view($view, compact('dataType', 'dataTypeContent', 'isModelTranslatable'));
+    }
+}
