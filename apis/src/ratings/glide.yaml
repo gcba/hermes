@@ -5,8 +5,6 @@ import:
   subpackages:
   - '...'
 - package: github.com/jinzhu/gorm
-- package: github.com/joho/godotenv
-  version: ^1.1.0
 - package: github.com/stretchr/testify
 - package: github.com/lib/pq
 - package: github.com/facebookgo/grace

@@ -1,5 +1,5 @@
-hash: 747b5d73dfb3452e07d44cc0179651ae7587dfecd5b40b0b01b9a5a9baaffb52
-updated: 2017-07-08T01:28:58.202791347-03:00
+hash: f2d9569a6902a94122a29bffa3c9a8958b5fdf3c06e8618cdf082868a5100436
+updated: 2017-07-21T16:20:05.252511794-03:00
 imports:
 - name: github.com/ajg/form
   version: cc2954064ec9ea8d93917f0f87456e11d7b881ad
@@ -36,10 +36,6 @@ imports:
   - dialects/postgres
 - name: github.com/jinzhu/inflection
   version: 1c35d901db3da928c72a72d8458480cc9ade058f
-- name: github.com/joho/godotenv
-  version: 726cc8b906e3d31c70a9671c90a13716a8d3f50d
-  subpackages:
-  - autoload
 - name: github.com/k0kubun/pp
   version: 027a6d1765d673d337e687394dbe780dd64e2a1e
 - name: github.com/labstack/echo
@@ -48,7 +44,7 @@ imports:
   - '...'
   - middleware
 - name: github.com/labstack/gommon
-  version: 1121fd3e243c202482226a7afe4dcd07ffc4139a
+  version: 779b8a8b9850a97acba6a3fe20feb628c39e17c1
   subpackages:
   - bytes
   - color
@@ -106,6 +102,10 @@ testImports:
   - query
 - name: github.com/imkira/go-interpol
   version: 5accad8134979a6ac504d456a6c7f1c53da237ca
+- name: github.com/joho/godotenv
+  version: 726cc8b906e3d31c70a9671c90a13716a8d3f50d
+  subpackages:
+  - autoload
 - name: github.com/klauspost/compress
   version: f3dce52e0576655d55fd69e74b63da96ad1108f3
   subpackages:
