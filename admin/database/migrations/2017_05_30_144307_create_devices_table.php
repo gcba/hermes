@@ -15,7 +15,7 @@ class CreateDevicesTable extends Migration
     {
         Schema::create('devices', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name', 30)->unique();
+            $table->string('name', 63)->unique();
             $table->index('name');
             $table->integer('screen_width');
             $table->integer('screen_height');

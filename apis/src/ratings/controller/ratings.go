@@ -62,11 +62,15 @@ func newMessage(rating uint, db *gorm.DB, frame *frame) error {
 		return errorResponse(frame.context)
 	}
 
-	value := result.Value.(*models.Message)
+	if value, ok := result.Value.(*models.Message); ok {
+		frame.context.Logger().Info("Created a new Message:", value)
 
-	frame.context.Logger().Info("Created a new Message:", value)
+		return nil
+	}
 
-	return nil
+	frame.context.Logger().Error("Error creating a new Message: Could not cast to model instance")
+
+	return errorResponse(frame.context)
 }
 
 /*
@@ -144,15 +148,21 @@ func newRating(dbs *databases, frame *frame) error {
 		return errorResponse(frame.context)
 	}
 
-	value := result.Value.(*models.Rating)
+	if value, ok := result.Value.(*models.Rating); ok {
+		frame.context.Logger().Info("Created a new Rating:", value)
 
-	if rating.HasMessage {
-		if err := newMessage(value.ID, dbs.write, frame); err != nil {
-			frame.context.Logger().Error("Error creating a message: " + err.Error())
+		if rating.HasMessage {
+			if err := newMessage(value.ID, dbs.write, frame); err != nil {
+				frame.context.Logger().Error("Error creating a message: " + err.Error())
 
-			return err
+				return err
+			}
 		}
+
+		return nil
 	}
 
-	return nil
+	frame.context.Logger().Error("Error creating a new Rating: Could not cast to model instance")
+
+	return errorResponse(frame.context)
 }

@@ -242,6 +242,8 @@ func getDevice(brand *models.Brand, platform *models.Platform, dbs *databases, f
 		if brand != nil {
 			device.BrandID = brand.ID
 		}
+	} else if len(getErrorList) > 0 || getResult.Value == nil {
+		return &models.Device{}, errorResponse(frame.context)
 	}
 
 	if result, ok := getResult.Value.(*models.Device); (ok && brand != nil) && (result.BrandID != brand.ID) {
@@ -280,8 +282,6 @@ func getDevice(brand *models.Brand, platform *models.Platform, dbs *databases, f
 			return value, nil
 		}
 
-		return &models.Device{}, errorResponse(frame.context)
-	} else if len(getErrorList) > 0 || getResult.Value == nil {
 		return &models.Device{}, errorResponse(frame.context)
 	}
 
@@ -347,7 +347,7 @@ func getBrand(dbs *databases, frame *frame) (*models.Brand, error) {
 
 func validateRating(from int8, to int8, frame *frame) error {
 	if (frame.request.Rating < from) || (frame.request.Rating > to) {
-		errorMessage := fmt.Sprintf("Error validating rating: %v is not in range(%v, %v)",
+		errorMessage := fmt.Sprintf("Error validating rating: %v is not in range (%v, %v)",
 			frame.request.Rating,
 			from,
 			to)
