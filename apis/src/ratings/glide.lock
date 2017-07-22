@@ -1,5 +1,5 @@
 hash: f2d9569a6902a94122a29bffa3c9a8958b5fdf3c06e8618cdf082868a5100436
-updated: 2017-07-21T16:20:05.252511794-03:00
+updated: 2017-07-21T23:57:58.244795663-03:00
 imports:
 - name: github.com/ajg/form
   version: cc2954064ec9ea8d93917f0f87456e11d7b881ad
@@ -126,7 +126,7 @@ testImports:
   subpackages:
   - diffmatchpatch
 - name: github.com/valyala/fasthttp
-  version: 498431ce67adb2a2154fb1aad7a35736964c2878
+  version: ae643c872d2c060154a4fb2162dc1c0ab1693ccd
   subpackages:
   - fasthttputil
   - stackless
