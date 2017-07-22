@@ -33,20 +33,27 @@ func errorResponse(context echo.Context) error {
 * App
 *
  */
-func getApp(db *gorm.DB, frame *frame) (*models.App, error) {
+func getApp(db *gorm.DB, frame *frame, channel chan appResult) {
 	result := models.GetApp(frame.request.App.Key, db)
-
 	errorList := result.GetErrors()
+	resultStruct := appResult{}
 
 	if len(errorList) > 0 || result.Value == nil {
-		return &models.App{}, errorResponse(frame.context)
+		resultStruct.err = errorResponse(frame.context)
+		channel <- resultStruct
+
+		return
 	}
 
 	if value, ok := result.Value.(*models.App); ok {
-		return value, nil
+		resultStruct.value = value
+		channel <- resultStruct
+
+		return
 	}
 
-	return &models.App{}, errorResponse(frame.context)
+	resultStruct.err = errorResponse(frame.context)
+	channel <- resultStruct
 }
 
 /*
@@ -54,19 +61,27 @@ func getApp(db *gorm.DB, frame *frame) (*models.App, error) {
 * Platform
 *
  */
-func getPlatform(db *gorm.DB, frame *frame) (*models.Platform, error) {
+func getPlatform(db *gorm.DB, frame *frame, channel chan platformResult) {
 	result := models.GetPlatform(frame.request.Platform.Key, db)
 	errorList := result.GetErrors()
+	resultStruct := platformResult{}
 
 	if len(errorList) > 0 || result.Value == nil {
-		return &models.Platform{}, errorResponse(frame.context)
+		resultStruct.err = errorResponse(frame.context)
+		channel <- resultStruct
+
+		return
 	}
 
 	if value, ok := result.Value.(*models.Platform); ok {
-		return value, nil
+		resultStruct.value = value
+		channel <- resultStruct
+
+		return
 	}
 
-	return &models.Platform{}, errorResponse(frame.context)
+	resultStruct.err = errorResponse(frame.context)
+	channel <- resultStruct
 }
 
 /*
@@ -74,19 +89,27 @@ func getPlatform(db *gorm.DB, frame *frame) (*models.Platform, error) {
 * Range
 *
  */
-func getRange(db *gorm.DB, frame *frame) (*models.Range, error) {
+func getRange(db *gorm.DB, frame *frame, channel chan rangeResult) {
 	result := models.GetRange(frame.request.Range, db)
 	errorList := result.GetErrors()
+	resultStruct := rangeResult{}
 
 	if len(errorList) > 0 || result.Value == nil {
-		return &models.Range{}, errorResponse(frame.context)
+		resultStruct.err = errorResponse(frame.context)
+		channel <- resultStruct
+
+		return
 	}
 
 	if value, ok := result.Value.(*models.Range); ok {
-		return value, nil
+		resultStruct.value = value
+		channel <- resultStruct
+
+		return
 	}
 
-	return &models.Range{}, errorResponse(frame.context)
+	resultStruct.err = errorResponse(frame.context)
+	channel <- resultStruct
 }
 
 /*

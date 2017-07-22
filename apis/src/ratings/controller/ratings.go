@@ -73,37 +73,68 @@ func newMessage(rating uint, db *gorm.DB, frame *frame) error {
 	return errorResponse(frame.context)
 }
 
+type appResult struct {
+	value *models.App
+	err   error
+}
+
+type platformResult struct {
+	value *models.Platform
+	err   error
+}
+
+type rangeResult struct {
+	value *models.Range
+	err   error
+}
+
 /*
 *
 * Rating
 *
  */
 func newRating(dbs *databases, frame *frame) error {
-	app, appErr := getApp(dbs.read, frame)
+	appChannel := make(chan appResult)
+	platformChannel := make(chan platformResult)
+	rangeChannel := make(chan rangeResult)
 
-	if appErr != nil {
-		frame.context.Logger().Error("Error getting app: " + appErr.Error())
+	defer close(appChannel)
+	defer close(platformChannel)
+	defer close(rangeChannel)
 
-		return appErr
+	go getApp(dbs.read, frame, appChannel)
+	go getPlatform(dbs.read, frame, platformChannel)
+	go getRange(dbs.read, frame, rangeChannel)
+
+	app, appOk := <-appChannel
+	platform, platformOk := <-platformChannel
+	rangeRecord, rangeOk := <-rangeChannel
+
+	if !appOk || !platformOk || !rangeOk {
+		frame.context.Logger().Error("Channel closed")
+
+		return errorResponse(frame.context)
 	}
 
-	platform, platformErr := getPlatform(dbs.read, frame)
+	if app.err != nil {
+		frame.context.Logger().Error("Error getting app: " + app.err.Error())
 
-	if platformErr != nil {
-		frame.context.Logger().Error("Error getting platform: " + platformErr.Error())
-
-		return platformErr
+		return app.err
 	}
 
-	rangeRecord, rangeErr := getRange(dbs.read, frame)
+	if platform.err != nil {
+		frame.context.Logger().Error("Error getting platform: " + platform.err.Error())
 
-	if rangeErr != nil {
-		frame.context.Logger().Error("Error getting range: " + rangeErr.Error())
-
-		return rangeErr
+		return platform.err
 	}
 
-	if err := validateRating(rangeRecord.From, rangeRecord.To, frame); err != nil {
+	if rangeRecord.err != nil {
+		frame.context.Logger().Error("Error getting range: " + rangeRecord.err.Error())
+
+		return rangeRecord.err
+	}
+
+	if err := validateRating(rangeRecord.value.From, rangeRecord.value.To, frame); err != nil {
 		frame.context.Logger().Error("Error validating rating: " + err.Error())
 
 		return err
@@ -115,11 +146,11 @@ func newRating(dbs *databases, frame *frame) error {
 		AppVersion:      frame.request.App.Version,
 		PlatformVersion: frame.request.Platform.Version,
 		HasMessage:      hasMessage(frame.request),
-		AppID:           app.ID,
-		RangeID:         rangeRecord.ID,
-		PlatformID:      platform.ID}
+		AppID:           app.value.ID,
+		RangeID:         rangeRecord.value.ID,
+		PlatformID:      platform.value.ID}
 
-	if err := attachDevice(rating, platform, dbs, frame); err != nil {
+	if err := attachDevice(rating, platform.value, dbs, frame); err != nil {
 		frame.context.Logger().Error("Error attaching device: " + err.Error())
 
 		return err
