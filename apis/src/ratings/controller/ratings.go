@@ -10,6 +10,23 @@ import (
 	"github.com/labstack/echo"
 )
 
+type (
+	appResult struct {
+		value *models.App
+		err   error
+	}
+
+	platformResult struct {
+		value *models.Platform
+		err   error
+	}
+
+	rangeResult struct {
+		value *models.Range
+		err   error
+	}
+)
+
 // OptionsRatings returns the response of the `OPTIONS /ratings` endpoint
 func OptionsRatings(context echo.Context) error {
 	endpoints := []responses.Endpoint{responses.Endpoints["PostRatings"]}
@@ -71,21 +88,6 @@ func newMessage(rating uint, db *gorm.DB, frame *frame) error {
 	frame.context.Logger().Error("Error creating a new Message: Could not cast to model instance")
 
 	return errorResponse(frame.context)
-}
-
-type appResult struct {
-	value *models.App
-	err   error
-}
-
-type platformResult struct {
-	value *models.Platform
-	err   error
-}
-
-type rangeResult struct {
-	value *models.Range
-	err   error
 }
 
 /*
