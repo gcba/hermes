@@ -152,25 +152,64 @@ func newRating(dbs *databases, frame *frame) error {
 		RangeID:         rangeRecord.value.ID,
 		PlatformID:      platform.value.ID}
 
-	if err := attachDevice(rating, platform.value, dbs, frame); err != nil {
-		frame.context.Logger().Error("Error attaching device: " + err.Error())
+	attachDeviceChannel := make(chan error)
+	defer close(attachDeviceChannel)
 
-		return err
+	go attachDevice(rating, platform.value, dbs, frame, attachDeviceChannel)
+
+	deviceError, deviceOk := <-attachDeviceChannel
+
+	if deviceError != nil {
+		frame.context.Logger().Error("Error attaching device: " + deviceError.Error())
+
+		return deviceError
+	}
+
+	if !deviceOk {
+		frame.context.Logger().Error("Channel closed")
+
+		return errorResponse(frame.context)
 	}
 
 	if hasAppUser(frame.request) {
-		if err := attachAppUser(rating, dbs, frame); err != nil {
-			frame.context.Logger().Error("Error attaching appuser: " + err.Error())
+		attachAppUserChannel := make(chan error)
+		defer close(attachAppUserChannel)
 
-			return err
+		go attachAppUser(rating, dbs, frame, attachAppUserChannel)
+
+		appUserError, appUserOk := <-attachAppUserChannel
+
+		if appUserError != nil {
+			frame.context.Logger().Error("Error attaching appuser: " + appUserError.Error())
+
+			return appUserError
+		}
+
+		if !appUserOk {
+			frame.context.Logger().Error("Channel closed")
+
+			return errorResponse(frame.context)
 		}
 	}
 
 	if hasBrowser(frame.request) {
-		if err := attachBrowser(rating, dbs, frame); err != nil {
-			frame.context.Logger().Error("Error attaching browser: " + err.Error())
+		attachBrowserChannel := make(chan error)
+		defer close(attachBrowserChannel)
 
-			return err
+		go attachBrowser(rating, dbs, frame, attachBrowserChannel)
+
+		browserError, browserOk := <-attachBrowserChannel
+
+		if browserError != nil {
+			frame.context.Logger().Error("Error attaching browser: " + browserError.Error())
+
+			return browserError
+		}
+
+		if !browserOk {
+			frame.context.Logger().Error("Channel closed")
+
+			return errorResponse(frame.context)
 		}
 	}
 

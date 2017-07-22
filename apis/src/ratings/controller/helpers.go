@@ -172,14 +172,14 @@ func getAppUser(dbs *databases, frame *frame) (*models.AppUser, error) {
 	return &models.AppUser{}, errorResponse(frame.context)
 }
 
-func attachAppUser(rating *models.Rating, dbs *databases, frame *frame) error {
+func attachAppUser(rating *models.Rating, dbs *databases, frame *frame, channel chan error) {
 	appUser, err := getAppUser(dbs, frame)
 
 	if err == nil {
 		rating.AppUserID = appUser.ID
 	}
 
-	return err
+	channel <- err
 }
 
 /*
@@ -222,17 +222,15 @@ func getBrowser(dbs *databases, frame *frame) (*models.Browser, error) {
 	return &models.Browser{}, errorResponse(frame.context)
 }
 
-func attachBrowser(rating *models.Rating, dbs *databases, frame *frame) error {
+func attachBrowser(rating *models.Rating, dbs *databases, frame *frame, channel chan error) {
 	browser, err := getBrowser(dbs, frame)
 
 	if err == nil {
 		rating.BrowserID = browser.ID
 		rating.BrowserVersion = frame.request.Browser.Version
-
-		return err
 	}
 
-	return nil
+	channel <- err
 }
 
 /*
@@ -315,7 +313,7 @@ func getDevice(brand *models.Brand, platform *models.Platform, dbs *databases, f
 	return &models.Device{}, errorResponse(frame.context)
 }
 
-func attachDevice(rating *models.Rating, platform *models.Platform, dbs *databases, frame *frame) error {
+func attachDevice(rating *models.Rating, platform *models.Platform, dbs *databases, frame *frame, channel chan error) {
 	var brand *models.Brand
 	var brandErr error
 
@@ -323,7 +321,9 @@ func attachDevice(rating *models.Rating, platform *models.Platform, dbs *databas
 		brand, brandErr = getBrand(dbs, frame)
 
 		if brandErr != nil {
-			return brandErr
+			channel <- brandErr
+
+			return
 		}
 	}
 
@@ -333,7 +333,7 @@ func attachDevice(rating *models.Rating, platform *models.Platform, dbs *databas
 		rating.DeviceID = device.ID
 	}
 
-	return deviceErr
+	channel <- deviceErr
 }
 
 /*
