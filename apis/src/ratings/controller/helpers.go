@@ -55,20 +55,26 @@ func getApp(db *gorm.DB, frame *frame, channel chan appResult) {
 
 	if len(errorList) > 0 || result.Value == nil {
 		resultStruct.err = errorResponse(frame.context)
+
 		channel <- resultStruct
+		close(channel)
 
 		return
 	}
 
 	if value, ok := result.Value.(*models.App); ok {
 		resultStruct.value = value
+
 		channel <- resultStruct
+		close(channel)
 
 		return
 	}
 
 	resultStruct.err = errorResponse(frame.context)
+
 	channel <- resultStruct
+	close(channel)
 }
 
 /*
@@ -83,20 +89,26 @@ func getPlatform(db *gorm.DB, frame *frame, channel chan platformResult) {
 
 	if len(errorList) > 0 || result.Value == nil {
 		resultStruct.err = errorResponse(frame.context)
+
 		channel <- resultStruct
+		close(channel)
 
 		return
 	}
 
 	if value, ok := result.Value.(*models.Platform); ok {
 		resultStruct.value = value
+
 		channel <- resultStruct
+		close(channel)
 
 		return
 	}
 
 	resultStruct.err = errorResponse(frame.context)
+
 	channel <- resultStruct
+	close(channel)
 }
 
 /*
@@ -111,20 +123,26 @@ func getRange(db *gorm.DB, frame *frame, channel chan rangeResult) {
 
 	if len(errorList) > 0 || result.Value == nil {
 		resultStruct.err = errorResponse(frame.context)
+
 		channel <- resultStruct
+		close(channel)
 
 		return
 	}
 
 	if value, ok := result.Value.(*models.Range); ok {
 		resultStruct.value = value
+
 		channel <- resultStruct
+		close(channel)
 
 		return
 	}
 
 	resultStruct.err = errorResponse(frame.context)
+
 	channel <- resultStruct
+	close(channel)
 }
 
 /*
@@ -195,6 +213,7 @@ func attachAppUser(rating *models.Rating, dbs *databases, frame *frame, channel 
 	}
 
 	channel <- err
+	close(channel)
 }
 
 /*
@@ -246,6 +265,7 @@ func attachBrowser(rating *models.Rating, dbs *databases, frame *frame, channel 
 	}
 
 	channel <- err
+	close(channel)
 }
 
 /*
@@ -337,6 +357,7 @@ func attachDevice(rating *models.Rating, platform *models.Platform, dbs *databas
 
 		if brandErr != nil {
 			channel <- brandErr
+			close(channel)
 
 			return
 		}
@@ -349,6 +370,7 @@ func attachDevice(rating *models.Rating, platform *models.Platform, dbs *databas
 	}
 
 	channel <- deviceErr
+	close(channel)
 }
 
 /*
@@ -392,10 +414,6 @@ func buildRating(dbs *databases, frame *frame) (*models.Rating, *models.Platform
 	appChannel := make(chan appResult)
 	platformChannel := make(chan platformResult)
 	rangeChannel := make(chan rangeResult)
-
-	defer close(appChannel)
-	defer close(platformChannel)
-	defer close(rangeChannel)
 
 	go getApp(dbs.read, frame, appChannel)
 	go getPlatform(dbs.read, frame, platformChannel)
@@ -456,6 +474,68 @@ func validateRating(from int8, to int8, frame *frame) error {
 			to)
 
 		return responses.ErrorResponse(http.StatusUnprocessableEntity, errorMessage, frame.context)
+	}
+
+	return nil
+}
+
+func attachFields(rating *models.Rating, platform *models.Platform, dbs *databases, frame *frame) error {
+	attachDeviceChannel := make(chan error)
+
+	go attachDevice(rating, platform, dbs, frame, attachDeviceChannel)
+
+	deviceError, deviceOk := <-attachDeviceChannel
+
+	if deviceError != nil {
+		frame.context.Logger().Error("Error attaching device: " + deviceError.Error())
+
+		return deviceError
+	}
+
+	if !deviceOk {
+		frame.context.Logger().Error("Channel closed")
+
+		return errorResponse(frame.context)
+	}
+
+	if hasAppUser(frame.request) {
+		attachAppUserChannel := make(chan error)
+
+		go attachAppUser(rating, dbs, frame, attachAppUserChannel)
+
+		appUserError, appUserOk := <-attachAppUserChannel
+
+		if appUserError != nil {
+			frame.context.Logger().Error("Error attaching appuser: " + appUserError.Error())
+
+			return appUserError
+		}
+
+		if !appUserOk {
+			frame.context.Logger().Error("Channel closed")
+
+			return errorResponse(frame.context)
+		}
+	}
+
+	if hasBrowser(frame.request) {
+		attachBrowserChannel := make(chan error)
+
+		go attachBrowser(rating, dbs, frame, attachBrowserChannel)
+
+		browserError, browserOk := <-attachBrowserChannel
+
+		if browserError != nil {
+			frame.context.Logger().Error("Error attaching browser: " + browserError.Error())
+
+			return browserError
+		}
+
+		if !browserOk {
+			frame.context.Logger().Error("Channel closed")
+
+			return errorResponse(frame.context)
+		}
 	}
 
 	return nil

@@ -79,71 +79,16 @@ func newMessage(rating uint, db *gorm.DB, frame *frame) error {
 *
  */
 func newRating(dbs *databases, frame *frame) error {
-	rating, platform, err := buildRating(dbs, frame)
+	rating, platform, buildErr := buildRating(dbs, frame)
 
-	if err != nil {
+	if buildErr != nil {
 		return errorResponse(frame.context)
 	}
 
-	attachDeviceChannel := make(chan error)
-	defer close(attachDeviceChannel)
+	attachErr := attachFields(rating, platform, dbs, frame)
 
-	go attachDevice(rating, platform, dbs, frame, attachDeviceChannel)
-
-	deviceError, deviceOk := <-attachDeviceChannel
-
-	if deviceError != nil {
-		frame.context.Logger().Error("Error attaching device: " + deviceError.Error())
-
-		return deviceError
-	}
-
-	if !deviceOk {
-		frame.context.Logger().Error("Channel closed")
-
+	if attachErr != nil {
 		return errorResponse(frame.context)
-	}
-
-	if hasAppUser(frame.request) {
-		attachAppUserChannel := make(chan error)
-		defer close(attachAppUserChannel)
-
-		go attachAppUser(rating, dbs, frame, attachAppUserChannel)
-
-		appUserError, appUserOk := <-attachAppUserChannel
-
-		if appUserError != nil {
-			frame.context.Logger().Error("Error attaching appuser: " + appUserError.Error())
-
-			return appUserError
-		}
-
-		if !appUserOk {
-			frame.context.Logger().Error("Channel closed")
-
-			return errorResponse(frame.context)
-		}
-	}
-
-	if hasBrowser(frame.request) {
-		attachBrowserChannel := make(chan error)
-		defer close(attachBrowserChannel)
-
-		go attachBrowser(rating, dbs, frame, attachBrowserChannel)
-
-		browserError, browserOk := <-attachBrowserChannel
-
-		if browserError != nil {
-			frame.context.Logger().Error("Error attaching browser: " + browserError.Error())
-
-			return browserError
-		}
-
-		if !browserOk {
-			frame.context.Logger().Error("Channel closed")
-
-			return errorResponse(frame.context)
-		}
 	}
 
 	result := models.CreateRating(rating, dbs.write)
