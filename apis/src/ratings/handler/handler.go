@@ -156,6 +156,7 @@ func Handler(port int, handlers map[string]echo.HandlerFunc) http.Handler {
 	e.Use(middleware.Secure())
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
+	e.Use(middleware.BodyLimit("20K"))
 	e.Use(notImplementedMiddleware)
 	e.Use(notAcceptableMiddleware)
 	e.Use(badRequestMiddleware)
