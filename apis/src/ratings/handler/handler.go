@@ -153,6 +153,14 @@ func Handler(port int, handlers map[string]echo.HandlerFunc) http.Handler {
 
 	parser.RegisterCustomValidators(validate)
 
+	if env == "DEV" {
+		e.Logger.SetLevel(log.DEBUG)
+		e.Debug = true
+	} else {
+		e.Pre(middleware.HTTPSRedirect())
+		e.Logger.SetLevel(log.ERROR)
+	}
+
 	e.Use(middleware.Secure())
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
@@ -166,13 +174,6 @@ func Handler(port int, handlers map[string]echo.HandlerFunc) http.Handler {
 	e.OPTIONS("/", handlers["OptionsRoot"])
 	e.OPTIONS("/ratings", handlers["OptionsRatings"])
 	e.POST("/ratings", handlers["PostRatings"])
-
-	if env == "DEV" {
-		e.Logger.SetLevel(log.DEBUG)
-		e.Debug = true
-	} else {
-		e.Logger.SetLevel(log.ERROR)
-	}
 
 	e.Server.Addr = ":" + strconv.Itoa(port)
 	e.HTTPErrorHandler = responses.ErrorHandler
