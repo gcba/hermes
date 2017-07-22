@@ -10,23 +10,6 @@ import (
 	"github.com/labstack/echo"
 )
 
-type (
-	appResult struct {
-		value *models.App
-		err   error
-	}
-
-	platformResult struct {
-		value *models.Platform
-		err   error
-	}
-
-	rangeResult struct {
-		value *models.Range
-		err   error
-	}
-)
-
 // OptionsRatings returns the response of the `OPTIONS /ratings` endpoint
 func OptionsRatings(context echo.Context) error {
 	endpoints := []responses.Endpoint{responses.Endpoints["PostRatings"]}
@@ -96,66 +79,16 @@ func newMessage(rating uint, db *gorm.DB, frame *frame) error {
 *
  */
 func newRating(dbs *databases, frame *frame) error {
-	appChannel := make(chan appResult)
-	platformChannel := make(chan platformResult)
-	rangeChannel := make(chan rangeResult)
+	rating, platform, err := buildRating(dbs, frame)
 
-	defer close(appChannel)
-	defer close(platformChannel)
-	defer close(rangeChannel)
-
-	go getApp(dbs.read, frame, appChannel)
-	go getPlatform(dbs.read, frame, platformChannel)
-	go getRange(dbs.read, frame, rangeChannel)
-
-	app, appOk := <-appChannel
-	platform, platformOk := <-platformChannel
-	rangeRecord, rangeOk := <-rangeChannel
-
-	if !appOk || !platformOk || !rangeOk {
-		frame.context.Logger().Error("Channel closed")
-
+	if err != nil {
 		return errorResponse(frame.context)
 	}
-
-	if app.err != nil {
-		frame.context.Logger().Error("Error getting app: " + app.err.Error())
-
-		return app.err
-	}
-
-	if platform.err != nil {
-		frame.context.Logger().Error("Error getting platform: " + platform.err.Error())
-
-		return platform.err
-	}
-
-	if rangeRecord.err != nil {
-		frame.context.Logger().Error("Error getting range: " + rangeRecord.err.Error())
-
-		return rangeRecord.err
-	}
-
-	if err := validateRating(rangeRecord.value.From, rangeRecord.value.To, frame); err != nil {
-		frame.context.Logger().Error("Error validating rating: " + err.Error())
-
-		return err
-	}
-
-	rating := &models.Rating{
-		Rating:          frame.request.Rating,
-		Description:     frame.request.Description,
-		AppVersion:      frame.request.App.Version,
-		PlatformVersion: frame.request.Platform.Version,
-		HasMessage:      hasMessage(frame.request),
-		AppID:           app.value.ID,
-		RangeID:         rangeRecord.value.ID,
-		PlatformID:      platform.value.ID}
 
 	attachDeviceChannel := make(chan error)
 	defer close(attachDeviceChannel)
 
-	go attachDevice(rating, platform.value, dbs, frame, attachDeviceChannel)
+	go attachDevice(rating, platform, dbs, frame, attachDeviceChannel)
 
 	deviceError, deviceOk := <-attachDeviceChannel
 

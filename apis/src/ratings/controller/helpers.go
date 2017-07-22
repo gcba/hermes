@@ -22,6 +22,21 @@ type (
 		read  *gorm.DB
 		write *gorm.DB
 	}
+
+	appResult struct {
+		value *models.App
+		err   error
+	}
+
+	platformResult struct {
+		value *models.Platform
+		err   error
+	}
+
+	rangeResult struct {
+		value *models.Range
+		err   error
+	}
 )
 
 func errorResponse(context echo.Context) error {
@@ -366,6 +381,71 @@ func getBrand(dbs *databases, frame *frame) (*models.Brand, error) {
 	}
 
 	return &models.Brand{}, errorResponse(frame.context)
+}
+
+/*
+*
+* Rating
+*
+ */
+func buildRating(dbs *databases, frame *frame) (*models.Rating, *models.Platform, error) {
+	appChannel := make(chan appResult)
+	platformChannel := make(chan platformResult)
+	rangeChannel := make(chan rangeResult)
+
+	defer close(appChannel)
+	defer close(platformChannel)
+	defer close(rangeChannel)
+
+	go getApp(dbs.read, frame, appChannel)
+	go getPlatform(dbs.read, frame, platformChannel)
+	go getRange(dbs.read, frame, rangeChannel)
+
+	app, appOk := <-appChannel
+	platform, platformOk := <-platformChannel
+	rangeRecord, rangeOk := <-rangeChannel
+
+	if !appOk || !platformOk || !rangeOk {
+		frame.context.Logger().Error("Channel closed")
+
+		return nil, nil, errorResponse(frame.context)
+	}
+
+	if app.err != nil {
+		frame.context.Logger().Error("Error getting app: " + app.err.Error())
+
+		return nil, nil, app.err
+	}
+
+	if platform.err != nil {
+		frame.context.Logger().Error("Error getting platform: " + platform.err.Error())
+
+		return nil, nil, platform.err
+	}
+
+	if rangeRecord.err != nil {
+		frame.context.Logger().Error("Error getting range: " + rangeRecord.err.Error())
+
+		return nil, nil, rangeRecord.err
+	}
+
+	if err := validateRating(rangeRecord.value.From, rangeRecord.value.To, frame); err != nil {
+		frame.context.Logger().Error("Error validating rating: " + err.Error())
+
+		return nil, nil, err
+	}
+
+	rating := &models.Rating{
+		Rating:          frame.request.Rating,
+		Description:     frame.request.Description,
+		AppVersion:      frame.request.App.Version,
+		PlatformVersion: frame.request.Platform.Version,
+		HasMessage:      hasMessage(frame.request),
+		AppID:           app.value.ID,
+		RangeID:         rangeRecord.value.ID,
+		PlatformID:      platform.value.ID}
+
+	return rating, platform.value, nil
 }
 
 func validateRating(from int8, to int8, frame *frame) error {
