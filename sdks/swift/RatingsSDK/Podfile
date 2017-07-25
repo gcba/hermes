@@ -16,5 +16,6 @@ target 'RatingsSDK' do
   # Pods for RatingsSDK
   pod 'SwiftHTTP', '~> 2.0.2'
   pod 'SwifterSwift/Foundation', '~> 3.1.0'
+  pod 'GBDeviceInfo', '~> 4.3.0'
 
 end
