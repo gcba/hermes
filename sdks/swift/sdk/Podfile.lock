@@ -1,12 +1,15 @@
 PODS:
+  - SwifterSwift/Foundation (3.1.0)
   - SwiftHTTP (2.0.2)
 
 DEPENDENCIES:
+  - SwifterSwift/Foundation (~> 3.1.0)
   - SwiftHTTP (~> 2.0.2)
 
 SPEC CHECKSUMS:
+  SwifterSwift: f84eb7308f7742724b3cbf84283ce00f7c06d7fc
   SwiftHTTP: faa1a5f7670568ffc9361898229dbe84a6088468
 
-PODFILE CHECKSUM: 574e06cc4554cae7cf9cc719d009ea050de771b9
+PODFILE CHECKSUM: b09833625c139ac1d14a15ec9349ae8a5de26991
 
 COCOAPODS: 1.3.0.beta.2

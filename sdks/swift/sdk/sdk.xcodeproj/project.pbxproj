@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C0A21B721F27886D003EE1A8 /* sdk.h in Headers */ = {isa = PBXBuildFile; fileRef = C0A21B701F27886D003EE1A8 /* sdk.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C0A21B791F2791C7003EE1A8 /* sdk.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A21B781F2791C7003EE1A8 /* sdk.swift */; };
 		F7AC69CB1DF55D2DFB962673 /* Pods_sdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 920CF9E41DBC0E45A3EC09B7 /* Pods_sdk.framework */; };
 /* End PBXBuildFile section */
 
@@ -18,6 +19,7 @@
 		C0A21B6D1F27886D003EE1A8 /* sdk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = sdk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0A21B701F27886D003EE1A8 /* sdk.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sdk.h; sourceTree = "<group>"; };
 		C0A21B711F27886D003EE1A8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C0A21B781F2791C7003EE1A8 /* sdk.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sdk.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +74,7 @@
 			children = (
 				C0A21B701F27886D003EE1A8 /* sdk.h */,
 				C0A21B711F27886D003EE1A8 /* Info.plist */,
+				C0A21B781F2791C7003EE1A8 /* sdk.swift */,
 			);
 			path = sdk;
 			sourceTree = "<group>";
@@ -122,6 +125,7 @@
 					C0A21B6C1F27886D003EE1A8 = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = 5GM2GDLL98;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -194,6 +198,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C0A21B791F2791C7003EE1A8 /* sdk.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -305,6 +310,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7DC67713D4106B473CC797F3 /* Pods-sdk.debug.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 5GM2GDLL98;
@@ -317,6 +323,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = gcba.ratings.sdk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -325,6 +332,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5F386405F068B4266805DCD0 /* Pods-sdk.release.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 5GM2GDLL98;
@@ -360,6 +368,7 @@
 				C0A21B771F27886D003EE1A8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
