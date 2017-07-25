@@ -64,7 +64,7 @@ public final class Rating {
     }
 
     private void validateRating(int rating) {
-        if (rating < -127) throw new IllegalArgumentException("invalid rating");
+        if (rating < -127 || rating > 127) throw new IllegalArgumentException("invalid rating");
     }
 
     private void validateDescription(String description) {

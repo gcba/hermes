@@ -20,7 +20,9 @@ public class MainActivity extends AppCompatActivity {
                 String range = app;
                 String token = app;
 
-                Rating rating = new Rating("https://0cc1a1ea.ngrok.io", app, platform, range, token);
+                // Use with try/catch
+
+                Rating rating = new Rating("https://e86d69ab.ngrok.io", app, platform, range, token);
 
                 rating.create(5);
                 rating.create(3, "Regular");
