@@ -7,16 +7,18 @@
 //
 
 import Foundation
+import SwiftHTTP
 import SwifterSwift
+import GBDeviceInfo
 
-public class RatingsSDK {
+public class RatingsSDK { // TODO: Remove
     public class func hello(){
         debugPrint("Hello from RatingsSDK!")
     }
 }
 
 enum RatingError: Error {
-    case validationError(message: String)
+    case validation(message: String)
 }
 
 public class Rating {
@@ -26,6 +28,7 @@ public class Rating {
         self.platform = platform.trimmed
         self.range = range.trimmed
         self.token = token.trimmed
+        self.deviceInfo = GBDeviceInfo()
         
         validateUrl(self.url)
         validateKey(self.app, description: "app")
@@ -41,19 +44,12 @@ public class Rating {
     let platform: String
     let range: String
     let token: String
+    let deviceInfo: GBDeviceInfo
     
-    var _user: [String: String]?
-    
-    // MARK: - Public properties
-    
-    public var user: [String: String]? {
-        get {
-            return _user
-        }
-    }
-    
+    var user: [String: String]?
+
     // MARK: - Validations
-    
+
     func validateUrl(_ url: String) {
         guard url.isValidUrl else {
              fatalError("invalid url")
@@ -74,89 +70,186 @@ public class Rating {
     
     func validateName(_ name: String) throws {
         guard name.length >= 3 else {
-            throw RatingError.validationError(message: "name too short")
+            throw RatingError.validation(message: "name too short")
         }
         
         guard name.length <= 70 else {
-            throw RatingError.validationError(message: "name too long")
+            throw RatingError.validation(message: "name too long")
         }
     }
     
     func validateEmail(_ email: String) throws {
         guard email.isEmail else {
-            throw RatingError.validationError(message: "invalid email")
+            throw RatingError.validation(message: "invalid email")
         }
         
         guard email.length >= 3 else {
-            throw RatingError.validationError(message: "email too short")
+            throw RatingError.validation(message: "email too short")
         }
         
         guard email.length <= 100 else {
-            throw RatingError.validationError(message: "email too long")
+            throw RatingError.validation(message: "email too long")
         }
     }
     
     func validateMibaId(_ mibaId: String) throws {
         guard mibaId.length > 0 else {
-            throw RatingError.validationError(message: "mibaId too short")
+            throw RatingError.validation(message: "mibaId too short")
         }
     }
     
     func validateRating(_ rating: Int) throws {
-        return
+        guard rating >= -127 && rating <= 127 else {
+            throw RatingError.validation(message: "invalid rating")
+        }
     }
     
-    func validateDescription() -> String? {
-        return ""
+    func validateDescription(_ description: String) throws {
+        guard description.length >= 3 else {
+            throw RatingError.validation(message: "description too short")
+        }
+        
+        guard description.length <= 30 else {
+            throw RatingError.validation(message: "description too long")
+        }
     }
     
-    func validateComment() -> String? {
-        return ""
+    func validateComment(_ comment: String) throws {
+        guard comment.length >= 3 else {
+            throw RatingError.validation(message: "comment too short")
+        }
+        
+        guard comment.length <= 1000 else {
+            throw RatingError.validation(message: "comment too long")
+        }
     }
-    
+
     // MARK: - Setters
     
-    func setUser(mibaId: String) throws {
-        try validateMibaId(mibaId)
+    func setUser(name: String?, mibaId: String?, email: String?) throws {
+        guard name != nil && mibaId != nil && email != nil else {
+            throw RatingError.validation(message: "user parameters can't all be nil")
+        }
         
-        _user = ["mibaId": mibaId]
+        guard mibaId != nil || email != nil else {
+            throw RatingError.validation(message: "user has no valid email or mibaId")
+        }
+        
+        var newUser: [String: String] = [:]
+        
+        if let actualName = name {
+            try validateName(actualName)
+            
+            newUser["name"] = actualName
+        }
+        
+        if let actualMibaId = mibaId {
+            try validateMibaId(actualMibaId)
+            
+            newUser["mibaId"] = actualMibaId
+        }
+        
+        if let actualEmail = email {
+            try validateEmail(actualEmail)
+            
+            newUser["email"] = actualEmail
+        }
+        
+        user = newUser
     }
     
-    func setUser(email: String) throws {
-        try validateEmail(email)
-        
-        _user = ["email": email]
+    public func setUser(mibaId: String) throws {
+        try setUser(name: nil, mibaId: mibaId, email: nil)
     }
     
-    func setUser(name: String, mibaId: String) throws {
-        try validateName(name)
-        try validateMibaId(mibaId)
-        
-        _user = [
-            "name": name,
-            "mibaId": mibaId
+    public func setUser(email: String) throws {
+        try setUser(name: nil, mibaId: nil, email: email)
+    }
+    
+    public func setUser(name: String, mibaId: String) throws {
+        try setUser(name: name, mibaId: mibaId, email: nil)
+    }
+    
+    public func setUser(name: String, email: String) throws {
+        try setUser(name: name, mibaId: nil, email: email)
+    }
+    
+    public func setUser(name: String, mibaId: String, email: String) throws {
+        try setUser(name: name, mibaId: mibaId, email: email)
+    }
+    
+    // MARK: - Helpers
+    
+    func buildParams() -> [String: Any] {
+        let screen: [String: Any] = [
+            "width": UIScreen.main.bounds.width,
+            "height": UIScreen.main.bounds.height,
+            "ppi": deviceInfo.displayInfo.pixelsPerInch
         ]
+        
+        let device: [String : Any] = [
+            "name": deviceInfo.modelString,
+            "brand": "Apple",
+            "screen": screen
+        ]
+        
+        let result: [String : Any]  = [
+            "range": range,
+            "app": [
+                "key": app,
+                "version": Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
+            ],
+            "platform": [
+                "key": platform,
+                "version": "\(deviceInfo.osVersion.major).\(deviceInfo.osVersion.minor).\(deviceInfo.osVersion.patch)"
+            ],
+            "device": device
+        ]
+        
+        return result
     }
     
-    func setUser(name: String, email: String) throws {
-        try validateName(name)
-        try validateEmail(email)
+    func send(params: [String: Any]) {
         
-        _user = [
-            "name": name,
-            "email": email
-        ]
     }
     
-    func setUser(name: String, mibaId: String, email: String) throws {
-        try validateName(name)
-        try validateMibaId(mibaId)
-        try validateEmail(email)
+    // MARK: - Public API
+    
+    func create(rating: Int, description: String?, comment: String?) throws {
+        try validateRating(rating)
         
-        _user = [
-            "name": name,
-            "mibaId": mibaId,
-            "email": email
-        ]
+        var params: [String: Any] = buildParams()
+        
+        params["rating"] = rating
+        
+        if let actualDescription = description {
+            try validateDescription(actualDescription)
+            
+            params["description"] = actualDescription
+        }
+        
+        if let actualComment = comment {
+            try validateComment(actualComment)
+            
+            params["comment"] = actualComment
+        }
+        
+        if let actualUser = user {
+            params["user"] = actualUser
+        }
+        
+        send(params: params)
+    }
+    
+    public func create(rating: Int) throws {
+        try create(rating: rating, description: nil, comment: nil)
+    }
+    
+    public func create(rating: Int, description: String) throws {
+        try create(rating: rating, description: description, comment: nil)
+    }
+    
+    public func create(rating: Int, description: String, comment: String) throws {
+        try create(rating: rating, description: description, comment: comment)
     }
 }
