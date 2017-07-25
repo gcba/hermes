@@ -21,11 +21,15 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		9DC48FD7DB6475E1D7A3A19F /* Pods_RatingsSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 554C0350B76E3FA7C710EBC0 /* Pods_RatingsSDK.framework */; };
 		C04EB8D91F27AAFA000425DD /* RatingsSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = C04EB8D71F27AAF9000425DD /* RatingsSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C04EB8E01F27AB0D000425DD /* RatingsSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04EB8DF1F27AB0D000425DD /* RatingsSDK.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		554C0350B76E3FA7C710EBC0 /* Pods_RatingsSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RatingsSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7D1DEDC7E472473AB862535C /* Pods-RatingsSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RatingsSDK.release.xcconfig"; path = "Pods/Target Support Files/Pods-RatingsSDK/Pods-RatingsSDK.release.xcconfig"; sourceTree = "<group>"; };
+		9C0886F39161ABE937F1CBFA /* Pods-RatingsSDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RatingsSDK.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RatingsSDK/Pods-RatingsSDK.debug.xcconfig"; sourceTree = "<group>"; };
 		C04EB8D41F27AAF9000425DD /* RatingsSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RatingsSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C04EB8D71F27AAF9000425DD /* RatingsSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RatingsSDK.h; sourceTree = "<group>"; };
 		C04EB8D81F27AAFA000425DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -37,17 +41,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9DC48FD7DB6475E1D7A3A19F /* Pods_RatingsSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		87E170C4ADD28BDFBAF1D6CF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				554C0350B76E3FA7C710EBC0 /* Pods_RatingsSDK.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8FBE25BC9C7A92758DAB6C9C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				9C0886F39161ABE937F1CBFA /* Pods-RatingsSDK.debug.xcconfig */,
+				7D1DEDC7E472473AB862535C /* Pods-RatingsSDK.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		C04EB8CA1F27AAF9000425DD = {
 			isa = PBXGroup;
 			children = (
 				C04EB8D61F27AAF9000425DD /* RatingsSDK */,
 				C04EB8D51F27AAF9000425DD /* Products */,
+				8FBE25BC9C7A92758DAB6C9C /* Pods */,
+				87E170C4ADD28BDFBAF1D6CF /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -87,10 +111,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C04EB8DC1F27AAFA000425DD /* Build configuration list for PBXNativeTarget "RatingsSDK" */;
 			buildPhases = (
+				E5A8D29D6FCF956F1EB6E5CE /* [CP] Check Pods Manifest.lock */,
 				C04EB8CF1F27AAF9000425DD /* Sources */,
 				C04EB8D01F27AAF9000425DD /* Frameworks */,
 				C04EB8D11F27AAF9000425DD /* Headers */,
 				C04EB8D21F27AAF9000425DD /* Resources */,
+				DA6E82C5ADBE2BD73B1D4E71 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -164,6 +190,39 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "#!/bin/sh\n\nUNIVERSAL_OUTPUTFOLDER=${BUILD_DIR}/${CONFIGURATION}-universal\n\n# make sure the output directory exists\nmkdir -p \"${UNIVERSAL_OUTPUTFOLDER}\"\n\n# Step 1. Build Device and Simulator versions\nxcodebuild -target \"${PROJECT_NAME}\" ONLY_ACTIVE_ARCH=NO -configuration ${CONFIGURATION} -sdk iphoneos  BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\" clean build\nxcodebuild -target \"${PROJECT_NAME}\" -configuration ${CONFIGURATION} -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\" clean build\n\n# Step 2. Copy the framework structure (from iphoneos build) to the universal folder\ncp -R \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/${PROJECT_NAME}.framework\" \"${UNIVERSAL_OUTPUTFOLDER}/\"\n\n# Step 3. Copy Swift modules from iphonesimulator build (if it exists) to the copied framework directory\nSIMULATOR_SWIFT_MODULES_DIR=\"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/${PROJECT_NAME}.framework/Modules/${PROJECT_NAME}.swiftmodule/.\"\nif [ -d \"${SIMULATOR_SWIFT_MODULES_DIR}\" ]; then\ncp -R \"${SIMULATOR_SWIFT_MODULES_DIR}\" \"${UNIVERSAL_OUTPUTFOLDER}/${PROJECT_NAME}.framework/Modules/${PROJECT_NAME}.swiftmodule\"\nfi\n\n# Step 4. Create universal binary file using lipo and place the combined executable in the copied framework directory\nlipo -create -output \"${UNIVERSAL_OUTPUTFOLDER}/${PROJECT_NAME}.framework/${PROJECT_NAME}\" \"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/${PROJECT_NAME}.framework/${PROJECT_NAME}\" \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/${PROJECT_NAME}.framework/${PROJECT_NAME}\"\n\n# Step 5. Convenience step to copy the framework to the project's directory\ncp -R \"${UNIVERSAL_OUTPUTFOLDER}/${PROJECT_NAME}.framework\" \"${PROJECT_DIR}\"";
+		};
+		DA6E82C5ADBE2BD73B1D4E71 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RatingsSDK/Pods-RatingsSDK-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E5A8D29D6FCF956F1EB6E5CE /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-RatingsSDK-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -282,6 +341,7 @@
 		};
 		C04EB8DD1F27AAFA000425DD /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9C0886F39161ABE937F1CBFA /* Pods-RatingsSDK.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -303,6 +363,7 @@
 		};
 		C04EB8DE1F27AAFA000425DD /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7D1DEDC7E472473AB862535C /* Pods-RatingsSDK.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
