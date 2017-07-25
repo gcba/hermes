@@ -6,6 +6,20 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		C0A21B7A1F2794A1003EE1A8 /* UniversalSDK */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = C0A21B7D1F2794A2003EE1A8 /* Build configuration list for PBXAggregateTarget "UniversalSDK" */;
+			buildPhases = (
+				C0A21B7E1F2794E1003EE1A8 /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = UniversalSDK;
+			productName = UniversalSDK;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		C0A21B721F27886D003EE1A8 /* sdk.h in Headers */ = {isa = PBXBuildFile; fileRef = C0A21B701F27886D003EE1A8 /* sdk.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C0A21B791F2791C7003EE1A8 /* sdk.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A21B781F2791C7003EE1A8 /* sdk.swift */; };
@@ -128,6 +142,11 @@
 						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
+					C0A21B7A1F2794A1003EE1A8 = {
+						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = 5GM2GDLL98;
+						ProvisioningStyle = Automatic;
+					};
 				};
 			};
 			buildConfigurationList = C0A21B671F27886D003EE1A8 /* Build configuration list for PBXProject "sdk" */;
@@ -143,6 +162,7 @@
 			projectRoot = "";
 			targets = (
 				C0A21B6C1F27886D003EE1A8 /* sdk */,
+				C0A21B7A1F2794A1003EE1A8 /* UniversalSDK */,
 			);
 		};
 /* End PBXProject section */
@@ -158,6 +178,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		C0A21B7E1F2794E1003EE1A8 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#!/bin/sh\n\nUNIVERSAL_OUTPUTFOLDER=${BUILD_DIR}/${CONFIGURATION}-universal\n\n# make sure the output directory exists\nmkdir -p \"${UNIVERSAL_OUTPUTFOLDER}\"\n\n# Step 1. Build Device and Simulator versions\nxcodebuild -target \"${PROJECT_NAME}\" ONLY_ACTIVE_ARCH=NO -configuration ${CONFIGURATION} -sdk iphoneos  BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\" clean build\nxcodebuild -target \"${PROJECT_NAME}\" -configuration ${CONFIGURATION} -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\" clean build\n\n# Step 2. Copy the framework structure (from iphoneos build) to the universal folder\ncp -R \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/${PROJECT_NAME}.framework\" \"${UNIVERSAL_OUTPUTFOLDER}/\"\n\n# Step 3. Copy Swift modules from iphonesimulator build (if it exists) to the copied framework directory\nSIMULATOR_SWIFT_MODULES_DIR=\"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/${PROJECT_NAME}.framework/Modules/${PROJECT_NAME}.swiftmodule/.\"\nif [ -d \"${SIMULATOR_SWIFT_MODULES_DIR}\" ]; then\ncp -R \"${SIMULATOR_SWIFT_MODULES_DIR}\" \"${UNIVERSAL_OUTPUTFOLDER}/${PROJECT_NAME}.framework/Modules/${PROJECT_NAME}.swiftmodule\"\nfi\n\n# Step 4. Create universal binary file using lipo and place the combined executable in the copied framework directory\nlipo -create -output \"${UNIVERSAL_OUTPUTFOLDER}/${PROJECT_NAME}.framework/${PROJECT_NAME}\" \"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/${PROJECT_NAME}.framework/${PROJECT_NAME}\" \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/${PROJECT_NAME}.framework/${PROJECT_NAME}\"\n\n# Step 5. Convenience step to copy the framework to the project's directory\ncp -R \"${UNIVERSAL_OUTPUTFOLDER}/${PROJECT_NAME}.framework\" \"${PROJECT_DIR}\"\n\n# Step 6. Convenience step to open the project's directory in Finder\nopen \"${PROJECT_DIR}\"";
+		};
 		D95105939E9F6F984C0917DF /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -349,6 +382,22 @@
 			};
 			name = Release;
 		};
+		C0A21B7B1F2794A1003EE1A8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = 5GM2GDLL98;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		C0A21B7C1F2794A1003EE1A8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = 5GM2GDLL98;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -369,6 +418,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		C0A21B7D1F2794A2003EE1A8 /* Build configuration list for PBXAggregateTarget "UniversalSDK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C0A21B7B1F2794A1003EE1A8 /* Debug */,
+				C0A21B7C1F2794A1003EE1A8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
