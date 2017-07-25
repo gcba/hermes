@@ -7,3 +7,9 @@
 //
 
 import Foundation
+
+class RatingsSDK: NSObject {
+    class func hello(){
+        debugPrint("Hello from RatingsSDK!")
+    }
+}
