@@ -1,0 +1,2 @@
+include ':sdk', ':app', ':sdk-debug'
+project(':app').projectDir = new File('example/app')
