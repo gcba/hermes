@@ -1,0 +1,10 @@
+framework module RatingsSDK {
+  umbrella header "RatingsSDK.h"
+
+  export *
+  module * { export * }
+}
+
+module RatingsSDK.Swift {
+    header "RatingsSDK-Swift.h"
+}

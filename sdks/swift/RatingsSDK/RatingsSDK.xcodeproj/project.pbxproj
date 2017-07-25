@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXAggregateTarget section */
-		C0BC4ABC1F2798FE003B20C5 /* UniversalRatingsSDK */ = {
+		C04EB8E11F27AB2D000425DD /* UniversalRatingsSDK */ = {
 			isa = PBXAggregateTarget;
-			buildConfigurationList = C0BC4ABD1F2798FE003B20C5 /* Build configuration list for PBXAggregateTarget "UniversalRatingsSDK" */;
+			buildConfigurationList = C04EB8E21F27AB2D000425DD /* Build configuration list for PBXAggregateTarget "UniversalRatingsSDK" */;
 			buildPhases = (
-				C0BC4AC01F279913003B20C5 /* ShellScript */,
+				C04EB8E51F27AB3F000425DD /* ShellScript */,
 			);
 			dependencies = (
 			);
@@ -21,102 +21,76 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		9925706674CCDD6FB9469839 /* Pods_RatingsSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3289372210B510641CF01451 /* Pods_RatingsSDK.framework */; };
-		C0BC4AB41F2797D2003B20C5 /* RatingsSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = C0BC4AB21F2797D2003B20C5 /* RatingsSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C0BC4ABB1F2798CD003B20C5 /* RatingsSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BC4ABA1F2798CD003B20C5 /* RatingsSDK.swift */; };
+		C04EB8D91F27AAFA000425DD /* RatingsSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = C04EB8D71F27AAF9000425DD /* RatingsSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C04EB8E01F27AB0D000425DD /* RatingsSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04EB8DF1F27AB0D000425DD /* RatingsSDK.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		321C398ECF6AF96716E652CB /* Pods-RatingsSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RatingsSDK.release.xcconfig"; path = "Pods/Target Support Files/Pods-RatingsSDK/Pods-RatingsSDK.release.xcconfig"; sourceTree = "<group>"; };
-		3289372210B510641CF01451 /* Pods_RatingsSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RatingsSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		461D0EE3656C443714571498 /* Pods-RatingsSDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RatingsSDK.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RatingsSDK/Pods-RatingsSDK.debug.xcconfig"; sourceTree = "<group>"; };
-		C0BC4AAF1F2797D2003B20C5 /* RatingsSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RatingsSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C0BC4AB21F2797D2003B20C5 /* RatingsSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RatingsSDK.h; sourceTree = "<group>"; };
-		C0BC4AB31F2797D2003B20C5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C0BC4ABA1F2798CD003B20C5 /* RatingsSDK.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingsSDK.swift; sourceTree = "<group>"; };
+		C04EB8D41F27AAF9000425DD /* RatingsSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RatingsSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C04EB8D71F27AAF9000425DD /* RatingsSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RatingsSDK.h; sourceTree = "<group>"; };
+		C04EB8D81F27AAFA000425DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C04EB8DF1F27AB0D000425DD /* RatingsSDK.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingsSDK.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		C0BC4AAB1F2797D2003B20C5 /* Frameworks */ = {
+		C04EB8D01F27AAF9000425DD /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9925706674CCDD6FB9469839 /* Pods_RatingsSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		B65A2CBDD986F228D29C6F78 /* Pods */ = {
+		C04EB8CA1F27AAF9000425DD = {
 			isa = PBXGroup;
 			children = (
-				461D0EE3656C443714571498 /* Pods-RatingsSDK.debug.xcconfig */,
-				321C398ECF6AF96716E652CB /* Pods-RatingsSDK.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
-		C0BC4AA51F2797D2003B20C5 = {
-			isa = PBXGroup;
-			children = (
-				C0BC4AB11F2797D2003B20C5 /* RatingsSDK */,
-				C0BC4AB01F2797D2003B20C5 /* Products */,
-				B65A2CBDD986F228D29C6F78 /* Pods */,
-				E617BA5B5892A2E67FD2EC50 /* Frameworks */,
+				C04EB8D61F27AAF9000425DD /* RatingsSDK */,
+				C04EB8D51F27AAF9000425DD /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		C0BC4AB01F2797D2003B20C5 /* Products */ = {
+		C04EB8D51F27AAF9000425DD /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C0BC4AAF1F2797D2003B20C5 /* RatingsSDK.framework */,
+				C04EB8D41F27AAF9000425DD /* RatingsSDK.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		C0BC4AB11F2797D2003B20C5 /* RatingsSDK */ = {
+		C04EB8D61F27AAF9000425DD /* RatingsSDK */ = {
 			isa = PBXGroup;
 			children = (
-				C0BC4AB21F2797D2003B20C5 /* RatingsSDK.h */,
-				C0BC4AB31F2797D2003B20C5 /* Info.plist */,
-				C0BC4ABA1F2798CD003B20C5 /* RatingsSDK.swift */,
+				C04EB8D71F27AAF9000425DD /* RatingsSDK.h */,
+				C04EB8D81F27AAFA000425DD /* Info.plist */,
+				C04EB8DF1F27AB0D000425DD /* RatingsSDK.swift */,
 			);
 			path = RatingsSDK;
-			sourceTree = "<group>";
-		};
-		E617BA5B5892A2E67FD2EC50 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				3289372210B510641CF01451 /* Pods_RatingsSDK.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		C0BC4AAC1F2797D2003B20C5 /* Headers */ = {
+		C04EB8D11F27AAF9000425DD /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C0BC4AB41F2797D2003B20C5 /* RatingsSDK.h in Headers */,
+				C04EB8D91F27AAFA000425DD /* RatingsSDK.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		C0BC4AAE1F2797D2003B20C5 /* RatingsSDK */ = {
+		C04EB8D31F27AAF9000425DD /* RatingsSDK */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C0BC4AB71F2797D2003B20C5 /* Build configuration list for PBXNativeTarget "RatingsSDK" */;
+			buildConfigurationList = C04EB8DC1F27AAFA000425DD /* Build configuration list for PBXNativeTarget "RatingsSDK" */;
 			buildPhases = (
-				B475A4A25957126A41823347 /* [CP] Check Pods Manifest.lock */,
-				C0BC4AAA1F2797D2003B20C5 /* Sources */,
-				C0BC4AAB1F2797D2003B20C5 /* Frameworks */,
-				C0BC4AAC1F2797D2003B20C5 /* Headers */,
-				C0BC4AAD1F2797D2003B20C5 /* Resources */,
-				7072872F1D43645A701036B3 /* [CP] Copy Pods Resources */,
+				C04EB8CF1F27AAF9000425DD /* Sources */,
+				C04EB8D01F27AAF9000425DD /* Frameworks */,
+				C04EB8D11F27AAF9000425DD /* Headers */,
+				C04EB8D21F27AAF9000425DD /* Resources */,
 			);
 			buildRules = (
 			);
@@ -124,51 +98,51 @@
 			);
 			name = RatingsSDK;
 			productName = RatingsSDK;
-			productReference = C0BC4AAF1F2797D2003B20C5 /* RatingsSDK.framework */;
+			productReference = C04EB8D41F27AAF9000425DD /* RatingsSDK.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		C0BC4AA61F2797D2003B20C5 /* Project object */ = {
+		C04EB8CB1F27AAF9000425DD /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = GCBA;
 				TargetAttributes = {
-					C0BC4AAE1F2797D2003B20C5 = {
+					C04EB8D31F27AAF9000425DD = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = 5GM2GDLL98;
 						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
-					C0BC4ABC1F2798FE003B20C5 = {
+					C04EB8E11F27AB2D000425DD = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = 5GM2GDLL98;
 						ProvisioningStyle = Automatic;
 					};
 				};
 			};
-			buildConfigurationList = C0BC4AA91F2797D2003B20C5 /* Build configuration list for PBXProject "RatingsSDK" */;
+			buildConfigurationList = C04EB8CE1F27AAF9000425DD /* Build configuration list for PBXProject "RatingsSDK" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 			);
-			mainGroup = C0BC4AA51F2797D2003B20C5;
-			productRefGroup = C0BC4AB01F2797D2003B20C5 /* Products */;
+			mainGroup = C04EB8CA1F27AAF9000425DD;
+			productRefGroup = C04EB8D51F27AAF9000425DD /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				C0BC4AAE1F2797D2003B20C5 /* RatingsSDK */,
-				C0BC4ABC1F2798FE003B20C5 /* UniversalRatingsSDK */,
+				C04EB8D31F27AAF9000425DD /* RatingsSDK */,
+				C04EB8E11F27AB2D000425DD /* UniversalRatingsSDK */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		C0BC4AAD1F2797D2003B20C5 /* Resources */ = {
+		C04EB8D21F27AAF9000425DD /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -178,40 +152,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		7072872F1D43645A701036B3 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RatingsSDK/Pods-RatingsSDK-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		B475A4A25957126A41823347 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-RatingsSDK-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C0BC4AC01F279913003B20C5 /* ShellScript */ = {
+		C04EB8E51F27AB3F000425DD /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -222,23 +163,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#!/bin/sh\n\nUNIVERSAL_OUTPUTFOLDER=${BUILD_DIR}/${CONFIGURATION}-universal\n\n# make sure the output directory exists\nmkdir -p \"${UNIVERSAL_OUTPUTFOLDER}\"\n\n# Step 1. Build Device and Simulator versions\nxcodebuild -target \"${PROJECT_NAME}\" ONLY_ACTIVE_ARCH=NO -configuration ${CONFIGURATION} -sdk iphoneos  BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\" clean build\nxcodebuild -target \"${PROJECT_NAME}\" -configuration ${CONFIGURATION} -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\" clean build\n\n# Step 2. Copy the framework structure (from iphoneos build) to the universal folder\ncp -R \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/${PROJECT_NAME}.framework\" \"${UNIVERSAL_OUTPUTFOLDER}/\"\n\n# Step 3. Copy Swift modules from iphonesimulator build (if it exists) to the copied framework directory\nSIMULATOR_SWIFT_MODULES_DIR=\"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/${PROJECT_NAME}.framework/Modules/${PROJECT_NAME}.swiftmodule/.\"\nif [ -d \"${SIMULATOR_SWIFT_MODULES_DIR}\" ]; then\ncp -R \"${SIMULATOR_SWIFT_MODULES_DIR}\" \"${UNIVERSAL_OUTPUTFOLDER}/${PROJECT_NAME}.framework/Modules/${PROJECT_NAME}.swiftmodule\"\nfi\n\n# Step 4. Create universal binary file using lipo and place the combined executable in the copied framework directory\nlipo -create -output \"${UNIVERSAL_OUTPUTFOLDER}/${PROJECT_NAME}.framework/${PROJECT_NAME}\" \"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/${PROJECT_NAME}.framework/${PROJECT_NAME}\" \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/${PROJECT_NAME}.framework/${PROJECT_NAME}\"\n\n# Step 5. Convenience step to copy the framework to the project's directory\ncp -R \"${UNIVERSAL_OUTPUTFOLDER}/${PROJECT_NAME}.framework\" \"${PROJECT_DIR}\"\n\n# Step 6. Convenience step to open the project's directory in Finder\nopen \"${PROJECT_DIR}\"";
+			shellScript = "#!/bin/sh\n\nUNIVERSAL_OUTPUTFOLDER=${BUILD_DIR}/${CONFIGURATION}-universal\n\n# make sure the output directory exists\nmkdir -p \"${UNIVERSAL_OUTPUTFOLDER}\"\n\n# Step 1. Build Device and Simulator versions\nxcodebuild -target \"${PROJECT_NAME}\" ONLY_ACTIVE_ARCH=NO -configuration ${CONFIGURATION} -sdk iphoneos  BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\" clean build\nxcodebuild -target \"${PROJECT_NAME}\" -configuration ${CONFIGURATION} -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\" clean build\n\n# Step 2. Copy the framework structure (from iphoneos build) to the universal folder\ncp -R \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/${PROJECT_NAME}.framework\" \"${UNIVERSAL_OUTPUTFOLDER}/\"\n\n# Step 3. Copy Swift modules from iphonesimulator build (if it exists) to the copied framework directory\nSIMULATOR_SWIFT_MODULES_DIR=\"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/${PROJECT_NAME}.framework/Modules/${PROJECT_NAME}.swiftmodule/.\"\nif [ -d \"${SIMULATOR_SWIFT_MODULES_DIR}\" ]; then\ncp -R \"${SIMULATOR_SWIFT_MODULES_DIR}\" \"${UNIVERSAL_OUTPUTFOLDER}/${PROJECT_NAME}.framework/Modules/${PROJECT_NAME}.swiftmodule\"\nfi\n\n# Step 4. Create universal binary file using lipo and place the combined executable in the copied framework directory\nlipo -create -output \"${UNIVERSAL_OUTPUTFOLDER}/${PROJECT_NAME}.framework/${PROJECT_NAME}\" \"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/${PROJECT_NAME}.framework/${PROJECT_NAME}\" \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/${PROJECT_NAME}.framework/${PROJECT_NAME}\"\n\n# Step 5. Convenience step to copy the framework to the project's directory\ncp -R \"${UNIVERSAL_OUTPUTFOLDER}/${PROJECT_NAME}.framework\" \"${PROJECT_DIR}\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		C0BC4AAA1F2797D2003B20C5 /* Sources */ = {
+		C04EB8CF1F27AAF9000425DD /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C0BC4ABB1F2798CD003B20C5 /* RatingsSDK.swift in Sources */,
+				C04EB8E01F27AB0D000425DD /* RatingsSDK.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		C0BC4AB51F2797D2003B20C5 /* Debug */ = {
+		C04EB8DA1F27AAFA000425DD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -292,7 +233,7 @@
 			};
 			name = Debug;
 		};
-		C0BC4AB61F2797D2003B20C5 /* Release */ = {
+		C04EB8DB1F27AAFA000425DD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -339,9 +280,8 @@
 			};
 			name = Release;
 		};
-		C0BC4AB81F2797D2003B20C5 /* Debug */ = {
+		C04EB8DD1F27AAFA000425DD /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 461D0EE3656C443714571498 /* Pods-RatingsSDK.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -353,7 +293,7 @@
 				INFOPLIST_FILE = RatingsSDK/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = gcba.ratings.sdk.RatingsSDK;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gcba.ratings.sdk.RatingsSDK;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -361,9 +301,8 @@
 			};
 			name = Debug;
 		};
-		C0BC4AB91F2797D2003B20C5 /* Release */ = {
+		C04EB8DE1F27AAFA000425DD /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 321C398ECF6AF96716E652CB /* Pods-RatingsSDK.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -375,14 +314,14 @@
 				INFOPLIST_FILE = RatingsSDK/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = gcba.ratings.sdk.RatingsSDK;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gcba.ratings.sdk.RatingsSDK;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
-		C0BC4ABE1F2798FE003B20C5 /* Debug */ = {
+		C04EB8E31F27AB2D000425DD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DEVELOPMENT_TEAM = 5GM2GDLL98;
@@ -390,7 +329,7 @@
 			};
 			name = Debug;
 		};
-		C0BC4ABF1F2798FE003B20C5 /* Release */ = {
+		C04EB8E41F27AB2D000425DD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DEVELOPMENT_TEAM = 5GM2GDLL98;
@@ -401,33 +340,32 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		C0BC4AA91F2797D2003B20C5 /* Build configuration list for PBXProject "RatingsSDK" */ = {
+		C04EB8CE1F27AAF9000425DD /* Build configuration list for PBXProject "RatingsSDK" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				C0BC4AB51F2797D2003B20C5 /* Debug */,
-				C0BC4AB61F2797D2003B20C5 /* Release */,
+				C04EB8DA1F27AAFA000425DD /* Debug */,
+				C04EB8DB1F27AAFA000425DD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C0BC4AB71F2797D2003B20C5 /* Build configuration list for PBXNativeTarget "RatingsSDK" */ = {
+		C04EB8DC1F27AAFA000425DD /* Build configuration list for PBXNativeTarget "RatingsSDK" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				C0BC4AB81F2797D2003B20C5 /* Debug */,
-				C0BC4AB91F2797D2003B20C5 /* Release */,
+				C04EB8DD1F27AAFA000425DD /* Debug */,
+				C04EB8DE1F27AAFA000425DD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
 		};
-		C0BC4ABD1F2798FE003B20C5 /* Build configuration list for PBXAggregateTarget "UniversalRatingsSDK" */ = {
+		C04EB8E21F27AB2D000425DD /* Build configuration list for PBXAggregateTarget "UniversalRatingsSDK" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				C0BC4ABE1F2798FE003B20C5 /* Debug */,
-				C0BC4ABF1F2798FE003B20C5 /* Release */,
+				C04EB8E31F27AB2D000425DD /* Debug */,
+				C04EB8E41F27AB2D000425DD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = C0BC4AA61F2797D2003B20C5 /* Project object */;
+	rootObject = C04EB8CB1F27AAF9000425DD /* Project object */;
 }
