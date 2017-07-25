@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class RatingsSDK: NSObject {
+public class RatingsSDK {
     public class func hello(){
         debugPrint("Hello from RatingsSDK!")
     }
