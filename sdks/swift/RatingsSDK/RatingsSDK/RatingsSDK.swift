@@ -22,7 +22,7 @@ public enum RatingError: Error {
 }
 
 public class Rating {
-    init(api url: String, app: String, platform: String, range: String, token: String) throws {
+    public init(api url: String, app: String, platform: String, range: String, token: String) throws {
         let baseUrl = url.trimmed
         
         self.url = baseUrl.lastCharacterAsString == "/" ? baseUrl + "ratings" :  baseUrl + "/ratings"
@@ -31,6 +31,7 @@ public class Rating {
         self.range = range.trimmed
         self.token = token.trimmed
         self.deviceInfo = GBDeviceInfo()
+        self.timeout = 3
         
         try validateUrl(self.url)
         try validateKey(self.app, description: "app")
@@ -48,6 +49,7 @@ public class Rating {
     let token: String
     let deviceInfo: GBDeviceInfo
     
+    var timeout: Double
     var user: [String: String]?
 
     // MARK: - Validations
@@ -128,11 +130,7 @@ public class Rating {
 
     // MARK: - Setters
     
-    func setUser(name: String?, mibaId: String?, email: String?) throws {
-        guard name != nil && mibaId != nil && email != nil else {
-            throw RatingError.validation(message: "user parameters can't all be nil")
-        }
-        
+    public func setUser(name: String?, mibaId: String? = nil, email: String? = nil) throws {
         guard mibaId != nil || email != nil else {
             throw RatingError.validation(message: "user has no valid email or mibaId")
         }
@@ -158,26 +156,6 @@ public class Rating {
         }
         
         user = newUser
-    }
-    
-    public func setUser(mibaId: String) throws {
-        try setUser(name: nil, mibaId: mibaId, email: nil)
-    }
-    
-    public func setUser(email: String) throws {
-        try setUser(name: nil, mibaId: nil, email: email)
-    }
-    
-    public func setUser(name: String, mibaId: String) throws {
-        try setUser(name: name, mibaId: mibaId, email: nil)
-    }
-    
-    public func setUser(name: String, email: String) throws {
-        try setUser(name: name, mibaId: nil, email: email)
-    }
-    
-    public func setUser(name: String, mibaId: String, email: String) throws {
-        try setUser(name: name, mibaId: mibaId, email: email)
     }
     
     // MARK: - Helpers
@@ -212,14 +190,24 @@ public class Rating {
     }
     
     func send(params: [String: Any], callback: @escaping (_ response: Response)->()) throws {
-        try HTTP.POST(self.url, parameters: params, requestSerializer: JSONParameterSerializer()).start { response in
+        let headers = [
+            "Content-Type": "application/json; charset=UTF-8",
+            "Accept": "application/json",
+            "Authorization": "Bearer \(token)"
+        ]
+        
+        HTTP.globalRequest { [unowned self] (request: NSMutableURLRequest) in
+            request.timeoutInterval = self.timeout
+        }
+        
+        try HTTP.POST(self.url, parameters: params, headers: headers, requestSerializer: JSONParameterSerializer()).start { response in
             callback(response)
         }
     }
     
     // MARK: - Public API
     
-    func create(rating: Int, description: String?, comment: String?, callback: @escaping (_ response: Response)->()) throws {
+    public func create(rating: Int, description: String? = nil, comment: String? = nil, callback: @escaping (_ response: Response)->()) throws {
         try validateRating(rating)
         
         var params: [String: Any] = buildParams()
@@ -243,17 +231,5 @@ public class Rating {
         }
         
         return try send(params: params, callback: callback)
-    }
-    
-    public func create(rating: Int, callback: @escaping (_ response: Response)->()) throws {
-        try create(rating: rating, description: nil, comment: nil, callback: callback)
-    }
-    
-    public func create(rating: Int, description: String, callback: @escaping (_ response: Response)->()) throws {
-        try create(rating: rating, description: description, comment: nil, callback: callback)
-    }
-    
-    public func create(rating: Int, description: String, comment: String, callback: @escaping (_ response: Response)->()) throws {
-        try create(rating: rating, description: description, comment: comment, callback: callback)
     }
 }
