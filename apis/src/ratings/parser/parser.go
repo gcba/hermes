@@ -14,19 +14,19 @@ import (
 
 type (
 	app struct {
-		Key     string `json:"key" validate:"required,len=32,alphanum,excludesall= " conform:"lower,trim"`
-		Version string `json:"version" validate:"required,gte=1,lte=15,excludesall= " conform:"lower,trim"`
+		Key     string `json:"key" validate:"required,len=32,alphanum,excludesall= " conform:"trim,lower"`
+		Version string `json:"version" validate:"required,gte=1,lte=15,excludesall= " conform:"trim,lower"`
 	}
 
 	user struct {
-		Name   string `json:"name" validate:"omitempty,gte=3,lte=70" conform:"name,trim"`
-		Email  string `json:"email" validate:"omitempty,email,gte=3,lte=100,excludesall= " conform:"email,trim"`
-		MiBAID string `json:"mibaId" validate:"omitempty,alphanum,gte=1,excludesall= " conform:"lower,trim"`
+		Name   string `json:"name" validate:"omitempty,gte=3,lte=70" conform:"trim,name"`
+		Email  string `json:"email" validate:"omitempty,email,gte=3,lte=100,excludesall= " conform:"trim,email"`
+		MiBAID string `json:"mibaId" validate:"omitempty,alphanum,gte=1,excludesall= " conform:"trim,lower"`
 	}
 
 	platform struct {
-		Key     string `json:"key" validate:"required,len=32,alphanum,excludesall= " conform:"lower,trim"`
-		Version string `json:"version" validate:"required,gte=1,lte=15,excludesall= " conform:"lower,trim"`
+		Key     string `json:"key" validate:"required,len=32,alphanum,excludesall= " conform:"trim,lower"`
+		Version string `json:"version" validate:"required,gte=1,lte=15,excludesall= " conform:"trim,lower"`
 	}
 
 	device struct {
@@ -43,7 +43,7 @@ type (
 
 	browser struct {
 		Name    string `json:"name" validate:"required,gte=1,lte=15" conform:"trim"`
-		Version string `json:"version" validate:"required,gte=1,lte=15,excludesall= " conform:"lower,trim"`
+		Version string `json:"version" validate:"required,gte=1,lte=15,excludesall= " conform:"trim,lower"`
 	}
 
 	// Request holds the mapped fields from the request's JSON body
@@ -51,7 +51,7 @@ type (
 		Rating      int8     `json:"rating" validate:"min=-127,max=127"`
 		Description string   `json:"description" validate:"omitempty,gte=3,lte=30" conform:"trim,title"`
 		Comment     string   `json:"comment" validate:"omitempty,gte=3,lte=1000" conform:"trim,ucfirst"`
-		Range       string   `json:"range" validate:"required,len=32,alphanum,excludesall= " conform:"lower,trim"`
+		Range       string   `json:"range" validate:"required,len=32,alphanum,excludesall= " conform:"trim,lower"`
 		App         app      `json:"app" validate:"required"`
 		Platform    platform `json:"platform" validate:"required"`
 		Device      device   `json:"device" validate:"required"`
