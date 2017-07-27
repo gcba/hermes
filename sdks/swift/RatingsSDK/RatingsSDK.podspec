@@ -5,13 +5,17 @@ Pod::Spec.new do |spec|
     spec.homepage = 'https://github.com/gcba/hermes'
 
     spec.authors = { 'Rita Zerrizuela' => 'zeta@widcket.com' }
-    spec.license = { :type => 'MIT' }
+    spec.license = { :type => 'MIT', :file => 'LICENSE' }
 
-    spec.platform = { :ios => "8.0", :osx => "10.7", :watchos => "2.0", :tvos => "9.0" }
-    spec.source = { :http => 'https://github.com/gcba/hermes/raw/master/sdks/swift/RatingsSDK/RatingsSDK.zip' }
+    spec.ios.deployment_target = '8.0'
+    spec.osx.deployment_target = '10.10'
 
-    spec.ios.vendored_frameworks = 'RatingsSDK.framework'
-    spec.osx.vendored_frameworks = 'RatingsSDK.framework'
-    spec.watchos.vendored_frameworks = 'RatingsSDK.framework'
-    spec.tvos.vendored_frameworks = 'RatingsSDK.framework'
+    spec.source = { :git => 'https://github.com/gcba/hermes.git', :branch => 'master' }
+    # spec.source_files = 'sdks/swift/RatingsSDK/RatingsSDK/*.{m,h,swift}'
+    spec.vendored_frameworks = 'sdks/swift/RatingsSDK/RatingsSDK.framework'
+
+    spec.frameworks = 'Foundation'
+    spec.dependency 'SwiftHTTP', '~> 2.0.2'
+    spec.dependency 'SwifterSwift/Foundation', '~> 3.1.0'
+    spec.dependency 'GBDeviceInfo', '~> 4.3.0'
 end
