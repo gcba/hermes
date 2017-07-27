@@ -17,7 +17,7 @@ public class RatingsSDK { // TODO: Remove
     }
 }
 
-enum RatingError: Error {
+public enum RatingError: Error {
     case validation(message: String)
 }
 
@@ -211,13 +211,15 @@ public class Rating {
         return result
     }
     
-    func send(params: [String: Any]) throws -> HTTP {
-        return try HTTP.POST(self.url, parameters: params, requestSerializer: JSONParameterSerializer())
+    func send(params: [String: Any], callback: @escaping (_ response: Response)->()) throws {
+        try HTTP.POST(self.url, parameters: params, requestSerializer: JSONParameterSerializer()).start { response in
+            callback(response)
+        }
     }
     
     // MARK: - Public API
     
-    func create(rating: Int, description: String?, comment: String?) throws -> HTTP {
+    func create(rating: Int, description: String?, comment: String?, callback: @escaping (_ response: Response)->()) throws {
         try validateRating(rating)
         
         var params: [String: Any] = buildParams()
@@ -240,18 +242,18 @@ public class Rating {
             params["user"] = actualUser
         }
         
-        return send(params: params)
+        return try send(params: params, callback: callback)
     }
     
-    public func create(rating: Int) throws {
-        try create(rating: rating, description: nil, comment: nil)
+    public func create(rating: Int, callback: @escaping (_ response: Response)->()) throws {
+        try create(rating: rating, description: nil, comment: nil, callback: callback)
     }
     
-    public func create(rating: Int, description: String) throws {
-        try create(rating: rating, description: description, comment: nil)
+    public func create(rating: Int, description: String, callback: @escaping (_ response: Response)->()) throws {
+        try create(rating: rating, description: description, comment: nil, callback: callback)
     }
     
-    public func create(rating: Int, description: String, comment: String) throws {
-        try create(rating: rating, description: description, comment: comment)
+    public func create(rating: Int, description: String, comment: String, callback: @escaping (_ response: Response)->()) throws {
+        try create(rating: rating, description: description, comment: comment, callback: callback)
     }
 }
