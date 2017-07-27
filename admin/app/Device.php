@@ -57,7 +57,7 @@ class Device extends Model
      * Get the platform the device belongs to.
      */
      public function platform() {
-        return $this->belongsTo('App\Platform', 'id', 'platform_id');
+        return $this->belongsTo('App\Platform', 'platform_id', 'id');
      }
 
     /**
