@@ -42,7 +42,9 @@ class ServerSideController extends Controller {
     */
     public function devicesAPI(Request $request)
     {
-        return Datatables::of(Device::query())->make(true);
+        $query = Device::with(['platform', 'brand'])->get();
+
+        return Datatables::of($query)->make(true);
     }
 
     /**
