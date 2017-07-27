@@ -5,7 +5,7 @@ Pod::Spec.new do |spec|
     spec.homepage = 'https://github.com/gcba/hermes'
 
     spec.authors = { 'Rita Zerrizuela' => 'zeta@widcket.com' }
-    spec.license = { :type => 'MIT', :file => 'LICENSE' }
+    spec.license = { :type => 'MIT' }
 
     spec.ios.deployment_target = '8.0'
     spec.osx.deployment_target = '10.10'
