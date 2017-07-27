@@ -22,19 +22,21 @@ enum RatingError: Error {
 }
 
 public class Rating {
-    init(api url: String, app: String, platform: String, range: String, token: String) {
-        self.url = url.trimmed
+    init(api url: String, app: String, platform: String, range: String, token: String) throws {
+        let baseUrl = url.trimmed
+        
+        self.url = baseUrl.lastCharacterAsString == "/" ? baseUrl + "ratings" :  baseUrl + "/ratings"
         self.app = app.trimmed
         self.platform = platform.trimmed
         self.range = range.trimmed
         self.token = token.trimmed
         self.deviceInfo = GBDeviceInfo()
         
-        validateUrl(self.url)
-        validateKey(self.app, description: "app")
-        validateKey(self.platform, description: "platform")
-        validateKey(self.range, description: "range")
-        validateToken(self.token)
+        try validateUrl(self.url)
+        try validateKey(self.app, description: "app")
+        try validateKey(self.platform, description: "platform")
+        try validateKey(self.range, description: "range")
+        try validateToken(self.token)
     }
     
     // MARK: - Private properties
@@ -50,21 +52,21 @@ public class Rating {
 
     // MARK: - Validations
 
-    func validateUrl(_ url: String) {
+    func validateUrl(_ url: String) throws {
         guard url.isValidUrl else {
-             fatalError("invalid url")
+             throw RatingError.validation(message: "invalid url")
         }
     }
     
-    func validateKey(_ key: String, description: String) {
+    func validateKey(_ key: String, description: String) throws {
         guard key.length == 32 else {
-            fatalError("\(description) is not a valid key")
+            throw RatingError.validation(message: "\(description) is not a valid key")
         }
     }
     
-    func validateToken(_ token: String) {
+    func validateToken(_ token: String) throws {
         guard token.length > 0 else {
-            fatalError("invalid token")
+            throw RatingError.validation(message: "invalid token")
         }
     }
     
@@ -209,13 +211,13 @@ public class Rating {
         return result
     }
     
-    func send(params: [String: Any]) {
-        
+    func send(params: [String: Any]) throws -> HTTP {
+        return try HTTP.POST(self.url, parameters: params, requestSerializer: JSONParameterSerializer())
     }
     
     // MARK: - Public API
     
-    func create(rating: Int, description: String?, comment: String?) throws {
+    func create(rating: Int, description: String?, comment: String?) throws -> HTTP {
         try validateRating(rating)
         
         var params: [String: Any] = buildParams()
@@ -238,7 +240,7 @@ public class Rating {
             params["user"] = actualUser
         }
         
-        send(params: params)
+        return send(params: params)
     }
     
     public func create(rating: Int) throws {
