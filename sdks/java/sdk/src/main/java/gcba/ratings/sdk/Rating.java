@@ -125,7 +125,6 @@ public final class Rating {
     public void setUser(String name, String mibaId, String email) {
         HashMap<String, String> newUser;
 
-        if (!(name != null || email != null || mibaId != null)) throw new IllegalArgumentException("user parameters can't all be null");
         if (email == null && mibaId == null) throw new IllegalArgumentException("user has no valid email or mibaId");
 
         newUser = new HashMap<String, String>();
