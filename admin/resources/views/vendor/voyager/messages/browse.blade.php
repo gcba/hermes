@@ -99,7 +99,7 @@
                 columns: [
                     { data: 'message', name: 'message' },
                     { data: 'direction', name: 'direction' },
-                    { data: 'rating_id', name: 'rating_id' },
+                    { data: 'rating.rating', name: 'rating_id' },
                     { data: 'created_at', name: 'created_at' },
                     { data: 'updated_at', name: 'updated_at' }
                 ]

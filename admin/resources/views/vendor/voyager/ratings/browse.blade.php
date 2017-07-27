@@ -93,17 +93,17 @@
                 ajax: '{!! route('ratings.api') !!}',
                 columns: [
                     { data: 'rating', name: 'rating' },
-                    { data: 'range_id', name: 'range_id' },
+                    { data: 'range.name', name: 'range_id' },
                     { data: 'description', name: 'description' },
                     { data: 'has_message', name: 'has_message' },
-                    { data: 'app_id', name: 'app_id' },
+                    { data: 'app.name', name: 'app_id' },
                     { data: 'app_version', name: 'app_version' },
-                    { data: 'platform_id', name: 'platform_id' },
+                    { data: 'platform.name', name: 'platform_id' },
                     { data: 'platform_version', name: 'platform_version' },
                     { data: 'browser_id', name: 'browser_id' },
                     { data: 'browser_version', name: 'browser_version' },
                     { data: 'appuser_id', name: 'appuser_id' },
-                    { data: 'device_id', name: 'device_id' },
+                    { data: 'device.name', name: 'device_id' },
                     { data: 'created_at', name: 'created_at' },
                     { data: 'updated_at', name: 'updated_at' }
                 ]

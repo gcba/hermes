@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use TCG\Voyager\Facades\Voyager;
 use Yajra\Datatables\Datatables;
+use App\Rating;
+use App\Message;
+use App\Device;
+use App\AppUser;
 
 class ServerSideController extends Controller {
     /**
@@ -14,7 +18,9 @@ class ServerSideController extends Controller {
     */
     public function ratingsAPI(Request $request)
     {
-        return Datatables::of(\App\Rating::query())->make(true);
+        $query = Rating::with(['range', 'app', 'platform', 'browser', 'appuser', 'device'])->get();
+
+        return Datatables::of($query)->make(true);
     }
 
     /**
@@ -24,7 +30,9 @@ class ServerSideController extends Controller {
     */
     public function messagesAPI(Request $request)
     {
-        return Datatables::of(\App\Message::query())->make(true);
+        $query = Message::with('rating')->get();
+
+        return Datatables::of($query)->make(true);
     }
 
     /**
@@ -34,7 +42,7 @@ class ServerSideController extends Controller {
     */
     public function devicesAPI(Request $request)
     {
-        return Datatables::of(\App\Device::query())->make(true);
+        return Datatables::of(Device::query())->make(true);
     }
 
     /**
@@ -44,7 +52,7 @@ class ServerSideController extends Controller {
     */
     public function appusersAPI(Request $request)
     {
-        return Datatables::of(\App\AppUser::query())->make(true);
+        return Datatables::of(AppUser::query())->make(true);
     }
 
     public function index(Request $request)
