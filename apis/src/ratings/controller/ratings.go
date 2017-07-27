@@ -58,7 +58,7 @@ func newMessage(rating uint, db *gorm.DB, frame *frame) error {
 	result := models.CreateMessage(message, db)
 	errorList := result.GetErrors()
 
-	if len(errorList) > 0 || result.Value == nil {
+	if len(errorList) > 0 || result.Error != nil || result.Value == nil {
 		return errorResponse(frame.context)
 	}
 
@@ -94,7 +94,7 @@ func newRating(dbs *databases, frame *frame) error {
 	result := models.CreateRating(rating, dbs.write)
 	errorList := result.GetErrors()
 
-	if len(errorList) > 0 || result.Value == nil {
+	if len(errorList) > 0 || result.Error != nil || result.Value == nil {
 		return errorResponse(frame.context)
 	}
 

@@ -53,7 +53,7 @@ func getApp(db *gorm.DB, frame *frame, channel chan appResult) {
 	errorList := result.GetErrors()
 	resultStruct := appResult{}
 
-	if len(errorList) > 0 || result.Value == nil {
+	if len(errorList) > 0 || result.Error != nil || result.Value == nil {
 		resultStruct.err = errorResponse(frame.context)
 
 		channel <- resultStruct
@@ -87,7 +87,7 @@ func getPlatform(db *gorm.DB, frame *frame, channel chan platformResult) {
 	errorList := result.GetErrors()
 	resultStruct := platformResult{}
 
-	if len(errorList) > 0 || result.Value == nil {
+	if len(errorList) > 0 || result.Error != nil || result.Value == nil {
 		resultStruct.err = errorResponse(frame.context)
 
 		channel <- resultStruct
@@ -121,7 +121,7 @@ func getRange(db *gorm.DB, frame *frame, channel chan rangeResult) {
 	errorList := result.GetErrors()
 	resultStruct := rangeResult{}
 
-	if len(errorList) > 0 || result.Value == nil {
+	if len(errorList) > 0 || result.Error != nil || result.Value == nil {
 		resultStruct.err = errorResponse(frame.context)
 
 		channel <- resultStruct
@@ -187,14 +187,16 @@ func getAppUser(dbs *databases, frame *frame) (*models.AppUser, error) {
 		createResult := models.CreateAppUser(appuser, dbs.write)
 		createErrorList := createResult.GetErrors()
 
-		if len(createErrorList) > 0 {
+		if len(createErrorList) > 0 || createResult.Error != nil || createResult.Value == nil {
 			return &models.AppUser{}, errorResponse(frame.context)
 		}
 
 		if value, ok := createResult.Value.(*models.AppUser); ok {
+			frame.context.Logger().Info("Created a new AppUser:", value)
+
 			return value, nil
 		}
-	} else if len(getErrorList) > 0 {
+	} else if len(getErrorList) > 0 || getResult.Error != nil || getResult.Value == nil {
 		return &models.AppUser{}, errorResponse(frame.context)
 	}
 
@@ -238,14 +240,16 @@ func getBrowser(dbs *databases, frame *frame) (*models.Browser, error) {
 		createResult := models.CreateBrowser(browser, dbs.write)
 		createErrorList := createResult.GetErrors()
 
-		if len(createErrorList) > 0 || createResult.Value == nil {
+		if len(createErrorList) > 0 || createResult.Error != nil || createResult.Value == nil {
 			return &models.Browser{}, errorResponse(frame.context)
 		}
 
 		if value, ok := createResult.Value.(*models.Browser); ok {
+			frame.context.Logger().Info("Created a new Browser:", value)
+
 			return value, nil
 		}
-	} else if len(getErrorList) > 0 || getResult.Value == nil {
+	} else if len(getErrorList) > 0 || getResult.Error != nil || getResult.Value == nil {
 		return &models.Browser{}, errorResponse(frame.context)
 	}
 
@@ -298,11 +302,12 @@ func getDevice(brand *models.Brand, platform *models.Platform, dbs *databases, f
 		if brand != nil {
 			device.BrandID = brand.ID
 		}
-	} else if len(getErrorList) > 0 || getResult.Value == nil {
+	} else if len(getErrorList) > 0 || getResult.Error != nil || getResult.Value == nil {
 		return &models.Device{}, errorResponse(frame.context)
 	}
 
 	if result, ok := getResult.Value.(*models.Device); (ok && brand != nil) && (result.BrandID != brand.ID) {
+
 		checkDeviceName := fmt.Sprintf("%v (%v)", deviceName, brand.Name)
 		checkGetResult := models.GetDevice(checkDeviceName, dbs.read)
 		checkGetErrorList := checkGetResult.GetErrors()
@@ -315,7 +320,7 @@ func getDevice(brand *models.Brand, platform *models.Platform, dbs *databases, f
 				PPI:          frame.request.Device.Screen.PPI,
 				PlatformID:   platform.ID,
 				BrandID:      brand.ID}
-		} else if len(checkGetErrorList) > 0 {
+		} else if len(checkGetErrorList) > 0 || checkGetResult.Error != nil || checkGetResult.Value == nil {
 			return &models.Device{}, errorResponse(frame.context)
 		} else {
 			if value, ok := checkGetResult.Value.(*models.Device); ok {
@@ -330,11 +335,13 @@ func getDevice(brand *models.Brand, platform *models.Platform, dbs *databases, f
 		createResult := models.CreateDevice(device, dbs.write)
 		createErrorList := createResult.GetErrors()
 
-		if len(createErrorList) > 0 || createResult.Value == nil {
+		if len(createErrorList) > 0 || createResult.Error != nil || createResult.Value == nil {
 			return &models.Device{}, errorResponse(frame.context)
 		}
 
 		if value, ok := createResult.Value.(*models.Device); ok {
+			frame.context.Logger().Info("Created a new Device:", value)
+
 			return value, nil
 		}
 
@@ -387,14 +394,16 @@ func getBrand(dbs *databases, frame *frame) (*models.Brand, error) {
 		createResult := models.CreateBrand(brand, dbs.write)
 		createErrorList := createResult.GetErrors()
 
-		if len(createErrorList) > 0 || createResult.Value == nil {
+		if len(createErrorList) > 0 || createResult.Error != nil || createResult.Value == nil {
 			return &models.Brand{}, errorResponse(frame.context)
 		}
 
 		if value, ok := createResult.Value.(*models.Brand); ok {
+			frame.context.Logger().Info("Created a new Brand:", value)
+
 			return value, nil
 		}
-	} else if len(getErrorList) > 0 || getResult.Value == nil {
+	} else if len(getErrorList) > 0 || getResult.Error != nil || getResult.Value == nil {
 		return &models.Brand{}, errorResponse(frame.context)
 	}
 

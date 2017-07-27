@@ -12,10 +12,8 @@ type Device struct {
 	ScreenWidth  int    `gorm:"not null"`
 	ScreenHeight int    `gorm:"not null"`
 	PPI          *int   `gorm:"DEFAULT:NULL"`
-	Brand        Brand
-	BrandID      uint `gorm:"DEFAULT:NULL"`
-	Platform     Platform
-	PlatformID   uint `gorm:"DEFAULT:NULL"`
+	BrandID      uint   `gorm:"DEFAULT:NULL"`
+	PlatformID   uint   `gorm:"DEFAULT:NULL"`
 
 	CreatedAt time.Time `gorm:"not null;type:datetime;default:CURRENT_TIMESTAMP"`
 }
