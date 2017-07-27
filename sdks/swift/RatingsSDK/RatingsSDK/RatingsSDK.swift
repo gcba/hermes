@@ -11,12 +11,6 @@ import SwiftHTTP
 import SwifterSwift
 import GBDeviceInfo
 
-public class RatingsSDK { // TODO: Remove
-    public class func hello(){
-        debugPrint("Hello from RatingsSDK!")
-    }
-}
-
 public enum RatingError: Error {
     case validation(message: String)
 }

@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
     spec.name = 'RatingsSDK'
-    spec.version = '1.0.0'
+    spec.version = '0.1.0'
     spec.summary = 'Hermes Swift SDK'
     spec.homepage = 'https://github.com/gcba/hermes'
 
