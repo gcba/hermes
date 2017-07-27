@@ -102,7 +102,7 @@
                     { data: 'platform_version', name: 'platform_version' },
                     { data: 'browser_id', name: 'browser_id' },
                     { data: 'browser_version', name: 'browser_version' },
-                    { data: 'appuser_id', name: 'appuser_id' },
+                    { data: 'appuser.name', name: 'appuser_id' },
                     { data: 'device.name', name: 'device_id' },
                     { data: 'created_at', name: 'created_at' },
                     { data: 'updated_at', name: 'updated_at' }

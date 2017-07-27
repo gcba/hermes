@@ -93,12 +93,12 @@
                 serverSide: true,
                 ajax: '{!! route('devices.api') !!}',
                 columns: [
-                    { data: 'brand_id', name: 'brand_id' },
+                    { data: 'brand.name', name: 'brand_id' },
                     { data: 'name', name: 'name' },
                     { data: 'screen_width', name: 'screen_width' },
                     { data: 'screen_height', name: 'screen_height' },
                     { data: 'ppi', name: 'ppi' },
-                    { data: 'platform_id', name: 'platform_id' },
+                    { data: 'platform.name', name: 'platform_id' },
                     { data: 'created_at', name: 'created_at' },
                     { data: 'updated_at', name: 'updated_at' }
                 ]
