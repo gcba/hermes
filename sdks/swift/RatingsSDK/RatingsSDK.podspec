@@ -11,8 +11,7 @@ Pod::Spec.new do |spec|
     spec.osx.deployment_target = '10.10'
 
     spec.source = { :git => 'https://github.com/gcba/hermes.git', :branch => 'master' }
-    # spec.source_files = 'sdks/swift/RatingsSDK/RatingsSDK/*.{m,h,swift}'
-    spec.vendored_frameworks = 'sdks/swift/RatingsSDK/RatingsSDK.framework'
+    spec.source_files = 'RatingsSDK/*.{swift}'
 
     spec.frameworks = 'Foundation'
     spec.dependency 'SwiftHTTP', '~> 2.0.2'
