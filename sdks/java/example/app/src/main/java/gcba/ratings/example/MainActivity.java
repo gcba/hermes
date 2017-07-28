@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
 
         Thread t = new Thread(new Runnable() {
             public void run() {
-                String app = "e10adc3949ba59abbe56e057f20f883e";
+                String app = "c33367701511b4f6020ec61ded352059";
                 String platform = app;
                 String range = app;
                 String token = app;

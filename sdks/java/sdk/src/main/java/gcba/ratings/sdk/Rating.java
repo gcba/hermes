@@ -24,6 +24,7 @@ public final class Rating {
         this.platform = platform.trim();
         this.range = range.trim();
         this.token = token.trim();
+        this.timeout = 3000;
     }
 
     private String url;
@@ -31,6 +32,7 @@ public final class Rating {
     private String platform;
     private String range;
     private String token;
+    private Integer timeout;
     private HashMap<String, String> user;
 
     private void validateUrl(String url) {
@@ -109,6 +111,7 @@ public final class Rating {
                     .header("Accept", "application/json")
                     .header("Authorization", "Bearer " + token)
                     .body(json)
+                    .connectTimeout(timeout)
                     .retry(3, false)
                     .asJsonObject();
         } catch(Error e) {
@@ -116,6 +119,10 @@ public final class Rating {
         }
 
         return response.getBody();
+    }
+
+    public void setTimeout(Integer value) {
+        timeout = value * 1000;
     }
 
     public void setUser(String name, String mibaId) {

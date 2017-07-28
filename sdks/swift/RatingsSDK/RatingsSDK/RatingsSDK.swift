@@ -11,12 +11,6 @@ import SwiftHTTP
 import SwifterSwift
 import GBDeviceInfo
 
-public class RatingsSDK { // TODO: Remove
-    public class func hello(){
-        debugPrint("Hello from RatingsSDK!")
-    }
-}
-
 public enum RatingError: Error {
     case validation(message: String)
 }
@@ -33,11 +27,11 @@ public class Rating {
         self.deviceInfo = GBDeviceInfo()
         self.timeout = 3
         
-        try validateUrl(self.url)
-        try validateKey(self.app, description: "app")
-        try validateKey(self.platform, description: "platform")
-        try validateKey(self.range, description: "range")
-        try validateToken(self.token)
+        validateUrl(self.url)
+        validateKey(self.app, description: "app")
+        validateKey(self.platform, description: "platform")
+        validateKey(self.range, description: "range")
+        validateToken(self.token)
     }
     
     // MARK: - Private properties
@@ -54,52 +48,58 @@ public class Rating {
 
     // MARK: - Validations
 
-    func validateUrl(_ url: String) throws {
+    func validateUrl(_ url: String) {
         guard url.isValidUrl else {
-             throw RatingError.validation(message: "invalid url")
+             fatalError("invalid url")
         }
     }
     
-    func validateKey(_ key: String, description: String) throws {
+    func validateKey(_ key: String, description: String) {
         guard key.length == 32 else {
-            throw RatingError.validation(message: "\(description) is not a valid key")
+            fatalError("\(description) is not a valid key")
         }
     }
     
-    func validateToken(_ token: String) throws {
+    func validateToken(_ token: String) {
         guard token.length > 0 else {
-            throw RatingError.validation(message: "invalid token")
+            fatalError("invalid token")
         }
     }
     
-    func validateName(_ name: String) throws {
+    func validateName(_ name: String) -> RatingError? {
         guard name.length >= 3 else {
-            throw RatingError.validation(message: "name too short")
+            return RatingError.validation(message: "name too short")
         }
         
         guard name.length <= 70 else {
-            throw RatingError.validation(message: "name too long")
+            return RatingError.validation(message: "name too long")
         }
+        
+        return nil
     }
     
-    func validateEmail(_ email: String) throws {
+    func validateEmail(_ email: String) -> RatingError? {
         guard email.isEmail else {
-            throw RatingError.validation(message: "invalid email")
+            return RatingError.validation(message: "invalid email")
         }
         
         guard email.length >= 3 else {
-            throw RatingError.validation(message: "email too short")
+            return RatingError.validation(message: "email too short")
         }
         
         guard email.length <= 100 else {
-            throw RatingError.validation(message: "email too long")
+            return RatingError.validation(message: "email too long")
         }
+        
+        return nil
     }
     
-    func validateMibaId(_ mibaId: String) throws {
+    func validateMibaId(_ mibaId: String) -> RatingError? {
         guard mibaId.length > 0 else {
-            throw RatingError.validation(message: "mibaId too short")
+            return RatingError.validation(message: "mibaId too short")
         }
+        
+        return nil
     }
     
     func validateRating(_ rating: Int) throws {
@@ -130,32 +130,40 @@ public class Rating {
 
     // MARK: - Setters
     
-    public func setUser(name: String?, mibaId: String? = nil, email: String? = nil) throws {
+    public func setUser(name: String?, mibaId: String? = nil, email: String? = nil) -> RatingError? {
         guard mibaId != nil || email != nil else {
-            throw RatingError.validation(message: "user has no valid email or mibaId")
+            return RatingError.validation(message: "user has no valid email or mibaId")
         }
         
         var newUser: [String: String] = [:]
         
         if let actualName = name {
-            try validateName(actualName)
+            if let error = validateName(actualName) {
+                return error
+            }
             
             newUser["name"] = actualName
         }
         
         if let actualMibaId = mibaId {
-            try validateMibaId(actualMibaId)
+            if let error = validateMibaId(actualMibaId) {
+                return error
+            }
             
             newUser["mibaId"] = actualMibaId
         }
         
         if let actualEmail = email {
-            try validateEmail(actualEmail)
-            
+            if let error = validateEmail(actualEmail) {
+                return error
+            }
+
             newUser["email"] = actualEmail
         }
         
         user = newUser
+        
+        return nil
     }
     
     // MARK: - Helpers
@@ -189,7 +197,7 @@ public class Rating {
         return result
     }
     
-    func send(params: [String: Any], callback: @escaping (_ response: Response)->()) throws {
+    func send(params: [String: Any], retry: Int = 3, callback: @escaping (_ response: Response)->()) {
         let headers = [
             "Content-Type": "application/json; charset=UTF-8",
             "Accept": "application/json",
@@ -200,8 +208,23 @@ public class Rating {
             request.timeoutInterval = self.timeout
         }
         
-        try HTTP.POST(self.url, parameters: params, headers: headers, requestSerializer: JSONParameterSerializer()).start { response in
-            callback(response)
+        do {
+            try HTTP.POST(self.url, parameters: params, headers: headers, requestSerializer: JSONParameterSerializer()).start { response in
+                if response.error != nil {
+                    guard retry > 0 else {
+                        callback(response)
+                        
+                        return
+                    }
+
+                    self.send(params: params, retry: retry - 1, callback: callback)
+                } else {
+                    callback(response)
+                }
+            }
+        }
+        catch let error {
+            debugPrint(error.localizedDescription)
         }
     }
     
@@ -230,6 +253,6 @@ public class Rating {
             params["user"] = actualUser
         }
         
-        return try send(params: params, callback: callback)
+        return send(params: params, callback: callback)
     }
 }

@@ -48,7 +48,11 @@ class ViewController: UIViewController {
 
             // Rating, description and comment; user name and mibaId only
 
-            try sdk.setUser(name: "Juan Pérez", mibaId: "e10adc3949")
+            if let error = sdk.setUser(name: "Juan Pérez", mibaId: "e10adc3949") {
+                debugPrint(error.localizedDescription)
+                
+                return
+            }
 
             try sdk.create(rating: 2, description: "Malo", comment: "Lorem ipsum dolor...") { response in
                 if let error = response.error {
@@ -57,8 +61,12 @@ class ViewController: UIViewController {
             }
 
             // Rating, description and comment; user name and email only
-
-            try sdk.setUser(name: "Juan Pérez", email: "juan@example.com")
+            
+            if let error = sdk.setUser(name: "Juan Pérez", email: "juan@example.com") {
+                debugPrint(error.localizedDescription)
+                
+                return
+            }
 
             try sdk.create(rating: 1, description: "Muy Malo", comment: "Lorem ipsum dolor...") { response in
                 if let error = response.error {
@@ -67,8 +75,12 @@ class ViewController: UIViewController {
             }
 
             // Rating, description and comment; user name, email and mibaId
-
-            try sdk.setUser(name: "Juan Pérez", mibaId: "e10adc3949", email: "juan@example.com")
+            
+            if let error = sdk.setUser(name: "Juan Pérez", mibaId: "e10adc3949", email: "juan@example.com") {
+                debugPrint(error.localizedDescription)
+                
+                return
+            }
 
             try sdk.create(rating: 5, description: "Muy Bueno", comment: "Lorem ipsum dolor...") { response in
                 if let error = response.error {
