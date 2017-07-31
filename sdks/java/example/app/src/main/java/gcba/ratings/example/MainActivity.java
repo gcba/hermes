@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
                 String token = app;
 
                 try{
-                    Rating rating = new Rating("https://527ff015.ngrok.io", app, platform, range, token);
+                    Rating rating = new Rating("https://7333ab98.ngrok.io", app, platform, range, token);
                     JSONObject result;
 
                     // Rating only; no user
