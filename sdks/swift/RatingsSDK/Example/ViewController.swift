@@ -20,7 +20,7 @@ class ViewController: UIViewController {
         let token = app
 
         do {
-            let sdk = try Rating(api: "https://527ff015.ngrok.io", app: app, platform: platform, range: range, token: token)
+            let sdk = try Rating(api: "https://7333ab98.ngrok.io", app: app, platform: platform, range: range, token: token)
 
             // Rating only; no user
 

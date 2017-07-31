@@ -204,27 +204,31 @@ public class Rating {
             "Authorization": "Bearer \(token)"
         ]
         
+        let backoff = 3 - retry
+        
         HTTP.globalRequest { [unowned self] (request: NSMutableURLRequest) in
             request.timeoutInterval = self.timeout
         }
         
-        do {
-            try HTTP.POST(self.url, parameters: params, headers: headers, requestSerializer: JSONParameterSerializer()).start { response in
-                if response.error != nil {
-                    guard retry > 0 else {
-                        callback(response)
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(backoff)) {
+            do {
+                try HTTP.POST(self.url, parameters: params, headers: headers, requestSerializer: JSONParameterSerializer()).start { response in
+                    if response.error != nil && (response.error!.code == 503 || response.error!.code == 504 || response.error!.code >= 520) {
+                        guard retry > 0 else {
+                            callback(response)
+                            
+                            return
+                        }
                         
-                        return
+                        self.send(params: params, retry: retry - 1, callback: callback)
+                    } else {
+                        callback(response)
                     }
-
-                    self.send(params: params, retry: retry - 1, callback: callback)
-                } else {
-                    callback(response)
                 }
             }
-        }
-        catch let error {
-            debugPrint(error.localizedDescription)
+            catch let error {
+                debugPrint(error.localizedDescription)
+            }
         }
     }
     
