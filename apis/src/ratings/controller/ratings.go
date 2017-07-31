@@ -52,24 +52,20 @@ func newMessage(rating uint, db *gorm.DB, frame *frame) error {
 		RatingID:  rating}
 
 	result := models.CreateMessage(message, db)
-	errorMessage := "Error creating a new Message:"
+	errorMessage := "Error creating a new Message: "
 	errorList := result.GetErrors()
 
 	if len(errorList) > 0 || result.Error != nil || result.Value == nil {
-		frame.context.Logger().Error(errorMessage, "Database driver returned invalid value")
-
-		return errorResponse(frame.context)
+		return loggedErrorResponse(errorMessage, invalidValueError, frame.context)
 	}
 
 	if value, ok := result.Value.(*models.Message); ok {
-		frame.context.Logger().Info("Created a new Message:", value)
+		frame.context.Logger().Info("Created a new Message: ", value)
 
 		return nil
 	}
 
-	frame.context.Logger().Error(errorMessage, "Could not cast to model instance")
-
-	return errorResponse(frame.context)
+	return loggedErrorResponse(errorMessage, cannotCastError, frame.context)
 }
 
 /*
@@ -79,29 +75,27 @@ func newMessage(rating uint, db *gorm.DB, frame *frame) error {
  */
 func newRating(dbs *databases, frame *frame) error {
 	rating, platform, buildErr := buildRating(dbs, frame)
-	errorMessage := "Error creating a new Rating:"
+	errorMessage := "Error creating a new Rating: "
 
 	if buildErr != nil {
-		return errorResponse(frame.context)
+		return buildErr
 	}
 
 	attachErr := attachFields(rating, platform, dbs, frame)
 
 	if attachErr != nil {
-		return errorResponse(frame.context)
+		return attachErr
 	}
 
 	result := models.CreateRating(rating, dbs.write)
 	errorList := result.GetErrors()
 
 	if len(errorList) > 0 || result.Error != nil || result.Value == nil {
-		frame.context.Logger().Error(errorMessage, "Database driver returned invalid value")
-
-		return errorResponse(frame.context)
+		return loggedErrorResponse(errorMessage, invalidValueError, frame.context)
 	}
 
 	if value, ok := result.Value.(*models.Rating); ok {
-		frame.context.Logger().Info("Created a new Rating:", value)
+		frame.context.Logger().Info("Created a new Rating: ", value)
 
 		if rating.HasMessage {
 			if err := newMessage(value.ID, dbs.write, frame); err != nil {
@@ -112,7 +106,5 @@ func newRating(dbs *databases, frame *frame) error {
 		return nil
 	}
 
-	frame.context.Logger().Error(errorMessage, "Could not cast to model instance")
-
-	return errorResponse(frame.context)
+	return loggedErrorResponse(errorMessage, cannotCastError, frame.context)
 }

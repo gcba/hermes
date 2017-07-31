@@ -38,8 +38,20 @@ type (
 	}
 )
 
+var (
+	invalidValueError  = "Database driver returned invalid value"
+	cannotCastError    = "Could not cast to model instance"
+	channelClosedError = "Channel closed"
+)
+
 func errorResponse(context echo.Context) error {
-	return echo.NewHTTPError(http.StatusInternalServerError, "")
+	return echo.NewHTTPError(http.StatusInternalServerError)
+}
+
+func loggedErrorResponse(tag string, message string, context echo.Context) error {
+	context.Logger().Error(tag, message)
+
+	return errorResponse(context)
 }
 
 /*
@@ -59,7 +71,7 @@ func getApp(db *gorm.DB, frame *frame, channel chan appResult) {
 		channel <- resultStruct
 		close(channel)
 
-		frame.context.Logger().Error(errorMessage, "Database driver returned invalid value")
+		frame.context.Logger().Error(errorMessage, invalidValueError)
 
 		return
 	}
@@ -78,7 +90,7 @@ func getApp(db *gorm.DB, frame *frame, channel chan appResult) {
 	channel <- resultStruct
 	close(channel)
 
-	frame.context.Logger().Error(errorMessage, "Could not cast to model instance")
+	frame.context.Logger().Error(errorMessage, cannotCastError)
 }
 
 /*
@@ -98,7 +110,7 @@ func getPlatform(db *gorm.DB, frame *frame, channel chan platformResult) {
 		channel <- resultStruct
 		close(channel)
 
-		frame.context.Logger().Error(errorMessage, "Database driver returned invalid value")
+		frame.context.Logger().Error(errorMessage, invalidValueError)
 
 		return
 	}
@@ -117,7 +129,7 @@ func getPlatform(db *gorm.DB, frame *frame, channel chan platformResult) {
 	channel <- resultStruct
 	close(channel)
 
-	frame.context.Logger().Error(errorMessage, "Could not cast to model instance")
+	frame.context.Logger().Error(errorMessage, cannotCastError)
 }
 
 /*
@@ -137,7 +149,7 @@ func getRange(db *gorm.DB, frame *frame, channel chan rangeResult) {
 		channel <- resultStruct
 		close(channel)
 
-		frame.context.Logger().Error(errorMessage, "Database driver returned invalid value")
+		frame.context.Logger().Error(errorMessage, invalidValueError)
 
 		return
 	}
@@ -156,7 +168,7 @@ func getRange(db *gorm.DB, frame *frame, channel chan rangeResult) {
 	channel <- resultStruct
 	close(channel)
 
-	frame.context.Logger().Error(errorMessage, "Could not cast to model instance")
+	frame.context.Logger().Error(errorMessage, cannotCastError)
 }
 
 /*
@@ -183,9 +195,10 @@ func hasAppUser(request *parser.Request) bool {
 
 func getAppUser(dbs *databases, frame *frame) (*models.AppUser, error) {
 	var getResult *gorm.DB
-	var errorMessage = "Could not get an AppUser:"
+	var errorMessage = "Could not get an AppUser: "
+	var hasMibaID = len(frame.request.User.MiBAID) > 0
 
-	if hasMibaID := len(frame.request.User.MiBAID); hasMibaID > 0 {
+	if hasMibaID {
 		getResult = models.GetAppUser(frame.request.User.MiBAID, dbs.read)
 	} else {
 		getResult = models.GetAppUserByEmail(frame.request.User.Email, dbs.read)
@@ -194,38 +207,41 @@ func getAppUser(dbs *databases, frame *frame) (*models.AppUser, error) {
 	getErrorList := getResult.GetErrors()
 
 	if getResult.RecordNotFound() {
-		appuser := &models.AppUser{
-			Name:   frame.request.User.Name,
-			Email:  frame.request.User.Email,
-			MiBAID: frame.request.User.MiBAID}
+		var appuser *models.AppUser
+
+		if hasMibaID {
+			appuser = &models.AppUser{
+				Name:   frame.request.User.Name,
+				MiBAID: &frame.request.User.MiBAID}
+		} else {
+			appuser = &models.AppUser{
+				Name:  frame.request.User.Name,
+				Email: &frame.request.User.Email}
+		}
+
+		frame.context.Logger().Debug(appuser)
 
 		createResult := models.CreateAppUser(appuser, dbs.write)
 		createErrorList := createResult.GetErrors()
 
 		if len(createErrorList) > 0 || createResult.Error != nil || createResult.Value == nil {
-			frame.context.Logger().Error(errorMessage, "Database driver returned invalid value")
-
-			return &models.AppUser{}, errorResponse(frame.context)
+			return &models.AppUser{}, loggedErrorResponse(errorMessage, invalidValueError, frame.context)
 		}
 
 		if value, ok := createResult.Value.(*models.AppUser); ok {
-			frame.context.Logger().Info("Created a new AppUser:", value)
+			frame.context.Logger().Info("Created a new AppUser: ", value)
 
 			return value, nil
 		}
 	} else if len(getErrorList) > 0 || getResult.Error != nil || getResult.Value == nil {
-		frame.context.Logger().Error(errorMessage, "Database driver returned invalid value")
-
-		return &models.AppUser{}, errorResponse(frame.context)
+		return &models.AppUser{}, loggedErrorResponse(errorMessage, invalidValueError, frame.context)
 	}
 
 	if value, ok := getResult.Value.(*models.AppUser); ok {
 		return value, nil
 	}
 
-	frame.context.Logger().Error(errorMessage, "Could not cast to model instance")
-
-	return &models.AppUser{}, errorResponse(frame.context)
+	return &models.AppUser{}, loggedErrorResponse(errorMessage, cannotCastError, frame.context)
 }
 
 func attachAppUser(rating *models.Rating, dbs *databases, frame *frame, channel chan error) {
@@ -254,7 +270,7 @@ func hasBrowser(request *parser.Request) bool {
 
 func getBrowser(dbs *databases, frame *frame) (*models.Browser, error) {
 	getResult := models.GetBrowser(frame.request.Browser.Name, dbs.read)
-	errorMessage := "Could not get a Browser:"
+	errorMessage := "Could not get a Browser: "
 	getErrorList := getResult.GetErrors()
 
 	if getResult.RecordNotFound() {
@@ -263,29 +279,23 @@ func getBrowser(dbs *databases, frame *frame) (*models.Browser, error) {
 		createErrorList := createResult.GetErrors()
 
 		if len(createErrorList) > 0 || createResult.Error != nil || createResult.Value == nil {
-			frame.context.Logger().Error(errorMessage, "Database driver returned invalid value")
-
-			return &models.Browser{}, errorResponse(frame.context)
+			return &models.Browser{}, loggedErrorResponse(errorMessage, invalidValueError, frame.context)
 		}
 
 		if value, ok := createResult.Value.(*models.Browser); ok {
-			frame.context.Logger().Info("Created a new Browser:", value)
+			frame.context.Logger().Info("Created a new Browser: ", value)
 
 			return value, nil
 		}
 	} else if len(getErrorList) > 0 || getResult.Error != nil || getResult.Value == nil {
-		frame.context.Logger().Error(errorMessage, "Database driver returned invalid value")
-
-		return &models.Browser{}, errorResponse(frame.context)
+		return &models.Browser{}, loggedErrorResponse(errorMessage, invalidValueError, frame.context)
 	}
 
 	if value, ok := getResult.Value.(*models.Browser); ok {
 		return value, nil
 	}
 
-	frame.context.Logger().Error(errorMessage, "Could not cast to model instance")
-
-	return &models.Browser{}, errorResponse(frame.context)
+	return &models.Browser{}, loggedErrorResponse(errorMessage, cannotCastError, frame.context)
 }
 
 func attachBrowser(rating *models.Rating, dbs *databases, frame *frame, channel chan error) {
@@ -307,7 +317,7 @@ func attachBrowser(rating *models.Rating, dbs *databases, frame *frame, channel 
  */
 func getDevice(brand *models.Brand, platform *models.Platform, dbs *databases, frame *frame) (*models.Device, error) {
 	var device *models.Device
-	var errorMessage = "Could not get a Device:"
+	var errorMessage = "Could not get a Device: "
 
 	deviceName := frame.request.Device.Name
 	screenWidth := frame.request.Device.Screen.Width
@@ -332,9 +342,7 @@ func getDevice(brand *models.Brand, platform *models.Platform, dbs *databases, f
 			device.BrandID = brand.ID
 		}
 	} else if len(getErrorList) > 0 || getResult.Error != nil || getResult.Value == nil {
-		frame.context.Logger().Error(errorMessage, "Database driver returned invalid value")
-
-		return &models.Device{}, errorResponse(frame.context)
+		return &models.Device{}, loggedErrorResponse(errorMessage, invalidValueError, frame.context)
 	}
 
 	if result, ok := getResult.Value.(*models.Device); (ok && brand != nil) && (result.BrandID != brand.ID) {
@@ -351,17 +359,13 @@ func getDevice(brand *models.Brand, platform *models.Platform, dbs *databases, f
 				PlatformID:   platform.ID,
 				BrandID:      brand.ID}
 		} else if len(checkGetErrorList) > 0 || checkGetResult.Error != nil || checkGetResult.Value == nil {
-			frame.context.Logger().Error(errorMessage, "Database driver returned invalid value")
-
-			return &models.Device{}, errorResponse(frame.context)
+			return &models.Device{}, loggedErrorResponse(errorMessage, invalidValueError, frame.context)
 		} else {
 			if value, ok := checkGetResult.Value.(*models.Device); ok {
 				return value, nil
 			}
 
-			frame.context.Logger().Error(errorMessage, "Could not cast to model instance")
-
-			return &models.Device{}, errorResponse(frame.context)
+			return &models.Device{}, loggedErrorResponse(errorMessage, cannotCastError, frame.context)
 		}
 	}
 
@@ -370,29 +374,23 @@ func getDevice(brand *models.Brand, platform *models.Platform, dbs *databases, f
 		createErrorList := createResult.GetErrors()
 
 		if len(createErrorList) > 0 || createResult.Error != nil || createResult.Value == nil {
-			frame.context.Logger().Error(errorMessage, "Database driver returned invalid value")
-
-			return &models.Device{}, errorResponse(frame.context)
+			return &models.Device{}, loggedErrorResponse(errorMessage, invalidValueError, frame.context)
 		}
 
 		if value, ok := createResult.Value.(*models.Device); ok {
-			frame.context.Logger().Info("Created a new Device:", value)
+			frame.context.Logger().Info("Created a new Device: ", value)
 
 			return value, nil
 		}
 
-		frame.context.Logger().Error(errorMessage, "Could not cast to model instance")
-
-		return &models.Device{}, errorResponse(frame.context)
+		return &models.Device{}, loggedErrorResponse(errorMessage, cannotCastError, frame.context)
 	}
 
 	if value, ok := getResult.Value.(*models.Device); ok {
 		return value, nil
 	}
 
-	frame.context.Logger().Error(errorMessage, "Could not cast to model instance")
-
-	return &models.Device{}, errorResponse(frame.context)
+	return &models.Device{}, loggedErrorResponse(errorMessage, cannotCastError, frame.context)
 }
 
 func attachDevice(rating *models.Rating, platform *models.Platform, dbs *databases, frame *frame, channel chan error) {
@@ -427,7 +425,7 @@ func attachDevice(rating *models.Rating, platform *models.Platform, dbs *databas
  */
 func getBrand(dbs *databases, frame *frame) (*models.Brand, error) {
 	getResult := models.GetBrand(*frame.request.Device.Brand, dbs.read)
-	errorMessage := "Could not get a Brand:"
+	errorMessage := "Could not get a Brand: "
 	getErrorList := getResult.GetErrors()
 
 	if getResult.RecordNotFound() {
@@ -436,29 +434,23 @@ func getBrand(dbs *databases, frame *frame) (*models.Brand, error) {
 		createErrorList := createResult.GetErrors()
 
 		if len(createErrorList) > 0 || createResult.Error != nil || createResult.Value == nil {
-			frame.context.Logger().Error(errorMessage, "Database driver returned invalid value")
-
-			return &models.Brand{}, errorResponse(frame.context)
+			return &models.Brand{}, loggedErrorResponse(errorMessage, invalidValueError, frame.context)
 		}
 
 		if value, ok := createResult.Value.(*models.Brand); ok {
-			frame.context.Logger().Info("Created a new Brand:", value)
+			frame.context.Logger().Info("Created a new Brand: ", value)
 
 			return value, nil
 		}
 	} else if len(getErrorList) > 0 || getResult.Error != nil || getResult.Value == nil {
-		frame.context.Logger().Error(errorMessage, "Database driver returned invalid value")
-
-		return &models.Brand{}, errorResponse(frame.context)
+		return &models.Brand{}, loggedErrorResponse(errorMessage, invalidValueError, frame.context)
 	}
 
 	if value, ok := getResult.Value.(*models.Brand); ok {
 		return value, nil
 	}
 
-	frame.context.Logger().Error(errorMessage, "Could not cast to model instance")
-
-	return &models.Brand{}, errorResponse(frame.context)
+	return &models.Brand{}, loggedErrorResponse(errorMessage, cannotCastError, frame.context)
 }
 
 /*
@@ -480,9 +472,7 @@ func buildRating(dbs *databases, frame *frame) (*models.Rating, *models.Platform
 	rangeRecord, rangeOk := <-rangeChannel
 
 	if !appOk || !platformOk || !rangeOk {
-		frame.context.Logger().Error("Channel closed")
-
-		return nil, nil, errorResponse(frame.context)
+		return nil, nil, loggedErrorResponse("", channelClosedError, frame.context)
 	}
 
 	if app.err != nil {
@@ -523,7 +513,7 @@ func validateRating(from int8, to int8, frame *frame) error {
 
 		frame.context.Logger().Error(errorMessage)
 
-		return echo.NewHTTPError(http.StatusUnprocessableEntity, errorMessage)
+		return echo.NewHTTPError(http.StatusUnprocessableEntity, []string{errorMessage})
 	}
 
 	return nil
@@ -531,20 +521,17 @@ func validateRating(from int8, to int8, frame *frame) error {
 
 func attachFields(rating *models.Rating, platform *models.Platform, dbs *databases, frame *frame) error {
 	attachDeviceChannel := make(chan error)
-	channelClosedMessage := "Channel closed"
 
 	go attachDevice(rating, platform, dbs, frame, attachDeviceChannel)
 
 	deviceError, deviceOk := <-attachDeviceChannel
 
 	if deviceError != nil {
-		return deviceError
+		return loggedErrorResponse("", "Error attaching Device", frame.context)
 	}
 
 	if !deviceOk {
-		frame.context.Logger().Error(channelClosedMessage)
-
-		return errorResponse(frame.context)
+		return loggedErrorResponse("", channelClosedError, frame.context)
 	}
 
 	if hasAppUser(frame.request) {
@@ -555,13 +542,11 @@ func attachFields(rating *models.Rating, platform *models.Platform, dbs *databas
 		appUserError, appUserOk := <-attachAppUserChannel
 
 		if appUserError != nil {
-			return appUserError
+			return loggedErrorResponse("", "Error attaching AppUser", frame.context)
 		}
 
 		if !appUserOk {
-			frame.context.Logger().Error(channelClosedMessage)
-
-			return errorResponse(frame.context)
+			return loggedErrorResponse("", channelClosedError, frame.context)
 		}
 	}
 
@@ -573,13 +558,11 @@ func attachFields(rating *models.Rating, platform *models.Platform, dbs *databas
 		browserError, browserOk := <-attachBrowserChannel
 
 		if browserError != nil {
-			return browserError
+			return loggedErrorResponse("", "Error attaching Browser", frame.context)
 		}
 
 		if !browserOk {
-			frame.context.Logger().Error(channelClosedMessage)
-
-			return errorResponse(frame.context)
+			return loggedErrorResponse("", channelClosedError, frame.context)
 		}
 	}
 

@@ -102,7 +102,20 @@
                     { data: 'rating.rating', name: 'rating_id' },
                     { data: 'created_at', name: 'created_at' },
                     { data: 'updated_at', name: 'updated_at' }
-                ]
+                ],
+                initComplete: function () {
+                    this.api().columns().every(function () {
+                        var column = this;
+                        var input = document.createElement("input");
+
+                        $(input).appendTo($(column.footer()).empty())
+                        .on('change', function () {
+                            var val = $.fn.dataTable.util.escapeRegex($(this).val());
+
+                            column.search(val ? val : '', true, false).draw();
+                        });
+                    });
+                }
             });
         });
 

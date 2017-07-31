@@ -89,9 +89,9 @@ func bind(request *Request, context echo.Context) error {
 			}
 		}
 
-		context.Logger().Error("Error binding request:", errorDescription)
+		context.Logger().Error("Error binding request: ", errorDescription)
 
-		return echo.NewHTTPError(errorCode, errorMessage)
+		return echo.NewHTTPError(errorCode, []string{errorMessage})
 	}
 
 	return nil
@@ -100,12 +100,12 @@ func bind(request *Request, context echo.Context) error {
 func validate(request *Request, context echo.Context) error {
 	if errs := context.Validate(request); errs != nil {
 		var errorList []string
-		var errorMessage = "Error validating request:"
+		var errorMessage = "Error validating request: "
 
 		if _, ok := errs.(*validator.InvalidValidationError); ok {
 			context.Logger().Error(errorMessage, errs.Error())
 
-			return echo.NewHTTPError(http.StatusUnprocessableEntity, errs.Error())
+			return echo.NewHTTPError(http.StatusUnprocessableEntity, []string{errs.Error()})
 		}
 
 		for _, err := range errs.(validator.ValidationErrors) {

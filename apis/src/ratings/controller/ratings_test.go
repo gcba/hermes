@@ -462,7 +462,7 @@ func TestPostRatings_WithoutPlatform(t *testing.T) {
 		"meta": map[string]interface{}{
 			"code":    http.StatusUnprocessableEntity,
 			"message": "Unprocessable Entity"},
-		"errors": []interface{}{"Error validating request: Key: 'Request.Platform.Key' Error:Field validation for 'Key' failed on the 'required' tag"}}
+		"errors": []interface{}{"Key: 'Request.Platform.Key' Error:Field validation for 'Key' failed on the 'required' tag"}}
 
 	r := e.POST("/ratings").
 		WithHeader("Content-Type", "application/json; charset=UTF-8").
@@ -946,8 +946,8 @@ func TestPostRatings_WithoutUserEmailAndMiBAID(t *testing.T) {
 			"code":    http.StatusUnprocessableEntity,
 			"message": "Unprocessable Entity"},
 		"errors": []interface{}{
-			"Error validating request: Key: 'Request.User.Email' Error:Field validation for 'Email' failed on the 'email/mibaid' tag",
-			"Error validating request: Key: 'Request.User.MiBAID' Error:Field validation for 'MiBAID' failed on the 'email/mibaid' tag"}}
+			"Key: 'Request.User.Email' Error:Field validation for 'Email' failed on the 'email/mibaid' tag",
+			"Key: 'Request.User.MiBAID' Error:Field validation for 'MiBAID' failed on the 'email/mibaid' tag"}}
 
 	r := e.POST("/ratings").
 		WithHeader("Content-Type", "application/json; charset=UTF-8").
@@ -992,7 +992,7 @@ func TestPostRatings_NotAcceptableError(t *testing.T) {
 			"code":    http.StatusNotAcceptable,
 			"message": "Not Acceptable"},
 		"errors": []interface{}{
-			"Not accepting JSON responses"}}
+			"JSON responses must be accepted"}}
 
 	r := e.POST("/ratings").
 		WithHeader("Content-Type", "application/json; charset=UTF-8").

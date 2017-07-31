@@ -7,10 +7,10 @@ import (
 )
 
 type AppUser struct {
-	ID     uint   `gorm:"primary_key;AUTO_INCREMENT"`
-	Name   string `gorm:"size:70;not null"`
-	Email  string `gorm:"size:100;not null"`
-	MiBAID string `gorm:"column:miba_id;not null"`
+	ID     uint    `gorm:"primary_key;AUTO_INCREMENT"`
+	Name   string  `gorm:"size:70;not null"`
+	Email  *string `gorm:"size:100;DEFAULT:NULL"`
+	MiBAID *string `gorm:"column:miba_id;DEFAULT:NULL"`
 
 	CreatedAt time.Time `gorm:"not null;type:datetime;default:CURRENT_TIMESTAMP"`
 }
@@ -24,14 +24,14 @@ func (AppUser) TableName() string {
 func GetAppUser(mibaID string, db *gorm.DB) *gorm.DB { // TODO: Check actual mibaID type
 	var result AppUser
 
-	return db.Where(&AppUser{MiBAID: mibaID}).First(&result)
+	return db.Where(&AppUser{MiBAID: &mibaID}).First(&result)
 }
 
 // GetAppUserByEmail gets an app user by email
 func GetAppUserByEmail(email string, db *gorm.DB) *gorm.DB {
 	var result AppUser
 
-	return db.Where(&AppUser{Email: email}).First(&result)
+	return db.Where(&AppUser{Email: &email}).First(&result)
 }
 
 // CreateAppUser creates a new app user

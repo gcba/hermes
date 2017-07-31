@@ -20,11 +20,13 @@
                             <thead>
                                 <tr>
                                     @foreach($dataType->browseRows as $row)
-                                    <th>{{ $row->display_name }}</th>
+                                        <th>{{ $row->display_name }}</th>
                                     @endforeach
                                     <th class="actions">{{ __('voyager.generic.actions') }}</th>
                                 </tr>
                             </thead>
+                            <tbody></tbody>
+                            <tfoot></tfoot>
                         </table>
                         @if (isset($dataType->server_side) && $dataType->server_side)
                             <div class="pull-left">
@@ -106,11 +108,25 @@
                     { data: 'device.name', name: 'device_id' },
                     { data: 'created_at', name: 'created_at' },
                     { data: 'updated_at', name: 'updated_at' }
-                ]
+                ],
+                initComplete: function () {
+                    this.api().columns().every(function () {
+                        var column = this;
+                        var input = document.createElement("input");
+
+                        $(input).appendTo($(column.footer()).empty())
+                        .on('change', function () {
+                            var val = $.fn.dataTable.util.escapeRegex($(this).val());
+
+                            column.search($(this).val(), false, false, true).draw();
+                        });
+                    });
+                }
             });
         });
 
         var deleteFormAction;
+
         $('td').on('click', '.delete', function (e) {
             var form = $('#delete_form')[0];
 

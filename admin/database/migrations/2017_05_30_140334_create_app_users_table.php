@@ -16,9 +16,9 @@ class CreateAppUsersTable extends Migration
         Schema::create('appusers', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name', 70);
-            $table->string('email', 100);
+            $table->string('email', 100)->nullable();;
             $table->index('email');
-            $table->char('miba_id', 10)->unique();
+            $table->char('miba_id', 10)->unique()->nullable();;
             $table->index('miba_id');
             $table->timestamps();
             $table->softDeletes();

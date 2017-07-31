@@ -30,19 +30,19 @@ func badRequestMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
 		if !hasAcceptHeader(context) {
 			message = "Accept header is missing"
 
-			return echo.NewHTTPError(http.StatusBadRequest, message)
+			return echo.NewHTTPError(http.StatusBadRequest, []string{message})
 		}
 
 		if context.Request().Method == echo.OPTIONS && hasContentTypeHeader(context) {
 			message = "OPTIONS requests must have no body"
 
-			return echo.NewHTTPError(http.StatusBadRequest, message)
+			return echo.NewHTTPError(http.StatusBadRequest, []string{message})
 		}
 
 		if context.Request().Method == echo.POST && !hasContentTypeHeader(context) {
 			message = "Content-Type header is missing"
 
-			return echo.NewHTTPError(http.StatusBadRequest, message)
+			return echo.NewHTTPError(http.StatusBadRequest, []string{message})
 		}
 
 		return next(context)
@@ -54,9 +54,9 @@ func notAcceptableMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
 		var message string
 
 		if !isValidAcceptHeader(context) {
-			message = "Not accepting JSON responses"
+			message = "JSON responses must be accepted"
 
-			return echo.NewHTTPError(http.StatusNotAcceptable, message)
+			return echo.NewHTTPError(http.StatusNotAcceptable, []string{message})
 		}
 
 		return next(context)
@@ -71,7 +71,7 @@ func unsupportedMediaTypeMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
 			if !isValidContentTypeHeader(context) || !isValidCharacterEncoding(context) {
 				message = "Request body must be UTF-8 encoded JSON"
 
-				return echo.NewHTTPError(http.StatusUnsupportedMediaType, message)
+				return echo.NewHTTPError(http.StatusUnsupportedMediaType, []string{message})
 			}
 		}
 
@@ -82,7 +82,7 @@ func unsupportedMediaTypeMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
 func notImplementedMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
 	return func(context echo.Context) error {
 		if context.Request().Method != echo.POST && context.Request().Method != echo.OPTIONS {
-			return echo.NewHTTPError(http.StatusNotImplemented, "")
+			return echo.NewHTTPError(http.StatusNotImplemented)
 		}
 
 		return next(context)
