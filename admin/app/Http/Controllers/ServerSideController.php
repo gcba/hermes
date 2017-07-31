@@ -50,7 +50,11 @@ class ServerSideController extends Controller {
     {
         $query = Device::with(['platform', 'brand'])->select('devices.*')->orderBy('created_at', 'desc');
 
-        return Datatables::of($query)->make(true);
+        return Datatables::of($query)
+            ->editColumn('brand.name', function($item){
+                    return $item->brand ? $item->brand->name : '';
+                })
+            ->make(true);
     }
 
     /**
