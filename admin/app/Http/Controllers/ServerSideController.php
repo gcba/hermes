@@ -48,7 +48,7 @@ class ServerSideController extends Controller {
     */
     public function devicesAPI(Request $request)
     {
-        $query = Device::with(['platform', 'brand'])->select('devices.*');
+        $query = Device::with(['platform', 'brand'])->select('devices.*')->orderBy('created_at', 'desc');
 
         return Datatables::of($query)->make(true);
     }
