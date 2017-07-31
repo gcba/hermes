@@ -175,13 +175,13 @@ public class Rating {
             "ppi": deviceInfo.displayInfo.pixelsPerInch
         ]
         
-        let device: [String : Any] = [
+        let device: [String: Any] = [
             "name": deviceInfo.modelString,
             "brand": "Apple",
             "screen": screen
         ]
         
-        let result: [String : Any]  = [
+        let result: [String: Any]  = [
             "range": range,
             "app": [
                 "key": app,
