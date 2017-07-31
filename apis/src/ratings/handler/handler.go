@@ -175,9 +175,9 @@ func Handler(port int, handlers map[string]echo.HandlerFunc) http.Handler {
 	e.OPTIONS("/ratings", handlers["OptionsRatings"])
 	e.POST("/ratings", handlers["PostRatings"])
 
-	e.Server.Addr = ":" + strconv.Itoa(port)
 	e.HTTPErrorHandler = responses.ErrorHandler
 	e.Validator = &RequestValidator{validator: validate}
+	e.Server.Addr = ":" + strconv.Itoa(port)
 
 	return e
 }
