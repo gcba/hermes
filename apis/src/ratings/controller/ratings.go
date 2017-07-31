@@ -24,8 +24,6 @@ func PostRatings(context echo.Context) error {
 	request, err := parser.Parse(context)
 
 	if err != nil {
-		context.Logger().Error("Error parsing request: " + err.Error())
-
 		return err
 	}
 
@@ -36,8 +34,6 @@ func PostRatings(context echo.Context) error {
 	defer dbs.write.Close()
 
 	if err := newRating(dbs, frame); err != nil {
-		frame.context.Logger().Error("Rating error: " + err.Error())
-
 		return err
 	}
 
@@ -56,9 +52,12 @@ func newMessage(rating uint, db *gorm.DB, frame *frame) error {
 		RatingID:  rating}
 
 	result := models.CreateMessage(message, db)
+	errorMessage := "Error creating a new Message:"
 	errorList := result.GetErrors()
 
 	if len(errorList) > 0 || result.Error != nil || result.Value == nil {
+		frame.context.Logger().Error(errorMessage, "Database driver returned invalid value")
+
 		return errorResponse(frame.context)
 	}
 
@@ -68,7 +67,7 @@ func newMessage(rating uint, db *gorm.DB, frame *frame) error {
 		return nil
 	}
 
-	frame.context.Logger().Error("Error creating a new Message: Could not cast to model instance")
+	frame.context.Logger().Error(errorMessage, "Could not cast to model instance")
 
 	return errorResponse(frame.context)
 }
@@ -80,6 +79,7 @@ func newMessage(rating uint, db *gorm.DB, frame *frame) error {
  */
 func newRating(dbs *databases, frame *frame) error {
 	rating, platform, buildErr := buildRating(dbs, frame)
+	errorMessage := "Error creating a new Rating:"
 
 	if buildErr != nil {
 		return errorResponse(frame.context)
@@ -95,6 +95,8 @@ func newRating(dbs *databases, frame *frame) error {
 	errorList := result.GetErrors()
 
 	if len(errorList) > 0 || result.Error != nil || result.Value == nil {
+		frame.context.Logger().Error(errorMessage, "Database driver returned invalid value")
+
 		return errorResponse(frame.context)
 	}
 
@@ -103,8 +105,6 @@ func newRating(dbs *databases, frame *frame) error {
 
 		if rating.HasMessage {
 			if err := newMessage(value.ID, dbs.write, frame); err != nil {
-				frame.context.Logger().Error("Error creating a message: " + err.Error())
-
 				return err
 			}
 		}
@@ -112,7 +112,7 @@ func newRating(dbs *databases, frame *frame) error {
 		return nil
 	}
 
-	frame.context.Logger().Error("Error creating a new Rating: Could not cast to model instance")
+	frame.context.Logger().Error(errorMessage, "Could not cast to model instance")
 
 	return errorResponse(frame.context)
 }

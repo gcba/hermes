@@ -4,8 +4,6 @@ import (
 	"fmt"
 	"net/http"
 
-	"ratings/responses"
-
 	"github.com/go-playground/validator"
 	"github.com/labstack/echo"
 	"github.com/leebenson/conform"
@@ -68,14 +66,10 @@ func Parse(context echo.Context) (*Request, error) {
 	escape(request)
 
 	if err := bind(request, context); err != nil {
-		context.Logger().Error("Error binding request: " + err.Error())
-
 		return request, err
 	}
 
 	if err := validate(request, context); err != nil {
-		context.Logger().Error("Error validating request: " + err.Error())
-
 		return request, err
 	}
 
@@ -84,7 +78,8 @@ func Parse(context echo.Context) (*Request, error) {
 
 func bind(request *Request, context echo.Context) error {
 	if err := context.Bind(request); err != nil {
-		errorMessage := fmt.Sprintf("Error parsing request: %s", err.Error())
+		errorDescription := err.Error()
+		errorMessage := fmt.Sprintf("Error parsing request: %s", errorDescription)
 		errorCode := http.StatusBadRequest
 
 		if httpError, ok := err.(*echo.HTTPError); ok {
@@ -94,9 +89,9 @@ func bind(request *Request, context echo.Context) error {
 			}
 		}
 
-		context.Logger().Error(errorMessage)
+		context.Logger().Error("Error binding request:", errorDescription)
 
-		return responses.ErrorResponse(errorCode, errorMessage, context)
+		return echo.NewHTTPError(errorCode, errorMessage)
 	}
 
 	return nil
@@ -105,19 +100,22 @@ func bind(request *Request, context echo.Context) error {
 func validate(request *Request, context echo.Context) error {
 	if errs := context.Validate(request); errs != nil {
 		var errorList []string
+		var errorMessage = "Error validating request:"
 
 		if _, ok := errs.(*validator.InvalidValidationError); ok {
-			return responses.ErrorResponse(http.StatusUnprocessableEntity, errs.Error(), context)
+			context.Logger().Error(errorMessage, errs.Error())
+
+			return echo.NewHTTPError(http.StatusUnprocessableEntity, errs.Error())
 		}
 
 		for _, err := range errs.(validator.ValidationErrors) {
-			errorMessage := fmt.Sprintf("Error validating request: %s", err.(error).Error())
-			errorList = append(errorList, errorMessage)
+			errorDescription := err.(error).Error()
+			errorList = append(errorList, errorDescription)
 
-			context.Logger().Error(errorMessage)
+			context.Logger().Error(errorMessage, errorDescription)
 		}
 
-		return responses.ErrorsResponse(http.StatusUnprocessableEntity, errorList, context)
+		return echo.NewHTTPError(http.StatusUnprocessableEntity, errorList)
 	}
 
 	return nil
