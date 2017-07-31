@@ -219,8 +219,6 @@ func getAppUser(dbs *databases, frame *frame) (*models.AppUser, error) {
 				Email: &frame.request.User.Email}
 		}
 
-		frame.context.Logger().Debug(appuser)
-
 		createResult := models.CreateAppUser(appuser, dbs.write)
 		createErrorList := createResult.GetErrors()
 
