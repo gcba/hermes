@@ -62,7 +62,7 @@ public final class Rating {
     }
 
     private void validateMibaId(String mibaId) {
-        if (mibaId.trim().length() < 1) throw new IllegalArgumentException("mibaId too short");
+        if (mibaId.trim().length() != 36) throw new IllegalArgumentException("invalid mibaId");
     }
 
     private void validateRating(int rating) {

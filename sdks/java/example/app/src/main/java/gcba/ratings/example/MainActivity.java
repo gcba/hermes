@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
                     // Rating, description and comment; user name and mibaId only
 
-                    rating.setUser("Juan Pérez", "e10adc394");
+                    rating.setUser("Juan Pérez", "dc62591b-1cd3-4c6c-a943-f682e8860e08");
 
                     result = rating.create(2, "Regular", "Lorem ipsum dolor...");
 
@@ -51,11 +51,11 @@ public class MainActivity extends AppCompatActivity {
 
                     // Rating, description and comment; user name, email and mibaId
 
-                    rating.setUser("Juan Pérez", "e10adc394", "juan@perez.com");
+                    rating.setUser("Juan Pérez", "ae0bfd64-7b37-4bb5-a628-b6cfe28a68af", "juan@perez.com");
 
                     result = rating.create(5, "Muy Bueno", "Lorem ipsum dolor...");
                 } catch(Error e) {
-                    System.err.println ("Error: " + e.getMessage());
+                    System.err.println("Error: " + e.getMessage());
                 }
             }
         });
