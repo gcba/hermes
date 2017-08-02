@@ -32,32 +32,46 @@ const validate = {
     options: (value) => {
         if (check.isPlainObject(value)) return true;
 
-        fail('Invalid options object');
+        fail('invalid options object');
     },
     rating: (value) => {
         if (check.isInteger(value) && value >= -127 && value <= 127) return value;
 
-        fail('Invalid or missing rating');
+        fail('invalid rating');
     },
     description: (value) => {
-        if (check.isString(value) && value.trim().length >= 3 && value.trim().length <= 30) return value.trim();
+        if (check.isString(value)) {
+            let trimmedValue = value.trim();
 
-        fail('Invalid description');
+            if (trimmedValue.length < 3) fail('description too short');
+            if (trimmedValue.length > 30) fail('description too long');
+
+            return trimmedValue;
+        }
+
+        fail('invalid description');
     },
     comment: (value) => {
-        if (check.isString(value) && value.trim().length >= 3 && value.trim().length <= 1000) return value.trim();
+        if (check.isString(value)) {
+            let trimmedValue = value.trim();
 
-        fail('Invalid comment');
+            if (trimmedValue.length < 3) fail('comment too short');
+            if (trimmedValue.length > 1000) fail('comment too long');
+
+            return trimmedValue;
+        }
+
+        fail('invalid comment');
     },
     key: (value, name) => {
         if (value && check.isString(value.trim()) && value.trim().length === 32) return value.trim();
 
-        fail('Invalid or missing ' + name);
+        fail('invalid ' + name);
     },
     token: (value) => {
         if (value && check.isString(value) && value.trim().length > 0) return value.trim();
 
-        fail('Invalid or missing token');
+        fail('invalid token');
     },
     url: (value) => {
         const url = new RegExp(/^(ftp|http|https):\/\/[^ "]+$/);
@@ -68,23 +82,60 @@ const validate = {
             return baseUrl[baseUrl.length - 1] === '/' ? baseUrl + 'ratings' : baseUrl + '/ratings';
         }
 
-        fail('Invalid or missing api');
+        fail('invalid api');
     },
     appVersion: (value) => {
-        if (value && check.isString(value) && value.trim().length >= 1 && value.trim().length <= 15)
-            return value.trim();
+        if (check.isString(value)) {
+            let trimmedValue = value.trim();
 
-        fail('Invalid or missing version');
+            if (trimmedValue.length < 1) fail('version too short');
+            if (trimmedValue.length > 15) fail('version too long');
+
+            return trimmedValue;
+        }
+
+        fail('invalid version');
     },
     isMobile: (value) => {
         if (value === undefined || value === null || check.isBool(value)) return value;
 
-        fail('Invalid isMobile');
+        fail('invalid isMobile');
     },
     userAgent: (value) => {
         if (check.isString(value) && value.trim().length > 0) return value.trim();
 
-        fail('Invalid userAgent');
+        fail('invalid userAgent');
+    },
+    name: (value) => {
+        if (check.isString(value)) {
+            let trimmedValue = value.trim();
+
+            if (trimmedValue.length < 3) fail('name too short');
+            if (trimmedValue.length > 70) fail('name too long');
+
+            return trimmedValue;
+        }
+
+        fail('invalid name');
+    },
+    email: (value) => {
+        const email = new RegExp(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/);
+
+        if (check.isString(value) && email.test(value.trim())) {
+            let trimmedValue = value.trim();
+
+            if (trimmedValue.length < 3) fail('email too short');
+            if (trimmedValue.length > 100) fail('email too long');
+
+            return trimmedValue;
+        }
+
+        fail('invalid email');
+    },
+    mibaId: (value) => {
+        if (check.isString(value) && value.length === 36) return value.trim();
+
+        fail('invalid mibaId');
     }
 };
 
@@ -178,24 +229,19 @@ class Rating {
     }
 
     set user(value) {
-        const email = new RegExp(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/);
-
         const isPlainObject = check.isPlainObject(value);
         const hasName = check.isString(value.name) && value.name.trim().length > 0;
         const hasEmail = check.isString(value.email) && value.email.trim().length > 0;
         const hasMibaId = check.isString(value.mibaId) && value.mibaId.trim().length > 0;
-        const nameIsValid = value.name.trim().length >= 3 && value.name.trim().length <= 70;
-        const emailIsValid = email.test(value.trim()) &&
-            value.email.trim().length >= 3 && value.email.trim().length <= 100;
-        const mibaIdIsValid = value.mibaId.trim().length === 36;
+        const name = validate.name(value.name);
+        const email = validate.email(value.email);
+        const mibaId = validate.mibaId(value.mibaId);
         const user = {};
 
         if (!(isPlainObject && (hasName || hasEmail || hasMibaId))) fail('User object is invalid');
-        if (!((hasEmail && emailIsValid) || (hasMibaId && mibaIdIsValid))) fail('User has no valid email or mibaId');
-
-        if (hasName) user.name = value.name.trim();
-        if (hasEmail) user.email = value.email.trim();
-        if (hasMibaId) user.mibaId = value.mibaId.trim();
+        if (hasName) user.name = name;
+        if (hasEmail) user.email = email;
+        if (hasMibaId) user.mibaId = mibaId;
 
         this._user = user;
     }
