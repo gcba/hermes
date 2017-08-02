@@ -6,6 +6,10 @@
     overflow-x: auto;
 }
 
+.dataTables_wrapper.form-inline:nth-child(1) > div {
+    overflow-y: hidden;
+}
+
 .dataTables_wrapper .row:last-of-type {
     margin-bottom: 0px;
 }
