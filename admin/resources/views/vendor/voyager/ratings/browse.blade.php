@@ -16,7 +16,7 @@
             <div class="col-md-12">
                 <div class="panel panel-bordered">
                     <div class="panel-body table-responsive">
-                        <table id="dataTable" class="row table table-hover">
+                        <table id="dataTable" class="row table table-hover table-ratings">
                             <thead>
                                 <tr>
                                     @foreach($dataType->browseRows as $row)
@@ -26,7 +26,11 @@
                                 </tr>
                             </thead>
                             <tbody></tbody>
-                            <tfoot></tfoot>
+                            <tfoot>
+                                @foreach($dataType->browseRows as $row)
+                                    <th></th>
+                                @endforeach
+                            </tfoot>
                         </table>
                         @if (isset($dataType->server_side) && $dataType->server_side)
                             <div class="pull-left">
@@ -70,9 +74,9 @@
 @stop
 
 @section('css')
-@if(!$dataType->server_side && config('dashboard.data_tables.responsive'))
-<link rel="stylesheet" href="{{ voyager_asset('lib/css/responsive.dataTables.min.css') }}">
-@endif
+    @if(!$dataType->server_side && config('dashboard.data_tables.responsive'))
+        <link rel="stylesheet" href="{{ voyager_asset('lib/css/responsive.dataTables.min.css') }}">
+    @endif
 @stop
 
 @section('javascript')
@@ -117,7 +121,7 @@
 
                         $(input).appendTo($(column.footer()).empty())
                         .on('change', function () {
-                            var val = $.fn.dataTable.util.escapeRegex($(this).val());
+                            var val = $.fn.dataTable.util.escapeRegex($(this).val().trim());
 
                             column.search($(this).val(), false, false, true).draw();
                         });
