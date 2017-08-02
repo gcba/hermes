@@ -2092,7 +2092,7 @@ var Rating = function () {
             var hasValidWidth = check.isInteger(value.width) && value > 0;
             var hasValidHeight = check.isInteger(value.width) && value > 0;
 
-            if (!(isPlainObject && hasValidWidth && hasValidHeight)) fail('Screen object is invalid');
+            if (!(isPlainObject && hasValidWidth && hasValidHeight)) fail('screen object is invalid');
 
             this._screen = value;
         }
@@ -2121,7 +2121,7 @@ var Rating = function () {
             var mibaId = validate.mibaId(value.mibaId);
             var user = {};
 
-            if (!(isPlainObject && (hasName || hasEmail || hasMibaId))) fail('User object is invalid');
+            if (!(isPlainObject && (hasName || hasEmail || hasMibaId))) fail('user object is invalid');
             if (hasName) user.name = name;
             if (hasEmail) user.email = email;
             if (hasMibaId) user.mibaId = mibaId;
