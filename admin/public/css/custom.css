@@ -60,3 +60,9 @@
 .dataTables_wrapper .table-ratings th:nth-child(3) {
     width: 100px !important;
 }
+
+@media screen and (max-width: 767px) {
+    #dataTable_filter {
+        float: none;
+    }
+}
