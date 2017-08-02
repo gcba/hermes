@@ -18,9 +18,7 @@ class ServerSideController extends Controller {
     */
     public function ratingsAPI(Request $request)
     {
-        $query = Rating::with(['range', 'app', 'platform', 'browser', 'appuser', 'device'])
-            ->select('ratings.*')
-            ->orderBy('created_at', 'desc');
+        $query = Rating::with(['range', 'app', 'platform', 'browser', 'appuser', 'device'])->select('ratings.*');
 
         return Datatables::of($query)
             ->editColumn('appuser.name', function($item){
@@ -36,7 +34,7 @@ class ServerSideController extends Controller {
     */
     public function messagesAPI(Request $request)
     {
-        $query = Message::with('rating')->select('messages.*')->orderBy('created_at', 'desc');
+        $query = Message::with('rating')->select('messages.*');
 
         return Datatables::of($query)->make(true);
     }
@@ -48,7 +46,7 @@ class ServerSideController extends Controller {
     */
     public function devicesAPI(Request $request)
     {
-        $query = Device::with(['platform', 'brand'])->select('devices.*')->orderBy('created_at', 'desc');
+        $query = Device::with(['platform', 'brand'])->select('devices.*');
 
         return Datatables::of($query)
             ->editColumn('brand.name', function($item){

@@ -102,6 +102,7 @@
                     { data: 'created_at', name: 'created_at' },
                     { data: 'updated_at', name: 'updated_at' }
                 ],
+                order: [[6, 'desc']],
                 initComplete: function () {
                     this.api().columns().every(function () {
                         var column = this;
