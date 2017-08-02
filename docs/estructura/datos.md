@@ -40,7 +40,7 @@ El usuario de las apps que envía calificaciones y comentarios.
 |id              |int (PK)              |       |       |       |       |
 |name            |varchar(70)           |       |       |       |       |
 |email           |varchar(100)          |       |X      |       |X      |
-|miba_id         |char(10)              |       |X      |X      |X      |
+|miba_id         |char(36)              |       |X      |X      |X      |
 |created_at      |timestamp             |       |       |       |       |
 |modified_at     |timestamp             |       |X      |       |       |
 
@@ -219,7 +219,7 @@ Los mensajes de las conversaciones con los usuarios de las apps que enviaron cal
 |----------------|----------------------|:-----:|:-----:|:-----:|:-----:|
 |id              |int (PK)              |       |       |       |       |
 |message         |text                  |       |       |       |       |
-|direction       |char                  |       |       |       |X      |
+|direction       |enum                  |       |       |       |X      |
 |rating_id       |int                   |X      |       |       |X      |
 |created_at      |timestamp             |       |       |       |       |
 |modified_at     |timestamp             |       |X      |       |       |
