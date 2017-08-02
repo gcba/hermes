@@ -96,7 +96,12 @@
             $('#dataTable').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: '{!! route('ratings.api') !!}',
+                ajax: {
+                    url: '{!! route('ratings.api') !!}',
+                    data: function (d) {
+                        console.info(d);
+                    }
+                },
                 columns: [
                     { data: 'rating', name: 'rating' },
                     { data: 'range.name', name: 'range_id' },
@@ -114,10 +119,13 @@
                     { data: 'updated_at', name: 'updated_at' }
                 ],
                 order: [[12, 'desc']],
+                mark: true,
                 initComplete: function () {
                     this.api().columns().every(function () {
                         var column = this;
                         var input = document.createElement("input");
+
+                        // input.name = column.name;
 
                         $(input).appendTo($(column.footer()).empty())
                         .on('change', function () {

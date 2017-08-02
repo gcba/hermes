@@ -204,14 +204,17 @@ return [
 
     // Here you can specify additonal assets you would like to be included in the master.blade
     'additional_css' => [
-        'css/bootstrap-datetimepicker.min.css',
-        'css/jquery.dataTables.yadcf.min.css',
-        'css/custom.css'
+        // 'css/bootstrap-datetimepicker.min.css',
+        // 'css/jquery.dataTables.yadcf.min.css',
+        'css/custom.css',
+        'css/datatables.mark.min.css'
     ],
 
     'additional_js' => [
-        'js/bootstrap-datetimepicker.min.js',
-        'js/jquery.dataTables.yadcf.min.js',
+        // 'js/bootstrap-datetimepicker.min.js',
+        // 'js/jquery.dataTables.yadcf.min.js',
+        'js/jquery.mark.min.js',
+        'js/datatables.mark.min.js'
     ],
 
 ];
