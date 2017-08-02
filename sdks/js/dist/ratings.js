@@ -1836,97 +1836,164 @@ var platform = createCommonjsModule(function (module, exports) {
 }.call(commonjsGlobal));
 });
 
-const fail = message => {
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var fail = function fail(message) {
     throw new RatingError(message);
 };
 
-const check = {
-    isString: thing => {
+var check = {
+    isString: function isString(thing) {
         return typeof thing === 'string' || thing instanceof String;
     },
-    isBool: thing => {
+    isBool: function isBool(thing) {
         return typeof thing === 'boolean';
     },
-    isInteger: thing => {
+    isInteger: function isInteger(thing) {
         return typeof thing === 'number' && isFinite(thing) && Math.floor(thing) === thing;
     },
-    isPlainObject: thing => {
-        return typeof thing === 'object' && thing !== null && thing.constructor === Object && thing.hasOwnProperty('isPrototypeOf') === false && thing.toString() === '[object Object]';
+    isPlainObject: function isPlainObject(thing) {
+        return (typeof thing === 'undefined' ? 'undefined' : _typeof(thing)) === 'object' && thing !== null && thing.constructor === Object && thing.hasOwnProperty('isPrototypeOf') === false && thing.toString() === '[object Object]';
     }
 };
 
-const validate = {
-    options: value => {
+var validate = {
+    options: function options(value) {
         if (check.isPlainObject(value)) return true;
 
-        fail('Invalid options object');
+        fail('invalid options object');
     },
-    rating: value => {
+    rating: function rating(value) {
         if (check.isInteger(value) && value >= -127 && value <= 127) return value;
 
-        fail('Invalid or missing rating');
+        fail('invalid rating');
     },
-    description: value => {
-        if (check.isString(value) && value.trim().length >= 3 && value.trim().length <= 30) return value.trim();
+    description: function description(value) {
+        if (check.isString(value)) {
+            var trimmedValue = value.trim();
 
-        fail('Invalid description');
-    },
-    comment: value => {
-        if (check.isString(value) && value.trim().length >= 3 && value.trim().length <= 1000) return value.trim();
+            if (trimmedValue.length < 3) fail('description too short');
+            if (trimmedValue.length > 30) fail('description too long');
 
-        fail('Invalid comment');
+            return trimmedValue;
+        }
+
+        fail('invalid description');
     },
-    key: (value, name) => {
+    comment: function comment(value) {
+        if (check.isString(value)) {
+            var trimmedValue = value.trim();
+
+            if (trimmedValue.length < 3) fail('comment too short');
+            if (trimmedValue.length > 1000) fail('comment too long');
+
+            return trimmedValue;
+        }
+
+        fail('invalid comment');
+    },
+    key: function key(value, name) {
         if (value && check.isString(value.trim()) && value.trim().length === 32) return value.trim();
 
-        fail('Invalid or missing ' + name);
+        fail('invalid ' + name);
     },
-    token: value => {
+    token: function token(value) {
         if (value && check.isString(value) && value.trim().length > 0) return value.trim();
 
-        fail('Invalid or missing token');
+        fail('invalid token');
     },
-    url: value => {
-        const url = new RegExp(/^(ftp|http|https):\/\/[^ "]+$/);
+    url: function url(value) {
+        var url = new RegExp(/^(ftp|http|https):\/\/[^ "]+$/);
 
         if (value && check.isString(value) && url.test(value.trim())) {
-            let baseUrl = value.trim();
+            var baseUrl = value.trim();
 
             return baseUrl[baseUrl.length - 1] === '/' ? baseUrl + 'ratings' : baseUrl + '/ratings';
         }
 
-        fail('Invalid or missing api');
+        fail('invalid api');
     },
-    appVersion: value => {
-        if (value && check.isString(value) && value.trim().length >= 1 && value.trim().length <= 15) return value.trim();
+    appVersion: function appVersion(value) {
+        if (check.isString(value)) {
+            var trimmedValue = value.trim();
 
-        fail('Invalid or missing version');
+            if (trimmedValue.length < 1) fail('version too short');
+            if (trimmedValue.length > 15) fail('version too long');
+
+            return trimmedValue;
+        }
+
+        fail('invalid version');
     },
-    isMobile: value => {
+    isMobile: function isMobile$$1(value) {
         if (value === undefined || value === null || check.isBool(value)) return value;
 
-        fail('Invalid isMobile');
+        fail('invalid isMobile');
     },
-    userAgent: value => {
+    userAgent: function userAgent(value) {
         if (check.isString(value) && value.trim().length > 0) return value.trim();
 
-        fail('Invalid userAgent');
+        fail('invalid userAgent');
+    },
+    name: function name(value) {
+        if (check.isString(value)) {
+            var trimmedValue = value.trim();
+
+            if (trimmedValue.length < 3) fail('name too short');
+            if (trimmedValue.length > 70) fail('name too long');
+
+            return trimmedValue;
+        }
+
+        fail('invalid name');
+    },
+    email: function email(value) {
+        var email = new RegExp(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/);
+
+        if (check.isString(value) && email.test(value.trim())) {
+            var trimmedValue = value.trim();
+
+            if (trimmedValue.length < 3) fail('email too short');
+            if (trimmedValue.length > 100) fail('email too long');
+
+            return trimmedValue;
+        }
+
+        fail('invalid email');
+    },
+    mibaId: function mibaId(value) {
+        if (check.isString(value) && value.length === 36) return value.trim();
+
+        fail('invalid mibaId');
     }
 };
 
-class RatingError {
-    constructor(message) {
+var RatingError = function () {
+    function RatingError(message) {
+        _classCallCheck(this, RatingError);
+
         this.message = message;
         this.name = 'RatingError';
     }
 
-    toString() {
-        return this.name + ': ' + this.message;
-    }
-}
+    _createClass(RatingError, [{
+        key: 'toString',
+        value: function toString() {
+            return this.name + ': ' + this.message;
+        }
+    }]);
 
-class Rating {
-    constructor(options) {
+    return RatingError;
+}();
+
+var Rating = function () {
+    function Rating(options) {
+        _classCallCheck(this, Rating);
+
         validate.options(options);
 
         this._keys = {};
@@ -1946,126 +2013,133 @@ class Rating {
         this._platform = platform.parse(this._userAgent);
     }
 
-    get isMobile() {
-        return this._isMobile === undefined || this._isMobile === null ? isMobile.any : this._isMobile;
-    }
+    _createClass(Rating, [{
+        key: 'create',
+        value: function create(data) {
+            var complaint = {
+                rating: validate.rating(data.rating),
+                range: this._keys.range,
+                app: this.app,
+                platform: this.platform,
+                device: this.device,
+                browser: this.browser
+            };
 
-    get app() {
-        return {
-            key: this._keys.app,
-            version: this._appVersion
-        };
-    }
+            if (data.description) data.description = validate.description(data.description);
+            if (data.comment) data.comment = validate.comment(data.comment);
+            if (this.user) complaint.user = this.user;
 
-    get platform() {
-        return {
-            key: this._keys.platform,
-            version: this._platform.os.version
-        };
-    }
+            return this.send(complaint);
+        }
+    }, {
+        key: 'send',
+        value: function send(complaint) {
+            var options = {
+                method: 'POST',
+                headers: new Headers({
+                    'Content-Type': 'application/json; charset=UTF-8',
+                    'Accept': 'application/json',
+                    'Authorization': 'Bearer ' + this._token
+                }),
+                body: JSON.stringify(complaint)
+            };
 
-    get device() {
-        const result = {
-            name: this.isMobile ? this._platform.product : 'Desktop',
-            screen: this.screen
-        };
+            return fetch(this._url, options);
+        }
+    }, {
+        key: 'isMobile',
+        get: function get() {
+            return this._isMobile === undefined || this._isMobile === null ? isMobile.any : this._isMobile;
+        }
+    }, {
+        key: 'app',
+        get: function get() {
+            return {
+                key: this._keys.app,
+                version: this._appVersion
+            };
+        }
+    }, {
+        key: 'platform',
+        get: function get() {
+            return {
+                key: this._keys.platform,
+                version: this._platform.os.version
+            };
+        }
+    }, {
+        key: 'device',
+        get: function get() {
+            var result = {
+                name: this.isMobile ? this._platform.product : 'Desktop',
+                screen: this.screen
+            };
 
-        if (this.isMobile && this._platform.manufacturer) result.brand = this._platform.manufacturer;
-
-        return result;
-    }
-
-    get screen() {
-        return {
-            width: self.screen.width || window.screen.width,
-            height: self.screen.height || window.screen.height
-        };
-    }
-
-    get user() {
-        if (this._user) {
-            const result = {};
-
-            if (this._user.name) result.name = this._user.name;
-            if (this._user.email) result.email = this._user.email;
-            if (this._user.mibaId) result.mibaId = this._user.mibaId;
+            if (this.isMobile && this._platform.manufacturer) result.brand = this._platform.manufacturer;
 
             return result;
         }
+    }, {
+        key: 'screen',
+        get: function get() {
+            return {
+                width: self.screen.width || window.screen.width,
+                height: self.screen.height || window.screen.height
+            };
+        },
+        set: function set(value) {
+            var isPlainObject = check.isPlainObject(value);
+            var hasValidWidth = check.isInteger(value.width) && value > 0;
+            var hasValidHeight = check.isInteger(value.width) && value > 0;
 
-        return;
-    }
+            if (!(isPlainObject && hasValidWidth && hasValidHeight)) fail('Screen object is invalid');
 
-    get browser() {
-        return {
-            name: this._platform.name,
-            version: this._platform.version
-        };
-    }
+            this._screen = value;
+        }
+    }, {
+        key: 'user',
+        get: function get() {
+            if (this._user) {
+                var result = {};
 
-    set user(value) {
-        const email = new RegExp(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/);
+                if (this._user.name) result.name = this._user.name;
+                if (this._user.email) result.email = this._user.email;
+                if (this._user.mibaId) result.mibaId = this._user.mibaId;
 
-        const isPlainObject = check.isPlainObject(value);
-        const hasName = check.isString(value.name) && value.name.trim().length > 0;
-        const hasEmail = check.isString(value.email) && value.email.trim().length > 0;
-        const hasMibaId = check.isString(value.mibaId) && value.mibaId.trim().length > 0;
-        const nameIsValid = value.name.trim().length >= 3 && value.name.trim().length <= 70;
-        const emailIsValid = email.test(value.trim()) && value.email.trim().length >= 3 && value.email.trim().length <= 100;
-        const mibaIdIsValid = value.mibaId.trim().length === 36;
-        const user = {};
+                return result;
+            }
 
-        if (!(isPlainObject && (hasName || hasEmail || hasMibaId))) fail('User object is invalid');
-        if (!(hasEmail && emailIsValid || hasMibaId && mibaIdIsValid)) fail('User has no valid email or mibaId');
+            return;
+        },
+        set: function set(value) {
+            var isPlainObject = check.isPlainObject(value);
+            var hasName = check.isString(value.name) && value.name.trim().length > 0;
+            var hasEmail = check.isString(value.email) && value.email.trim().length > 0;
+            var hasMibaId = check.isString(value.mibaId) && value.mibaId.trim().length > 0;
+            var name = validate.name(value.name);
+            var email = validate.email(value.email);
+            var mibaId = validate.mibaId(value.mibaId);
+            var user = {};
 
-        if (hasName) user.name = value.name.trim();
-        if (hasEmail) user.email = value.email.trim();
-        if (hasMibaId) user.mibaId = value.mibaId.trim();
+            if (!(isPlainObject && (hasName || hasEmail || hasMibaId))) fail('User object is invalid');
+            if (hasName) user.name = name;
+            if (hasEmail) user.email = email;
+            if (hasMibaId) user.mibaId = mibaId;
 
-        this._user = user;
-    }
+            this._user = user;
+        }
+    }, {
+        key: 'browser',
+        get: function get() {
+            return {
+                name: this._platform.name,
+                version: this._platform.version
+            };
+        }
+    }]);
 
-    set screen(value) {
-        const isPlainObject = check.isPlainObject(value);
-        const hasValidWidth = check.isInteger(value.width) && value > 0;
-        const hasValidHeight = check.isInteger(value.width) && value > 0;
-
-        if (!(isPlainObject && hasValidWidth && hasValidHeight)) fail('Screen object is invalid');
-
-        this._screen = value;
-    }
-
-    create(data) {
-        const complaint = {
-            rating: validate.rating(data.rating),
-            range: this._keys.range,
-            app: this.app,
-            platform: this.platform,
-            device: this.device,
-            browser: this.browser
-        };
-
-        if (data.description) data.description = validate.description(data.description);
-        if (data.comment) data.comment = validate.comment(data.comment);
-        if (this.user) complaint.user = this.user;
-
-        return this.send(complaint);
-    }
-
-    send(complaint) {
-        const options = {
-            method: 'POST',
-            headers: new Headers({
-                'Content-Type': 'application/json; charset=UTF-8',
-                'Accept': 'application/json',
-                'Authorization': 'Bearer ' + this._token
-            }),
-            body: JSON.stringify(complaint)
-        };
-
-        return fetch(this._url, options);
-    }
-}
+    return Rating;
+}();
 
 return Rating;
 
