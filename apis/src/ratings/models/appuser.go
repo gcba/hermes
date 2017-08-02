@@ -10,7 +10,7 @@ type AppUser struct {
 	ID     uint    `gorm:"primary_key;AUTO_INCREMENT"`
 	Name   string  `gorm:"size:70;not null"`
 	Email  *string `gorm:"size:100;DEFAULT:NULL"`
-	MiBAID *string `gorm:"column:miba_id;DEFAULT:NULL"`
+	MiBAID *string `gorm:"column:miba_id;type:char(36);DEFAULT:NULL"`
 
 	CreatedAt time.Time `gorm:"not null;type:datetime;default:CURRENT_TIMESTAMP"`
 }

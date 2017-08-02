@@ -19,7 +19,7 @@ type (
 	user struct {
 		Name   string `json:"name" validate:"omitempty,gte=3,lte=70" conform:"trim,name"`
 		Email  string `json:"email" validate:"omitempty,email,gte=3,lte=100,excludesall= " conform:"trim,email"`
-		MiBAID string `json:"mibaId" validate:"omitempty,alphanum,gte=1,excludesall= " conform:"trim,lower"`
+		MiBAID string `json:"mibaId" validate:"omitempty,alphanum,len=36,excludesall= " conform:"trim,lower"`
 	}
 
 	platform struct {
