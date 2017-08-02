@@ -22,7 +22,8 @@ const resolvePlugin = nodeResolve({
 const babelPlugin = babel({
     include: 'src/**',
     exclude: 'node_modules/**',
-    presets: ['stage-3'],
+    presets: [['es2015', {'modules': false}], 'stage-3'],
+    runtimeHelpers: true,
     babelrc: false
 });
 
@@ -53,7 +54,7 @@ for (const config of bundles) {
         plugins: [resolvePlugin, commonjs()].concat(config.plugins),
         onwarn: (warning) => {
             if (warning.code === 'THIS_IS_UNDEFINED') return;
-            console.warn(warning.message);
+            if (warning.message) console.warn(warning.message);
         }
     };
 
