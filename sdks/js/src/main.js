@@ -6,7 +6,7 @@ import isMobile from 'ismobilejs';
 import platform from 'platform';
 
 const fail = (message) => {
-    throw new Error(message);
+    throw new RatingError(message);
 }
 
 const check = {
@@ -87,6 +87,17 @@ const validate = {
         fail('Invalid userAgent');
     }
 };
+
+class RatingError {
+    constructor(message) {
+        this.message = message;
+        this.name = 'RatingError'
+    }
+
+    toString() {
+        return this.name + ': ' + this.message
+    }
+}
 
 class Rating {
     constructor(options) {
@@ -176,11 +187,17 @@ class Rating {
         const nameIsValid = value.name.trim().length >= 3 && value.name.trim().length <= 70;
         const emailIsValid = email.test(value.trim()) &&
             value.email.trim().length >= 3 && value.email.trim().length <= 100;
-        const mibaIdIsValid = value.mibaId.trim().length >= 1;
+        const mibaIdIsValid = value.mibaId.trim().length === 36;
+        const user = {};
 
         if (!(isPlainObject && (hasName || hasEmail || hasMibaId))) fail('User object is invalid');
         if (!((hasEmail && emailIsValid) || (hasMibaId && mibaIdIsValid))) fail('User has no valid email or mibaId');
-        else this._user = value;
+
+        if (hasName) user.name = value.name.trim();
+        if (hasEmail) user.email = value.email.trim();
+        if (hasMibaId) user.mibaId = value.mibaId.trim();
+
+        this._user = user;
     }
 
     set screen(value) {
@@ -189,7 +206,8 @@ class Rating {
         const hasValidHeight = check.isInteger(value.width) && value > 0;
 
         if (!(isPlainObject && hasValidWidth &&  hasValidHeight)) fail('Screen object is invalid');
-        else this._screen = value;
+
+        this._screen = value;
     }
 
     create(data) {
