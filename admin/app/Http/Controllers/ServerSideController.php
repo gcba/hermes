@@ -18,13 +18,27 @@ class ServerSideController extends Controller {
     */
     public function ratingsAPI(Request $request)
     {
-        $query = Rating::with(['range', 'app', 'platform', 'browser', 'appuser', 'device'])->select('ratings.*');
+        $model = Rating::with(['range', 'app', 'platform', 'browser', 'appuser', 'device'])->select('ratings.*');
+        $params = $request->query()['columns'];
 
-        return Datatables::of($query)
+        $datatables = Datatables::of($model)
+            ->filter(function ($query) use($params) {
+                    foreach ($params as $index => $column) {
+                        $searchTerm = $column['search']['value'];
+                        $field = explode('.', $column['data']);
+
+                        if ($searchTerm !== null && count($field) > 1) {
+                            $query->whereHas($field[0], function ($q) use ($searchTerm, $field) {
+                                $q->where($field[1], 'ilike', $searchTerm.'%');
+                            });
+                        }
+                    }
+                }, true)
             ->editColumn('appuser.name', function($item){
-                    return $item->appuser ? $item->appuser->name : '';
-                })
-            ->make(true);
+                return $item->appuser ? $item->appuser->name : '';
+            });
+
+        return $datatables->make(true);
     }
 
     /**

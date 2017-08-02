@@ -99,22 +99,29 @@
                 ajax: {
                     url: '{!! route('ratings.api') !!}',
                     data: function (d) {
-                        console.info(d);
+                        d.columns.forEach(function (column) {
+                            if (column.name && column.name.indexOf('.') != -1) {
+                                var name = column.name.replace('.', '_');
+                                var searchTerm = $('input[name=' + name + ']').val();
+
+                                if (searchTerm && searchTerm.trim().length > 0) d[name] = searchTerm.trim();
+                            }
+                        });
                     }
                 },
                 columns: [
                     { data: 'rating', name: 'rating' },
-                    { data: 'range.name', name: 'range_id' },
+                    { data: 'range.name', name: 'range.name' },
                     { data: 'description', name: 'description' },
                     { data: 'has_message', name: 'has_message' },
-                    { data: 'app.name', name: 'app_id' },
+                    { data: 'app.name', name: 'app.name' },
                     { data: 'app_version', name: 'app_version' },
-                    { data: 'platform.name', name: 'platform_id' },
+                    { data: 'platform.name', name: 'platform.name' },
                     { data: 'platform_version', name: 'platform_version' },
                     { data: 'browser_id', name: 'browser_id' },
                     { data: 'browser_version', name: 'browser_version' },
-                    { data: 'appuser.name', name: 'appuser_id' },
-                    { data: 'device.name', name: 'device_id' },
+                    { data: 'appuser.name', name: 'appuser.name' },
+                    { data: 'device.name', name: 'device.name' },
                     { data: 'created_at', name: 'created_at' },
                     { data: 'updated_at', name: 'updated_at' }
                 ],
@@ -125,13 +132,13 @@
                         var column = this;
                         var input = document.createElement("input");
 
-                        // input.name = column.name;
+                        if (column.name) input.name = column.name.replace('.', '_');
 
                         $(input).appendTo($(column.footer()).empty())
                         .on('change', function () {
                             var val = $.fn.dataTable.util.escapeRegex($(this).val().trim());
 
-                            column.search($(this).val(), false, false, true).draw();
+                            column.search($(this).val()).draw();
                         });
                     });
                 }
