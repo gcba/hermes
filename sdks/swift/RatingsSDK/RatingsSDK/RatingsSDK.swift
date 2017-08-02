@@ -95,8 +95,8 @@ public class Rating {
     }
     
     func validateMibaId(_ mibaId: String) -> RatingError? {
-        guard mibaId.length > 0 else {
-            return RatingError.validation(message: "mibaId too short")
+        guard mibaId.length == 36 else {
+            return RatingError.validation(message: "invalid mibaId")
         }
         
         return nil

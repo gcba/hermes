@@ -48,7 +48,7 @@ class ViewController: UIViewController {
 
             // Rating, description and comment; user name and mibaId only
 
-            if let error = sdk.setUser(name: "Juan Pérez", mibaId: "e10adc3949") {
+            if let error = sdk.setUser(name: "Juan Pérez", mibaId: "04860d65-7e93-49e8-a983-a4007d23ffa5") {
                 debugPrint(error.localizedDescription)
                 
                 return
@@ -76,7 +76,7 @@ class ViewController: UIViewController {
 
             // Rating, description and comment; user name, email and mibaId
             
-            if let error = sdk.setUser(name: "Juan Pérez", mibaId: "e10adc3949", email: "juan@example.com") {
+            if let error = sdk.setUser(name: "Juan Pérez", mibaId: "08108a49-4c68-47da-8510-93922b6b2d76", email: "juan@example.com") {
                 debugPrint(error.localizedDescription)
                 
                 return
