@@ -842,6 +842,36 @@
                 ]
               }
             ]
+          },
+          {
+            "title": "Sprint 10",
+            "source": "docs/desarrollo/sprint10.md",
+            "url": "desarrollo/sprint10.html",
+            "slug": "desarrollosprint10",
+            "headings": [
+              {
+                "title": "Días",
+                "depth": 2,
+                "id": "dias"
+              },
+              {
+                "title": "Objetivo",
+                "depth": 2,
+                "id": "objetivo"
+              },
+              {
+                "title": "Tareas",
+                "depth": 2,
+                "id": "tareas",
+                "headings": [
+                  {
+                    "title": "Admin",
+                    "depth": 3,
+                    "id": "admin"
+                  }
+                ]
+              }
+            ]
           }
         ]
       }
@@ -1676,6 +1706,36 @@
           ]
         }
       ]
+    },
+    "desarrollo/sprint10.html": {
+      "source": "docs/desarrollo/sprint10.md",
+      "title": "Sprint 10 - Hermes",
+      "pageTitle": "Sprint 10",
+      "slug": "desarrollosprint10",
+      "headings": [
+        {
+          "title": "Días",
+          "depth": 2,
+          "id": "dias"
+        },
+        {
+          "title": "Objetivo",
+          "depth": 2,
+          "id": "objetivo"
+        },
+        {
+          "title": "Tareas",
+          "depth": 2,
+          "id": "tareas",
+          "headings": [
+            {
+              "title": "Admin",
+              "depth": 3,
+              "id": "admin"
+            }
+          ]
+        }
+      ]
     }
   },
   "sources": {
@@ -1699,6 +1759,7 @@
     "docs/desarrollo/sprint7.md": "desarrollo/sprint7.html",
     "docs/desarrollo/sprint8.md": "desarrollo/sprint8.html",
     "docs/desarrollo/sprint9.md": "desarrollo/sprint9.html",
+    "docs/desarrollo/sprint10.md": "desarrollo/sprint10.html",
     "docs/images/schema.png": "images/schema.png"
   }
 }
