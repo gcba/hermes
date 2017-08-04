@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Ldap;
+namespace App\Http\Ldap;
 
 class ValidarResponse
 {
