@@ -94,9 +94,11 @@ class App extends Model
     }
 
     public function getTypeAttribute(){
-        switch ($this->attributes['type']) {
-            case 'M': return 'Móvil';
-            case 'W': return 'Web';
+        if (array_key_exists('type', $this->attributes)) {
+            switch ($this->attributes['type']) {
+                case 'M': return 'Móvil';
+                case 'W': return 'Web';
+            }
         }
     }
 
