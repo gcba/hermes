@@ -3,10 +3,14 @@
 namespace App\Extensions;
 
 use App\User;
-use App\Http\Ldap\ValidarRequest;
-use App\Http\Ldap\ValidarResponse;
-use App\Http\Ldap\BuscarPorEmailRequest;
-use App\Http\Ldap\BuscarPorEmailResponse;
+use App\Http\Ldap\validar;
+use App\Http\Ldap\validarResponse;
+use App\Http\Ldap\validar_porcuit;
+use App\Http\Ldap\validar_porcuitResponse;
+use App\Http\Ldap\buscarporemail;
+use App\Http\Ldap\buscarporemailResponse;
+use App\Http\Ldap\buscarporcuit;
+use App\Http\Ldap\buscarporcuitResponse;
 use Artisaninweb\SoapWrapper\SoapWrapper;
 use Illuminate\Auth\EloquentUserProvider;
 
@@ -35,8 +39,14 @@ class LdapUserProvider extends EloquentUserProvider
                 ->wsdl('https://esb-hml.gcba.gob.ar/ad/consulta?wsdl') // TODO: Mind the environments
                 ->trace(true)
                 ->classmap([
-                    LdapRequest::class,
-                    LdapResponse::class,
+                    validar::class,
+                    validarResponse::class,
+                    validar_porcuit::class,
+                    validar_porcuitResponse::class,
+                    buscarporemail::class,
+                    buscarporemailResponse::class,
+                    buscarporcuit::class,
+                    buscarporcuitResponse::class
                 ]);
             });
     }
@@ -62,7 +72,7 @@ class LdapUserProvider extends EloquentUserProvider
     public function validateCredentials(UserInterface $user, array $credentials)
     {
         $response = $this->soapWrapper->call('Ldap.validar', [
-            new ValidarRequest($credentials['email'], $credentials['password'])
+            new validar($credentials['email'], $credentials['password'])
         ]);
     }
 }
