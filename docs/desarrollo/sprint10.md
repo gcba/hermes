@@ -8,7 +8,7 @@
 
 ## Objetivo
 
-Agregar filtros relacionales a las tablas del Admin.
+Agregar filtros relacionales y no relacionales a las tablas del Admin.
 
 ## Tareas
 
