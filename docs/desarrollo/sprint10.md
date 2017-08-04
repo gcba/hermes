@@ -8,7 +8,7 @@
 
 ## Objetivo
 
-Agregar filtros a las tablas del Admin.
+Agregar filtros relacionales a las tablas del Admin.
 
 ## Tareas
 
@@ -24,3 +24,7 @@ Agregar filtros a las tablas del Admin.
 8. Agregar filtro por browser en Calificaciones
 9. Agregar filtro por brand en Dispositivos
 10. Agregar filtro por platform en Dispositivos
+11. Agregar filtros para el resto de los campos no relacionales en Mensajes
+12. Agregar filtros para el resto de los campos no relacionales en Calificaciones
+13. Agregar filtros para el resto de los campos no relacionales en Dispositivos
+14. Hacer responsivas las tablas
