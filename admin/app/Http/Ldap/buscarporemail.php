@@ -2,7 +2,7 @@
 
 namespace App\Http\Ldap;
 
-class buscarporemailRequest
+class buscarporemail
 {
   /**
    * @var string
