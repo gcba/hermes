@@ -30,6 +30,12 @@
                                     <th class="actions">Actions</th>
                                 </tr>
                             </thead>
+                            <tbody></tbody>
+                            <tfoot>
+                                @foreach($dataType->browseRows as $row)
+                                    <th></th>
+                                @endforeach
+                            </tfoot>
                         </table>
                         @if (isset($dataType->server_side) && $dataType->server_side)
                             <div class="pull-left">
@@ -91,28 +97,43 @@
             $('#dataTable').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: '{!! route('devices.api') !!}',
+                ajax: {
+                    url: '{!! route('devices.api') !!}',
+                    data: function (d) {
+                        d.columns.forEach(function (column) {
+                            if (column.name && column.name.indexOf('.') != -1) {
+                                var name = column.name.replace('.', '_');
+                                var searchTerm = $('input[name=' + name + ']').val();
+
+                                if (searchTerm && searchTerm.trim().length > 0) d[name] = searchTerm.trim();
+                            }
+                        });
+                    }
+                },
                 columns: [
-                    { data: 'brand.name', name: 'brand_id' },
+                    { data: 'brand.name', name: 'brand.name' },
                     { data: 'name', name: 'name' },
                     { data: 'screen_width', name: 'screen_width' },
                     { data: 'screen_height', name: 'screen_height' },
                     { data: 'ppi', name: 'ppi' },
-                    { data: 'platform.name', name: 'platform_id' },
+                    { data: 'platform.name', name: 'platform.name' },
                     { data: 'created_at', name: 'created_at' },
                     { data: 'updated_at', name: 'updated_at' }
                 ],
                 order: [[6, 'desc']],
+                mark: true,
                 initComplete: function () {
                     this.api().columns().every(function () {
                         var column = this;
                         var input = document.createElement("input");
 
+                        if (column.name) input.name = column.name.replace('.', '_');
+
                         $(input).appendTo($(column.footer()).empty())
                         .on('change', function () {
-                            var val = $.fn.dataTable.util.escapeRegex($(this).val());
+                            var val = $.fn.dataTable.util.escapeRegex($(this).val().trim());
 
-                            column.search(val ? val : '', true, false).draw();
+                            column.search($(this).val()).draw();
                         });
                     });
                 }

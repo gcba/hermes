@@ -57,13 +57,18 @@ class ServerSideController extends Controller {
     */
     public function devicesAPI(Request $request)
     {
-        $query = Device::with(['platform', 'brand'])->select('devices.*');
+        $model = Device::with(['platform', 'brand'])->select('devices.*');
+        $params = $request->query()['columns'];
 
-        return Datatables::of($query)
+        $datatables = Datatables::of($model)
+            ->filter(function ($query) use($params) {
+                $query = $this->filterQuery($query, $params);
+            }, true)
             ->editColumn('brand.name', function($item){
                     return $item->brand ? $item->brand->name : '';
-                })
-            ->make(true);
+                });
+
+        return $datatables->make(true);
     }
 
     /**
