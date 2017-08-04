@@ -2,7 +2,7 @@
 
 namespace App\Http\Ldap;
 
-class ValidarResponse
+class validarResponse
 {
   /**
    * @var string
@@ -10,7 +10,7 @@ class ValidarResponse
   protected $return;
 
   /**
-   * ValidarResponse constructor.
+   * validarResponse constructor.
    *
    * @param string $return
    */
@@ -22,7 +22,7 @@ class ValidarResponse
   /**
    * @return string
    */
-  public function getReturn()
+  public function getreturn()
   {
     return $this->return;
   }

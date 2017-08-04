@@ -2,7 +2,7 @@
 
 namespace App\Http\Ldap;
 
-class ValidarRequest
+class validar
 {
   /**
    * @var string
@@ -15,7 +15,7 @@ class ValidarRequest
   protected $clave;
 
   /**
-   * ValidarRequest constructor.
+   * validar constructor.
    *
    * @param string $email
    * @param string $clave
@@ -29,7 +29,7 @@ class ValidarRequest
   /**
    * @return string
    */
-  public function getEmail()
+  public function getemail()
   {
     return $this->email;
   }
@@ -37,7 +37,7 @@ class ValidarRequest
   /**
    * @return string
    */
-  public function getClave()
+  public function getclave()
   {
     return $this->clave;
   }

@@ -2,7 +2,7 @@
 
 namespace App\Http\Ldap;
 
-class BuscarPorEmailResponse
+class buscarporemailResponse
 {
   /**
    * @var string
@@ -35,7 +35,7 @@ class BuscarPorEmailResponse
   protected $tipo_cuenta;
 
   /**
-   * BuscarPorEmailResponse constructor.
+   * buscarporemailResponse constructor.
    *
    * @param string $nombre
    * @param string $apellido
@@ -57,7 +57,7 @@ class BuscarPorEmailResponse
   /**
    * @return string
    */
-  public function getNombre()
+  public function getnombre()
   {
     return $this->nombre;
   }
@@ -65,7 +65,7 @@ class BuscarPorEmailResponse
   /**
    * @return string
    */
-  public function getApellido()
+  public function getapellido()
   {
     return $this->apellido;
   }
@@ -73,7 +73,7 @@ class BuscarPorEmailResponse
   /**
    * @return string
    */
-  public function getNumeroCui()
+  public function getnumero_cui()
   {
     return $this->numero_cui;
   }
@@ -81,7 +81,7 @@ class BuscarPorEmailResponse
   /**
    * @return string
    */
-  public function getTipoCui()
+  public function gettipo_cui()
   {
     return $this->tipo_cui;
   }
@@ -89,7 +89,7 @@ class BuscarPorEmailResponse
   /**
    * @return string
    */
-  public function getRlaboral()
+  public function getrlaboral()
   {
     return $this->rlaboral;
   }
@@ -97,7 +97,7 @@ class BuscarPorEmailResponse
   /**
    * @return string
    */
-  public function getTipoCuenta()
+  public function gettipo_cuenta()
   {
     return $this->tipo_cuenta;
   }

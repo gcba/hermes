@@ -2,28 +2,28 @@
 
 namespace App\Http\Ldap;
 
-class BuscarPorEmailRequest
+class buscarporemailRequest
 {
   /**
    * @var string
    */
-  protected $Email;
+  protected $email;
 
   /**
    * BuscarPorEmailRequest constructor.
    *
-   * @param string $Email
+   * @param string $email
    */
-  public function __construct($Email, $Clave)
+  public function __construct($email)
   {
-    $this->Email = $Email;
+    $this->email = $email;
   }
 
   /**
    * @return string
    */
-  public function getEmail()
+  public function getemail()
   {
-    return $this->Email;
+    return $this->email;
   }
 }
