@@ -30,6 +30,12 @@
                                     <th class="actions">{{ __('voyager.generic.actions') }}</th>
                                 </tr>
                             </thead>
+                            <tbody></tbody>
+                            <tfoot>
+                                @foreach($dataType->browseRows as $row)
+                                    <th></th>
+                                @endforeach
+                            </tfoot>
                         </table>
                         @if (isset($dataType->server_side) && $dataType->server_side)
                             <div class="pull-left">
@@ -95,25 +101,40 @@
             $('#dataTable').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: '{!! route('messages.api') !!}',
+                ajax: {
+                    url: '{!! route('messages.api') !!}',
+                    data: function (d) {
+                        d.columns.forEach(function (column) {
+                            if (column.name && column.name.indexOf('.') != -1) {
+                                var name = column.name.replace('.', '_');
+                                var searchTerm = $('input[name=' + name + ']').val();
+
+                                if (searchTerm && searchTerm.trim().length > 0) d[name] = searchTerm.trim();
+                            }
+                        });
+                    }
+                },
                 columns: [
                     { data: 'message', name: 'message' },
                     { data: 'direction', name: 'direction' },
-                    { data: 'rating.rating', name: 'rating_id' },
+                    { data: 'rating.rating', name: 'rating.rating' },
                     { data: 'created_at', name: 'created_at' },
                     { data: 'updated_at', name: 'updated_at' }
                 ],
                 order: [[3, 'desc']],
+                mark: true,
                 initComplete: function () {
                     this.api().columns().every(function () {
                         var column = this;
                         var input = document.createElement("input");
 
+                        if (column.name) input.name = column.name.replace('.', '_');
+
                         $(input).appendTo($(column.footer()).empty())
                         .on('change', function () {
-                            var val = $.fn.dataTable.util.escapeRegex($(this).val());
+                            var val = $.fn.dataTable.util.escapeRegex($(this).val().trim());
 
-                            column.search(val ? val : '', true, false).draw();
+                            column.search($(this).val()).draw();
                         });
                     });
                 }

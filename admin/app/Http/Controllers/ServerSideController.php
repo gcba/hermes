@@ -23,17 +23,8 @@ class ServerSideController extends Controller {
 
         $datatables = Datatables::of($model)
             ->filter(function ($query) use($params) {
-                    foreach ($params as $index => $column) {
-                        $searchTerm = $column['search']['value'];
-                        $field = explode('.', $column['data']);
-
-                        if ($searchTerm !== null && count($field) > 1) {
-                            $query->whereHas($field[0], function ($q) use ($searchTerm, $field) {
-                                $q->where($field[1], 'ilike', $searchTerm.'%');
-                            });
-                        }
-                    }
-                }, true)
+                $query = $this->filterQuery($query, $params);
+            }, true)
             ->editColumn('appuser.name', function($item){
                 return $item->appuser ? $item->appuser->name : '';
             });
@@ -48,9 +39,15 @@ class ServerSideController extends Controller {
     */
     public function messagesAPI(Request $request)
     {
-        $query = Message::with('rating')->select('messages.*');
+        $model = Message::with('rating')->select('messages.*');
+        $params = $request->query()['columns'];
 
-        return Datatables::of($query)->make(true);
+        $datatables = Datatables::of($model)
+            ->filter(function ($query) use($params) {
+                $query = $this->filterQuery($query, $params);
+            }, true);
+
+        return $datatables->make(true);
     }
 
     /**
@@ -98,5 +95,24 @@ class ServerSideController extends Controller {
         }
 
         return view($view, compact('dataType', 'dataTypeContent', 'isModelTranslatable'));
+    }
+
+    private function filterQuery($query, $params) {
+        foreach ($params as $index => $column) {
+            $searchTerm = $column['search']['value'];
+            $field = explode('.', $column['data']);
+
+            if ($searchTerm !== null && count($field) > 1) {
+                $query->whereHas($field[0], function ($q) use ($searchTerm, $field) {
+                    $isNumeric = is_numeric($searchTerm);
+                    $operator = $isNumeric ? '=' : 'ilike';
+                    $searchTerm = $isNumeric ? $searchTerm : $searchTerm.'%';
+
+                    $q->where($field[1], $operator, $searchTerm);
+                });
+            }
+        }
+
+        return $query;
     }
 }
