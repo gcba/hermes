@@ -170,7 +170,6 @@ return [
         TCG\Voyager\VoyagerServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
         Yajra\Datatables\DatatablesServiceProvider::class,
-        Adldap\Laravel\AdldapServiceProvider::class,
         Artisaninweb\SoapWrapper\ServiceProvider::class,
 
         /*
@@ -232,7 +231,6 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
         'Datatables' => Yajra\Datatables\Facades\Datatables::class,
-        'Adldap' => Adldap\Laravel\Facades\Adldap::class,
         'SoapWrapper' => Artisaninweb\SoapWrapper\Facade::class
 
     ],
