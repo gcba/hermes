@@ -173,7 +173,7 @@ return [
         ],
 
         'data_tables' => [
-            'responsive' => false, // Use responsive extension for jQuery dataTables that are not server-side paginated
+            'responsive' => true, // Use responsive extension for jQuery dataTables that are not server-side paginated
         ],
 
         'widgets' => [
