@@ -7,23 +7,23 @@ class ValidarResponse
   /**
    * @var string
    */
-  protected $Result;
+  protected $return;
 
   /**
    * ValidarResponse constructor.
    *
-   * @param string
+   * @param string $return
    */
-  public function __construct($Result)
+  public function __construct($return)
   {
-    $this->Result = $Result;
+    $this->return = $return;
   }
 
   /**
    * @return string
    */
-  public function getResult()
+  public function getReturn()
   {
-    return $this->Result;
+    return $this->return;
   }
 }

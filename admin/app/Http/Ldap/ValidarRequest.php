@@ -7,23 +7,23 @@ class ValidarRequest
   /**
    * @var string
    */
-  protected $Email;
+  protected $email;
 
   /**
    * @var string
    */
-  protected $Clave;
+  protected $clave;
 
   /**
    * ValidarRequest constructor.
    *
-   * @param string $Email
-   * @param string $Clave
+   * @param string $email
+   * @param string $clave
    */
-  public function __construct($Email, $Clave)
+  public function __construct($email, $clave)
   {
-    $this->Email = $Email;
-    $this->Clave = $Clave;
+    $this->email = $email;
+    $this->clave = $clave;
   }
 
   /**
@@ -31,7 +31,7 @@ class ValidarRequest
    */
   public function getEmail()
   {
-    return $this->Email;
+    return $this->email;
   }
 
   /**
@@ -39,6 +39,6 @@ class ValidarRequest
    */
   public function getClave()
   {
-    return $this->Clave;
+    return $this->clave;
   }
 }
