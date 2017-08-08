@@ -12,8 +12,7 @@ return [
      |
      */
 
-    // 'enabled' => env('DEBUGBAR_ENABLED', null),
-    'enabled' => false,
+    'enabled' => env('DEBUGBAR_ENABLED', null),
 
     /*
      |--------------------------------------------------------------------------
