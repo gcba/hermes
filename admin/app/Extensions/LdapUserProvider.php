@@ -90,7 +90,6 @@ class LdapUserProvider extends EloquentUserProvider
 
                 $newUser->name = $userDataResponse->return->nombre . ' ' . $userDataResponse->return->apellido;
                 $newUser->email = $credentials['email'];
-                $newUser->password = $credentials['password'];
 
                 $newUser->save();
 
