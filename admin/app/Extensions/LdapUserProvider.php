@@ -12,31 +12,42 @@ use App\Http\Ldap\buscarporemailResponse;
 use App\Http\Ldap\buscarporcuit;
 use App\Http\Ldap\buscarporcuitResponse;
 use Artisaninweb\SoapWrapper\SoapWrapper;
+
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Auth\EloquentUserProvider;
+use Illuminate\Hashing\BcryptHasher;
 
 class LdapUserProvider extends EloquentUserProvider
 {
-    /**
-   * @var SoapWrapper
-   */
-  protected $soapWrapper;
 
   /**
-     * Create a new database user provider.
-     *
-     * @param  \Illuminate\Contracts\Hashing\Hasher  $hasher
-     * @param  string  $model
-     * @return void
-     */
-    public function __construct(HasherContract $hasher, $model)
+    * @var SoapWrapper
+    */
+  protected $soapWrapper;
+
+   /**
+    * Create a new database user provider.
+    *
+    * @param  \Illuminate\Contracts\Hashing\Hasher  $hasher
+    * @param  string  $model
+    * @return void
+    */
+    public function __construct(BcryptHasher $hasher, $model)
     {
-        $this->model = $model;
-        $this->hasher = $hasher;
+        parent::__construct($hasher, $model);
+
         $this->soapWrapper = new SoapWrapper();
 
-        $this->soapWrapper->add('Ldap', function ($service) {
+        $this->setupLDAP();
+    }
+
+    private function setupLDAP() {
+        $env = \App::environment('local') ? '-qa' : '';
+        $url = 'https://esb' . $env . '.gcba.gob.ar/ad/consulta?wsdl';
+
+        $this->soapWrapper->add('LDAP', function ($service) use($url) {
             $service
-                ->wsdl('https://esb-hml.gcba.gob.ar/ad/consulta?wsdl') // TODO: Mind the environments
+                ->wsdl($url)
                 ->trace(true)
                 ->classmap([
                     validar::class,
@@ -47,8 +58,8 @@ class LdapUserProvider extends EloquentUserProvider
                     buscarporemailResponse::class,
                     buscarporcuit::class,
                     buscarporcuitResponse::class
-                ]);
-            });
+            ]) or null;
+        });
     }
 
     /**
@@ -59,20 +70,48 @@ class LdapUserProvider extends EloquentUserProvider
      */
     public function retrieveByCredentials(array $credentials)
     {
-        if (empty($credentials)) {
+        if (empty($credentials) || !$this->soapWrapper->has('LDAP')) {
             return;
         }
 
-        // Rest of the implementation
-    }
-
-  /**
-   * Use the SoapWrapper
-   */
-    public function validateCredentials(UserInterface $user, array $credentials)
-    {
-        $response = $this->soapWrapper->call('Ldap.validar', [
+        $validationResponse = $this->soapWrapper->call('LDAP.validar', [
             new validar($credentials['email'], $credentials['password'])
         ]);
+
+        if ($validationResponse->return == 1) {
+            $user = parent::retrieveByCredentials($credentials);
+
+            if (!$user) {
+                $userDataResponse = $this->soapWrapper->call('LDAP.buscarporemail', [
+                    new buscarporemail($credentials['email'])
+                ]);
+
+                $newUser = new User;
+
+                $newUser->name = $userDataResponse->return->nombre . ' ' . $userDataResponse->return->apellido;
+                $newUser->email = $credentials['email'];
+                $newUser->password = $credentials['password'];
+
+                $newUser->save();
+
+                return $newUser;
+            }
+
+            return $user;
+        }
+
+        return null;
+    }
+
+   /**
+     * Validate a user against the given credentials.
+     *
+     * @param  \Illuminate\Contracts\Auth\Authenticatable  $user
+     * @param  array  $credentials
+     * @return bool
+     */
+    public function validateCredentials(Authenticatable $user, array $credentials)
+    {
+        return $user;
     }
 }
