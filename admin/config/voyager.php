@@ -164,22 +164,19 @@ return [
             'Home' => [
                 'route'         => '/',
                 'icon_class'    => 'voyager-home',
-                'target_blank'  => true,
+                'target_blank'  => false,
             ],
             'Logout' => [
                 'route'      => 'voyager.logout',
                 'icon_class' => 'voyager-power',
             ],
         ],
-
         'data_tables' => [
             'responsive' => true, // Use responsive extension for jQuery dataTables that are not server-side paginated
         ],
-
         'widgets' => [
             'TCG\\Voyager\\Widgets\\UserDimmer',
         ],
-
     ],
 
     /*
@@ -204,17 +201,14 @@ return [
 
     // Here you can specify additonal assets you would like to be included in the master.blade
     'additional_css' => [
-        // 'css/bootstrap-datetimepicker.min.css',
-        // 'css/jquery.dataTables.yadcf.min.css',
-        'css/custom.css',
-        'css/datatables.mark.min.css'
+        'css/datatables.mark.min.css',
+        'css/hermes.css'
     ],
 
     'additional_js' => [
-        // 'js/bootstrap-datetimepicker.min.js',
-        // 'js/jquery.dataTables.yadcf.min.js',
         'js/jquery.mark.min.js',
-        'js/datatables.mark.min.js'
+        'js/datatables.mark.min.js',
+        'js/hermes.js'
     ],
 
 ];

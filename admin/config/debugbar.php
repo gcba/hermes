@@ -12,7 +12,8 @@ return [
      |
      */
 
-    'enabled' => env('DEBUGBAR_ENABLED', null),
+    // 'enabled' => env('DEBUGBAR_ENABLED', null),
+    'enabled' => false,
 
     /*
      |--------------------------------------------------------------------------
@@ -74,7 +75,7 @@ return [
      |
      */
     'error_handler' => false,
-    
+
     /*
      |--------------------------------------------------------------------------
      | Clockwork integration
