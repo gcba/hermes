@@ -7,7 +7,7 @@
 
 ## Objetivo
 
-Reemplazar el sistema de autorización con Active Directory.
+Reemplazar el sistema de autenticación con Active Directory.
 
 ## Tareas
 
