@@ -2,6 +2,10 @@
     padding-right: 0px;
 }
 
+.messages-detail {
+    padding-left: 0px;
+}
+
 .dataTables_wrapper:nth-child(1) > div {
     overflow-x: auto;
 }
@@ -21,7 +25,6 @@
 .dataTables_wrapper tbody td {
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis;
 }
 
 .dataTables_wrapper tfoot {
@@ -35,6 +38,10 @@
 }
 
 @media screen and (max-width: 767px) {
+    .messages-detail {
+        padding-left: 15px;
+    }
+
     #dataTable_filter {
         float: none;
     }

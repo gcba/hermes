@@ -65,7 +65,7 @@ class MessageDataRowsTableSeeder extends Seeder
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'select_dropdown',
-                'display_name' => 'Calificación',
+                'display_name' => 'Rating',
                 'required'     => 1,
                 'browse'       => 1,
                 'read'         => 1,
