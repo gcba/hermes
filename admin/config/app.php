@@ -171,6 +171,7 @@ return [
         Barryvdh\Debugbar\ServiceProvider::class,
         Yajra\Datatables\DatatablesServiceProvider::class,
         Artisaninweb\SoapWrapper\ServiceProvider::class,
+        Bogardo\Mailgun\MailgunServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -231,7 +232,8 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
         'Datatables' => Yajra\Datatables\Facades\Datatables::class,
-        'SoapWrapper' => Artisaninweb\SoapWrapper\Facade::class
+        'SoapWrapper' => Artisaninweb\SoapWrapper\Facade::class,
+        'Mailgun' => Bogardo\Mailgun\Facades\Mailgun::class
 
     ],
 
