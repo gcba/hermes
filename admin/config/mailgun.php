@@ -16,7 +16,7 @@ return [
      * Domain name registered with Mailgun
      *
      */
-    'domain' => '',
+    'domain' => env('MAILGUN_DOMAIN', ''),
 
     /*
      * Mailgun (private) API key
@@ -37,8 +37,8 @@ return [
      *
      */
     'from' => [
-        'address' => '',
-        'name' => ''
+        'address' => env('MAILGUN_FROM', ''),
+        'name' => env('MAILGUN_SENDER', '')
     ],
 
     /*
@@ -83,5 +83,5 @@ return [
      *
      * Note: Mailgun DOES charge your account for messages sent in test mode.
      */
-    'testmode' => true
+    'testmode' => env('MAILGUN_TEST_MODE', false),
 ];
