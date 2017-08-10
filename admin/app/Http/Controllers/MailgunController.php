@@ -23,7 +23,7 @@ class MailgunController extends Controller
      * @param  Request  $request
      * @return Response
      */
-    public function __invoke(Request $request)
+    public function receive(Request $request)
     {
 
 
