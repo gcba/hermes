@@ -5,12 +5,12 @@ namespace App\Extensions;
 use App\User;
 use App\Http\Ldap\validar;
 use App\Http\Ldap\validarResponse;
-use App\Http\Ldap\validar_porcuit;
-use App\Http\Ldap\validar_porcuitResponse;
+// use App\Http\Ldap\validar_porcuit;
+// use App\Http\Ldap\validar_porcuitResponse;
 use App\Http\Ldap\buscarporemail;
 use App\Http\Ldap\buscarporemailResponse;
-use App\Http\Ldap\buscarporcuit;
-use App\Http\Ldap\buscarporcuitResponse;
+// use App\Http\Ldap\buscarporcuit;
+// use App\Http\Ldap\buscarporcuitResponse;
 use Artisaninweb\SoapWrapper\SoapWrapper;
 
 use Illuminate\Contracts\Auth\Authenticatable;
@@ -52,12 +52,12 @@ class LdapUserProvider extends EloquentUserProvider
                 ->classmap([
                     validar::class,
                     validarResponse::class,
-                    validar_porcuit::class,
-                    validar_porcuitResponse::class,
+                    // validar_porcuit::class,
+                    // validar_porcuitResponse::class,
                     buscarporemail::class,
                     buscarporemailResponse::class,
-                    buscarporcuit::class,
-                    buscarporcuitResponse::class
+                    // buscarporcuit::class,
+                    // buscarporcuitResponse::class
             ]) or null;
         });
     }
