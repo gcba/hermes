@@ -18,7 +18,7 @@
     <div class="page-content browse container-fluid">
         @include('voyager::alerts')
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <div class="panel panel-bordered">
                     <div class="panel-body table-responsive">
                         <table id="dataTable" class="row table table-hover">
@@ -53,7 +53,15 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-6">
+                <div class="panel panel-bordered">
+                    <div class="panel-body">
+                        <p>Hola mundo</p>
+                    </div>
+                </div>
+            </div>
         </div>
+
     </div>
 
     <div class="modal modal-danger fade" tabindex="-1" id="delete_modal" role="dialog">
