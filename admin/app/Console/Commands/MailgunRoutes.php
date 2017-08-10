@@ -54,6 +54,12 @@ class MailgunRoutes extends Command
             return;
         }
 
+        if (!filter_var($url, FILTER_VALIDATE_URL) && !$delete) {
+            $this->error('Invalid URL');
+
+            return;
+        }
+
         if ($url && $delete) {
             $this->error('Route deletion needs no URL');
 
