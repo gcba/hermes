@@ -25,7 +25,7 @@ class MailgunController extends Controller
      */
     public function receive(Request $request)
     {
-
+        // TODO: Parse response
 
         return Response::make('', 200);
     }
