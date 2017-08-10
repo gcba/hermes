@@ -2,10 +2,13 @@
 
 namespace App\Providers;
 
+use Mailgun\Mailgun;
 use Illuminate\Support\ServiceProvider;
 
 class MailgunServiceProvider extends ServiceProvider
 {
+    private $client;
+
     /**
      * Bootstrap the application services.
      *
@@ -13,7 +16,7 @@ class MailgunServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $this->client = new Mailgun(env('MAILGUN_API_KEY', ''));
     }
 
     /**
@@ -23,6 +26,8 @@ class MailgunServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->singleton(MailgunServiceProvider::class, function ($app) {
+            return new MailgunServiceProvider();
+        });
     }
 }
