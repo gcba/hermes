@@ -23,6 +23,7 @@ class MessagesTableSeeder extends Seeder
                 Message::create([
                     'message' => $message,
                     'direction' => 'in',
+                    'notified' => false,
                     'rating_id' => $rating->id
                 ]);
             }

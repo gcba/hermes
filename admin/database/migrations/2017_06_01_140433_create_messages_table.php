@@ -18,6 +18,7 @@ class CreateMessagesTable extends Migration
             $table->text('message');
             $table->enum('direction', ['in', 'out']);
             $table->index('direction');
+            $table->boolean('notified')->default(false);
             $table->integer('rating_id')->unsigned();
             $table->foreign('rating_id')->references('id')->on('ratings')->onDelete('cascade');
             $table->index('rating_id');
