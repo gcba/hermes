@@ -114,7 +114,7 @@ class ServerSideController extends Controller {
             if ($searchTerm !== null && count($field) > 1) {
                 $query->whereHas($field[0], function ($q) use ($searchTerm, $field) {
                     $isNumeric = is_numeric($searchTerm);
-                    $operator = $isNumeric ? '=' : 'ilike';
+                    $operator = $isNumeric ? '=' : 'like';
                     $searchTerm = $isNumeric ? $searchTerm : $searchTerm . '%';
 
                     $q->where($field[1], $operator, $searchTerm);
