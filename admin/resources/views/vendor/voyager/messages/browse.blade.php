@@ -18,7 +18,7 @@
     <div class="page-content browse container-fluid">
         @include('voyager::alerts')
         <div class="row">
-            <div class="col-lg-3 col-md-6">
+            <div class="col-lg-4 col-md-6 messages-master">
                 <div class="panel panel-bordered">
                     <div class="panel-body table-responsive">
                         <table id="dataTable" class="row table table-hover">
@@ -53,7 +53,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-9 col-md-6 messages-detail">
+            <div class="col-lg-8 col-md-6 messages-detail">
                 <div class="panel panel-bordered">
                     <div class="panel-body">
                         <p>Hola mundo</p>
@@ -125,7 +125,7 @@
                 columns: [
                     { data: 'message', name: 'message' },
                     { data: 'direction', name: 'direction', visible: false },
-                    { data: 'rating.rating', name: 'rating.rating' },
+                    { data: 'rating.rating', name: 'rating.rating', visible: false },
                     { data: 'created_at', name: 'created_at' }
                 ],
                 order: [[3, 'desc']],

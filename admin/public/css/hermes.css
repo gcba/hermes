@@ -37,12 +37,22 @@
     width: 100%;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 991px) {
     .messages-detail {
         padding-left: 15px;
     }
 
     #dataTable_filter {
         float: none;
+    }
+}
+
+@media screen and (min-width: 1200px) and (max-width: 1420px) {
+    .messages-master {
+        width: 40%;
+    }
+
+    .messages-detail {
+        width: 60%;
     }
 }
