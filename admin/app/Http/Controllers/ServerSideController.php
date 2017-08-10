@@ -43,10 +43,13 @@ class ServerSideController extends Controller {
         $params = $request->query()['columns'];
 
         $datatables = Datatables::of($model)
+            ->removeColumn('updated_at')
             ->filter(function ($query) use($params) {
                 $query = $this->filterQuery($query, $params);
             }, true)
-            ->removeColumn('updated_at');
+            ->editColumn('message', function($item){
+                return $this->shortenString($item->message, 25);
+            });
 
         return $datatables->make(true);
     }
@@ -120,5 +123,14 @@ class ServerSideController extends Controller {
         }
 
         return $query;
+    }
+
+    private function shortenString($string, $limit)
+    {
+        if(strlen($string) > $limit) {
+            $string = trim(substr($string, 0, $limit)) . "...";
+        }
+
+        return $string;
     }
 }
