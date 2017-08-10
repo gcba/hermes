@@ -13,7 +13,7 @@ class CreateMailgunRoute extends Command
      *
      * @var string
      */
-    protected $signature = 'mailgun:routes {url}';
+    protected $signature = 'mailgun:routes {url?} {--delete}';
 
     /**
      * The console command description.
@@ -46,14 +46,41 @@ class CreateMailgunRoute extends Command
     public function handle()
     {
         $url = $this->argument('url');
+        $delete = $this->option('delete');
 
-        if (!$url) {
+        if (!$url && !$delete) {
             $this->error('Missing URL');
 
             return;
         }
 
-        $this->checkRoute($url);
+        if ($url && $delete) {
+            $this->error('Route deletion needs no URL');
+
+            return;
+        }
+
+        if ($delete) {
+            $this->deleteRoutes();
+        }
+        else {
+            $this->checkRoute($url);
+        }
+    }
+
+    private function deleteRoutes() {
+        $routes = $this->client->get("routes");
+
+        if (count($routes->http_response_body->items) > 0) {
+            foreach ($routes->http_response_body->items as $key => $value) {
+                $res = $this->client->delete('routes/' . $value->id);
+
+                $this->info('Route ' . $value->id . ' deleted successfully');
+            }
+        }
+        else {
+            $this->error('No routes to delete');
+        }
     }
 
     private function checkRoute(String $url) {
@@ -101,6 +128,6 @@ class CreateMailgunRoute extends Command
         $setting->type = 'text';
         $setting->save();
 
-        $this->info('Route saved: ' . $id);
+        $this->info("Route $id saved successfully");
     }
 }
