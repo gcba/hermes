@@ -2,7 +2,8 @@
 
 namespace App\Console;
 
-use App\Console\Commands\CreateMailgunRoute;
+use App\Console\Commands\MailgunRoutes;
+use App\Console\Commands\MailgunMessages;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -15,7 +16,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        CreateMailgunRoute::class
+        MailgunRoutes::class,
+        MailgunMessages::class
     ];
 
     /**
