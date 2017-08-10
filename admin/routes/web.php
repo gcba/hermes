@@ -23,5 +23,5 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('devices/api', 'ServerSideController@devicesAPI')->name('devices.api');
     Route::get('appusers/api', 'ServerSideController@appusersAPI')->name('appusers.api');
 
-    Route::post('messages/receive', 'MailgunController')->name('messages.receive');
+    Route::post('messages/receive', 'MailgunController@receive')->name('messages.receive');
 });
