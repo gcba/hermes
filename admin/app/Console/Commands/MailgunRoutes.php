@@ -6,7 +6,7 @@ use Mailgun\Mailgun;
 use TCG\Voyager\Models\Setting;
 use Illuminate\Console\Command;
 
-class CreateMailgunRoute extends Command
+class MailgunRoutes extends Command
 {
     /**
      * The name and signature of the console command.
