@@ -45,7 +45,8 @@ class ServerSideController extends Controller {
         $datatables = Datatables::of($model)
             ->filter(function ($query) use($params) {
                 $query = $this->filterQuery($query, $params);
-            }, true);
+            }, true)
+            ->removeColumn('updated_at');
 
         return $datatables->make(true);
     }
@@ -111,7 +112,7 @@ class ServerSideController extends Controller {
                 $query->whereHas($field[0], function ($q) use ($searchTerm, $field) {
                     $isNumeric = is_numeric($searchTerm);
                     $operator = $isNumeric ? '=' : 'ilike';
-                    $searchTerm = $isNumeric ? $searchTerm : $searchTerm.'%';
+                    $searchTerm = $isNumeric ? $searchTerm : $searchTerm . '%';
 
                     $q->where($field[1], $operator, $searchTerm);
                 });

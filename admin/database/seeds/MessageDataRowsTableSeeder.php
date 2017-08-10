@@ -33,7 +33,7 @@ class MessageDataRowsTableSeeder extends Seeder
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'text_area',
-                'display_name' => 'Mensaje',
+                'display_name' => 'Texto',
                 'required'     => 1,
                 'browse'       => 1,
                 'read'         => 1,
@@ -97,7 +97,7 @@ class MessageDataRowsTableSeeder extends Seeder
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'timestamp',
-                'display_name' => 'Creación',
+                'display_name' => 'Fecha',
                 'required'     => 0,
                 'browse'       => 1,
                 'read'         => 1,

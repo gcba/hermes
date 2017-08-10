@@ -124,10 +124,9 @@
                 },
                 columns: [
                     { data: 'message', name: 'message' },
-                    { data: 'direction', name: 'direction' },
+                    { data: 'direction', name: 'direction', visible: false },
                     { data: 'rating.rating', name: 'rating.rating' },
-                    { data: 'created_at', name: 'created_at' },
-                    { data: 'updated_at', name: 'updated_at' }
+                    { data: 'created_at', name: 'created_at' }
                 ],
                 order: [[3, 'desc']],
                 mark: true,
