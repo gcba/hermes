@@ -42,8 +42,7 @@ class LdapUserProvider extends EloquentUserProvider
     }
 
     private function setupLDAP() {
-        $env = \App::environment('local') ? '-qa' : '';
-        $url = 'https://esb' . $env . '.gcba.gob.ar/ad/consulta?wsdl';
+        $url = env('LDAP_URL', 'https://esb-qa.gcba.gob.ar/ad/consulta?wsdl');
 
         $this->soapWrapper->add('LDAP', function ($service) use($url) {
             $service
@@ -71,7 +70,7 @@ class LdapUserProvider extends EloquentUserProvider
     public function retrieveByCredentials(array $credentials)
     {
         if (empty($credentials) || !$this->soapWrapper->has('LDAP')) {
-            return;
+            return null;
         }
 
         $validationResponse = $this->soapWrapper->call('LDAP.validar', [
