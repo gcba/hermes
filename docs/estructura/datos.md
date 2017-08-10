@@ -215,14 +215,15 @@ Los mensajes de las conversaciones con los usuarios de las apps que enviaron cal
 
 - **One-to-many** con Rating, a través de `rating_id`
 
-|Campos          |Tipo                  | FK?   | Null? |Unique?|Index? |
-|----------------|----------------------|:-----:|:-----:|:-----:|:-----:|
-|id              |int (PK)              |       |       |       |       |
-|message         |text                  |       |       |       |       |
-|direction       |enum                  |       |       |       |X      |
-|rating_id       |int                   |X      |       |       |X      |
-|created_at      |timestamp             |       |       |       |       |
-|modified_at     |timestamp             |       |X      |       |       |
+|Campos          |Tipo                  |Default| FK?   | Null? |Unique?|Index? |
+|----------------|----------------------|-------|:-----:|:-----:|:-----:|:-----:|
+|id              |int (PK)              |       |       |       |       |       |
+|message         |text                  |       |       |       |       |       |
+|direction       |enum                  |       |       |       |       |X      |
+|notified        |bool                  |false  |       |       |       |X      |
+|rating_id       |int                   |       |X      |       |       |X      |
+|created_at      |timestamp             |       |       |       |       |       |
+|modified_at     |timestamp             |       |       |X      |       |       |
 
 ### Range
 
