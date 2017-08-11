@@ -90,7 +90,7 @@ class MailgunRoutes extends Command
                 $row["ID"] = $value->id;
                 $row["Description"] = $value->description;
                 $row["Expression"] = $value->expression;
-                $row["Actions"] = join(' ,', $value->actions);
+                $row["Actions"] = join(', ', $value->actions);
                 $row["Priority"] = $value->priority;
                 $row["Created At"] = $value->created_at;
 
