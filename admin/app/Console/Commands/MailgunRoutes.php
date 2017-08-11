@@ -13,7 +13,7 @@ class MailgunRoutes extends Command
      *
      * @var string
      */
-    protected $signature = 'mailgun:routes {url?} {--delete}';
+    protected $signature = 'mailgun:routes {url?} {--delete} {--list}';
 
     /**
      * The console command description.
@@ -47,30 +47,60 @@ class MailgunRoutes extends Command
     {
         $url = $this->argument('url');
         $delete = $this->option('delete');
+        $list = $this->option('list');
 
-        if (!$url && !$delete) {
+        if (!$url && !$delete && !$list) {
             $this->error('Missing URL');
 
             return;
         }
 
-        if (!filter_var($url, FILTER_VALIDATE_URL) && !$delete) {
+        if (!filter_var($url, FILTER_VALIDATE_URL) && !$delete && !$list) {
             $this->error('Invalid URL');
 
             return;
         }
 
-        if ($url && $delete) {
-            $this->error('Route deletion needs no URL');
+        if ($url && ($delete || $list)) {
+            $this->error('No URL needed');
 
             return;
         }
 
-        if ($delete) {
+        if ($list) {
+            $this->listRoutes();
+        }
+        else if ($delete) {
             $this->deleteRoutes();
         }
         else {
             $this->checkRoute($url);
+        }
+    }
+
+    private function listRoutes() {
+        $routes = $this->client->get("routes");
+        $headers = ["ID", 'Description', 'Expression', "Actions", "Priority", "Created At"];
+        $rows = [];
+
+        if (count($routes->http_response_body->items) > 0) {
+            foreach ($routes->http_response_body->items as $key => $value) {
+                $row = [];
+
+                $row["ID"] = $value->id;
+                $row["Description"] = $value->description;
+                $row["Expression"] = $value->expression;
+                $row["Actions"] = join(' ,', $value->actions);
+                $row["Priority"] = $value->priority;
+                $row["Created At"] = $value->created_at;
+
+                $rows[] = $row;
+            }
+
+            $this->table($headers, $rows);
+        }
+        else {
+            $this->info('No routes to show');
         }
     }
 
@@ -81,7 +111,7 @@ class MailgunRoutes extends Command
             foreach ($routes->http_response_body->items as $key => $value) {
                 $res = $this->client->delete('routes/' . $value->id);
 
-                $this->info('Route ' . $value->id . ' deleted successfully');
+                $this->info('Route "' . $value->description . '" deleted successfully');
             }
         }
         else {
@@ -117,7 +147,10 @@ class MailgunRoutes extends Command
         ]);
 
         if ($newRoute->http_response_code == 200) {
-            $this->saveRoute($newRoute->http_response_body->route->id);
+            $id = $newRoute->http_response_body->route->id;
+            $description = $newRoute->http_response_body->route->description;
+
+            $this->saveRoute($id, $description);
 
             return;
         }
@@ -125,7 +158,7 @@ class MailgunRoutes extends Command
         $this->error('Error creating the route. Are you connected to the internet?');
     }
 
-    private function saveRoute(String $id) {
+    private function saveRoute(String $id, String $name) {
         $setting = Setting::firstOrNew(['key' => $this->key]);
 
         $setting->key = $this->key;
@@ -134,6 +167,6 @@ class MailgunRoutes extends Command
         $setting->type = 'text';
         $setting->save();
 
-        $this->info("Route $id saved successfully");
+        $this->info('Route "' . $name . '" saved successfully');
     }
 }
