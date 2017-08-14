@@ -11,6 +11,21 @@
     height: 100%;
 }
 
+.messages-detail .panel.message {
+    border: 1px solid #EAEAEA;
+}
+
+.messages-detail .panel.message .message-heading {
+    padding: 6px 8px 6px 8px;
+    font-size: 13px;
+    font-weight: normal;
+}
+
+.messages-detail .panel.message .message-body {
+    padding-top: 10px;
+    font-size: 13px;
+}
+
 .dataTables_wrapper:nth-child(1) > div {
     overflow-x: auto;
 }
