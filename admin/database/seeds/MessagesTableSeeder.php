@@ -24,6 +24,7 @@ class MessagesTableSeeder extends Seeder
                     'message' => $message,
                     'direction' => 'in',
                     'notified' => false,
+                    'transport_id' => null,
                     'rating_id' => $rating->id
                 ]);
             }

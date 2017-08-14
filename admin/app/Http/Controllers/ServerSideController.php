@@ -44,6 +44,8 @@ class ServerSideController extends Controller {
 
         $datatables = Datatables::of($model)
             ->removeColumn('updated_at')
+            ->removeColumn('transport_id')
+            ->removeColumn('notified')
             ->filter(function ($query) use($params) {
                 $query = $this->filterQuery($query, $params);
             }, true)

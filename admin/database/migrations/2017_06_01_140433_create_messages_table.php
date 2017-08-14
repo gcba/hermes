@@ -20,6 +20,8 @@ class CreateMessagesTable extends Migration
             $table->index('direction');
             $table->boolean('notified')->default(false);
             $table->index('notified');
+            $table->string('transport_id', 90)->unique()->nullable();
+            $table->index('transport_id');
             $table->integer('rating_id')->unsigned();
             $table->foreign('rating_id')->references('id')->on('ratings')->onDelete('cascade');
             $table->index('rating_id');
