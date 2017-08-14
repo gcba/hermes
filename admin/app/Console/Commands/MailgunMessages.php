@@ -65,11 +65,11 @@ class MailgunMessages extends Command
             return;
         });
 
-        if ($result->http_response_code == 200) {
+        if ($result->status == 200) {
             $this->info('Message sent successfully');
         }
         else {
-            $this->error('Error sending email. Are you connected to the internet?');
+            $this->error('Error sending email: ' . $result->message);
         }
 
         return;
