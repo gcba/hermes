@@ -3,20 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Response;
 
 class MailgunController extends Controller
 {
-     /**
-     * Instantiate a new controller instance.
-     *
-     * @return void
-     */
-     public function __construct()
-     {
-         $this->middleware('log');
-     }
-
      /**
      * Process a Mailgun message.
      *
@@ -27,6 +17,6 @@ class MailgunController extends Controller
     {
         // TODO: Parse response
 
-        return Response::make('', 200);
+        return Response::make(null, 200);
     }
 }

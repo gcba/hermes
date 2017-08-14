@@ -51,11 +51,6 @@ class ValidateMailgun
 
     private function verify($request)
     {
-        // Check if the timestamp is fresh
-        if (abs(time() - $request->input('timestamp')) > 15) {
-            return false;
-        }
-
         return $this->buildSignature($request) === $request->input('signature');
     }
 }
