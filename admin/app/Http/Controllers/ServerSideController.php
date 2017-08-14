@@ -43,9 +43,9 @@ class ServerSideController extends Controller {
         $params = $request->query()['columns'];
 
         $datatables = Datatables::of($model)
-            ->removeColumn('updated_at')
-            ->removeColumn('transport_id')
             ->removeColumn('notified')
+            ->removeColumn('transport_id')
+            ->removeColumn('updated_at')
             ->filter(function ($query) use($params) {
                 $query = $this->filterQuery($query, $params);
             }, true)
@@ -70,9 +70,9 @@ class ServerSideController extends Controller {
             ->filter(function ($query) use($params) {
                 $query = $this->filterQuery($query, $params);
             }, true)
-            ->editColumn('brand.name', function($item){
-                    return $item->brand ? $item->brand->name : '';
-                });
+            ->editColumn('brand.name', function($item) {
+                return $item->brand ? $item->brand->name : '';
+            });
 
         return $datatables->make(true);
     }
@@ -129,10 +129,6 @@ class ServerSideController extends Controller {
 
     private function shortenString($string, $limit)
     {
-        if(strlen($string) > $limit) {
-            $string = trim(substr($string, 0, $limit)) . "...";
-        }
-
-        return $string;
+        return strlen($string) > $limit ? trim(substr($string, 0, $limit)) . "..." : $string;
     }
 }
