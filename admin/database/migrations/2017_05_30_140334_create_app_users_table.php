@@ -18,7 +18,7 @@ class CreateAppUsersTable extends Migration
             $table->string('name', 70);
             $table->string('email', 100)->nullable();
             $table->index('email');
-            $table->uuid('miba_id')->unique()->nullable();
+            $table->uuid('miba_id')->nullable();
             $table->index('miba_id');
             $table->timestamps();
             $table->softDeletes();
