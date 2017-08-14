@@ -4,6 +4,11 @@
 
 .messages-detail {
     padding-left: 0px;
+    max-height: 55vh;
+}
+
+.messages-detail .messages-detail-list {
+    height: 100%;
 }
 
 .dataTables_wrapper:nth-child(1) > div {

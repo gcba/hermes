@@ -18,6 +18,7 @@
     <div class="page-content browse container-fluid">
         @include('voyager::alerts')
         <div class="row">
+
             <div class="col-lg-4 col-md-6 messages-master">
                 <div class="panel panel-bordered">
                     <div class="panel-body table-responsive">
@@ -53,26 +54,41 @@
                     </div>
                 </div>
             </div>
+
             <div class="col-lg-8 col-md-6 messages-detail">
                 <div class="panel panel-bordered">
                     <div class="panel-body">
                         <div class="messages-detail-list">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">Date should go here, to the right</div>
-                                    <div class="panel-body">
+
+                            <div class="panel panel-default message message-out">
+                                <div class="panel-heading message-heading">Employee name to the left, date to the right</div>
+                                    <div class="panel-body message-body">
                                         Message content
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="panel panel-primary message message-in">
+                                <div class="panel-heading message-heading">User name and email to the left, date to the right</div>
+                                    <div class="panel-body message-body">
+                                        Message content
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
+
                         <div class="messages-detail-compose">
-                            Compose area
+                            <div class="input-group">
+                                <textarea class="form-control custom-control" rows="3"></textarea>
+                                <span class="input-group-addon btn btn-primary">Enviar</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
+        </div>
     </div>
 
     <div class="modal modal-danger fade" tabindex="-1" id="delete_modal" role="dialog">
