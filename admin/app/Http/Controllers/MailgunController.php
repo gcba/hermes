@@ -17,6 +17,6 @@ class MailgunController extends Controller
     {
         // TODO: Parse response
 
-        return Response::make(null, 200);
+        return Response::json([], 200);
     }
 }
