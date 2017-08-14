@@ -37,15 +37,15 @@ return [
      *
      */
     'from' => [
-        'address' => env('MAILGUN_FROM', 'hello@example.com'),
-        'name' => env('MAILGUN_SENDER', 'Example')
+        'address' => env('MAIL_FROM', 'hello@example.com'),
+        'name' => env('MAIL_SENDER', 'Example')
     ],
 
     /*
      * Global reply-to e-mail address
      *
      */
-    'reply_to' => env('MAILGUN_REPLY_TO', 'hello@example.com'),
+    'reply_to' => env('MAIL_REPLY_TO', 'hello@example.com'),
 
     /*
      * Force the from address
