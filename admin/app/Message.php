@@ -13,7 +13,7 @@ class Message extends Model
      * @var array
      */
     protected $fillable = [
-        'message', 'direction', 'rating_id'
+        'message', 'direction', 'notified', 'transport_id', 'rating_id'
     ];
 
     /**
@@ -25,7 +25,6 @@ class Message extends Model
         parent::boot();
 
         static::creating(function ($model) {
-            $model->attributes['direction'] = 'out';
             $model->attributes['updated_at'] = null;
         });
     }
@@ -46,6 +45,10 @@ class Message extends Model
 
     public function setMessageAttribute($value) {
         $this->attributes['message'] = ucfirst(filter_var(trim($value), FILTER_SANITIZE_SPECIAL_CHARS));
+    }
+
+    public function setTransportIdAttribute($value) {
+        $this->attributes['transport_id'] = filter_var(trim($value), FILTER_SANITIZE_EMAIL);
     }
 
     public function getDirectionAttribute(){
