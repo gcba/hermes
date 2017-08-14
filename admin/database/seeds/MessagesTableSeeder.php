@@ -18,7 +18,7 @@ class MessagesTableSeeder extends Seeder
 
             foreach ($ratingsWithMessages as $rating) {
                 $message = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit sed eiusmod tempor incidunt ';
-                $message . 'ut labore et dolore magna aliqua.';
+                $message = $message . 'ut labore et dolore magna aliqua.';
 
                 Message::create([
                     'message' => $message,
