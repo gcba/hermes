@@ -56,7 +56,18 @@
             <div class="col-lg-8 col-md-6 messages-detail">
                 <div class="panel panel-bordered">
                     <div class="panel-body">
-                        <p>Hola mundo</p>
+                        <div class="messages-detail-list">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">Date should go here, to the right</div>
+                                    <div class="panel-body">
+                                        Message content
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="messages-detail-compose">
+                            Compose area
+                        </div>
                     </div>
                 </div>
             </div>
