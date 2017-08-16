@@ -23,7 +23,7 @@ type Count {
 }
 
 type Average {
-    ratings(field: Field): Int!
+    ratings(field: Field): Float!
 }
 
 input Field {
