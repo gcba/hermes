@@ -1,0 +1,26 @@
+package: hermes/ratings
+import:
+- package: github.com/labstack/echo
+  version: ^3.1.0
+  subpackages:
+  - '...'
+- package: github.com/jinzhu/gorm
+- package: github.com/stretchr/testify
+- package: github.com/lib/pq
+- package: github.com/facebookgo/grace
+- package: github.com/facebookgo/httpdown
+- package: github.com/dchest/uniuri
+- package: github.com/go-playground/validator
+  version: ^9.4.0
+- package: github.com/go-playground/universal-translator
+  version: ^0.16.0
+- package: github.com/leebenson/conform
+- package: github.com/etgryphon/stringUp
+- package: github.com/microcosm-cc/bluemonday
+- package: github.com/gavv/httpexpect
+- package: github.com/ajg/form
+  version: ^1.5.0
+- package: github.com/labstack/gommon
+  version: ^0.2.1
+  subpackages:
+  - log
