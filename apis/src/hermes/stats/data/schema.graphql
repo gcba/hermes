@@ -1,60 +1,35 @@
 schema {
-  query: Query
+    query: Stats
 }
 
-type Query {
-    ratings: [Rating]
+union FieldValue = Int | Float | String | Boolean
+
+enum Operator {
+    EQUAL
 }
 
-type Rating {
-    id: ID!
-    rating: Int!
-    description: String
-    hasMessage: Boolean!
-    app: App!
-    platform: Platform!
-    device: Device!
-    browser: Browser
+enum Condition {
+    OR
+    AND
 }
 
-type Message {
-    id: ID!
-    message: String!
-    direction: MESSAGE_DIRECTION!
-    rating: Rating!
+type Stats {
+    count: Count,
+    average: Average
 }
 
-enum MESSAGE_DIRECTION {
-    IN
-    OUT
+type Count {
+    ratings(field: Field): Int!
 }
 
-type App {
-    id: ID!
+type Average {
+    ratings(field: Field): Int!
+}
+
+input Field {
     name: String!
-    type: String!
-    key: String!
-}
-
-type Platform {
-    id: ID!
-    name: String!
-    key: String!
-}
-
-type Browser {
-    id: ID!
-    name: Name!
-}
-
-type Device {
-    id: ID!
-    name: String!
-    brand: Brand
-    platform: Platform!
-}
-
-type Brand {
-    id: ID!
-    name: String!
+    operator: Operator
+    value: FieldValue
+    condition: Condition
+    next: Field
 }
