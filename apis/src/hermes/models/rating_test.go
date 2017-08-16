@@ -1,8 +1,9 @@
 package models
 
 import (
-	"hermes/database"
 	"testing"
+
+	"hermes/database"
 
 	"github.com/dchest/uniuri"
 	_ "github.com/joho/godotenv/autoload" // Loads config from .env file
