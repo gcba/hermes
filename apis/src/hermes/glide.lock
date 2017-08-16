@@ -1,8 +1,10 @@
-hash: f2d9569a6902a94122a29bffa3c9a8958b5fdf3c06e8618cdf082868a5100436
-updated: 2017-07-21T23:57:58.244795663-03:00
+hash: 146c3b48143e7d7a9268c096529a5a75765f0fe8795485c55f5fc1646ef7509e
+updated: 2017-08-16T11:03:42.066322471-03:00
 imports:
 - name: github.com/ajg/form
   version: cc2954064ec9ea8d93917f0f87456e11d7b881ad
+- name: github.com/alecthomas/kingpin
+  version: 1087e65c9441605df944fb12c33f0fe7072d18ca
 - name: github.com/dchest/uniuri
   version: 8902c56451e9b58ff940bbe5fec35d5f9c04584a
 - name: github.com/dgrijalva/jwt-go
@@ -29,15 +31,13 @@ imports:
 - name: github.com/go-playground/universal-translator
   version: b32fa301c9fe55953584134cb6853a13c87ec0a1
 - name: github.com/go-playground/validator
-  version: fb68f39656d7ebf8aa339ad4917aa0c260ecc237
+  version: d529ee1b0f30352444f507cc6cdac96bfd12decc
 - name: github.com/jinzhu/gorm
   version: 9acaa33324bbcc78239a1c913d4f1292c12177b9
   subpackages:
   - dialects/postgres
 - name: github.com/jinzhu/inflection
   version: 1c35d901db3da928c72a72d8458480cc9ade058f
-- name: github.com/k0kubun/pp
-  version: 027a6d1765d673d337e687394dbe780dd64e2a1e
 - name: github.com/labstack/echo
   version: 935a60782cbbc55110e7bd4b33120e4567cbee43
   subpackages:
