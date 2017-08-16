@@ -8,16 +8,26 @@
 
 ## Objetivo
 
-
+Crear el único endpoint de la API de estadísticas, sin los resolvers.
 
 ## Tareas
 
-### SDKs
+### APIs
 
-1. Crear el SDK Swift
+1. Convertir la API de calificaciones en un subpackage
 
-El SDK debe ejecutar las siguientes funciones:
+2. Extraer los modelos a un subpackage común
 
-- Recabar los datos de sistema necesarios para enviar una nueva calificación: Nombre del dispositivo, marca, resolución, plataforma, versiones.
-- Ingresar los datos de la nueva calificación.
-- Enviar la nueva calificación a la API.
+3. Extraer la conexión a la base de datos a un subpackage común
+
+4. Emplear un único main.go
+
+5. Crear un comando para iniciar la API de calificaciones
+
+6. Crear un comando para iniciar la API de estadísticas
+
+7. Agregar schema GraphQL de calificaciones
+
+8. Agregar schema GraphQL de mensajes
+
+9. Crear endpoint GET /stats
