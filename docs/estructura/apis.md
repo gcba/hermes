@@ -130,8 +130,6 @@ Esta API será de sólo lectura, con un enfoque de obtención y transformación 
 
 ### Endpoints
 
-Dado que se trata de una API GraphQL, sólo es necesario un endpoint. En él se admiten los métodos GET y POST.
+Dado que se trata de una API GraphQL, sólo es necesario un endpoint GET.
 
 `GET /stats`
-
-`POST /stats`
