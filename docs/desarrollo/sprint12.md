@@ -26,8 +26,6 @@ Crear el único endpoint de la API de estadísticas, sin los resolvers.
 
 6. Crear un comando para iniciar la API de estadísticas
 
-7. Agregar schema GraphQL de calificaciones
+7. Agregar schema GraphQL
 
-8. Agregar schema GraphQL de mensajes
-
-9. Crear endpoint GET /stats
+8. Crear endpoint GET /stats
