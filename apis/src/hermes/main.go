@@ -17,6 +17,7 @@ var (
 	app            = kingpin.New("hermes", "GCBA product ratings APIs.")
 	startCommand   = kingpin.Command("start", "Start an Hermes API.")
 	ratingsCommand = startCommand.Command("ratings", "Start the ratings API.")
+	statsCommand   = startCommand.Command("stats", "Start the statistics API.")
 	ratingsPort    = getRatingsPort()
 	noCursor       = "\n\n\033[?25l"
 	banner         = `
@@ -32,6 +33,8 @@ func main() {
 	switch kingpin.Parse() {
 	case "start ratings":
 		startRatingsAPI()
+	case "start stats":
+		startStatsAPI()
 	}
 }
 
@@ -53,8 +56,36 @@ func startRatingsAPI() {
 	handler.Logger.Fatal(gracehttp.Serve(handler.Server))
 }
 
+func startStatsAPI() {
+	routes := map[string]echo.HandlerFunc{
+		"OptionsRoot":    controller.OptionsRoot,
+		"OptionsRatings": controller.OptionsRatings,
+		"PostRatings":    controller.PostRatings}
+
+	handler, castOk := handler.Handler(ratingsPort, routes).(*echo.Echo)
+
+	if !castOk {
+		handler.Logger.Fatal("Could not start server")
+	}
+
+	fmt.Println("✅  Server started on port", strconv.Itoa(ratingsPort))
+	fmt.Print(noCursor)
+
+	handler.Logger.Fatal(gracehttp.Serve(handler.Server))
+}
+
 func getRatingsPort() int {
-	port, portErr := strconv.Atoi(os.Getenv("API_RATINGS_PORT"))
+	port, portErr := strconv.Atoi(os.Getenv("HERMES_RATINGS_PORT"))
+
+	if portErr != nil {
+		return 5000
+	}
+
+	return port
+}
+
+func getStatsPort() int {
+	port, portErr := strconv.Atoi(os.Getenv("HERMES_STATS_PORT"))
 
 	if portErr != nil {
 		return 5000
