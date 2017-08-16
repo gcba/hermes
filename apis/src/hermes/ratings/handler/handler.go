@@ -149,7 +149,7 @@ func isValidCharacterEncoding(context echo.Context) bool {
 func Handler(port int, handlers map[string]echo.HandlerFunc) http.Handler {
 	e := echo.New()
 	validate := validator.New()
-	env := os.Getenv("API_RATINGS_ENV")
+	env := os.Getenv("HERMES_RATINGS_ENV")
 
 	parser.RegisterCustomValidators(validate)
 

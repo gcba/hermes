@@ -12,18 +12,18 @@ import (
 // Load enviroment variables
 var (
 	// Load read database settings
-	readDBPort     = os.Getenv("API_RATINGS_READDB_PORT")
-	readDBHost     = os.Getenv("API_RATINGS_READDB_HOST")
-	readDBName     = os.Getenv("API_RATINGS_READDB_NAME")
-	readDBUser     = os.Getenv("API_RATINGS_READDB_USER")
-	readDBPassword = os.Getenv("API_RATINGS_READDB_PASSWORD")
+	readDBPort     = os.Getenv("HERMES_READDB_PORT")
+	readDBHost     = os.Getenv("HERMES_READDB_HOST")
+	readDBName     = os.Getenv("HERMES_READDB_NAME")
+	readDBUser     = os.Getenv("HERMES_READDB_USER")
+	readDBPassword = os.Getenv("HERMES_READDB_PASSWORD")
 
 	// Load write database settings
-	writeDBPort     = os.Getenv("API_RATINGS_WRITEDB_PORT")
-	writeDBHost     = os.Getenv("API_RATINGS_WRITEDB_HOST")
-	writeDBName     = os.Getenv("API_RATINGS_WRITEDB_NAME")
-	writeDBUser     = os.Getenv("API_RATINGS_WRITEDB_USER")
-	writeDBPassword = os.Getenv("API_RATINGS_WRITEDB_PASSWORD")
+	writeDBPort     = os.Getenv("HERMES_WRITEDB_PORT")
+	writeDBHost     = os.Getenv("HERMES_WRITEDB_HOST")
+	writeDBName     = os.Getenv("HERMES_WRITEDB_NAME")
+	writeDBUser     = os.Getenv("HERMES_WRITEDB_USER")
+	writeDBPassword = os.Getenv("HERMES_WRITEDB_PASSWORD")
 )
 
 // GetReadDB connects to the read database and returns a pointer to the connection
