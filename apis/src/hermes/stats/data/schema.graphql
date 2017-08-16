@@ -1,0 +1,60 @@
+schema {
+  query: Query
+}
+
+type Query {
+    ratings: [Rating]
+}
+
+type Rating {
+    id: ID!
+    rating: Int!
+    description: String
+    hasMessage: Boolean!
+    app: App!
+    platform: Platform!
+    device: Device!
+    browser: Browser
+}
+
+type Message {
+    id: ID!
+    message: String!
+    direction: MESSAGE_DIRECTION!
+    rating: Rating!
+}
+
+enum MESSAGE_DIRECTION {
+    IN
+    OUT
+}
+
+type App {
+    id: ID!
+    name: String!
+    type: String!
+    key: String!
+}
+
+type Platform {
+    id: ID!
+    name: String!
+    key: String!
+}
+
+type Browser {
+    id: ID!
+    name: Name!
+}
+
+type Device {
+    id: ID!
+    name: String!
+    brand: Brand
+    platform: Platform!
+}
+
+type Brand {
+    id: ID!
+    name: String!
+}
