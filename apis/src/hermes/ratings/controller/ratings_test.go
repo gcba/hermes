@@ -185,7 +185,7 @@ func TestPostRatings_WithAppUser(t *testing.T) {
 		"user": map[string]interface{}{
 			"name":   "Miguel Raldes",
 			"email":  "miguel@example.com",
-			"mibaId": "e10adc3949"},
+			"mibaId": "25dfee5b-bdfd-4e4f-9516-50e51042b3a9"},
 		"device": map[string]interface{}{
 			"name":  "Moto G",
 			"brand": "Motorola",
@@ -240,7 +240,7 @@ func TestPostRatings_WithMessage(t *testing.T) {
 		"user": map[string]interface{}{
 			"name":   "Miguel Raldes",
 			"email":  "miguel@example.com",
-			"mibaId": "e10adc3949"},
+			"mibaId": "25dfee5b-bdfd-4e4f-9516-50e51042b3a9"},
 		"device": map[string]interface{}{
 			"name":  "Moto G",
 			"brand": "Motorola",
@@ -295,7 +295,7 @@ func TestPostRatings_WithDesktopDevice(t *testing.T) {
 		"user": map[string]interface{}{
 			"name":   "Miguel Raldes",
 			"email":  "miguel@example.com",
-			"mibaId": "e10adc3949"},
+			"mibaId": "25dfee5b-bdfd-4e4f-9516-50e51042b3a9"},
 		"device": map[string]interface{}{
 			"name": "Desktop",
 			"screen": map[string]interface{}{
@@ -505,7 +505,7 @@ func TestPostRatings_WithoutBrand(t *testing.T) {
 		"user": map[string]interface{}{
 			"name":   "Miguel Raldes",
 			"email":  "miguel@example.com",
-			"mibaId": "e10adc3949"},
+			"mibaId": "25dfee5b-bdfd-4e4f-9516-50e51042b3a9"},
 		"device": map[string]interface{}{
 			"name": "Moto G",
 			"screen": map[string]interface{}{
@@ -559,7 +559,7 @@ func TestPostRatings_WithoutPPI(t *testing.T) {
 		"user": map[string]interface{}{
 			"name":   "Miguel Raldes",
 			"email":  "miguel@example.com",
-			"mibaId": "e10adc3949"},
+			"mibaId": "25dfee5b-bdfd-4e4f-9516-50e51042b3a9"},
 		"device": map[string]interface{}{
 			"name":  "Moto G",
 			"brand": "Motorola",
@@ -613,7 +613,7 @@ func TestPostRatings_WithoutBrandAndPPI(t *testing.T) {
 		"user": map[string]interface{}{
 			"name":   "Miguel Raldes",
 			"email":  "miguel@example.com",
-			"mibaId": "e10adc3949"},
+			"mibaId": "25dfee5b-bdfd-4e4f-9516-50e51042b3a9"},
 		"device": map[string]interface{}{
 			"name": "Moto G",
 			"screen": map[string]interface{}{
@@ -665,7 +665,7 @@ func TestPostRatings_WithoutUserName(t *testing.T) {
 			"version": "9.0"},
 		"user": map[string]interface{}{
 			"email":  "miguel@example.com",
-			"mibaId": "e10adc3949"},
+			"mibaId": "25dfee5b-bdfd-4e4f-9516-50e51042b3a9"},
 		"device": map[string]interface{}{
 			"name":  "Moto G",
 			"brand": "Motorola",
@@ -719,7 +719,7 @@ func TestPostRatings_WithoutUserEmail(t *testing.T) {
 			"version": "10.0"},
 		"user": map[string]interface{}{
 			"name":   "Miguel Raldes",
-			"mibaId": "e10adc3949"},
+			"mibaId": "25dfee5b-bdfd-4e4f-9516-50e51042b3a9"},
 		"device": map[string]interface{}{
 			"name":  "Moto G",
 			"brand": "Motorola",
@@ -826,7 +826,7 @@ func TestPostRatings_WithoutUserNameAndEmail(t *testing.T) {
 			"key":     "e10adc3949ba59abbe56e057f20f883e",
 			"version": "10.0"},
 		"user": map[string]interface{}{
-			"mibaId": "e10adc3949"},
+			"mibaId": "25dfee5b-bdfd-4e4f-9516-50e51042b3a9"},
 		"device": map[string]interface{}{
 			"name":  "Moto G",
 			"brand": "Motorola",
