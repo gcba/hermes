@@ -1,5 +1,5 @@
-hash: c7e623c2c15771adc734e2edc3de7f47a80a462c914e8260302c48cb73d3a481
-updated: 2017-08-16T11:30:12.253338183-03:00
+hash: dae8a15c24403d6b4486a6aedca108313e2bc2c4da0e846b2f55b70b7e8ea45f
+updated: 2017-08-16T12:02:24.682611104-03:00
 imports:
 - name: github.com/ajg/form
   version: cc2954064ec9ea8d93917f0f87456e11d7b881ad
@@ -69,6 +69,8 @@ imports:
   version: fc9e8d8ef48496124e79ae0df75490096eccf6fe
 - name: github.com/microcosm-cc/bluemonday
   version: e79763773ab6222ca1d5a7cbd9d62d83c1f77081
+- name: github.com/neelance/graphql-go
+  version: 52080e1f0951c75dd4addba57db27fc4de1d0019
 - name: github.com/stretchr/testify
   version: f6abca593680b2315d2075e0f5e2a9751e3f431a
   subpackages:
