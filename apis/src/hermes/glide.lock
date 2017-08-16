@@ -1,10 +1,16 @@
-hash: 146c3b48143e7d7a9268c096529a5a75765f0fe8795485c55f5fc1646ef7509e
-updated: 2017-08-16T11:03:42.066322471-03:00
+hash: c7e623c2c15771adc734e2edc3de7f47a80a462c914e8260302c48cb73d3a481
+updated: 2017-08-16T11:30:12.253338183-03:00
 imports:
 - name: github.com/ajg/form
   version: cc2954064ec9ea8d93917f0f87456e11d7b881ad
 - name: github.com/alecthomas/kingpin
   version: 1087e65c9441605df944fb12c33f0fe7072d18ca
+- name: github.com/alecthomas/template
+  version: a0175ee3bccc567396460bf5acd36800cb10c49c
+  subpackages:
+  - parse
+- name: github.com/alecthomas/units
+  version: 2efee857e7cfd4f3d0138cc3cbb1b4966962b93a
 - name: github.com/dchest/uniuri
   version: 8902c56451e9b58ff940bbe5fec35d5f9c04584a
 - name: github.com/dgrijalva/jwt-go

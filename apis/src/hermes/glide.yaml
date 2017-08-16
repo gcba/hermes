@@ -26,3 +26,4 @@ import:
   - log
 - package: github.com/alecthomas/kingpin
   version: ^2.2.5
+- package: github.com/alecthomas/template
