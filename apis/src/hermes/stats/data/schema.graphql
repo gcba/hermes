@@ -2,8 +2,6 @@ schema {
     query: Stats
 }
 
-union FieldValue = Int | Float | String | Boolean
-
 enum Operator {
     EQUAL
 }
@@ -29,7 +27,10 @@ type Average {
 input Field {
     name: String!
     operator: Operator
-    value: FieldValue
+    int: Int
+    float: Float
+    string: String
+    bool: Boolean
     condition: Condition
     next: Field
 }
