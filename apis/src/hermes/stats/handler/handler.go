@@ -52,11 +52,11 @@ type (
 	}
 )
 
-func (cr *CountResolver) Ratings(args struct{ Field field }) int {
+func (cr *CountResolver) Ratings(context echo.Context, args struct{ Field field }) (int, error) {
 	return 0
 }
 
-func (ar *AverageResolver) Ratings(args struct{ Field field }) float {
+func (ar *AverageResolver) Ratings(context echo.Context, args struct{ Field field }) (float64, error) {
 	return 0
 }
 
@@ -93,6 +93,8 @@ type RequestValidator struct {
 func (rv *RequestValidator) Validate(request interface{}) error {
 	return rv.validator.Struct(request)
 }
+
+// TODO: Extract middlewares into their own package
 
 func badRequestMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
 	return func(context echo.Context) error {
@@ -134,6 +136,22 @@ func notAcceptableMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
 	}
 }
 
+func unsupportedMediaTypeMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
+	return func(context echo.Context) error {
+		var message string
+
+		if context.Request().Method == echo.POST {
+			if !isValidContentTypeHeader(context) || !isValidCharacterEncoding(context) {
+				message = "Request body must be UTF-8 encoded JSON"
+
+				return echo.NewHTTPError(http.StatusUnsupportedMediaType, []string{message})
+			}
+		}
+
+		return next(context)
+	}
+}
+
 func notImplementedMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
 	return func(context echo.Context) error {
 		if context.Request().Method != echo.POST && context.Request().Method != echo.OPTIONS {
@@ -147,7 +165,7 @@ func notImplementedMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
 func corsMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
 	return func(context echo.Context) error {
 		context.Response().Header().Set("Access-Control-Allow-Origin", "*")
-		context.Response().Header().Set("Access-Control-Allow-Methods", "POST")
+		context.Response().Header().Set("Access-Control-Allow-Methods", "OPTIONS, POST")
 		context.Response().Header().Set("Access-Control-Allow-Headers", "Content-Type, Accept, Authorization")
 
 		return next(context)
@@ -180,6 +198,27 @@ func hasContentTypeHeader(context echo.Context) bool {
 	return false
 }
 
+func isValidContentTypeHeader(context echo.Context) bool {
+	text := "text/plain"
+	json := "application/json"
+
+	if header := context.Request().Header.Get("Content-Type"); strings.Contains(strings.ToLower(header), text) || strings.Contains(strings.ToLower(header), json) {
+		return true
+	}
+
+	return false
+}
+
+func isValidCharacterEncoding(context echo.Context) bool {
+	charset := "charset=utf-8"
+
+	if header := context.Request().Header.Get("Content-Type"); strings.HasSuffix(strings.ToLower(header), charset) {
+		return true
+	}
+
+	return false
+}
+
 func Handler(port int, handlers map[string]echo.HandlerFunc) http.Handler {
 	e := echo.New()
 	validate := validator.New()
@@ -200,6 +239,7 @@ func Handler(port int, handlers map[string]echo.HandlerFunc) http.Handler {
 	e.Use(notImplementedMiddleware)
 	e.Use(notAcceptableMiddleware)
 	e.Use(badRequestMiddleware)
+	e.Use(unsupportedMediaTypeMiddleware)
 	e.Use(corsMiddleware)
 
 	e.POST("/stats", handlers["PostStats"])
