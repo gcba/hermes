@@ -14,6 +14,69 @@ import (
 	"github.com/labstack/gommon/log"
 )
 
+var Schema = `
+schema {
+    query: Stats
+}
+
+enum Operator {
+    EQUAL
+}
+
+enum Condition {
+    OR
+    AND
+}
+
+type Stats {
+    count: Count,
+    average: Average
+}
+
+type Count {
+    ratings(field: Field): Int!
+}
+
+type Average {
+    ratings(field: Field): Float!
+}
+
+input Field {
+    name: String!
+    operator: Operator
+    int: Int
+    float: Float
+    string: String
+    bool: Boolean
+    next: Operation
+}
+
+input Operation {
+    condition: Condition!
+    field: Field
+}
+`
+
+type stats struct {
+	Count   *graphql.ID
+	Average *graphql.ID
+}
+
+type field struct {
+	Name     string
+	Operator *graphql.ID
+	Int      *int
+	Float    *float64
+	String   *string
+	Bool     *bool
+	Next     *graphql.ID
+}
+
+type operation struct {
+	Condition graphql.ID
+	Field     *graphql.ID
+}
+
 type RequestValidator struct {
 	validator *validator.Validate
 }
@@ -143,6 +206,10 @@ func isValidCharacterEncoding(context echo.Context) bool {
 	}
 
 	return false
+}
+
+func loadSchema() {
+
 }
 
 func Handler(port int, handlers map[string]echo.HandlerFunc) http.Handler {
