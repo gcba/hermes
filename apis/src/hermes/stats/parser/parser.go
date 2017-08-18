@@ -13,9 +13,8 @@ import (
 type (
 	// Request holds the mapped fields from the request's JSON body
 	Request struct {
-		Query         string                 `json:"query" validate:"required,gte=10,lte=5000" conform:"trim"`
-		OperationName string                 `json:"operationName" validate:"required,gte=3,lte=15,alphanum,excludesall= " conform:"trim,lower"`
-		Variables     map[string]interface{} `json:"variables" validate:"required,gte=1,lte=15,dive,required"`
+		Query     string                 `json:"query" validate:"required,gte=10,lte=5000" conform:"trim"`
+		Variables map[string]interface{} `json:"variables" validate:"required,gte=1,lte=15,dive,required"`
 	}
 )
 
@@ -88,7 +87,6 @@ func escape(request *Request) {
 	sanitizer := bluemonday.StrictPolicy()
 
 	request.Query = sanitizer.Sanitize(request.Query)
-	request.OperationName = sanitizer.Sanitize(request.OperationName)
 
 	for key, value := range request.Variables {
 		switch actualValue := value.(type) {
