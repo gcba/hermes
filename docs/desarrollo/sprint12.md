@@ -28,4 +28,4 @@ Crear el único endpoint de la API de estadísticas, sin los resolvers.
 
 7. Agregar schema GraphQL
 
-8. Crear endpoint GET /stats
+8. Crear endpoint POST /stats
