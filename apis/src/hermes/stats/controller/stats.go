@@ -8,6 +8,11 @@ import (
 	"github.com/labstack/echo"
 )
 
+type frame struct {
+	request *parser.Request
+	context echo.Context
+}
+
 // PostStats is the main GraphQL controller
 func PostStats(context echo.Context) error {
 	request, err := parser.Parse(context)
@@ -16,11 +21,10 @@ func PostStats(context echo.Context) error {
 		return err
 	}
 
-	dbs := &databases{read: database.GetWriteDB(), write: database.GetReadDB()}
+	dbs := database.GetReadDB()
 	frame := &frame{request: request, context: context}
 
-	defer dbs.read.Close()
-	defer dbs.write.Close()
+	defer db.Close()
 
 	// Do something...
 

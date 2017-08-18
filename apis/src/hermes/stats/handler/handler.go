@@ -6,6 +6,7 @@ import (
 	"strconv"
 	"strings"
 
+	"hermes/database"
 	"hermes/stats/responses"
 
 	"github.com/go-playground/validator"
@@ -19,49 +20,6 @@ import (
 
 var (
 	schema *graphql.Schema
-
-	Schema = `
-	schema {
-		query: Stats
-	}
-
-	enum Operator {
-		EQUAL
-	}
-
-	enum Condition {
-		OR
-		AND
-	}
-
-	type Stats {
-		count: Count,
-		average: Average
-	}
-
-	type Count {
-		ratings(field: Field): Int!
-	}
-
-	type Average {
-		ratings(field: Field): Float!
-	}
-
-	input Field {
-		name: String!
-		operator: Operator
-		int: Int
-		float: Float
-		string: String
-		bool: Boolean
-		next: Operation
-	}
-
-	input Operation {
-		condition: Condition!
-		field: Field
-	}
-	`
 )
 
 type (
@@ -94,11 +52,19 @@ func NewResolver(db *gorm.DB) *Resolver {
 	return &Resolver{db: db}
 }
 
-
-func Parse() {
+func ParseSchema() {
 	var err error
+	var db = database.GetReadDB()
 
-	schema, err = graphql.ParseSchema(Schema, &Resolver{})
+	defer db.Close()
+
+	rawSchema, readErr := ioutil.ReadFile("../schema/schema.graphql")
+
+	if !readOk {
+		panic("Could not load Graphql schema")
+	}
+
+	schema, err = graphql.ParseSchema(string(rawSchema), NewResolver(db))
 
 	if err != nil {
 		panic(err)
