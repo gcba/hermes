@@ -12,78 +12,93 @@ import (
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
 	"github.com/labstack/gommon/log"
+	"github.com/jinzhu/gorm"
 )
 
 // SCHEMA --- Extract this into another package
-var schema *graphql.Schema
 
-var Schema = `
-schema {
-    query: Stats
+var (
+	schema *graphql.Schema
+
+	Schema = `
+	schema {
+		query: Stats
+	}
+
+	enum Operator {
+		EQUAL
+	}
+
+	enum Condition {
+		OR
+		AND
+	}
+
+	type Stats {
+		count: Count,
+		average: Average
+	}
+
+	type Count {
+		ratings(field: Field): Int!
+	}
+
+	type Average {
+		ratings(field: Field): Float!
+	}
+
+	input Field {
+		name: String!
+		operator: Operator
+		int: Int
+		float: Float
+		string: String
+		bool: Boolean
+		next: Operation
+	}
+
+	input Operation {
+		condition: Condition!
+		field: Field
+	}
+	`
+)
+
+type (
+	stats struct {
+		Count   *graphql.ID
+		Average *graphql.ID
+	}
+
+	field struct {
+		Name     string
+		Operator *graphql.ID
+		Int      *int
+		Float    *float64
+		String   *string
+		Bool     *bool
+		Next     *graphql.ID
+	}
+
+	operation struct {
+		Condition graphql.ID
+		Field     *graphql.ID
+	}
+
+	Resolver struct {
+		db: *gorm.DB
+	}
+)
+
+func NewResolver(db *gorm.DB) *Resolver {
+	return &Resolver{db: db}
 }
 
-enum Operator {
-    EQUAL
-}
-
-enum Condition {
-    OR
-    AND
-}
-
-type Stats {
-    count: Count,
-    average: Average
-}
-
-type Count {
-    ratings(field: Field): Int!
-}
-
-type Average {
-    ratings(field: Field): Float!
-}
-
-input Field {
-    name: String!
-    operator: Operator
-    int: Int
-    float: Float
-    string: String
-    bool: Boolean
-    next: Operation
-}
-
-input Operation {
-    condition: Condition!
-    field: Field
-}
-`
-
-type stats struct {
-	Count   *graphql.ID
-	Average *graphql.ID
-}
-
-type field struct {
-	Name     string
-	Operator *graphql.ID
-	Int      *int
-	Float    *float64
-	String   *string
-	Bool     *bool
-	Next     *graphql.ID
-}
-
-type operation struct {
-	Condition graphql.ID
-	Field     *graphql.ID
-}
 
 func Parse() {
 	var err error
 
-	schema, err = graphql.ParseSchema(starwars.Schema, &starwars.Resolver{})
+	schema, err = graphql.ParseSchema(Schema, &Resolver{})
 
 	if err != nil {
 		panic(err)
@@ -140,22 +155,6 @@ func notAcceptableMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
 	}
 }
 
-func unsupportedMediaTypeMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
-	return func(context echo.Context) error {
-		var message string
-
-		if context.Request().Method == echo.POST {
-			if !isValidContentTypeHeader(context) || !isValidCharacterEncoding(context) {
-				message = "Request body must be UTF-8 encoded JSON"
-
-				return echo.NewHTTPError(http.StatusUnsupportedMediaType, []string{message})
-			}
-		}
-
-		return next(context)
-	}
-}
-
 func notImplementedMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
 	return func(context echo.Context) error {
 		if context.Request().Method != echo.POST && context.Request().Method != echo.OPTIONS {
@@ -169,7 +168,7 @@ func notImplementedMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
 func corsMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
 	return func(context echo.Context) error {
 		context.Response().Header().Set("Access-Control-Allow-Origin", "*")
-		context.Response().Header().Set("Access-Control-Allow-Methods", "OPTIONS, POST")
+		context.Response().Header().Set("Access-Control-Allow-Methods", "POST")
 		context.Response().Header().Set("Access-Control-Allow-Headers", "Content-Type, Accept, Authorization")
 
 		return next(context)
@@ -202,31 +201,6 @@ func hasContentTypeHeader(context echo.Context) bool {
 	return false
 }
 
-func isValidContentTypeHeader(context echo.Context) bool {
-	text := "text/plain"
-	json := "application/json"
-
-	if header := context.Request().Header.Get("Content-Type"); strings.Contains(strings.ToLower(header), text) || strings.Contains(strings.ToLower(header), json) {
-		return true
-	}
-
-	return false
-}
-
-func isValidCharacterEncoding(context echo.Context) bool {
-	charset := "charset=utf-8"
-
-	if header := context.Request().Header.Get("Content-Type"); strings.HasSuffix(strings.ToLower(header), charset) {
-		return true
-	}
-
-	return false
-}
-
-func loadSchema() {
-
-}
-
 func Handler(port int, handlers map[string]echo.HandlerFunc) http.Handler {
 	e := echo.New()
 	validate := validator.New()
@@ -247,7 +221,6 @@ func Handler(port int, handlers map[string]echo.HandlerFunc) http.Handler {
 	e.Use(notImplementedMiddleware)
 	e.Use(notAcceptableMiddleware)
 	e.Use(badRequestMiddleware)
-	e.Use(unsupportedMediaTypeMiddleware)
 	e.Use(corsMiddleware)
 
 	e.POST("/stats", handlers["PostStats"])
