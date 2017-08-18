@@ -5,8 +5,8 @@ import (
 	"net/http"
 
 	"hermes/database"
-	"hermes/stats/handler"
 	"hermes/stats/parser"
+	"hermes/stats/schema"
 
 	"github.com/labstack/echo"
 )
@@ -25,8 +25,8 @@ func PostStats(echoContext echo.Context) error {
 
 	if !echoContext.Response().Committed {
 		currentContext := echoContext.Request().Context()
-		loadedContext := context.WithValue(currentContext, handler.DB, db)
-		response := handler.Schema.Exec(loadedContext, request.Query, "", request.Variables)
+		loadedContext := context.WithValue(currentContext, schema.DB, db)
+		response := schema.Schema.Exec(loadedContext, request.Query, "", request.Variables)
 
 		return echoContext.JSON(http.StatusOK, &response)
 	}
