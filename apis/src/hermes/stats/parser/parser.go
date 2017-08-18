@@ -19,6 +19,8 @@ type (
 	}
 )
 
+// TODO: Consider extracting the common parts into its own package
+
 // Parse parses, scrubs and escapes a request's JSON body and maps it to a struct
 func Parse(context echo.Context) (*Request, error) {
 	request := new(Request)
