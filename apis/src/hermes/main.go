@@ -5,8 +5,11 @@ import (
 	"os"
 	"strconv"
 
-	"hermes/ratings/controller"
-	"hermes/ratings/handler"
+	ratingsController "hermes/ratings/controller"
+	ratingsHandler "hermes/ratings/handler"
+
+	statsController "hermes/stats/controller"
+	statsHandler "hermes/stats/handler"
 
 	"github.com/alecthomas/kingpin"
 	"github.com/facebookgo/grace/gracehttp"
@@ -43,11 +46,11 @@ func main() {
 
 func startRatingsAPI() {
 	routes := map[string]echo.HandlerFunc{
-		"OptionsRoot":    controller.OptionsRoot,
-		"OptionsRatings": controller.OptionsRatings,
-		"PostRatings":    controller.PostRatings}
+		"OptionsRoot":    ratingsController.OptionsRoot,
+		"OptionsRatings": ratingsController.OptionsRatings,
+		"PostRatings":    ratingsController.PostRatings}
 
-	handler, castOk := handler.Handler(ratingsPort, routes).(*echo.Echo)
+	handler, castOk := ratingsHandler.Handler(ratingsPort, routes).(*echo.Echo)
 
 	if !castOk {
 		handler.Logger.Fatal("Could not start server")
@@ -60,8 +63,8 @@ func startRatingsAPI() {
 }
 
 func startStatsAPI() {
-	routes := map[string]echo.HandlerFunc{"PostStats": controller.PostStats}
-	handler, castOk := handler.Handler(statsPort, routes).(*echo.Echo)
+	routes := map[string]echo.HandlerFunc{"PostStats": statsController.PostStats}
+	handler, castOk := statsHandler.Handler(statsPort, routes).(*echo.Echo)
 
 	if !castOk {
 		handler.Logger.Fatal("Could not start server")
