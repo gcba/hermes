@@ -14,6 +14,9 @@ import (
 	"github.com/labstack/gommon/log"
 )
 
+// SCHEMA --- Extract this into another package
+var schema *graphql.Schema
+
 var Schema = `
 schema {
     query: Stats
@@ -76,6 +79,18 @@ type operation struct {
 	Condition graphql.ID
 	Field     *graphql.ID
 }
+
+func Parse() {
+	var err error
+
+	schema, err = graphql.ParseSchema(starwars.Schema, &starwars.Resolver{})
+
+	if err != nil {
+		panic(err)
+	}
+}
+
+// END SCHEMA --- Extract this into another package
 
 type RequestValidator struct {
 	validator *validator.Validate
