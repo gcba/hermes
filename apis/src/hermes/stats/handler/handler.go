@@ -14,6 +14,7 @@ import (
 	"github.com/labstack/echo/middleware"
 	"github.com/labstack/gommon/log"
 	"github.com/jinzhu/gorm"
+	"github.com/neelance/graphql-go"
 )
 
 // SCHEMA --- Extract this into another package
