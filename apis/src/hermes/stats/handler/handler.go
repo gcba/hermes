@@ -23,30 +23,41 @@ var (
 )
 
 type (
-	stats struct {
-		Count   *graphql.ID
-		Average *graphql.ID
-	}
-
 	field struct {
 		Name     string
-		Operator *graphql.ID
+		Operator *string
 		Int      *int
 		Float    *float64
 		String   *string
 		Bool     *bool
-		Next     *graphql.ID
+		Next     *operation
 	}
 
 	operation struct {
-		Condition graphql.ID
-		Field     *graphql.ID
+		Condition string
+		Field     *field
 	}
 
 	Resolver struct {
 		db: *gorm.DB
 	}
+
+	CountResolver struct {
+		db: *gorm.DB
+	}
+
+	AverageResolver struct {
+		db: *gorm.DB
+	}
 )
+
+func (cr *CountResolver) Ratings(args struct{ Field field }) int {
+	return 0
+}
+
+func (ar *AverageResolver) Ratings(args struct{ Field field }) float {
+	return 0
+}
 
 func NewResolver(db *gorm.DB) *Resolver {
 	return &Resolver{db: db}
