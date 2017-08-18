@@ -6,8 +6,7 @@ import (
 	"strconv"
 	"strings"
 
-	"hermes/ratings/parser"
-	"hermes/ratings/responses"
+	"hermes/stats/responses"
 
 	"github.com/go-playground/validator"
 	"github.com/labstack/echo"
@@ -149,9 +148,7 @@ func isValidCharacterEncoding(context echo.Context) bool {
 func Handler(port int, handlers map[string]echo.HandlerFunc) http.Handler {
 	e := echo.New()
 	validate := validator.New()
-	env := os.Getenv("HERMES_RATINGS_ENV")
-
-	parser.RegisterCustomValidators(validate)
+	env := os.Getenv("HERMES_STATS_ENV")
 
 	if env == "DEV" {
 		e.Logger.SetLevel(log.DEBUG)
@@ -171,9 +168,7 @@ func Handler(port int, handlers map[string]echo.HandlerFunc) http.Handler {
 	e.Use(unsupportedMediaTypeMiddleware)
 	e.Use(corsMiddleware)
 
-	e.OPTIONS("/", handlers["OptionsRoot"])
-	e.OPTIONS("/ratings", handlers["OptionsRatings"])
-	e.POST("/ratings", handlers["PostRatings"])
+	e.POST("/stats", handlers["PostStats"])
 
 	e.HTTPErrorHandler = responses.ErrorHandler
 	e.Validator = &RequestValidator{validator: validate}
