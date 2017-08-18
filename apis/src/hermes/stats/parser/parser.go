@@ -10,6 +10,15 @@ import (
 	"github.com/microcosm-cc/bluemonday"
 )
 
+type (
+	// Request holds the mapped fields from the request's JSON body
+	Request struct {
+		Query         string                 `json:"query" validate:"required,gte=10,lte=5000" conform:"trim"`
+		OperationName string                 `json:"operationName" validate:"required,gte=3,lte=15,alphanum,excludesall= " conform:"trim,lower"`
+		Variables     map[string]interface{} `json:"variables" validate:"required,gte=1,lte=15,dive,required"`
+	}
+)
+
 // Parse parses, scrubs and escapes a request's JSON body and maps it to a struct
 func Parse(context echo.Context) (*Request, error) {
 	request := new(Request)
@@ -76,6 +85,21 @@ func validate(request *Request, context echo.Context) error {
 func escape(request *Request) {
 	sanitizer := bluemonday.StrictPolicy()
 
-	request.Comment = sanitizer.Sanitize(request.Comment)
-	request.Description = sanitizer.Sanitize(request.Description)
+	request.Query = sanitizer.Sanitize(request.Query)
+	request.OperationName = sanitizer.Sanitize(request.OperationName)
+
+	for key, value := range request.Variables {
+		switch actualValue := value.(type) {
+		case int:
+			break
+		case float64:
+			break
+		case string:
+			request.Variables[key] = sanitizer.Sanitize(actualValue)
+		case bool:
+			break
+		default:
+			break
+		}
+	}
 }
