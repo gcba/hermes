@@ -60,11 +60,7 @@ func startRatingsAPI() {
 }
 
 func startStatsAPI() {
-	routes := map[string]echo.HandlerFunc{
-		"OptionsRoot":    controller.OptionsRoot,
-		"OptionsRatings": controller.OptionsRatings,
-		"PostRatings":    controller.PostRatings}
-
+	routes := map[string]echo.HandlerFunc{"PostStats": controller.PostStats}
 	handler, castOk := handler.Handler(statsPort, routes).(*echo.Echo)
 
 	if !castOk {
