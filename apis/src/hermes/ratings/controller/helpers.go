@@ -44,14 +44,14 @@ var (
 	channelClosedError = "Channel closed"
 )
 
-func errorResponse(context echo.Context) error {
+func errorResponse() error {
 	return echo.NewHTTPError(http.StatusInternalServerError)
 }
 
 func loggedErrorResponse(tag string, message string, context echo.Context) error {
 	context.Logger().Error(tag, message)
 
-	return errorResponse(context)
+	return errorResponse()
 }
 
 /*
@@ -66,7 +66,7 @@ func getApp(db *gorm.DB, frame *frame, channel chan appResult) {
 	resultStruct := appResult{}
 
 	if len(errorList) > 0 || result.Error != nil || result.Value == nil {
-		resultStruct.err = errorResponse(frame.context)
+		resultStruct.err = errorResponse()
 
 		channel <- resultStruct
 		close(channel)
@@ -85,7 +85,7 @@ func getApp(db *gorm.DB, frame *frame, channel chan appResult) {
 		return
 	}
 
-	resultStruct.err = errorResponse(frame.context)
+	resultStruct.err = errorResponse()
 
 	channel <- resultStruct
 	close(channel)
@@ -105,7 +105,7 @@ func getPlatform(db *gorm.DB, frame *frame, channel chan platformResult) {
 	resultStruct := platformResult{}
 
 	if len(errorList) > 0 || result.Error != nil || result.Value == nil {
-		resultStruct.err = errorResponse(frame.context)
+		resultStruct.err = errorResponse()
 
 		channel <- resultStruct
 		close(channel)
@@ -124,7 +124,7 @@ func getPlatform(db *gorm.DB, frame *frame, channel chan platformResult) {
 		return
 	}
 
-	resultStruct.err = errorResponse(frame.context)
+	resultStruct.err = errorResponse()
 
 	channel <- resultStruct
 	close(channel)
@@ -144,7 +144,7 @@ func getRange(db *gorm.DB, frame *frame, channel chan rangeResult) {
 	resultStruct := rangeResult{}
 
 	if len(errorList) > 0 || result.Error != nil || result.Value == nil {
-		resultStruct.err = errorResponse(frame.context)
+		resultStruct.err = errorResponse()
 
 		channel <- resultStruct
 		close(channel)
@@ -163,7 +163,7 @@ func getRange(db *gorm.DB, frame *frame, channel chan rangeResult) {
 		return
 	}
 
-	resultStruct.err = errorResponse(frame.context)
+	resultStruct.err = errorResponse()
 
 	channel <- resultStruct
 	close(channel)

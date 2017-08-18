@@ -1,9 +1,12 @@
 package handler
 
 import (
+	"context"
 	"io/ioutil"
 	"net/http"
 	"os"
+	"path"
+	"runtime"
 	"strconv"
 
 	"hermes/database"
@@ -19,16 +22,17 @@ import (
 )
 
 // SCHEMA --- Extract this into another package
+const DB = iota
 
 var (
-	schema *graphql.Schema
+	Schema *graphql.Schema
 )
 
 type (
 	field struct {
 		Name     string
 		Operator *string
-		Int      *int
+		Int      *int32
 		Float    *float64
 		String   *string
 		Bool     *bool
@@ -53,11 +57,39 @@ type (
 	}
 )
 
-func (cr *CountResolver) Ratings(context echo.Context, args struct{ Field field }) (int, error) {
+func errorResponse() error {
+	return echo.NewHTTPError(http.StatusInternalServerError)
+}
+
+func (r *Resolver) Count(context context.Context) (*CountResolver, error) {
+	if db, ok := context.Value(DB).(*gorm.DB); ok {
+		// TODO: Implement
+
+		return &CountResolver{db: db}, nil
+	}
+
+	return nil, errorResponse()
+}
+
+func (r *Resolver) Average(context context.Context) (*AverageResolver, error) {
+	if db, ok := context.Value(DB).(*gorm.DB); ok {
+		// TODO: Implement
+
+		return &AverageResolver{db: db}, nil
+	}
+
+	return nil, errorResponse()
+}
+
+func (cr *CountResolver) Ratings(context context.Context, args struct{ Field *field }) (int32, error) {
+	// TODO: Implement
+
 	return 0, nil
 }
 
-func (ar *AverageResolver) Ratings(context echo.Context, args struct{ Field field }) (float64, error) {
+func (ar *AverageResolver) Ratings(context context.Context, args struct{ Field *field }) (float64, error) {
+	// TODO: Implement
+
 	return 0, nil
 }
 
@@ -68,17 +100,24 @@ func NewResolver(db *gorm.DB) *Resolver {
 func ParseSchema() {
 	var rawSchema []byte
 	var err error
-	var db = database.GetReadDB()
+
+	db := database.GetReadDB()
 
 	defer db.Close()
 
-	rawSchema, err = ioutil.ReadFile("../schema/schema.graphql")
+	_, filename, _, ok := runtime.Caller(1)
+
+	if !ok {
+		panic("Could not load GraphQL schema")
+	}
+
+	rawSchema, err = ioutil.ReadFile(path.Join(path.Dir(filename), "../schema/schema.graphql"))
 
 	if err != nil {
 		panic(err)
 	}
 
-	schema, err = graphql.ParseSchema(string(rawSchema), NewResolver(db))
+	Schema, err = graphql.ParseSchema(string(rawSchema), NewResolver(db))
 
 	if err != nil {
 		panic(err)
@@ -93,6 +132,10 @@ type RequestValidator struct {
 
 func (rv *RequestValidator) Validate(request interface{}) error {
 	return rv.validator.Struct(request)
+}
+
+func init() {
+	ParseSchema()
 }
 
 func Handler(port int, handlers map[string]echo.HandlerFunc) http.Handler {

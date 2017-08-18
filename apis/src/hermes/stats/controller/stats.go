@@ -1,32 +1,35 @@
 package controller
 
 import (
+	"context"
+	"net/http"
+
 	"hermes/database"
+	"hermes/stats/handler"
 	"hermes/stats/parser"
-	"hermes/stats/responses"
 
 	"github.com/labstack/echo"
 )
 
-type frame struct {
-	request *parser.Request
-	context echo.Context
-}
-
 // PostStats is the main GraphQL controller
-func PostStats(context echo.Context) error {
-	request, err := parser.Parse(context)
+func PostStats(echoContext echo.Context) error {
+	request, err := parser.Parse(echoContext)
 
 	if err != nil {
 		return err
 	}
 
 	db := database.GetReadDB()
-	frame := &frame{request: request, context: context}
 
 	defer db.Close()
 
-	// Do something...
+	if !echoContext.Response().Committed {
+		currentContext := echoContext.Request().Context()
+		loadedContext := context.WithValue(currentContext, handler.DB, db)
+		response := handler.Schema.Exec(loadedContext, request.Query, "", request.Variables)
 
-	return responses.PostResponse(frame.context)
+		return echoContext.JSON(http.StatusOK, &response)
+	}
+
+	return nil
 }
