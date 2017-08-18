@@ -1,8 +1,9 @@
 package responses
 
 import (
-	"github.com/labstack/echo"
 	"net/http"
+
+	"github.com/labstack/echo"
 )
 
 type Post struct {
@@ -11,9 +12,9 @@ type Post struct {
 
 func PostResponse(context echo.Context) error {
 	if !context.Response().Committed {
-		response := Post{Meta: metas[http.StatusCreated]}
+		response := Post{Meta: metas[http.StatusOK]}
 
-		return context.JSON(http.StatusCreated, &response)
+		return context.JSON(http.StatusOK, &response)
 	}
 
 	return nil
