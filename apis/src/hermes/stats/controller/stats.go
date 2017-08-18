@@ -21,7 +21,7 @@ func PostStats(context echo.Context) error {
 		return err
 	}
 
-	dbs := database.GetReadDB()
+	db := database.GetReadDB()
 	frame := &frame{request: request, context: context}
 
 	defer db.Close()

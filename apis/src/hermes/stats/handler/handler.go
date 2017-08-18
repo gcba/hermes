@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"io/ioutil"
 	"net/http"
 	"os"
 	"strconv"
@@ -10,10 +11,10 @@ import (
 	"hermes/stats/responses"
 
 	"github.com/go-playground/validator"
+	"github.com/jinzhu/gorm"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
 	"github.com/labstack/gommon/log"
-	"github.com/jinzhu/gorm"
 	"github.com/neelance/graphql-go"
 )
 
@@ -40,24 +41,24 @@ type (
 	}
 
 	Resolver struct {
-		db: *gorm.DB
+		db *gorm.DB
 	}
 
 	CountResolver struct {
-		db: *gorm.DB
+		db *gorm.DB
 	}
 
 	AverageResolver struct {
-		db: *gorm.DB
+		db *gorm.DB
 	}
 )
 
 func (cr *CountResolver) Ratings(context echo.Context, args struct{ Field field }) (int, error) {
-	return 0
+	return 0, nil
 }
 
 func (ar *AverageResolver) Ratings(context echo.Context, args struct{ Field field }) (float64, error) {
-	return 0
+	return 0, nil
 }
 
 func NewResolver(db *gorm.DB) *Resolver {

@@ -76,7 +76,7 @@ func startStatsAPI() {
 	handler.Logger.Fatal(gracehttp.Serve(handler.Server))
 }
 
-func getPort(env string, defaultPort int) {
+func getPort(env string, defaultPort int) int {
 	port, portErr := strconv.Atoi(os.Getenv(env))
 
 	if portErr != nil {
