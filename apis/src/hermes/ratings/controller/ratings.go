@@ -27,7 +27,7 @@ func PostRatings(context echo.Context) error {
 		return err
 	}
 
-	dbs := &databases{read: database.GetWriteDB(), write: database.GetReadDB()}
+	dbs := &databases{read: database.GetReadDB(), write: database.GetWriteDB()}
 	frame := &frame{request: request, context: context}
 
 	defer dbs.read.Close()
