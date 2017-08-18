@@ -31,6 +31,10 @@ input Field {
     float: Float
     string: String
     bool: Boolean
-    condition: Condition
-    next: Field
+    next: Operation
+}
+
+input Operation {
+    condition: Condition!
+    field: Field
 }
