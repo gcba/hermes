@@ -64,15 +64,16 @@ func NewResolver(db *gorm.DB) *Resolver {
 }
 
 func ParseSchema() {
+	var rawSchema []byte
 	var err error
 	var db = database.GetReadDB()
 
 	defer db.Close()
 
-	rawSchema, readErr := ioutil.ReadFile("../schema/schema.graphql")
+	rawSchema, err = ioutil.ReadFile("../schema/schema.graphql")
 
-	if !readOk {
-		panic("Could not load Graphql schema")
+	if err != nil {
+		panic(err)
 	}
 
 	schema, err = graphql.ParseSchema(string(rawSchema), NewResolver(db))
