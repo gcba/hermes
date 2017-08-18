@@ -1,5 +1,5 @@
-hash: 0d5b286d32148872ac2d15187df585b7dba7a4008597de107c14f5493758bb9c
-updated: 2017-08-16T15:21:10.220205011-03:00
+hash: efc97bdbb9161afae75609b041ef525d76d468a1dd6c14374eb361b10cb0a0f2
+updated: 2017-08-18T17:10:05.304321692-03:00
 imports:
 - name: github.com/ajg/form
   version: cc2954064ec9ea8d93917f0f87456e11d7b881ad
@@ -71,8 +71,26 @@ imports:
   version: e79763773ab6222ca1d5a7cbd9d62d83c1f77081
 - name: github.com/neelance/graphql-go
   version: 52080e1f0951c75dd4addba57db27fc4de1d0019
+  subpackages:
+  - errors
+  - internal/common
+  - internal/exec
+  - internal/exec/packer
+  - internal/exec/resolvable
+  - internal/exec/selected
+  - internal/query
+  - internal/schema
+  - internal/validation
+  - introspection
+  - log
+  - trace
 - name: github.com/nicksrandall/dataloader
   version: 32dea884eaaf5d1d5fa84766581762e367f15e12
+- name: github.com/opentracing/opentracing-go
+  version: 8ebe5d4e236eed9fd88e593c288bfb804d630b8c
+  subpackages:
+  - ext
+  - log
 - name: github.com/stretchr/testify
   version: f6abca593680b2315d2075e0f5e2a9751e3f431a
   subpackages:
@@ -90,6 +108,7 @@ imports:
 - name: golang.org/x/net
   version: feeb485667d1fdabe727840fe00adc22431bc86e
   subpackages:
+  - context
   - html
   - html/atom
   - publicsuffix
