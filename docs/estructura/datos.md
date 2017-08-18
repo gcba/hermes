@@ -20,7 +20,6 @@ El usuario del backend.
 |id              |int (PK)              |       |       |       |       |
 |name            |varchar(70)           |       |       |       |       |
 |email           |varchar(100)          |       |       |X      |       |
-|password        |varchar(60)           |       |       |       |       |
 |created_at      |timestamp             |       |       |       |       |
 |modified_at     |timestamp             |       |X      |       |       |
 |modified_by     |int                   |X      |X      |       |       |
