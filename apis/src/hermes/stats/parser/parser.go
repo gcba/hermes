@@ -13,7 +13,7 @@ import (
 // Request holds the mapped fields from the request's JSON body
 type Request struct {
 	Query     string                 `json:"query" validate:"required,gte=10,lte=5000" conform:"trim"`
-	Variables map[string]interface{} `json:"variables" validate:"required,gte=1,lte=15,dive,required"`
+	Variables map[string]interface{} `json:"variables" validate:"required,gte=1,lte=30,dive,required"`
 }
 
 // TODO: Consider extracting the common parts into its own package
