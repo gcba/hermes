@@ -90,6 +90,8 @@ func (f *field) query(context context.Context) *gorm.DB {
 		if model, modelExists := f.resolveModel(); modelExists {
 			entity := f.getEntity()
 
+			// TODO: Support operators (default is EQ)
+
 			return db.Where(map[string]interface{}{entity.Field: f.Value}).Find(&model)
 		}
 	}
@@ -105,19 +107,24 @@ func (f *field) getEntity() entity {
 	return entity{Table: splitField[0], Field: splitField[1]}
 }
 
-func (f *field) resolveOperator() (string, bool) {
+func (f *field) resolveOperator(value interface{}) (string, bool) {
 	if f.Operator != nil {
-		var result string
-
 		switch *f.Operator {
 		case "EQ":
-			result = "="
-
-			return result, true
+			return f.resolveEQOperator(value), true
 		}
 	}
 
 	return "", false
+}
+
+func (f *field) resolveEQOperator(value interface{}) string {
+	switch value.(type) {
+	case string:
+		return "LIKE"
+	default:
+		return "="
+	}
 }
 
 func (f *field) resolveModel() (interface{}, bool) {
