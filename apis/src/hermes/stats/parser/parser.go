@@ -11,9 +11,26 @@ import (
 )
 
 // Request holds the mapped fields from the request's JSON body
+
+type field struct {
+	Name     string      `json:"name" validate:"required,gte=3,lte=30,contains=.,excludesall= " conform:"trim,lower"` // TODO: Add custom validator
+	Operator *string     `json:"operator" validate:"omitempty,gte=1,lte=3,alpha" conform:"trim,upper"`
+	Value    interface{} `json:"value" validate:"required"`
+	Next     *operation  `json:"next" validate:"omitempty"`
+}
+
+type operation struct {
+	Condition string `json:"condition" validate:"required,gte=1,lte=3,alpha" conform:"trim,upper"` // TODO: Add custom validator
+	Field     *field `json:"field" validate:"omitempty"`
+}
+
+type variables struct {
+	Field field `json:"field" validate:"required"`
+}
+
 type Request struct {
-	Query     string                 `json:"query" validate:"required,gte=10,lte=5000" conform:"trim"`
-	Variables map[string]interface{} `json:"variables" validate:"required,gte=1,lte=30,dive,required"`
+	Query     string    `json:"query" validate:"required,gte=10,lte=5000" conform:"trim"`
+	Variables variables `json:"variables" validate:"required"`
 }
 
 // TODO: Consider extracting the common parts into its own package
@@ -85,19 +102,12 @@ func escape(request *Request) {
 	sanitizer := bluemonday.StrictPolicy()
 
 	request.Query = sanitizer.Sanitize(request.Query)
+	request.Variables.Field.Name = sanitizer.Sanitize(request.Variables.Field.Name)
 
-	for key, value := range request.Variables {
-		switch actualValue := value.(type) {
-		case int:
-			break
-		case float64:
-			break
-		case string:
-			request.Variables[key] = sanitizer.Sanitize(actualValue)
-		case bool:
-			break
-		default:
-			break
-		}
+	switch value := request.Variables.Field.Value.(type) {
+	case string:
+		request.Variables.Field.Value = sanitizer.Sanitize(value)
+	default:
+		break
 	}
 }
