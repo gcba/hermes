@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"strings"
 
+	"hermes/database"
 	"hermes/stats/parser"
 	"hermes/stats/schema"
 
@@ -22,6 +23,9 @@ func PostStats(echoContext echo.Context) error {
 	}
 
 	if !echoContext.Response().Committed {
+		db := database.GetReadDB()
+		defer db.Close()
+
 		currentContext := echoContext.Request().Context()
 		loadedContext := context.WithValue(currentContext, schema.DB, db)
 		variables := mapop.MapKeys(strings.ToLower, structs.Map(&request.Variables))
