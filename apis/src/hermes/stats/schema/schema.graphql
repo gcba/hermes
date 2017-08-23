@@ -9,7 +9,6 @@ enum Operator {
 enum Condition {
     OR
     AND
-    NOT
 }
 
 scalar Value
