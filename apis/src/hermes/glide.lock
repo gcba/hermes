@@ -1,5 +1,5 @@
-hash: efc97bdbb9161afae75609b041ef525d76d468a1dd6c14374eb361b10cb0a0f2
-updated: 2017-08-18T17:10:05.304321692-03:00
+hash: 2b9e8b31a54fb5bb8ce3436ccb81332598d9cdef6f07f83325acb872dfadc350
+updated: 2017-08-23T12:47:42.843254987-03:00
 imports:
 - name: github.com/ajg/form
   version: cc2954064ec9ea8d93917f0f87456e11d7b881ad
@@ -13,6 +13,8 @@ imports:
   version: 2efee857e7cfd4f3d0138cc3cbb1b4966962b93a
 - name: github.com/dchest/uniuri
   version: 8902c56451e9b58ff940bbe5fec35d5f9c04584a
+- name: github.com/deckarep/golang-set
+  version: 3a36ffa8b5bf7cd329c8834c6b743d6930dad12f
 - name: github.com/dgrijalva/jwt-go
   version: a539ee1a749a2b895533f979515ac7e6e0f5b650
 - name: github.com/etgryphon/stringUp
@@ -28,6 +30,8 @@ imports:
   version: a3b1354551a26449fbe05f5d855937f6e7acbd71
 - name: github.com/facebookgo/stats
   version: 1b76add642e42c6ffba7211ad7b3939ce654526e
+- name: github.com/fatih/structs
+  version: 7e5a8eef611ee84dd359503f3969f80df4c50723
 - name: github.com/gavv/httpexpect
   version: d852bb8255b678d369ba96dc7647bac47e092c96
 - name: github.com/go-playground/locales
@@ -121,8 +125,6 @@ testImports:
   version: 04cdfd42973bb9c8589fd6a731800cf222fde1a9
   subpackages:
   - spew
-- name: github.com/fatih/structs
-  version: 7e5a8eef611ee84dd359503f3969f80df4c50723
 - name: github.com/gavv/monotime
   version: 47d58efa69556a936a3c15eb2ed42706d968ab01
 - name: github.com/google/go-querystring

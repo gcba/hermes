@@ -30,3 +30,5 @@ import:
 - package: github.com/neelance/graphql-go
 - package: github.com/nicksrandall/dataloader
 - package: github.com/opentracing/opentracing-go
+- package: github.com/deckarep/golang-set
+- package: github.com/fatih/structs
