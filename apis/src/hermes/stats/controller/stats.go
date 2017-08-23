@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"context"
 	"net/http"
 	"strings"
 
@@ -13,18 +14,20 @@ import (
 )
 
 // PostStats is the main GraphQL controller
-func PostStats(context echo.Context) error {
-	request, err := parser.Parse(context)
+func PostStats(echoContext echo.Context) error {
+	request, err := parser.Parse(echoContext)
 
 	if err != nil {
 		return err
 	}
 
-	if !context.Response().Committed {
+	if !echoContext.Response().Committed {
+		currentContext := echoContext.Request().Context()
+		loadedContext := context.WithValue(currentContext, schema.DB, db)
 		variables := mapop.MapKeys(strings.ToLower, structs.Map(&request.Variables))
-		response := schema.Schema.Exec(context.Request().Context(), request.Query, "", variables)
+		response := schema.Schema.Exec(loadedContext, request.Query, "", variables)
 
-		return context.JSON(http.StatusOK, &response)
+		return echoContext.JSON(http.StatusOK, &response)
 	}
 
 	return nil
