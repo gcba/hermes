@@ -2,6 +2,7 @@ package schema
 
 import (
 	"context"
+	"fmt"
 	"net/http"
 	"strings"
 
@@ -88,11 +89,12 @@ func (f *field) flatten(buffer []*field) []*field {
 func (f *field) query(context context.Context) *gorm.DB {
 	if db, castOk := context.Value(DB).(*gorm.DB); castOk {
 		if model, modelExists := f.resolveModel(); modelExists {
-			entity := f.getEntity()
+			if operator, operatorExists := f.resolveOperator(f.Value); operatorExists {
+				entity := f.getEntity()
+				where := fmt.Sprintf("%s %s ?", entity.Field, operator)
 
-			// TODO: Support operators (default is EQ)
-
-			return db.Where(map[string]interface{}{entity.Field: f.Value}).Find(&model)
+				return db.Where(where, f.Value).Find(&model)
+			}
 		}
 	}
 
