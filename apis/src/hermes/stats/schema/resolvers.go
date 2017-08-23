@@ -52,6 +52,10 @@ func (f *field) toSet() mapset.Set {
 	return mapset.NewSet()
 }
 
+func (f *field) flatten() []mapset.Set {
+	return []mapset.Set{}
+}
+
 func getTableName() {
 
 }
