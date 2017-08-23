@@ -3,38 +3,30 @@ schema {
 }
 
 enum Operator {
-    EQUAL
+    EQ
 }
 
 enum Condition {
     OR
     AND
+    NOT
 }
+
+scalar Value
 
 type Stats {
-    count: Count,
-    average: Average
-}
-
-type Count {
-    ratings(field: Field): Int!
-}
-
-type Average {
-    ratings(field: Field): Float!
+    count(field: Field): Int!
+    average(field: Field): Float!
 }
 
 input Field {
     name: String!
     operator: Operator
-    int: Int
-    float: Float
-    string: String
-    bool: Boolean
+    value: Value!
     next: Operation
 }
 
 input Operation {
     condition: Condition!
-    field: Field
+    field: Field!
 }

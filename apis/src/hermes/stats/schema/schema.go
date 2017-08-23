@@ -1,6 +1,7 @@
 package schema
 
 import (
+	"errors"
 	"io/ioutil"
 	"path"
 	"runtime"
@@ -13,6 +14,34 @@ import (
 const DB = iota
 
 var Schema *graphql.Schema
+
+type Value struct {
+	String string
+	Int    int
+	Float  float64
+	Bool   bool
+}
+
+func (_ Value) ImplementsGraphQLType(name string) bool {
+	return name == "Value"
+}
+
+func (v *Value) UnmarshalGraphQL(input interface{}) error {
+	switch input := input.(type) {
+	case string:
+		v.String = input
+	case int:
+		v.Int = input
+	case float64:
+		v.Float = input
+	case bool:
+		v.Bool = input
+	default:
+		return errors.New("Wrong type")
+	}
+
+	return nil
+}
 
 func Parse() {
 	var rawSchema []byte
