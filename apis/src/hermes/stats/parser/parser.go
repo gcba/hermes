@@ -14,7 +14,7 @@ import (
 
 type field struct {
 	Name     string      `json:"name" validate:"required,gte=3,lte=30,contains=.,excludesall= " conform:"trim,lower"` // TODO: Add custom validator
-	Operator *string     `json:"operator" validate:"omitempty,gte=1,lte=3,alpha" conform:"trim,upper"`
+	Operator *string     `json:"operator" validate:"omitempty,gte=1,lte=3,alpha" conform:"trim,upper"`                // TODO: Add custom validator
 	Value    interface{} `json:"value" validate:"required"`
 	Next     *operation  `json:"next" validate:"omitempty"`
 }
