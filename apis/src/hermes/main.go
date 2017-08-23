@@ -31,14 +31,12 @@ var (
 
 func main() {
 	kingpin.Version("0.0.1")
-	fmt.Println("\n", banner)
+	fmt.Print("\n", banner, "\n\n\n")
 
 	switch kingpin.Parse() {
-	case "start ratings":
-		fmt.Print("	               ratings", "\n\n\n")
+	case ratingsCommand.FullCommand():
 		startRatingsAPI()
-	case "start stats":
-		fmt.Print("	                 stats", "\n\n\n")
+	case statsCommand.FullCommand():
 		startStatsAPI()
 	}
 }
