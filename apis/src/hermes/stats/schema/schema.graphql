@@ -15,8 +15,8 @@ enum Condition {
 scalar Value
 
 type Stats {
-    count(field: Field): Int!
-    average(field: Field): Float!
+    count(field: Field!): Int!
+    average(field: Field!): Float!
 }
 
 input Field {
