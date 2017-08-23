@@ -4,6 +4,7 @@ import (
 	"context"
 	"net/http"
 
+	"github.com/deckarep/golang-set"
 	"github.com/labstack/echo"
 )
 
@@ -17,7 +18,7 @@ type (
 
 	operation struct {
 		Condition string
-		Field     *field
+		Field     field
 	}
 
 	Resolver struct{}
@@ -37,4 +38,24 @@ func (r *Resolver) Average(context context.Context, args struct{ Field *field })
 	// TODO: Implement
 
 	return 0, nil
+}
+
+func (f *field) walk(callback func(*field)) {
+	if f.Next != nil {
+		f.Next.Field.walk(callback)
+	}
+
+	go callback(f)
+}
+
+func (f *field) toSet() mapset.Set {
+	return mapset.NewSet()
+}
+
+func getTableName() {
+
+}
+
+func getFieldName() {
+
 }
