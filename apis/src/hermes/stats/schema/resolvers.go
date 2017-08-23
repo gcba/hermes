@@ -3,11 +3,11 @@ package schema
 import (
 	"context"
 	"net/http"
-	"reflect"
 	"strings"
 
 	"hermes/models"
 
+	"github.com/jinzhu/gorm"
 	"github.com/labstack/echo"
 )
 
@@ -32,6 +32,19 @@ type (
 	Resolver struct{}
 )
 
+var modelList = map[string]interface{}{
+	"apps":      []models.App{},
+	"appusers":  []models.AppUser{},
+	"brands":    []models.Brand{},
+	"browsers":  []models.Browser{},
+	"devices":   []models.Device{},
+	"messages":  []models.Message{},
+	"platforms": []models.Platform{},
+	"ranges":    []models.Range{},
+	"ratings":   []models.Rating{},
+}
+
+/*
 var modelList = map[string]reflect.Type{
 	"apps":      reflect.TypeOf(models.App{}),
 	"appusers":  reflect.TypeOf(models.AppUser{}),
@@ -43,6 +56,7 @@ var modelList = map[string]reflect.Type{
 	"ranges":    reflect.TypeOf(models.Range{}),
 	"ratings":   reflect.TypeOf(models.Rating{}),
 }
+*/
 
 func errorResponse() error {
 	return echo.NewHTTPError(http.StatusInternalServerError)
@@ -71,12 +85,18 @@ func (f *field) flatten(buffer []*field) []*field {
 	return buffer
 }
 
-func (f *field) query(context context.Context) {
-	/*
-		if db, castOk := context.Value(DB).(*gorm.DB); castOk {
+func (f *field) query(context context.Context) *gorm.DB {
+	if db, castOk := context.Value(DB).(*gorm.DB); castOk {
+		if model, modelExists := f.resolveModel(); modelExists {
+			entity := f.getEntity()
 
+			return db.Where(map[string]interface{}{entity.Field: f.Value}).Find(&model)
 		}
-	*/
+	}
+
+	// TODO: Handle non existent db
+
+	return nil
 }
 
 func (f *field) getEntity() entity {
@@ -104,6 +124,19 @@ func (f *field) resolveModel() (interface{}, bool) {
 	entity := f.getEntity()
 
 	if model, ok := modelList[entity.Table]; ok {
+		return model, true
+	}
+
+	// TODO: Handle non existent model
+
+	return nil, false
+}
+
+/*
+func (f *field) resolveModel() (interface{}, bool) {
+	entity := f.getEntity()
+
+	if model, ok := modelList[entity.Table]; ok {
 		result := reflect.New(model).Elem().Interface()
 
 		return result, true
@@ -113,3 +146,4 @@ func (f *field) resolveModel() (interface{}, bool) {
 
 	return nil, false
 }
+*/
