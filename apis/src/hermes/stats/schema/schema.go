@@ -1,8 +1,9 @@
 package schema
 
 import (
-	"errors"
+	"fmt"
 	"io/ioutil"
+	"log"
 	"path"
 	"runtime"
 
@@ -35,7 +36,7 @@ func (v *Value) UnmarshalGraphQL(input interface{}) error {
 	case bool:
 		v.Bool = input
 	default:
-		return errors.New("Wrong type")
+		return fmt.Errorf("Wrong type")
 	}
 
 	return nil
@@ -48,18 +49,18 @@ func Parse() {
 	_, filename, _, ok := runtime.Caller(1)
 
 	if !ok {
-		panic("Could not load GraphQL schema")
+		log.Fatal("Could not load GraphQL schema")
 	}
 
 	rawSchema, err = ioutil.ReadFile(path.Join(path.Dir(filename), "../schema/schema.graphql"))
 
 	if err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
 
 	Schema, err = graphql.ParseSchema(string(rawSchema), &Resolver{})
 
 	if err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
 }
