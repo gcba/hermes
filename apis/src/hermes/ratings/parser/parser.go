@@ -12,7 +12,7 @@ import (
 
 type (
 	app struct {
-		Key     string `json:"key" validate:"required,len=32,alphanum,excludesall= " conform:"trim,lower"`
+		Key     string `json:"key" validate:"required,len=32,alphanum" conform:"trim,lower"`
 		Version string `json:"version" validate:"required,gte=1,lte=15,excludesall= " conform:"trim,lower"`
 	}
 
@@ -23,7 +23,7 @@ type (
 	}
 
 	platform struct {
-		Key     string `json:"key" validate:"required,len=32,alphanum,excludesall= " conform:"trim,lower"`
+		Key     string `json:"key" validate:"required,len=32,alphanum" conform:"trim,lower"`
 		Version string `json:"version" validate:"required,gte=1,lte=15,excludesall= " conform:"trim,lower"`
 	}
 
@@ -49,7 +49,7 @@ type (
 		Rating      int8     `json:"rating" validate:"min=-127,max=127"`
 		Description string   `json:"description" validate:"omitempty,gte=3,lte=30" conform:"trim,title"`
 		Comment     string   `json:"comment" validate:"omitempty,gte=3,lte=1000" conform:"trim,ucfirst"`
-		Range       string   `json:"range" validate:"required,len=32,alphanum,excludesall= " conform:"trim,lower"`
+		Range       string   `json:"range" validate:"required,len=32,alphanum" conform:"trim,lower"`
 		App         app      `json:"app" validate:"required"`
 		Platform    platform `json:"platform" validate:"required"`
 		Device      device   `json:"device" validate:"required"`
