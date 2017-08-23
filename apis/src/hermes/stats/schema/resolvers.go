@@ -85,7 +85,7 @@ func (f *field) getEntity() entity {
 	return entity{Table: splitField[0], Field: splitField[1]}
 }
 
-func (f *field) resolveOperator() *string {
+func (f *field) resolveOperator() (string, bool) {
 	if f.Operator != nil {
 		var result string
 
@@ -93,23 +93,23 @@ func (f *field) resolveOperator() *string {
 		case "EQ":
 			result = "="
 
-			return &result
+			return result, true
 		}
 	}
 
-	return nil
+	return "", false
 }
 
-func (f *field) resolveModel() *interface{} {
+func (f *field) resolveModel() (interface{}, bool) {
 	entity := f.getEntity()
 
 	if model, ok := modelList[entity.Table]; ok {
 		result := reflect.New(model).Elem().Interface()
 
-		return &result
+		return result, true
 	}
 
 	// TODO: Handle non existent model
 
-	return nil
+	return nil, false
 }
