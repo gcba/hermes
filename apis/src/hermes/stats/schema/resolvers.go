@@ -3,12 +3,20 @@ package schema
 import (
 	"context"
 	"net/http"
+	"reflect"
+	"strings"
 
-	"github.com/deckarep/golang-set"
+	"hermes/models"
+
 	"github.com/labstack/echo"
 )
 
 type (
+	entity struct {
+		Table string
+		Field string
+	}
+
 	field struct {
 		Name     string
 		Operator *string
@@ -24,42 +32,84 @@ type (
 	Resolver struct{}
 )
 
+var modelList = map[string]reflect.Type{
+	"apps":      reflect.TypeOf(models.App{}),
+	"appusers":  reflect.TypeOf(models.AppUser{}),
+	"brands":    reflect.TypeOf(models.Brand{}),
+	"browsers":  reflect.TypeOf(models.Browser{}),
+	"devices":   reflect.TypeOf(models.Device{}),
+	"messages":  reflect.TypeOf(models.Message{}),
+	"platforms": reflect.TypeOf(models.Platform{}),
+	"ranges":    reflect.TypeOf(models.Range{}),
+	"ratings":   reflect.TypeOf(models.Rating{}),
+}
+
 func errorResponse() error {
 	return echo.NewHTTPError(http.StatusInternalServerError)
 }
 
-func (r *Resolver) Count(context context.Context, args struct{ Field *field }) (int32, error) {
+func (r *Resolver) Count(context context.Context, args struct{ Field field }) (int32, error) {
+	// entity := getEntity(args.Field.Name)
+
+	return 0, nil
+}
+
+func (r *Resolver) Average(context context.Context, args struct{ Field field }) (float64, error) {
 	// TODO: Implement
 
 	return 0, nil
 }
 
-func (r *Resolver) Average(context context.Context, args struct{ Field *field }) (float64, error) {
-	// TODO: Implement
-
-	return 0, nil
-}
-
-func (f *field) walk(callback func(*field)) {
+func (f *field) flatten(buffer []*field) []*field {
 	if f.Next != nil {
-		f.Next.Field.walk(callback)
+		f.Next.Field.flatten(buffer)
 	}
 
-	go callback(f)
+	f.Next = nil
+	buffer = append(buffer, f)
+
+	return buffer
 }
 
-func (f *field) toSet() mapset.Set {
-	return mapset.NewSet()
+func (f *field) query(context context.Context) {
+	/*
+		if db, castOk := context.Value(DB).(*gorm.DB); castOk {
+
+		}
+	*/
 }
 
-func (f *field) flatten() []mapset.Set {
-	return []mapset.Set{}
+func (f *field) getEntity() entity {
+	splitField := strings.Split(f.Name, ".")
+
+	return entity{Table: splitField[0], Field: splitField[1]}
 }
 
-func getTableName() {
+func (f *field) resolveOperator() *string {
+	if f.Operator != nil {
+		var result string
 
+		switch *f.Operator {
+		case "EQ":
+			result = "="
+
+			return &result
+		}
+	}
+
+	return nil
 }
 
-func getFieldName() {
+func (f *field) resolveModel() *interface{} {
+	entity := f.getEntity()
 
+	if model, ok := modelList[entity.Table]; ok {
+		result := reflect.New(model).Elem().Interface()
+
+		return &result
+	}
+
+	// TODO: Handle non existent model
+
+	return nil
 }
