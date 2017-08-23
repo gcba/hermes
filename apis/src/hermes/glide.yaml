@@ -32,3 +32,4 @@ import:
 - package: github.com/opentracing/opentracing-go
 - package: github.com/deckarep/golang-set
 - package: github.com/fatih/structs
+- package: github.com/linkosmos/mapop

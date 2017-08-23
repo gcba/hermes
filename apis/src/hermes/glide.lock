@@ -1,5 +1,5 @@
-hash: 2b9e8b31a54fb5bb8ce3436ccb81332598d9cdef6f07f83325acb872dfadc350
-updated: 2017-08-23T12:47:42.843254987-03:00
+hash: 93a903b59c81401a4cf7f6b79e484a095177317a7f9b28c1a0a77c5faedfde37
+updated: 2017-08-23T16:00:59.159682254-03:00
 imports:
 - name: github.com/ajg/form
   version: cc2954064ec9ea8d93917f0f87456e11d7b881ad
@@ -67,6 +67,8 @@ imports:
   subpackages:
   - hstore
   - oid
+- name: github.com/linkosmos/mapop
+  version: 30336b2a6179ae763465b95e561c99eb87cba942
 - name: github.com/mattn/go-colorable
   version: 941b50ebc6efddf4c41c8e4537a5f68a4e686b24
 - name: github.com/mattn/go-isatty
