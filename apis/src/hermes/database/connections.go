@@ -12,15 +12,15 @@ import (
 // Load enviroment variables
 var (
 	// Load read database settings
-	readDBPort     = os.Getenv("HERMES_READDB_PORT")
-	readDBHost     = os.Getenv("HERMES_READDB_HOST")
+	readDBPort     = getConfig("HERMES_READDB_PORT", "5432")
+	readDBHost     = getConfig("HERMES_READDB_HOST", "localhost")
 	readDBName     = os.Getenv("HERMES_READDB_NAME")
 	readDBUser     = os.Getenv("HERMES_READDB_USER")
 	readDBPassword = os.Getenv("HERMES_READDB_PASSWORD")
 
 	// Load write database settings
-	writeDBPort     = os.Getenv("HERMES_WRITEDB_PORT")
-	writeDBHost     = os.Getenv("HERMES_WRITEDB_HOST")
+	writeDBPort     = getConfig("HERMES_WRITEDB_PORT", "5432")
+	writeDBHost     = getConfig("HERMES_WRITEDB_HOST", "localhost")
 	writeDBName     = os.Getenv("HERMES_WRITEDB_NAME")
 	writeDBUser     = os.Getenv("HERMES_WRITEDB_USER")
 	writeDBPassword = os.Getenv("HERMES_WRITEDB_PASSWORD")
@@ -37,14 +37,6 @@ func GetWriteDB() *gorm.DB {
 }
 
 func getDB(host string, port string, db string, user string, password string) *gorm.DB {
-	if len(host) == 0 {
-		host = "localhost"
-	}
-
-	if len(port) == 0 {
-		port = "5432"
-	}
-
 	credentials := fmt.Sprintf(
 		"host=%s port=%s user=%s dbname=%s sslmode=disable password=%s", // TODO: Handle sslmode
 		host,
@@ -53,15 +45,19 @@ func getDB(host string, port string, db string, user string, password string) *g
 		db,
 		password)
 
-	return connectDB("postgres", credentials)
-}
+	connection, err := gorm.Open("postgres", credentials)
 
-func connectDB(driver string, credentials string) *gorm.DB {
-	db, dbErr := gorm.Open(driver, credentials)
-
-	if dbErr != nil {
-		log.Println("Failed to connect to " + driver + " database. Error: " + dbErr.Error())
+	if err != nil {
+		log.Println("Failed to connect to database. Error: " + err.Error())
 	}
 
-	return db
+	return connection
+}
+
+func getConfig(env string, fallback string) string {
+	if result := os.Getenv(env); len(result) > 0 {
+		return result
+	}
+
+	return fallback
 }
