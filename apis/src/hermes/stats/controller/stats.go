@@ -1,10 +1,8 @@
 package controller
 
 import (
-	"context"
 	"net/http"
 
-	"hermes/database"
 	"hermes/stats/parser"
 	"hermes/stats/schema"
 
@@ -12,23 +10,17 @@ import (
 )
 
 // PostStats is the main GraphQL controller
-func PostStats(echoContext echo.Context) error {
-	request, err := parser.Parse(echoContext)
+func PostStats(context echo.Context) error {
+	request, err := parser.Parse(context)
 
 	if err != nil {
 		return err
 	}
 
-	db := database.GetReadDB()
+	if !context.Response().Committed {
+		response := schema.Schema.Exec(context.Request().Context(), request.Query, "", request.Variables)
 
-	defer db.Close()
-
-	if !echoContext.Response().Committed {
-		currentContext := echoContext.Request().Context()
-		loadedContext := context.WithValue(currentContext, schema.DB, db)
-		response := schema.Schema.Exec(loadedContext, request.Query, "", request.Variables)
-
-		return echoContext.JSON(http.StatusOK, &response)
+		return context.JSON(http.StatusOK, &response)
 	}
 
 	return nil

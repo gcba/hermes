@@ -4,7 +4,6 @@ import (
 	"context"
 	"net/http"
 
-	"github.com/jinzhu/gorm"
 	"github.com/labstack/echo"
 )
 
@@ -21,9 +20,7 @@ type (
 		Field     *field
 	}
 
-	Resolver struct {
-		db *gorm.DB
-	}
+	Resolver struct{}
 )
 
 func errorResponse() error {
@@ -40,8 +37,4 @@ func (r *Resolver) Average(context context.Context, args struct{ Field *field })
 	// TODO: Implement
 
 	return 0, nil
-}
-
-func NewResolver(db *gorm.DB) *Resolver {
-	return &Resolver{db: db}
 }

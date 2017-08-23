@@ -6,8 +6,6 @@ import (
 	"path"
 	"runtime"
 
-	"hermes/database"
-
 	"github.com/neelance/graphql-go"
 )
 
@@ -47,10 +45,6 @@ func Parse() {
 	var rawSchema []byte
 	var err error
 
-	db := database.GetReadDB()
-
-	defer db.Close()
-
 	_, filename, _, ok := runtime.Caller(1)
 
 	if !ok {
@@ -63,7 +57,7 @@ func Parse() {
 		panic(err)
 	}
 
-	Schema, err = graphql.ParseSchema(string(rawSchema), NewResolver(db))
+	Schema, err = graphql.ParseSchema(string(rawSchema), &Resolver{})
 
 	if err != nil {
 		panic(err)
