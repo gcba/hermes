@@ -17,10 +17,10 @@ Implementar los resolvers de la API de estadísticas.
 
 2. Implementar el resover Count para campos OR
 
-3. Implementar el resover Count para campos AND
+3. Implementar el resolver Count para campos AND
 
 4. Implementar el resolver Average para un solo campo
 
-5. Implementar el resover Average para campos OR
+5. Implementar el resolver Average para campos OR
 
-6. Implementar el resover Average para campos AND
+6. Implementar el resolver Average para campos AND
