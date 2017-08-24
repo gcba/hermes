@@ -63,8 +63,7 @@ func (r *Resolver) Average(context context.Context, args arguments) (float64, er
 	var total float64
 
 	if db, castOk := context.Value(DB).(*gorm.DB); castOk {
-		entity := args.Field.getEntity()
-		average := fmt.Sprintf("AVG(%s)", entity.Field)
+		average := fmt.Sprintf("AVG(%s)", args.Field.Name)
 		query := args.Field.query(db).Select(average)
 
 		r.average(db, args, query, &total)
@@ -111,35 +110,27 @@ func (r *Resolver) count(db *gorm.DB, args arguments, query *gorm.DB, total *int
 }
 
 func (r *Resolver) average(db *gorm.DB, args arguments, query *gorm.DB, total *float64) {
-	operator := args.Field.resolveOperator()
-	entity := args.Field.getEntity()
-	value := args.Field.getValue()
-	where := fmt.Sprintf("%s %s ?", entity.Field, operator)
+	query = query.Debug()
 
-	if args.And == nil && args.Or == nil {
-		query.Where(where, value).Row().Scan(total)
-	} else if args.And != nil {
-		*total = 8 // Placeholder value
-	} else if args.Or != nil {
-		/*
-			for _, item := range *args.Or {
+	if args.And != nil {
+		for _, item := range *args.And {
+			suboperator := item.resolveOperator()
+			where := fmt.Sprintf("%s %s ?", item.Name, suboperator)
 
-					var subtotal int32
-
-					entity := args.Field.getEntity()
-					average := fmt.Sprintf("AVG(%s)", entity.Field)
-					subquery := item.query(db).Select(average)
-					errorList := subquery.GetErrors()
-
-					if !(len(errorList) > 0 || subquery.Error != nil || subquery.Value == nil) {
-						subquery.Row().Scan(&subtotal)
-
-						*total += subtotal
-					}
-
-			}
-		*/
+			query = query.Where(where, item.getValue())
+		}
 	}
+
+	if args.Or != nil {
+		for _, item := range *args.Or {
+			suboperator := item.resolveOperator()
+			where := fmt.Sprintf("%s %s ?", item.Name, suboperator)
+
+			query = query.Or(where, item.getValue())
+		}
+	}
+
+	query.Row().Scan(total)
 }
 
 func (f *field) query(db *gorm.DB) *gorm.DB {
