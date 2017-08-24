@@ -27,3 +27,4 @@ Hermes
     * [Sprint 10](desarrollo/sprint10.md)
     * [Sprint 11](desarrollo/sprint11.md)
     * [Sprint 12](desarrollo/sprint12.md)
+    * [Sprint 13](desarrollo/sprint13.md)
