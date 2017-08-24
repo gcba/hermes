@@ -78,63 +78,88 @@ func (r *Resolver) Average(context context.Context, args arguments) (float64, er
 }
 
 func (r *Resolver) count(db *gorm.DB, args arguments, query *gorm.DB, total *int32) {
-	if args.And == nil && args.Or == nil {
-		query.Count(total)
-	} else if args.And != nil {
-		*total = 9 // Placeholder value
-	} else if args.Or != nil {
-		for _, item := range *args.Or {
-			var subtotal int32
+	operator := args.Field.resolveOperator()
+	where := fmt.Sprintf("%s %s ?", args.Field.Name, operator)
 
-			subquery := item.query(db)
-			errorList := subquery.GetErrors()
+	query = query.Where(where, args.Field.getValue())
 
-			if !(len(errorList) > 0 || subquery.Error != nil || subquery.Value == nil) {
-				subquery.Count(&subtotal)
+	if args.And != nil {
+		for _, item := range *args.And {
+			suboperator := item.resolveOperator()
+			where := fmt.Sprintf("%s %s ?", item.Name, suboperator)
 
-				*total += subtotal
-			}
+			query = query.Where(where, item.getValue())
 		}
 	}
+
+	if args.Or != nil {
+		for _, item := range *args.Or {
+			suboperator := item.resolveOperator()
+			where := fmt.Sprintf("%s %s ?", item.Name, suboperator)
+
+			query = query.Or(where, item.getValue())
+		}
+	}
+
+	query.Count(total)
 }
 
 func (r *Resolver) average(db *gorm.DB, args arguments, query *gorm.DB, total *float64) {
+	operator := args.Field.resolveOperator()
+	entity := args.Field.getEntity()
+	value := args.Field.getValue()
+	where := fmt.Sprintf("%s %s ?", entity.Field, operator)
+
 	if args.And == nil && args.Or == nil {
-		query.Row().Scan(total)
+		query.Where(where, value).Row().Scan(total)
 	} else if args.And != nil {
 		*total = 8 // Placeholder value
 	} else if args.Or != nil {
-		*total = 9 // Placeholder value
+		/*
+			for _, item := range *args.Or {
+
+					var subtotal int32
+
+					entity := args.Field.getEntity()
+					average := fmt.Sprintf("AVG(%s)", entity.Field)
+					subquery := item.query(db).Select(average)
+					errorList := subquery.GetErrors()
+
+					if !(len(errorList) > 0 || subquery.Error != nil || subquery.Value == nil) {
+						subquery.Row().Scan(&subtotal)
+
+						*total += subtotal
+					}
+
+			}
+		*/
 	}
 }
 
 func (f *field) query(db *gorm.DB) *gorm.DB {
-	operator := f.resolveOperator()
 	entity := f.getEntity()
-	value := f.getValue()
-	where := fmt.Sprintf("%s %s ?", entity.Field, operator)
 
 	switch entity.Table {
 	case "apps":
-		return db.Model(&models.Rating{}).Where(where, value)
+		return db.Model(&models.Rating{})
 	case "appusers":
-		return db.Model(&models.AppUser{}).Where(where, value)
+		return db.Model(&models.AppUser{})
 	case "brands":
-		return db.Model(&models.Brand{}).Where(where, value)
+		return db.Model(&models.Brand{})
 	case "browsers":
-		return db.Model(&models.Browser{}).Where(where, value)
+		return db.Model(&models.Browser{})
 	case "devices":
-		return db.Model(&models.Device{}).Where(where, value)
+		return db.Model(&models.Device{})
 	case "messages":
-		return db.Model(&models.Message{}).Where(where, value)
+		return db.Model(&models.Message{})
 	case "platforms":
-		return db.Model(&models.Platform{}).Where(where, value)
+		return db.Model(&models.Platform{})
 	case "ranges":
-		return db.Model(&models.Range{}).Where(where, value)
+		return db.Model(&models.Range{})
 	case "ratings":
 		fallthrough
 	default:
-		return db.Model(&models.Rating{}).Where(where, value)
+		return db.Model(&models.Rating{})
 	}
 }
 
