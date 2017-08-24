@@ -932,6 +932,36 @@
                 ]
               }
             ]
+          },
+          {
+            "title": "Sprint 13",
+            "source": "docs/desarrollo/sprint13.md",
+            "url": "desarrollo/sprint13.html",
+            "slug": "desarrollosprint13",
+            "headings": [
+              {
+                "title": "Días",
+                "depth": 2,
+                "id": "dias"
+              },
+              {
+                "title": "Objetivo",
+                "depth": 2,
+                "id": "objetivo"
+              },
+              {
+                "title": "Tareas",
+                "depth": 2,
+                "id": "tareas",
+                "headings": [
+                  {
+                    "title": "APIs",
+                    "depth": 3,
+                    "id": "apis"
+                  }
+                ]
+              }
+            ]
           }
         ]
       }
@@ -1856,6 +1886,36 @@
           ]
         }
       ]
+    },
+    "desarrollo/sprint13.html": {
+      "source": "docs/desarrollo/sprint13.md",
+      "title": "Sprint 13 - Hermes",
+      "pageTitle": "Sprint 13",
+      "slug": "desarrollosprint13",
+      "headings": [
+        {
+          "title": "Días",
+          "depth": 2,
+          "id": "dias"
+        },
+        {
+          "title": "Objetivo",
+          "depth": 2,
+          "id": "objetivo"
+        },
+        {
+          "title": "Tareas",
+          "depth": 2,
+          "id": "tareas",
+          "headings": [
+            {
+              "title": "APIs",
+              "depth": 3,
+              "id": "apis"
+            }
+          ]
+        }
+      ]
     }
   },
   "sources": {
@@ -1882,6 +1942,7 @@
     "docs/desarrollo/sprint10.md": "desarrollo/sprint10.html",
     "docs/desarrollo/sprint11.md": "desarrollo/sprint11.html",
     "docs/desarrollo/sprint12.md": "desarrollo/sprint12.html",
+    "docs/desarrollo/sprint13.md": "desarrollo/sprint13.html",
     "docs/images/schema.png": "images/schema.png"
   }
 }
