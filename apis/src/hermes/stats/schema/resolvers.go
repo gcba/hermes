@@ -98,21 +98,10 @@ func (f *field) flatten(buffer []*field) []*field {
 }
 
 func (f *field) query(db *gorm.DB) *gorm.DB {
-	var value interface{}
-
 	operator := f.resolveOperator(f.Value)
 	entity := f.getEntity()
+	value := f.getValue()
 	where := fmt.Sprintf("%s %s ?", entity.Field, operator)
-
-	if f.Value.String != nil {
-		value = f.Value.String
-	} else if f.Value.Int != nil {
-		value = f.Value.Int
-	} else if f.Value.Float != nil {
-		value = f.Value.Float
-	} else if f.Value.Bool != nil {
-		value = f.Value.Bool
-	}
 
 	switch entity.Table {
 	case "apps":
@@ -142,6 +131,20 @@ func (f *field) getEntity() entity {
 	splitField := strings.Split(f.Name, ".")
 
 	return entity{Table: splitField[0], Field: splitField[1]}
+}
+
+func (f *field) getValue() interface{} {
+	if f.Value.String != nil {
+		return f.Value.String
+	} else if f.Value.Int != nil {
+		return f.Value.Int
+	} else if f.Value.Float != nil {
+		return f.Value.Float
+	} else if f.Value.Bool != nil {
+		return f.Value.Bool
+	}
+
+	return nil
 }
 
 func (f *field) resolveOperator(value interface{}) string {
