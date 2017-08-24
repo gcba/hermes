@@ -15,7 +15,7 @@ Implementar los resolvers de la API de estadísticas.
 
 1. Implementar el resolver Count para un solo campo
 
-2. Implementar el resover Count para campos OR
+2. Implementar el resolver Count para campos OR
 
 3. Implementar el resolver Count para campos AND
 
