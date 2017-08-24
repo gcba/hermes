@@ -41,9 +41,14 @@ func (r *Resolver) Count(context context.Context, args arguments) (int32, error)
 	var total int32
 
 	if db, castOk := context.Value(DB).(*gorm.DB); castOk {
-		query := args.Field.query(db)
+		operator := args.Field.resolveOperator()
+		where := fmt.Sprintf("%s %s ?", args.Field.Name, operator)
+		query := args.Field.query(db).Debug().Where(where, args.Field.getValue())
 
-		r.count(db, args, query, &total)
+		query = args.queryAND(query)
+		query = args.queryOR(query)
+
+		query.Count(&total)
 
 		errorList := query.GetErrors()
 
@@ -66,7 +71,10 @@ func (r *Resolver) Average(context context.Context, args arguments) (float64, er
 		average := fmt.Sprintf("AVG(%s)", args.Field.Name)
 		query := args.Field.query(db).Select(average)
 
-		r.average(db, args, query, &total)
+		query = args.queryAND(query)
+		query = args.queryOR(query)
+
+		query.Row().Scan(&total)
 
 		errorList := query.GetErrors()
 
@@ -80,57 +88,6 @@ func (r *Resolver) Average(context context.Context, args arguments) (float64, er
 	}
 
 	return total, errors.New("Could not connect to database")
-}
-
-func (r *Resolver) count(db *gorm.DB, args arguments, query *gorm.DB, total *int32) {
-	operator := args.Field.resolveOperator()
-	where := fmt.Sprintf("%s %s ?", args.Field.Name, operator)
-
-	query = query.Where(where, args.Field.getValue())
-
-	if args.And != nil {
-		for _, item := range *args.And {
-			suboperator := item.resolveOperator()
-			where := fmt.Sprintf("%s %s ?", item.Name, suboperator)
-
-			query = query.Where(where, item.getValue())
-		}
-	}
-
-	if args.Or != nil {
-		for _, item := range *args.Or {
-			suboperator := item.resolveOperator()
-			where := fmt.Sprintf("%s %s ?", item.Name, suboperator)
-
-			query = query.Or(where, item.getValue())
-		}
-	}
-
-	query.Count(total)
-}
-
-func (r *Resolver) average(db *gorm.DB, args arguments, query *gorm.DB, total *float64) {
-	query = query.Debug()
-
-	if args.And != nil {
-		for _, item := range *args.And {
-			suboperator := item.resolveOperator()
-			where := fmt.Sprintf("%s %s ?", item.Name, suboperator)
-
-			query = query.Where(where, item.getValue())
-		}
-	}
-
-	if args.Or != nil {
-		for _, item := range *args.Or {
-			suboperator := item.resolveOperator()
-			where := fmt.Sprintf("%s %s ?", item.Name, suboperator)
-
-			query = query.Or(where, item.getValue())
-		}
-	}
-
-	query.Row().Scan(total)
 }
 
 func (f *field) query(db *gorm.DB) *gorm.DB {
@@ -158,6 +115,32 @@ func (f *field) query(db *gorm.DB) *gorm.DB {
 	default:
 		return db.Model(&models.Rating{})
 	}
+}
+
+func (a arguments) queryAND(query *gorm.DB) *gorm.DB {
+	if a.And != nil {
+		for _, item := range *a.And {
+			suboperator := item.resolveOperator()
+			where := fmt.Sprintf("%s %s ?", item.Name, suboperator)
+
+			query = query.Where(where, item.getValue())
+		}
+	}
+
+	return query
+}
+
+func (a arguments) queryOR(query *gorm.DB) *gorm.DB {
+	if a.Or != nil {
+		for _, item := range *a.Or {
+			suboperator := item.resolveOperator()
+			where := fmt.Sprintf("%s %s ?", item.Name, suboperator)
+
+			query = query.Or(where, item.getValue())
+		}
+	}
+
+	return query
 }
 
 func (f *field) getEntity() entity {
