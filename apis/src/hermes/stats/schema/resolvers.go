@@ -34,18 +34,6 @@ type (
 	Resolver struct{}
 )
 
-var modelList = map[string]interface{}{
-	"apps":      []models.App{},
-	"appusers":  []models.AppUser{},
-	"brands":    []models.Brand{},
-	"browsers":  []models.Browser{},
-	"devices":   []models.Device{},
-	"messages":  []models.Message{},
-	"platforms": []models.Platform{},
-	"ranges":    []models.Range{},
-	"ratings":   []models.Rating{},
-}
-
 func errorResponse() error {
 	return echo.NewHTTPError(http.StatusInternalServerError)
 }
@@ -109,34 +97,51 @@ func (f *field) flatten(buffer []*field) []*field {
 	return buffer
 }
 
-func (f *field) query(db *gorm.DB) *gorm.DB { // TODO: Cast models
-	if model, modelExists := f.resolveModel(); modelExists {
-		operator := f.resolveOperator(f.Value)
-		entity := f.getEntity()
-		where := fmt.Sprintf("%s %s ?", entity.Field, operator)
+func (f *field) query(db *gorm.DB) *gorm.DB {
+	var value interface{}
 
-		return db.Where(where, f.Value).Find(&model)
+	operator := f.resolveOperator(f.Value)
+	entity := f.getEntity()
+	where := fmt.Sprintf("%s %s ?", entity.Field, operator)
+
+	if f.Value.String != nil {
+		value = f.Value.String
+	} else if f.Value.Int != nil {
+		value = f.Value.Int
+	} else if f.Value.Float != nil {
+		value = f.Value.Float
+	} else if f.Value.Bool != nil {
+		value = f.Value.Bool
 	}
 
-	return nil
+	switch entity.Table {
+	case "apps":
+		return db.Where(where, value).Find(&[]models.App{})
+	case "appusers":
+		return db.Where(where, value).Find(&[]models.AppUser{})
+	case "brands":
+		return db.Where(where, value).Find(&[]models.Brand{})
+	case "browsers":
+		return db.Where(where, value).Find(&[]models.Browser{})
+	case "devices":
+		return db.Where(where, value).Find(&[]models.Device{})
+	case "messages":
+		return db.Where(where, value).Find(&[]models.Message{})
+	case "platforms":
+		return db.Where(where, value).Find(&[]models.Platform{})
+	case "ranges":
+		return db.Where(where, value).Find(&[]models.Range{})
+	case "ratings":
+		fallthrough
+	default:
+		return db.Where(where, value).Find(&[]models.Rating{})
+	}
 }
 
 func (f *field) getEntity() entity {
 	splitField := strings.Split(f.Name, ".")
 
 	return entity{Table: splitField[0], Field: splitField[1]}
-}
-
-func (f *field) resolveModel() (interface{}, bool) {
-	entity := f.getEntity()
-
-	if model, ok := modelList[entity.Table]; ok {
-		return model, true
-	}
-
-	// TODO: Handle non existent model
-
-	return nil, false
 }
 
 func (f *field) resolveOperator(value interface{}) string {
