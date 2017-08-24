@@ -2,7 +2,6 @@ package schema
 
 import (
 	"context"
-	"errors"
 	"fmt"
 	"net/http"
 	"strings"
@@ -55,13 +54,13 @@ func (r *Resolver) Count(context context.Context, args arguments) (int32, error)
 		if !(len(errorList) > 0 || query.Error != nil || query.Value == nil) {
 			return total, nil
 		} else if query.Error != nil {
-			return total, query.Error
+			return total, fmt.Errorf("Error getting value from database: %v", query.Error)
 		}
 
-		return total, errors.New("Could not get value from database")
+		return total, fmt.Errorf("Could not get value from database")
 	}
 
-	return total, errors.New("Could not connect to database")
+	return total, fmt.Errorf("Could not connect to database")
 }
 
 func (r *Resolver) Average(context context.Context, args arguments) (float64, error) {
@@ -81,13 +80,13 @@ func (r *Resolver) Average(context context.Context, args arguments) (float64, er
 		if !(len(errorList) > 0 || query.Error != nil || query.Value == nil) {
 			return total, nil
 		} else if query.Error != nil {
-			return total, query.Error
+			return total, fmt.Errorf("Error getting value from database: %v", query.Error)
 		}
 
-		return total, errors.New("Could not get value from database")
+		return total, fmt.Errorf("Could not get value from database")
 	}
 
-	return total, errors.New("Could not connect to database")
+	return total, fmt.Errorf("Could not connect to database")
 }
 
 func (a arguments) attachAND(query *gorm.DB) *gorm.DB {
@@ -116,28 +115,6 @@ func (a arguments) attachOR(query *gorm.DB) *gorm.DB {
 	return query
 }
 
-func (f *field) getEntity() entity {
-	splitField := strings.Split(f.Name, ".")
-
-	return entity{Table: splitField[0], Field: splitField[1]}
-}
-
-func (f *field) getValue() interface{} {
-	if f.Eq != nil {
-		if f.Eq.String != nil {
-			return f.Eq.String
-		} else if f.Eq.Int != nil {
-			return f.Eq.Int
-		} else if f.Eq.Float != nil {
-			return f.Eq.Float
-		} else if f.Eq.Bool != nil {
-			return f.Eq.Bool
-		}
-	}
-
-	return nil
-}
-
 func (f *field) getQuery(db *gorm.DB) *gorm.DB {
 	entity := f.getEntity()
 
@@ -163,6 +140,34 @@ func (f *field) getQuery(db *gorm.DB) *gorm.DB {
 	default:
 		return db.Model(&models.Rating{})
 	}
+}
+
+func (f *field) getEntity() entity {
+	splitField := strings.Split(f.Name, ".")
+
+	return entity{Table: splitField[0], Field: splitField[1]}
+}
+
+func (f *field) getValue() interface{} {
+	if f.Eq != nil {
+		return f.resolveValue(f.Eq)
+	}
+
+	return nil
+}
+
+func (f *field) resolveValue(value *Value) interface{} {
+	if value.String != nil {
+		return value.String
+	} else if value.Int != nil {
+		return value.Int
+	} else if value.Float != nil {
+		return value.Float
+	} else if value.Bool != nil {
+		return value.Bool
+	}
+
+	return nil
 }
 
 func (f *field) resolveOperator() string {
