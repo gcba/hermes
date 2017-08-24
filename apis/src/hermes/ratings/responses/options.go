@@ -3,6 +3,8 @@ package responses
 import (
 	"net/http"
 
+	"hermes/responses"
+
 	"github.com/labstack/echo"
 )
 
@@ -19,8 +21,8 @@ type (
 	}
 
 	Options struct {
-		Meta      meta       `json:"meta"`
-		Endpoints []Endpoint `json:"endpoints"`
+		Meta      responses.Status `json:"meta"`
+		Endpoints []Endpoint       `json:"endpoints"`
 	}
 )
 
@@ -54,7 +56,7 @@ var (
 func OptionsResponse(endpoints []Endpoint, context echo.Context) error {
 	if !context.Response().Committed {
 		response := Options{
-			Meta:      metas[http.StatusOK],
+			Meta:      responses.Statuses[http.StatusOK],
 			Endpoints: endpoints}
 
 		return context.JSON(http.StatusOK, &response)

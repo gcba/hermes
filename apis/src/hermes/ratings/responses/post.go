@@ -3,15 +3,17 @@ package responses
 import (
 	"github.com/labstack/echo"
 	"net/http"
+
+	"hermes/responses"
 )
 
 type Post struct {
-	Meta meta `json:"meta"`
+	Meta responses.Status `json:"meta"`
 }
 
 func PostResponse(context echo.Context) error {
 	if !context.Response().Committed {
-		response := Post{Meta: metas[http.StatusCreated]}
+		response := Post{Meta: responses.Statuses[http.StatusCreated]}
 
 		return context.JSON(http.StatusCreated, &response)
 	}

@@ -4,39 +4,39 @@ import (
 	"net/http"
 )
 
-type meta struct {
+type Status struct {
 	Code    int    `json:"code"`
 	Message string `json:"message"`
 }
 
-var metas = map[int]meta{
-	http.StatusOK: meta{
+var Statuses = map[int]Status{
+	http.StatusOK: Status{
 		Code:    http.StatusOK,
 		Message: "OK"},
-	http.StatusCreated: meta{
+	http.StatusCreated: Status{
 		Code:    http.StatusCreated,
 		Message: "Created"},
-	http.StatusBadRequest: meta{
+	http.StatusBadRequest: Status{
 		Code:    http.StatusBadRequest,
 		Message: "Bad Request"},
-	http.StatusForbidden: meta{
+	http.StatusForbidden: Status{
 		Code:    http.StatusForbidden,
 		Message: "Forbidden"},
-	http.StatusNotFound: meta{
+	http.StatusNotFound: Status{
 		Code:    http.StatusNotFound,
 		Message: "Not Found"},
-	http.StatusNotAcceptable: meta{
+	http.StatusNotAcceptable: Status{
 		Code:    http.StatusNotAcceptable,
 		Message: "Not Acceptable"},
-	http.StatusUnsupportedMediaType: meta{
+	http.StatusUnsupportedMediaType: Status{
 		Code:    http.StatusUnsupportedMediaType,
 		Message: "Unsupported Media Type"},
-	http.StatusUnprocessableEntity: meta{
+	http.StatusUnprocessableEntity: Status{
 		Code:    http.StatusUnprocessableEntity,
 		Message: "Unprocessable Entity"},
-	http.StatusInternalServerError: meta{
+	http.StatusInternalServerError: Status{
 		Code:    http.StatusInternalServerError,
 		Message: "Internal Server Error"},
-	http.StatusNotImplemented: meta{
+	http.StatusNotImplemented: Status{
 		Code:    http.StatusNotImplemented,
 		Message: "Not Implemented"}}

@@ -7,7 +7,7 @@ import (
 
 	"hermes/middlewares"
 	"hermes/ratings/parser"
-	"hermes/ratings/responses"
+	"hermes/responses"
 
 	"github.com/go-playground/validator"
 	"github.com/labstack/echo"

@@ -1,20 +1,41 @@
 package responses
 
 import (
+	"encoding/json"
 	"net/http"
 
+	"hermes/responses"
+
 	"github.com/labstack/echo"
+	"github.com/neelance/graphql-go"
 )
 
-type Post struct {
-	Meta meta `json:"meta"`
-}
+func PostResponse(echoContext echo.Context, response *graphql.Response) error {
+	if !echoContext.Response().Committed {
+		var dataMap map[string]interface{}
 
-func PostResponse(context echo.Context) error {
-	if !context.Response().Committed {
-		response := Post{Meta: metas[http.StatusOK]}
+		status := http.StatusOK
+		responseMap := map[string]interface{}{}
 
-		return context.JSON(http.StatusOK, &response)
+		metaMap := map[string]interface{}{
+			"code":    http.StatusOK,
+			"message": responses.Statuses[http.StatusOK].Message,
+		}
+
+		if response.Errors != nil {
+			status = http.StatusBadRequest
+			responseMap["errors"] = response.Errors
+
+			metaMap["code"] = status
+			metaMap["message"] = responses.Statuses[status].Message
+		}
+
+		json.Unmarshal(response.Data, &dataMap)
+
+		responseMap["meta"] = metaMap
+		responseMap["data"] = dataMap
+
+		return echoContext.JSON(status, &responseMap)
 	}
 
 	return nil

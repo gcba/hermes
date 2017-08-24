@@ -9,12 +9,12 @@ import (
 
 type (
 	Error struct {
-		Meta   meta     `json:"meta"`
+		Meta   Status   `json:"meta"`
 		Errors []string `json:"errors"`
 	}
 
 	BasicError struct {
-		Meta meta `json:"meta"`
+		Meta Status `json:"meta"`
 	}
 )
 
@@ -33,13 +33,13 @@ func ErrorResponse(status int, singleError string, context echo.Context) error {
 func ErrorsResponse(status int, errorList []string, context echo.Context) error {
 	if !context.Response().Committed {
 		if len(errorList) == 0 {
-			response := BasicError{Meta: metas[status]}
+			response := BasicError{Meta: Statuses[status]}
 
 			return context.JSON(status, &response)
 		}
 
 		response := Error{
-			Meta:   metas[status],
+			Meta:   Statuses[status],
 			Errors: errorList}
 
 		return context.JSON(status, &response)

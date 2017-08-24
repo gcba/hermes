@@ -6,7 +6,7 @@ import (
 	"strconv"
 
 	"hermes/middlewares"
-	"hermes/stats/responses"
+	"hermes/responses"
 	"hermes/stats/schema"
 
 	"github.com/go-playground/validator"
