@@ -86,8 +86,8 @@ func (r *Resolver) Average(context context.Context, args arguments) (float64, er
 func (a arguments) attachAND(query *gorm.DB) *gorm.DB {
 	if a.And != nil {
 		for _, item := range *a.And {
-			suboperator := item.resolveOperator()
-			where := fmt.Sprintf("%s %s ?", item.Name, suboperator)
+			operator := item.resolveOperator()
+			where := fmt.Sprintf("%s %s ?", item.Name, operator)
 
 			query = query.Where(where, item.getValue())
 		}
@@ -99,8 +99,8 @@ func (a arguments) attachAND(query *gorm.DB) *gorm.DB {
 func (a arguments) attachOR(query *gorm.DB) *gorm.DB {
 	if a.Or != nil {
 		for _, item := range *a.Or {
-			suboperator := item.resolveOperator()
-			where := fmt.Sprintf("%s %s ?", item.Name, suboperator)
+			operator := item.resolveOperator()
+			where := fmt.Sprintf("%s %s ?", item.Name, operator)
 
 			query = query.Or(where, item.getValue())
 		}
