@@ -2,6 +2,7 @@ package schema
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"net/http"
 	"strings"
@@ -44,13 +45,15 @@ func (r *Resolver) Count(context context.Context, args arguments) (int32, error)
 		errorList := query.GetErrors()
 
 		if !(len(errorList) > 0 || query.Error != nil || query.Value == nil) {
-			query.Count(&total)
+			r.count(db, args, query, &total)
+
+			return total, nil
 		}
+
+		return total, errors.New("Could not get value from database")
 	}
 
-	// TODO: Handle non existent db
-
-	return total, nil
+	return total, errors.New("Could not connect to database")
 }
 
 func (r *Resolver) Average(context context.Context, args arguments) (float64, error) {
@@ -63,11 +66,46 @@ func (r *Resolver) Average(context context.Context, args arguments) (float64, er
 		errorList := query.GetErrors()
 
 		if !(len(errorList) > 0 || query.Error != nil || query.Value == nil) {
-			query.Row().Scan(&total)
+			r.average(db, args, query, &total)
+
+			return total, nil
 		}
+
+		return total, errors.New("Could not get value from database")
 	}
 
-	return total, nil
+	return total, errors.New("Could not connect to database")
+}
+
+func (r *Resolver) count(db *gorm.DB, args arguments, query *gorm.DB, total *int32) {
+	if args.And == nil && args.Or == nil {
+		query.Count(total)
+	} else if args.And != nil {
+		*total = 9 // Placeholder value
+	} else if args.Or != nil {
+		for _, item := range *args.Or {
+			var subtotal int32
+
+			subquery := item.query(db)
+			errorList := subquery.GetErrors()
+
+			if !(len(errorList) > 0 || subquery.Error != nil || subquery.Value == nil) {
+				subquery.Count(&subtotal)
+
+				*total += subtotal
+			}
+		}
+	}
+}
+
+func (r *Resolver) average(db *gorm.DB, args arguments, query *gorm.DB, total *float64) {
+	if args.And == nil && args.Or == nil {
+		query.Row().Scan(total)
+	} else if args.And != nil {
+		*total = 8 // Placeholder value
+	} else if args.Or != nil {
+		*total = 9 // Placeholder value
+	}
 }
 
 func (f *field) query(db *gorm.DB) *gorm.DB {
