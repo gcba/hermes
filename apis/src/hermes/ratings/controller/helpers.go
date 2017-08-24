@@ -223,6 +223,8 @@ func getAppUser(dbs *databases, frame *frame) (*models.AppUser, error) {
 		createErrorList := createResult.GetErrors()
 
 		if len(createErrorList) > 0 || createResult.Error != nil || createResult.Value == nil {
+			dbs.write.Rollback()
+
 			return &models.AppUser{}, loggedErrorResponse(errorMessage, invalidValueError, frame.context)
 		}
 
@@ -277,6 +279,8 @@ func getBrowser(dbs *databases, frame *frame) (*models.Browser, error) {
 		createErrorList := createResult.GetErrors()
 
 		if len(createErrorList) > 0 || createResult.Error != nil || createResult.Value == nil {
+			dbs.write.Rollback()
+
 			return &models.Browser{}, loggedErrorResponse(errorMessage, invalidValueError, frame.context)
 		}
 
@@ -372,6 +376,8 @@ func getDevice(brand *models.Brand, platform *models.Platform, dbs *databases, f
 		createErrorList := createResult.GetErrors()
 
 		if len(createErrorList) > 0 || createResult.Error != nil || createResult.Value == nil {
+			dbs.write.Rollback()
+
 			return &models.Device{}, loggedErrorResponse(errorMessage, invalidValueError, frame.context)
 		}
 
@@ -432,6 +438,8 @@ func getBrand(dbs *databases, frame *frame) (*models.Brand, error) {
 		createErrorList := createResult.GetErrors()
 
 		if len(createErrorList) > 0 || createResult.Error != nil || createResult.Value == nil {
+			dbs.write.Rollback()
+
 			return &models.Brand{}, loggedErrorResponse(errorMessage, invalidValueError, frame.context)
 		}
 

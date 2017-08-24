@@ -27,7 +27,9 @@ func PostRatings(context echo.Context) error {
 		return err
 	}
 
-	dbs := &databases{read: database.GetReadDB(), write: database.GetWriteDB()}
+	writeDB := database.GetWriteDB()
+	tx := writeDB.Begin()
+	dbs := &databases{read: database.GetReadDB(), write: tx}
 	frame := &frame{request: request, context: context}
 
 	defer dbs.read.Close()
@@ -92,6 +94,8 @@ func newRating(dbs *databases, frame *frame) error {
 	errorList := result.GetErrors()
 
 	if len(errorList) > 0 || result.Error != nil || result.Value == nil {
+		dbs.write.Rollback()
+
 		return loggedErrorResponse(errorMessage, invalidValueError, frame.context)
 	}
 
@@ -100,9 +104,13 @@ func newRating(dbs *databases, frame *frame) error {
 
 		if rating.HasMessage {
 			if err := newMessage(value.ID, dbs.write, frame); err != nil {
+				dbs.write.Rollback()
+
 				return err
 			}
 		}
+
+		dbs.write.Commit()
 
 		return nil
 	}
