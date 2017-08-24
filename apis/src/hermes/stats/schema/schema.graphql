@@ -2,30 +2,14 @@ schema {
     query: Stats
 }
 
-enum Operator {
-    EQ
-}
-
-enum Condition {
-    OR
-    AND
-}
-
 scalar Value
 
 type Stats {
-    count(field: Field!): Int!
-    average(field: Field!): Float!
+    count(field: Field!, or: [Field!], and: [Field!]): Int!
+    average(field: Field!, or: [Field!], and: [Field!]): Float!
 }
 
 input Field {
     name: String!
-    operator: Operator!
-    value: Value!
-    next: Operation
-}
-
-input Operation {
-    condition: Condition!
-    field: Field!
+    eq: Value
 }

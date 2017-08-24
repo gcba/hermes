@@ -3,6 +3,7 @@ package parser
 import (
 	"fmt"
 	"net/http"
+	"reflect"
 
 	"github.com/go-playground/validator"
 	"github.com/labstack/echo"
@@ -13,26 +14,9 @@ import (
 // Request holds the mapped fields from the request's JSON body
 
 type (
-	operation struct {
-		Condition string `json:"condition" validate:"required,gte=1,lte=3,alpha" conform:"trim,upper"` // TODO: Add custom validator
-		Field     *Field `json:"field" validate:"omitempty"`
-	}
-
-	variables struct {
-		Field Field `json:"field" validate:"required"`
-	}
-
-	Field struct {
-		Name     string      `json:"name" validate:"required,gte=3,lte=30,contains=.,excludesall= " conform:"trim,lower"` // TODO: Add custom validator
-		Operator string      `json:"operator" validate:"omitempty,gte=1,lte=3,alpha" conform:"trim,upper"`                // TODO: Add custom validator
-		Value    interface{} `json:"value" validate:"required"`
-		Next     *operation  `json:"next" validate:"omitempty"`
-	}
-
 	Request struct {
-		Query     string    `json:"query" validate:"required,gte=10,lte=5000" conform:"trim"`
-		Variables variables `json:"variables" validate:"required"`
-		// Variables map[string]interface{} `json:"variables" validate:"required"`
+		Query     string                 `json:"query" validate:"required,gte=10,lte=5000" conform:"trim"`
+		Variables map[string]interface{} `json:"variables" validate:"required"`
 	}
 )
 
@@ -105,12 +89,46 @@ func escape(request *Request) {
 	sanitizer := bluemonday.StrictPolicy()
 
 	request.Query = sanitizer.Sanitize(request.Query)
-	request.Variables.Field.Name = sanitizer.Sanitize(request.Variables.Field.Name)
+	request.Variables, _ = sanitizeMap(request.Variables, sanitizer).(map[string]interface{})
+}
 
-	switch value := request.Variables.Field.Value.(type) {
-	case string:
-		request.Variables.Field.Value = sanitizer.Sanitize(value)
+// From: https://gist.github.com/hvoecking/10772475, license: MIT
+
+func sanitizeMap(obj interface{}, sanitizer *bluemonday.Policy) interface{} {
+	original := reflect.ValueOf(obj)
+	copy := reflect.New(original.Type()).Elem()
+
+	sanitizeMapRecursive(copy, original, sanitizer)
+
+	return copy.Interface()
+}
+
+// From: https://gist.github.com/hvoecking/10772475, license: MIT
+
+func sanitizeMapRecursive(copy, original reflect.Value, sanitizer *bluemonday.Policy) {
+	switch original.Kind() {
+	case reflect.Interface:
+		originalValue := original.Elem()
+		copyValue := reflect.New(originalValue.Type()).Elem()
+
+		sanitizeMapRecursive(copyValue, originalValue, sanitizer)
+		copy.Set(copyValue)
+	case reflect.Map:
+		copy.Set(reflect.MakeMap(original.Type()))
+
+		for _, key := range original.MapKeys() {
+			originalValue := original.MapIndex(key)
+			copyValue := reflect.New(originalValue.Type()).Elem()
+
+			sanitizeMapRecursive(copyValue, originalValue, sanitizer)
+			copy.SetMapIndex(key, copyValue)
+		}
+	case reflect.String:
+		originalValue := fmt.Sprintf("%v", original.Elem())
+		sanitizedValue := sanitizer.Sanitize(originalValue)
+
+		copy.SetString(sanitizedValue)
 	default:
-		break
+		copy.Set(original)
 	}
 }
