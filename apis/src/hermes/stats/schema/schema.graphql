@@ -20,7 +20,7 @@ type Stats {
 
 input Field {
     name: String!
-    operator: Operator
+    operator: Operator!
     value: Value!
     next: Operation
 }
