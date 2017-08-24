@@ -15,10 +15,10 @@ const DB = iota
 var Schema *graphql.Schema
 
 type Value struct {
-	String string
-	Int    int
-	Float  float64
-	Bool   bool
+	String *string
+	Int    *int
+	Float  *float64
+	Bool   *bool
 }
 
 func (_ Value) ImplementsGraphQLType(name string) bool {
@@ -28,13 +28,13 @@ func (_ Value) ImplementsGraphQLType(name string) bool {
 func (v *Value) UnmarshalGraphQL(input interface{}) error {
 	switch input := input.(type) {
 	case string:
-		v.String = input
+		v.String = &input
 	case int:
-		v.Int = input
+		v.Int = &input
 	case float64:
-		v.Float = input
+		v.Float = &input
 	case bool:
-		v.Bool = input
+		v.Bool = &input
 	default:
 		return fmt.Errorf("Wrong type")
 	}
