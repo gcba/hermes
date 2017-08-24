@@ -1,5 +1,5 @@
 hash: 93a903b59c81401a4cf7f6b79e484a095177317a7f9b28c1a0a77c5faedfde37
-updated: 2017-08-23T16:00:59.159682254-03:00
+updated: 2017-08-24T11:56:56.295329938-03:00
 imports:
 - name: github.com/ajg/form
   version: cc2954064ec9ea8d93917f0f87456e11d7b881ad
@@ -49,7 +49,7 @@ imports:
 - name: github.com/jinzhu/inflection
   version: 1c35d901db3da928c72a72d8458480cc9ade058f
 - name: github.com/labstack/echo
-  version: 935a60782cbbc55110e7bd4b33120e4567cbee43
+  version: 6c54ff78a2351623e91ccf085d94a78d02b1882c
   subpackages:
   - '...'
   - middleware
