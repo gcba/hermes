@@ -43,10 +43,10 @@ func (r *Resolver) Count(context context.Context, args arguments) (int32, error)
 	if db, castOk := context.Value(DB).(*gorm.DB); castOk {
 		operator := args.Field.resolveOperator()
 		where := fmt.Sprintf("%s %s ?", args.Field.Name, operator)
-		query := args.Field.query(db).Debug().Where(where, args.Field.getValue())
+		query := args.Field.getQuery(db).Where(where, args.Field.getValue())
 
-		query = args.queryAND(query)
-		query = args.queryOR(query)
+		query = args.attachAND(query)
+		query = args.attachOR(query)
 
 		query.Count(&total)
 
@@ -69,10 +69,10 @@ func (r *Resolver) Average(context context.Context, args arguments) (float64, er
 
 	if db, castOk := context.Value(DB).(*gorm.DB); castOk {
 		average := fmt.Sprintf("AVG(%s)", args.Field.Name)
-		query := args.Field.query(db).Select(average)
+		query := args.Field.getQuery(db).Select(average)
 
-		query = args.queryAND(query)
-		query = args.queryOR(query)
+		query = args.attachAND(query)
+		query = args.attachOR(query)
 
 		query.Row().Scan(&total)
 
@@ -90,34 +90,7 @@ func (r *Resolver) Average(context context.Context, args arguments) (float64, er
 	return total, errors.New("Could not connect to database")
 }
 
-func (f *field) query(db *gorm.DB) *gorm.DB {
-	entity := f.getEntity()
-
-	switch entity.Table {
-	case "apps":
-		return db.Model(&models.Rating{})
-	case "appusers":
-		return db.Model(&models.AppUser{})
-	case "brands":
-		return db.Model(&models.Brand{})
-	case "browsers":
-		return db.Model(&models.Browser{})
-	case "devices":
-		return db.Model(&models.Device{})
-	case "messages":
-		return db.Model(&models.Message{})
-	case "platforms":
-		return db.Model(&models.Platform{})
-	case "ranges":
-		return db.Model(&models.Range{})
-	case "ratings":
-		fallthrough
-	default:
-		return db.Model(&models.Rating{})
-	}
-}
-
-func (a arguments) queryAND(query *gorm.DB) *gorm.DB {
+func (a arguments) attachAND(query *gorm.DB) *gorm.DB {
 	if a.And != nil {
 		for _, item := range *a.And {
 			suboperator := item.resolveOperator()
@@ -130,7 +103,7 @@ func (a arguments) queryAND(query *gorm.DB) *gorm.DB {
 	return query
 }
 
-func (a arguments) queryOR(query *gorm.DB) *gorm.DB {
+func (a arguments) attachOR(query *gorm.DB) *gorm.DB {
 	if a.Or != nil {
 		for _, item := range *a.Or {
 			suboperator := item.resolveOperator()
@@ -163,6 +136,33 @@ func (f *field) getValue() interface{} {
 	}
 
 	return nil
+}
+
+func (f *field) getQuery(db *gorm.DB) *gorm.DB {
+	entity := f.getEntity()
+
+	switch entity.Table {
+	case "apps":
+		return db.Model(&models.Rating{})
+	case "appusers":
+		return db.Model(&models.AppUser{})
+	case "brands":
+		return db.Model(&models.Brand{})
+	case "browsers":
+		return db.Model(&models.Browser{})
+	case "devices":
+		return db.Model(&models.Device{})
+	case "messages":
+		return db.Model(&models.Message{})
+	case "platforms":
+		return db.Model(&models.Platform{})
+	case "ranges":
+		return db.Model(&models.Range{})
+	case "ratings":
+		fallthrough
+	default:
+		return db.Model(&models.Rating{})
+	}
 }
 
 func (f *field) resolveOperator() string {
