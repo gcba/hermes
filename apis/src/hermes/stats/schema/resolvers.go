@@ -3,13 +3,11 @@ package schema
 import (
 	"context"
 	"fmt"
-	"net/http"
 	"strings"
 
 	"hermes/models"
 
 	"github.com/jinzhu/gorm"
-	"github.com/labstack/echo"
 )
 
 type (
@@ -31,10 +29,6 @@ type (
 
 	Resolver struct{}
 )
-
-func errorResponse() error {
-	return echo.NewHTTPError(http.StatusInternalServerError)
-}
 
 func (r *Resolver) Count(context context.Context, args arguments) (int32, error) {
 	var total int32
