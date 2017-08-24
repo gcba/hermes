@@ -42,12 +42,15 @@ func (r *Resolver) Count(context context.Context, args arguments) (int32, error)
 
 	if db, castOk := context.Value(DB).(*gorm.DB); castOk {
 		query := args.Field.query(db)
+
+		r.count(db, args, query, &total)
+
 		errorList := query.GetErrors()
 
 		if !(len(errorList) > 0 || query.Error != nil || query.Value == nil) {
-			r.count(db, args, query, &total)
-
 			return total, nil
+		} else if query.Error != nil {
+			return total, query.Error
 		}
 
 		return total, errors.New("Could not get value from database")
@@ -63,12 +66,15 @@ func (r *Resolver) Average(context context.Context, args arguments) (float64, er
 		entity := args.Field.getEntity()
 		average := fmt.Sprintf("AVG(%s)", entity.Field)
 		query := args.Field.query(db).Select(average)
+
+		r.average(db, args, query, &total)
+
 		errorList := query.GetErrors()
 
 		if !(len(errorList) > 0 || query.Error != nil || query.Value == nil) {
-			r.average(db, args, query, &total)
-
 			return total, nil
+		} else if query.Error != nil {
+			return total, query.Error
 		}
 
 		return total, errors.New("Could not get value from database")
