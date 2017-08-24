@@ -18,8 +18,8 @@ func PostResponse(echoContext echo.Context, response *graphql.Response) error {
 		responseMap := map[string]interface{}{}
 
 		metaMap := map[string]interface{}{
-			"code":    http.StatusOK,
-			"message": responses.Statuses[http.StatusOK].Message,
+			"code":    status,
+			"message": responses.Statuses[status].Message,
 		}
 
 		if response.Errors != nil {
