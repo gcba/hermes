@@ -1,5 +1,5 @@
-hash: efc97bdbb9161afae75609b041ef525d76d468a1dd6c14374eb361b10cb0a0f2
-updated: 2017-08-24T18:39:42.087493615-03:00
+hash: 84587c1d56696c3d5b240f2edb7805ced7ce180a05349ab8a7a2b952739c533d
+updated: 2017-08-24T21:35:08.091048548-03:00
 imports:
 - name: github.com/ajg/form
   version: cc2954064ec9ea8d93917f0f87456e11d7b881ad
@@ -84,8 +84,6 @@ imports:
   - introspection
   - log
   - trace
-- name: github.com/nicksrandall/dataloader
-  version: 32dea884eaaf5d1d5fa84766581762e367f15e12
 - name: github.com/opentracing/opentracing-go
   version: 8ebe5d4e236eed9fd88e593c288bfb804d630b8c
   subpackages:
