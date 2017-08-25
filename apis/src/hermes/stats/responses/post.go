@@ -22,21 +22,37 @@ func PostResponse(echoContext echo.Context, response *graphql.Response) error {
 			"message": responses.Statuses[status].Message,
 		}
 
-		if response.Errors != nil {
-			status = http.StatusBadRequest
-			responseMap["errors"] = response.Errors
+		if len(response.Errors) > 0 {
+			errs := getErrors(response)
 
+			status = http.StatusBadRequest
+			responseMap["errors"] = errs
 			metaMap["code"] = status
 			metaMap["message"] = responses.Statuses[status].Message
+		} else {
+			json.Unmarshal(response.Data, &dataMap)
+
+			responseMap["data"] = dataMap
 		}
 
-		json.Unmarshal(response.Data, &dataMap)
-
 		responseMap["meta"] = metaMap
-		responseMap["data"] = dataMap
 
 		return echoContext.JSON(status, &responseMap)
 	}
 
 	return nil
+}
+
+func getErrors(response *graphql.Response) []error {
+	errs := []error{}
+
+	for _, err := range response.Errors {
+		if err.ResolverError != nil {
+			err.Message = err.ResolverError.Error()
+		}
+
+		errs = append(errs, err)
+	}
+
+	return errs
 }
