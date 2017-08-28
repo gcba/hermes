@@ -22,7 +22,7 @@ func PostResponse(echoContext echo.Context, response *graphql.Response) error {
 			if statsError := getCustomError(response); statsError != nil {
 				status = statsError.Code
 			} else {
-				status = http.StatusInternalServerError
+				status = http.StatusBadRequest
 			}
 
 			responseMap["errors"] = response.Errors
