@@ -128,11 +128,11 @@
 <h3 id="admin">Admin</h3>
 <p>PHP 7.1 con Laravel 5.4.</p>
 <h3 id="apis">APIs</h3>
-<p>Go 1.8 con Echo y Gorm.</p>
+<p>Go 1.9 con Echo y Gorm.</p>
 <h3 id="datos">Datos</h3>
-<p>PostgreSQL y Redis.</p>
+<p>PostgreSQL.</p>
 <h3 id="api-gateway">API Gateway</h3>
-<p>Tyk.</p>
+<p>Kong.</p>
 <h2 id="convenciones">Convenciones</h2>
 <h3 id="go">Go</h3>
 <p>El c&#xF3;digo debe formatearse con la herramienta <code>gofmt</code>.</p>
@@ -153,16 +153,7 @@
 <p>Todo el c&#xF3;digo y la documentaci&#xF3;n se alojar&#xE1;n en GitHub, en un solo repositorio.</p>
 <p><a href="https://github.com/gcba/hermes">https://github.com/gcba/hermes</a></p>
 <h3 id="ramas">Ramas</h3>
-<p>Se trabajar&#xE1; con un esquema de 3 ramas: dev, qa y master, con una rama adicional para el deploy de la documentaci&#xF3;n.</p>
-<h4 id="dev">dev</h4>
-<p>En dev se realizar&#xE1; el desarrollo. Al finalizar un sprint, se mergear&#xE1; a qa para testear.</p>
-<h4 id="qa">qa</h4>
-<p>En qa residir&#xE1; un snapshot de c&#xF3;digo del sprint anterior para testar autom&#xE1;tica y manualmente. Al finalizar un sprint, si no quedan bugs sin solucionar (del sprint anterior) se mergear&#xE1; a master. Si se fueran juntando bugs de varios sprints y no se puede mergear a master, se realizar&#xE1; un sprint dedicado a la correcci&#xF3;n de bugs.</p>
-<h4 id="master">master</h4>
-<p>En master residir&#xE1; el c&#xF3;digo de las releases m&#xE1;s recientes. En las primera etapa del desarrollo (cuando no hay versiones usables a&#xFA;n) contendr&#xE1; el c&#xF3;digo que m&#xE1;s recientemente haya superado la etapa de qa.</p>
-<p>Cuando ya se est&#xE9;n taggeando releases cada nuevo merge a master supondr&#xE1; la creaci&#xF3;n de una nueva release.</p>
-<h4 id="gh_pages">gh_pages</h4>
-<p>Esta rama se utilizar&#xE1; para servir la documentaci&#xF3;n a trav&#xE9;s de Github Pages.</p>
+<p>Se trabajar&#xE1; con un esquema de 3 ramas: dev, qa y master, con una rama adicional para el deploy de la documentaci&#xF3;n (gh_pages).</p>
 <h3 id="commits">Commits</h3>
 <p>Los mensajes de los commits deber&#xE1;n ser breves, concisos y estar escritos en ingl&#xE9;s.</p>
 <h3 id="releases">Releases</h3>
