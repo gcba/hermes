@@ -43,25 +43,21 @@ func (r *Resolver) Count(context context.Context, args arguments) (int32, error)
 
 	if db, castOk := context.Value(DB).(*gorm.DB); castOk {
 		operator := args.Field.resolveOperator()
-		statement := fmt.Sprintf("count(%s)", args.Field.Name)
+		count := fmt.Sprintf("COUNT(%s)", args.Field.Name)
 		model := args.Field.getModel(db)
-		query := db.Model(model).Select(statement)
+		query := db.Model(model).Select(count)
 		entity := args.Field.getEntity()
 
 		if model == nil {
 			return total, invalidTableError(entity.Table)
 		}
 
-		fields := structs.Names(model)
-
-		if !fieldExists(entity.Field, fields) {
+		if !fieldExists(entity.Field, structs.Names(model)) {
 			return total, invalidFieldError(entity.Field)
 		}
 
 		if value := args.Field.getValue(); value != nil {
-			where := fmt.Sprintf("%s %s ?", args.Field.Name, operator)
-
-			query = query.Where(where, value)
+			query = query.Where(fmt.Sprintf("%s %s ?", args.Field.Name, operator), value)
 		}
 
 		query = args.attachAND(query)
@@ -99,9 +95,7 @@ func (r *Resolver) Average(context context.Context, args arguments) (float64, er
 			return total, invalidTableError(entity.Table)
 		}
 
-		fields := structs.Names(model)
-
-		if !fieldExists(entity.Field, fields) {
+		if !fieldExists(entity.Field, structs.Names(model)) {
 			return total, invalidFieldError(entity.Field)
 		}
 
