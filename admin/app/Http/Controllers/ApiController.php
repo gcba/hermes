@@ -11,7 +11,7 @@ use App\Message;
 
 class ApiController extends Controller {
     /**
-    * Gets messages.
+    * Gets a single message.
     *
     * @return \Illuminate\Http\JsonResponse
     */
@@ -21,6 +21,24 @@ class ApiController extends Controller {
 
         if ($user->hasPermission('read_messages')) {
             return Response::json($message);
+        }
+
+        return Response::json([], 401);
+    }
+
+    /**
+    * Gets all the messages that belong to a rating.
+    *
+    * @return \Illuminate\Http\JsonResponse
+    */
+    public function ratingMessages($id)
+    {
+        $user = Auth::user();
+
+        if ($user->hasPermission('read_messages')) {
+            $messages = Message::where('rating_id', $id)->get();
+
+            return Response::json($messages);
         }
 
         return Response::json([], 401);
