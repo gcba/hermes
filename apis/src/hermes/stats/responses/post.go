@@ -19,8 +19,8 @@ func PostResponse(echoContext echo.Context, response *graphql.Response) error {
 		status := http.StatusOK
 
 		if len(response.Errors) > 0 {
-			if statsError := getCustomError(response); statsError != nil {
-				status = statsError.Code
+			if customError := getCustomError(response); customError != nil {
+				status = customError.Code
 			} else {
 				status = http.StatusBadRequest
 			}
