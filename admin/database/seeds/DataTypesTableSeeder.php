@@ -99,7 +99,7 @@ class DataTypesTableSeeder extends Seeder
                 'slug'                  => 'devices',
                 'icon'                  => 'voyager-phone',
                 'model_name'            => 'App\\Device',
-                'controller'            => 'ServerSideController',
+                'controller'            => 'DataTablesController',
                 'generate_permissions'  => 0,
                 'description'           => 'Dispositivos móviles',
                 'server_side'           => 0
@@ -115,7 +115,7 @@ class DataTypesTableSeeder extends Seeder
                 'slug'                  => 'messages',
                 'icon'                  => 'voyager-chat',
                 'model_name'            => 'App\\Message',
-                'controller'            => 'ServerSideController',
+                'controller'            => 'DataTablesController',
                 'generate_permissions'  => 0,
                 'description'           => 'Mensajes',
                 'server_side'           => 0
@@ -163,7 +163,7 @@ class DataTypesTableSeeder extends Seeder
                 'slug'                  => 'ratings',
                 'icon'                  => 'voyager-star-two',
                 'model_name'            => 'App\\Rating',
-                'controller'            => 'ServerSideController',
+                'controller'            => 'DataTablesController',
                 'generate_permissions'  => 0,
                 'description'           => 'Calificaciones',
                 'server_side'           => 0
