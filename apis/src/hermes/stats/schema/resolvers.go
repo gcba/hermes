@@ -85,7 +85,7 @@ func (r *Resolver) Average(context context.Context, args arguments) (float64, er
 
 	if db, castOk := context.Value(DB).(*gorm.DB); castOk {
 		if value := args.Field.getValue(); value != nil {
-			return total, badRequestError("Average does not need a value on the main field")
+			return total, badRequestError("Average does not accept a value on the main field")
 		}
 
 		average := fmt.Sprintf("AVG(%s)", args.Field.Name)
