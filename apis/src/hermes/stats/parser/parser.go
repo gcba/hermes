@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/http"
 	"reflect"
+	"strings"
 
 	"github.com/go-playground/validator"
 	"github.com/labstack/echo"
@@ -125,7 +126,7 @@ func sanitizeMapRecursive(copy, original reflect.Value, sanitizer *bluemonday.Po
 		}
 	case reflect.String:
 		originalValue := fmt.Sprintf("%v", original.Elem())
-		sanitizedValue := sanitizer.Sanitize(originalValue)
+		sanitizedValue := strings.TrimSpace(sanitizer.Sanitize(originalValue))
 
 		copy.SetString(sanitizedValue)
 	default:

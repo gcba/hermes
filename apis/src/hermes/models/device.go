@@ -24,7 +24,7 @@ type Device struct {
 func GetDevice(name string, db *gorm.DB) *gorm.DB {
 	var result Device
 
-	if isPostgres(db) {
+	if isPostgres() {
 		return db.Where("name ILIKE ?", name).First(&result)
 	}
 

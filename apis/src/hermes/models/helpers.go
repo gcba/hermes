@@ -1,15 +1,11 @@
 package models
 
 import (
-	"reflect"
-
-	"github.com/jinzhu/gorm"
+	"hermes/database"
 )
 
-func isPostgres(db *gorm.DB) bool {
-	driver := reflect.ValueOf(db.DB().Driver())
-
-	if driver.Type().String() == "*pq.Driver" {
+func isPostgres() bool {
+	if database.ReadDBDriver == "*pq.Driver" {
 		return true
 	}
 

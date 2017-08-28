@@ -19,7 +19,7 @@ type Browser struct {
 func GetBrowser(name string, db *gorm.DB) *gorm.DB {
 	var result Browser
 
-	if isPostgres(db) {
+	if isPostgres() {
 		return db.Where("name ILIKE ?", name).First(&result)
 	}
 

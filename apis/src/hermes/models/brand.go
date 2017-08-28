@@ -19,7 +19,7 @@ type Brand struct {
 func GetBrand(name string, db *gorm.DB) *gorm.DB {
 	var result Brand
 
-	if isPostgres(db) {
+	if isPostgres() {
 		return db.Where("name ILIKE ?", name).First(&result)
 	}
 

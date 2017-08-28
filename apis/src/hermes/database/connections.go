@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"reflect"
 
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres" // postgres driver
@@ -17,6 +18,7 @@ var (
 	readDBName     = os.Getenv("HERMES_READDB_NAME")
 	readDBUser     = os.Getenv("HERMES_READDB_USER")
 	readDBPassword = os.Getenv("HERMES_READDB_PASSWORD")
+	ReadDBDriver   = ""
 
 	// Load write database settings
 	writeDBPort     = getConfig("HERMES_WRITEDB_PORT", "5432")
@@ -24,16 +26,25 @@ var (
 	writeDBName     = os.Getenv("HERMES_WRITEDB_NAME")
 	writeDBUser     = os.Getenv("HERMES_WRITEDB_USER")
 	writeDBPassword = os.Getenv("HERMES_WRITEDB_PASSWORD")
+	WriteDBDriver   = ""
 )
 
 // GetReadDB connects to the read database and returns a pointer to the connection
 func GetReadDB() *gorm.DB {
-	return getDB(readDBHost, readDBPort, readDBName, readDBUser, readDBPassword)
+	db := getDB(readDBHost, readDBPort, readDBName, readDBUser, readDBPassword)
+
+	ReadDBDriver = reflect.ValueOf(db.DB().Driver()).Type().String()
+
+	return db
 }
 
 // GetWriteDB connects to the write database and returns a pointer to the connection
 func GetWriteDB() *gorm.DB {
-	return getDB(writeDBHost, writeDBPort, writeDBName, writeDBUser, writeDBPassword)
+	db := getDB(writeDBHost, writeDBPort, writeDBName, writeDBUser, writeDBPassword)
+
+	WriteDBDriver = reflect.ValueOf(db.DB().Driver()).Type().String()
+
+	return db
 }
 
 func getDB(host string, port string, db string, user string, password string) *gorm.DB {
