@@ -23,6 +23,8 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('devices.api', 'DataTablesController@devicesAPI')->name('devices.api');
     Route::get('appusers.api', 'DataTablesController@appusersAPI')->name('appusers.api');
 
+    Route::get('messages/{message}', 'ApiController@message')->name('messages.read.api');
+
     Route::post('messages/receive', 'MailgunController@receive')
         ->name('messages.receive')
         ->middleware(\App\Http\Middleware\ValidateMailgun::class, \App\Http\Middleware\Sessionless::class);
