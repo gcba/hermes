@@ -143,8 +143,8 @@
                     data: function (d) {
                         d.columns.forEach(function (column) {
                             if (column.name && column.name.indexOf('.') != -1) {
-                                var name = column.name.replace('.', '_');
-                                var searchTerm = $('input[name=' + name + ']').val();
+                                const name = column.name.replace('.', '_');
+                                const searchTerm = $('input[name=' + name + ']').val();
 
                                 if (searchTerm && searchTerm.trim().length > 0) d[name] = searchTerm.trim();
                             }
@@ -161,23 +161,40 @@
                 mark: true,
                 initComplete: function () {
                     this.api().columns().every(function () {
-                        var column = this;
-                        var input = document.createElement("input");
+                        const column = this;
+                        const input = document.createElement("input");
 
                         if (column.name) input.name = column.name.replace('.', '_');
 
                         $(input).appendTo($(column.footer()).empty())
                         .on('change', function () {
-                            var val = $.fn.dataTable.util.escapeRegex($(this).val().trim());
+                            const val = $.fn.dataTable.util.escapeRegex($(this).val().trim());
 
                             column.search($(this).val()).draw();
                         });
                     });
                 }
             });
+        }).on('click', 'tr', function() {
+            const rowData = $('#dataTable').DataTable().row(this).data();
+
+            if (rowData) {
+                const ratingID = rowData.rating_id;
+
+                console.info(ratingID);
+
+                fetch('/admin/ratings/' + ratingID + '/messages', {
+                    method: 'GET',
+                    credentials: 'include'
+                })
+                .then(function(response) {
+                    console.info(response);
+                })
+            }
         });
 
         var deleteFormAction;
+
         $('td').on('click', '.delete', function (e) {
             var form = $('#delete_form')[0];
 
