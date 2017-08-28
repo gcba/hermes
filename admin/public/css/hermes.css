@@ -11,8 +11,13 @@
     height: 100%;
 }
 
+.messages-detail .messages-detail-compose {
+    margin-top: 1rem;
+}
+
 .messages-detail .panel.message {
     border: 1px solid #EAEAEA;
+    margin-bottom: 0.75rem;
 }
 
 .messages-detail .panel.message .message-heading {
@@ -23,6 +28,7 @@
 
 .messages-detail .panel.message .message-body {
     padding-top: 10px;
+    padding-bottom: 10px;
     font-size: 13px;
 }
 
