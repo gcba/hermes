@@ -181,11 +181,12 @@
             if (rowData) {
                 const ratingID = rowData.rating_id;
 
-                console.info(ratingID);
-
                 fetch('/admin/ratings/' + ratingID + '/messages', {
                     method: 'GET',
                     credentials: 'include'
+                })
+                .then(function(response) {
+                    return response.json();
                 })
                 .then(function(response) {
                     console.info(response);
