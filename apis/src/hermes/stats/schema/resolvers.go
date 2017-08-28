@@ -206,8 +206,8 @@ func (f *field) resolveOperator() string {
 
 	if f.Eq != nil {
 		switch value.(type) {
-		case string:
-			return "LIKE"
+		case string, *string:
+			return "ILIKE"
 		default:
 			return "="
 		}
