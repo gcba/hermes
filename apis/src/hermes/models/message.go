@@ -15,6 +15,7 @@ type Message struct {
 	TransportID *uint  `gorm:"DEFAULT:NULL"`
 
 	CreatedAt time.Time `gorm:"not null;type:datetime;default:CURRENT_TIMESTAMP"`
+	UpdatedAt time.Time `gorm:"-"`
 }
 
 // CreateMessage creates a new message

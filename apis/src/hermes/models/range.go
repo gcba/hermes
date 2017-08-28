@@ -14,6 +14,8 @@ type Range struct {
 	AppID uint   `gorm:"not null"`
 
 	CreatedAt time.Time `gorm:"not null;type:datetime;default:CURRENT_TIMESTAMP"`
+	UpdatedAt time.Time `gorm:"-"`
+	DeletedAt time.Time `gorm:"-"`
 }
 
 // GetRange gets a range by key

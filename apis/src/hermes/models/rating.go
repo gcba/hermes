@@ -22,6 +22,8 @@ type Rating struct {
 	BrowserID       uint   `gorm:"DEFAULT:NULL"`
 
 	CreatedAt time.Time `gorm:"not null;type:datetime;default:CURRENT_TIMESTAMP"`
+	UpdatedAt time.Time `gorm:"-"`
+	DeletedAt time.Time `gorm:"-"`
 }
 
 // CreateRating creates a new rating

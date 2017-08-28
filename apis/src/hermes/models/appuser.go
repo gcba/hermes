@@ -13,6 +13,8 @@ type AppUser struct {
 	MiBAID *string `gorm:"column:miba_id;type:char(36);DEFAULT:NULL"`
 
 	CreatedAt time.Time `gorm:"not null;type:datetime;default:CURRENT_TIMESTAMP"`
+	UpdatedAt time.Time `gorm:"-"`
+	DeletedAt time.Time `gorm:"-"`
 }
 
 // TableName sets AppUser's table name to be `appuser`

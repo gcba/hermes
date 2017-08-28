@@ -16,6 +16,8 @@ type Device struct {
 	PlatformID   uint   `gorm:"DEFAULT:NULL"`
 
 	CreatedAt time.Time `gorm:"not null;type:datetime;default:CURRENT_TIMESTAMP"`
+	UpdatedAt time.Time `gorm:"-"`
+	DeletedAt time.Time `gorm:"-"`
 }
 
 // GetDevice gets a device by name and brand id
