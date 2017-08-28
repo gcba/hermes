@@ -108,10 +108,12 @@ func (r *Resolver) Average(context context.Context, args arguments) (float64, er
 		err := query.Row().Scan(&total)
 		errorList := query.GetErrors()
 
-		if !(len(errorList) > 0 || err != nil || query.Value == nil) {
+		if !(len(errorList) > 0 || err != nil || query.Error != nil || query.Value == nil) {
 			return total, nil
-		} else if query.Error != nil {
+		} else if err != nil {
 			return total, queryError(err)
+		} else if query.Error != nil {
+			return total, queryError(query.Error)
 		}
 
 		return total, databaseError()
