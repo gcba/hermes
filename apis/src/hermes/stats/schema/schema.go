@@ -1,13 +1,13 @@
 package schema
 
 import (
-	"fmt"
 	"io/ioutil"
 	"log"
 	"path"
 	"runtime"
 
 	"github.com/neelance/graphql-go"
+	"github.com/neelance/graphql-go/errors"
 )
 
 const DB = iota
@@ -36,7 +36,7 @@ func (v *Value) UnmarshalGraphQL(input interface{}) error {
 	case bool:
 		v.Bool = &input
 	default:
-		return fmt.Errorf("Wrong type")
+		return errors.Errorf("Wrong type")
 	}
 
 	return nil

@@ -7,7 +7,10 @@ import (
 
 	"hermes/models"
 
+	"github.com/fatih/structs"
+	"github.com/iancoleman/strcase"
 	"github.com/jinzhu/gorm"
+	"github.com/neelance/graphql-go/errors"
 )
 
 type (
@@ -27,6 +30,11 @@ type (
 		And   *[]field
 	}
 
+	StatsError struct {
+		*errors.QueryError
+		Code int
+	}
+
 	Resolver struct{}
 )
 
@@ -35,52 +43,85 @@ func (r *Resolver) Count(context context.Context, args arguments) (int32, error)
 
 	if db, castOk := context.Value(DB).(*gorm.DB); castOk {
 		operator := args.Field.resolveOperator()
-		where := fmt.Sprintf("%s %s ?", args.Field.Name, operator)
-		query := args.Field.getQuery(db).Where(where, args.Field.getValue())
+		statement := fmt.Sprintf("count(%s)", args.Field.Name)
+		model := args.Field.getModel(db)
+		query := db.Model(model).Select(statement)
+		entity := args.Field.getEntity()
+
+		if model == nil {
+			return total, invalidTableError(entity.Table)
+		}
+
+		fields := structs.Names(model)
+
+		if !fieldExists(entity.Field, fields) {
+			return total, invalidFieldError(entity.Field)
+		}
+
+		if value := args.Field.getValue(); value != nil {
+			where := fmt.Sprintf("%s %s ?", args.Field.Name, operator)
+
+			query = query.Where(where, value)
+		}
 
 		query = args.attachAND(query)
 		query = args.attachOR(query)
-
-		query.Count(&total)
+		query = query.Count(&total)
 
 		errorList := query.GetErrors()
 
 		if !(len(errorList) > 0 || query.Error != nil || query.Value == nil) {
 			return total, nil
 		} else if query.Error != nil {
-			return total, fmt.Errorf("Error getting value from database: %v", query.Error)
+			return total, queryError(query.Error)
 		}
 
-		return total, fmt.Errorf("Could not get value from database")
+		return total, databaseError()
 	}
 
-	return total, fmt.Errorf("Could not connect to database")
+	return total, connectionError()
 }
 
 func (r *Resolver) Average(context context.Context, args arguments) (float64, error) {
 	var total float64
 
 	if db, castOk := context.Value(DB).(*gorm.DB); castOk {
-		average := fmt.Sprintf("AVG(%s)", args.Field.Name)
-		query := args.Field.getQuery(db).Select(average)
+		if value := args.Field.getValue(); value != nil {
+			return total, badRequestError("Average does not need a value on the main field")
+		}
 
+		average := fmt.Sprintf("AVG(%s)", args.Field.Name)
+		model := args.Field.getModel(db)
+		query := db.Model(model)
+		entity := args.Field.getEntity()
+
+		if model == nil {
+			return total, invalidTableError(entity.Table)
+		}
+
+		fields := structs.Names(model)
+
+		if !fieldExists(entity.Field, fields) {
+			return total, invalidFieldError(entity.Field)
+		}
+
+		query = query.Select(average)
 		query = args.attachAND(query)
 		query = args.attachOR(query)
 
-		query.Row().Scan(&total)
-
+		err := query.Row().Scan(&total)
 		errorList := query.GetErrors()
 
-		if !(len(errorList) > 0 || query.Error != nil || query.Value == nil) {
+		if !(len(errorList) > 0 || err != nil || query.Value == nil) {
 			return total, nil
 		} else if query.Error != nil {
-			return total, fmt.Errorf("Error getting value from database: %v", query.Error)
+			return total, queryError(err)
 		}
 
-		return total, fmt.Errorf("Could not get value from database")
+		return total, databaseError()
 	}
 
-	return total, fmt.Errorf("Could not connect to database")
+	return total, connectionError()
 }
 
 func (a arguments) attachAND(query *gorm.DB) *gorm.DB {
@@ -109,30 +150,30 @@ func (a arguments) attachOR(query *gorm.DB) *gorm.DB {
 	return query
 }
 
-func (f *field) getQuery(db *gorm.DB) *gorm.DB {
+func (f *field) getModel(db *gorm.DB) interface{} {
 	entity := f.getEntity()
 
 	switch entity.Table {
 	case "apps":
-		return db.Model(&models.Rating{})
+		return &models.App{}
 	case "appusers":
-		return db.Model(&models.AppUser{})
+		return &models.AppUser{}
 	case "brands":
-		return db.Model(&models.Brand{})
+		return &models.Brand{}
 	case "browsers":
-		return db.Model(&models.Browser{})
+		return &models.Browser{}
 	case "devices":
-		return db.Model(&models.Device{})
+		return &models.Device{}
 	case "messages":
-		return db.Model(&models.Message{})
+		return &models.Message{}
 	case "platforms":
-		return db.Model(&models.Platform{})
+		return &models.Platform{}
 	case "ranges":
-		return db.Model(&models.Range{})
+		return &models.Range{}
 	case "ratings":
-		fallthrough
+		return &models.Rating{}
 	default:
-		return db.Model(&models.Rating{})
+		return nil
 	}
 }
 
@@ -176,5 +217,15 @@ func (f *field) resolveOperator() string {
 		}
 	}
 
-	return "="
+	return ""
+}
+
+func fieldExists(field string, fields []string) bool {
+	for _, item := range fields {
+		if item == strcase.ToCamel(field) {
+			return true
+		}
+	}
+
+	return false
 }

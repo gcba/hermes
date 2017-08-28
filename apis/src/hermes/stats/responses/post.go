@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"hermes/responses"
+	"hermes/stats/schema"
 
 	"github.com/labstack/echo"
 	"github.com/neelance/graphql-go"
@@ -14,28 +15,27 @@ func PostResponse(echoContext echo.Context, response *graphql.Response) error {
 	if !echoContext.Response().Committed {
 		var dataMap map[string]interface{}
 
-		status := http.StatusOK
 		responseMap := map[string]interface{}{}
-
-		metaMap := map[string]interface{}{
-			"code":    status,
-			"message": responses.Statuses[status].Message,
-		}
+		status := http.StatusOK
 
 		if len(response.Errors) > 0 {
-			errs := getErrors(response)
+			if statsError := getCustomError(response); statsError != nil {
+				status = statsError.Code
+			} else {
+				status = http.StatusInternalServerError
+			}
 
-			status = http.StatusBadRequest
-			responseMap["errors"] = errs
-			metaMap["code"] = status
-			metaMap["message"] = responses.Statuses[status].Message
+			responseMap["errors"] = response.Errors
 		} else {
 			json.Unmarshal(response.Data, &dataMap)
 
 			responseMap["data"] = dataMap
 		}
 
-		responseMap["meta"] = metaMap
+		responseMap["meta"] = map[string]interface{}{
+			"code":    status,
+			"message": responses.Statuses[status].Message,
+		}
 
 		return echoContext.JSON(status, &responseMap)
 	}
@@ -43,16 +43,14 @@ func PostResponse(echoContext echo.Context, response *graphql.Response) error {
 	return nil
 }
 
-func getErrors(response *graphql.Response) []error {
-	errs := []error{}
-
+func getCustomError(response *graphql.Response) *schema.StatsError {
 	for _, err := range response.Errors {
 		if err.ResolverError != nil {
-			err.Message = err.ResolverError.Error()
+			if statsError, castOk := err.ResolverError.(*schema.StatsError); castOk {
+				return statsError
+			}
 		}
-
-		errs = append(errs, err)
 	}
 
-	return errs
+	return nil
 }
