@@ -29,3 +29,5 @@ import:
 - package: github.com/alecthomas/template
 - package: github.com/neelance/graphql-go
 - package: github.com/opentracing/opentracing-go
+- package: github.com/fatih/structs
+- package: github.com/iancoleman/strcase
