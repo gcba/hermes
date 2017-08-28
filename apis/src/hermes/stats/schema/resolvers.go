@@ -42,7 +42,6 @@ func (r *Resolver) Count(context context.Context, args arguments) (int32, error)
 	var total int32
 
 	if db, castOk := context.Value(DB).(*gorm.DB); castOk {
-		operator := args.Field.resolveOperator()
 		count := fmt.Sprintf("COUNT(%s)", args.Field.Name)
 		model := args.Field.getModel(db)
 		query := db.Model(model).Select(count)
@@ -57,7 +56,10 @@ func (r *Resolver) Count(context context.Context, args arguments) (int32, error)
 		}
 
 		if value := args.Field.getValue(); value != nil {
-			query = query.Where(fmt.Sprintf("%s %s ?", args.Field.Name, operator), value)
+			operator := args.Field.resolveOperator()
+			where := fmt.Sprintf("%s %s ?", args.Field.Name, operator)
+
+			query = query.Where(where, value)
 		}
 
 		query = args.attachAND(query)
