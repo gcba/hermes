@@ -8,15 +8,15 @@ PHP 7.1 con Laravel 5.4.
 
 ### APIs
 
-Go 1.8 con Echo y Gorm.
+Go 1.9 con Echo y Gorm.
 
 ### Datos
 
-PostgreSQL y Redis.
+PostgreSQL.
 
 ### API Gateway
 
-Tyk.
+Kong.
 
 ## Convenciones
 
@@ -52,25 +52,7 @@ https://github.com/gcba/hermes
 
 ### Ramas
 
-Se trabajará con un esquema de 3 ramas: dev, qa y master, con una rama adicional para el deploy de la documentación.
-
-#### dev
-
-En dev se realizará el desarrollo. Al finalizar un sprint, se mergeará a qa para testear.
-
-#### qa
-
-En qa residirá un snapshot de código del sprint anterior para testar automática y manualmente. Al finalizar un sprint, si no quedan bugs sin solucionar (del sprint anterior) se mergeará a master. Si se fueran juntando bugs de varios sprints y no se puede mergear a master, se realizará un sprint dedicado a la corrección de bugs.
-
-#### master
-
-En master residirá el código de las releases más recientes. En las primera etapa del desarrollo (cuando no hay versiones usables aún) contendrá el código que más recientemente haya superado la etapa de qa.
-
-Cuando ya se estén taggeando releases cada nuevo merge a master supondrá la creación de una nueva release.
-
-#### gh_pages
-
-Esta rama se utilizará para servir la documentación a través de Github Pages.
+Se trabajará con un esquema de 3 ramas: dev, qa y master, con una rama adicional para el deploy de la documentación (gh_pages).
 
 ### Commits
 
