@@ -75,10 +75,20 @@
 
 @media screen and (min-width: 1200px) and (max-width: 1420px) {
     .messages-master {
+        width: 45%;
+    }
+
+    .messages-detail {
+        width: 55%;
+    }
+}
+
+@media screen and (min-width: 1420px) and (max-width: 1500px) {
+    .messages-master {
         width: 40%;
     }
 
     .messages-detail {
-        width: 60%;
+        width: 50%;
     }
 }
