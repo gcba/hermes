@@ -213,7 +213,7 @@ func (f *field) resolveOperator() string {
 		}
 	}
 
-	return ""
+	return "="
 }
 
 func fieldExists(field string, fields []string) bool {
