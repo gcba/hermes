@@ -8,7 +8,6 @@ import (
 	"hermes/models"
 
 	"github.com/fatih/structs"
-	"github.com/iancoleman/strcase"
 	"github.com/jinzhu/gorm"
 	"github.com/neelance/graphql-go/errors"
 )
@@ -16,12 +15,18 @@ import (
 type (
 	entity struct {
 		Table string
-		Field string
+		Field *string
 	}
 
 	field struct {
-		Name string
-		Eq   *Value
+		Name  string
+		Eq    *Value
+		Ne    *Value
+		Gt    *Value
+		Lt    *Value
+		Gte   *Value
+		Lte   *Value
+		Count *bool
 	}
 
 	arguments struct {
@@ -51,8 +56,8 @@ func (r *Resolver) Count(context context.Context, args arguments) (int32, error)
 			return total, invalidTableError(entity.Table)
 		}
 
-		if !fieldExists(entity.Field, structs.Names(model)) {
-			return total, invalidFieldError(entity.Field)
+		if entity.Field != nil && !fieldExists(*entity.Field, structs.Names(model)) {
+			return total, invalidFieldError(*entity.Field)
 		}
 
 		if value := args.Field.getValue(); value != nil {
@@ -64,12 +69,25 @@ func (r *Resolver) Count(context context.Context, args arguments) (int32, error)
 
 		query = args.attachAND(query)
 		query = args.attachOR(query)
-		query = query.Count(&total)
 
+		rows, err := query.Rows()
 		errorList := query.GetErrors()
+		accumulator := 0
 
-		if !(len(errorList) > 0 || query.Error != nil || query.Value == nil) {
+		for rows.Next() {
+			accumulator++
+		}
+
+		if accumulator > 1 {
+			total = int32(accumulator)
+		} else {
+			query.Count(&total)
+		}
+
+		if !(len(errorList) > 0 || err != nil || query.Error != nil || query.Value == nil) {
 			return total, nil
+		} else if err != nil {
+			return total, queryError(err)
 		} else if query.Error != nil {
 			return total, queryError(query.Error)
 		}
@@ -97,16 +115,32 @@ func (r *Resolver) Average(context context.Context, args arguments) (float64, er
 			return total, invalidTableError(entity.Table)
 		}
 
-		if !fieldExists(entity.Field, structs.Names(model)) {
-			return total, invalidFieldError(entity.Field)
+		if entity.Field == nil {
+			return total, badRequestError("Average requires a field name")
+		}
+
+		if !fieldExists(*entity.Field, structs.Names(model)) {
+			return total, invalidFieldError(*entity.Field)
 		}
 
 		query = query.Select(average)
 		query = args.attachAND(query)
 		query = args.attachOR(query)
 
-		err := query.Row().Scan(&total)
+		rows, err := query.Rows()
 		errorList := query.GetErrors()
+		numberOfRows := 0
+
+		for rows.Next() {
+			var avg float64
+
+			rows.Scan(&avg)
+
+			total += avg
+			numberOfRows++
+		}
+
+		total = total / float64(numberOfRows)
 
 		if !(len(errorList) > 0 || err != nil || query.Error != nil || query.Value == nil) {
 			return total, nil
@@ -126,9 +160,16 @@ func (a arguments) attachAND(query *gorm.DB) *gorm.DB {
 	if a.And != nil {
 		for _, item := range *a.And {
 			operator := item.resolveOperator()
-			where := fmt.Sprintf("%s %s ?", item.Name, operator)
 
-			query = query.Where(where, item.getValue())
+			if item.Count != nil && *item.Count {
+				having := fmt.Sprintf("COUNT(%s) %s ?", item.Name, operator)
+
+				query = query.Group(item.Name).Having(having, item.getValue())
+			} else {
+				where := fmt.Sprintf("%s %s ?", item.Name, operator)
+
+				query = query.Where(where, item.getValue())
+			}
 		}
 	}
 
@@ -178,12 +219,26 @@ func (f *field) getModel(db *gorm.DB) interface{} {
 func (f *field) getEntity() entity {
 	splitField := strings.Split(f.Name, ".")
 
-	return entity{Table: splitField[0], Field: splitField[1]}
+	if len(splitField) < 2 {
+		return entity{Table: splitField[0], Field: nil}
+	}
+
+	return entity{Table: splitField[0], Field: &splitField[1]}
 }
 
 func (f *field) getValue() interface{} {
 	if f.Eq != nil {
 		return f.resolveValue(f.Eq)
+	} else if f.Ne != nil {
+		return f.resolveValue(f.Ne)
+	} else if f.Gt != nil {
+		return f.resolveValue(f.Gt)
+	} else if f.Lt != nil {
+		return f.resolveValue(f.Lt)
+	} else if f.Gte != nil {
+		return f.resolveValue(f.Gte)
+	} else if f.Lte != nil {
+		return f.resolveValue(f.Lte)
 	}
 
 	return nil
@@ -209,21 +264,34 @@ func (f *field) resolveOperator() string {
 	if f.Eq != nil {
 		switch value.(type) {
 		case string, *string:
-			return "ILIKE"
+			if isPostgres() {
+				return "ILIKE"
+			}
+
+			return "LIKE"
 		default:
 			return "="
 		}
+	} else if f.Ne != nil {
+		switch value.(type) {
+		case string, *string:
+			if isPostgres() {
+				return "NOT ILIKE"
+			}
+
+			return "NOT LIKE"
+		default:
+			return "<>"
+		}
+	} else if f.Gt != nil {
+		return ">"
+	} else if f.Lt != nil {
+		return "<"
+	} else if f.Gte != nil {
+		return ">="
+	} else if f.Lte != nil {
+		return "<="
 	}
 
 	return "="
-}
-
-func fieldExists(field string, fields []string) bool {
-	for _, item := range fields {
-		if item == strcase.ToCamel(field) {
-			return true
-		}
-	}
-
-	return false
 }

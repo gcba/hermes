@@ -7,11 +7,11 @@ import (
 )
 
 func connectionError() error {
-	return &StatsError{errors.Errorf("Could not connect to database"), http.StatusInternalServerError}
+	return internalServerError("Could not connect to database")
 }
 
 func databaseError() error {
-	return &StatsError{errors.Errorf("Could not get value from database"), http.StatusInternalServerError}
+	return internalServerError("Could not get value from database")
 }
 
 func queryError(err error) error {
@@ -26,6 +26,10 @@ func invalidTableError(table string) error {
 
 func invalidFieldError(field string) error {
 	return &StatsError{errors.Errorf("%s is not a valid field", field), http.StatusBadRequest}
+}
+
+func internalServerError(message string) error {
+	return &StatsError{errors.Errorf(message), http.StatusInternalServerError}
 }
 
 func badRequestError(message string) error {
