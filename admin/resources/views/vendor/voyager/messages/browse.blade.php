@@ -61,18 +61,20 @@
                         <div class="messages-detail-list">
 
                             <div class="panel panel-default message message-out">
-                                <div class="panel-heading message-heading">Employee name to the left, date to the right</div>
-                                    <div class="panel-body message-body">
-                                        Message content
-                                    </div>
+                                <div class="panel-heading message-heading">
+                                    Employee name to the left, date to the right
+                                </div>
+                                <div class="panel-body message-body">
+                                    Message content
                                 </div>
                             </div>
 
                             <div class="panel panel-primary message message-in">
-                                <div class="panel-heading message-heading">User name and email to the left, date to the right</div>
-                                    <div class="panel-body message-body">
-                                        Message content
-                                    </div>
+                                <div class="panel-heading message-heading">
+                                    User name and email to the left, date to the right
+                                </div>
+                                <div class="panel-body message-body">
+                                    Message content
                                 </div>
                             </div>
 
