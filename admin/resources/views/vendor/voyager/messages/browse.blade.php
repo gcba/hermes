@@ -59,25 +59,6 @@
                 <div class="panel panel-bordered">
                     <div class="panel-body">
                         <div class="messages-detail-list">
-
-                            <div class="panel panel-default message message-out">
-                                <div class="panel-heading message-heading">
-                                    Employee name to the left, date to the right
-                                </div>
-                                <div class="panel-body message-body">
-                                    Message content
-                                </div>
-                            </div>
-
-                            <div class="panel panel-primary message message-in">
-                                <div class="panel-heading message-heading">
-                                    User name and email to the left, date to the right
-                                </div>
-                                <div class="panel-body message-body">
-                                    Message content
-                                </div>
-                            </div>
-
                         </div>
 
                         <div class="messages-detail-compose">
@@ -162,7 +143,7 @@
                 initComplete: function () {
                     this.api().columns().every(function () {
                         const column = this;
-                        const input = document.createElement("input");
+                        const input = document.createElement('input');
 
                         if (column.name) input.name = column.name.replace('.', '_');
 
@@ -171,27 +152,15 @@
                             const val = $.fn.dataTable.util.escapeRegex($(this).val().trim());
 
                             column.search($(this).val()).draw();
-                        });
+                        })
+                        .closest('tr').addClass('row-search');
                     });
+
+                    $('#dataTable tr:nth-child(2)').click();
                 }
             });
         }).on('click', 'tr', function() {
-            const rowData = $('#dataTable').DataTable().row(this).data();
-
-            if (rowData) {
-                const ratingID = rowData.rating_id;
-
-                fetch('/admin/ratings/' + ratingID + '/messages', {
-                    method: 'GET',
-                    credentials: 'include'
-                })
-                .then(function(response) {
-                    return response.json();
-                })
-                .then(function(response) {
-                    console.info(response);
-                })
-            }
+            selectRow(this);
         });
 
         var deleteFormAction;
@@ -210,5 +179,67 @@
 
             $('#delete_modal').modal('show');
         });
+
+        const messagePanel = function(direction) {
+            const type = direction === 'in' ? 'primary' : 'default';
+
+            return $('<div>', { class: 'panel panel-' + type + ' message message-' + direction });
+        }
+
+        const messageHeading = function(content) {
+            return $('<div>', {
+                class: 'panel-heading message-heading',
+                text: content
+             });
+        }
+
+        const messageBody = function(content) {
+            return $('<div>', {
+                class: 'panel-body message-body',
+                text: content
+             });
+        }
+
+        const buildMessage = function(content) {
+            const message = messagePanel(content.direction);
+            const heading = messageHeading(content.created_at);
+            const body = messageBody(content.message);
+
+            message.append(heading);
+            message.append(body);
+
+            return message;
+        }
+
+        const buildThread = function(messages) {
+            const thread = $('.messages-detail-list').first().empty();
+
+            for (const message of messages) {
+               thread.append(buildMessage(message));
+            }
+        }
+
+        const selectRow = function(row) {
+            const rowData = $('#dataTable').DataTable().row(row).data();
+
+            $('#dataTable .row-selected').removeClass('row-selected');
+
+            if (!$(row).hasClass('row-search')) $(this).addClass('row-selected');
+
+            if (rowData) {
+                const ratingID = rowData.rating_id;
+
+                fetch('/admin/ratings/' + ratingID + '/messages', {
+                    method: 'GET',
+                    credentials: 'include'
+                })
+                .then(function(response) {
+                    return response.json();
+                })
+                .then(function(response) {
+                    buildThread(response);
+                })
+            }
+        }
     </script>
 @stop

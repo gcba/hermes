@@ -32,6 +32,10 @@
     font-size: 13px;
 }
 
+.dataTables_wrapper .row-selected {
+    background-color: #eee;
+}
+
 .dataTables_wrapper:nth-child(1) > div {
     overflow-x: auto;
 }
