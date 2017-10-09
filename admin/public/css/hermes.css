@@ -62,6 +62,7 @@
 
 .dataTables_wrapper table tbody tr {
     font-size: 0.9rem;
+    cursor: pointer;
 }
 
 .dataTables_wrapper table tbody td {
