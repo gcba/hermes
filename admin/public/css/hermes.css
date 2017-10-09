@@ -15,6 +15,10 @@
     margin-top: 1rem;
 }
 
+.messages-detail .panel {
+    box-shadow: none;
+}
+
 .messages-detail .panel.message {
     border: 1px solid #EAEAEA;
     margin-bottom: 0.75rem;
@@ -30,6 +34,10 @@
     padding-top: 10px;
     padding-bottom: 10px;
     font-size: 13px;
+}
+
+.dataTables_wrapper table tbody tr {
+    font-size: 0.9rem;
 }
 
 .dataTables_wrapper .row-selected {
