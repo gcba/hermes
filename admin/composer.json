@@ -1,7 +1,10 @@
 {
     "name": "laravel/laravel",
     "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "keywords": [
+        "framework",
+        "laravel"
+    ],
     "license": "MIT",
     "type": "project",
     "require": {
@@ -13,7 +16,7 @@
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
         "php-http/guzzle6-adapter": "^1.1",
-        "tcg/voyager": "^0.11.12",
+        "tcg/voyager": "1.0.*",
         "yajra/laravel-datatables-oracle": "^7.5"
     },
     "require-dev": {
@@ -54,5 +57,11 @@
         "preferred-install": "dist",
         "sort-packages": true,
         "optimize-autoloader": true
+    },
+    "repositories": {
+        "hooks": {
+            "type": "composer",
+            "url": "https://larapack.io"
+        }
     }
 }
