@@ -1,5 +1,5 @@
 <p align="left">
-  <img src="https://raw.githubusercontent.com/SwifterSwift/SwifterSwift/master/Assets/logo.png" title="swifterSwift">
+  <img src="https://cdn.rawgit.com/SwifterSwift/SwifterSwift/master/Assets/logo.svg" title="swifterSwift">
 </p>
 
 [![Build Status](https://api.travis-ci.org/SwifterSwift/SwifterSwift.svg?branch=master)](https://travis-ci.org/SwifterSwift/SwifterSwift)
@@ -19,7 +19,7 @@
 SwifterSwift is a collection of **over 500 native Swift 3 extensions**, with handy methods, syntactic sugar, and performance improvements for wide range of primitive data types, UIKit and Cocoa classes –over 500 in 1– for iOS, macOS, tvOS and watchOS.
 
 
-### [Whats New in v3.1?](https://github.com/SwifterSwift/SwifterSwift/blob/master/CHANGELOG.md#v310)
+### [Whats New in v3.1.1?](https://github.com/SwifterSwift/SwifterSwift/blob/master/CHANGELOG.md#v311)
 
 
 
@@ -170,9 +170,15 @@ let package = Package(
 
 <li><a href="https://github.com/SwifterSwift/SwifterSwift/tree/master/Sources/Extensions/Foundation/DictionaryExtensions.swift"><code>Dictionary extensions</code></a></li>
 
+<li><a href="https://github.com/SwifterSwift/SwifterSwift/tree/master/Sources/Extensions/Foundation/SignedNumberExtensions.swift"><code>SignedNumber extensions</code></a></li>
+
+<li><a href="https://github.com/SwifterSwift/SwifterSwift/tree/master/Sources/Extensions/Foundation/FloatingPointExtensions.swift"><code>FloatingPoint extensions</code></a></li>
+
 <li><a href="https://github.com/SwifterSwift/SwifterSwift/tree/master/Sources/Extensions/Foundation/DoubleExtensions.swift"><code>Double extensions</code></a></li>
 
 <li><a href="https://github.com/SwifterSwift/SwifterSwift/tree/master/Sources/Extensions/Foundation/FloatExtensions.swift"><code>Float extensions</code></a></li>
+
+<li><a href="https://github.com/SwifterSwift/SwifterSwift/tree/master/Sources/Extensions/Foundation/SignedIntegerExtensions.swift"><code>SignedInteger extensions</code></a></li>
 
 <li><a href="https://github.com/SwifterSwift/SwifterSwift/tree/master/Sources/Extensions/Foundation/IntExtensions.swift"><code>Int extensions</code></a></li>
 
@@ -233,9 +239,9 @@ let package = Package(
 
 <li><a href="https://github.com/SwifterSwift/SwifterSwift/tree/master/Sources/Extensions/UIKit/UITextViewExtensions.swift"><code>UITextView extensions</code></a></li>
 
-<li><a href="https://github.com/SwifterSwift/SwifterSwift/tree/master/Sources/Extensions/UIKit/UIViewExtensions.swift"><code>UIView extensions</code></a></li>
-
 <li><a href="https://github.com/SwifterSwift/SwifterSwift/tree/master/Sources/Extensions/UIKit/UIViewControllerExtensions.swift"><code>UIViewController extensions</code></a></li>
+
+<li><a href="https://github.com/SwifterSwift/SwifterSwift/tree/master/Sources/Extensions/UIKit/UIViewExtensions.swift"><code>UIView extensions</code></a></li>
 </ul>
 
 </details>
