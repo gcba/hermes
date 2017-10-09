@@ -36,10 +36,6 @@
     font-size: 13px;
 }
 
-.dataTables_wrapper table tbody tr {
-    font-size: 0.9rem;
-}
-
 .dataTables_wrapper .row-selected {
     background-color: #eee;
 }
@@ -60,16 +56,24 @@
     width: 100% !important;
 }
 
-.dataTables_wrapper tbody td {
+.dataTables_wrapper table .row-selected {
+    background-color: #FFFFE0;
+}
+
+.dataTables_wrapper table tbody tr {
+    font-size: 0.9rem;
+}
+
+.dataTables_wrapper table tbody td {
     white-space: nowrap;
     overflow: hidden;
 }
 
-.dataTables_wrapper tfoot {
+.dataTables_wrapper table tfoot {
     display: table-footer-group;
 }
 
-.dataTables_wrapper tfoot input {
+.dataTables_wrapper table tfoot input {
     border: none;
     border-bottom: 2px dotted #eee;
     width: 100%;

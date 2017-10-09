@@ -60,7 +60,7 @@ class DataTablesController extends Controller {
                     $query = $this->filterQuery($query, $params);
                 }, true)
                 ->editColumn('message', function($item){
-                    return $this->shortenString($item->message, 50);
+                    return $this->shortenString($item->message, 40);
                 });
 
             return $datatables->make(true);

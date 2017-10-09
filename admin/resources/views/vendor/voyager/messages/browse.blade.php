@@ -224,21 +224,23 @@
 
             $('#dataTable .row-selected').removeClass('row-selected');
 
-            if (!$(row).hasClass('row-search')) $(this).addClass('row-selected');
+            if (!$(row).hasClass('row-search')) {
+                $(row).addClass('row-selected');
 
-            if (rowData) {
-                const ratingID = rowData.rating_id;
+                if (rowData) {
+                    const ratingID = rowData.rating_id;
 
-                fetch('/admin/ratings/' + ratingID + '/messages', {
-                    method: 'GET',
-                    credentials: 'include'
-                })
-                .then(function(response) {
-                    return response.json();
-                })
-                .then(function(response) {
-                    buildThread(response);
-                })
+                    fetch('/admin/ratings/' + ratingID + '/messages', {
+                        method: 'GET',
+                        credentials: 'include'
+                    })
+                    .then(function(response) {
+                        return response.json();
+                    })
+                    .then(function(response) {
+                        buildThread(response);
+                    })
+                }
             }
         }
     </script>
