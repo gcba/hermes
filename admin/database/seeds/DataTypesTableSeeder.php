@@ -115,7 +115,7 @@ class DataTypesTableSeeder extends Seeder
                 'slug'                  => 'messages',
                 'icon'                  => 'voyager-chat',
                 'model_name'            => 'App\\Message',
-                'controller'            => 'DataTablesController',
+                'controller'            => 'MessagesController',
                 'generate_permissions'  => 0,
                 'description'           => 'Mensajes',
                 'server_side'           => 0

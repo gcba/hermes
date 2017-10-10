@@ -27,7 +27,7 @@ class MailgunController extends Controller
             $messageReplied = Message::where('transport_id', $inReplyTo)->first();
 
             if ($messageReplied) {
-                $messageReplied->status = $messageReplied->status + 1;
+                $messageReplied->status = 2; // Sent/Received = 0, Notified/Delivered = 1, Replied = 2
 
                 $message = Message::create([
                     'message' => $data['stripped-text'], // Sanitization happens in mutator

@@ -29,4 +29,7 @@ Route::group(['prefix' => 'admin'], function() {
     Route::post('messages/receive', 'MailgunController@receive')
         ->name('messages.receive')
         ->middleware(\App\Http\Middleware\ValidateMailgun::class, \App\Http\Middleware\Sessionless::class);
+    Route::post('messages/notify', 'MailgunController@notify')
+        ->name('messages.notify')
+        ->middleware(\App\Http\Middleware\ValidateMailgun::class, \App\Http\Middleware\Sessionless::class);
 });
