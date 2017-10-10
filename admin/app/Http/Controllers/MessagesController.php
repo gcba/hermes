@@ -24,7 +24,7 @@ class MessagesController extends DataTablesController
         $user = Auth::user();
 
         if ($user->hasPermission('browse_messages')) {
-            $model = Message::with('rating')->select('messages.*');
+            $model = Message::with('rating')->select('messages.*')->where('direction', '=', 'in');
             $params = $request->query()['columns'];
 
             $datatables = Datatables::of($model)
@@ -33,9 +33,6 @@ class MessagesController extends DataTablesController
                 ->removeColumn('updated_at')
                 ->filter(function ($query) use($params) {
                     $query = $this->filterQuery($query, $params);
-                }, true)
-                ->filter(function ($query) use($params) {
-                    $query = $query->where('direction', '=', 'in');
                 }, true)
                 ->editColumn('message', function($item){
                     return $this->shortenString($item->message, 40);
