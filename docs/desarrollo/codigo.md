@@ -14,7 +14,7 @@ Go 1.9 con Echo y Gorm.
 
 PostgreSQL 10.
 
-### Cache y Queue
+### Cache y job queue
 
 Redis 3.0.
 
