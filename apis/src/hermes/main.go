@@ -17,7 +17,8 @@ var (
 	startCommand   = kingpin.Command("start", "Start an Hermes API.")
 	ratingsCommand = startCommand.Command("ratings", "Start the ratings API.")
 	statsCommand   = startCommand.Command("stats", "Start the statistics API.")
-	noCursor       = "\n\n\033[?25l"
+	hideCursor     = "\n\n\033[?25l"
+	showCursor     = "\033[?25h"
 	banner         = `
  _  _ ____ ____ _  _ ____ ____
  |__| |___ |__/ |\/| |___ [__
@@ -40,16 +41,18 @@ func startRatingsAPI() {
 	port := getPort("HERMES_RATINGS_PORT", 5000)
 	handler := ratingsHandler.Handler(port)
 
-	fmt.Println("✅  Ratings server started on port", strconv.Itoa(port), noCursor)
-	handler.Logger.Fatal(gracehttp.Serve(handler.Server))
+	fmt.Println("✅  Ratings server started on port", strconv.Itoa(port), hideCursor)
+	gracehttp.Serve(handler.Server)
+	fmt.Print(showCursor)
 }
 
 func startStatsAPI() {
 	port := getPort("HERMES_STATS_PORT", 7000)
 	handler := statsHandler.Handler(port)
 
-	fmt.Println("✅  Stats server started on port", strconv.Itoa(port), noCursor)
-	handler.Logger.Fatal(gracehttp.Serve(handler.Server))
+	fmt.Println("✅  Stats server started on port", strconv.Itoa(port), hideCursor)
+	gracehttp.Serve(handler.Server)
+	fmt.Print(showCursor)
 }
 
 func getPort(env string, defaultPort int) int {
