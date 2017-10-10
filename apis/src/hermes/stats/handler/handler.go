@@ -1,12 +1,12 @@
 package handler
 
 import (
-	"net/http"
 	"os"
 	"strconv"
 
 	"hermes/middlewares"
 	"hermes/responses"
+	"hermes/stats/controller"
 	"hermes/stats/schema"
 
 	"github.com/go-playground/validator"
@@ -23,7 +23,7 @@ func (rv *RequestValidator) Validate(request interface{}) error {
 	return rv.validator.Struct(request)
 }
 
-func Handler(port int, handlers map[string]echo.HandlerFunc) http.Handler {
+func Handler(port int) *echo.Echo {
 	schema.Parse()
 
 	e := echo.New()
@@ -48,7 +48,7 @@ func Handler(port int, handlers map[string]echo.HandlerFunc) http.Handler {
 	e.Use(middlewares.UnsupportedMediaTypeMiddleware)
 	e.Use(middlewares.CorsMiddleware)
 
-	e.POST("/stats", handlers["PostStats"])
+	e.POST("/stats", controller.PostStats)
 
 	e.HTTPErrorHandler = responses.ErrorHandler
 	e.Validator = &RequestValidator{validator: validate}

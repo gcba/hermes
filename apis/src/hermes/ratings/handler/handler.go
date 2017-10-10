@@ -1,11 +1,11 @@
 package handler
 
 import (
-	"net/http"
 	"os"
 	"strconv"
 
 	"hermes/middlewares"
+	"hermes/ratings/controller"
 	"hermes/ratings/parser"
 	"hermes/responses"
 
@@ -23,7 +23,7 @@ func (rv *RequestValidator) Validate(request interface{}) error {
 	return rv.validator.Struct(request)
 }
 
-func Handler(port int, handlers map[string]echo.HandlerFunc) http.Handler {
+func Handler(port int) *echo.Echo {
 	e := echo.New()
 	validate := validator.New()
 	env := os.Getenv("HERMES_RATINGS_ENV")
@@ -48,9 +48,9 @@ func Handler(port int, handlers map[string]echo.HandlerFunc) http.Handler {
 	e.Use(middlewares.UnsupportedMediaTypeMiddleware)
 	e.Use(middlewares.CorsMiddleware)
 
-	e.OPTIONS("/", handlers["OptionsRoot"])
-	e.OPTIONS("/ratings", handlers["OptionsRatings"])
-	e.POST("/ratings", handlers["PostRatings"])
+	e.OPTIONS("/", controller.OptionsRoot)
+	e.OPTIONS("/ratings", controller.OptionsRatings)
+	e.POST("/ratings", controller.PostRatings)
 
 	e.HTTPErrorHandler = responses.ErrorHandler
 	e.Validator = &RequestValidator{validator: validate}
