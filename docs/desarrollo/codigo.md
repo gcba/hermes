@@ -12,7 +12,7 @@ Go 1.9 con Echo y Gorm.
 
 ### Datos
 
-PostgreSQL.
+PostgreSQL 10.
 
 ### API Gateway
 
