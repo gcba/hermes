@@ -19,7 +19,7 @@ Route::group(['prefix' => 'admin'], function() {
     Voyager::routes();
 
     Route::get('ratings.api', 'DataTablesController@ratingsAPI')->name('ratings.api');
-    Route::get('messages.api', 'DataTablesController@messagesAPI')->name('messages.api');
+    Route::get('messages.api', 'MessagesController@messagesAPI')->name('messages.api');
     Route::get('devices.api', 'DataTablesController@devicesAPI')->name('devices.api');
     Route::get('appusers.api', 'DataTablesController@appusersAPI')->name('appusers.api');
 

@@ -44,36 +44,6 @@ class DataTablesController extends Controller {
     *
     * @return \Illuminate\Http\JsonResponse
     */
-    public function messagesAPI(Request $request)
-    {
-        $user = Auth::user();
-
-        if ($user->hasPermission('browse_messages')) {
-            $model = Message::with('rating')->select('messages.*');
-            $params = $request->query()['columns'];
-
-            $datatables = Datatables::of($model)
-                ->removeColumn('status')
-                ->removeColumn('transport_id')
-                ->removeColumn('updated_at')
-                ->filter(function ($query) use($params) {
-                    $query = $this->filterQuery($query, $params);
-                }, true)
-                ->editColumn('message', function($item){
-                    return $this->shortenString($item->message, 40);
-                });
-
-            return $datatables->make(true);
-        }
-
-        return Response::json([], 401);
-    }
-
-    /**
-    * Process datatables ajax request.
-    *
-    * @return \Illuminate\Http\JsonResponse
-    */
     public function devicesAPI(Request $request)
     {
         $user = Auth::user();
@@ -112,7 +82,7 @@ class DataTablesController extends Controller {
         return Response::json([], 401);
     }
 
-    private function filterQuery($query, $params)
+    protected function filterQuery($query, $params)
     {
         foreach ($params as $index => $column) {
             $searchTerm = $column['search']['value'];
@@ -132,7 +102,7 @@ class DataTablesController extends Controller {
         return $query;
     }
 
-    private function shortenString($string, $limit)
+    protected function shortenString($string, $limit)
     {
         return strlen($string) > $limit ? trim(substr($string, 0, $limit)) . "..." : $string;
     }
