@@ -148,15 +148,9 @@ func (a arguments) attachAND(query *gorm.DB) *gorm.DB {
 		for _, item := range *a.And {
 			if operator := item.resolveOperator(); operator != nil && len(item.Name) > 0 {
 				if value := item.getValue(); value != nil {
-					if item.Count != nil && *item.Count {
-						having := fmt.Sprintf("COUNT(%s) %s ?", item.Name, *operator)
+					where := fmt.Sprintf("%s %s ?", item.Name, *operator)
 
-						query = query.Group(item.Name).Having(having, value)
-					} else {
-						where := fmt.Sprintf("%s %s ?", item.Name, *operator)
-
-						query = query.Where(where, value)
-					}
+					query = query.Where(where, value)
 				}
 			}
 		}

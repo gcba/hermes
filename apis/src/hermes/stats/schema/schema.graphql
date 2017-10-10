@@ -16,6 +16,5 @@ input Field {
     gt: Value,
     lt: Value,
     gte: Value,
-    lte: Value,
-    count: Boolean
+    lte: Value
 }
