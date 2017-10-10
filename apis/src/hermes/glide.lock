@@ -1,5 +1,5 @@
 hash: 95d35820f5e1e33440cb8b3b55effb05336f49cee7c41ec191fb38591fe78502
-updated: 2017-08-28T10:09:00.043307173-03:00
+updated: 2017-10-10T20:23:25.545873465-03:00
 imports:
 - name: github.com/ajg/form
   version: cc2954064ec9ea8d93917f0f87456e11d7b881ad
@@ -39,7 +39,7 @@ imports:
 - name: github.com/go-playground/universal-translator
   version: b32fa301c9fe55953584134cb6853a13c87ec0a1
 - name: github.com/go-playground/validator
-  version: d529ee1b0f30352444f507cc6cdac96bfd12decc
+  version: a021b2ec9a8a8bb970f3f15bc42617cb520e8a64
 - name: github.com/iancoleman/strcase
   version: e1e131f0f235122cd147dfb40fb9aaf7d97a45bc
 - name: github.com/jinzhu/gorm
@@ -54,7 +54,7 @@ imports:
   - '...'
   - middleware
 - name: github.com/labstack/gommon
-  version: 779b8a8b9850a97acba6a3fe20feb628c39e17c1
+  version: 57409ada9da0f2afad6664c49502f8c50fbd8476
   subpackages:
   - bytes
   - color
@@ -74,7 +74,7 @@ imports:
 - name: github.com/microcosm-cc/bluemonday
   version: e79763773ab6222ca1d5a7cbd9d62d83c1f77081
 - name: github.com/neelance/graphql-go
-  version: 52080e1f0951c75dd4addba57db27fc4de1d0019
+  version: 10eb949b8f4439212ef19d5d924c47c10c110cc7
   subpackages:
   - errors
   - internal/common
@@ -89,7 +89,7 @@ imports:
   - log
   - trace
 - name: github.com/opentracing/opentracing-go
-  version: 8ebe5d4e236eed9fd88e593c288bfb804d630b8c
+  version: 1361b9cd60be79c4c3a7fa9841b3c132e40066a7
   subpackages:
   - ext
   - log
