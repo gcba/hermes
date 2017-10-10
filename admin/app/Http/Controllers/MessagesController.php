@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\AppUser;
+use App\Message;
 use App\Jobs\SendMessage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use TCG\Voyager\Facades\Voyager;
+use Yajra\Datatables\Datatables;
 use Validator;
 
 class MessagesController extends DataTablesController
@@ -30,6 +33,9 @@ class MessagesController extends DataTablesController
                 ->removeColumn('updated_at')
                 ->filter(function ($query) use($params) {
                     $query = $this->filterQuery($query, $params);
+                }, true)
+                ->filter(function ($query) use($params) {
+                    $query = $query->where('direction', '=', 'in');
                 }, true)
                 ->editColumn('message', function($item){
                     return $this->shortenString($item->message, 40);
