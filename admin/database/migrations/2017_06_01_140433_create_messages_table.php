@@ -18,8 +18,8 @@ class CreateMessagesTable extends Migration
             $table->text('message');
             $table->enum('direction', ['in', 'out']);
             $table->index('direction');
-            $table->boolean('notified')->default(false);
-            $table->index('notified');
+            $table->smallInteger('status')->default(0);
+            $table->index('status');
             $table->string('transport_id', 90)->nullable();
             $table->index('transport_id');
             $table->integer('rating_id')->unsigned();

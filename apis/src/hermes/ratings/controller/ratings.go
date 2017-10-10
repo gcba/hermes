@@ -51,7 +51,7 @@ func newMessage(rating uint, db *gorm.DB, frame *frame) error {
 	message := &models.Message{
 		Message:   frame.request.Comment,
 		Direction: "in",
-		Notified:  false,
+		Status:    0,
 		RatingID:  rating}
 
 	result := models.CreateMessage(message, db)

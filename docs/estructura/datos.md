@@ -219,7 +219,7 @@ Los mensajes de las conversaciones con los usuarios de las apps que enviaron cal
 |id              |int (PK)              |       |       |       |       |       |
 |message         |text                  |       |       |       |       |       |
 |direction       |enum                  |       |       |       |       |X      |
-|notified        |bool                  |false  |       |       |       |X      |
+|status          |smallint              |0      |       |       |       |X      |
 |transport_id    |varchar(90)           |       |       |X      |X      |X      |
 |rating_id       |int                   |       |X      |       |       |X      |
 |created_at      |timestamp             |       |       |       |       |       |

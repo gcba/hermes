@@ -53,7 +53,7 @@ class DataTablesController extends Controller {
             $params = $request->query()['columns'];
 
             $datatables = Datatables::of($model)
-                ->removeColumn('notified')
+                ->removeColumn('status')
                 ->removeColumn('transport_id')
                 ->removeColumn('updated_at')
                 ->filter(function ($query) use($params) {

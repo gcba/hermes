@@ -10,7 +10,7 @@ type Message struct {
 	ID          uint   `gorm:"primary_key;AUTO_INCREMENT"`
 	Message     string `sql:"type:text;not null"`
 	Direction   string `sql:"type:enum('in','out');not null"`
-	Notified    bool   `gorm:"not null;DEFAULT:false"`
+	Status      int    `gorm:"not null;DEFAULT:0"`
 	RatingID    uint   `gorm:"not null"`
 	TransportID *uint  `gorm:"DEFAULT:NULL"`
 
