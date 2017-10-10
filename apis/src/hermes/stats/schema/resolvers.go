@@ -9,7 +9,7 @@ import (
 
 	"github.com/fatih/structs"
 	"github.com/jinzhu/gorm"
-	"github.com/neelance/graphql-go/errors"
+	graphqlErrors "github.com/neelance/graphql-go/errors"
 )
 
 type (
@@ -35,8 +35,16 @@ type (
 		And   *[]field
 	}
 
+	countResult struct {
+		Count int32
+	}
+
+	averageResult struct {
+		Average float64
+	}
+
 	StatsError struct {
-		*errors.QueryError
+		*graphqlErrors.QueryError
 		Code int
 	}
 
@@ -44,135 +52,111 @@ type (
 )
 
 func (r *Resolver) Count(context context.Context, args arguments) (int32, error) {
-	var total int32
+	var result countResult
 
 	if db, castOk := context.Value(DB).(*gorm.DB); castOk {
-		count := fmt.Sprintf("COUNT(%s)", args.Field.Name)
+		count := fmt.Sprintf("COUNT(%s) AS Count", args.Field.Name)
 		model := args.Field.getModel(db)
-		query := db.Model(model).Select(count)
 		entity := args.Field.getEntity()
+		query := db.Select(count).Table(entity.Table)
 
 		if model == nil {
-			return total, invalidTableError(entity.Table)
+			return result.Count, invalidTableError(entity.Table)
 		}
 
 		if entity.Field != nil && !fieldExists(*entity.Field, structs.Names(model)) {
-			return total, invalidFieldError(*entity.Field)
+			return result.Count, invalidFieldError(*entity.Field)
 		}
 
 		if value := args.Field.getValue(); value != nil {
-			operator := args.Field.resolveOperator()
-			where := fmt.Sprintf("%s %s ?", args.Field.Name, operator)
+			if operator := args.Field.resolveOperator(); operator != nil {
+				where := fmt.Sprintf("%s %s ?", args.Field.Name, *operator)
 
-			query = query.Where(where, value)
+				query = query.Where(where, value)
+			}
 		}
 
 		query = args.attachAND(query)
 		query = args.attachOR(query)
 
-		rows, err := query.Rows()
+		query.Scan(&result)
+
 		errorList := query.GetErrors()
-		accumulator := 0
 
-		for rows.Next() {
-			accumulator++
-		}
-
-		if accumulator > 1 {
-			total = int32(accumulator)
-		} else {
-			query.Count(&total)
-		}
-
-		if !(len(errorList) > 0 || err != nil || query.Error != nil || query.Value == nil) {
-			return total, nil
-		} else if err != nil {
-			return total, queryError(err)
+		if !(len(errorList) > 0 || query.Error != nil) {
+			return result.Count, nil
 		} else if query.Error != nil {
-			return total, queryError(query.Error)
+			return result.Count, queryError(query.Error)
 		}
 
-		return total, databaseError()
+		return result.Count, databaseError()
 	}
 
-	return total, connectionError()
+	return result.Count, connectionError()
 }
 
 func (r *Resolver) Average(context context.Context, args arguments) (float64, error) {
-	var total float64
+	var result averageResult
 
 	if db, castOk := context.Value(DB).(*gorm.DB); castOk {
 		if value := args.Field.getValue(); value != nil {
-			return total, badRequestError("Average does not accept a value on the main field")
+			return result.Average, badRequestError("Average does not accept a value on the main field")
 		}
 
-		average := fmt.Sprintf("AVG(%s)", args.Field.Name)
+		if operator := args.Field.resolveOperator(); operator != nil {
+			return result.Average, badRequestError("Average does not accept an operator on the main field")
+		}
+
 		model := args.Field.getModel(db)
-		query := db.Model(model)
 		entity := args.Field.getEntity()
+		average := fmt.Sprintf("AVG(%s) AS Average", args.Field.Name)
+		query := db.Select(average).Table(entity.Table)
 
 		if model == nil {
-			return total, invalidTableError(entity.Table)
+			return result.Average, invalidTableError(entity.Table)
 		}
 
 		if entity.Field == nil {
-			return total, badRequestError("Average requires a field name")
+			return result.Average, badRequestError("Average requires a field name")
 		}
 
 		if !fieldExists(*entity.Field, structs.Names(model)) {
-			return total, invalidFieldError(*entity.Field)
+			return result.Average, invalidFieldError(*entity.Field)
 		}
 
-		query.Debug()
-
-		query = query.Select(average)
 		query = args.attachAND(query)
 		query = args.attachOR(query)
 
-		rows, err := query.Rows()
+		query.Scan(&result)
+
 		errorList := query.GetErrors()
-		numberOfRows := 0
 
-		for rows.Next() {
-			var avg float64
-
-			rows.Scan(&avg)
-
-			total += avg
-			numberOfRows++
-		}
-
-		total = total / float64(numberOfRows)
-
-		if !(len(errorList) > 0 || err != nil || query.Error != nil || query.Value == nil) {
-			return total, nil
-		} else if err != nil {
-			return total, queryError(err)
+		if !(len(errorList) > 0 || query.Error != nil) {
+			return result.Average, nil
 		} else if query.Error != nil {
-			return total, queryError(query.Error)
+			return result.Average, queryError(query.Error)
 		}
 
-		return total, databaseError()
+		return result.Average, databaseError()
 	}
 
-	return total, connectionError()
+	return result.Average, connectionError()
 }
 
 func (a arguments) attachAND(query *gorm.DB) *gorm.DB {
 	if a.And != nil {
 		for _, item := range *a.And {
-			if operator := item.resolveOperator(); len(operator) > 0 && len(item.Name) > 0 {
+			if operator := item.resolveOperator(); operator != nil && len(item.Name) > 0 {
 				if value := item.getValue(); value != nil {
 					if item.Count != nil && *item.Count {
-						having := fmt.Sprintf("COUNT(%s) %s ?", item.Name, operator)
+						having := fmt.Sprintf("COUNT(%s) %s ?", item.Name, *operator)
 
 						query = query.Group(item.Name).Having(having, value)
 					} else {
-						where := fmt.Sprintf("%s %s ?", item.Name, operator)
+						where := fmt.Sprintf("%s %s ?", item.Name, *operator)
 
 						query = query.Where(where, value)
 					}
-
 				}
 			}
 		}
@@ -184,9 +168,9 @@ func (a arguments) attachAND(query *gorm.DB) *gorm.DB {
 func (a arguments) attachOR(query *gorm.DB) *gorm.DB {
 	if a.Or != nil {
 		for _, item := range *a.Or {
-			if operator := item.resolveOperator(); len(operator) > 0 && len(item.Name) > 0 {
+			if operator := item.resolveOperator(); operator != nil && len(item.Name) > 0 {
 				if value := item.getValue(); value != nil {
-					where := fmt.Sprintf("%s %s ?", item.Name, operator)
+					where := fmt.Sprintf("%s %s ?", item.Name, *operator)
 
 					query = query.Or(where, value)
 				}
@@ -266,40 +250,46 @@ func (f *field) resolveValue(value *Value) interface{} {
 	return nil
 }
 
-func (f *field) resolveOperator() string {
+func (f *field) resolveOperator() *string {
+	var operator string
+
 	value := f.getValue()
 
 	if f.Eq != nil {
 		switch value.(type) {
 		case string, *string:
 			if isPostgres() {
-				return "ILIKE"
+				operator = "ILIKE"
 			}
 
-			return "LIKE"
+			operator = "ILIKE"
 		default:
-			return "="
+			operator = "="
 		}
 	} else if f.Ne != nil {
 		switch value.(type) {
 		case string, *string:
 			if isPostgres() {
-				return "NOT ILIKE"
+				operator = "NOT ILIKE"
 			}
 
-			return "NOT LIKE"
+			operator = "NOT LIKE"
 		default:
-			return "<>"
+			operator = "<>"
 		}
 	} else if f.Gt != nil {
-		return ">"
+		operator = ">"
 	} else if f.Lt != nil {
-		return "<"
+		operator = "<"
 	} else if f.Gte != nil {
-		return ">="
+		operator = ">="
 	} else if f.Lte != nil {
-		return "<="
+		operator = "<="
 	}
 
-	return "="
+	if len(operator) > 0 {
+		return &operator
+	}
+
+	return nil
 }
