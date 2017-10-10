@@ -36,6 +36,27 @@
     font-size: 13px;
 }
 
+.messages-master .dataTables_wrapper .row>[class*=col-] {
+    margin-bottom: 0.5em;
+}
+
+.messages-master .dataTables_wrapper .row {
+    margin-bottom: 0em;
+}
+
+.dataTables_wrapper .dataTables_filter {
+    width: 100%;
+}
+
+.dataTables_wrapper .dataTables_filter label {
+    width: 100%;
+    text-align: unset;
+}
+
+.dataTables_wrapper .dataTables_filter input {
+    width: calc(100% - 75px);
+}
+
 .dataTables_wrapper .row-selected {
     background-color: #eee;
 }
