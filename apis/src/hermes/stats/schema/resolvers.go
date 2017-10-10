@@ -159,17 +159,20 @@ func (r *Resolver) Average(context context.Context, args arguments) (float64, er
 }
 
 func (a arguments) attachAND(query *gorm.DB) *gorm.DB {
-	if a.And != nil && len(*a.And) > 0 {
+	if a.And != nil {
 		for _, item := range *a.And {
 			if operator := item.resolveOperator(); len(operator) > 0 && len(item.Name) > 0 {
-				if item.Count != nil && *item.Count {
-					having := fmt.Sprintf("COUNT(%s) %s ?", item.Name, operator)
+				if value := item.getValue(); value != nil {
+					if item.Count != nil && *item.Count {
+						having := fmt.Sprintf("COUNT(%s) %s ?", item.Name, operator)
 
-					query = query.Group(item.Name).Having(having, item.getValue())
-				} else {
-					where := fmt.Sprintf("%s %s ?", item.Name, operator)
+						query = query.Group(item.Name).Having(having, value)
+					} else {
+						where := fmt.Sprintf("%s %s ?", item.Name, operator)
 
-					query = query.Where(where, item.getValue())
+						query = query.Where(where, value)
+					}
+
 				}
 			}
 		}
@@ -179,12 +182,14 @@ func (a arguments) attachAND(query *gorm.DB) *gorm.DB {
 }
 
 func (a arguments) attachOR(query *gorm.DB) *gorm.DB {
-	if a.Or != nil && len(*a.Or) > 0 {
+	if a.Or != nil {
 		for _, item := range *a.Or {
 			if operator := item.resolveOperator(); len(operator) > 0 && len(item.Name) > 0 {
-				where := fmt.Sprintf("%s %s ?", item.Name, operator)
+				if value := item.getValue(); value != nil {
+					where := fmt.Sprintf("%s %s ?", item.Name, operator)
 
-				query = query.Or(where, item.getValue())
+					query = query.Or(where, value)
+				}
 			}
 		}
 	}
