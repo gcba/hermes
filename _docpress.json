@@ -411,9 +411,9 @@
                     "id": "datos"
                   },
                   {
-                    "title": "Cache y Queue",
+                    "title": "Cache y job queue",
                     "depth": 3,
-                    "id": "cache-y-queue"
+                    "id": "cache-y-job-queue"
                   },
                   {
                     "title": "API Gateway",
@@ -1370,9 +1370,9 @@
               "id": "datos"
             },
             {
-              "title": "Cache y Queue",
+              "title": "Cache y job queue",
               "depth": 3,
-              "id": "cache-y-queue"
+              "id": "cache-y-job-queue"
             },
             {
               "title": "API Gateway",
