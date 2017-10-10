@@ -103,6 +103,8 @@
         <script src="{{ voyager_asset('js/multilingual.js') }}"></script>
     @endif
     <script>
+        // TODO: Create a proper asset pipeline
+
         $(document).ready(function () {
             @if ($isModelTranslatable)
                 $('.side-body').multilingual();
@@ -148,7 +150,7 @@
                         .closest('tr').addClass('row-search');
                     });
 
-                    $('#dataTable tr:nth-child(2)').click();
+                    selectRow($('#dataTable tbody tr:nth-child(1)'));
                 }
             });
         }).on('click', 'tr', function() {
