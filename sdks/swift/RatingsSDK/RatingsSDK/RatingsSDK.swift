@@ -210,7 +210,7 @@ public class Rating {
             request.timeoutInterval = self.timeout
         }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(backoff)) {
+        DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: .now() + .seconds(backoff)) {
             do {
                 try HTTP.POST(self.url, parameters: params, headers: headers, requestSerializer: JSONParameterSerializer()).start { response in
                     if response.error != nil && (response.error!.code == 503 || response.error!.code == 504 || response.error!.code >= 520) {
