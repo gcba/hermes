@@ -133,3 +133,137 @@ Esta API será de sólo lectura, con un enfoque de obtención y transformación 
 Dado que se trata de una API GraphQL, sólo es necesario un endpoint POST.
 
 `POST /stats`
+
+### Queries
+
+#### Count
+
+##### Tabla
+
+Devuelve la cantidad de registros en una tabla.
+
+```json
+{
+    "query": "query Example($field: Field!) { count(field: $field) }",
+    "variables": {
+        "field": {
+            "name": "messages"
+        }
+    }
+}
+```
+
+##### Columna
+
+Devuelve la cantidad de registros en una columna, ignorando nulls.
+
+```json
+{
+    "query": "query Example($field: Field!) { count(field: $field) }",
+    "variables": {
+        "field": {
+            "name": "messages.transport_id"
+        }
+    }
+}
+```
+
+##### Columna con condición
+
+Devuelve la cantidad de registros en una columna que cumplen con una condición, ignroando nulls.
+
+```json
+{
+    "query": "query Example($field: Field!) { count(field: $field) }",
+    "variables": {
+        "field": {
+            "name": "messages.status",
+            "eq": 0
+        }
+    }
+}
+```
+
+##### AND
+
+Permite agregar condiciones adicionales que deben verificarse conjuntamente.
+
+```json
+{
+    "query": "query Example($field: Field!, $and: [Field!]) { count(field: $field, and: $and) }",
+    "variables": {
+        "field": {
+            "name": "ratings.rating",
+            "gt": 2
+        },
+        "and": {
+            "name": "ratings.rating",
+            "lt": 5
+        }
+    }
+}
+```
+
+```json
+{
+    "query": "query Example($field: Field!, $and: [Field!]) { count(field: $field, and: $and) }",
+    "variables": {
+        "field": {
+            "name": "ratings.rating",
+            "gt": 2
+        },
+        "and": [
+            {
+                "name": "ratings.rating",
+                "lt": 5
+            },
+            {
+                "name": "ratings.has_message",
+                "eq": true
+            }
+        ]
+    }
+}
+```
+
+##### OR
+
+Permite agregar condiciones adicionales que no necesariamente deban verificarse a la vez.
+
+```json
+{
+    "query": "query Example($field: Field!, $or: [Field!]) { count(field: $field, or: $or) }",
+    "variables": {
+        "field": {
+            "name": "ratings.rating",
+            "eq": 2
+        },
+        "or": {
+            "name": "ratings.rating",
+            "eq": 5
+        }
+    }
+}
+```
+
+```json
+{
+    "query": "query Example($field: Field!, $or: [Field!]) { count(field: $field, or: $or) }",
+    "variables": {
+        "field": {
+            "name": "ratings.rating",
+            "eq": 2
+        },
+        "or": [
+            {
+                "name": "ratings.rating",
+                "eq": 5
+            },
+            {
+                "name": "ratings.rating",
+                "eq": 3
+            }
+        ]
+    }
+}
+```
