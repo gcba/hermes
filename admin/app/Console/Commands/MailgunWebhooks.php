@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use Mailgun\Mailgun;
 use TCG\Voyager\Models\Setting;
 use Illuminate\Console\Command;
 
@@ -59,7 +60,7 @@ class MailgunWebhooks extends Command
             return;
         }
 
-        if (!in_array($type, $this->types)) {
+        if (!in_array($type, $this->types) && !$delete && !$list) {
             $this->error('Invalid type');
 
             return;
@@ -163,10 +164,10 @@ class MailgunWebhooks extends Command
     private function getWebhooks() {
         $response = $this->client->get("domains/$this->domain/webhooks");
 
-        return $response->http_response_code === 200 &&
-            count($response->http_response_body->items) > 0 &&
-            array_key_exists('webhooks', $response->http_response_body->items[0]) ? // Watch out here
-            $webhooks->http_response_body->items[0]['webhooks'] :
+        var_dump($response->http_response_body);
+
+        return $response->http_response_code === 200 && isset($response->http_response_body->webhooks) ?
+            $response->http_response_body->webhooks :
             null;
     }
 }
