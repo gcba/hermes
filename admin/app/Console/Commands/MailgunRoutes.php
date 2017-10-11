@@ -13,7 +13,10 @@ class MailgunRoutes extends Command
      *
      * @var string
      */
-    protected $signature = 'mailgun:routes {url?} {--delete} {--list}';
+    protected $signature = 'mailgun:routes
+        {url? : The url of the route to create.}
+        {--delete : Delete all routes. }
+        {--list : List all existing routes.}';
 
     /**
      * The console command description.
@@ -77,20 +80,20 @@ class MailgunRoutes extends Command
     }
 
     private function listRoutes() {
-        $routes = $this->client->get("routes");
-        $headers = ["ID", 'Description', 'Expression', "Actions", "Priority", "Created At"];
+        $routes = $this->getRoutes();
+        $headers = ['ID', 'Description', 'Expression', 'Actions', 'Priority', 'Created At'];
         $rows = [];
 
-        if (count($routes->http_response_body->items) > 0) {
-            foreach ($routes->http_response_body->items as $key => $value) {
+        if ($routes !== null) {
+            foreach ($routes as $key => $value) {
                 $row = [];
 
-                $row["ID"] = $value->id;
-                $row["Description"] = $value->description;
-                $row["Expression"] = $value->expression;
-                $row["Actions"] = join(', ', $value->actions);
-                $row["Priority"] = $value->priority;
-                $row["Created At"] = $value->created_at;
+                $row['ID'] = $value->id;
+                $row['Description'] = $value->description;
+                $row['Expression'] = $value->expression;
+                $row['Actions'] = join(', ', $value->actions);
+                $row['Priority'] = $value->priority;
+                $row['Created At'] = $value->created_at;
 
                 $rows[] = $row;
             }
@@ -103,13 +106,13 @@ class MailgunRoutes extends Command
     }
 
     private function deleteRoutes() {
-        $routes = $this->client->get("routes");
+        $routes = $this->getRoutes();
 
-        if (count($routes->http_response_body->items) > 0) {
-            foreach ($routes->http_response_body->items as $key => $value) {
+        if ($routes !== null) {
+            foreach ($routes as $key => $value) {
                 $res = $this->client->delete('routes/' . $value->id);
 
-                $this->info('Route "' . $value->description . '" deleted successfully');
+                $this->info("Route '' . $value->description . '' deleted successfully");
             }
         }
         else {
@@ -120,11 +123,11 @@ class MailgunRoutes extends Command
     private function checkRoute(String $url) {
         if (Setting::where('key', $this->key)->exists()) {
             $route = Setting::where('key', $this->key)->first()->value;
-            $results = $this->client->get("routes");
+            $routes = $this->getRoutes();
 
-            if ($results->http_response_code == 200) {
-                foreach ($results->http_response_body->items as $key => $value) {
-                    if ($value->id == $route) {
+            if ($routes !== null) {
+                foreach ($routes as $key => $value) {
+                    if ($value->id === $route) {
                         $this->error('Route already exists');
 
                         return;
@@ -137,14 +140,14 @@ class MailgunRoutes extends Command
     }
 
     private function createRoute(String $url) {
-        $newRoute = $this->client->post("routes", [
+        $newRoute = $this->client->post('routes', [
             'priority'    => 0,
             'expression'  => 'catch_all()',
-            'action'      => ['forward("' . $url . '")', 'stop()'],
+            'action'      => ["forward('' . $url . '')', 'stop()"],
             'description' => 'Forward all messages to Hermes'
         ]);
 
-        if ($newRoute->http_response_code == 200) {
+        if ($newRoute->http_response_code === 200) {
             $id = $newRoute->http_response_body->route->id;
             $description = $newRoute->http_response_body->route->description;
 
@@ -156,6 +159,14 @@ class MailgunRoutes extends Command
         $this->error('Error creating the route. Are you connected to the internet?');
     }
 
+    private function getRoutes() {
+        $response = $this->client->get('routes');
+
+        return $response->http_response_code === 200 && count($response->http_response_body->items) > 0 ?
+            $response->http_response_body->items :
+            null;
+    }
+
     private function saveRoute(String $id, String $name) {
         $setting = Setting::firstOrNew(['key' => $this->key]);
 
@@ -163,8 +174,13 @@ class MailgunRoutes extends Command
         $setting->value = $id;
         $setting->display_name = 'Mailgun Route ID';
         $setting->type = 'text';
-        $setting->save();
 
-        $this->info('Route "' . $name . '" saved successfully');
+        if (!$setting->save()) {
+            $this->error('Error saving route to settings');
+
+            return;
+        }
+
+        $this->info("Route '' . $name . '' saved successfully");
     }
 }
