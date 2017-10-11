@@ -6,7 +6,6 @@ import (
 	"hermes/database"
 
 	"github.com/dchest/uniuri"
-	_ "github.com/joho/godotenv/autoload" // Loads config from .env file
 	"github.com/stretchr/testify/require"
 )
 
@@ -54,6 +53,6 @@ func TestGetAppUser(t *testing.T) {
 		require.Equal(t, email, *result.Email)
 		require.Equal(t, mibaID, *result.MiBAID)
 	} else {
-		t.Fatal("Value is not aan AppUser")
+		t.Fatal("Value is not an AppUser")
 	}
 }
