@@ -3,6 +3,8 @@
 namespace App\Jobs;
 
 use App\AppUser;
+use App\Message;
+use App\Jobs\SetMessageTransportId;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
@@ -14,8 +16,8 @@ class SendMessage implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     protected $subject;
-    protected $text;
     protected $user;
+    protected $message;
 
     /**
      * The number of seconds the job can run before timing out.
@@ -29,11 +31,11 @@ class SendMessage implements ShouldQueue
      *
      * @return void
      */
-    public function __construct(String $subject, String $text,  AppUser $user)
+    public function __construct(String $subject, Message $message, AppUser $user)
     {
         $this->subject = $subject;
-        $this->text = $text;
         $this->user = $user;
+        $this->message = $message;
     }
 
     /**
@@ -43,7 +45,7 @@ class SendMessage implements ShouldQueue
      */
     public function handle()
     {
-        $result = Mailgun::raw($this->text, function ($message) {
+        $result = Mailgun::raw($this->message->message, function ($message) {
             $message->to($this->user->email, env('MAILGUN_SENDER', ''))->subject($this->subject);
 
             return;
@@ -51,6 +53,9 @@ class SendMessage implements ShouldQueue
 
         if ($result->status != 200) {
             throw new Exception("Could not send email to Mailgun. Requeuing...");
+        }
+        else {
+            SetMessageTransportId::dispatch($this->message, $result->id);
         }
 
         return;

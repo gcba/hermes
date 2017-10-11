@@ -93,7 +93,7 @@ class MessagesController extends DataTablesController
         }
 
         if (isset($user->email)) {
-            SendMessage::dispatch($subject, $text, $user);
+            SendMessage::dispatch($subject, $message, $user);
         }
         else {
             return response()->json(['errors' => "User has no email.", 'code' => $unprocessableEntity]);
