@@ -52,7 +52,9 @@ class SendMessage implements ShouldQueue
         });
 
         if ($result->status === 200) {
-            SetMessageTransportId::dispatch($this->message, $result->id);
+            $id = filter_var(substr(trim($result->id), 1, -1), FILTER_SANITIZE_EMAIL);
+
+            SetMessageTransportId::dispatch($this->message, $id);
         }
         else {
             throw new Exception("Could not send email to Mailgun. Requeuing...");

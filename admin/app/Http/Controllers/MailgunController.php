@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Message;
-
+use App\Jobs\CreateMessage;
+use App\Jobs\SetMessageStatus;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 
@@ -26,20 +27,48 @@ class MailgunController extends Controller
         if (filter_var($inReplyTo, FILTER_VALIDATE_EMAIL)) {
             $messageReplied = Message::where('transport_id', $inReplyTo)->first();
 
-            if ($messageReplied) {
-                $messageReplied->status = 2; // Sent/Received = 0, Notified/Delivered = 1, Replied = 2
+            if ($messageReplied !== null) {
+                $message =$data['stripped-text']; // Sanitization happens in mutator
+                $direction = 'in';
+                $status = 0;
+                $transportId = null;
+                $ratingId = $messageReplied->rating->id;
 
-                $message = Message::create([
-                    'message' => $data['stripped-text'], // Sanitization happens in mutator
-                    'direction' => 'in',
-                    'status' => 0,
-                    'transport_id' => null,
-                    'rating_id' => $messageReplied->rating->id
-                ]);
-
-                $messageReplied->save();
-                $message->save();
+                CreateMessage::dispatch($message, $direction, $status, $transportId, $ratingId);
+                SetMessageStatus::dispatch($messageReplied, 2); // Sent/Received = 0, Notified/Delivered = 1, Replied = 2
             }
+        }
+        else {
+            return Response::json([], 406);
+        }
+
+        return Response::json([], 200);
+    }
+
+    /**
+     * Sets a message as notified.
+     *
+     * @param  Request  $request
+     * @return Response
+     */
+    public function notify(Request $request)
+    {
+        $data = [];
+
+        parse_str($request->getContent(), $data);
+
+        $event = filter_var(substr(trim($data['event']), 1, -1), FILTER_SANITIZE_SPECIAL_CHARS);
+        $messageId = filter_var(substr(trim($data['Message-Id']), 1, -1), FILTER_SANITIZE_EMAIL);
+
+        if ($event == 'delivered' && filter_var($messageId, FILTER_VALIDATE_EMAIL)) {
+            $message = Message::where('transport_id', $messageId)->first();
+
+            if ($message !== null) {
+                SetMessageStatus::dispatch($message, 1); // Sent/Received = 0, Notified/Delivered = 1, Replied = 2
+            }
+        }
+        else {
+            return Response::json([], 406);
         }
 
         return Response::json([], 200);
