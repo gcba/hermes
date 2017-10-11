@@ -374,6 +374,16 @@
                     "title": "Endpoints",
                     "depth": 3,
                     "id": "endpoints"
+                  },
+                  {
+                    "title": "Queries",
+                    "depth": 3,
+                    "id": "queries"
+                  },
+                  {
+                    "title": "Responses",
+                    "depth": 3,
+                    "id": "responses"
                   }
                 ]
               }
@@ -1338,6 +1348,16 @@
               "title": "Endpoints",
               "depth": 3,
               "id": "endpoints"
+            },
+            {
+              "title": "Queries",
+              "depth": 3,
+              "id": "queries"
+            },
+            {
+              "title": "Responses",
+              "depth": 3,
+              "id": "responses"
             }
           ]
         }
