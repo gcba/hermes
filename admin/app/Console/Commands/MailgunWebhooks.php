@@ -164,8 +164,6 @@ class MailgunWebhooks extends Command
     private function getWebhooks() {
         $response = $this->client->get("domains/$this->domain/webhooks");
 
-        var_dump($response->http_response_body);
-
         return $response->http_response_code === 200 && isset($response->http_response_body->webhooks) ?
             $response->http_response_body->webhooks :
             null;
