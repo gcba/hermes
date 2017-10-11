@@ -70,12 +70,37 @@ func (r *Resolver) Count(context context.Context, args arguments) (int32, error)
 
 		count := fmt.Sprintf("COUNT(%s) AS Count", args.Field.Name)
 		query := db.Select(count).Table(entity.Table)
+		modelStruct := structs.New(model)
 
-		if value := args.Field.getValue(); value != nil {
+		if entity.Field != nil {
+			fieldName := toCamelCase(*entity.Field)
+			field := modelStruct.Field(fieldName)
+			fieldKind := field.Kind()
+
 			if operator := args.Field.resolveOperator(); operator != nil {
-				where := fmt.Sprintf("%s %s ?", args.Field.Name, *operator)
+				if value := args.Field.getValue(); value != nil {
+					valueType := reflect.TypeOf(value)
+					valueKind := valueType.Kind()
+					valueElemKind := valueType.Elem().Kind()
+					ptrKind := reflect.Ptr
+					intKind := reflect.Int
+					floatKind := reflect.Float64
 
-				query = query.Where(where, value)
+					if (valueKind == ptrKind && valueElemKind == fieldKind) ||
+						(valueKind == ptrKind && valueElemKind == floatKind && fieldKind == intKind) ||
+						(valueKind == ptrKind && valueElemKind == intKind && fieldKind == floatKind) ||
+						(valueKind == fieldKind) ||
+						(valueKind == floatKind && fieldKind == intKind) ||
+						(valueKind == intKind && fieldKind == floatKind) {
+						where := fmt.Sprintf("%s %s ?", args.Field.Name, *operator)
+
+						query = query.Where(where, value)
+					} else {
+						return result.Count, invalidValueError()
+					}
+				} else {
+					return result.Count, noValueError()
+				}
 			}
 		}
 
@@ -102,14 +127,6 @@ func (r *Resolver) Average(context context.Context, args arguments) (float64, er
 	var result averageResult
 
 	if db, castOk := context.Value(DB).(*gorm.DB); castOk {
-		if value := args.Field.getValue(); value != nil {
-			return result.Average, badRequestError("Average does not accept a value on the main field")
-		}
-
-		if operator := args.Field.resolveOperator(); operator != nil {
-			return result.Average, badRequestError("Average does not accept an operator on the main field")
-		}
-
 		model := args.Field.getModel(db)
 		entity := args.Field.getEntity()
 
@@ -122,6 +139,10 @@ func (r *Resolver) Average(context context.Context, args arguments) (float64, er
 
 		if entity.Field == nil {
 			return result.Average, badRequestError("Average requires a field name")
+		}
+
+		if !fieldExists(*entity.Field, structs.Names(model)) {
+			return result.Average, invalidFieldError(*entity.Field)
 		}
 
 		modelStruct := structs.New(model)
@@ -140,8 +161,25 @@ func (r *Resolver) Average(context context.Context, args arguments) (float64, er
 			return result.Average, invalidFieldError(*entity.Field)
 		}
 
-		if !fieldExists(*entity.Field, structs.Names(model)) {
-			return result.Average, invalidFieldError(*entity.Field)
+		if operator := args.Field.resolveOperator(); operator != nil {
+			if value := args.Field.getValue(); value != nil {
+				valueType := reflect.TypeOf(value)
+				valueKind := valueType.Kind()
+				valueElemKind := valueType.Elem().Kind()
+				intKind := reflect.Int
+				floatKind := reflect.Float64
+
+				if (valueKind == reflect.Ptr && (valueElemKind == intKind || valueElemKind == floatKind)) ||
+					(valueKind == intKind || valueKind == floatKind) {
+					where := fmt.Sprintf("%s %s ?", args.Field.Name, *operator)
+
+					query = query.Where(where, value)
+				} else {
+					return result.Average, invalidValueError()
+				}
+			} else {
+				return result.Average, noValueError()
+			}
 		}
 
 		query = args.attachAND(query)

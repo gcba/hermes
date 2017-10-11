@@ -28,6 +28,14 @@ func invalidFieldError(field string) error {
 	return &StatsError{errors.Errorf("%s is not a valid field", field), http.StatusBadRequest}
 }
 
+func invalidValueError() error {
+	return &StatsError{errors.Errorf("Invalid value provided"), http.StatusBadRequest}
+}
+
+func noValueError() error {
+	return &StatsError{errors.Errorf("No value provided"), http.StatusBadRequest}
+}
+
 func internalServerError(message string) error {
 	return &StatsError{errors.Errorf(message), http.StatusInternalServerError}
 }

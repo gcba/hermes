@@ -316,6 +316,55 @@ func TestCount_InvalidField_BadRequest(t *testing.T) {
 	json.ContainsKey("errors")
 }
 
+func TestCount_WrongFieldType_BadRequest(t *testing.T) {
+	handler := handler.Handler(3000, routes)
+	server := httptest.NewServer(handler)
+
+	defer server.Close()
+
+	server.URL = "http://localhost:" + port
+
+	e := httpexpect.WithConfig(httpexpect.Config{
+		BaseURL:  server.URL,
+		Reporter: httpexpect.NewAssertReporter(t),
+		Printers: []httpexpect.Printer{
+			httpexpect.NewDebugPrinter(t, true),
+		},
+	})
+
+	query := `
+	{
+		"query": "query Example($field: Field!) { count(field: $field) }",
+		"variables": {
+		    "field": {
+				"name": "ratings.rating",
+				"eq": true
+		    }
+		}
+	}
+	`
+
+	meta := map[string]interface{}{
+		"meta": map[string]interface{}{
+			"code":    http.StatusBadRequest,
+			"message": "Bad Request"}}
+
+	r := e.POST("/stats").
+		WithHeader("Content-Type", "application/json; charset=UTF-8").
+		WithHeader("Accept", "application/json").
+		WithText(query).
+		Expect()
+
+	r.Status(http.StatusBadRequest)
+	r.Header("Content-Type").Equal("application/json; charset=UTF-8")
+
+	json := r.JSON().Object()
+
+	json.ContainsMap(meta)
+	json.NotContainsKey("data")
+	json.ContainsKey("errors")
+}
+
 func TestAverage(t *testing.T) {
 	handler := handler.Handler(3000, routes)
 	server := httptest.NewServer(handler)
@@ -364,6 +413,55 @@ func TestAverage(t *testing.T) {
 	json.NotContainsKey("errors")
 }
 
+func TestAverage_WithOperator(t *testing.T) {
+	handler := handler.Handler(3000, routes)
+	server := httptest.NewServer(handler)
+
+	defer server.Close()
+
+	server.URL = "http://localhost:" + port
+
+	e := httpexpect.WithConfig(httpexpect.Config{
+		BaseURL:  server.URL,
+		Reporter: httpexpect.NewAssertReporter(t),
+		Printers: []httpexpect.Printer{
+			httpexpect.NewDebugPrinter(t, true),
+		},
+	})
+
+	query := `
+	{
+		"query": "query Example($field: Field!) { average(field: $field) }",
+		"variables": {
+		    "field": {
+				"name": "ratings.rating",
+				"gt": 0
+		    }
+		}
+	}
+	`
+
+	meta := map[string]interface{}{
+		"meta": map[string]interface{}{
+			"code":    http.StatusOK,
+			"message": "OK"}}
+
+	r := e.POST("/stats").
+		WithHeader("Content-Type", "application/json; charset=UTF-8").
+		WithHeader("Accept", "application/json").
+		WithText(query).
+		Expect()
+
+	r.Status(http.StatusOK)
+	r.Header("Content-Type").Equal("application/json; charset=UTF-8")
+
+	json := r.JSON().Object()
+
+	json.ContainsMap(meta)
+	json.ContainsKey("data")
+	json.NotContainsKey("errors")
+}
+
 func TestAverage_And(t *testing.T) {
 	handler := handler.Handler(3000, routes)
 	server := httptest.NewServer(handler)
@@ -385,11 +483,12 @@ func TestAverage_And(t *testing.T) {
 		"query": "query Example($field: Field!, $and: [Field!]) { average(field: $field, and: $and) }",
 		"variables": {
 		    "field": {
-			    "name": "ratings.rating"
+				"name": "ratings.rating",
+				"gt": 0
 		    },
 		    "and": {
-			    "name": "ratings.has_message",
-			    "eq": true
+			    "name": "ratings.rating",
+			    "lt": 4
 		    }
 		}
 	}
@@ -437,11 +536,12 @@ func TestAverage_Or(t *testing.T) {
 		"query": "query Example($field: Field!, $or: [Field!]) { average(field: $field, or: $or) }",
 		"variables": {
 			"field": {
-				"name": "ratings.rating"
+				"name": "ratings.rating",
+				"gt": 3
 		  	},
 		  	"or": {
-				"name": "ratings.has_message",
-				"eq": true
+				"name": "ratings.rating",
+				"lte": 2
 			}
 		}
 	}
