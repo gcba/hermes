@@ -3,6 +3,7 @@ package controller
 import (
 	"net/http"
 	"net/http/httptest"
+	"os"
 	"testing"
 
 	"hermes/ratings/handler"
@@ -11,10 +12,14 @@ import (
 	"github.com/labstack/echo"
 )
 
-var routes = map[string]echo.HandlerFunc{
-	"OptionsRoot":    OptionsRoot,
-	"OptionsRatings": OptionsRatings,
-	"PostRatings":    PostRatings}
+var (
+	routes = map[string]echo.HandlerFunc{
+		"OptionsRoot":    OptionsRoot,
+		"OptionsRatings": OptionsRatings,
+		"PostRatings":    PostRatings}
+
+	port = getPort("HERMES_RATINGS_PORT", 5000)
+)
 
 func TestOptionsRatings(t *testing.T) {
 	handler := handler.Handler(3000, routes)
@@ -22,7 +27,7 @@ func TestOptionsRatings(t *testing.T) {
 
 	defer server.Close()
 
-	server.URL = "http://localhost:5000"
+	server.URL = "http://localhost:" + port
 
 	e := httpexpect.WithConfig(httpexpect.Config{
 		BaseURL:  server.URL,
@@ -59,7 +64,7 @@ func TestPostRatings(t *testing.T) {
 
 	defer server.Close()
 
-	server.URL = "http://localhost:5000"
+	server.URL = "http://localhost:" + port
 
 	e := httpexpect.WithConfig(httpexpect.Config{
 		BaseURL:  server.URL,
@@ -109,7 +114,7 @@ func TestPostRatings_WithBrowser(t *testing.T) {
 
 	defer server.Close()
 
-	server.URL = "http://localhost:5000"
+	server.URL = "http://localhost:" + port
 
 	e := httpexpect.WithConfig(httpexpect.Config{
 		BaseURL:  server.URL,
@@ -162,7 +167,7 @@ func TestPostRatings_WithAppUser(t *testing.T) {
 
 	defer server.Close()
 
-	server.URL = "http://localhost:5000"
+	server.URL = "http://localhost:" + port
 
 	e := httpexpect.WithConfig(httpexpect.Config{
 		BaseURL:  server.URL,
@@ -216,7 +221,7 @@ func TestPostRatings_WithMessage(t *testing.T) {
 
 	defer server.Close()
 
-	server.URL = "http://localhost:5000"
+	server.URL = "http://localhost:" + port
 
 	e := httpexpect.WithConfig(httpexpect.Config{
 		BaseURL:  server.URL,
@@ -271,7 +276,7 @@ func TestPostRatings_WithDesktopDevice(t *testing.T) {
 
 	defer server.Close()
 
-	server.URL = "http://localhost:5000"
+	server.URL = "http://localhost:" + port
 
 	e := httpexpect.WithConfig(httpexpect.Config{
 		BaseURL:  server.URL,
@@ -324,7 +329,7 @@ func TestPostRatings_WithNewBrowser(t *testing.T) {
 
 	defer server.Close()
 
-	server.URL = "http://localhost:5000"
+	server.URL = "http://localhost:" + port
 
 	e := httpexpect.WithConfig(httpexpect.Config{
 		BaseURL:  server.URL,
@@ -377,7 +382,7 @@ func TestPostRatings_WithDeviceBrandMismatch(t *testing.T) {
 
 	defer server.Close()
 
-	server.URL = "http://localhost:5000"
+	server.URL = "http://localhost:" + port
 
 	e := httpexpect.WithConfig(httpexpect.Config{
 		BaseURL:  server.URL,
@@ -430,7 +435,7 @@ func TestPostRatings_WithoutPlatform(t *testing.T) {
 
 	defer server.Close()
 
-	server.URL = "http://localhost:5000"
+	server.URL = "http://localhost:" + port
 
 	e := httpexpect.WithConfig(httpexpect.Config{
 		BaseURL:  server.URL,
@@ -481,7 +486,7 @@ func TestPostRatings_WithoutBrand(t *testing.T) {
 
 	defer server.Close()
 
-	server.URL = "http://localhost:5000"
+	server.URL = "http://localhost:" + port
 
 	e := httpexpect.WithConfig(httpexpect.Config{
 		BaseURL:  server.URL,
@@ -535,7 +540,7 @@ func TestPostRatings_WithoutPPI(t *testing.T) {
 
 	defer server.Close()
 
-	server.URL = "http://localhost:5000"
+	server.URL = "http://localhost:" + port
 
 	e := httpexpect.WithConfig(httpexpect.Config{
 		BaseURL:  server.URL,
@@ -589,7 +594,7 @@ func TestPostRatings_WithoutBrandAndPPI(t *testing.T) {
 
 	defer server.Close()
 
-	server.URL = "http://localhost:5000"
+	server.URL = "http://localhost:" + port
 
 	e := httpexpect.WithConfig(httpexpect.Config{
 		BaseURL:  server.URL,
@@ -642,7 +647,7 @@ func TestPostRatings_WithoutUserName(t *testing.T) {
 
 	defer server.Close()
 
-	server.URL = "http://localhost:5000"
+	server.URL = "http://localhost:" + port
 
 	e := httpexpect.WithConfig(httpexpect.Config{
 		BaseURL:  server.URL,
@@ -696,7 +701,7 @@ func TestPostRatings_WithoutUserEmail(t *testing.T) {
 
 	defer server.Close()
 
-	server.URL = "http://localhost:5000"
+	server.URL = "http://localhost:" + port
 
 	e := httpexpect.WithConfig(httpexpect.Config{
 		BaseURL:  server.URL,
@@ -750,7 +755,7 @@ func TestPostRatings_WithUserMiBAID(t *testing.T) {
 
 	defer server.Close()
 
-	server.URL = "http://localhost:5000"
+	server.URL = "http://localhost:" + port
 
 	e := httpexpect.WithConfig(httpexpect.Config{
 		BaseURL:  server.URL,
@@ -804,7 +809,7 @@ func TestPostRatings_WithoutUserNameAndEmail(t *testing.T) {
 
 	defer server.Close()
 
-	server.URL = "http://localhost:5000"
+	server.URL = "http://localhost:" + port
 
 	e := httpexpect.WithConfig(httpexpect.Config{
 		BaseURL:  server.URL,
@@ -857,7 +862,7 @@ func TestPostRatings_WithoutUserNameAndMiBAID(t *testing.T) {
 
 	defer server.Close()
 
-	server.URL = "http://localhost:5000"
+	server.URL = "http://localhost:" + port
 
 	e := httpexpect.WithConfig(httpexpect.Config{
 		BaseURL:  server.URL,
@@ -910,7 +915,7 @@ func TestPostRatings_WithoutUserEmailAndMiBAID(t *testing.T) {
 
 	defer server.Close()
 
-	server.URL = "http://localhost:5000"
+	server.URL = "http://localhost:" + port
 
 	e := httpexpect.WithConfig(httpexpect.Config{
 		BaseURL:  server.URL,
@@ -966,7 +971,7 @@ func TestPostRatings_NotAcceptableError(t *testing.T) {
 
 	defer server.Close()
 
-	server.URL = "http://localhost:5000"
+	server.URL = "http://localhost:" + port
 
 	e := httpexpect.WithConfig(httpexpect.Config{
 		BaseURL:  server.URL,
@@ -1003,4 +1008,14 @@ func TestPostRatings_NotAcceptableError(t *testing.T) {
 	r.Status(http.StatusNotAcceptable)
 	r.Header("Content-Type").Equal("application/json; charset=UTF-8")
 	r.JSON().Object().Equal(response)
+}
+
+func getPort(env string, defaultPort int) string {
+	port := os.Getenv(env)
+
+	if len(port) == 0 {
+		return string(defaultPort)
+	}
+
+	return port
 }
