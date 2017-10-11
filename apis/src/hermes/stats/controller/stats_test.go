@@ -6,7 +6,7 @@ import (
 	"os"
 	"testing"
 
-	"hermes/ratings/handler"
+	"hermes/stats/handler"
 
 	"github.com/gavv/httpexpect"
 	"github.com/labstack/echo"
@@ -49,7 +49,7 @@ func TestCount(t *testing.T) {
 			"code":    http.StatusOK,
 			"message": "OK"}}
 
-	r := e.POST("/ratings").
+	r := e.POST("/stats").
 		WithHeader("Content-Type", "application/json; charset=UTF-8").
 		WithHeader("Accept", "application/json").
 		WithText(query).
@@ -61,7 +61,7 @@ func TestCount(t *testing.T) {
 	json := r.JSON().Object()
 
 	json.ContainsMap(meta)
-	json.ContainsKey("data").ContainsKey("count")
+	json.ContainsKey("data")
 	json.NotContainsKey("errors")
 }
 
@@ -98,7 +98,7 @@ func TestCountWithOperator(t *testing.T) {
 			"code":    http.StatusOK,
 			"message": "OK"}}
 
-	r := e.POST("/ratings").
+	r := e.POST("/stats").
 		WithHeader("Content-Type", "application/json; charset=UTF-8").
 		WithHeader("Accept", "application/json").
 		WithText(query).
@@ -110,7 +110,7 @@ func TestCountWithOperator(t *testing.T) {
 	json := r.JSON().Object()
 
 	json.ContainsMap(meta)
-	json.ContainsKey("data").ContainsKey("count")
+	json.ContainsKey("data")
 	json.NotContainsKey("errors")
 }
 
@@ -151,7 +151,7 @@ func TestCountAnd(t *testing.T) {
 			"code":    http.StatusOK,
 			"message": "OK"}}
 
-	r := e.POST("/ratings").
+	r := e.POST("/stats").
 		WithHeader("Content-Type", "application/json; charset=UTF-8").
 		WithHeader("Accept", "application/json").
 		WithText(query).
@@ -163,7 +163,7 @@ func TestCountAnd(t *testing.T) {
 	json := r.JSON().Object()
 
 	json.ContainsMap(meta)
-	json.ContainsKey("data").ContainsKey("count")
+	json.ContainsKey("data")
 	json.NotContainsKey("errors")
 }
 
@@ -204,7 +204,7 @@ func TestCountOr(t *testing.T) {
 			"code":    http.StatusOK,
 			"message": "OK"}}
 
-	r := e.POST("/ratings").
+	r := e.POST("/stats").
 		WithHeader("Content-Type", "application/json; charset=UTF-8").
 		WithHeader("Accept", "application/json").
 		WithText(query).
@@ -216,7 +216,7 @@ func TestCountOr(t *testing.T) {
 	json := r.JSON().Object()
 
 	json.ContainsMap(meta)
-	json.ContainsKey("data").ContainsKey("count")
+	json.ContainsKey("data")
 	json.NotContainsKey("errors")
 }
 
@@ -252,13 +252,13 @@ func TestCountInvalidTableBadRequest(t *testing.T) {
 			"code":    http.StatusBadRequest,
 			"message": "Bad Request"}}
 
-	r := e.POST("/ratings").
+	r := e.POST("/stats").
 		WithHeader("Content-Type", "application/json; charset=UTF-8").
 		WithHeader("Accept", "application/json").
 		WithText(query).
 		Expect()
 
-	r.Status(http.StatusOK)
+	r.Status(http.StatusBadRequest)
 	r.Header("Content-Type").Equal("application/json; charset=UTF-8")
 
 	json := r.JSON().Object()
@@ -300,13 +300,13 @@ func TestCountInvalidFieldBadRequest(t *testing.T) {
 			"code":    http.StatusBadRequest,
 			"message": "Bad Request"}}
 
-	r := e.POST("/ratings").
+	r := e.POST("/stats").
 		WithHeader("Content-Type", "application/json; charset=UTF-8").
 		WithHeader("Accept", "application/json").
 		WithText(query).
 		Expect()
 
-	r.Status(http.StatusOK)
+	r.Status(http.StatusBadRequest)
 	r.Header("Content-Type").Equal("application/json; charset=UTF-8")
 
 	json := r.JSON().Object()
@@ -348,7 +348,7 @@ func TestAverage(t *testing.T) {
 			"code":    http.StatusOK,
 			"message": "OK"}}
 
-	r := e.POST("/ratings").
+	r := e.POST("/stats").
 		WithHeader("Content-Type", "application/json; charset=UTF-8").
 		WithHeader("Accept", "application/json").
 		WithText(query).
@@ -360,7 +360,7 @@ func TestAverage(t *testing.T) {
 	json := r.JSON().Object()
 
 	json.ContainsMap(meta)
-	json.ContainsKey("data").ContainsKey("average")
+	json.ContainsKey("data")
 	json.NotContainsKey("errors")
 }
 
@@ -400,7 +400,7 @@ func TestAverageAnd(t *testing.T) {
 			"code":    http.StatusOK,
 			"message": "OK"}}
 
-	r := e.POST("/ratings").
+	r := e.POST("/stats").
 		WithHeader("Content-Type", "application/json; charset=UTF-8").
 		WithHeader("Accept", "application/json").
 		WithText(query).
@@ -412,7 +412,7 @@ func TestAverageAnd(t *testing.T) {
 	json := r.JSON().Object()
 
 	json.ContainsMap(meta)
-	json.ContainsKey("data").ContainsKey("average")
+	json.ContainsKey("data")
 	json.NotContainsKey("errors")
 }
 
@@ -452,7 +452,7 @@ func TestAverageOr(t *testing.T) {
 			"code":    http.StatusOK,
 			"message": "OK"}}
 
-	r := e.POST("/ratings").
+	r := e.POST("/stats").
 		WithHeader("Content-Type", "application/json; charset=UTF-8").
 		WithHeader("Accept", "application/json").
 		WithText(query).
@@ -464,7 +464,7 @@ func TestAverageOr(t *testing.T) {
 	json := r.JSON().Object()
 
 	json.ContainsMap(meta)
-	json.ContainsKey("data").ContainsKey("average")
+	json.ContainsKey("data")
 	json.NotContainsKey("errors")
 }
 
@@ -500,13 +500,13 @@ func TestAverageInvalidTableBadRequest(t *testing.T) {
 			"code":    http.StatusBadRequest,
 			"message": "Bad Request"}}
 
-	r := e.POST("/ratings").
+	r := e.POST("/stats").
 		WithHeader("Content-Type", "application/json; charset=UTF-8").
 		WithHeader("Accept", "application/json").
 		WithText(query).
 		Expect()
 
-	r.Status(http.StatusOK)
+	r.Status(http.StatusBadRequest)
 	r.Header("Content-Type").Equal("application/json; charset=UTF-8")
 
 	json := r.JSON().Object()
@@ -548,13 +548,13 @@ func TestAverageInvalidFieldBadRequest(t *testing.T) {
 			"code":    http.StatusBadRequest,
 			"message": "Bad Request"}}
 
-	r := e.POST("/ratings").
+	r := e.POST("/stats").
 		WithHeader("Content-Type", "application/json; charset=UTF-8").
 		WithHeader("Accept", "application/json").
 		WithText(query).
 		Expect()
 
-	r.Status(http.StatusOK)
+	r.Status(http.StatusBadRequest)
 	r.Header("Content-Type").Equal("application/json; charset=UTF-8")
 
 	json := r.JSON().Object()
@@ -585,7 +585,7 @@ func TestAverageNoFieldBadRequest(t *testing.T) {
 		"query": "query Example($field: Field!) { average(field: $field) }",
 		"variables": {
 		  "field": {
-			  "name": "ratings"
+			  "name": "stats"
 		  }
 		}
 	  }
@@ -596,13 +596,13 @@ func TestAverageNoFieldBadRequest(t *testing.T) {
 			"code":    http.StatusBadRequest,
 			"message": "Bad Request"}}
 
-	r := e.POST("/ratings").
+	r := e.POST("/stats").
 		WithHeader("Content-Type", "application/json; charset=UTF-8").
 		WithHeader("Accept", "application/json").
 		WithText(query).
 		Expect()
 
-	r.Status(http.StatusOK)
+	r.Status(http.StatusBadRequest)
 	r.Header("Content-Type").Equal("application/json; charset=UTF-8")
 
 	json := r.JSON().Object()
