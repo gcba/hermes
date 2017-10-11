@@ -37,11 +37,11 @@ func TestCount_(t *testing.T) {
 	{
 		"query": "query Example($field: Field!) { count(field: $field) }",
 		"variables": {
-		  "field": {
-			  "name": "messages"
-		  }
-		}
-	  }
+		    "field": {
+			    "name": "messages"
+		    }
+	    }
+	}
 	`
 
 	meta := map[string]interface{}{
@@ -85,12 +85,12 @@ func TestCount_WithOperator(t *testing.T) {
 	{
 		"query": "query Example($field: Field!) { count(field: $field) }",
 		"variables": {
-		  "field": {
-			  "name": "messages.status",
-			  "eq": 0
-		  }
-		}
-	  }
+		    "field": {
+			    "name": "messages.status",
+			    "eq": 0
+		    }
+	    }
+	}
 	`
 
 	meta := map[string]interface{}{
@@ -134,16 +134,16 @@ func TestCount_And(t *testing.T) {
 	{
 		"query": "query Example($field: Field!, $and: [Field!]) { count(field: $field, and: $and) }",
 		"variables": {
-		  "field": {
-			  "name": "messages.status",
-			  "eq": 0
-		  },
-		  "and": {
-			  "name": "messages.rating_id",
-			  "lte": 5
-		  }
+		    "field": {
+			    "name": "messages.status",
+			    "eq": 0
+		    },
+		    "and": {
+			    "name": "messages.rating_id",
+			    "lte": 5
+		    }
 		}
-	  }
+	}
 	`
 
 	meta := map[string]interface{}{
@@ -187,16 +187,16 @@ func TestCount_Or(t *testing.T) {
 	{
 		"query": "query Example($field: Field!, $or: [Field!]) { count(field: $field, or: $or) }",
 		"variables": {
-		  "field": {
-			  "name": "messages.status",
-			  "eq": 0
-		  },
-		  "or": {
-			  "name": "messages.rating_id",
-			  "lte": 5
-		  }
+		    "field": {
+			    "name": "messages.status",
+			    "eq": 0
+		    },
+		    "or": {
+			    "name": "messages.rating_id",
+			    "lte": 5
+		    }
 		}
-	  }
+	}
 	`
 
 	meta := map[string]interface{}{
@@ -240,11 +240,11 @@ func TestCount_InvalidTableBadRequest(t *testing.T) {
 	{
 		"query": "query Example($field: Field!) { count(field: $field) }",
 		"variables": {
-		  "field": {
-			  "name": "example"
-		  }
+		    "field": {
+			    "name": "example"
+		    }
 		}
-	  }
+	}
 	`
 
 	meta := map[string]interface{}{
@@ -288,11 +288,11 @@ func TestCount_InvalidFieldBadRequest(t *testing.T) {
 	{
 		"query": "query Example($field: Field!) { count(field: $field) }",
 		"variables": {
-		  "field": {
-			  "name": "ratings.example"
-		  }
+		    "field": {
+			    "name": "ratings.example"
+		    }
 		}
-	  }
+	}
 	`
 
 	meta := map[string]interface{}{
@@ -336,11 +336,11 @@ func TestAverage_(t *testing.T) {
 	{
 		"query": "query Example($field: Field!) { average(field: $field) }",
 		"variables": {
-		  "field": {
-			  "name": "ratings.rating"
-		  }
+		    "field": {
+			    "name": "ratings.rating"
+		    }
 		}
-	  }
+	}
 	`
 
 	meta := map[string]interface{}{
@@ -384,15 +384,15 @@ func TestAverage_And(t *testing.T) {
 	{
 		"query": "query Example($field: Field!, $and: [Field!]) { average(field: $field, and: $and) }",
 		"variables": {
-		  "field": {
-			  "name": "ratings.rating"
-		  },
-		  "and": {
-			  "name": "ratings.has_message",
-			  "eq": true
-		  }
+		    "field": {
+			    "name": "ratings.rating"
+		    },
+		    "and": {
+			    "name": "ratings.has_message",
+			    "eq": true
+		    }
 		}
-	  }
+	}
 	`
 
 	meta := map[string]interface{}{
@@ -436,15 +436,15 @@ func TestAverage_Or(t *testing.T) {
 	{
 		"query": "query Example($field: Field!, $or: [Field!]) { average(field: $field, or: $or) }",
 		"variables": {
-		  "field": {
-			  "name": "ratings.rating"
-		  },
-		  "or": {
-			"name": "ratings.has_message",
-			"eq": true
-		  }
+			"field": {
+				"name": "ratings.rating"
+		  	},
+		  	"or": {
+				"name": "ratings.has_message",
+				"eq": true
+			}
 		}
-	  }
+	}
 	`
 
 	meta := map[string]interface{}{
@@ -488,11 +488,11 @@ func TestAverage_InvalidTableBadRequest(t *testing.T) {
 	{
 		"query": "query Example($field: Field!) { average(field: $field) }",
 		"variables": {
-		  "field": {
-			  "name": "example"
-		  }
+		    "field": {
+			    "name": "example"
+		    }
 		}
-	  }
+	}
 	`
 
 	meta := map[string]interface{}{
@@ -536,11 +536,11 @@ func TestAverage_InvalidFieldBadRequest(t *testing.T) {
 	{
 		"query": "query Example($field: Field!) { average(field: $field) }",
 		"variables": {
-		  "field": {
-			  "name": "ratings.example"
-		  }
+		    "field": {
+			    "name": "ratings.example"
+		    }
 		}
-	  }
+	}
 	`
 
 	meta := map[string]interface{}{
@@ -584,11 +584,11 @@ func TestAverage_NoFieldBadRequest(t *testing.T) {
 	{
 		"query": "query Example($field: Field!) { average(field: $field) }",
 		"variables": {
-		  "field": {
-			  "name": "stats"
-		  }
+		    "field": {
+			    "name": "stats"
+		    }
 		}
-	  }
+	}
 	`
 
 	meta := map[string]interface{}{
