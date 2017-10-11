@@ -10,6 +10,7 @@ import (
 
 	"github.com/alecthomas/kingpin"
 	"github.com/facebookgo/grace/gracehttp"
+	"github.com/labstack/echo"
 )
 
 var (
@@ -38,8 +39,13 @@ func main() {
 }
 
 func startRatingsAPI() {
+	routes := map[string]echo.HandlerFunc{
+		"OptionsRoot":    ratingsController.OptionsRoot,
+		"OptionsRatings": ratingsController.OptionsRatings,
+		"PostRatings":    ratingsController.PostRatings}
+
 	port := getPort("HERMES_RATINGS_PORT", 5000)
-	handler := ratingsHandler.Handler(port)
+	handler := ratingsHandler.Handler(port, routes)
 
 	fmt.Println("✅  Ratings server started on port", strconv.Itoa(port), hideCursor)
 	gracehttp.Serve(handler.Server)
@@ -47,8 +53,9 @@ func startRatingsAPI() {
 }
 
 func startStatsAPI() {
+	routes := map[string]echo.HandlerFunc{"PostStats": statsController.PostStats}
 	port := getPort("HERMES_STATS_PORT", 7000)
-	handler := statsHandler.Handler(port)
+	handler := statsHandler.Handler(port, routes)
 
 	fmt.Println("✅  Stats server started on port", strconv.Itoa(port), hideCursor)
 	gracehttp.Serve(handler.Server)
