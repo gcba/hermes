@@ -21,9 +21,7 @@ class MailgunRoutes extends Command
      * @var string
      */
     protected $description = 'Create a new Mailgun Route';
-
     protected $key = 'MAILGUN_ROUTE';
-
     protected $client;
 
     /**
