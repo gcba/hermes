@@ -3,11 +3,13 @@ package schema
 import (
 	"context"
 	"fmt"
+	"reflect"
 	"strings"
 
 	"hermes/models"
 
 	"github.com/fatih/structs"
+	"github.com/iancoleman/strcase"
 	"github.com/jinzhu/gorm"
 	graphqlErrors "github.com/neelance/graphql-go/errors"
 )
@@ -55,10 +57,8 @@ func (r *Resolver) Count(context context.Context, args arguments) (int32, error)
 	var result countResult
 
 	if db, castOk := context.Value(DB).(*gorm.DB); castOk {
-		count := fmt.Sprintf("COUNT(%s) AS Count", args.Field.Name)
 		model := args.Field.getModel(db)
 		entity := args.Field.getEntity()
-		query := db.Select(count).Table(entity.Table)
 
 		if model == nil {
 			return result.Count, invalidTableError(entity.Table)
@@ -67,6 +67,9 @@ func (r *Resolver) Count(context context.Context, args arguments) (int32, error)
 		if entity.Field != nil && !fieldExists(*entity.Field, structs.Names(model)) {
 			return result.Count, invalidFieldError(*entity.Field)
 		}
+
+		count := fmt.Sprintf("COUNT(%s) AS Count", args.Field.Name)
+		query := db.Select(count).Table(entity.Table)
 
 		if value := args.Field.getValue(); value != nil {
 			if operator := args.Field.resolveOperator(); operator != nil {
@@ -109,15 +112,32 @@ func (r *Resolver) Average(context context.Context, args arguments) (float64, er
 
 		model := args.Field.getModel(db)
 		entity := args.Field.getEntity()
-		average := fmt.Sprintf("AVG(%s) AS Average", args.Field.Name)
-		query := db.Select(average).Table(entity.Table)
 
 		if model == nil {
 			return result.Average, invalidTableError(entity.Table)
 		}
 
+		average := fmt.Sprintf("AVG(%s) AS Average", args.Field.Name)
+		query := db.Select(average).Table(entity.Table)
+
 		if entity.Field == nil {
 			return result.Average, badRequestError("Average requires a field name")
+		}
+
+		modelStruct := structs.New(model)
+		fieldName := toCamelCase(*entity.Field)
+		field := modelStruct.Field(fieldName)
+		fieldKind := field.Kind()
+
+		if fieldKind != reflect.Int &&
+			fieldKind != reflect.Int8 &&
+			fieldKind != reflect.Int16 &&
+			fieldKind != reflect.Int32 &&
+			fieldKind != reflect.Int64 &&
+			fieldKind != reflect.Uint &&
+			fieldKind != reflect.Float32 &&
+			fieldKind != reflect.Float64 {
+			return result.Average, invalidFieldError(*entity.Field)
 		}
 
 		if !fieldExists(*entity.Field, structs.Names(model)) {
@@ -286,4 +306,15 @@ func (f *field) resolveOperator() *string {
 	}
 
 	return nil
+}
+
+func toCamelCase(str string) string {
+	camel := strcase.ToCamel(str)
+
+	if strings.HasSuffix(camel, "Id") {
+		camel = strings.TrimSuffix(camel, "Id")
+		camel = camel + "ID"
+	}
+
+	return camel
 }
