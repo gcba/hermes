@@ -18,10 +18,10 @@ func TestGetRange(t *testing.T) {
 	defer readDb.Close()
 
 	rangeRecord := Range{
-		From:  0,
-		To:    5,
-		Key:   "7C6F0035B18C3D5J" + strings.ToUpper(uniuri.New()),
-		AppID: uint(1)}
+		Name: uniuri.NewLen(11),
+		From: 0,
+		To:   5,
+		Key:  "7C6F0035B18C3D5J" + strings.ToUpper(uniuri.New())}
 
 	result := writeDb.Create(&rangeRecord)
 
@@ -34,7 +34,6 @@ func TestGetRange(t *testing.T) {
 		require.Equal(t, rangeRecord.From, value.From)
 		require.Equal(t, rangeRecord.To, value.To)
 		require.Equal(t, rangeRecord.Key, value.Key)
-		require.Equal(t, rangeRecord.AppID, value.AppID)
 	} else {
 		t.Fatal("Value is not a Range")
 	}

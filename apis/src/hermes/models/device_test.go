@@ -15,12 +15,13 @@ func TestCreateDevice(t *testing.T) {
 	defer db.Close()
 
 	name := uniuri.New()
+	ppi := 320
 
 	device := Device{
 		Name:         name,
 		ScreenWidth:  720,
 		ScreenHeight: 1280,
-		PPI:          320,
+		PPI:          &ppi,
 		BrandID:      1,
 		PlatformID:   2}
 
@@ -47,12 +48,13 @@ func TestGetDevice(t *testing.T) {
 	defer readDb.Close()
 
 	name := uniuri.New()
+	ppi := 430
 
 	device := Device{
 		Name:         name,
 		ScreenWidth:  960,
 		ScreenHeight: 1600,
-		PPI:          430,
+		PPI:          &ppi,
 		BrandID:      2,
 		PlatformID:   2}
 

@@ -17,7 +17,7 @@ var (
 	port   = getPort("HERMES_STATS_PORT", 7000)
 )
 
-func TestCount(t *testing.T) {
+func TestCount_(t *testing.T) {
 	handler := handler.Handler(3000, routes)
 	server := httptest.NewServer(handler)
 
@@ -65,7 +65,7 @@ func TestCount(t *testing.T) {
 	json.NotContainsKey("errors")
 }
 
-func TestCountWithOperator(t *testing.T) {
+func TestCount_WithOperator(t *testing.T) {
 	handler := handler.Handler(3000, routes)
 	server := httptest.NewServer(handler)
 
@@ -114,7 +114,7 @@ func TestCountWithOperator(t *testing.T) {
 	json.NotContainsKey("errors")
 }
 
-func TestCountAnd(t *testing.T) {
+func TestCount_And(t *testing.T) {
 	handler := handler.Handler(3000, routes)
 	server := httptest.NewServer(handler)
 
@@ -167,7 +167,7 @@ func TestCountAnd(t *testing.T) {
 	json.NotContainsKey("errors")
 }
 
-func TestCountOr(t *testing.T) {
+func TestCount_Or(t *testing.T) {
 	handler := handler.Handler(3000, routes)
 	server := httptest.NewServer(handler)
 
@@ -220,7 +220,7 @@ func TestCountOr(t *testing.T) {
 	json.NotContainsKey("errors")
 }
 
-func TestCountInvalidTableBadRequest(t *testing.T) {
+func TestCount_InvalidTableBadRequest(t *testing.T) {
 	handler := handler.Handler(3000, routes)
 	server := httptest.NewServer(handler)
 
@@ -268,7 +268,7 @@ func TestCountInvalidTableBadRequest(t *testing.T) {
 	json.ContainsKey("errors")
 }
 
-func TestCountInvalidFieldBadRequest(t *testing.T) {
+func TestCount_InvalidFieldBadRequest(t *testing.T) {
 	handler := handler.Handler(3000, routes)
 	server := httptest.NewServer(handler)
 
@@ -316,7 +316,7 @@ func TestCountInvalidFieldBadRequest(t *testing.T) {
 	json.ContainsKey("errors")
 }
 
-func TestAverage(t *testing.T) {
+func TestAverage_(t *testing.T) {
 	handler := handler.Handler(3000, routes)
 	server := httptest.NewServer(handler)
 
@@ -364,7 +364,7 @@ func TestAverage(t *testing.T) {
 	json.NotContainsKey("errors")
 }
 
-func TestAverageAnd(t *testing.T) {
+func TestAverage_And(t *testing.T) {
 	handler := handler.Handler(3000, routes)
 	server := httptest.NewServer(handler)
 
@@ -416,7 +416,7 @@ func TestAverageAnd(t *testing.T) {
 	json.NotContainsKey("errors")
 }
 
-func TestAverageOr(t *testing.T) {
+func TestAverage_Or(t *testing.T) {
 	handler := handler.Handler(3000, routes)
 	server := httptest.NewServer(handler)
 
@@ -468,7 +468,7 @@ func TestAverageOr(t *testing.T) {
 	json.NotContainsKey("errors")
 }
 
-func TestAverageInvalidTableBadRequest(t *testing.T) {
+func TestAverage_InvalidTableBadRequest(t *testing.T) {
 	handler := handler.Handler(3000, routes)
 	server := httptest.NewServer(handler)
 
@@ -516,7 +516,7 @@ func TestAverageInvalidTableBadRequest(t *testing.T) {
 	json.ContainsKey("errors")
 }
 
-func TestAverageInvalidFieldBadRequest(t *testing.T) {
+func TestAverage_InvalidFieldBadRequest(t *testing.T) {
 	handler := handler.Handler(3000, routes)
 	server := httptest.NewServer(handler)
 
@@ -564,7 +564,7 @@ func TestAverageInvalidFieldBadRequest(t *testing.T) {
 	json.ContainsKey("errors")
 }
 
-func TestAverageNoFieldBadRequest(t *testing.T) {
+func TestAverage_NoFieldBadRequest(t *testing.T) {
 	handler := handler.Handler(3000, routes)
 	server := httptest.NewServer(handler)
 
