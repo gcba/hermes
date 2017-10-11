@@ -16,7 +16,6 @@ class Controller extends BreadController
     public function store(Request $request)
     {
         $slug = $this->getSlug($request);
-
         $dataType = Voyager::model('DataType')->where('slug', '=', $slug)->first();
 
         // Check permission
@@ -47,7 +46,6 @@ class Controller extends BreadController
     public function update(Request $request, $id)
     {
         $slug = $this->getSlug($request);
-
         $dataType = Voyager::model('DataType')->where('slug', '=', $slug)->first();
 
         // Check permission

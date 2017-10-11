@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\AppUser;
+use App\Rating;
 use App\Message;
 use App\Jobs\SendMessage;
 use Illuminate\Http\Request;
@@ -49,16 +50,55 @@ class MessagesController extends DataTablesController
     // POST BRE(A)D
     public function store(Request $request)
     {
-        $response = parent::store($request);
+        Voyager::canOrFail('add_messages');
+
+        $created = 201;
+        $badRequest = 400;
+        $unprocessableEntity = 422;
+        $internalServerError = 500;
+
+        $slug = $this->getSlug($request);
+        $dataType = Voyager::model('DataType')->where('slug', '=', $slug)->first();
+        $validation = $this->validateBread($request->all(), $dataType->addRows);
+
+        if ($validation->fails()) {
+            return response()->json(['errors' => $val->messages(), 'code' => $badRequest]);
+        }
+
+        $text = $request->input('message');
+        $ratingID = $request->input('rating');
+        $rating = Rating::find($ratingID);
+
+        if ($rating === null) {
+            return response()->json(['errors' => "Invalid rating id.", 'code' => $unprocessableEntity]);
+        }
+
+        $message = new Message;
+
+        $message->message = $text;
+        $message->direction = 'out';
+        $message->rating()->associate($rating);
+
+        if (!$message->save()) {
+            return response()->json(['errors' => "Could not save new message.", 'code' => $internalServerError]);
+        }
+
         $subject = $request->input('subject');
         $text = $request->input('message');
         $userId = $request->input('user');
-        $user = DB::table('appusers')->where('miba_id', $userId)->first();
+        $user = AppUser::find($userId);
+
+        if ($user === null) {
+            return response()->json(['errors' => "Invalid user id.", 'code' => $unprocessableEntity]);
+        }
 
         if (isset($user->email)) {
             SendMessage::dispatch($subject, $text, $user);
         }
+        else {
+            return response()->json(['errors' => "User has no email.", 'code' => $unprocessableEntity]);
+        }
 
-        return $response;
+        return response()->json(['code' => $created]);
     }
 }
