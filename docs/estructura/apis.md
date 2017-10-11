@@ -170,7 +170,7 @@ Devuelve la cantidad de registros en una columna, ignorando nulls.
 
 ##### Columna con condición
 
-Devuelve la cantidad de registros en una columna que cumplen con una condición, ignroando nulls.
+Devuelve la cantidad de registros en una columna que cumplen con una condición, ignorando nulls.
 
 ```json
 {
@@ -264,6 +264,77 @@ Permite agregar condiciones adicionales que no necesariamente deban verificarse 
                 "eq": 3
             }
         ]
+    }
+}
+```
+
+#### Average
+
+##### Columna
+
+Devuelve el promedio de los valores en una columna numérica, ignorando nulls.
+
+```json
+{
+    "query": "query Example($field: Field!) { average(field: $field) }",
+    "variables": {
+        "field": {
+            "name": "ratings.rating"
+        }
+    }
+}
+```
+
+##### Columna con condición
+
+DDevuelve el promedio de los valores en una columna numérica que cumplen con una condición, ignorando nulls.
+
+```json
+{
+    "query": "query Example($field: Field!) { average(field: $field) }",
+    "variables": {
+        "field": {
+            "name": "ratings.rating",
+            "gt": 2
+        }
+    }
+}
+```
+
+##### AND
+
+Permite agregar condiciones adicionales que deben verificarse conjuntamente. Ídem **count**.
+
+##### OR
+
+Permite agregar condiciones adicionales que no necesariamente deban verificarse a la vez. Ídem **count**.
+
+### Responses
+
+#### Count
+
+```json
+{
+    "meta": {
+        "code": ...,
+        "message": ...
+    },
+        "data": {
+        "count": ...
+    }
+}
+```
+
+#### Average
+
+```json
+{
+  "meta": {
+        "code": ...,
+        "message": ...
+    },
+    "data": {
+        "average": ...
     }
 }
 ```
