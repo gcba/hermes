@@ -16,8 +16,8 @@ class SendMessage implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     protected $subject;
-    protected $user;
     protected $message;
+    protected $user;
 
     /**
      * The number of seconds the job can run before timing out.
@@ -34,8 +34,8 @@ class SendMessage implements ShouldQueue
     public function __construct(String $subject, Message $message, AppUser $user)
     {
         $this->subject = $subject;
-        $this->user = $user;
         $this->message = $message;
+        $this->user = $user;
     }
 
     /**
@@ -51,11 +51,11 @@ class SendMessage implements ShouldQueue
             return;
         });
 
-        if ($result->status != 200) {
-            throw new Exception("Could not send email to Mailgun. Requeuing...");
+        if ($result->status === 200) {
+            SetMessageTransportId::dispatch($this->message, $result->id);
         }
         else {
-            SetMessageTransportId::dispatch($this->message, $result->id);
+            throw new Exception("Could not send email to Mailgun. Requeuing...");
         }
 
         return;
