@@ -3,6 +3,7 @@
 namespace App\Console;
 
 use App\Console\Commands\MailgunRoutes;
+use App\Console\Commands\MailgunWebhooks;
 use App\Console\Commands\MailgunMessages;
 
 use Illuminate\Console\Scheduling\Schedule;
@@ -17,6 +18,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         MailgunRoutes::class,
+        MailgunWebhooks::class,
         MailgunMessages::class
     ];
 
