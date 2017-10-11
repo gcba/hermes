@@ -50,7 +50,7 @@ class MessagesController extends DataTablesController
     public function store(Request $request)
     {
         $response = parent::store($request);
-        $subject = $request->input('input');
+        $subject = $request->input('subject');
         $text = $request->input('message');
         $userId = $request->input('user');
         $user = DB::table('appusers')->where('miba_id', $userId)->first();
