@@ -17,7 +17,7 @@ var (
 	port   = getPort("HERMES_STATS_PORT", 7000)
 )
 
-func TestCount_(t *testing.T) {
+func TestCount(t *testing.T) {
 	handler := handler.Handler(3000, routes)
 	server := httptest.NewServer(handler)
 
@@ -316,7 +316,7 @@ func TestCount_InvalidField_BadRequest(t *testing.T) {
 	json.ContainsKey("errors")
 }
 
-func TestAverage_(t *testing.T) {
+func TestAverage(t *testing.T) {
 	handler := handler.Handler(3000, routes)
 	server := httptest.NewServer(handler)
 
