@@ -50,7 +50,7 @@ class SendMessage implements ShouldQueue
         });
 
         if ($result->status != 200) {
-            throw new Exception("Could not send mail to Mailgun. Requeuing...");
+            throw new Exception("Could not send email to Mailgun. Requeuing...");
         }
 
         return;
