@@ -99,17 +99,28 @@ class MailgunWebhooks extends Command
         $headers = ['Type', 'URL'];
         $rows = [];
         $webhooks = $this->getWebhooks();
+        $matches = false;
 
         if ($webhooks !== null) {
             foreach ($this->types as $type) {
-                if (array_key_exists($type, $webhooks) && array_key_exists('url', $webhooks[$type])) {
+                if (isset($webhooks->$type) && isset($webhooks->$type->url)) {
+                    if ($matches) {
+                        $matches = true;
+                    }
+
                     $row = [];
 
                     $row['Type'] = $type;
-                    $row['URL'] = $webhooks[$type]['url'];
+                    $row['URL'] = $webhooks->$type->url;
 
                     $rows[] = $row;
                 }
+            }
+
+            if (!$matches) {
+                $this->error('No webhooks to show');
+
+                return;
             }
 
             $this->table($headers, $rows);
@@ -121,14 +132,23 @@ class MailgunWebhooks extends Command
 
     private function deleteWebhooks() {
         $webhooks = $this->getWebhooks();
+        $matches = false;
 
-        if ($webhooks === null) {
+        if ($webhooks !== null) {
             foreach ($this->types as $type) {
-                if (array_key_exists($type, $webhooks) && array_key_exists('url', $webhooks[$type])) {
+                if (isset($webhooks->$type) && isset($webhooks->$type->url)) {
+                    if ($matches) {
+                        $matches = true;
+                    }
+
                     $response = $this->client->delete("$this->domain/webhooks/$type");
 
                     $this->info("Webhook '' . $type . '' deleted successfully");
                 }
+            }
+
+            if (!$matches) {
+                $this->error('No webhooks to delete');
             }
         }
         else {
@@ -139,7 +159,7 @@ class MailgunWebhooks extends Command
     private function checkWebhook(String $type) {
         $webhooks = $this->getWebhooks();
 
-        if ($webhooks !== null && array_key_exists($type, $webhooks) && array_key_exists('url', $webhooks[$type])) {
+        if ($webhooks !== null && isset($webhooks->$type) && isset($webhooks->$type->url)) {
             $this->error('Webhook already exists');
 
             return;
