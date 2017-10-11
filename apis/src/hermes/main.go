@@ -5,7 +5,9 @@ import (
 	"os"
 	"strconv"
 
+	ratingsController "hermes/ratings/controller"
 	ratingsHandler "hermes/ratings/handler"
+	statsController "hermes/stats/controller"
 	statsHandler "hermes/stats/handler"
 
 	"github.com/alecthomas/kingpin"
