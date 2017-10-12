@@ -973,20 +973,15 @@
             "slug": "usoapis",
             "headings": [
               {
-                "title": "MacOS",
-                "depth": 2,
-                "id": "macos"
-              },
-              {
-                "title": "Ubuntu",
-                "depth": 2,
-                "id": "ubuntu"
-              },
-              {
                 "title": "Instalación",
                 "depth": 2,
                 "id": "instalacion",
                 "headings": [
+                  {
+                    "title": "Package manager",
+                    "depth": 3,
+                    "id": "package-manager"
+                  },
                   {
                     "title": "Dependencias",
                     "depth": 3,
@@ -1992,20 +1987,15 @@
       "slug": "usoapis",
       "headings": [
         {
-          "title": "MacOS",
-          "depth": 2,
-          "id": "macos"
-        },
-        {
-          "title": "Ubuntu",
-          "depth": 2,
-          "id": "ubuntu"
-        },
-        {
           "title": "Instalación",
           "depth": 2,
           "id": "instalacion",
           "headings": [
+            {
+              "title": "Package manager",
+              "depth": 3,
+              "id": "package-manager"
+            },
             {
               "title": "Dependencias",
               "depth": 3,

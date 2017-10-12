@@ -77,12 +77,10 @@
               <ul class="submenu">
                 <li class="menu-item -level-2"><a class="link title -active link-usoapis" href="../uso/apis.html">APIs</a>
                   <ul class="headings heading-list">
-                    <li class="heading-item -depth-2"><a class="hlink link-macos" href="#macos">MacOS</a>
-                    </li>
-                    <li class="heading-item -depth-2"><a class="hlink link-ubuntu" href="#ubuntu">Ubuntu</a>
-                    </li>
                     <li class="heading-item -depth-2"><a class="hlink link-instalacion" href="#instalacion">Instalación</a>
                       <ul class="heading-list -depth-2">
+                        <li class="heading-item -depth-3"><a class="hlink link-package-manager" href="#package-manager">Package manager</a>
+                        </li>
                         <li class="heading-item -depth-3"><a class="hlink link-dependencias" href="#dependencias">Dependencias</a>
                         </li>
                         <li class="heading-item -depth-3"><a class="hlink link-variables-de-entorno" href="#variables-de-entorno">Variables de entorno</a>
@@ -115,12 +113,15 @@
           <div class="right">
           </div>
         </div>
-        <div class="markdown-body"><h1 id="package-manager">Package manager</h1>
+        <div class="markdown-body"><h1 id="apis">APIs</h1>
+<h2 id="instalacion">Instalaci&#xF3;n</h2>
+<p>Implica clonar el repo, instalar las dependencias y configurar las variables de entorno.</p>
+<h3 id="package-manager">Package manager</h3>
 <p>Para instalar <a href="https://github.com/Masterminds/glide">Glide</a>:</p>
-<h2 id="macos">MacOS</h2>
+<h4 id="macos">MacOS</h4>
 <pre><code class="lang-bash">$ brew install glide
 </code></pre>
-<h2 id="ubuntu">Ubuntu</h2>
+<h4 id="ubuntu">Ubuntu</h4>
 <p>En <strong>Zesty (17.04)</strong> o m&#xE1;s reciente:</p>
 <pre><code class="lang-bash">$ sudo add-apt-repository ppa:masterminds/glide &amp;&amp; sudo apt-get update
 $ sudo apt-get install golang-glide
@@ -129,9 +130,6 @@ $ sudo apt-get install golang-glide
 <pre><code class="lang-bash">$ sudo add-apt-repository ppa:masterminds/glide &amp;&amp; sudo apt-get update
 $ sudo apt-get install glide
 </code></pre>
-<h1 id="apis">APIs</h1>
-<h2 id="instalacion">Instalaci&#xF3;n</h2>
-<p>Implica clonar el repo, instalar las dependencias y configurar las variables de entorno.</p>
 <h3 id="dependencias">Dependencias</h3>
 <pre><code class="lang-bash">$ glide install
 </code></pre>
@@ -207,7 +205,6 @@ $ sudo apt-get install glide
 <pre><code class="lang-json">{
     <span class="hljs-attr">&quot;query&quot;</span>: <span class="pl-s">&quot;query Example($field: Field!) { count(field: $field) }&quot;</span>,
     <span class="hljs-attr">&quot;variables&quot;</span>: {
-
         <span class="hljs-attr">&quot;field&quot;</span>: {
             <span class="hljs-attr">&quot;name&quot;</span>: <span class="pl-s">&quot;messages.status&quot;</span>,
             <span class="hljs-attr">&quot;eq&quot;</span>: <span class="hljs-number">0</span>
