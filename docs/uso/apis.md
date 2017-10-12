@@ -24,6 +24,7 @@ $ sudo add-apt-repository ppa:masterminds/glide && sudo apt-get update
 $ sudo apt-get install glide
 ```
 
+
 # APIs
 
 ## Instalación
@@ -81,20 +82,26 @@ $ go run main.go start ratings
 $ go run main.go start stats
 ```
 
-## Endpoints
+## API de calificaciones
+
+Esta API no debe usarse directamente, sino por medio de los SDKs.
+
+## API de estadísticas
+
+### Endpoints
 
 Hay un único endpoint: `POST /stats`.
 
-## Headers
+### Headers
 
 - **Content-Type:** `application/json; charset=utf-8`
 - **Accept:** `application/json`
 
-## Body
+### Body
 
-### Count
+#### Count
 
-#### Tabla
+##### Tabla
 
 Devuelve la cantidad de registros en una tabla.
 
@@ -109,7 +116,7 @@ Devuelve la cantidad de registros en una tabla.
 }
 ```
 
-#### Columna
+##### Columna
 
 Devuelve la cantidad de registros en una columna, ignorando nulls.
 
@@ -124,7 +131,7 @@ Devuelve la cantidad de registros en una columna, ignorando nulls.
 }
 ```
 
-#### Columna con condición
+##### Columna con condición
 
 Devuelve la cantidad de registros en una columna que cumplen con una condición, ignorando nulls.
 
@@ -141,7 +148,7 @@ Devuelve la cantidad de registros en una columna que cumplen con una condición,
 }
 ```
 
-#### AND
+##### AND
 
 Permite agregar condiciones adicionales que deben verificarse conjuntamente.
 
@@ -183,7 +190,7 @@ Permite agregar condiciones adicionales que deben verificarse conjuntamente.
 }
 ```
 
-#### OR
+##### OR
 
 Permite agregar condiciones adicionales que no necesariamente deban verificarse a la vez.
 
@@ -225,9 +232,9 @@ Permite agregar condiciones adicionales que no necesariamente deban verificarse 
 }
 ```
 
-### Average
+#### Average
 
-#### Columna
+##### Columna
 
 Devuelve el promedio de los valores en una columna numérica, ignorando nulls.
 
@@ -242,7 +249,7 @@ Devuelve el promedio de los valores en una columna numérica, ignorando nulls.
 }
 ```
 
-#### Columna con condición
+##### Columna con condición
 
 Devuelve el promedio de los valores en una columna numérica que cumplen con una condición, ignorando nulls.
 
@@ -258,15 +265,15 @@ Devuelve el promedio de los valores en una columna numérica que cumplen con una
 }
 ```
 
-#### AND
+##### AND
 
 Permite agregar condiciones adicionales que deben verificarse conjuntamente. Ídem **count**.
 
-#### OR
+##### OR
 
 Permite agregar condiciones adicionales que no necesariamente deban verificarse a la vez. Ídem **count**.
 
-### Operadores
+#### Operadores
 
 Para construir condiciones se pueden usar los siguientes operadores:
 
@@ -277,9 +284,9 @@ Para construir condiciones se pueden usar los siguientes operadores:
 - **gte:** Mayor o igual a *(greater than or equal)*.
 - **lte:** Menor o igual a *(lower than or equal)*.
 
-## Responses
+### Responses
 
-### Count
+#### Count
 
 ```json
 {
@@ -293,7 +300,7 @@ Para construir condiciones se pueden usar los siguientes operadores:
 }
 ```
 
-### Average
+#### Average
 
 ```json
 {
