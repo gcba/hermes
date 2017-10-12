@@ -287,7 +287,7 @@ Devuelve el promedio de los valores en una columna numérica, ignorando nulls.
 
 ##### Columna con condición
 
-DDevuelve el promedio de los valores en una columna numérica que cumplen con una condición, ignorando nulls.
+Devuelve el promedio de los valores en una columna numérica que cumplen con una condición, ignorando nulls.
 
 ```json
 {
@@ -308,6 +308,17 @@ Permite agregar condiciones adicionales que deben verificarse conjuntamente. Íd
 ##### OR
 
 Permite agregar condiciones adicionales que no necesariamente deban verificarse a la vez. Ídem **count**.
+
+#### Operadores
+
+Para construir condiciones se pueden usar los siguientes operadores:
+
+- **eq:** Igual a *(equal)*.
+- **ne:** No igual a *(equal)*.
+- **gt:** Mayor a *(greater than)*.
+- **lt:** Menor a *(lower than)*.
+- **gte:** Mayor o igual a *(greater than or equal)*.
+- **lte:** Menor o igual a *(lower than or equal)*.
 
 ### Responses
 
