@@ -54,14 +54,6 @@
                       </ul>
                     </li>
                     <li class="heading-item -depth-2"><a class="hlink link-api-de-estadisticas" href="#api-de-estadisticas">API de estadísticas</a>
-                      <ul class="heading-list -depth-2">
-                        <li class="heading-item -depth-3"><a class="hlink link-endpoints" href="#endpoints">Endpoints</a>
-                        </li>
-                        <li class="heading-item -depth-3"><a class="hlink link-queries" href="#queries">Queries</a>
-                        </li>
-                        <li class="heading-item -depth-3"><a class="hlink link-responses" href="#responses">Responses</a>
-                        </li>
-                      </ul>
                     </li>
                   </ul>
                 </li>
@@ -100,6 +92,12 @@
                 <li class="menu-item -level-2"><a class="link title  link-desarrollosprint12" href="../desarrollo/sprint12.html">Sprint 12</a>
                 </li>
                 <li class="menu-item -level-2"><a class="link title  link-desarrollosprint13" href="../desarrollo/sprint13.html">Sprint 13</a>
+                </li>
+              </ul>
+            </li>
+            <li class="menu-item -level-1 -parent"><span class="title">Uso</span>
+              <ul class="submenu">
+                <li class="menu-item -level-2"><a class="link title  link-usoapis" href="../uso/apis.html">APIs</a>
                 </li>
               </ul>
             </li>
@@ -207,168 +205,6 @@
 </code></pre>
 <h2 id="api-de-estadisticas">API de estad&#xED;sticas</h2>
 <p>Esta API ser&#xE1; de s&#xF3;lo lectura, con un enfoque de obtenci&#xF3;n y transformaci&#xF3;n de  datos cuantitativos. Tiene por fin poder responder preguntas relacionadas con los datos de forma confiable, flexible y expresiva.</p>
-<h3 id="endpoints">Endpoints</h3>
-<p>Dado que se trata de una API GraphQL, s&#xF3;lo es necesario un endpoint POST.</p>
-<p><code>POST /stats</code></p>
-<h3 id="queries">Queries</h3>
-<h4 id="count">Count</h4>
-<h5 id="tabla">Tabla</h5>
-<p>Devuelve la cantidad de registros en una tabla.</p>
-<pre><code class="lang-json">{
-    <span class="hljs-attr">&quot;query&quot;</span>: <span class="pl-s">&quot;query Example($field: Field!) { count(field: $field) }&quot;</span>,
-    <span class="hljs-attr">&quot;variables&quot;</span>: {
-        <span class="hljs-attr">&quot;field&quot;</span>: {
-            <span class="hljs-attr">&quot;name&quot;</span>: <span class="pl-s">&quot;messages&quot;</span>
-        }
-    }
-}
-</code></pre>
-<h5 id="columna">Columna</h5>
-<p>Devuelve la cantidad de registros en una columna, ignorando nulls.</p>
-<pre><code class="lang-json">{
-    <span class="hljs-attr">&quot;query&quot;</span>: <span class="pl-s">&quot;query Example($field: Field!) { count(field: $field) }&quot;</span>,
-    <span class="hljs-attr">&quot;variables&quot;</span>: {
-        <span class="hljs-attr">&quot;field&quot;</span>: {
-            <span class="hljs-attr">&quot;name&quot;</span>: <span class="pl-s">&quot;messages.transport_id&quot;</span>
-        }
-    }
-}
-</code></pre>
-<h5 id="columna-con-condicion">Columna con condici&#xF3;n</h5>
-<p>Devuelve la cantidad de registros en una columna que cumplen con una condici&#xF3;n, ignorando nulls.</p>
-<pre><code class="lang-json">{
-    <span class="hljs-attr">&quot;query&quot;</span>: <span class="pl-s">&quot;query Example($field: Field!) { count(field: $field) }&quot;</span>,
-    <span class="hljs-attr">&quot;variables&quot;</span>: {
-        <span class="hljs-attr">&quot;field&quot;</span>: {
-            <span class="hljs-attr">&quot;name&quot;</span>: <span class="pl-s">&quot;messages.status&quot;</span>,
-            <span class="hljs-attr">&quot;eq&quot;</span>: <span class="hljs-number">0</span>
-        }
-    }
-}
-</code></pre>
-<h5 id="and">AND</h5>
-<p>Permite agregar condiciones adicionales que deben verificarse conjuntamente.</p>
-<pre><code class="lang-json">{
-    <span class="hljs-attr">&quot;query&quot;</span>: <span class="pl-s">&quot;query Example($field: Field!, $and: [Field!]) { count(field: $field, and: $and) }&quot;</span>,
-    <span class="hljs-attr">&quot;variables&quot;</span>: {
-        <span class="hljs-attr">&quot;field&quot;</span>: {
-            <span class="hljs-attr">&quot;name&quot;</span>: <span class="pl-s">&quot;ratings.rating&quot;</span>,
-            <span class="hljs-attr">&quot;gt&quot;</span>: <span class="hljs-number">2</span>
-        },
-        <span class="hljs-attr">&quot;and&quot;</span>: {
-            <span class="hljs-attr">&quot;name&quot;</span>: <span class="pl-s">&quot;ratings.rating&quot;</span>,
-            <span class="hljs-attr">&quot;lt&quot;</span>: <span class="hljs-number">5</span>
-        }
-    }
-}
-</code></pre>
-<pre><code class="lang-json">{
-    <span class="hljs-attr">&quot;query&quot;</span>: <span class="pl-s">&quot;query Example($field: Field!, $and: [Field!]) { count(field: $field, and: $and) }&quot;</span>,
-    <span class="hljs-attr">&quot;variables&quot;</span>: {
-        <span class="hljs-attr">&quot;field&quot;</span>: {
-            <span class="hljs-attr">&quot;name&quot;</span>: <span class="pl-s">&quot;ratings.rating&quot;</span>,
-            <span class="hljs-attr">&quot;gt&quot;</span>: <span class="hljs-number">2</span>
-        },
-        <span class="hljs-attr">&quot;and&quot;</span>: [
-            {
-                <span class="hljs-attr">&quot;name&quot;</span>: <span class="pl-s">&quot;ratings.rating&quot;</span>,
-                <span class="hljs-attr">&quot;lt&quot;</span>: <span class="hljs-number">5</span>
-            },
-            {
-                <span class="hljs-attr">&quot;name&quot;</span>: <span class="pl-s">&quot;ratings.has_message&quot;</span>,
-                <span class="hljs-attr">&quot;eq&quot;</span>: <span class="pl-c1">true</span>
-            }
-        ]
-    }
-}
-</code></pre>
-<h5 id="or">OR</h5>
-<p>Permite agregar condiciones adicionales que no necesariamente deban verificarse a la vez.</p>
-<pre><code class="lang-json">{
-    <span class="hljs-attr">&quot;query&quot;</span>: <span class="pl-s">&quot;query Example($field: Field!, $or: [Field!]) { count(field: $field, or: $or) }&quot;</span>,
-    <span class="hljs-attr">&quot;variables&quot;</span>: {
-        <span class="hljs-attr">&quot;field&quot;</span>: {
-            <span class="hljs-attr">&quot;name&quot;</span>: <span class="pl-s">&quot;ratings.rating&quot;</span>,
-            <span class="hljs-attr">&quot;eq&quot;</span>: <span class="hljs-number">2</span>
-        },
-        <span class="hljs-attr">&quot;or&quot;</span>: {
-            <span class="hljs-attr">&quot;name&quot;</span>: <span class="pl-s">&quot;ratings.rating&quot;</span>,
-            <span class="hljs-attr">&quot;eq&quot;</span>: <span class="hljs-number">5</span>
-        }
-    }
-}
-</code></pre>
-<pre><code class="lang-json">{
-    <span class="hljs-attr">&quot;query&quot;</span>: <span class="pl-s">&quot;query Example($field: Field!, $or: [Field!]) { count(field: $field, or: $or) }&quot;</span>,
-    <span class="hljs-attr">&quot;variables&quot;</span>: {
-        <span class="hljs-attr">&quot;field&quot;</span>: {
-            <span class="hljs-attr">&quot;name&quot;</span>: <span class="pl-s">&quot;ratings.rating&quot;</span>,
-            <span class="hljs-attr">&quot;eq&quot;</span>: <span class="hljs-number">2</span>
-        },
-        <span class="hljs-attr">&quot;or&quot;</span>: [
-            {
-                <span class="hljs-attr">&quot;name&quot;</span>: <span class="pl-s">&quot;ratings.rating&quot;</span>,
-                <span class="hljs-attr">&quot;eq&quot;</span>: <span class="hljs-number">5</span>
-            },
-            {
-                <span class="hljs-attr">&quot;name&quot;</span>: <span class="pl-s">&quot;ratings.rating&quot;</span>,
-                <span class="hljs-attr">&quot;eq&quot;</span>: <span class="hljs-number">3</span>
-            }
-        ]
-    }
-}
-</code></pre>
-<h4 id="average">Average</h4>
-<h5 id="columna">Columna</h5>
-<p>Devuelve el promedio de los valores en una columna num&#xE9;rica, ignorando nulls.</p>
-<pre><code class="lang-json">{
-    <span class="hljs-attr">&quot;query&quot;</span>: <span class="pl-s">&quot;query Example($field: Field!) { average(field: $field) }&quot;</span>,
-    <span class="hljs-attr">&quot;variables&quot;</span>: {
-        <span class="hljs-attr">&quot;field&quot;</span>: {
-            <span class="hljs-attr">&quot;name&quot;</span>: <span class="pl-s">&quot;ratings.rating&quot;</span>
-        }
-    }
-}
-</code></pre>
-<h5 id="columna-con-condicion">Columna con condici&#xF3;n</h5>
-<p>DDevuelve el promedio de los valores en una columna num&#xE9;rica que cumplen con una condici&#xF3;n, ignorando nulls.</p>
-<pre><code class="lang-json">{
-    <span class="hljs-attr">&quot;query&quot;</span>: <span class="pl-s">&quot;query Example($field: Field!) { average(field: $field) }&quot;</span>,
-    <span class="hljs-attr">&quot;variables&quot;</span>: {
-        <span class="hljs-attr">&quot;field&quot;</span>: {
-            <span class="hljs-attr">&quot;name&quot;</span>: <span class="pl-s">&quot;ratings.rating&quot;</span>,
-            <span class="hljs-attr">&quot;gt&quot;</span>: <span class="hljs-number">2</span>
-        }
-    }
-}
-</code></pre>
-<h5 id="and">AND</h5>
-<p>Permite agregar condiciones adicionales que deben verificarse conjuntamente. &#xCD;dem <strong>count</strong>.</p>
-<h5 id="or">OR</h5>
-<p>Permite agregar condiciones adicionales que no necesariamente deban verificarse a la vez. &#xCD;dem <strong>count</strong>.</p>
-<h3 id="responses">Responses</h3>
-<h4 id="count">Count</h4>
-<pre><code class="lang-json">{
-    <span class="hljs-attr">&quot;meta&quot;</span>: {
-        <span class="hljs-attr">&quot;code&quot;</span>: ...,
-        <span class="hljs-attr">&quot;message&quot;</span>: ...
-    },
-        <span class="hljs-attr">&quot;data&quot;</span>: {
-        <span class="hljs-attr">&quot;count&quot;</span>: ...
-    }
-}
-</code></pre>
-<h4 id="average">Average</h4>
-<pre><code class="lang-json">{
-  <span class="hljs-attr">&quot;meta&quot;</span>: {
-        <span class="hljs-attr">&quot;code&quot;</span>: ...,
-        <span class="hljs-attr">&quot;message&quot;</span>: ...
-    },
-    <span class="hljs-attr">&quot;data&quot;</span>: {
-        <span class="hljs-attr">&quot;average&quot;</span>: ...
-    }
-}
-</code></pre>
 
         </div>
         <div class="footer-nav">

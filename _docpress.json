@@ -368,24 +368,7 @@
               {
                 "title": "API de estadísticas",
                 "depth": 2,
-                "id": "api-de-estadisticas",
-                "headings": [
-                  {
-                    "title": "Endpoints",
-                    "depth": 3,
-                    "id": "endpoints"
-                  },
-                  {
-                    "title": "Queries",
-                    "depth": 3,
-                    "id": "queries"
-                  },
-                  {
-                    "title": "Responses",
-                    "depth": 3,
-                    "id": "responses"
-                  }
-                ]
+                "id": "api-de-estadisticas"
               }
             ]
           }
@@ -979,6 +962,39 @@
             ]
           }
         ]
+      },
+      {
+        "title": "Uso",
+        "sections": [
+          {
+            "title": "APIs",
+            "source": "docs/uso/apis.md",
+            "url": "uso/apis.html",
+            "slug": "usoapis",
+            "headings": [
+              {
+                "title": "Endpoints",
+                "depth": 3,
+                "id": "endpoints"
+              },
+              {
+                "title": "Headers",
+                "depth": 3,
+                "id": "headers"
+              },
+              {
+                "title": "Body",
+                "depth": 3,
+                "id": "body"
+              },
+              {
+                "title": "Responses",
+                "depth": 3,
+                "id": "responses"
+              }
+            ]
+          }
+        ]
       }
     ]
   },
@@ -1342,24 +1358,7 @@
         {
           "title": "API de estadísticas",
           "depth": 2,
-          "id": "api-de-estadisticas",
-          "headings": [
-            {
-              "title": "Endpoints",
-              "depth": 3,
-              "id": "endpoints"
-            },
-            {
-              "title": "Queries",
-              "depth": 3,
-              "id": "queries"
-            },
-            {
-              "title": "Responses",
-              "depth": 3,
-              "id": "responses"
-            }
-          ]
+          "id": "api-de-estadisticas"
         }
       ]
     },
@@ -1946,6 +1945,34 @@
           ]
         }
       ]
+    },
+    "uso/apis.html": {
+      "source": "docs/uso/apis.md",
+      "title": "APIs - Hermes",
+      "pageTitle": "APIs",
+      "slug": "usoapis",
+      "headings": [
+        {
+          "title": "Endpoints",
+          "depth": 3,
+          "id": "endpoints"
+        },
+        {
+          "title": "Headers",
+          "depth": 3,
+          "id": "headers"
+        },
+        {
+          "title": "Body",
+          "depth": 3,
+          "id": "body"
+        },
+        {
+          "title": "Responses",
+          "depth": 3,
+          "id": "responses"
+        }
+      ]
     }
   },
   "sources": {
@@ -1973,6 +2000,7 @@
     "docs/desarrollo/sprint11.md": "desarrollo/sprint11.html",
     "docs/desarrollo/sprint12.md": "desarrollo/sprint12.html",
     "docs/desarrollo/sprint13.md": "desarrollo/sprint13.html",
+    "docs/uso/apis.md": "uso/apis.html",
     "docs/images/schema.png": "images/schema.png"
   }
 }
