@@ -1,14 +1,20 @@
-# Package manager
+# APIs
+
+## Instalación
+
+Implica clonar el repo, instalar las dependencias y configurar las variables de entorno.
+
+### Package manager
 
 Para instalar [Glide](https://github.com/Masterminds/glide):
 
-## MacOS
+#### MacOS
 
 ```bash
 $ brew install glide
 ```
 
-## Ubuntu
+#### Ubuntu
 
 En **Zesty (17.04)** o más reciente:
 
@@ -23,13 +29,6 @@ En versiones anteriores a Zesty:
 $ sudo add-apt-repository ppa:masterminds/glide && sudo apt-get update
 $ sudo apt-get install glide
 ```
-
-
-# APIs
-
-## Instalación
-
-Implica clonar el repo, instalar las dependencias y configurar las variables de entorno.
 
 ### Dependencias
 
@@ -139,7 +138,6 @@ Devuelve la cantidad de registros en una columna que cumplen con una condición,
 {
     "query": "query Example($field: Field!) { count(field: $field) }",
     "variables": {
-
         "field": {
             "name": "messages.status",
             "eq": 0
