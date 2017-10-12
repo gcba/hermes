@@ -973,24 +973,80 @@
             "slug": "usoapis",
             "headings": [
               {
+                "title": "MacOS",
+                "depth": 2,
+                "id": "macos"
+              },
+              {
+                "title": "Ubuntu",
+                "depth": 2,
+                "id": "ubuntu"
+              },
+              {
+                "title": "Instalación",
+                "depth": 2,
+                "id": "instalacion",
+                "headings": [
+                  {
+                    "title": "Dependencias",
+                    "depth": 3,
+                    "id": "dependencias"
+                  },
+                  {
+                    "title": "Variables de entorno",
+                    "depth": 3,
+                    "id": "variables-de-entorno"
+                  }
+                ]
+              },
+              {
                 "title": "Endpoints",
-                "depth": 3,
+                "depth": 2,
                 "id": "endpoints"
               },
               {
                 "title": "Headers",
-                "depth": 3,
+                "depth": 2,
                 "id": "headers"
               },
               {
                 "title": "Body",
-                "depth": 3,
-                "id": "body"
+                "depth": 2,
+                "id": "body",
+                "headings": [
+                  {
+                    "title": "Count",
+                    "depth": 3,
+                    "id": "count"
+                  },
+                  {
+                    "title": "Average",
+                    "depth": 3,
+                    "id": "average"
+                  },
+                  {
+                    "title": "Operadores",
+                    "depth": 3,
+                    "id": "operadores"
+                  }
+                ]
               },
               {
                 "title": "Responses",
-                "depth": 3,
-                "id": "responses"
+                "depth": 2,
+                "id": "responses",
+                "headings": [
+                  {
+                    "title": "Count",
+                    "depth": 3,
+                    "id": "count"
+                  },
+                  {
+                    "title": "Average",
+                    "depth": 3,
+                    "id": "average"
+                  }
+                ]
               }
             ]
           }
@@ -1953,24 +2009,80 @@
       "slug": "usoapis",
       "headings": [
         {
+          "title": "MacOS",
+          "depth": 2,
+          "id": "macos"
+        },
+        {
+          "title": "Ubuntu",
+          "depth": 2,
+          "id": "ubuntu"
+        },
+        {
+          "title": "Instalación",
+          "depth": 2,
+          "id": "instalacion",
+          "headings": [
+            {
+              "title": "Dependencias",
+              "depth": 3,
+              "id": "dependencias"
+            },
+            {
+              "title": "Variables de entorno",
+              "depth": 3,
+              "id": "variables-de-entorno"
+            }
+          ]
+        },
+        {
           "title": "Endpoints",
-          "depth": 3,
+          "depth": 2,
           "id": "endpoints"
         },
         {
           "title": "Headers",
-          "depth": 3,
+          "depth": 2,
           "id": "headers"
         },
         {
           "title": "Body",
-          "depth": 3,
-          "id": "body"
+          "depth": 2,
+          "id": "body",
+          "headings": [
+            {
+              "title": "Count",
+              "depth": 3,
+              "id": "count"
+            },
+            {
+              "title": "Average",
+              "depth": 3,
+              "id": "average"
+            },
+            {
+              "title": "Operadores",
+              "depth": 3,
+              "id": "operadores"
+            }
+          ]
         },
         {
           "title": "Responses",
-          "depth": 3,
-          "id": "responses"
+          "depth": 2,
+          "id": "responses",
+          "headings": [
+            {
+              "title": "Count",
+              "depth": 3,
+              "id": "count"
+            },
+            {
+              "title": "Average",
+              "depth": 3,
+              "id": "average"
+            }
+          ]
         }
       ]
     }

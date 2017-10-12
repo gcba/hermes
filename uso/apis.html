@@ -77,13 +77,39 @@
               <ul class="submenu">
                 <li class="menu-item -level-2"><a class="link title -active link-usoapis" href="../uso/apis.html">APIs</a>
                   <ul class="headings heading-list">
-                    <li class="heading-item -depth-3"><a class="hlink link-endpoints" href="#endpoints">Endpoints</a>
+                    <li class="heading-item -depth-2"><a class="hlink link-macos" href="#macos">MacOS</a>
                     </li>
-                    <li class="heading-item -depth-3"><a class="hlink link-headers" href="#headers">Headers</a>
+                    <li class="heading-item -depth-2"><a class="hlink link-ubuntu" href="#ubuntu">Ubuntu</a>
                     </li>
-                    <li class="heading-item -depth-3"><a class="hlink link-body" href="#body">Body</a>
+                    <li class="heading-item -depth-2"><a class="hlink link-instalacion" href="#instalacion">Instalación</a>
+                      <ul class="heading-list -depth-2">
+                        <li class="heading-item -depth-3"><a class="hlink link-dependencias" href="#dependencias">Dependencias</a>
+                        </li>
+                        <li class="heading-item -depth-3"><a class="hlink link-variables-de-entorno" href="#variables-de-entorno">Variables de entorno</a>
+                        </li>
+                      </ul>
                     </li>
-                    <li class="heading-item -depth-3"><a class="hlink link-responses" href="#responses">Responses</a>
+                    <li class="heading-item -depth-2"><a class="hlink link-endpoints" href="#endpoints">Endpoints</a>
+                    </li>
+                    <li class="heading-item -depth-2"><a class="hlink link-headers" href="#headers">Headers</a>
+                    </li>
+                    <li class="heading-item -depth-2"><a class="hlink link-body" href="#body">Body</a>
+                      <ul class="heading-list -depth-2">
+                        <li class="heading-item -depth-3"><a class="hlink link-count" href="#count">Count</a>
+                        </li>
+                        <li class="heading-item -depth-3"><a class="hlink link-average" href="#average">Average</a>
+                        </li>
+                        <li class="heading-item -depth-3"><a class="hlink link-operadores" href="#operadores">Operadores</a>
+                        </li>
+                      </ul>
+                    </li>
+                    <li class="heading-item -depth-2"><a class="hlink link-responses" href="#responses">Responses</a>
+                      <ul class="heading-list -depth-2">
+                        <li class="heading-item -depth-3"><a class="hlink link-count" href="#count">Count</a>
+                        </li>
+                        <li class="heading-item -depth-3"><a class="hlink link-average" href="#average">Average</a>
+                        </li>
+                      </ul>
                     </li>
                   </ul>
                 </li>
@@ -97,20 +123,69 @@
           <div class="right">
           </div>
         </div>
-        <div class="markdown-body"><h1 id="api-de-calificaciones">API de calificaciones</h1>
-<p>Esta API no est&#xE1; pensada para ser usada directamente, sino a trav&#xE9;s de un SDK.</p>
-<h1 id="api-de-estadisticas">API de estad&#xED;sticas</h1>
-<h3 id="endpoints">Endpoints</h3>
-<p>Hay un &#xFA;nico endpoint POST.</p>
-<p><code>POST /stats</code></p>
-<h3 id="headers">Headers</h3>
+        <div class="markdown-body"><h1 id="package-manager">Package manager</h1>
+<p>Para instalar <a href="https://github.com/Masterminds/glide">Glide</a>:</p>
+<h2 id="macos">MacOS</h2>
+<pre><code class="lang-bash">$ brew install glide
+</code></pre>
+<h2 id="ubuntu">Ubuntu</h2>
+<p>En <strong>Zesty (17.04)</strong> o m&#xE1;s reciente:</p>
+<pre><code class="lang-bash">$ sudo add-apt-repository ppa:masterminds/glide &amp;&amp; sudo apt-get update
+$ sudo apt-get install golang-glide
+</code></pre>
+<p>En versiones anteriores a Zesty:</p>
+<pre><code class="lang-bash">$ sudo add-apt-repository ppa:masterminds/glide &amp;&amp; sudo apt-get update
+$ sudo apt-get install glide
+</code></pre>
+<h1 id="apis">APIs</h1>
+<h2 id="instalacion">Instalaci&#xF3;n</h2>
+<p>Implica clonar el repo, instalar las dependencias y configurar las variables de entorno.</p>
+<h3 id="dependencias">Dependencias</h3>
+<pre><code class="lang-bash">$ glide install
+</code></pre>
+<h3 id="variables-de-entorno">Variables de entorno</h3>
+<p>En <code>&lt;REPO&gt;/apis/src/hermes</code> crear un archivo <code>.env</code> con los valores de configuraci&#xF3;n:</p>
+<pre><code class="lang-bash"><span class="pl-c1">export</span> GOPATH=&lt;GOPATH&gt;
+
+<span class="pl-c"># Environment</span>
+<span class="pl-c1">export</span> HERMES_RATINGS_ENV=DEV
+<span class="pl-c1">export</span> HERMES_STATS_ENV=DEV
+
+<span class="pl-c"># Ports</span>
+<span class="pl-c1">export</span> HERMES_RATINGS_PORT=5000 <span class="pl-c"># Se puede omitir, por defecto es &apos;5000&apos;</span>
+<span class="pl-c1">export</span> HERMES_STATS_PORT=7000 <span class="pl-c"># Se puede omitir, por defecto es &apos;7000&apos;</span>
+
+<span class="pl-c"># Database</span>
+<span class="pl-c1">export</span> HERMES_READDB_HOST=localhost <span class="pl-c"># Se puede omitir, por defecto es &apos;localhost&apos;</span>
+<span class="pl-c1">export</span> HERMES_READDB_PORT=5432 <span class="pl-c"># Se puede omitir, por defecto es &apos;5432&apos;</span>
+<span class="pl-c1">export</span> HERMES_READDB_NAME=hermes
+<span class="pl-c1">export</span> HERMES_READDB_USER=hermes
+<span class="pl-c1">export</span> HERMES_READDB_PASSWORD=hermes_test
+
+<span class="pl-c1">export</span> HERMES_WRITEDB_HOST=localhost <span class="pl-c"># Se puede omitir, por defecto es &apos;localhost&apos;</span>
+<span class="pl-c1">export</span> HERMES_WRITEDB_PORT=5432 <span class="pl-c"># Se puede omitir, por defecto es &apos;5432&apos;</span>
+<span class="pl-c1">export</span> HERMES_WRITEDB_NAME=hermes
+<span class="pl-c1">export</span> HERMES_WRITEDB_USER=hermes
+<span class="pl-c1">export</span> HERMES_WRITEDB_PASSWORD=hermes_test
+</code></pre>
+<p>Finalmente, cargarlo con:</p>
+<pre><code class="lang-bash">$ <span class="pl-c1">source</span> .env
+</code></pre>
+<p>Ahora se puede correr las APIs.</p>
+<pre><code class="lang-bash">$ go run main.go start ratings
+</code></pre>
+<pre><code class="lang-bash">$ go run main.go start stats
+</code></pre>
+<h2 id="endpoints">Endpoints</h2>
+<p>Hay un &#xFA;nico endpoint: <code>POST /stats</code>.</p>
+<h2 id="headers">Headers</h2>
 <ul>
 <li><strong>Content-Type:</strong> <code>application/json; charset=utf-8</code></li>
 <li><strong>Accept:</strong> <code>application/json</code></li>
 </ul>
-<h3 id="body">Body</h3>
-<h4 id="count">Count</h4>
-<h5 id="tabla">Tabla</h5>
+<h2 id="body">Body</h2>
+<h3 id="count">Count</h3>
+<h4 id="tabla">Tabla</h4>
 <p>Devuelve la cantidad de registros en una tabla.</p>
 <pre><code class="lang-json">{
     <span class="hljs-attr">&quot;query&quot;</span>: <span class="pl-s">&quot;query Example($field: Field!) { count(field: $field) }&quot;</span>,
@@ -121,7 +196,7 @@
     }
 }
 </code></pre>
-<h5 id="columna">Columna</h5>
+<h4 id="columna">Columna</h4>
 <p>Devuelve la cantidad de registros en una columna, ignorando nulls.</p>
 <pre><code class="lang-json">{
     <span class="hljs-attr">&quot;query&quot;</span>: <span class="pl-s">&quot;query Example($field: Field!) { count(field: $field) }&quot;</span>,
@@ -132,11 +207,12 @@
     }
 }
 </code></pre>
-<h5 id="columna-con-condicion">Columna con condici&#xF3;n</h5>
+<h4 id="columna-con-condicion">Columna con condici&#xF3;n</h4>
 <p>Devuelve la cantidad de registros en una columna que cumplen con una condici&#xF3;n, ignorando nulls.</p>
 <pre><code class="lang-json">{
     <span class="hljs-attr">&quot;query&quot;</span>: <span class="pl-s">&quot;query Example($field: Field!) { count(field: $field) }&quot;</span>,
     <span class="hljs-attr">&quot;variables&quot;</span>: {
+
         <span class="hljs-attr">&quot;field&quot;</span>: {
             <span class="hljs-attr">&quot;name&quot;</span>: <span class="pl-s">&quot;messages.status&quot;</span>,
             <span class="hljs-attr">&quot;eq&quot;</span>: <span class="hljs-number">0</span>
@@ -144,7 +220,7 @@
     }
 }
 </code></pre>
-<h5 id="and">AND</h5>
+<h4 id="and">AND</h4>
 <p>Permite agregar condiciones adicionales que deben verificarse conjuntamente.</p>
 <pre><code class="lang-json">{
     <span class="hljs-attr">&quot;query&quot;</span>: <span class="pl-s">&quot;query Example($field: Field!, $and: [Field!]) { count(field: $field, and: $and) }&quot;</span>,
@@ -180,7 +256,7 @@
     }
 }
 </code></pre>
-<h5 id="or">OR</h5>
+<h4 id="or">OR</h4>
 <p>Permite agregar condiciones adicionales que no necesariamente deban verificarse a la vez.</p>
 <pre><code class="lang-json">{
     <span class="hljs-attr">&quot;query&quot;</span>: <span class="pl-s">&quot;query Example($field: Field!, $or: [Field!]) { count(field: $field, or: $or) }&quot;</span>,
@@ -216,8 +292,8 @@
     }
 }
 </code></pre>
-<h4 id="average">Average</h4>
-<h5 id="columna">Columna</h5>
+<h3 id="average">Average</h3>
+<h4 id="columna">Columna</h4>
 <p>Devuelve el promedio de los valores en una columna num&#xE9;rica, ignorando nulls.</p>
 <pre><code class="lang-json">{
     <span class="hljs-attr">&quot;query&quot;</span>: <span class="pl-s">&quot;query Example($field: Field!) { average(field: $field) }&quot;</span>,
@@ -228,7 +304,7 @@
     }
 }
 </code></pre>
-<h5 id="columna-con-condicion">Columna con condici&#xF3;n</h5>
+<h4 id="columna-con-condicion">Columna con condici&#xF3;n</h4>
 <p>Devuelve el promedio de los valores en una columna num&#xE9;rica que cumplen con una condici&#xF3;n, ignorando nulls.</p>
 <pre><code class="lang-json">{
     <span class="hljs-attr">&quot;query&quot;</span>: <span class="pl-s">&quot;query Example($field: Field!) { average(field: $field) }&quot;</span>,
@@ -240,11 +316,11 @@
     }
 }
 </code></pre>
-<h5 id="and">AND</h5>
+<h4 id="and">AND</h4>
 <p>Permite agregar condiciones adicionales que deben verificarse conjuntamente. &#xCD;dem <strong>count</strong>.</p>
-<h5 id="or">OR</h5>
+<h4 id="or">OR</h4>
 <p>Permite agregar condiciones adicionales que no necesariamente deban verificarse a la vez. &#xCD;dem <strong>count</strong>.</p>
-<h4 id="operadores">Operadores</h4>
+<h3 id="operadores">Operadores</h3>
 <p>Para construir condiciones se pueden usar los siguientes operadores:</p>
 <ul>
 <li><strong>eq:</strong> Igual a <em>(equal)</em>.</li>
@@ -254,8 +330,8 @@
 <li><strong>gte:</strong> Mayor o igual a <em>(greater than or equal)</em>.</li>
 <li><strong>lte:</strong> Menor o igual a <em>(lower than or equal)</em>.</li>
 </ul>
-<h3 id="responses">Responses</h3>
-<h4 id="count">Count</h4>
+<h2 id="responses">Responses</h2>
+<h3 id="count">Count</h3>
 <pre><code class="lang-json">{
     <span class="hljs-attr">&quot;meta&quot;</span>: {
         <span class="hljs-attr">&quot;code&quot;</span>: ...,
@@ -266,7 +342,7 @@
     }
 }
 </code></pre>
-<h4 id="average">Average</h4>
+<h3 id="average">Average</h3>
 <pre><code class="lang-json">{
   <span class="hljs-attr">&quot;meta&quot;</span>: {
         <span class="hljs-attr">&quot;code&quot;</span>: ...,
