@@ -15,8 +15,6 @@ Hay un único endpoint POST.
 - **Content-Type:** `application/json; charset=utf-8`
 - **Accept:** `application/json`
 
-`POST /stats`
-
 ### Body
 
 #### Count
