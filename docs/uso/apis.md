@@ -41,7 +41,7 @@ $ glide install
 En `<REPO>/apis/src/hermes` crear un archivo `.env` con los valores de configuración:
 
 ```bash
-export GOPATH=<GOPATH>
+export GOPATH=<REPO>/apis
 
 # Environment
 export HERMES_RATINGS_ENV=DEV
