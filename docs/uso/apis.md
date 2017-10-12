@@ -1,25 +1,100 @@
-# API de calificaciones
+# Package manager
 
-Esta API no está pensada para ser usada directamente, sino a través de un SDK.
+Para instalar [Glide](https://github.com/Masterminds/glide):
 
-# API de estadísticas
+## MacOS
 
-### Endpoints
+```bash
+$ brew install glide
+```
 
-Hay un único endpoint POST.
+## Ubuntu
 
-`POST /stats`
+En **Zesty (17.04)** o más reciente:
 
-### Headers
+```bash
+$ sudo add-apt-repository ppa:masterminds/glide && sudo apt-get update
+$ sudo apt-get install golang-glide
+```
+
+En versiones anteriores a Zesty:
+
+```bash
+$ sudo add-apt-repository ppa:masterminds/glide && sudo apt-get update
+$ sudo apt-get install glide
+```
+
+# APIs
+
+## Instalación
+
+Implica clonar el repo, instalar las dependencias y configurar las variables de entorno.
+
+### Dependencias
+
+```bash
+$ glide install
+```
+
+### Variables de entorno
+
+En `<REPO>/apis/src/hermes` crear un archivo `.env` con los valores de configuración:
+
+```bash
+export GOPATH=<GOPATH>
+
+# Environment
+export HERMES_RATINGS_ENV=DEV
+export HERMES_STATS_ENV=DEV
+
+# Ports
+export HERMES_RATINGS_PORT=5000 # Se puede omitir, por defecto es '5000'
+export HERMES_STATS_PORT=7000 # Se puede omitir, por defecto es '7000'
+
+# Database
+export HERMES_READDB_HOST=localhost # Se puede omitir, por defecto es 'localhost'
+export HERMES_READDB_PORT=5432 # Se puede omitir, por defecto es '5432'
+export HERMES_READDB_NAME=hermes
+export HERMES_READDB_USER=hermes
+export HERMES_READDB_PASSWORD=hermes_test
+
+export HERMES_WRITEDB_HOST=localhost # Se puede omitir, por defecto es 'localhost'
+export HERMES_WRITEDB_PORT=5432 # Se puede omitir, por defecto es '5432'
+export HERMES_WRITEDB_NAME=hermes
+export HERMES_WRITEDB_USER=hermes
+export HERMES_WRITEDB_PASSWORD=hermes_test
+```
+
+Finalmente, cargarlo con:
+
+```bash
+$ source .env
+```
+
+Ahora se puede correr las APIs.
+
+```bash
+$ go run main.go start ratings
+```
+
+```bash
+$ go run main.go start stats
+```
+
+## Endpoints
+
+Hay un único endpoint: `POST /stats`.
+
+## Headers
 
 - **Content-Type:** `application/json; charset=utf-8`
 - **Accept:** `application/json`
 
-### Body
+## Body
 
-#### Count
+### Count
 
-##### Tabla
+#### Tabla
 
 Devuelve la cantidad de registros en una tabla.
 
@@ -34,7 +109,7 @@ Devuelve la cantidad de registros en una tabla.
 }
 ```
 
-##### Columna
+#### Columna
 
 Devuelve la cantidad de registros en una columna, ignorando nulls.
 
@@ -49,7 +124,7 @@ Devuelve la cantidad de registros en una columna, ignorando nulls.
 }
 ```
 
-##### Columna con condición
+#### Columna con condición
 
 Devuelve la cantidad de registros en una columna que cumplen con una condición, ignorando nulls.
 
@@ -57,6 +132,7 @@ Devuelve la cantidad de registros en una columna que cumplen con una condición,
 {
     "query": "query Example($field: Field!) { count(field: $field) }",
     "variables": {
+
         "field": {
             "name": "messages.status",
             "eq": 0
@@ -65,7 +141,7 @@ Devuelve la cantidad de registros en una columna que cumplen con una condición,
 }
 ```
 
-##### AND
+#### AND
 
 Permite agregar condiciones adicionales que deben verificarse conjuntamente.
 
@@ -107,7 +183,7 @@ Permite agregar condiciones adicionales que deben verificarse conjuntamente.
 }
 ```
 
-##### OR
+#### OR
 
 Permite agregar condiciones adicionales que no necesariamente deban verificarse a la vez.
 
@@ -149,9 +225,9 @@ Permite agregar condiciones adicionales que no necesariamente deban verificarse 
 }
 ```
 
-#### Average
+### Average
 
-##### Columna
+#### Columna
 
 Devuelve el promedio de los valores en una columna numérica, ignorando nulls.
 
@@ -166,7 +242,7 @@ Devuelve el promedio de los valores en una columna numérica, ignorando nulls.
 }
 ```
 
-##### Columna con condición
+#### Columna con condición
 
 Devuelve el promedio de los valores en una columna numérica que cumplen con una condición, ignorando nulls.
 
@@ -182,15 +258,15 @@ Devuelve el promedio de los valores en una columna numérica que cumplen con una
 }
 ```
 
-##### AND
+#### AND
 
 Permite agregar condiciones adicionales que deben verificarse conjuntamente. Ídem **count**.
 
-##### OR
+#### OR
 
 Permite agregar condiciones adicionales que no necesariamente deban verificarse a la vez. Ídem **count**.
 
-#### Operadores
+### Operadores
 
 Para construir condiciones se pueden usar los siguientes operadores:
 
@@ -201,9 +277,9 @@ Para construir condiciones se pueden usar los siguientes operadores:
 - **gte:** Mayor o igual a *(greater than or equal)*.
 - **lte:** Menor o igual a *(lower than or equal)*.
 
-### Responses
+## Responses
 
-#### Count
+### Count
 
 ```json
 {
@@ -217,7 +293,7 @@ Para construir condiciones se pueden usar los siguientes operadores:
 }
 ```
 
-#### Average
+### Average
 
 ```json
 {
