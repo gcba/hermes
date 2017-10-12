@@ -1000,51 +1000,34 @@
                 ]
               },
               {
-                "title": "Endpoints",
+                "title": "API de calificaciones",
                 "depth": 2,
-                "id": "endpoints"
+                "id": "api-de-calificaciones"
               },
               {
-                "title": "Headers",
+                "title": "API de estadísticas",
                 "depth": 2,
-                "id": "headers"
-              },
-              {
-                "title": "Body",
-                "depth": 2,
-                "id": "body",
+                "id": "api-de-estadisticas",
                 "headings": [
                   {
-                    "title": "Count",
+                    "title": "Endpoints",
                     "depth": 3,
-                    "id": "count"
+                    "id": "endpoints"
                   },
                   {
-                    "title": "Average",
+                    "title": "Headers",
                     "depth": 3,
-                    "id": "average"
+                    "id": "headers"
                   },
                   {
-                    "title": "Operadores",
+                    "title": "Body",
                     "depth": 3,
-                    "id": "operadores"
-                  }
-                ]
-              },
-              {
-                "title": "Responses",
-                "depth": 2,
-                "id": "responses",
-                "headings": [
-                  {
-                    "title": "Count",
-                    "depth": 3,
-                    "id": "count"
+                    "id": "body"
                   },
                   {
-                    "title": "Average",
+                    "title": "Responses",
                     "depth": 3,
-                    "id": "average"
+                    "id": "responses"
                   }
                 ]
               }
@@ -2036,51 +2019,34 @@
           ]
         },
         {
-          "title": "Endpoints",
+          "title": "API de calificaciones",
           "depth": 2,
-          "id": "endpoints"
+          "id": "api-de-calificaciones"
         },
         {
-          "title": "Headers",
+          "title": "API de estadísticas",
           "depth": 2,
-          "id": "headers"
-        },
-        {
-          "title": "Body",
-          "depth": 2,
-          "id": "body",
+          "id": "api-de-estadisticas",
           "headings": [
             {
-              "title": "Count",
+              "title": "Endpoints",
               "depth": 3,
-              "id": "count"
+              "id": "endpoints"
             },
             {
-              "title": "Average",
+              "title": "Headers",
               "depth": 3,
-              "id": "average"
+              "id": "headers"
             },
             {
-              "title": "Operadores",
+              "title": "Body",
               "depth": 3,
-              "id": "operadores"
-            }
-          ]
-        },
-        {
-          "title": "Responses",
-          "depth": 2,
-          "id": "responses",
-          "headings": [
-            {
-              "title": "Count",
-              "depth": 3,
-              "id": "count"
+              "id": "body"
             },
             {
-              "title": "Average",
+              "title": "Responses",
               "depth": 3,
-              "id": "average"
+              "id": "responses"
             }
           ]
         }

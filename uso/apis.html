@@ -89,25 +89,17 @@
                         </li>
                       </ul>
                     </li>
-                    <li class="heading-item -depth-2"><a class="hlink link-endpoints" href="#endpoints">Endpoints</a>
+                    <li class="heading-item -depth-2"><a class="hlink link-api-de-calificaciones" href="#api-de-calificaciones">API de calificaciones</a>
                     </li>
-                    <li class="heading-item -depth-2"><a class="hlink link-headers" href="#headers">Headers</a>
-                    </li>
-                    <li class="heading-item -depth-2"><a class="hlink link-body" href="#body">Body</a>
+                    <li class="heading-item -depth-2"><a class="hlink link-api-de-estadisticas" href="#api-de-estadisticas">API de estadísticas</a>
                       <ul class="heading-list -depth-2">
-                        <li class="heading-item -depth-3"><a class="hlink link-count" href="#count">Count</a>
+                        <li class="heading-item -depth-3"><a class="hlink link-endpoints" href="#endpoints">Endpoints</a>
                         </li>
-                        <li class="heading-item -depth-3"><a class="hlink link-average" href="#average">Average</a>
+                        <li class="heading-item -depth-3"><a class="hlink link-headers" href="#headers">Headers</a>
                         </li>
-                        <li class="heading-item -depth-3"><a class="hlink link-operadores" href="#operadores">Operadores</a>
+                        <li class="heading-item -depth-3"><a class="hlink link-body" href="#body">Body</a>
                         </li>
-                      </ul>
-                    </li>
-                    <li class="heading-item -depth-2"><a class="hlink link-responses" href="#responses">Responses</a>
-                      <ul class="heading-list -depth-2">
-                        <li class="heading-item -depth-3"><a class="hlink link-count" href="#count">Count</a>
-                        </li>
-                        <li class="heading-item -depth-3"><a class="hlink link-average" href="#average">Average</a>
+                        <li class="heading-item -depth-3"><a class="hlink link-responses" href="#responses">Responses</a>
                         </li>
                       </ul>
                     </li>
@@ -176,16 +168,19 @@ $ sudo apt-get install glide
 </code></pre>
 <pre><code class="lang-bash">$ go run main.go start stats
 </code></pre>
-<h2 id="endpoints">Endpoints</h2>
+<h2 id="api-de-calificaciones">API de calificaciones</h2>
+<p>Esta API no debe usarse directamente, sino por medio de los SDKs.</p>
+<h2 id="api-de-estadisticas">API de estad&#xED;sticas</h2>
+<h3 id="endpoints">Endpoints</h3>
 <p>Hay un &#xFA;nico endpoint: <code>POST /stats</code>.</p>
-<h2 id="headers">Headers</h2>
+<h3 id="headers">Headers</h3>
 <ul>
 <li><strong>Content-Type:</strong> <code>application/json; charset=utf-8</code></li>
 <li><strong>Accept:</strong> <code>application/json</code></li>
 </ul>
-<h2 id="body">Body</h2>
-<h3 id="count">Count</h3>
-<h4 id="tabla">Tabla</h4>
+<h3 id="body">Body</h3>
+<h4 id="count">Count</h4>
+<h5 id="tabla">Tabla</h5>
 <p>Devuelve la cantidad de registros en una tabla.</p>
 <pre><code class="lang-json">{
     <span class="hljs-attr">&quot;query&quot;</span>: <span class="pl-s">&quot;query Example($field: Field!) { count(field: $field) }&quot;</span>,
@@ -196,7 +191,7 @@ $ sudo apt-get install glide
     }
 }
 </code></pre>
-<h4 id="columna">Columna</h4>
+<h5 id="columna">Columna</h5>
 <p>Devuelve la cantidad de registros en una columna, ignorando nulls.</p>
 <pre><code class="lang-json">{
     <span class="hljs-attr">&quot;query&quot;</span>: <span class="pl-s">&quot;query Example($field: Field!) { count(field: $field) }&quot;</span>,
@@ -207,7 +202,7 @@ $ sudo apt-get install glide
     }
 }
 </code></pre>
-<h4 id="columna-con-condicion">Columna con condici&#xF3;n</h4>
+<h5 id="columna-con-condicion">Columna con condici&#xF3;n</h5>
 <p>Devuelve la cantidad de registros en una columna que cumplen con una condici&#xF3;n, ignorando nulls.</p>
 <pre><code class="lang-json">{
     <span class="hljs-attr">&quot;query&quot;</span>: <span class="pl-s">&quot;query Example($field: Field!) { count(field: $field) }&quot;</span>,
@@ -220,7 +215,7 @@ $ sudo apt-get install glide
     }
 }
 </code></pre>
-<h4 id="and">AND</h4>
+<h5 id="and">AND</h5>
 <p>Permite agregar condiciones adicionales que deben verificarse conjuntamente.</p>
 <pre><code class="lang-json">{
     <span class="hljs-attr">&quot;query&quot;</span>: <span class="pl-s">&quot;query Example($field: Field!, $and: [Field!]) { count(field: $field, and: $and) }&quot;</span>,
@@ -256,7 +251,7 @@ $ sudo apt-get install glide
     }
 }
 </code></pre>
-<h4 id="or">OR</h4>
+<h5 id="or">OR</h5>
 <p>Permite agregar condiciones adicionales que no necesariamente deban verificarse a la vez.</p>
 <pre><code class="lang-json">{
     <span class="hljs-attr">&quot;query&quot;</span>: <span class="pl-s">&quot;query Example($field: Field!, $or: [Field!]) { count(field: $field, or: $or) }&quot;</span>,
@@ -292,8 +287,8 @@ $ sudo apt-get install glide
     }
 }
 </code></pre>
-<h3 id="average">Average</h3>
-<h4 id="columna">Columna</h4>
+<h4 id="average">Average</h4>
+<h5 id="columna">Columna</h5>
 <p>Devuelve el promedio de los valores en una columna num&#xE9;rica, ignorando nulls.</p>
 <pre><code class="lang-json">{
     <span class="hljs-attr">&quot;query&quot;</span>: <span class="pl-s">&quot;query Example($field: Field!) { average(field: $field) }&quot;</span>,
@@ -304,7 +299,7 @@ $ sudo apt-get install glide
     }
 }
 </code></pre>
-<h4 id="columna-con-condicion">Columna con condici&#xF3;n</h4>
+<h5 id="columna-con-condicion">Columna con condici&#xF3;n</h5>
 <p>Devuelve el promedio de los valores en una columna num&#xE9;rica que cumplen con una condici&#xF3;n, ignorando nulls.</p>
 <pre><code class="lang-json">{
     <span class="hljs-attr">&quot;query&quot;</span>: <span class="pl-s">&quot;query Example($field: Field!) { average(field: $field) }&quot;</span>,
@@ -316,11 +311,11 @@ $ sudo apt-get install glide
     }
 }
 </code></pre>
-<h4 id="and">AND</h4>
+<h5 id="and">AND</h5>
 <p>Permite agregar condiciones adicionales que deben verificarse conjuntamente. &#xCD;dem <strong>count</strong>.</p>
-<h4 id="or">OR</h4>
+<h5 id="or">OR</h5>
 <p>Permite agregar condiciones adicionales que no necesariamente deban verificarse a la vez. &#xCD;dem <strong>count</strong>.</p>
-<h3 id="operadores">Operadores</h3>
+<h4 id="operadores">Operadores</h4>
 <p>Para construir condiciones se pueden usar los siguientes operadores:</p>
 <ul>
 <li><strong>eq:</strong> Igual a <em>(equal)</em>.</li>
@@ -330,8 +325,8 @@ $ sudo apt-get install glide
 <li><strong>gte:</strong> Mayor o igual a <em>(greater than or equal)</em>.</li>
 <li><strong>lte:</strong> Menor o igual a <em>(lower than or equal)</em>.</li>
 </ul>
-<h2 id="responses">Responses</h2>
-<h3 id="count">Count</h3>
+<h3 id="responses">Responses</h3>
+<h4 id="count">Count</h4>
 <pre><code class="lang-json">{
     <span class="hljs-attr">&quot;meta&quot;</span>: {
         <span class="hljs-attr">&quot;code&quot;</span>: ...,
@@ -342,7 +337,7 @@ $ sudo apt-get install glide
     }
 }
 </code></pre>
-<h3 id="average">Average</h3>
+<h4 id="average">Average</h4>
 <pre><code class="lang-json">{
   <span class="hljs-attr">&quot;meta&quot;</span>: {
         <span class="hljs-attr">&quot;code&quot;</span>: ...,
