@@ -11,7 +11,7 @@ Se encuentra en `<REPO>/sdks/js`.
 ##### NPM
 
 ```bash
-$ npm install `<REPO>/sdks/js`
+$ npm install '<REPO>/sdks/js'
 ```
 
 ##### Yarn
