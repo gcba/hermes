@@ -20,6 +20,8 @@ $ npm install `<REPO>/sdks/js`
 $ yarn add file:<REPO>/sdks/js
 ```
 
+##### Importación
+
 ```javascript
 import Ratings from 'hermes-ratings-sdk';
 ```
