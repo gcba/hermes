@@ -4,15 +4,27 @@
 
 ### Instalación
 
-### Con &lt;script&gt;
+#### Módulo ES6
 
-El build script genera un módulo **UMD**. Aechivos minificados y sin minificar están en `<REPO>/sdks/js/dist`.
+Se encuentra en `<REPO>/sdks/js`.
+
+````
+$ npm install --save `<REPO>/sdks/js`
+````
+
+```javascript
+import Ratings from 'hermes-ratings-sdk';
+```
+
+#### Módulo UMD
+
+Los archivos minificados y sin minificar están en `<REPO>/sdks/js/dist`.
 
 ```html
 <script src="js/ratings.min.js"></script>
 ```
 
-### Con
+### Enviar una calificación
 
 ```javascript
 const sdk = new Ratings({
