@@ -8,9 +8,17 @@
 
 Se encuentra en `<REPO>/sdks/js`.
 
-````
-$ npm install --save `<REPO>/sdks/js`
-````
+##### NPM
+
+```bash
+$ npm install `<REPO>/sdks/js`
+```
+
+##### Yarn
+
+```bash
+$ yarn add file:<REPO>/sdks/js
+```
 
 ```javascript
 import Ratings from 'hermes-ratings-sdk';
