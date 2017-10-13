@@ -311,3 +311,20 @@ Para construir condiciones se pueden usar los siguientes operadores:
     }
 }
 ```
+
+#### Errores
+
+```json
+{
+    "meta": {
+        "code": ...,
+        "message": ...
+    },
+    "errors": [
+        {
+            "message": ...,
+            "path": [ ... ]
+        }
+    ]
+}
+```
