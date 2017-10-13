@@ -11,8 +11,8 @@ type Message struct {
 	Message     string `sql:"type:text;not null"`
 	Direction   string `sql:"type:enum('in','out');not null"`
 	Status      int    `gorm:"not null;DEFAULT:0"`
-	RatingID    uint   `gorm:"not null"`
 	TransportID *uint  `gorm:"DEFAULT:NULL"`
+	RatingID    uint   `gorm:"not null"`
 
 	CreatedAt time.Time `gorm:"not null;type:datetime;default:CURRENT_TIMESTAMP"`
 	UpdatedAt time.Time `gorm:"-"`
