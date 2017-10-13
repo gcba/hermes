@@ -1,7 +1,7 @@
 # JavaScript SDK
 
-Ratings API SDK
+Hermes ratings API SDK. [Documentación](https://gcba.github.io/hermes/uso/sdks.html)
 
-## License
+## Licencia
 
 [MIT](LICENSE.md)
