@@ -80,18 +80,8 @@ func (r *Resolver) Count(context context.Context, args arguments) (int32, error)
 			if operator := args.Field.resolveOperator(); operator != nil {
 				if value := args.Field.getValue(); value != nil {
 					valueType := reflect.TypeOf(value)
-					valueKind := valueType.Kind()
-					valueElemKind := valueType.Elem().Kind()
-					ptrKind := reflect.Ptr
-					intKind := reflect.Int
-					floatKind := reflect.Float64
 
-					if (valueKind == ptrKind && valueElemKind == fieldKind) ||
-						(valueKind == ptrKind && valueElemKind == floatKind && fieldKind == intKind) ||
-						(valueKind == ptrKind && valueElemKind == intKind && fieldKind == floatKind) ||
-						(valueKind == fieldKind) ||
-						(valueKind == floatKind && fieldKind == intKind) ||
-						(valueKind == intKind && fieldKind == floatKind) {
+					if isValidType(fieldKind, valueType) {
 						where := fmt.Sprintf("%s %s ?", args.Field.Name, *operator)
 
 						query = query.Where(where, value)
@@ -150,27 +140,21 @@ func (r *Resolver) Average(context context.Context, args arguments) (float64, er
 		field := modelStruct.Field(fieldName)
 		fieldKind := field.Kind()
 
-		if fieldKind != reflect.Int &&
-			fieldKind != reflect.Int8 &&
-			fieldKind != reflect.Int16 &&
-			fieldKind != reflect.Int32 &&
-			fieldKind != reflect.Int64 &&
-			fieldKind != reflect.Uint &&
-			fieldKind != reflect.Float32 &&
-			fieldKind != reflect.Float64 {
+		if fieldKind == reflect.Ptr {
+			fieldValueKind := reflect.TypeOf(field.Value()).Kind()
+
+			if !isNumericKind(fieldValueKind) {
+				return result.Average, invalidFieldError(*entity.Field)
+			}
+		} else if !isNumericKind(fieldKind) {
 			return result.Average, invalidFieldError(*entity.Field)
 		}
 
 		if operator := args.Field.resolveOperator(); operator != nil {
 			if value := args.Field.getValue(); value != nil {
 				valueType := reflect.TypeOf(value)
-				valueKind := valueType.Kind()
-				valueElemKind := valueType.Elem().Kind()
-				intKind := reflect.Int
-				floatKind := reflect.Float64
 
-				if (valueKind == reflect.Ptr && (valueElemKind == intKind || valueElemKind == floatKind)) ||
-					(valueKind == intKind || valueKind == floatKind) {
+				if isValidNumericType(valueType) {
 					where := fmt.Sprintf("%s %s ?", args.Field.Name, *operator)
 
 					query = query.Where(where, value)
@@ -355,4 +339,40 @@ func toCamelCase(str string) string {
 	}
 
 	return camel
+}
+
+func isValidType(kind reflect.Kind, valueType reflect.Type) bool {
+	valueKind := valueType.Kind()
+	valueElemKind := valueType.Elem().Kind()
+	ptrKind := reflect.Ptr
+	intKind := reflect.Int
+	floatKind := reflect.Float64
+
+	return (valueKind == ptrKind && valueElemKind == kind) ||
+		(valueKind == ptrKind && valueElemKind == floatKind && kind == intKind) ||
+		(valueKind == ptrKind && valueElemKind == intKind && kind == floatKind) ||
+		(valueKind == kind) ||
+		(valueKind == floatKind && kind == intKind) ||
+		(valueKind == intKind && kind == floatKind)
+}
+
+func isValidNumericType(valueType reflect.Type) bool {
+	valueKind := valueType.Kind()
+	valueElemKind := valueType.Elem().Kind()
+	intKind := reflect.Int
+	floatKind := reflect.Float64
+
+	return (valueKind == reflect.Ptr && (valueElemKind == intKind || valueElemKind == floatKind)) ||
+		(valueKind == intKind || valueKind == floatKind)
+}
+
+func isNumericKind(kind reflect.Kind) bool {
+	return (kind == reflect.Int) ||
+		(kind == reflect.Int8) ||
+		(kind == reflect.Int16) ||
+		(kind == reflect.Int32) ||
+		(kind == reflect.Int64) ||
+		(kind == reflect.Uint) ||
+		(kind == reflect.Float32) ||
+		(kind == reflect.Float64)
 }
