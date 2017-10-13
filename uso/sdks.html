@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="../assets/style.css?t=615badd5">
     <script src="../assets/script.js?t=42463e55"></script>
-    <title>Sprint 3 - Hermes</title>
+    <title>SDKs - Hermes</title>
     <meta name="viewport" content="width=device-width">
   </head>
   <body class="-menu-visible">
@@ -49,23 +49,7 @@
                 </li>
                 <li class="menu-item -level-2"><a class="link title  link-desarrollosprint2" href="../desarrollo/sprint2.html">Sprint 2</a>
                 </li>
-                <li class="menu-item -level-2"><a class="link title -active link-desarrollosprint3" href="../desarrollo/sprint3.html">Sprint 3</a>
-                  <ul class="headings heading-list">
-                    <li class="heading-item -depth-2"><a class="hlink link-dias" href="#dias">Días</a>
-                    </li>
-                    <li class="heading-item -depth-2"><a class="hlink link-objetivo" href="#objetivo">Objetivo</a>
-                    </li>
-                    <li class="heading-item -depth-2"><a class="hlink link-tareas" href="#tareas">Tareas</a>
-                      <ul class="heading-list -depth-2">
-                        <li class="heading-item -depth-3"><a class="hlink link-api-de-calificaciones" href="#api-de-calificaciones">API de calificaciones</a>
-                        </li>
-                        <li class="heading-item -depth-3"><a class="hlink link-admin" href="#admin">Admin</a>
-                        </li>
-                        <li class="heading-item -depth-3"><a class="hlink link-documentacion" href="#documentacion">Documentación</a>
-                        </li>
-                      </ul>
-                    </li>
-                  </ul>
+                <li class="menu-item -level-2"><a class="link title  link-desarrollosprint3" href="../desarrollo/sprint3.html">Sprint 3</a>
                 </li>
                 <li class="menu-item -level-2"><a class="link title  link-desarrollosprint4" href="../desarrollo/sprint4.html">Sprint 4</a>
                 </li>
@@ -93,99 +77,73 @@
               <ul class="submenu">
                 <li class="menu-item -level-2"><a class="link title  link-usoapis" href="../uso/apis.html">APIs</a>
                 </li>
-                <li class="menu-item -level-2"><a class="link title  link-usosdks" href="../uso/sdks.html">SDKs</a>
+                <li class="menu-item -level-2"><a class="link title -active link-usosdks" href="../uso/sdks.html">SDKs</a>
+                  <ul class="headings heading-list">
+                    <li class="heading-item -depth-2"><a class="hlink link-javascript" href="#javascript">JavaScript</a>
+                      <ul class="heading-list -depth-2">
+                        <li class="heading-item -depth-3"><a class="hlink link-instalacion" href="#instalacion">Instalación</a>
+                        </li>
+                        <li class="heading-item -depth-3"><a class="hlink link-enviar-una-calificacion" href="#enviar-una-calificacion">Enviar una calificación</a>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
                 </li>
               </ul>
             </li>
           </ul>
         </li>
       </div>
-      <div class="body page-desarrollosprint3">
+      <div class="body page-usosdks">
         <div class="header-nav">
           <div class="right">
           </div>
         </div>
-        <div class="markdown-body"><h1 id="sprint-3">Sprint 3</h1>
-<h2 id="dias">D&#xED;as</h2>
-<ul>
-<li>Martes 13/06</li>
-<li>Jueves 15/06</li>
-</ul>
-<h2 id="objetivo">Objetivo</h2>
-<p>Crear los endpoints de la API de calificaciones. Agregar tests para los modelos creados en el sprint 2.</p>
-<h2 id="tareas">Tareas</h2>
-<h3 id="api-de-calificaciones">API de calificaciones</h3>
-<ol>
-<li>
-<p>Crear el endpoint <code>POST /ratings</code></p>
-</li>
-<li>
-<p>Crear el endpoint <code>OPTIONS /ratings</code></p>
-</li>
-<li>
-<p>Crear el endpoint <code>OPTIONS /</code></p>
-</li>
-<li>
-<p>Agregar tests de AppUser</p>
-</li>
-<li>
-<p>Agregar tests de Brand</p>
-</li>
-<li>
-<p>Agregar tests de Browser</p>
-</li>
-<li>
-<p>Agregar tests de Device</p>
-</li>
-<li>
-<p>Agregar tests de Message</p>
-</li>
-<li>
-<p>Agregar tests de Platform</p>
-</li>
-<li>
-<p>Agregar tests de Rating</p>
-</li>
-<li>
-<p>Agregar el campo miba_id a AppUser</p>
-</li>
-</ol>
-<h3 id="admin">Admin</h3>
-<ol>
-<li>
-<p>Hacer nulleables los campos platform_version, browser_version y appuser_id de Rating</p>
-</li>
-<li>
-<p>Hacer no nulleable el campo email de AppUser</p>
-</li>
-<li>
-<p>Agregar el campo is_owner a la tabla User_App</p>
-</li>
-<li>
-<p>Agregar la tabla intermedia AppUser_Device</p>
-</li>
-<li>
-<p>Agregar el modelo Range</p>
-</li>
-<li>
-<p>Agregar el campo range_id a Rating</p>
-</li>
-<li>
-<p>Agregar las migraciones de Range</p>
-</li>
-<li>
-<p>Agregar los seeds de Range</p>
-</li>
-</ol>
-<h3 id="documentacion">Documentaci&#xF3;n</h3>
-<ol>
-<li>Crear tabla documentando roles y permisos</li>
-</ol>
+        <div class="markdown-body"><h1 id="sdks">SDKs</h1>
+<h2 id="javascript">JavaScript</h2>
+<h3 id="instalacion">Instalaci&#xF3;n</h3>
+<h4 id="modulo-es6">M&#xF3;dulo ES6</h4>
+<p>Se encuentra en <code>&lt;REPO&gt;/sdks/js</code>.</p>
+<h5 id="npm">NPM</h5>
+<pre><code class="lang-bash">$ npm install `&lt;REPO&gt;/sdks/js`
+</code></pre>
+<h5 id="yarn">Yarn</h5>
+<pre><code class="lang-bash">$ yarn add file:&lt;REPO&gt;/sdks/js
+</code></pre>
+<pre><code class="lang-javascript"><span class="pl-k">import</span> Ratings <span class="pl-k">from</span> <span class="pl-s">&apos;hermes-ratings-sdk&apos;</span>;
+</code></pre>
+<h4 id="modulo-umd">M&#xF3;dulo UMD</h4>
+<p>Los archivos minificados y sin minificar est&#xE1;n en <code>&lt;REPO&gt;/sdks/js/dist</code>.</p>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="pl-s">&quot;js/ratings.min.js&quot;</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+</code></pre>
+<h3 id="enviar-una-calificacion">Enviar una calificaci&#xF3;n</h3>
+<pre><code class="lang-javascript"><span class="pl-k">const</span> sdk = <span class="pl-k">new</span> Ratings({
+    <span class="hljs-attr">api</span>: <span class="pl-s">&apos;http://127.0.0.1:5000&apos;</span>,
+    <span class="hljs-attr">token</span>: &lt;TOKEN&gt;,
+    app: &lt;APP&gt;,
+    version: &apos;3.0&apos;,
+    range: &lt;RANGE&gt;,
+    platform: &lt;PLATFORM&gt;
+});
+
+sdk.create({
+    rating: 5,
+    description: &apos;Excelente&apos;,
+    comment: &apos;Me encant&#xF3;&apos;
+})
+.then((response) =&gt; {
+    response.json().then((json) =&gt; {
+        // ...
+    });
+})
+.catch((error) =&gt; {
+    // ..
+});
+</code></pre>
 
         </div>
         <div class="footer-nav">
-          <div class="left"><a href="../desarrollo/sprint2.html"><span class="title">Sprint 2</span></a></div>
-          <div class="right"><a href="../desarrollo/sprint4.html"><span class="label">Next: </span><span class="title">Sprint 4</span></a></div>
+          <div class="left"><a href="../uso/apis.html"><span class="title">APIs</span></a></div>
         </div>
       </div>
     </div>

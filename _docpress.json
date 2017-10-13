@@ -1027,6 +1027,31 @@
                 ]
               }
             ]
+          },
+          {
+            "title": "SDKs",
+            "source": "docs/uso/sdks.md",
+            "url": "uso/sdks.html",
+            "slug": "usosdks",
+            "headings": [
+              {
+                "title": "JavaScript",
+                "depth": 2,
+                "id": "javascript",
+                "headings": [
+                  {
+                    "title": "Instalación",
+                    "depth": 3,
+                    "id": "instalacion"
+                  },
+                  {
+                    "title": "Enviar una calificación",
+                    "depth": 3,
+                    "id": "enviar-una-calificacion"
+                  }
+                ]
+              }
+            ]
           }
         ]
       }
@@ -2041,6 +2066,31 @@
           ]
         }
       ]
+    },
+    "uso/sdks.html": {
+      "source": "docs/uso/sdks.md",
+      "title": "SDKs - Hermes",
+      "pageTitle": "SDKs",
+      "slug": "usosdks",
+      "headings": [
+        {
+          "title": "JavaScript",
+          "depth": 2,
+          "id": "javascript",
+          "headings": [
+            {
+              "title": "Instalación",
+              "depth": 3,
+              "id": "instalacion"
+            },
+            {
+              "title": "Enviar una calificación",
+              "depth": 3,
+              "id": "enviar-una-calificacion"
+            }
+          ]
+        }
+      ]
     }
   },
   "sources": {
@@ -2069,6 +2119,7 @@
     "docs/desarrollo/sprint12.md": "desarrollo/sprint12.html",
     "docs/desarrollo/sprint13.md": "desarrollo/sprint13.html",
     "docs/uso/apis.md": "uso/apis.html",
+    "docs/uso/sdks.md": "uso/sdks.html",
     "docs/images/schema.png": "images/schema.png"
   }
 }
