@@ -10,8 +10,7 @@ Pod::Spec.new do |spec|
     spec.ios.deployment_target = '8.0'
     spec.osx.deployment_target = '10.10'
 
-    spec.source = { :git => 'https://github.com/gcba/hermes.git', :branch => 'master' }
-    spec.source_files = 'RatingsSDK/*.{swift}'
+    spec.source = { :http => 'https://github.com/gcba/hermes/raw/master/sdks/swift/RatingsSDK.zip' }
 
     spec.frameworks = 'Foundation'
     spec.dependency 'SwiftHTTP', '~> 2.0.2'
