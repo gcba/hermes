@@ -3,10 +3,11 @@ package controller
 import (
 	"net/http"
 	"net/http/httptest"
-	"os"
+	"strconv"
 	"testing"
 
 	"hermes/ratings/handler"
+	"hermes/utils"
 
 	"github.com/gavv/httpexpect"
 	"github.com/labstack/echo"
@@ -18,7 +19,7 @@ var (
 		"OptionsRatings": OptionsRatings,
 		"PostRatings":    PostRatings}
 
-	port = getPort("HERMES_RATINGS_PORT", 5000)
+	port = strconv.Itoa(utils.GetPort("HERMES_RATINGS_PORT", 5000))
 )
 
 func TestOptionsRatings(t *testing.T) {
@@ -1008,14 +1009,4 @@ func TestPostRatings_NotAcceptableError(t *testing.T) {
 	r.Status(http.StatusNotAcceptable)
 	r.Header("Content-Type").Equal("application/json; charset=UTF-8")
 	r.JSON().Object().Equal(response)
-}
-
-func getPort(env string, defaultPort int) string {
-	port := os.Getenv(env)
-
-	if len(port) == 0 {
-		return string(defaultPort)
-	}
-
-	return port
 }

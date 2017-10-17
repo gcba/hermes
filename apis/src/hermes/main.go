@@ -2,13 +2,13 @@ package main
 
 import (
 	"fmt"
-	"os"
 	"strconv"
 
 	ratingsController "hermes/ratings/controller"
 	ratingsHandler "hermes/ratings/handler"
 	statsController "hermes/stats/controller"
 	statsHandler "hermes/stats/handler"
+	"hermes/utils"
 
 	"github.com/alecthomas/kingpin"
 	"github.com/facebookgo/grace/gracehttp"
@@ -46,7 +46,7 @@ func startRatingsAPI() {
 		"OptionsRatings": ratingsController.OptionsRatings,
 		"PostRatings":    ratingsController.PostRatings}
 
-	port := getPort("HERMES_RATINGS_PORT", 5000)
+	port := utils.GetPort("HERMES_RATINGS_PORT", 5000)
 	handler := ratingsHandler.Handler(port, routes)
 
 	fmt.Println("✅  Ratings server started on port", strconv.Itoa(port), hideCursor)
@@ -56,20 +56,10 @@ func startRatingsAPI() {
 
 func startStatsAPI() {
 	routes := map[string]echo.HandlerFunc{"PostStats": statsController.PostStats}
-	port := getPort("HERMES_STATS_PORT", 7000)
+	port := utils.GetPort("HERMES_STATS_PORT", 7000)
 	handler := statsHandler.Handler(port, routes)
 
 	fmt.Println("✅  Stats server started on port", strconv.Itoa(port), hideCursor)
 	gracehttp.Serve(handler.Server)
 	fmt.Print(showCursor)
-}
-
-func getPort(env string, defaultPort int) int {
-	port, portErr := strconv.Atoi(os.Getenv(env))
-
-	if portErr != nil {
-		return defaultPort
-	}
-
-	return port
 }
