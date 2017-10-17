@@ -139,7 +139,7 @@
 <p>El usuario del backend.</p>
 <h4 id="relaciones">Relaciones</h4>
 <ul>
-<li><strong>One-to-many</strong> con User, a trav&#xE9;s de <code>modified_by</code></li>
+<li><strong>One-to-many</strong> con User, a trav&#xE9;s de <code>updated_by</code></li>
 <li><strong>Many-to-many</strong> con App, a trav&#xE9;s de la tabla <code>App_User</code></li>
 </ul>
 <table>
@@ -187,7 +187,7 @@
 <td style="text-align:center"></td>
 </tr>
 <tr>
-<td>modified_at</td>
+<td>updated_at</td>
 <td>timestamp</td>
 <td style="text-align:center"></td>
 <td style="text-align:center">X</td>
@@ -195,7 +195,7 @@
 <td style="text-align:center"></td>
 </tr>
 <tr>
-<td>modified_by</td>
+<td>updated_by</td>
 <td>int</td>
 <td style="text-align:center">X</td>
 <td style="text-align:center">X</td>
@@ -265,7 +265,15 @@
 <td style="text-align:center"></td>
 </tr>
 <tr>
-<td>modified_at</td>
+<td>updated_at</td>
+<td>timestamp</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">X</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>deleted_at</td>
 <td>timestamp</td>
 <td style="text-align:center"></td>
 <td style="text-align:center">X</td>
@@ -278,7 +286,7 @@
 <p>Las apps sobre las que se env&#xED;an calificaciones y comentarios.</p>
 <h4 id="relaciones">Relaciones</h4>
 <ul>
-<li><strong>One-to-many</strong> con User, a trav&#xE9;s de <code>modified_by</code></li>
+<li><strong>One-to-many</strong> con User, a trav&#xE9;s de <code>updated_by</code></li>
 <li><strong>Many-to-many</strong> con User, a trav&#xE9;s de la tabla <code>App_User</code></li>
 <li><strong>Many-to-many</strong> con Platform, a trav&#xE9;s de la tabla <code>App_Platform</code></li>
 <li><strong>Many-to-many</strong> con AppUser, a trav&#xE9;s de la tabla <code>AppUser_App</code></li>
@@ -336,7 +344,7 @@
 <td style="text-align:center"></td>
 </tr>
 <tr>
-<td>modified_at</td>
+<td>updated_at</td>
 <td>timestamp</td>
 <td style="text-align:center"></td>
 <td style="text-align:center">X</td>
@@ -344,9 +352,17 @@
 <td style="text-align:center"></td>
 </tr>
 <tr>
-<td>modified_by</td>
+<td>updated_by</td>
 <td>int</td>
 <td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>deleted_at</td>
+<td>timestamp</td>
+<td style="text-align:center"></td>
 <td style="text-align:center">X</td>
 <td style="text-align:center"></td>
 <td style="text-align:center"></td>
@@ -405,7 +421,15 @@
 <td style="text-align:center"></td>
 </tr>
 <tr>
-<td>modified_at</td>
+<td>updated_at</td>
+<td>timestamp</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">X</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>deleted_at</td>
 <td>timestamp</td>
 <td style="text-align:center"></td>
 <td style="text-align:center">X</td>
@@ -499,7 +523,15 @@
 <td style="text-align:center"></td>
 </tr>
 <tr>
-<td>modified_at</td>
+<td>updated_at</td>
+<td>timestamp</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">X</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>deleted_at</td>
 <td>timestamp</td>
 <td style="text-align:center"></td>
 <td style="text-align:center">X</td>
@@ -751,7 +783,15 @@
 <td style="text-align:center"></td>
 </tr>
 <tr>
-<td>modified_at</td>
+<td>updated_at</td>
+<td>timestamp</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">X</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>deleted_at</td>
 <td>timestamp</td>
 <td style="text-align:center"></td>
 <td style="text-align:center">X</td>
@@ -799,7 +839,15 @@
 <td style="text-align:center"></td>
 </tr>
 <tr>
-<td>modified_at</td>
+<td>updated_at</td>
+<td>timestamp</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">X</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>deleted_at</td>
 <td>timestamp</td>
 <td style="text-align:center"></td>
 <td style="text-align:center">X</td>
@@ -959,11 +1007,20 @@
 <td style="text-align:center"></td>
 </tr>
 <tr>
-<td>modified_at</td>
+<td>updated_at</td>
 <td>timestamp</td>
 <td></td>
 <td style="text-align:center"></td>
 <td style="text-align:center">X</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>deleted_at</td>
+<td>timestamp</td>
+<td></td>
+<td style="text-align:center">X</td>
+<td style="text-align:center"></td>
 <td style="text-align:center"></td>
 <td style="text-align:center"></td>
 </tr>
@@ -1052,7 +1109,7 @@
 <td style="text-align:center"></td>
 </tr>
 <tr>
-<td>modified_at</td>
+<td>updated_at</td>
 <td>timestamp</td>
 <td></td>
 <td style="text-align:center"></td>
@@ -1125,7 +1182,15 @@
 <td style="text-align:center"></td>
 </tr>
 <tr>
-<td>modified_at</td>
+<td>updated_at</td>
+<td>timestamp</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">X</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>deleted_at</td>
 <td>timestamp</td>
 <td style="text-align:center"></td>
 <td style="text-align:center">X</td>
@@ -1138,7 +1203,7 @@
 <p>Los valores de configuraci&#xF3;n del backend.</p>
 <h4 id="relaciones">Relaciones</h4>
 <ul>
-<li><strong>One-to-many</strong> con User, a trav&#xE9;s de <code>modified_by</code></li>
+<li><strong>One-to-many</strong> con User, a trav&#xE9;s de <code>updated_by</code></li>
 </ul>
 <table>
 <thead>
@@ -1193,7 +1258,7 @@
 <td style="text-align:center"></td>
 </tr>
 <tr>
-<td>modified_at</td>
+<td>updated_at</td>
 <td>timestamp</td>
 <td style="text-align:center"></td>
 <td style="text-align:center">X</td>
@@ -1201,7 +1266,7 @@
 <td style="text-align:center"></td>
 </tr>
 <tr>
-<td>modified_by</td>
+<td>updated_by</td>
 <td>int</td>
 <td style="text-align:center">X</td>
 <td style="text-align:center">X</td>
@@ -1211,7 +1276,7 @@
 </tbody>
 </table>
 <h2 id="timestamps">Timestamps</h2>
-<p>Los campos <code>created_at</code> y <code>modified_at</code> son creados autom&#xE1;ticamente por Laravel y no ser&#xE1;n modificados.</p>
+<p>Los campos <code>created_at</code> y <code>updated_at</code> son creados autom&#xE1;ticamente por Laravel y no ser&#xE1;n modificados.</p>
 <h2 id="borrado">Borrado</h2>
 <p>Ser&#xE1; l&#xF3;gico para <code>Platform</code>, <code>Device</code>, <code>Browser</code>, <code>Brand</code>, <code>Rating</code>, <code>Range</code>, <code>AppUser</code>, <code>App</code></p>
 <p>Ser&#xE1; f&#xED;sico para <code>User</code> y <code>Message</code>.</p>
