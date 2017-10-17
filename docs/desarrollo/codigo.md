@@ -18,10 +18,6 @@ PostgreSQL 10.
 
 Redis 3.0.
 
-### API Gateway
-
-Kong.
-
 ## Convenciones
 
 ### Go
