@@ -1,5 +1,5 @@
-hash: 991717a5bb952f6ed11871eb6e7513f01767f8dd92ccb48b09062e5d910f9129
-updated: 2017-10-11T18:46:36.848766236-03:00
+hash: 60c9faf5c5db9881e06b29502327de4472c47bc405c8e823e322a612cce8d88b
+updated: 2017-10-17T11:07:35.499594732-03:00
 imports:
 - name: github.com/alecthomas/kingpin
   version: 1087e65c9441605df944fb12c33f0fe7072d18ca
@@ -12,7 +12,7 @@ imports:
 - name: github.com/dchest/uniuri
   version: 8902c56451e9b58ff940bbe5fec35d5f9c04584a
 - name: github.com/dgrijalva/jwt-go
-  version: a539ee1a749a2b895533f979515ac7e6e0f5b650
+  version: d2709f9f1f31ebcda9651b03077758c1f3a0018c
 - name: github.com/etgryphon/stringUp
   version: 31534ccd8cac1d3d205c906ea5722928b045ed8c
 - name: github.com/facebookgo/clock
