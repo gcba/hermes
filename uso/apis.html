@@ -148,17 +148,23 @@ $ sudo apt-get install glide
 <span class="pl-c1">export</span> HERMES_STATS_PORT=7000 <span class="pl-c"># Se puede omitir, por defecto es &apos;7000&apos;</span>
 
 <span class="pl-c"># Database</span>
+<span class="pl-c1">export</span> HERMES_DB_SSL=<span class="pl-c1">disable</span> <span class="pl-c"># Se puede omitir, por defecto es &apos;disable&apos;.</span>
+
 <span class="pl-c1">export</span> HERMES_READDB_HOST=localhost <span class="pl-c"># Se puede omitir, por defecto es &apos;localhost&apos;</span>
 <span class="pl-c1">export</span> HERMES_READDB_PORT=5432 <span class="pl-c"># Se puede omitir, por defecto es &apos;5432&apos;</span>
 <span class="pl-c1">export</span> HERMES_READDB_NAME=hermes
 <span class="pl-c1">export</span> HERMES_READDB_USER=hermes
-<span class="pl-c1">export</span> HERMES_READDB_PASSWORD=hermes_test
+<span class="pl-c1">export</span> HERMES_READDB_PASSWORD=&lt;READDB_PASSWORD&gt;
 
 <span class="pl-c1">export</span> HERMES_WRITEDB_HOST=localhost <span class="pl-c"># Se puede omitir, por defecto es &apos;localhost&apos;</span>
 <span class="pl-c1">export</span> HERMES_WRITEDB_PORT=5432 <span class="pl-c"># Se puede omitir, por defecto es &apos;5432&apos;</span>
 <span class="pl-c1">export</span> HERMES_WRITEDB_NAME=hermes
 <span class="pl-c1">export</span> HERMES_WRITEDB_USER=hermes
-<span class="pl-c1">export</span> HERMES_WRITEDB_PASSWORD=hermes_test
+<span class="pl-c1">export</span> HERMES_WRITEDB_PASSWORD=&lt;WRITEDB_PASSWORD&gt;
+
+<span class="pl-c"># Keys</span>
+<span class="pl-c1">export</span> HERMES_RATINGS_PUBLICKEY=&lt;RATINGS_PUBLICKEY&gt; <span class="pl-c"># Para la autenticaci&#xF3;n JWT</span>
+<span class="pl-c1">export</span> HERMES_STATS_PUBLICKEY=&lt;STATS_PUBLICKEY&gt; <span class="pl-c"># Para la autenticaci&#xF3;n JWT</span>
 </code></pre>
 <p>Finalmente, cargarlo con:</p>
 <pre><code class="lang-bash">$ <span class="pl-c1">source</span> .env
@@ -177,6 +183,7 @@ $ sudo apt-get install glide
 <ul>
 <li><strong>Content-Type:</strong> <code>application/json; charset=utf-8</code></li>
 <li><strong>Accept:</strong> <code>application/json</code></li>
+<li><strong>Authorization:</strong> <code>Bearer &lt;TOKEN&gt;</code></li>
 </ul>
 <h3 id="body">Body</h3>
 <h4 id="count">Count</h4>

@@ -407,11 +407,6 @@
                     "title": "Cache y job queue",
                     "depth": 3,
                     "id": "cache-y-job-queue"
-                  },
-                  {
-                    "title": "API Gateway",
-                    "depth": 3,
-                    "id": "api-gateway"
                   }
                 ]
               },
@@ -1451,11 +1446,6 @@
               "title": "Cache y job queue",
               "depth": 3,
               "id": "cache-y-job-queue"
-            },
-            {
-              "title": "API Gateway",
-              "depth": 3,
-              "id": "api-gateway"
             }
           ]
         },
