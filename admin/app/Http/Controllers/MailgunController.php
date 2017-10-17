@@ -57,7 +57,7 @@ class MailgunController extends Controller
 
         parse_str($request->getContent(), $data);
 
-        $event = filter_var(substr(trim($data['event']), 1, -1), FILTER_SANITIZE_SPECIAL_CHARS);
+        $event = filter_var(trim($data['event']), FILTER_SANITIZE_SPECIAL_CHARS);
         $messageId = filter_var(substr(trim($data['Message-Id']), 1, -1), FILTER_SANITIZE_EMAIL);
 
         if ($event == 'delivered' && filter_var($messageId, FILTER_VALIDATE_EMAIL)) {
