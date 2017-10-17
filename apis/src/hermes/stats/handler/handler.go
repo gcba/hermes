@@ -15,7 +15,6 @@ import (
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
 	"github.com/labstack/gommon/log"
-	"github.com/ssh-vault/ssh2pem"
 )
 
 type RequestValidator struct {
@@ -32,7 +31,7 @@ func Handler(port int, routes map[string]echo.HandlerFunc) *echo.Echo {
 	e := echo.New()
 	validate := validator.New()
 	env := os.Getenv("HERMES_STATS_ENV")
-	key := getKey(e)
+	key := getPublicKey(e)
 
 	jwtConfig := middleware.JWTConfig{
 		SigningKey:    key,
@@ -68,23 +67,16 @@ func Handler(port int, routes map[string]echo.HandlerFunc) *echo.Echo {
 	return e
 }
 
-func getKey(echo *echo.Echo) *rsa.PublicKey { // TODO: Move to a shared utils package
-	keyArray, readErr := ioutil.ReadFile(os.Getenv("HERMES_STATS_KEY"))
+func getPublicKey(echo *echo.Echo) *rsa.PublicKey { // TODO: Move to a shared utils package
+	keyData, readErr := ioutil.ReadFile(os.Getenv("HERMES_STATS_PUBLICKEY"))
 
 	if readErr != nil {
 		echo.Logger.Fatal("Could not find key file")
 	}
 
-	keyPEM, sshParseErr := ssh2pem.GetPublicKeyPem(string(keyArray[:]))
-
-	if sshParseErr != nil {
-		echo.Logger.Fatal("Could not parse SSH key")
-	}
-
-	key, parseErr := jwt.ParseRSAPublicKeyFromPEM(keyPEM)
+	key, parseErr := jwt.ParseRSAPublicKeyFromPEM(keyData)
 
 	if parseErr != nil {
-
 		echo.Logger.Fatal("Invalid PEM key")
 	}
 
