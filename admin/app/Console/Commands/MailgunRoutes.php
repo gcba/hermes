@@ -14,9 +14,9 @@ class MailgunRoutes extends Command
      * @var string
      */
     protected $signature = 'mailgun:routes
-        {url? : The url of the route to create.}
-        {--delete : Delete all routes. }
-        {--list : List all existing routes.}';
+        {url? : The url of the route to create}
+        {--delete : Delete all routes }
+        {--list : List all existing routes}';
 
     /**
      * The console command description.
