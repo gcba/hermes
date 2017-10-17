@@ -110,9 +110,14 @@ class MailgunRoutes extends Command
 
         if ($routes !== null) {
             foreach ($routes as $key => $value) {
-                $res = $this->client->delete('routes/' . $value->id);
+                $response = $this->client->delete('routes/' . $value->id);
 
-                $this->info("Route '' . $value->description . '' deleted successfully");
+                if ($response->http_response_code == 200) {
+                    $this->info("Route '" . $value->description . "' deleted successfully");
+                }
+                else {
+                    $this->error("Error deleting route '" . $$value->description . "'.");
+                }
             }
         }
         else {
@@ -143,7 +148,7 @@ class MailgunRoutes extends Command
         $newRoute = $this->client->post('routes', [
             'priority'    => 0,
             'expression'  => 'catch_all()',
-            'action'      => ["forward('' . $url . '')', 'stop()"],
+            'action'      => ['forward("' . $url . '")', 'stop()'],
             'description' => 'Forward all messages to Hermes'
         ]);
 
@@ -181,6 +186,6 @@ class MailgunRoutes extends Command
             return;
         }
 
-        $this->info("Route '' . $name . '' saved successfully");
+        $this->info("Route '" . $name . "' saved successfully");
     }
 }
