@@ -14,8 +14,8 @@ class MailgunWebhooks extends Command
      * @var string
      */
     protected $signature = 'mailgun:webhooks
-    {type? : The type of the webhook to create.}
-    {url? : The url of the webhook to create.}
+    {type? : The type of webhook to create. Can be: open, click, unsubscribe, spam, bounce, drop, deliver.}
+    {url? : The url of the webhook.}
     {--delete : Delete all webhooks. }
     {--list : List all existing webhooks.}';
 
