@@ -42,6 +42,7 @@ El usuario de las apps que envía calificaciones y comentarios.
 |miba_id         |char(36)              |       |X      |X      |X      |
 |created_at      |timestamp             |       |       |       |       |
 |updated_at      |timestamp             |       |X      |       |       |
+|deleted_at      |timestamp             |       |X      |       |       |
 
 ### App
 
@@ -63,6 +64,7 @@ Las apps sobre las que se envían calificaciones y comentarios.
 |created_at      |timestamp             |       |       |       |       |
 |updated_at      |timestamp             |       |X      |       |       |
 |updated_by      |int                   |X      |X      |       |       |
+|deleted_at      |timestamp             |       |X      |       |       |
 
 ### Platform
 
@@ -80,6 +82,7 @@ La plataforma donde corren las apps y de donde provienen las calificaciones y co
 |key             |char(32)              |       |       |X      |X      |
 |created_at      |timestamp             |       |       |       |       |
 |updated_at      |timestamp             |       |X      |       |       |
+|deleted_at      |timestamp             |       |X      |       |       |
 
 ### Device
 
@@ -102,6 +105,7 @@ En el caso de las aplicaciones móviles, el dispositivo desde donde se enviaron 
 |platform_id     |int                   |X      |       |       |X      |
 |created_at      |timestamp             |       |       |       |       |
 |updated_at      |timestamp             |       |X      |       |       |
+|deleted_at      |timestamp             |       |X      |       |       |
 
 ### App_User
 
@@ -163,6 +167,7 @@ En el caso de las aplicaciones web, el browser desde donde se enviaron las calif
 |name            |varchar(15)           |       |       |X      |       |
 |created_at      |timestamp             |       |       |       |       |
 |updated_at      |timestamp             |       |X      |       |       |
+|deleted_at      |timestamp             |       |X      |       |       |
 
 ### Brand
 
@@ -174,6 +179,7 @@ En el caso de las aplicaciones móviles, la marca del dispositivo.
 |name            |varchar(30)           |       |       |X      |       |
 |created_at      |timestamp             |       |       |       |       |
 |updated_at      |timestamp             |       |X      |       |       |
+|deleted_at      |timestamp             |       |X      |       |       |
 
 ### Rating
 
@@ -205,6 +211,7 @@ Las calificaciones de las apps.
 |browser_id      |int                   |       |X      |X      |       |X      |
 |created_at      |timestamp             |       |       |       |       |       |
 |updated_at      |timestamp             |       |       |X      |       |       |
+|deleted_at      |timestamp             |       |X      |       |       |       |
 
 ### Message
 
@@ -238,7 +245,7 @@ Los rangos de calificaciones de cada app.
 |key             |char(32)              |       |       |X      |X      |
 |created_at      |timestamp             |       |       |       |       |
 |updated_at      |timestamp             |       |X      |       |       |
-
+|deleted_at      |timestamp             |       |X      |       |       |
 
 ### Setting
 

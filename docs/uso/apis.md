@@ -89,7 +89,7 @@ $ go run main.go start stats
 
 ## API de calificaciones
 
-Esta API no debe usarse directamente, sino por medio de los SDKs.
+Esta API no debe usarse directamente, sino por medio de los [SDKs](sdks.md).
 
 ## API de estadísticas
 
