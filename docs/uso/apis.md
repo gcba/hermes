@@ -99,9 +99,11 @@ Hay un único endpoint: `POST /stats`.
 
 ### Headers
 
-- **Content-Type:** `application/json; charset=utf-8`
-- **Accept:** `application/json`
-- **Authorization:** `Bearer <TOKEN>`
+|                    |                                         |
+|--------------------|-----------------------------------------|
+|**Content-Type**    |`application/json; charset=utf-8`        |
+|**Accept**          |`application/json`                       |
+|**Authorization**   |`Bearer <TOKEN>`                         |
 
 ### Body
 
