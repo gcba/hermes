@@ -19,6 +19,9 @@ var Statuses = map[int]Status{
 	http.StatusBadRequest: Status{
 		Code:    http.StatusBadRequest,
 		Message: "Bad Request"},
+	http.StatusUnauthorized: Status{
+		Code:    http.StatusUnauthorized,
+		Message: "Unauthorized"},
 	http.StatusForbidden: Status{
 		Code:    http.StatusForbidden,
 		Message: "Forbidden"},

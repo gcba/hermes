@@ -26,3 +26,4 @@ import:
 - package: github.com/iancoleman/strcase
 - package: github.com/dgrijalva/jwt-go
   version: ^3.0.0
+- package: github.com/ssh-vault/ssh2pem

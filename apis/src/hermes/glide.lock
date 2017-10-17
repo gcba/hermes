@@ -1,5 +1,5 @@
-hash: 60c9faf5c5db9881e06b29502327de4472c47bc405c8e823e322a612cce8d88b
-updated: 2017-10-17T11:07:35.499594732-03:00
+hash: a03433e9aedbcc58380f8848eb09ccdf33346cbb4c6167ba5a690848dee49816
+updated: 2017-10-17T13:55:58.562506629-03:00
 imports:
 - name: github.com/alecthomas/kingpin
   version: 1087e65c9441605df944fb12c33f0fe7072d18ca
@@ -91,6 +91,8 @@ imports:
   subpackages:
   - ext
   - log
+- name: github.com/ssh-vault/ssh2pem
+  version: c1edc64d10c522605f07c563da926f194426c755
 - name: github.com/stretchr/testify
   version: f6abca593680b2315d2075e0f5e2a9751e3f431a
   subpackages:

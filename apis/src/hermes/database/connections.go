@@ -18,7 +18,8 @@ var (
 	readDBName     = os.Getenv("HERMES_READDB_NAME")
 	readDBUser     = os.Getenv("HERMES_READDB_USER")
 	readDBPassword = os.Getenv("HERMES_READDB_PASSWORD")
-	ReadDBDriver   = ""
+
+	ReadDBDriver string
 
 	// Load write database settings
 	writeDBPort     = getConfig("HERMES_WRITEDB_PORT", "5432")
@@ -26,7 +27,8 @@ var (
 	writeDBName     = os.Getenv("HERMES_WRITEDB_NAME")
 	writeDBUser     = os.Getenv("HERMES_WRITEDB_USER")
 	writeDBPassword = os.Getenv("HERMES_WRITEDB_PASSWORD")
-	WriteDBDriver   = ""
+
+	WriteDBDriver string
 )
 
 // GetReadDB connects to the read database and returns a pointer to the connection
