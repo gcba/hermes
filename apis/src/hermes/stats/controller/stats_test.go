@@ -3,10 +3,11 @@ package controller
 import (
 	"net/http"
 	"net/http/httptest"
-	"os"
+	"strconv"
 	"testing"
 
 	"hermes/stats/handler"
+	"hermes/utils"
 
 	"github.com/gavv/httpexpect"
 	"github.com/labstack/echo"
@@ -14,7 +15,7 @@ import (
 
 var (
 	routes = map[string]echo.HandlerFunc{"PostStats": PostStats}
-	port   = getPort("HERMES_STATS_PORT", 7000)
+	port   = strconv.Itoa(utils.GetPort("HERMES_STATS_PORT", 7000))
 )
 
 func TestCount(t *testing.T) {
@@ -758,14 +759,4 @@ func TestAverage_NonNumericField_BadRequest(t *testing.T) {
 	json.ContainsMap(meta)
 	json.NotContainsKey("data")
 	json.ContainsKey("errors")
-}
-
-func getPort(env string, defaultPort int) string {
-	port := os.Getenv(env)
-
-	if len(port) == 0 {
-		return string(defaultPort)
-	}
-
-	return port
 }

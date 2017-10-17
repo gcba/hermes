@@ -1,16 +1,14 @@
 package handler
 
 import (
-	"crypto/rsa"
-	"io/ioutil"
 	"os"
 	"strconv"
 
 	"hermes/middlewares"
 	"hermes/responses"
 	"hermes/stats/schema"
+	"hermes/utils"
 
-	"github.com/dgrijalva/jwt-go"
 	"github.com/go-playground/validator"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
@@ -30,19 +28,17 @@ func Handler(port int, routes map[string]echo.HandlerFunc) *echo.Echo {
 
 	e := echo.New()
 	validate := validator.New()
-	env := os.Getenv("HERMES_STATS_ENV")
-	key := getPublicKey(e)
 
-	jwtConfig := middleware.JWTConfig{
-		SigningKey:    key,
-		SigningMethod: "RS256",
-		ContextKey:    "jwt"}
-
-	if env == "DEV" {
-		e.Logger.SetLevel(log.DEBUG)
-
+	if os.Getenv("HERMES_STATS_ENV") == "DEV" {
 		e.Debug = true
+
+		e.Logger.SetLevel(log.DEBUG)
 	} else {
+		jwtConfig := middleware.JWTConfig{
+			SigningKey:    utils.GetPublicKey("HERMES_STATS_PUBLICKEY", e),
+			SigningMethod: "RS256",
+			ContextKey:    "jwt"}
+
 		e.Logger.SetLevel(log.ERROR)
 		e.Pre(middleware.HTTPSRedirect())
 		e.Use(middleware.JWTWithConfig(jwtConfig))
@@ -65,30 +61,4 @@ func Handler(port int, routes map[string]echo.HandlerFunc) *echo.Echo {
 	e.Server.Addr = ":" + strconv.Itoa(port)
 
 	return e
-}
-
-func getPublicKey(echo *echo.Echo) *rsa.PublicKey { // TODO: Move to a shared utils package
-	keyData, readErr := ioutil.ReadFile(os.Getenv("HERMES_STATS_PUBLICKEY"))
-
-	if readErr != nil {
-		echo.Logger.Fatal("Could not find key file")
-	}
-
-	key, parseErr := jwt.ParseRSAPublicKeyFromPEM(keyData)
-
-	if parseErr != nil {
-		echo.Logger.Fatal("Invalid PEM key")
-	}
-
-	/*
-		token := jwt.New(jwt.SigningMethodRS256)
-		privKey, _ := ioutil.ReadFile(os.Getenv("HERMES_STATS_PRIVATEKEY"))
-		privKeyParsed, _ := jwt.ParseRSAPrivateKeyFromPEM(privKey)
-
-		t, _ := token.SignedString(privKeyParsed)
-
-		echo.Logger.Fatal(t)
-	*/
-
-	return key
 }
