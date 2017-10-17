@@ -52,17 +52,23 @@ export HERMES_RATINGS_PORT=5000 # Se puede omitir, por defecto es '5000'
 export HERMES_STATS_PORT=7000 # Se puede omitir, por defecto es '7000'
 
 # Database
+export HERMES_DB_SSL=disable # Se puede omitir, por defecto es 'disable'.
+
 export HERMES_READDB_HOST=localhost # Se puede omitir, por defecto es 'localhost'
 export HERMES_READDB_PORT=5432 # Se puede omitir, por defecto es '5432'
 export HERMES_READDB_NAME=hermes
 export HERMES_READDB_USER=hermes
-export HERMES_READDB_PASSWORD=hermes_test
+export HERMES_READDB_PASSWORD=<READDB_PASSWORD>
 
 export HERMES_WRITEDB_HOST=localhost # Se puede omitir, por defecto es 'localhost'
 export HERMES_WRITEDB_PORT=5432 # Se puede omitir, por defecto es '5432'
 export HERMES_WRITEDB_NAME=hermes
 export HERMES_WRITEDB_USER=hermes
-export HERMES_WRITEDB_PASSWORD=hermes_test
+export HERMES_WRITEDB_PASSWORD=<WRITEDB_PASSWORD>
+
+# Keys
+export HERMES_RATINGS_PUBLICKEY=<RATINGS_PUBLICKEY> # Para la autenticación JWT
+export HERMES_STATS_PUBLICKEY=<STATS_PUBLICKEY> # Para la autenticación JWT
 ```
 
 Finalmente, cargarlo con:
@@ -95,6 +101,7 @@ Hay un único endpoint: `POST /stats`.
 
 - **Content-Type:** `application/json; charset=utf-8`
 - **Accept:** `application/json`
+- **Authorization:** `Bearer <TOKEN>`
 
 ### Body
 
