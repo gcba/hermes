@@ -99,7 +99,7 @@ Hay un único endpoint: `POST /stats`.
 
 ### Headers
 
-|                    |                                         |
+|Key                 |Value                                    |
 |--------------------|-----------------------------------------|
 |**Content-Type**    |`application/json; charset=utf-8`        |
 |**Accept**          |`application/json`                       |
@@ -284,7 +284,7 @@ Permite agregar condiciones adicionales que no necesariamente deban verificarse 
 
 Para construir condiciones se pueden usar los siguientes operadores:
 
-|                    |                                         |
+|Key                 |Value                                    |
 |--------------------|-----------------------------------------|
 |**eq**              |Igual a *(equal)*                        |
 |**ne**              |No igual a *(equal)*                     |
