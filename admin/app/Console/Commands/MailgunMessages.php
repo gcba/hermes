@@ -13,7 +13,10 @@ class MailgunMessages extends Command
      *
      * @var string
      */
-    protected $signature = 'mailgun:send {args*}';
+    protected $signature = 'mailgun:send
+        {message : The email body}
+        {email : Where to send the message}
+        {--subject=Mailgun Test : Email subject}';
 
     /**
      * The console command description.
@@ -29,38 +32,40 @@ class MailgunMessages extends Command
      */
     public function handle()
     {
-        $args = $this->arguments()['args'];
+        $message = $this->argument('message');
+        $email = $this->argument('email');
+        $subject = $this->option('subject');
 
-        if (!$args) {
+        if (!$message && !$email) {
             $this->error('No arguments passed');
 
             return;
         }
 
-        if (!$args[0]) {
+        if (!$message) {
             $this->error('No message to send');
 
             return;
         }
 
-        if (!$args[1]) {
+        if (!$email) {
             $this->error('No email address');
 
             return;
         }
 
-        if (!filter_var($args[1], FILTER_VALIDATE_EMAIL)) {
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $this->error('Invalid email address');
 
             return;
         }
 
-        $this->sendEmail($args[0], $args[1]);
+        $this->sendEmail($message, $email, $subject);
     }
 
-    private function sendEmail(string $text, String $email) {
-        $result = Mailgun::raw($text, function ($message) use($email) {
-            $message->to($email, env('MAILGUN_SENDER', ''))->subject('Mailgun Test');
+    private function sendEmail(string $text, String $email, String $subject) {
+        $result = Mailgun::raw($text, function ($message) use($email, $subject) {
+            $message->to($email, env('MAILGUN_SENDER', ''))->subject($subject);
 
             return;
         });
