@@ -104,7 +104,7 @@ class MailgunWebhooks extends Command
         if ($webhooks !== null) {
             foreach ($this->types as $type) {
                 if (isset($webhooks->$type) && isset($webhooks->$type->url)) {
-                    if ($matches) {
+                    if (!$matches) {
                         $matches = true;
                     }
 
@@ -156,7 +156,7 @@ class MailgunWebhooks extends Command
         }
     }
 
-    private function checkWebhook(String $type) {
+    private function checkWebhook(String $type, String $url) {
         $webhooks = $this->getWebhooks();
 
         if ($webhooks !== null && isset($webhooks->$type) && isset($webhooks->$type->url)) {
@@ -165,7 +165,7 @@ class MailgunWebhooks extends Command
             return;
         }
 
-        $this->createWebhook($type);
+        $this->createWebhook($type, $url);
     }
 
     private function createWebhook(String $type, String $url) {
