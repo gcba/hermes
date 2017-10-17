@@ -137,7 +137,7 @@ class MailgunWebhooks extends Command
         if ($webhooks !== null) {
             foreach ($this->types as $type) {
                 if (isset($webhooks->$type) && isset($webhooks->$type->url)) {
-                    $response = $this->client->delete("$this->domain/webhooks/$type");
+                    $response = $this->client->delete("domains/$this->domain/webhooks/$type");
 
                     if ($response->http_response_code == 200) {
                         $this->info("Webhook '" . $type . "' deleted successfully");
