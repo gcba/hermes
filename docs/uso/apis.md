@@ -282,12 +282,14 @@ Permite agregar condiciones adicionales que no necesariamente deban verificarse 
 
 Para construir condiciones se pueden usar los siguientes operadores:
 
-- **eq:** Igual a *(equal)*.
-- **ne:** No igual a *(equal)*.
-- **gt:** Mayor a *(greater than)*.
-- **lt:** Menor a *(lower than)*.
-- **gte:** Mayor o igual a *(greater than or equal)*.
-- **lte:** Menor o igual a *(lower than or equal)*.
+|                    |                                         |
+|--------------------|-----------------------------------------|
+|**eq**              |Igual a *(equal)*                        |
+|**ne**              |No igual a *(equal)*                     |
+|**gt**              |Mayor a *(greater than)*                 |
+|**lt**              |Menor a *(lower than)*                   |
+|**gte**             |Mayor o igual a *(greater than or equal)*|
+|**lte**             |Menor o igual a *(lower than or equal)*  |
 
 ### Responses
 
