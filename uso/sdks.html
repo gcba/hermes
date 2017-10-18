@@ -87,6 +87,14 @@
                         </li>
                       </ul>
                     </li>
+                    <li class="heading-item -depth-2"><a class="hlink link-swift" href="#swift">Swift</a>
+                      <ul class="heading-list -depth-2">
+                        <li class="heading-item -depth-3"><a class="hlink link-instalacion" href="#instalacion">Instalación</a>
+                        </li>
+                        <li class="heading-item -depth-3"><a class="hlink link-enviar-una-calificacion" href="#enviar-una-calificacion">Enviar una calificación</a>
+                        </li>
+                      </ul>
+                    </li>
                   </ul>
                 </li>
               </ul>
@@ -119,25 +127,61 @@
 </code></pre>
 <h3 id="enviar-una-calificacion">Enviar una calificaci&#xF3;n</h3>
 <pre><code class="lang-javascript"><span class="pl-k">const</span> sdk = <span class="pl-k">new</span> Ratings({
-    <span class="hljs-attr">api</span>: <span class="pl-s">&apos;http://127.0.0.1:5000&apos;</span>,
-    <span class="hljs-attr">token</span>: &lt;TOKEN&gt;,
+    <span class="hljs-attr">api</span>: &lt;ENDPOINT&gt;,
+    token: &lt;TOKEN&gt;,
     app: &lt;APP&gt;,
     version: &apos;3.0&apos;,
     range: &lt;RANGE&gt;,
     platform: &lt;PLATFORM&gt;
 });
 
+// Opcional; omitir para calificaciones an&#xF3;nimas
+sdk.user = {
+    name: &quot;Juan P&#xE9;rez&quot;,
+    email: &quot;juan@example.com&quot;, // Opcional, si est&#xE1; el mibaId
+    mibaId: &quot;04860d65-7e93-49e8-a983-a4007d23ffa5&quot; // Opcional, si est&#xE1; el email
+}
+
 sdk.create({
     rating: 5,
-    description: &apos;Excelente&apos;,
-    comment: &apos;Me encant&#xF3;&apos;
+    description: &apos;Excelente&apos;, // Opcional
+    comment: &apos;Me encant&#xF3;&apos; // Opcional
 })
 .then((json) =&gt; {
     // ...
 })
-.catch((error) =&gt; {
+.catch((errors) =&gt; {
     // ...
 });
+</code></pre>
+<h2 id="swift">Swift</h2>
+<h3 id="instalacion">Instalaci&#xF3;n</h3>
+<h4 id="cocoapods">Cocoapods</h4>
+<p>En el <code>Podfile</code> del proyecto:</p>
+<pre><code class="lang-ruby">pod <span class="pl-s">&apos;RatingsSDK&apos;</span>, <span class="hljs-symbol">:path</span> =&gt; <span class="pl-s">&apos;&lt;REPO&gt;/sdks/swift&apos;</span>
+</code></pre>
+<h4 id="manual">Manual</h4>
+<p>Agregar al proyecto los archivos <code>RatingsSDK.swift</code>, <code>RatingsUser.swift</code> y <code>RatingsError.swift</code> que est&#xE1;n en <code>&lt;REPO&gt;/sdks/swift/RatingsSDK</code>.</p>
+<h3 id="enviar-una-calificacion">Enviar una calificaci&#xF3;n</h3>
+<pre><code class="lang-swift"><span class="pl-k">import</span> RatingsSDK
+</code></pre>
+<pre><code class="lang-swift"><span class="pl-k">let</span> sdk = <span class="hljs-type">Ratings</span>(api: &lt;<span class="hljs-type">ENDPOINT</span>&gt;, token: &lt;<span class="hljs-type">TOKEN</span>&gt;, app: &lt;<span class="hljs-type">APP</span>&gt;, platform: &lt;<span class="hljs-type">PLATFORM</span>&gt;, range: &lt;<span class="hljs-type">RANGE</span>&gt;)
+
+<span class="pl-c">// Opcional; omitir para calificaciones an&#xF3;nimas. El email es opcional si est&#xE1; el mibaId y viceversa</span>
+sdk.user = <span class="hljs-type">RatingsUser</span>(
+    name: <span class="pl-s">&quot;Juan P&#xE9;rez&quot;</span>,
+    email: <span class="pl-s">&quot;juan@example.com&quot;</span>,
+    mibaId: <span class="pl-s">&quot;08108a49-4c68-47da-8510-93922b6b2d76&quot;</span>
+)
+
+<span class="pl-c">// Description y comment son opcionales</span>
+sdk.create(rating: <span class="hljs-number">5</span>, description: <span class="pl-s">&quot;Muy Bueno&quot;</span>, comment: <span class="pl-s">&quot;Lorem ipsum dolor...&quot;</span>) { response, error <span class="pl-k">in</span>
+    <span class="pl-k">guard</span> error == <span class="pl-c1">nil</span> <span class="pl-k">else</span> {
+        <span class="pl-c">// ...</span>
+    }
+
+    <span class="pl-c">// ...</span>
+}
 </code></pre>
 
         </div>
