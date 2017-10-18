@@ -12,31 +12,31 @@ import SwifterSwift
 import GBDeviceInfo
 
 public class Ratings {
-    public init(api url: String, app: String, platform: String, range: String, token: String) {
+    public init(api url: String, token: String, app: String, platform: String, range: String) {
         let baseUrl = url.trimmed
         
         self.url = baseUrl.lastCharacterAsString == "/" ? baseUrl + "ratings" :  baseUrl + "/ratings"
+        self.token = token.trimmed
         self.app = app.trimmed
         self.platform = platform.trimmed
         self.range = range.trimmed
-        self.token = token.trimmed
         self.deviceInfo = GBDeviceInfo()
         self.timeout = 3
         
         validateUrl(self.url)
+        validateToken(self.token)
         validateKey(self.app, description: "app")
         validateKey(self.platform, description: "platform")
         validateKey(self.range, description: "range")
-        validateToken(self.token)
     }
     
     // MARK: - Private properties
     
     private let url: String
+    private let token: String
     private let app: String
     private let platform: String
     private let range: String
-    private let token: String
     private let deviceInfo: GBDeviceInfo
     
     private var timeout: Double
@@ -52,12 +52,12 @@ public class Ratings {
         guard url.isValidUrl else { fatalError("invalid url") }
     }
     
-    private func validateKey(_ key: String, description: String) {
-        guard key.length == 32 else { fatalError("\(description) is not a valid key") }
-    }
-    
     private func validateToken(_ token: String) {
         guard token.length > 0 else { fatalError("invalid token") }
+    }
+    
+    private func validateKey(_ key: String, description: String) {
+        guard key.length == 32 else { fatalError("\(description) is not a valid key") }
     }
     
     private func validateName(_ name: String) -> RatingsError? {

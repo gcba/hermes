@@ -17,7 +17,7 @@ class ViewController: UIViewController {
         let platform = app
         let range = app
         let token = app
-        let sdk = Ratings(api: "https://73cbd954.ngrok.io", app: app, platform: platform, range: range, token: token)
+        let sdk = Ratings(api: "https://73cbd954.ngrok.io", token: token, app: app, platform: platform, range: range)
         
         // Rating only; no user
         sdk.create(rating: 5) { response, error in
