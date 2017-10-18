@@ -7,6 +7,82 @@
     padding-right: 0px;
 }
 
+.dataTables_wrapper .dataTables_filter {
+    width: 100%;
+}
+
+.dataTables_wrapper .dataTables_filter label {
+    width: 100%;
+    text-align: unset;
+}
+
+.dataTables_wrapper .dataTables_filter input {
+    width: 85%;
+}
+
+.dataTables_wrapper .row-selected {
+    background-color: #eee;
+}
+
+.dataTables_wrapper:nth-child(1) > div {
+    overflow-x: auto;
+}
+
+.dataTables_wrapper.form-inline:nth-child(1) > div {
+    overflow-y: hidden;
+}
+
+.dataTables_wrapper .row:last-of-type {
+    margin-bottom: 0px;
+}
+
+.dataTables_wrapper table {
+    width: 100% !important;
+}
+
+.dataTables_wrapper table .row-selected {
+    background-color: #FFFFE0;
+}
+
+.dataTables_wrapper .row:last-child [class*=col-] {
+    margin-bottom: 5px;
+}
+
+.dataTables_wrapper table tbody tr {
+    height: 2.6rem;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.dataTables_wrapper table tbody tr td {
+    white-space: nowrap;
+    overflow: hidden;
+    vertical-align: middle;
+}
+
+.dataTables_wrapper table tfoot {
+    display: table-footer-group;
+}
+
+.dataTables_wrapper table tfoot th {
+    border-bottom: 1px dashed #eee;
+    padding: 15px 5px 10px;
+    font-size: 0.9rem;
+}
+
+.dataTables_wrapper table tfoot input {
+    border: none;
+    width: 100%;
+}
+
+.dataTables_wrapper .dataTables_info {
+    font-size: 0.9rem;
+}
+
+.dataTables_wrapper .dataTables_paginate {
+    font-size: 0.9rem;
+}
+
 .messages-master .dataTables_wrapper table thead {
     display: none;
 }
@@ -108,82 +184,6 @@
 
 .messages-detail .message-in .message-body {
     text-align: right;
-}
-
-.dataTables_wrapper .dataTables_filter {
-    width: 100%;
-}
-
-.dataTables_wrapper .dataTables_filter label {
-    width: 100%;
-    text-align: unset;
-}
-
-.dataTables_wrapper .dataTables_filter input {
-    width: 85%;
-}
-
-.dataTables_wrapper .row-selected {
-    background-color: #eee;
-}
-
-.dataTables_wrapper:nth-child(1) > div {
-    overflow-x: auto;
-}
-
-.dataTables_wrapper.form-inline:nth-child(1) > div {
-    overflow-y: hidden;
-}
-
-.dataTables_wrapper .row:last-of-type {
-    margin-bottom: 0px;
-}
-
-.dataTables_wrapper table {
-    width: 100% !important;
-}
-
-.dataTables_wrapper table .row-selected {
-    background-color: #FFFFE0;
-}
-
-.dataTables_wrapper .row:last-child [class*=col-] {
-    margin-bottom: 5px;
-}
-
-.dataTables_wrapper table tbody tr {
-    height: 2.5rem;
-    font-size: 0.9rem;
-    cursor: pointer;
-}
-
-.dataTables_wrapper table tbody tr td {
-    white-space: nowrap;
-    overflow: hidden;
-    vertical-align: middle;
-}
-
-.dataTables_wrapper table tfoot {
-    display: table-footer-group;
-}
-
-.dataTables_wrapper table tfoot th {
-    border-bottom: 1px dashed #eee;
-    padding: 10px 5px 10px;
-    font-size: 0.9rem;
-}
-
-.dataTables_wrapper table tfoot input {
-    border: none;
-    width: 100%;
-}
-
-.dataTables_wrapper .dataTables_info {
-    font-size: 0.9rem;
-}
-
-.dataTables_wrapper .dataTables_paginate {
-    font-size: 0.9rem;
 }
 
 @media screen and (max-width: 991px) {
