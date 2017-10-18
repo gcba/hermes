@@ -3,7 +3,9 @@
 namespace App\Console\Commands;
 
 use App\Rating;
+use App\Message;
 use App\Jobs\CreateMessage;
+use App\Jobs\SetMessageStatus;
 use Bogardo\Mailgun\Facades\Mailgun;
 use TCG\Voyager\Models\Setting;
 use Illuminate\Console\Command;
@@ -18,7 +20,8 @@ class MailgunMessages extends Command
     protected $signature = 'mailgun:send
         {message : The email body}
         {email : Where to send the message}
-        {--subject=Mailgun Test : Email subject}';
+        {--subject=Mailgun Test : Email subject}
+        {--reply : Sends the message as a reply to the latest email}';
 
     /**
      * The console command description.
@@ -37,6 +40,7 @@ class MailgunMessages extends Command
         $message = $this->argument('message');
         $email = $this->argument('email');
         $subject = $this->option('subject');
+        $isReply = $this->option('reply');
 
         if (!$message && !$email) {
             $this->error('No arguments passed');
@@ -62,11 +66,20 @@ class MailgunMessages extends Command
             return;
         }
 
-        $this->sendEmail($message, $email, $subject);
+        $this->sendEmail($message, $email, $subject, $isReply);
     }
 
-    private function sendEmail(string $text, String $email, String $subject) {
-        $result = Mailgun::raw($text, function ($message) use($email, $subject) {
+    private function sendEmail(string $text, String $email, String $subject, Bool $isReply) {
+        if ($isReply) {
+            $where = [['direction', '=', 'in'], ['status', '<>', '2']];
+            $inReplyTo = Message::where($where)->orderBy('id', 'desc')->first();
+        }
+
+        $result = Mailgun::raw($text, function ($message) use($email, $subject, $isReply, $inReplyTo) {
+            if ($isReply && $inReplyTo !== null) {
+                $message->header('In-Reply-To', '<' . $inReplyTo->transport_id . '>');
+            }
+
             $message->to($email, env('MAILGUN_SENDER', ''))->subject($subject);
 
             return;
@@ -79,6 +92,10 @@ class MailgunMessages extends Command
             $rating = Rating::where('has_message', true)->orderBy('id', 'desc')->first();
 
             CreateMessage::dispatch($text, $direction, $status, $transportId, $rating->id);
+
+            if ($isReply && $inReplyTo !== null) {
+                SetMessageStatus::dispatch($inReplyTo, 2);
+            }
 
             $this->info('Message sent successfully');
         }
