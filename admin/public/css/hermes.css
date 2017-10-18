@@ -52,6 +52,7 @@
     height: 2.6rem;
     font-size: 0.9rem;
     cursor: pointer;
+    transition: background .2s ease-out,border-color 0s ease-out,color .2s ease-out;
 }
 
 .dataTables_wrapper table tbody tr td {
