@@ -16,6 +16,7 @@ use Artisaninweb\SoapWrapper\SoapWrapper;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Auth\EloquentUserProvider;
 use Illuminate\Hashing\BcryptHasher;
+use Illuminate\Support\Facades\Log;
 
 class LdapUserProvider extends EloquentUserProvider
 {
@@ -44,21 +45,27 @@ class LdapUserProvider extends EloquentUserProvider
     private function setupLDAP() {
         $url = env('LDAP_URL', 'https://esb-qa.gcba.gob.ar/ad/consulta?wsdl');
 
-        $this->soapWrapper->add('LDAP', function ($service) use($url) {
-            $service
-                ->wsdl($url)
-                ->trace(true)
-                ->classmap([
-                    validar::class,
-                    validarResponse::class,
-                    // validar_porcuit::class,
-                    // validar_porcuitResponse::class,
-                    buscarporemail::class,
-                    buscarporemailResponse::class,
-                    // buscarporcuit::class,
-                    // buscarporcuitResponse::class
-            ]) or null;
-        });
+        try {
+            $this->soapWrapper->add('LDAP', function ($service) use($url) {
+                $service
+                    ->wsdl($url)
+                    ->trace(false)
+                    ->classmap([
+                        validar::class,
+                        validarResponse::class,
+                        // validar_porcuit::class,
+                        // validar_porcuitResponse::class,
+                        buscarporemail::class,
+                        buscarporemailResponse::class,
+                        // buscarporcuit::class,
+                        // buscarporcuitResponse::class
+                ]);
+            });
+        } catch (\SoapFault $fault) {
+            Log::error($fault);
+
+            return;
+        }
     }
 
     /**
@@ -73,17 +80,29 @@ class LdapUserProvider extends EloquentUserProvider
             return null;
         }
 
-        $validationResponse = $this->soapWrapper->call('LDAP.validar', [
-            new validar($credentials['email'], $credentials['password'])
-        ]);
+        try {
+            $validationResponse = $this->soapWrapper->call('LDAP.validar', [
+                new validar($credentials['email'], $credentials['password'])
+            ]);
+        } catch (\SoapFault $fault) {
+            Log::error($fault);
+
+            return null;
+        }
 
         if ($validationResponse->return == 1) {
             $user = parent::retrieveByCredentials($credentials);
 
             if (!$user) {
-                $userDataResponse = $this->soapWrapper->call('LDAP.buscarporemail', [
-                    new buscarporemail($credentials['email'])
-                ]);
+                try {
+                    $userDataResponse = $this->soapWrapper->call('LDAP.buscarporemail', [
+                        new buscarporemail($credentials['email'])
+                    ]);
+                } catch (\SoapFault $fault) {
+                    Log::error($fault);
+
+                    return null;
+                }
 
                 $newUser = new User;
 
