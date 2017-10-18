@@ -60,8 +60,8 @@ func loggedErrorResponse(tag string, message string, context echo.Context) error
 *
  */
 func getApp(db *gorm.DB, frame *frame, channel chan appResult) {
-	result := models.GetApp(frame.request.App.Key, db)
 	errorMessage := "Error getting an App:"
+	result := models.GetApp(frame.request.App.Key, db)
 	errorList := result.GetErrors()
 	resultStruct := appResult{}
 
@@ -99,8 +99,8 @@ func getApp(db *gorm.DB, frame *frame, channel chan appResult) {
 *
  */
 func getPlatform(db *gorm.DB, frame *frame, channel chan platformResult) {
-	result := models.GetPlatform(frame.request.Platform.Key, db)
 	errorMessage := "Error getting a Platform:"
+	result := models.GetPlatform(frame.request.Platform.Key, db)
 	errorList := result.GetErrors()
 	resultStruct := platformResult{}
 
@@ -138,8 +138,8 @@ func getPlatform(db *gorm.DB, frame *frame, channel chan platformResult) {
 *
  */
 func getRange(db *gorm.DB, frame *frame, channel chan rangeResult) {
-	result := models.GetRange(frame.request.Range, db)
 	errorMessage := "Error getting a Range:"
+	result := models.GetRange(frame.request.Range, db)
 	errorList := result.GetErrors()
 	resultStruct := rangeResult{}
 
@@ -195,8 +195,10 @@ func hasAppUser(request *parser.Request) bool {
 
 func getAppUser(dbs *databases, frame *frame) (*models.AppUser, error) {
 	var getResult *gorm.DB
-	var errorMessage = "Could not get an AppUser: "
-	var hasMibaID = len(frame.request.User.MiBAID) > 0
+
+	getErrorMessage := "Could not get an AppUser: "
+	createErrorMessage := "Could not create an AppUser: "
+	hasMibaID := len(frame.request.User.MiBAID) > 0
 
 	if hasMibaID {
 		getResult = models.GetAppUser(frame.request.User.MiBAID, dbs.read)
@@ -225,7 +227,7 @@ func getAppUser(dbs *databases, frame *frame) (*models.AppUser, error) {
 		if len(createErrorList) > 0 || createResult.Error != nil || createResult.Value == nil {
 			dbs.write.Rollback()
 
-			return &models.AppUser{}, loggedErrorResponse(errorMessage, invalidValueError, frame.context)
+			return &models.AppUser{}, loggedErrorResponse(createErrorMessage, invalidValueError, frame.context)
 		}
 
 		if value, ok := createResult.Value.(*models.AppUser); ok {
@@ -234,14 +236,14 @@ func getAppUser(dbs *databases, frame *frame) (*models.AppUser, error) {
 			return value, nil
 		}
 	} else if len(getErrorList) > 0 || getResult.Error != nil || getResult.Value == nil {
-		return &models.AppUser{}, loggedErrorResponse(errorMessage, invalidValueError, frame.context)
+		return &models.AppUser{}, loggedErrorResponse(getErrorMessage, invalidValueError, frame.context)
 	}
 
 	if value, ok := getResult.Value.(*models.AppUser); ok {
 		return value, nil
 	}
 
-	return &models.AppUser{}, loggedErrorResponse(errorMessage, cannotCastError, frame.context)
+	return &models.AppUser{}, loggedErrorResponse(getErrorMessage, cannotCastError, frame.context)
 }
 
 func attachAppUser(rating *models.Rating, dbs *databases, frame *frame, channel chan error) {
@@ -269,8 +271,9 @@ func hasBrowser(request *parser.Request) bool {
 }
 
 func getBrowser(dbs *databases, frame *frame) (*models.Browser, error) {
+	getErrorMessage := "Could not get a Browser: "
+	createErrorMessage := "Could not create a Browser: "
 	getResult := models.GetBrowser(frame.request.Browser.Name, dbs.read)
-	errorMessage := "Could not get a Browser: "
 	getErrorList := getResult.GetErrors()
 
 	if getResult.RecordNotFound() {
@@ -281,7 +284,7 @@ func getBrowser(dbs *databases, frame *frame) (*models.Browser, error) {
 		if len(createErrorList) > 0 || createResult.Error != nil || createResult.Value == nil {
 			dbs.write.Rollback()
 
-			return &models.Browser{}, loggedErrorResponse(errorMessage, invalidValueError, frame.context)
+			return &models.Browser{}, loggedErrorResponse(createErrorMessage, invalidValueError, frame.context)
 		}
 
 		if value, ok := createResult.Value.(*models.Browser); ok {
@@ -290,14 +293,14 @@ func getBrowser(dbs *databases, frame *frame) (*models.Browser, error) {
 			return value, nil
 		}
 	} else if len(getErrorList) > 0 || getResult.Error != nil || getResult.Value == nil {
-		return &models.Browser{}, loggedErrorResponse(errorMessage, invalidValueError, frame.context)
+		return &models.Browser{}, loggedErrorResponse(getErrorMessage, invalidValueError, frame.context)
 	}
 
 	if value, ok := getResult.Value.(*models.Browser); ok {
 		return value, nil
 	}
 
-	return &models.Browser{}, loggedErrorResponse(errorMessage, cannotCastError, frame.context)
+	return &models.Browser{}, loggedErrorResponse(getErrorMessage, cannotCastError, frame.context)
 }
 
 func attachBrowser(rating *models.Rating, dbs *databases, frame *frame, channel chan error) {
@@ -319,8 +322,9 @@ func attachBrowser(rating *models.Rating, dbs *databases, frame *frame, channel 
  */
 func getDevice(brand *models.Brand, platform *models.Platform, dbs *databases, frame *frame) (*models.Device, error) {
 	var device *models.Device
-	var errorMessage = "Could not get a Device: "
 
+	getErrorMessage := "Could not get a Device: "
+	createErrorMessage := "Could not create a Device: "
 	deviceName := frame.request.Device.Name
 	screenWidth := frame.request.Device.Screen.Width
 	screenHeight := frame.request.Device.Screen.Height
@@ -344,7 +348,7 @@ func getDevice(brand *models.Brand, platform *models.Platform, dbs *databases, f
 			device.BrandID = brand.ID
 		}
 	} else if len(getErrorList) > 0 || getResult.Error != nil || getResult.Value == nil {
-		return &models.Device{}, loggedErrorResponse(errorMessage, invalidValueError, frame.context)
+		return &models.Device{}, loggedErrorResponse(getErrorMessage, invalidValueError, frame.context)
 	}
 
 	if result, ok := getResult.Value.(*models.Device); (ok && brand != nil) && (result.BrandID != brand.ID) {
@@ -361,13 +365,13 @@ func getDevice(brand *models.Brand, platform *models.Platform, dbs *databases, f
 				PlatformID:   platform.ID,
 				BrandID:      brand.ID}
 		} else if len(checkGetErrorList) > 0 || checkGetResult.Error != nil || checkGetResult.Value == nil {
-			return &models.Device{}, loggedErrorResponse(errorMessage, invalidValueError, frame.context)
+			return &models.Device{}, loggedErrorResponse(getErrorMessage, invalidValueError, frame.context)
 		} else {
 			if value, ok := checkGetResult.Value.(*models.Device); ok {
 				return value, nil
 			}
 
-			return &models.Device{}, loggedErrorResponse(errorMessage, cannotCastError, frame.context)
+			return &models.Device{}, loggedErrorResponse(getErrorMessage, cannotCastError, frame.context)
 		}
 	}
 
@@ -378,7 +382,7 @@ func getDevice(brand *models.Brand, platform *models.Platform, dbs *databases, f
 		if len(createErrorList) > 0 || createResult.Error != nil || createResult.Value == nil {
 			dbs.write.Rollback()
 
-			return &models.Device{}, loggedErrorResponse(errorMessage, invalidValueError, frame.context)
+			return &models.Device{}, loggedErrorResponse(createErrorMessage, invalidValueError, frame.context)
 		}
 
 		if value, ok := createResult.Value.(*models.Device); ok {
@@ -387,14 +391,14 @@ func getDevice(brand *models.Brand, platform *models.Platform, dbs *databases, f
 			return value, nil
 		}
 
-		return &models.Device{}, loggedErrorResponse(errorMessage, cannotCastError, frame.context)
+		return &models.Device{}, loggedErrorResponse(createErrorMessage, cannotCastError, frame.context)
 	}
 
 	if value, ok := getResult.Value.(*models.Device); ok {
 		return value, nil
 	}
 
-	return &models.Device{}, loggedErrorResponse(errorMessage, cannotCastError, frame.context)
+	return &models.Device{}, loggedErrorResponse(getErrorMessage, cannotCastError, frame.context)
 }
 
 func attachDevice(rating *models.Rating, platform *models.Platform, dbs *databases, frame *frame, channel chan error) {
@@ -428,8 +432,9 @@ func attachDevice(rating *models.Rating, platform *models.Platform, dbs *databas
 *
  */
 func getBrand(dbs *databases, frame *frame) (*models.Brand, error) {
+	getErrorMessage := "Could not get a Brand: "
+	createErrorMessage := "Could not create a Brand: "
 	getResult := models.GetBrand(*frame.request.Device.Brand, dbs.read)
-	errorMessage := "Could not get a Brand: "
 	getErrorList := getResult.GetErrors()
 
 	if getResult.RecordNotFound() {
@@ -440,7 +445,7 @@ func getBrand(dbs *databases, frame *frame) (*models.Brand, error) {
 		if len(createErrorList) > 0 || createResult.Error != nil || createResult.Value == nil {
 			dbs.write.Rollback()
 
-			return &models.Brand{}, loggedErrorResponse(errorMessage, invalidValueError, frame.context)
+			return &models.Brand{}, loggedErrorResponse(createErrorMessage, invalidValueError, frame.context)
 		}
 
 		if value, ok := createResult.Value.(*models.Brand); ok {
@@ -449,14 +454,14 @@ func getBrand(dbs *databases, frame *frame) (*models.Brand, error) {
 			return value, nil
 		}
 	} else if len(getErrorList) > 0 || getResult.Error != nil || getResult.Value == nil {
-		return &models.Brand{}, loggedErrorResponse(errorMessage, invalidValueError, frame.context)
+		return &models.Brand{}, loggedErrorResponse(getErrorMessage, invalidValueError, frame.context)
 	}
 
 	if value, ok := getResult.Value.(*models.Brand); ok {
 		return value, nil
 	}
 
-	return &models.Brand{}, loggedErrorResponse(errorMessage, cannotCastError, frame.context)
+	return &models.Brand{}, loggedErrorResponse(getErrorMessage, cannotCastError, frame.context)
 }
 
 /*
