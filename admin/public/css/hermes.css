@@ -112,22 +112,14 @@
     max-height: 55vh;
 }
 
+.messages-detail > .panel {
+    background-color: transparent;
+    border: unset;
+    box-shadow: unset;
+}
+
 .messages-detail .messages-detail-list {
     height: 100%;
-}
-
-.messages-detail .messages-detail-list .label {
-    position: absolute;
-}
-
-.messages-detail .messages-detail-list .label-in {
-    top: -1px;
-    right: -1px;
-}
-
-.messages-detail .messages-detail-list .label-out {
-    top: -1px;
-    left: -1px;
 }
 
 .messages-detail .messages-detail-compose {
@@ -143,9 +135,9 @@
 .messages-detail .message {
     display: flex;
     align-items: stretch;
-    border: 1px solid #EAEAEA;
+    border-color: #dddddd;
     margin-bottom: 0.75rem;
-    box-shadow: 0 1px 1px rgba(0,0,0,.04);
+    box-shadow: unset;
     width: calc(100% - 6rem);
     position: relative;
 }
