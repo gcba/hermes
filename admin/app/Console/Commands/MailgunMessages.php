@@ -2,6 +2,8 @@
 
 namespace App\Console\Commands;
 
+use App\Rating;
+use App\Jobs\CreateMessage;
 use Bogardo\Mailgun\Facades\Mailgun;
 use TCG\Voyager\Models\Setting;
 use Illuminate\Console\Command;
@@ -71,6 +73,13 @@ class MailgunMessages extends Command
         });
 
         if ($result->status == 200) {
+            $direction = 'out';
+            $status = 0;
+            $transportId = filter_var(substr(trim($result->id), 1, -1), FILTER_SANITIZE_EMAIL);
+            $rating = Rating::where('has_message', true)->orderBy('id', 'desc')->first();
+
+            CreateMessage::dispatch($text, $direction, $status, $transportId, $rating->id);
+
             $this->info('Message sent successfully');
         }
         else {
