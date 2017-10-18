@@ -1845,10 +1845,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 var errors = [];
 
 var fail = function fail(message, type) {
-    var error = { message: message, type: type };
-
-    console.error(message);
-    errors.concat(error);
+    errors.push({ message: message, type: type });
 };
 
 var check = {
@@ -1870,46 +1867,50 @@ var validate = {
     options: function options(value) {
         if (check.isPlainObject(value)) return true;
 
-        fail('invalid options object');
+        fail('invalid options object', 'INVALID_OPTIONS');
     },
     rating: function rating(value) {
         if (check.isInteger(value) && value >= -127 && value <= 127) return value;
 
-        fail('invalid rating');
+        fail('invalid rating', 'INVALID_RATING');
     },
     description: function description(value) {
+        var errorType = 'INVALID_DESCRIPTION';
+
         if (check.isString(value)) {
             var trimmedValue = value.trim();
 
-            if (trimmedValue.length < 3) fail('description too short');
-            if (trimmedValue.length > 30) fail('description too long');
+            if (trimmedValue.length < 3) fail('description too short', errorType);
+            if (trimmedValue.length > 30) fail('description too long', errorType);
 
             return trimmedValue;
         }
 
-        fail('invalid description');
+        fail('invalid description', errorType);
     },
     comment: function comment(value) {
+        var errorType = 'INVALID_COMMENT';
+
         if (check.isString(value)) {
             var trimmedValue = value.trim();
 
-            if (trimmedValue.length < 3) fail('comment too short');
-            if (trimmedValue.length > 1000) fail('comment too long');
+            if (trimmedValue.length < 3) fail('comment too short', errorType);
+            if (trimmedValue.length > 1000) fail('comment too long', errorType);
 
             return trimmedValue;
         }
 
-        fail('invalid comment');
+        fail('invalid comment', errorType);
     },
     key: function key(value, name) {
         if (value && check.isString(value.trim()) && value.trim().length === 32) return value.trim();
 
-        fail('invalid ' + name);
+        fail('invalid ' + name, 'INVALID_' + name.toUpperCase());
     },
     token: function token(value) {
         if (value && check.isString(value) && value.trim().length > 0) return value.trim();
 
-        fail('invalid token');
+        fail('invalid token', 'INVALID_TOKEN');
     },
     url: function url(value) {
         var url = new RegExp(/^(ftp|http|https):\/\/[^ "]+$/);
@@ -1920,60 +1921,65 @@ var validate = {
             return baseUrl[baseUrl.length - 1] === '/' ? baseUrl + 'ratings' : baseUrl + '/ratings';
         }
 
-        fail('invalid api');
+        fail('invalid endpoint', 'INVALID_ENDPOINT');
     },
     appVersion: function appVersion(value) {
+        var errorType = 'INVALID_VERSION';
+
         if (check.isString(value)) {
             var trimmedValue = value.trim();
 
-            if (trimmedValue.length < 1) fail('version too short');
-            if (trimmedValue.length > 15) fail('version too long');
+            if (trimmedValue.length < 1) fail('version too short', errorType);
+            if (trimmedValue.length > 15) fail('version too long', errorType);
 
             return trimmedValue;
         }
 
-        fail('invalid version');
+        fail('invalid version', errorType);
     },
     isMobile: function isMobile$$1(value) {
         if (value === undefined || value === null || check.isBool(value)) return value;
 
-        fail('invalid isMobile');
+        fail('invalid isMobile', 'INVALID_IS_MOBILE');
     },
     userAgent: function userAgent(value) {
         if (check.isString(value) && value.trim().length > 0) return value.trim();
 
-        fail('invalid userAgent');
+        fail('invalid userAgent', 'INVALID_USER_AGENT');
     },
     name: function name(value) {
+        var errorType = 'INVALID_NAME';
+
         if (check.isString(value)) {
             var trimmedValue = value.trim();
 
-            if (trimmedValue.length < 3) fail('name too short');
-            if (trimmedValue.length > 70) fail('name too long');
+            if (trimmedValue.length < 3) fail('name too short', errorType);
+            if (trimmedValue.length > 70) fail('name too long', errorType);
 
             return trimmedValue;
         }
 
-        fail('invalid name');
+        fail('invalid name', errorType);
     },
     email: function email(value) {
+        var errorType = 'INVALID_EMAIL';
         var email = new RegExp(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/);
 
         if (check.isString(value) && email.test(value.trim())) {
             var trimmedValue = value.trim();
 
-            if (trimmedValue.length < 3) fail('email too short');
-            if (trimmedValue.length > 100) fail('email too long');
+            if (trimmedValue.length < 3) fail('email too short', errorType);
+            if (trimmedValue.length > 100) fail('email too long', errorType);
 
             return trimmedValue;
         }
 
-        fail('invalid email');
+        fail('invalid email', errorType);
     },
     mibaId: function mibaId(value) {
         if (check.isString(value) && value.length === 36) return value.trim();
 
-        fail('invalid mibaId');
+        fail('invalid mibaId', 'INVALID_MIBAID');
     }
 };
 
@@ -2039,6 +2045,8 @@ var Rating = function () {
     }, {
         key: 'send',
         value: function send(complaint) {
+            var _this = this;
+
             var options = {
                 method: 'POST',
                 headers: new Headers({
@@ -2049,19 +2057,16 @@ var Rating = function () {
                 body: JSON.stringify(complaint)
             };
 
-            var checkErrors = function checkErrors(value) {
+            var checkErrors = function checkErrors() {
                 return new Promise(function (resolve, reject) {
-                    setTimeout(function () {
-                        errors.length == 0 ? resolve(value) : reject();
-
-                        errors = [];
-                    }, 0);
+                    errors.length == 0 ? resolve() : reject(errors.slice(0));
+                    errors = [];
                 });
             };
 
-            var request = fetch(this._url, options);
-
-            return checkErrors(request).then(function (response) {
+            return checkErrors().then(function () {
+                return fetch(_this._url, options);
+            }).then(function (response) {
                 return response.json();
             });
         }
@@ -2111,7 +2116,7 @@ var Rating = function () {
             var hasValidWidth = check.isInteger(value.width) && value > 0;
             var hasValidHeight = check.isInteger(value.width) && value > 0;
 
-            if (!(isPlainObject && hasValidWidth && hasValidHeight)) fail('screen object is invalid');
+            if (!(isPlainObject && hasValidWidth && hasValidHeight)) fail('screen object is invalid', 'INVALID_SCREEN');
 
             this._screen = value;
         }
@@ -2139,7 +2144,7 @@ var Rating = function () {
             var email = validate.email(value.email);
             var user = {};
 
-            if (!(isPlainObject && (hasName || hasEmail || hasMibaId))) fail('user object is invalid');
+            if (!(isPlainObject && (hasName || hasEmail || hasMibaId))) fail('user object is invalid', 'INVALID_USER');
             if (hasName) user.name = name;
             if (hasEmail) user.email = email;
             if (hasMibaId) user.mibaId = validate.mibaId(value.mibaId);

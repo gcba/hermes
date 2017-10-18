@@ -35,8 +35,8 @@ $(document).ready(function () {
             }
             else $('#result-errors').hide();
         })
-        .catch((error) => {
-            console.error(error);
+        .catch((errors) => {
+            console.error(errors);
         });
 
         return false;
