@@ -41,7 +41,7 @@ class ViewController: UIViewController {
         }
         
         // Rating, description and comment; user name and mibaId only
-        sdk.user = RatingUser(name: "Juan Pérez", mibaId: "04860d65-7e93-49e8-a983-a4007d23ffa5")
+        sdk.user = RatingsUser(name: "Juan Pérez", mibaId: "04860d65-7e93-49e8-a983-a4007d23ffa5")
 
         sdk.create(rating: 2, description: "Malo", comment: "Lorem ipsum dolor...") { response, error in
             if error != nil {
@@ -50,7 +50,7 @@ class ViewController: UIViewController {
         }
         
         // Rating, description and comment; user name and email only
-        sdk.user = RatingUser(name: "Juan Pérez", email: "juan@example.com")
+        sdk.user = RatingsUser(name: "Juan Pérez", email: "juan@example.com")
         
         sdk.create(rating: 1, description: "Muy Malo", comment: "Lorem ipsum dolor...") { response, error in
             if error != nil {
@@ -59,7 +59,7 @@ class ViewController: UIViewController {
         }
         
         // Rating, description and comment; user name, email and mibaId
-        sdk.user = RatingUser(name: "Juan Pérez", email: "juan@example.com", mibaId: "08108a49-4c68-47da-8510-93922b6b2d76")
+        sdk.user = RatingsUser(name: "Juan Pérez", email: "juan@example.com", mibaId: "08108a49-4c68-47da-8510-93922b6b2d76")
         
         sdk.create(rating: 5, description: "Muy Bueno", comment: "Lorem ipsum dolor...") { response, error in
             if error != nil {

@@ -1,5 +1,5 @@
 //
-//  RatingUser.swift
+//  RatingsUser.swift
 //  RatingsSDK
 //
 //  Created by Rita Zerrizuela on 10/13/17.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct RatingUser {
+public struct RatingsUser {
     public let name: String
     public let email: String?
     public let mibaId: String?

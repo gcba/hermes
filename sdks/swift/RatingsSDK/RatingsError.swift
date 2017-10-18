@@ -1,5 +1,5 @@
 //
-//  RatingError.swift
+//  RatingsError.swift
 //  RatingsSDK
 //
 //  Created by Rita Zerrizuela on 10/13/17.
@@ -9,7 +9,7 @@
 import Foundation
 import SwiftHTTP
 
-public enum RatingError: Error {
+public enum RatingsError: Error {
     case invalidName(String)
     case invalidEmail(String)
     case invalidMibaId(String)
@@ -21,7 +21,7 @@ public enum RatingError: Error {
     case other(String)
 }
 
-public extension RatingError {
+public extension RatingsError {
     public var message: String {
         switch self {
         case .invalidName(let description): return description

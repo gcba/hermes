@@ -18,8 +18,8 @@
 		C08F76E01F27B30C0053E5DA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C08F76DE1F27B30C0053E5DA /* LaunchScreen.storyboard */; };
 		C08F76E51F27B32E0053E5DA /* RatingsSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C08F76C21F27B2A30053E5DA /* RatingsSDK.framework */; };
 		C08F76E61F27B32E0053E5DA /* RatingsSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C08F76C21F27B2A30053E5DA /* RatingsSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		C0BADFA21F91449B004DF800 /* RatingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BADFA11F91449B004DF800 /* RatingError.swift */; };
-		C0BADFA41F91654C004DF800 /* RatingUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BADFA31F91654C004DF800 /* RatingUser.swift */; };
+		C0BADFA21F91449B004DF800 /* RatingsError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BADFA11F91449B004DF800 /* RatingsError.swift */; };
+		C0BADFA41F91654C004DF800 /* RatingsUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BADFA31F91654C004DF800 /* RatingsUser.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,8 +62,8 @@
 		C08F76DC1F27B30C0053E5DA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C08F76DF1F27B30C0053E5DA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C08F76E11F27B30C0053E5DA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C0BADFA11F91449B004DF800 /* RatingError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingError.swift; sourceTree = "<group>"; };
-		C0BADFA31F91654C004DF800 /* RatingUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingUser.swift; sourceTree = "<group>"; };
+		C0BADFA11F91449B004DF800 /* RatingsError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingsError.swift; sourceTree = "<group>"; };
+		C0BADFA31F91654C004DF800 /* RatingsUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingsUser.swift; sourceTree = "<group>"; };
 		C9840FD63DA987B3618EE5B8 /* Pods_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDB7FFCB994DD44AF45C9FAE /* Pods_RatingsSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RatingsSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -135,8 +135,8 @@
 				C08F76C51F27B2A30053E5DA /* RatingsSDK.h */,
 				C08F76C61F27B2A30053E5DA /* Info.plist */,
 				C08F76CD1F27B2CB0053E5DA /* RatingsSDK.swift */,
-				C0BADFA11F91449B004DF800 /* RatingError.swift */,
-				C0BADFA31F91654C004DF800 /* RatingUser.swift */,
+				C0BADFA11F91449B004DF800 /* RatingsError.swift */,
+				C0BADFA31F91654C004DF800 /* RatingsUser.swift */,
 			);
 			path = RatingsSDK;
 			sourceTree = "<group>";
@@ -369,8 +369,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				C08F76CE1F27B2CB0053E5DA /* RatingsSDK.swift in Sources */,
-				C0BADFA21F91449B004DF800 /* RatingError.swift in Sources */,
-				C0BADFA41F91654C004DF800 /* RatingUser.swift in Sources */,
+				C0BADFA21F91449B004DF800 /* RatingsError.swift in Sources */,
+				C0BADFA41F91654C004DF800 /* RatingsUser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

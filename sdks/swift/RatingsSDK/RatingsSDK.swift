@@ -40,11 +40,11 @@ public class Ratings {
     private let deviceInfo: GBDeviceInfo
     
     private var timeout: Double
-    private var _user: RatingUser?
+    private var _user: RatingsUser?
     
     // MARK: - Public properties
     
-    public var user: RatingUser?
+    public var user: RatingsUser?
 
     // MARK: - Validations
 
@@ -60,51 +60,51 @@ public class Ratings {
         guard token.length > 0 else { fatalError("invalid token") }
     }
     
-    private func validateName(_ name: String) -> RatingError? {
-        guard name.length >= 3 else { return RatingError.invalidName("name too short") }
-        guard name.length <= 70 else { return RatingError.invalidName("name too long") }
+    private func validateName(_ name: String) -> RatingsError? {
+        guard name.length >= 3 else { return RatingsError.invalidName("name too short") }
+        guard name.length <= 70 else { return RatingsError.invalidName("name too long") }
         
         return nil
     }
     
-    private func validateEmail(_ email: String) -> RatingError? {
-        guard email.isEmail else { return RatingError.invalidEmail("invalid email") }
-        guard email.length >= 3 else { return RatingError.invalidEmail("email too short") }
-        guard email.length <= 100 else { return RatingError.invalidEmail("email too long") }
+    private func validateEmail(_ email: String) -> RatingsError? {
+        guard email.isEmail else { return RatingsError.invalidEmail("invalid email") }
+        guard email.length >= 3 else { return RatingsError.invalidEmail("email too short") }
+        guard email.length <= 100 else { return RatingsError.invalidEmail("email too long") }
         
         return nil
     }
     
-    private func validateMibaId(_ mibaId: String) -> RatingError? {
-        guard mibaId.length == 36 else { return RatingError.invalidMibaId("invalid mibaId") }
+    private func validateMibaId(_ mibaId: String) -> RatingsError? {
+        guard mibaId.length == 36 else { return RatingsError.invalidMibaId("invalid mibaId") }
         
         return nil
     }
     
-    private func validateRating(_ rating: Int) -> RatingError? {
-        guard rating >= -127 && rating <= 127 else { return RatingError.invalidRating("invalid rating") }
+    private func validateRating(_ rating: Int) -> RatingsError? {
+        guard rating >= -127 && rating <= 127 else { return RatingsError.invalidRating("invalid rating") }
         
         return nil
     }
     
-    private func validateDescription(_ description: String) -> RatingError? {
-        guard description.length >= 3 else { return RatingError.invalidDescription("description too short") }
-        guard description.length <= 30 else { return RatingError.invalidDescription("description too long") }
+    private func validateDescription(_ description: String) -> RatingsError? {
+        guard description.length >= 3 else { return RatingsError.invalidDescription("description too short") }
+        guard description.length <= 30 else { return RatingsError.invalidDescription("description too long") }
         
         return nil
     }
     
-    private func validateComment(_ comment: String) -> RatingError? {
-        guard comment.length >= 3 else { return RatingError.invalidComment("comment too short") }
-        guard comment.length <= 1000 else { return RatingError.invalidComment("comment too long") }
+    private func validateComment(_ comment: String) -> RatingsError? {
+        guard comment.length >= 3 else { return RatingsError.invalidComment("comment too short") }
+        guard comment.length <= 1000 else { return RatingsError.invalidComment("comment too long") }
         
         return nil
     }
 
     // MARK: - Setters
     
-    public func validateUser(_ user: RatingUser) -> RatingError? {
-        guard user.mibaId != nil || user.email != nil else { return RatingError.missingEmailAndMibaId("user is missing email and mibaId") }
+    public func validateUser(_ user: RatingsUser) -> RatingsError? {
+        guard user.mibaId != nil || user.email != nil else { return RatingsError.missingEmailAndMibaId("user is missing email and mibaId") }
         
         if let error = validateName(user.name) { return error }
         
@@ -152,7 +152,7 @@ public class Ratings {
         return result
     }
     
-    private func send(params: [String: Any], retry: Int = 3, callback: @escaping (_ response: Response?, _ error: RatingError?) -> ()) {
+    private func send(params: [String: Any], retry: Int = 3, callback: @escaping (_ response: Response?, _ error: RatingsError?) -> ()) {
         let headers = [
             "Content-Type": "application/json; charset=UTF-8",
             "Accept": "application/json",
@@ -172,7 +172,7 @@ public class Ratings {
                 try HTTP.POST(self.url, parameters: params, headers: headers, requestSerializer: JSONParameterSerializer()).start { response in
                     if response.error != nil && (response.error!.code == 503 || response.error!.code == 504 || response.error!.code >= 520) {
                         guard retry > 0 else {
-                            completionHandler(response, RatingError.http("Could not create new rating", response.error!.code, response))
+                            completionHandler(response, RatingsError.http("Could not create new rating", response.error!.code, response))
                             
                             return
                         }
@@ -185,14 +185,14 @@ public class Ratings {
             }
             catch let error {
                 debugPrint(error.localizedDescription)
-                completionHandler(nil, RatingError.other(error.localizedDescription))
+                completionHandler(nil, RatingsError.other(error.localizedDescription))
             }
         }
     }
     
     // MARK: - Public API
     
-    public func create(rating: Int, description: String? = nil, comment: String? = nil, callback: @escaping (_ response: Response?, _ error: RatingError?) -> ()) {
+    public func create(rating: Int, description: String? = nil, comment: String? = nil, callback: @escaping (_ response: Response?, _ error: RatingsError?) -> ()) {
         if let error = validateRating(rating) { return callback(nil, error) }
         
         var params: [String: Any] = buildParams()
