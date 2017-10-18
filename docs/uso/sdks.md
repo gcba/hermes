@@ -51,12 +51,10 @@ sdk.create({
     description: 'Excelente',
     comment: 'Me encantó'
 })
-.then((response) => {
-    response.json().then((json) => {
-        // ...
-    });
+.then((json) => {
+    // ...
 })
 .catch((error) => {
-    // ..
+    // ...
 });
 ```
