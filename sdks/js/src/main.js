@@ -284,7 +284,7 @@ class Rating {
             body: JSON.stringify(complaint),
         };
 
-        return fetch(this._url, options);
+        return fetch(this._url, options).then((response) => response.json());
     }
 }
 

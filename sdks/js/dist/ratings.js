@@ -2044,7 +2044,9 @@ var Rating = function () {
                 body: JSON.stringify(complaint)
             };
 
-            return fetch(this._url, options);
+            return fetch(this._url, options).then(function (response) {
+                return response.json();
+            });
         }
     }, {
         key: 'isMobile',
