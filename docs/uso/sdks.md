@@ -49,8 +49,8 @@ const sdk = new Ratings({
 // Opcional; omitir para calificaciones anónimas
 sdk.user = {
     name: "Juan Pérez",
-    email: "juan@example.com", // Opcional, si está el mibaId
-    mibaId: "04860d65-7e93-49e8-a983-a4007d23ffa5" // Opcional, si está el email
+    email: "juan@example.com", // Opcional si está el mibaId
+    mibaId: "04860d65-7e93-49e8-a983-a4007d23ffa5" // Opcional si está el email
 }
 
 sdk.create({
@@ -91,11 +91,11 @@ import RatingsSDK
 ```swift
 let sdk = Ratings(api: <ENDPOINT>, token: <TOKEN>, app: <APP>, platform: <PLATFORM>, range: <RANGE>)
 
-// Opcional; omitir para calificaciones anónimas. El email es opcional si está el mibaId y viceversa
+// Opcional; omitir para calificaciones anónimas
 sdk.user = RatingsUser(
     name: "Juan Pérez",
-    email: "juan@example.com",
-    mibaId: "08108a49-4c68-47da-8510-93922b6b2d76"
+    email: "juan@example.com", // Opcional si está el mibaId
+    mibaId: "08108a49-4c68-47da-8510-93922b6b2d76" // Opcional si está el email
 )
 
 // Description y comment son opcionales
