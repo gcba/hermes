@@ -152,7 +152,7 @@ public class Ratings {
         return result
     }
     
-    private func send(params: [String: Any], retry: Int = 3, callback: @escaping (_ response: Response?, _ error: RatingError?)->()) {
+    private func send(params: [String: Any], retry: Int = 3, callback: @escaping (_ response: Response?, _ error: RatingError?) -> ()) {
         let headers = [
             "Content-Type": "application/json; charset=UTF-8",
             "Accept": "application/json",
@@ -166,31 +166,33 @@ public class Ratings {
         }
         
         DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: .now() + .seconds(backoff)) {
+            let completionHandler = callback
+            
             do {
                 try HTTP.POST(self.url, parameters: params, headers: headers, requestSerializer: JSONParameterSerializer()).start { response in
                     if response.error != nil && (response.error!.code == 503 || response.error!.code == 504 || response.error!.code >= 520) {
                         guard retry > 0 else {
-                            callback(response, RatingError.http("Could not create new rating", response.error!.code, response))
+                            completionHandler(response, RatingError.http("Could not create new rating", response.error!.code, response))
                             
                             return
                         }
                         
                         self.send(params: params, retry: retry - 1, callback: callback)
                     } else {
-                        callback(response, nil)
+                        completionHandler(response, nil)
                     }
                 }
             }
             catch let error {
                 debugPrint(error.localizedDescription)
-                callback(nil, RatingError.other(error.localizedDescription))
+                completionHandler(nil, RatingError.other(error.localizedDescription))
             }
         }
     }
     
     // MARK: - Public API
     
-    public func create(rating: Int, description: String? = nil, comment: String? = nil, callback: @escaping (_ response: Response?, _ error: RatingError?)->()) {
+    public func create(rating: Int, description: String? = nil, comment: String? = nil, callback: @escaping (_ response: Response?, _ error: RatingError?) -> ()) {
         if let error = validateRating(rating) { return callback(nil, error) }
         
         var params: [String: Any] = buildParams()
