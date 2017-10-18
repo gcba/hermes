@@ -61,7 +61,7 @@ sdk.create({
 .then((json) => {
     // ...
 })
-.catch((error) => {
+.catch((errors) => {
     // ...
 });
 ```
