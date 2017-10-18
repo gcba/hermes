@@ -1842,8 +1842,13 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var fail = function fail(message) {
+var errors = [];
+
+var fail = function fail(message, type) {
+    var error = { message: message, type: type };
+
     console.error(message);
+    errors.concat(error);
 };
 
 var check = {
@@ -2025,8 +2030,8 @@ var Rating = function () {
                 browser: this.browser
             };
 
-            if (data.description) data.description = validate.description(data.description);
-            if (data.comment) data.comment = validate.comment(data.comment);
+            if (data.description) complaint.description = validate.description(data.description);
+            if (data.comment) complaint.comment = validate.comment(data.comment);
             if (this.user) complaint.user = this.user;
 
             return this.send(complaint);
@@ -2044,7 +2049,19 @@ var Rating = function () {
                 body: JSON.stringify(complaint)
             };
 
-            return fetch(this._url, options).then(function (response) {
+            var checkErrors = function checkErrors(value) {
+                return new Promise(function (resolve, reject) {
+                    setTimeout(function () {
+                        errors.length == 0 ? resolve(value) : reject();
+
+                        errors = [];
+                    }, 0);
+                });
+            };
+
+            var request = fetch(this._url, options);
+
+            return checkErrors(request).then(function (response) {
                 return response.json();
             });
         }
@@ -2120,13 +2137,12 @@ var Rating = function () {
             var hasMibaId = check.isString(value.mibaId) && value.mibaId.trim().length > 0;
             var name = validate.name(value.name);
             var email = validate.email(value.email);
-            var mibaId = validate.mibaId(value.mibaId);
             var user = {};
 
             if (!(isPlainObject && (hasName || hasEmail || hasMibaId))) fail('user object is invalid');
             if (hasName) user.name = name;
             if (hasEmail) user.email = email;
-            if (hasMibaId) user.mibaId = mibaId;
+            if (hasMibaId) user.mibaId = validate.mibaId(value.mibaId);
 
             this._user = user;
         }

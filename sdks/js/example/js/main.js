@@ -13,6 +13,11 @@ $(document).ready(function () {
             platform: 'e10adc3949ba59abbe56e057f20f883e'
         });
 
+        sdk.user = {
+            name: $('#name').val(),
+            email: $('#email').val()
+        }
+
         sdk.create({
             rating: parseInt($('#rating').val()),
             description: $('#description').val(),
@@ -21,16 +26,14 @@ $(document).ready(function () {
         .then((response) => {
             $('#result').show();
 
-            response.json().then((json) => {
-                $('#result-code span').text(json.meta.code);
-                $('#result-message span').text(json.meta.message);
+            $('#result-code span').text(response.meta.code);
+            $('#result-message span').text(response.meta.message);
 
-                if (json.errors) {
-                    $('#result-errors').show();
-                    $('#result-errors span').text(json.errors.join('\n'));
-                }
-                else $('#result-errors').hide();
-            });
+            if (response.errors) {
+                $('#result-errors').show();
+                $('#result-errors span').text(response.errors.join('\n'));
+            }
+            else $('#result-errors').hide();
         })
         .catch((error) => {
             console.error(error);

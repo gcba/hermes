@@ -5,8 +5,13 @@ import 'whatwg-fetch'
 import isMobile from 'ismobilejs';
 import platform from 'platform';
 
-const fail = (message) => {
+let errors = [];
+
+const fail = (message, type) => {
+    let error = { message, type };
+
     console.error(message);
+    errors.concat(error);
 }
 
 const check = {
@@ -235,13 +240,12 @@ class Rating {
         const hasMibaId = check.isString(value.mibaId) && value.mibaId.trim().length > 0;
         const name = validate.name(value.name);
         const email = validate.email(value.email);
-        const mibaId = validate.mibaId(value.mibaId);
         const user = {};
 
         if (!(isPlainObject && (hasName || hasEmail || hasMibaId))) fail('user object is invalid');
         if (hasName) user.name = name;
         if (hasEmail) user.email = email;
-        if (hasMibaId) user.mibaId = mibaId;
+        if (hasMibaId) user.mibaId = validate.mibaId(value.mibaId);
 
         this._user = user;
     }
@@ -266,8 +270,8 @@ class Rating {
             browser: this.browser
         };
 
-        if (data.description) data.description = validate.description(data.description);
-        if (data.comment) data.comment = validate.comment(data.comment);
+        if (data.description) complaint.description = validate.description(data.description);
+        if (data.comment) complaint.comment = validate.comment(data.comment);
         if (this.user) complaint.user = this.user;
 
         return this.send(complaint);
@@ -284,7 +288,19 @@ class Rating {
             body: JSON.stringify(complaint),
         };
 
-        return fetch(this._url, options).then((response) => response.json());
+        const checkErrors = (value) => {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    errors.length == 0 ? resolve(value) : reject();
+
+                    errors = [];
+                }, 0);
+            });
+        };
+
+        const request = fetch(this._url, options);
+
+        return checkErrors(request).then((response) => response.json());
     }
 }
 
