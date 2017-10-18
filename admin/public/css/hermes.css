@@ -2,6 +2,21 @@
     padding-right: 0px;
 }
 
+.messages-master .dataTables_wrapper table thead {
+    display: none;
+}
+
+.messages-master .dataTables_wrapper table tbody tr {
+    height: 3.5rem;
+    margin-bottom: 0em;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.messages-master .dataTables_wrapper .row>[class*=col-] {
+    margin-bottom: 0.5em;
+}
+
 .messages-detail {
     padding-left: 0px;
     max-height: 55vh;
@@ -13,6 +28,12 @@
 
 .messages-detail .messages-detail-compose {
     margin-top: 1rem;
+}
+
+.messages-detail-compose .input-group {
+    border-spacing: 1rem;
+    margin-left: -1rem;
+    margin-right: -1rem;
 }
 
 .messages-detail .panel {
@@ -34,14 +55,6 @@
     padding-top: 10px;
     padding-bottom: 10px;
     font-size: 13px;
-}
-
-.messages-master .dataTables_wrapper .row>[class*=col-] {
-    margin-bottom: 0.5em;
-}
-
-.messages-master .dataTables_wrapper .row {
-    margin-bottom: 0em;
 }
 
 .dataTables_wrapper .dataTables_filter {
@@ -81,10 +94,6 @@
     background-color: #FFFFE0;
 }
 
-.dataTables_wrapper table thead {
-    display: none;
-}
-
 .dataTables_wrapper table tbody tr {
     font-size: 0.9rem;
     cursor: pointer;
@@ -93,15 +102,19 @@
 .dataTables_wrapper table tbody td {
     white-space: nowrap;
     overflow: hidden;
+    vertical-align: middle;
 }
 
 .dataTables_wrapper table tfoot {
     display: table-footer-group;
 }
 
+.dataTables_wrapper table tfoot th {
+    border-bottom: 2px dotted #eee;
+}
+
 .dataTables_wrapper table tfoot input {
     border: none;
-    border-bottom: 2px dotted #eee;
     width: 100%;
 }
 

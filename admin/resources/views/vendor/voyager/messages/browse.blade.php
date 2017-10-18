@@ -5,11 +5,6 @@
 @section('page_header')
     <h1 class="page-title">
         <i class="{{ $dataType->icon }}"></i> {{ $dataType->display_name_plural }}
-        @if (Voyager::can('add_'.$dataType->name))
-            <a href="{{ route('voyager.'.$dataType->slug.'.create') }}" class="btn btn-success">
-                <i class="voyager-plus"></i> {{ __('voyager.generic.add_new') }}
-            </a>
-        @endif
     </h1>
     @include('voyager::multilingual.language-selector')
 @stop
@@ -52,13 +47,14 @@
                     <div class="panel-body">
                         <div class="messages-detail-list">
                         </div>
-
-                        <div class="messages-detail-compose">
-                            <div class="input-group">
-                                <textarea class="form-control custom-control" rows="3"></textarea>
-                                <span class="input-group-addon btn btn-primary">Enviar</span>
+                        @if (Voyager::can('add_'.$dataType->name))
+                            <div class="messages-detail-compose">
+                                <div class="input-group">
+                                    <textarea class="form-control custom-control" rows="3"></textarea>
+                                    <span class="input-group-addon btn btn-primary">Enviar</span>
+                                </div>
                             </div>
-                        </div>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -134,6 +130,10 @@
                 ],
                 order: [[3, 'desc']],
                 mark: true,
+                language: {
+                    search: '',
+                    sLengthMenu: '_MENU_'
+                },
                 initComplete: function () {
                     this.api().columns().every(function () {
                         const column = this;
