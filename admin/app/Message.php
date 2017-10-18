@@ -51,10 +51,6 @@ class Message extends Model
         $this->attributes['transport_id'] = filter_var(trim($value), FILTER_SANITIZE_EMAIL);
     }
 
-    public function getDirectionAttribute(){
-        return $this->attributes['direction'] == 'out' ? '➡️' : '⬅️';
-    }
-
     public function getCreatedAtAttribute(){
         return $this->formatDate($this->attributes['created_at']);
     }

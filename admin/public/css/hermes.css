@@ -1,3 +1,8 @@
+.app-container {
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
 .container-fluid {
     padding-right: 0px;
 }
@@ -7,14 +12,22 @@
 }
 
 .messages-master .dataTables_wrapper table tbody tr {
-    height: 3.5rem;
+    height: 3.3rem;
     margin-bottom: 0em;
     font-size: 0.9rem;
     cursor: pointer;
 }
 
+.messages-master .dataTables_wrapper table tbody tr td:last-child {
+    width: 100px;
+}
+
 .messages-master .dataTables_wrapper .row>[class*=col-] {
     margin-bottom: 0.5em;
+}
+
+.messages-master .panel-body, .messages-detail .panel-body {
+    padding: 20px 20px 10px;
 }
 
 .messages-detail {
@@ -24,6 +37,20 @@
 
 .messages-detail .messages-detail-list {
     height: 100%;
+}
+
+.messages-detail .messages-detail-list .label {
+    position: absolute;
+}
+
+.messages-detail .messages-detail-list .label-in {
+    top: -1px;
+    right: -1px;
+}
+
+.messages-detail .messages-detail-list .label-out {
+    top: -1px;
+    left: -1px;
 }
 
 .messages-detail .messages-detail-compose {
@@ -36,25 +63,51 @@
     margin-right: -1rem;
 }
 
-.messages-detail .panel {
-    box-shadow: none;
-}
-
-.messages-detail .panel.message {
+.messages-detail .message {
+    display: flex;
+    align-items: stretch;
     border: 1px solid #EAEAEA;
     margin-bottom: 0.75rem;
+    box-shadow: 0 1px 1px rgba(0,0,0,.04);
+    width: calc(100% - 6rem);
+    position: relative;
 }
 
-.messages-detail .panel.message .message-heading {
-    padding: 6px 8px 6px 8px;
-    font-size: 13px;
-    font-weight: normal;
+.messages-detail .message-in {
+    left: 6rem;
 }
 
-.messages-detail .panel.message .message-body {
-    padding-top: 10px;
-    padding-bottom: 10px;
+.messages-detail .message .message-pill {
+    display: flex;
+    align-items: center;
+    width: 6rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #76838f;
+    background-color: #fafafa;
+    vertical-align: middle;
+    text-align: center;
+    white-space: pre-wrap;
+}
+
+.messages-detail .message-in .message-pill {
+    border-bottom-right-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+.messages-detail .message-out .message-pill {
+    border-bottom-left-radius: 4px;
+    border-top-left-radius: 4px;
+}
+
+.messages-detail .message .message-body {
+    width: 100%;
+    padding: 10px 15px;
     font-size: 13px;
+}
+
+.messages-detail .message-in .message-body {
+    text-align: right;
 }
 
 .dataTables_wrapper .dataTables_filter {
@@ -67,7 +120,7 @@
 }
 
 .dataTables_wrapper .dataTables_filter input {
-    width: calc(100% - 75px);
+    width: 85%;
 }
 
 .dataTables_wrapper .row-selected {
@@ -94,12 +147,17 @@
     background-color: #FFFFE0;
 }
 
+.dataTables_wrapper .row:last-child [class*=col-] {
+    margin-bottom: 5px;
+}
+
 .dataTables_wrapper table tbody tr {
+    height: 2.5rem;
     font-size: 0.9rem;
     cursor: pointer;
 }
 
-.dataTables_wrapper table tbody td {
+.dataTables_wrapper table tbody tr td {
     white-space: nowrap;
     overflow: hidden;
     vertical-align: middle;
@@ -110,12 +168,22 @@
 }
 
 .dataTables_wrapper table tfoot th {
-    border-bottom: 2px dotted #eee;
+    border-bottom: 1px dashed #eee;
+    padding: 10px 5px 10px;
+    font-size: 0.9rem;
 }
 
 .dataTables_wrapper table tfoot input {
     border: none;
     width: 100%;
+}
+
+.dataTables_wrapper .dataTables_info {
+    font-size: 0.9rem;
+}
+
+.dataTables_wrapper .dataTables_paginate {
+    font-size: 0.9rem;
 }
 
 @media screen and (max-width: 991px) {
@@ -126,4 +194,8 @@
     #dataTable_filter {
         float: none;
     }
+}
+
+.app-footer {
+    display: none;
 }

@@ -169,20 +169,17 @@
             form.action = deleteFormAction.match(/\/[0-9]+$/)
                 ? deleteFormAction.replace(/([0-9]+$)/, $(this).data('id'))
                 : deleteFormAction + '/' + $(this).data('id');
-            console.log(form.action);
 
             $('#delete_modal').modal('show');
         });
 
         const messagePanel = function(direction) {
-            const type = direction === 'in' ? 'primary' : 'default';
-
-            return $('<div>', { class: 'panel panel-' + type + ' message message-' + direction });
+            return $('<div>', { class: 'panel panel-default message message-' + direction });
         }
 
-        const messageHeading = function(content) {
+        const messageHeading = function(content, direction) {
             return $('<div>', {
-                class: 'panel-heading message-heading',
+                class: 'message-pill',
                 text: content
              });
         }
@@ -196,11 +193,17 @@
 
         const buildMessage = function(content) {
             const message = messagePanel(content.direction);
-            const heading = messageHeading(content.created_at);
+            const heading = messageHeading(content.created_at, content.direction);
             const body = messageBody(content.message);
 
-            message.append(heading);
-            message.append(body);
+            if (content.direction === 'in') {
+                message.append(body);
+                message.append(heading);
+            }
+            else {
+                message.append(heading);
+                message.append(body);
+            }
 
             return message;
         }
