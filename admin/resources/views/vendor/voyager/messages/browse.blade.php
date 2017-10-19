@@ -125,7 +125,6 @@
                 columns: [
                     { data: 'message', name: 'message' },
                     { data: 'rating.app.name', name: 'app' },
-                    { data: 'direction', name: 'direction', visible: false },
                     { data: 'rating.rating', name: 'rating.rating', visible: false },
                     { data: 'created_at', name: 'created_at' }
                 ],
@@ -142,6 +141,8 @@
                     this.api().columns().every(function () {
                         const column = this;
                         const input = document.createElement('input');
+
+                        console.log('!!!!!!!!');
 
                         $(input).appendTo($(column.footer()).empty())
                             .on('change', function () {

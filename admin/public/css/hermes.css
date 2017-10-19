@@ -119,6 +119,7 @@
 
 .messages-master .dataTables_wrapper table tbody tr td:last-child {
     width: 100px;
+    text-align: right;
 }
 
 .messages-master .dataTables_wrapper .row>[class*=col-] {

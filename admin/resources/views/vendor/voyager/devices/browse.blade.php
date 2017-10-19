@@ -102,8 +102,8 @@
                     data: function (d) {
                         d.columns.forEach(function (column) {
                             if (column.name && column.name.indexOf('.') != -1) {
-                                var name = column.name.replace('.', '_');
-                                var searchTerm = $('input[name=' + name + ']').val();
+                                const name = column.name.replace('.', '_');
+                                const searchTerm = $('input[name=' + name + ']').val();
 
                                 if (searchTerm && searchTerm.trim().length > 0) d[name] = searchTerm.trim();
                             }
