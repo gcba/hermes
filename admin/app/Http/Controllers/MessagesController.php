@@ -39,8 +39,7 @@ class MessagesController extends DataTablesController
                 ->where('direction', '=', 'in')
                 ->orderBy('created_at', 'desc')
                 ->get()
-                ->unique('rating_id')
-                ->sortByDesc('created_at');
+                ->unique('rating_id');
 
             $datatables = Datatables::of($model)
                 ->filter(function ($query) use($params) {
