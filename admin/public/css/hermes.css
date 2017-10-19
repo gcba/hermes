@@ -99,6 +99,13 @@
     cursor: pointer;
 }
 
+.messages-master .dataTables_wrapper table tbody tr td:nth-last-child(2) {
+    width: 130px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .messages-master .dataTables_wrapper table tbody tr td:last-child {
     width: 100px;
 }

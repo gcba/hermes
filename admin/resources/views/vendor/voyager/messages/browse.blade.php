@@ -234,7 +234,7 @@
                 thread.append(threadHeading(row.rating.appuser.name, row));
             }
             else {
-                thread.append(threadHeading('Un usuario anónimo', row));
+                thread.append(threadHeading('Anónimo', row));
             }
 
             for (const message of messages) {
