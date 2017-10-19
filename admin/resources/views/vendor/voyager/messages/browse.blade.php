@@ -48,11 +48,10 @@
                         <div class="messages-detail-list">
                         </div>
                         @if (Voyager::can('add_'.$dataType->name))
+                            <hr>
                             <div class="messages-detail-compose">
-                                <div class="input-group">
-                                    <textarea class="form-control custom-control" rows="3"></textarea>
-                                    <span class="input-group-addon btn btn-primary">Enviar</span>
-                                </div>
+                                <textarea class="form-control custom-control" rows="3"></textarea>
+                                <div class="btn btn-primary">Enviar</div>
                             </div>
                         @endif
                     </div>

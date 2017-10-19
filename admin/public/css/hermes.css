@@ -166,13 +166,17 @@
 }
 
 .messages-detail .messages-detail-compose {
-    margin-top: 1rem;
+    margin-top: 2rem;
 }
 
-.messages-detail-compose .input-group {
-    border-spacing: 1rem;
-    margin-left: -1rem;
-    margin-right: -1rem;
+.messages-detail .messages-detail-compose textarea {
+    border-radius: 4px;
+}
+
+.messages-detail .messages-detail-compose .btn {
+    float: right;
+    width: 100px;
+    margin-top: 0.75rem;
 }
 
 .messages-detail .message {
