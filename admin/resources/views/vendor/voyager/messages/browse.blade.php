@@ -124,6 +124,7 @@
                 },
                 columns: [
                     { data: 'message', name: 'message' },
+                    { data: 'rating.app.name', name: 'app' },
                     { data: 'direction', name: 'direction', visible: false },
                     { data: 'rating.rating', name: 'rating.rating', visible: false },
                     { data: 'created_at', name: 'created_at' }
@@ -191,11 +192,22 @@
              });
         }
 
-        const threadHeading = function(name) {
-            return $('<h3>', {
-                class: 'messages-detail-header',
-                text: 'Conversación con ' + name
-             });
+        const threadHeading = function(name, row) {
+            const container = $('<div>', { class: 'messages-detail-header' });
+            const user = $('<h3>', { text: name + ' ' });
+
+            if (!row.rating.app_version) {
+                row.rating.app_version = '(versión desconocida)';
+            }
+
+            const contextualInfo = $('<small>', {
+                text: `${row.rating.app.name} ${row.rating.app_version}, ${row.rating.platform.name}`
+            });
+
+            user.append(contextualInfo);
+            container.append(user);
+
+            return container;
         }
 
         const buildMessage = function(content) {
@@ -215,14 +227,14 @@
             return message;
         }
 
-        const buildThread = function(messages) {
+        const buildThread = function(messages, row) {
             const thread = $('.messages-detail-list').first().empty();
 
-            if (messages[0].rating && messages[0].rating.appuser) {
-                thread.append(threadHeading(messages[0].rating.appuser.name));
+            if (row.rating && row.rating.appuser) {
+                thread.append(threadHeading(row.rating.appuser.name, row));
             }
             else {
-                thread.append(threadHeading('un usuario anónimo'));
+                thread.append(threadHeading('Un usuario anónimo', row));
             }
 
             for (const message of messages) {
@@ -249,7 +261,7 @@
                         return response.json();
                     })
                     .then(function(response) {
-                        buildThread(response);
+                        buildThread(response, rowData);
                     })
                 }
             }

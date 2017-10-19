@@ -25,8 +25,11 @@ class MessagesController extends DataTablesController
         $user = Auth::user();
 
         if ($user->hasPermission('browse_messages')) {
-            $model = Message::with('rating')->select('messages.*')->where('direction', '=', 'in');
             $params = $request->query()['columns'];
+
+            $model = Message::with(['rating', 'rating.app', 'rating.platform', 'rating.appuser'])
+                ->select('messages.*')
+                ->where('direction', '=', 'in');
 
             $datatables = Datatables::of($model)
                 ->removeColumn('status')
@@ -62,7 +65,7 @@ class MessagesController extends DataTablesController
         $validation = $this->validateBread($request->all(), $dataType->addRows);
 
         if ($validation->fails()) {
-            return response()->json(['errors' => $val->messages(), 'code' => $badRequest]);
+            return response()->json(['errors' => $validation->messages(), 'code' => $badRequest]);
         }
 
         $text = $request->input('message');
@@ -70,7 +73,7 @@ class MessagesController extends DataTablesController
         $rating = Rating::find($ratingID);
 
         if ($rating === null) {
-            return response()->json(['errors' => "Invalid rating id.", 'code' => $unprocessableEntity]);
+            return response()->json(['errors' => "Invalid rating.", 'code' => $unprocessableEntity]);
         }
 
         $message = new Message;
@@ -89,7 +92,7 @@ class MessagesController extends DataTablesController
         $user = AppUser::find($userId);
 
         if ($user === null) {
-            return response()->json(['errors' => "Invalid user id.", 'code' => $unprocessableEntity]);
+            return response()->json(['errors' => "Invalid user.", 'code' => $unprocessableEntity]);
         }
 
         if (isset($user->email)) {

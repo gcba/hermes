@@ -76,6 +76,10 @@
     width: 100%;
 }
 
+.dataTables_wrapper .dataTables_processing {
+    height: 67px;
+}
+
 .dataTables_wrapper .dataTables_info {
     font-size: 0.9rem;
 }
@@ -126,8 +130,12 @@
     padding: 0px 20px;
 }
 
-.messages-detail-header {
+.messages-detail .messages-detail-header {
     margin-bottom: 46px;
+}
+
+.messages-detail .messages-detail-header small {
+    margin-left: 0.5rem;
 }
 
 .messages-detail .messages-detail-list {

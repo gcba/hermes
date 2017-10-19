@@ -36,7 +36,7 @@ class ApiController extends Controller {
         $user = Auth::user();
 
         if ($user->hasPermission('read_messages')) {
-            $messages = Message::with('rating.appuser')->where('rating_id', $id)->get();
+            $messages = Message::where('rating_id', $id)->orderBy('created_at', 'asc')->get();
 
             return Response::json($messages);
         }
