@@ -130,7 +130,11 @@
                 })
                 .then((response) => response.json())
                 .then((json) => {
-                    textarea.val('');
+                    if (json.status === 201) {
+                        textarea.val('');
+                        appendMessage(json.message);
+                    }
+                    else console.error(json);
                 })
                 .catch((error) => {
                     console.error(error);
@@ -317,6 +321,12 @@
                     })
                 }
             }
+        }
+
+        const appendMessage = function(message) {
+            const thread = $('.messages-detail-list').first();
+
+            thread.append(buildMessage(message));
         }
     </script>
 @stop
