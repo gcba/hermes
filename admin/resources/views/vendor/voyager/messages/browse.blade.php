@@ -138,23 +138,37 @@
                 initComplete: function () {
                     if ($('.dataTables_empty').length !== 0) return;
 
+
+
                     this.api().columns().every(function () {
                         const column = this;
                         const input = document.createElement('input');
 
                         $(input).appendTo($(column.footer()).empty())
                             .on('change', function () {
-                                const val = $.fn.dataTable.util.escapeRegex($(this).val().trim());
+                                const $this = $(this);
+                                const val = $.fn.dataTable.util.escapeRegex($this.val().trim());
 
-                                column.search($(this).val()).draw();
+                                column.search($this.val()).draw();
                             })
                             .closest('tr').addClass('row-search');
                     });
 
                     selectRow($('#dataTable tbody tr:nth-child(1)'));
                 }
+            })
+            .on('stateLoaded.dt', function (e, settings, data) {
+                console.log("hola");
+            })
+            .on('preDraw', function (e, settings) {
+                $(this).DataTable().rows().every(function () {
+                    if (this.data().status === 0) {
+                        $(this.node()).addClass('row-unread');
+                    }
+                });
             });
-        }).on('click', 'tbody tr', function() {
+        })
+        .on('click', 'tbody tr', function() {
             if ($(this).children().length <= 1) return;
 
             selectRow(this);
@@ -244,11 +258,16 @@
 
         const selectRow = function(row) {
             const rowData = $('#dataTable').DataTable().row(row).data();
+            const $row = $(row);
 
             $('#dataTable .row-selected').removeClass('row-selected');
 
-            if (!$(row).hasClass('row-search')) {
-                $(row).addClass('row-selected');
+            if ($row.hasClass('row-unread')) {
+                $row.removeClass('row-unread');
+            }
+
+            if (!$row.hasClass('row-search')) {
+                $row.addClass('row-selected');
 
                 if (rowData) {
                     const ratingID = rowData.rating_id;

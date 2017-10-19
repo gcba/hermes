@@ -33,6 +33,7 @@ class MessagesController extends DataTablesController
                     'messages.id',
                     'messages.message',
                     'messages.direction',
+                    'messages.status',
                     'messages.created_at',
                     'messages.rating_id'
                 ])

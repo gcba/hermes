@@ -129,14 +129,15 @@
                 mark: true,
                 initComplete: function () {
                     this.api().columns().every(function () {
-                        var column = this;
-                        var input = document.createElement("input");
+                        const column = this;
+                        const input = document.createElement("input");
 
                         $(input).appendTo($(column.footer()).empty())
                         .on('change', function () {
-                            var val = $.fn.dataTable.util.escapeRegex($(this).val().trim());
+                            const $this = $(this);
+                            const val = $.fn.dataTable.util.escapeRegex($this.val().trim());
 
-                            column.search($(this).val()).draw();
+                            column.search($this.val()).draw();
                         });
                     });
                 }
