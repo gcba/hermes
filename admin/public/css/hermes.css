@@ -111,10 +111,11 @@
 }
 
 .messages-master .dataTables_wrapper table tbody tr td:nth-last-child(2) {
-    width: 120px;
+    width: 1px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    text-align: right;
 }
 
 .messages-master .dataTables_wrapper table tbody tr td:last-child {
