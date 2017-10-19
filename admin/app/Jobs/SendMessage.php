@@ -72,8 +72,7 @@ class SendMessage implements ShouldQueue
             }
         }
         else {
-            error_log($result);
-            // throw new Exception("Could not send email to Mailgun. Requeuing...");
+            throw new Exception("Could not send email to Mailgun. Requeuing...");
         }
 
         return;
