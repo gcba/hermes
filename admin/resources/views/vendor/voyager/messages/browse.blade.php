@@ -50,10 +50,14 @@
                         </div>
                         @if (Voyager::can('add_'.$dataType->name))
                             <hr>
-                            <div class="messages-detail-compose">
-                                <textarea class="form-control custom-control" rows="3"></textarea>
-                                <div class="btn btn-primary">Enviar</div>
-                            </div>
+                            <form class="messages-detail-compose">
+                                <fieldset>
+                                    <textarea class="form-control custom-control" name="message" rows="3" minlength="5" required></textarea>
+                                    <input id="hidden-field-rating" name="rating" type="hidden" value="">
+                                    <input id="hidden-field-user" name="user" type="hidden" value="">
+                                    <button type="submit" class="btn btn-primary">Enviar</button>
+                                </fieldset>
+                            </form>
                         @endif
                     </div>
                 </div>
