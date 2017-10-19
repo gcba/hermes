@@ -107,6 +107,10 @@
     padding: 20px 20px 10px;
 }
 
+.messages-master .dataTables_wrapper .dataTables_paginate {
+    font-size: 0.8rem;
+}
+
 .messages-detail {
     padding-left: 0px;
     max-height: 55vh;
