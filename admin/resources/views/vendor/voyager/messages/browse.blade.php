@@ -129,32 +129,35 @@
                     { data: 'rating.rating', name: 'rating.rating', visible: false },
                     { data: 'created_at', name: 'created_at' }
                 ],
-                order: [[3, 'desc']],
+                bSort: false,
+                bInfo: false,
                 mark: true,
                 language: {
                     search: '',
                     sLengthMenu: '_MENU_'
                 },
                 initComplete: function () {
+                    // if (this.api().columns().length <= 1) return;
+
                     this.api().columns().every(function () {
                         const column = this;
                         const input = document.createElement('input');
 
-                        if (column.name) input.name = column.name.replace('.', '_');
-
                         $(input).appendTo($(column.footer()).empty())
-                        .on('change', function () {
-                            const val = $.fn.dataTable.util.escapeRegex($(this).val().trim());
+                            .on('change', function () {
+                                const val = $.fn.dataTable.util.escapeRegex($(this).val().trim());
 
-                            column.search($(this).val()).draw();
-                        })
-                        .closest('tr').addClass('row-search');
+                                column.search($(this).val()).draw();
+                            })
+                            .closest('tr').addClass('row-search');
                     });
 
                     selectRow($('#dataTable tbody tr:nth-child(1)'));
                 }
             });
-        }).on('click', 'tr', function() {
+        }).on('click', 'tbody tr', function() {
+            if ($(this).children().length <= 1) return;
+
             selectRow(this);
         });
 
@@ -196,12 +199,10 @@
             const container = $('<div>', { class: 'messages-detail-header' });
             const user = $('<h3>', { text: name + ' ' });
 
-            if (!row.rating.app_version) {
-                row.rating.app_version = '(versión desconocida)';
-            }
-
             const contextualInfo = $('<small>', {
-                text: `${row.rating.app.name} ${row.rating.app_version}, ${row.rating.platform.name}`
+                text: row.rating.app_version ?
+                `${row.rating.app.name} ${row.rating.app_version}, ${row.rating.platform.name}` :
+                `${row.rating.app.name}, ${row.rating.platform.name}`
             });
 
             user.append(contextualInfo);

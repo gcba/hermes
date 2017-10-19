@@ -44,18 +44,28 @@ class Message extends Model
     }
 
     public function setMessageAttribute($value) {
-        $this->attributes['message'] = ucfirst(filter_var(trim($value), FILTER_SANITIZE_SPECIAL_CHARS));
+        $filteredValue = filter_var(
+            trim($value),
+            FILTER_SANITIZE_STRING,
+            FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_BACKTICK | FILTER_FLAG_ENCODE_LOW
+        );
+
+        $this->attributes['message'] = ucfirst(htmlspecialchars($filteredValue));
     }
 
     public function setTransportIdAttribute($value) {
         $this->attributes['transport_id'] = filter_var(trim($value), FILTER_SANITIZE_EMAIL);
     }
 
-    public function getCreatedAtAttribute(){
+    public function getMessageAttribute() {
+        return html_entity_decode( $this->attributes['message']);
+    }
+
+    public function getCreatedAtAttribute() {
         return $this->formatDate($this->attributes['created_at']);
     }
 
-    public function getUpdatedAtAttribute(){
+    public function getUpdatedAtAttribute() {
         return $this->attributes['updated_at'] ? $this->formatDate($this->attributes['updated_at']) : '-';
     }
 

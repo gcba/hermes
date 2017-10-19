@@ -80,6 +80,10 @@
     height: 67px;
 }
 
+.messages-master .dataTables_wrapper .dataTables_empty {
+    cursor: default;
+}
+
 .dataTables_wrapper .dataTables_info {
     font-size: 0.9rem;
 }
@@ -97,6 +101,13 @@
     margin-bottom: 0em;
     font-size: 0.9rem;
     cursor: pointer;
+}
+
+.messages-master .dataTables_wrapper table tbody tr td:first-child {
+    max-width: 1px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .messages-master .dataTables_wrapper table tbody tr td:nth-last-child(2) {
@@ -162,7 +173,7 @@
 .messages-detail .message {
     display: flex;
     align-items: stretch;
-    border-color: #dddddd;
+    border-color: #ddd !important;
     margin-bottom: 0.75rem;
     box-shadow: unset;
     width: calc(100% - 6rem);

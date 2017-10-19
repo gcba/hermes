@@ -132,8 +132,6 @@
                         var column = this;
                         var input = document.createElement("input");
 
-                        if (column.name) input.name = column.name.replace('.', '_');
-
                         $(input).appendTo($(column.footer()).empty())
                         .on('change', function () {
                             var val = $.fn.dataTable.util.escapeRegex($(this).val().trim());

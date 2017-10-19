@@ -9,6 +9,7 @@ use App\Jobs\SendMessage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Response;
 use TCG\Voyager\Facades\Voyager;
 use Yajra\Datatables\Datatables;
 use Validator;
@@ -28,19 +29,23 @@ class MessagesController extends DataTablesController
             $params = $request->query()['columns'];
 
             $model = Message::with(['rating', 'rating.app', 'rating.platform', 'rating.appuser'])
-                ->select('messages.*')
-                ->where('direction', '=', 'in');
+                ->select([
+                    'messages.id',
+                    'messages.message',
+                    'messages.direction',
+                    'messages.created_at',
+                    'messages.rating_id'
+                ])
+                ->where('direction', '=', 'in')
+                ->orderBy('created_at', 'desc')
+                ->get()
+                ->unique('rating_id')
+                ->sortByDesc('created_at');
 
             $datatables = Datatables::of($model)
-                ->removeColumn('status')
-                ->removeColumn('transport_id')
-                ->removeColumn('updated_at')
                 ->filter(function ($query) use($params) {
                     $query = $this->filterQuery($query, $params);
-                }, true)
-                ->editColumn('message', function($item){
-                    return $this->shortenString($item->message, 40);
-                });
+                }, true);
 
             return $datatables->make(true);
         }
