@@ -51,7 +51,7 @@ class SendMessage implements ShouldQueue
     {
         $result = Mailgun::raw($this->message->message, function ($message) {
             $catchAll = env('MAILGUN_CATCH_ALL', null);
-            $email = $catchAll === null ? $this->user->email : $catchAll;
+            $email = $catchAll !== null && \App::environment('local') ? $catchAll : $this->user->email;
 
             if ($this->replyTo !== null && isset($this->replyTo->transport_id)) {
                 $message->header('In-Reply-To', '<' . $this->replyTo->transport_id . '>');
