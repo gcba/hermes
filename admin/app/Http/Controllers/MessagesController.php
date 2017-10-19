@@ -65,25 +65,38 @@ class MessagesController extends DataTablesController
         $unprocessableEntity = 422;
         $internalServerError = 500;
 
-        $slug = $this->getSlug($request);
-        $dataType = Voyager::model('DataType')->where('slug', '=', $slug)->first();
+        $dataType = Voyager::model('DataType')->where('slug', '=', 'messages')->first();
         $validation = $this->validateBread($request->all(), $dataType->addRows);
 
         if ($validation->fails()) {
             return response()->json(['errors' => $validation->messages(), 'code' => $badRequest]);
         }
 
-        $text = $request->input('message');
-        $ratingID = $request->input('rating');
-        $rating = Rating::find($ratingID);
+        $ratingId = $request->input('rating');
+        $rating = Rating::find($ratingId);
 
         if ($rating === null) {
             return response()->json(['errors' => "Invalid rating.", 'code' => $unprocessableEntity]);
         }
 
+        $user = AppUser::find($rating->appuser_id);
+
+        if ($user === null) {
+            return response()->json(['errors' => "Invalid user.", 'code' => $unprocessableEntity]);
+        }
+
+        $replyTo = Message::select('id')
+        ->where([['rating_id', '=', $ratingId], ['direction', '=', 'in']])
+        ->orderBy('created_at', 'desc')
+        ->first();
+
+        if ($replyTo === null) {
+            return response()->json(['errors' => "Message not found.", 'code' => $internalServerError]);
+        }
+
         $message = new Message;
 
-        $message->message = $text;
+        $message->message = $request->input('message');
         $message->direction = 'out';
         $message->rating()->associate($rating);
 
@@ -91,16 +104,10 @@ class MessagesController extends DataTablesController
             return response()->json(['errors' => "Could not save new message.", 'code' => $internalServerError]);
         }
 
-        $subject = env('MAIL_SUBJECT', 'Gracias por tus comentarios');
-        $userId = $request->input('user');
-        $user = AppUser::find($userId);
-
-        if ($user === null) {
-            return response()->json(['errors' => "Invalid user.", 'code' => $unprocessableEntity]);
-        }
-
         if (isset($user->email)) {
-            SendMessage::dispatch($subject, $message, $user);
+            $subject = env('MAIL_SUBJECT', 'Gracias por tus comentarios');
+
+            SendMessage::dispatch($subject, $message, $replyTo, $user);
         }
         else {
             return response()->json(['errors' => "User has no email.", 'code' => $unprocessableEntity]);

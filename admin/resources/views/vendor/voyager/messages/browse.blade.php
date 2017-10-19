@@ -50,13 +50,11 @@
                         </div>
                         @if (Voyager::can('add_'.$dataType->name))
                             <hr>
-                            <form class="messages-detail-compose">
+                            <form id="messages-detail-compose">
                                 <fieldset>
                                     <textarea class="form-control custom-control" name="message" rows="3" minlength="5" required></textarea>
-                                    <input id="hidden-field-rating" name="rating" type="hidden" value="">
-                                    <input id="hidden-field-user" name="user" type="hidden" value="">
-                                    <button type="submit" class="btn btn-primary">Enviar</button>
                                 </fieldset>
+                                <button type="submit" class="btn btn-primary">Enviar</button>
                             </form>
                         @endif
                     </div>
@@ -109,6 +107,37 @@
             @if ($isModelTranslatable)
                 $('.side-body').multilingual();
             @endif
+
+            $('#messages-detail-compose').submit(function(e) {
+                e.preventDefault();
+
+                const selectedRow = $('#dataTable .row-selected').first();
+                const rowData = $('#dataTable').DataTable().row(selectedRow).data();
+                const textarea = $('#messages-detail-compose textarea');
+                const csrfToken = $('meta[name="csrf-token"]').attr('content');
+
+                fetch('/admin/messages', {
+                    method: 'post',
+                    credentials: 'include',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': csrfToken
+                    },
+                    body: JSON.stringify({
+                        message: textarea.val().trim(),
+                        rating: rowData.rating_id
+                    })
+                })
+                .then((response) => response.json())
+                .then((json) => {
+                    textarea.val('');
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+
+                return false;
+            });
 
             $('#dataTable').DataTable({
                 processing: true,

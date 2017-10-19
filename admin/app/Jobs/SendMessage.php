@@ -5,11 +5,13 @@ namespace App\Jobs;
 use App\AppUser;
 use App\Message;
 use App\Jobs\SetMessageTransportId;
+use App\Jobs\SetMessageStatus;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Bogardo\Mailgun\Facades\Mailgun;
 
 class SendMessage implements ShouldQueue
 {
@@ -17,6 +19,7 @@ class SendMessage implements ShouldQueue
 
     protected $subject;
     protected $message;
+    protected $replyTo;
     protected $user;
 
     /**
@@ -31,10 +34,11 @@ class SendMessage implements ShouldQueue
      *
      * @return void
      */
-    public function __construct(String $subject, Message $message, AppUser $user)
+    public function __construct(String $subject, Message $message, Message $replyTo, AppUser $user)
     {
         $this->subject = $subject;
         $this->message = $message;
+        $this->replyTo = $replyTo;
         $this->user = $user;
     }
 
@@ -46,6 +50,10 @@ class SendMessage implements ShouldQueue
     public function handle()
     {
         $result = Mailgun::raw($this->message->message, function ($message) {
+            if ($this->replyTo !== null && isset($this->replyTo->transport_id)) {
+                $message->header('In-Reply-To', '<' . $this->replyTo->transport_id . '>');
+            }
+
             $message->to($this->user->email, env('MAILGUN_SENDER', ''))->subject($this->subject);
 
             return;
@@ -55,9 +63,14 @@ class SendMessage implements ShouldQueue
             $id = filter_var(substr(trim($result->id), 1, -1), FILTER_SANITIZE_EMAIL);
 
             SetMessageTransportId::dispatch($this->message, $id);
+
+            if ($this->replyTo !== null) {
+                SetMessageStatus::dispatch($this->replyTo, 2);
+            }
         }
         else {
-            throw new Exception("Could not send email to Mailgun. Requeuing...");
+            error_log($result);
+            // throw new Exception("Could not send email to Mailgun. Requeuing...");
         }
 
         return;
