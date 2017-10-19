@@ -103,7 +103,7 @@
     margin-bottom: 0.5em;
 }
 
-.messages-master .panel-body, .messages-detail .panel-body {
+.messages-master .panel-body {
     padding: 20px 20px 10px;
 }
 
@@ -120,6 +120,14 @@
     background-color: transparent;
     border: unset;
     box-shadow: unset;
+}
+
+.messages-detail .panel-body {
+    padding: 0px 20px;
+}
+
+.messages-detail-header {
+    margin-bottom: 46px;
 }
 
 .messages-detail .messages-detail-list {

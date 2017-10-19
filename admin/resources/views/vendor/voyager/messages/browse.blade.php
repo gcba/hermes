@@ -191,6 +191,13 @@
              });
         }
 
+        const threadHeading = function(name) {
+            return $('<h3>', {
+                class: 'messages-detail-header',
+                text: 'Conversación con ' + name
+             });
+        }
+
         const buildMessage = function(content) {
             const message = messagePanel(content.direction);
             const heading = messageHeading(content.created_at, content.direction);
@@ -210,6 +217,13 @@
 
         const buildThread = function(messages) {
             const thread = $('.messages-detail-list').first().empty();
+
+            if (messages[0].rating && messages[0].rating.appuser) {
+                thread.append(threadHeading(messages[0].rating.appuser.name));
+            }
+            else {
+                thread.append(threadHeading('un usuario anónimo'));
+            }
 
             for (const message of messages) {
                thread.append(buildMessage(message));
