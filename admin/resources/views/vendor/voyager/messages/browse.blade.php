@@ -3,6 +3,7 @@
 @section('page_title', __('voyager.generic.viewing').' '.$dataType->display_name_plural)
 
 @section('page_header')
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <h1 class="page-title">
         <i class="{{ $dataType->icon }}"></i> {{ $dataType->display_name_plural }}
     </h1>
