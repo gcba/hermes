@@ -91,8 +91,7 @@ class MessagesController extends DataTablesController
             return response()->json(['errors' => "Could not save new message.", 'code' => $internalServerError]);
         }
 
-        $subject = $request->input('subject');
-        $text = $request->input('message');
+        $subject = env('MAIL_SUBJECT', 'Gracias por tus comentarios');
         $userId = $request->input('user');
         $user = AppUser::find($userId);
 
