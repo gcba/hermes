@@ -24,6 +24,7 @@ Route::group(['prefix' => 'admin'], function() {
     Route::get('appusers.api', 'DataTablesController@appusersAPI')->name('appusers.api');
 
     Route::get('messages/{message}', 'ApiController@message')->name('messages.read.api');
+    Route::post('messages', 'MessagesController@create')->name('messages.create.api');
     Route::get('ratings/{id}/messages', 'ApiController@ratingMessages')->name('ratings.messages.read.api');
 
     Route::post('messages/receive', 'MailgunController@receive')

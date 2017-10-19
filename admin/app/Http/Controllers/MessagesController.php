@@ -56,7 +56,7 @@ class MessagesController extends DataTablesController
     // From Voyager's VoyagerBreadController.php, customized
 
     // POST BRE(A)D
-    public function store(Request $request)
+    public function create(Request $request)
     {
         Voyager::canOrFail('add_messages');
 
