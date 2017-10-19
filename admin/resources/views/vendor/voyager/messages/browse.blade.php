@@ -136,13 +136,11 @@
                     sLengthMenu: '_MENU_'
                 },
                 initComplete: function () {
-                    // if (this.api().columns().length <= 1) return;
+                    if ($('.dataTables_empty').length !== 0) return;
 
                     this.api().columns().every(function () {
                         const column = this;
                         const input = document.createElement('input');
-
-                        console.log('!!!!!!!!');
 
                         $(input).appendTo($(column.footer()).empty())
                             .on('change', function () {
