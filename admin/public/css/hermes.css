@@ -7,6 +7,26 @@
     padding-right: 0px;
 }
 
+.dataTables_wrapper:nth-child(1) > div {
+    overflow-x: auto;
+}
+
+.dataTables_wrapper.form-inline:nth-child(1) > div {
+    overflow-y: hidden;
+}
+
+.dataTables_wrapper .dataTables_processing {
+    height: 67px;
+}
+
+.dataTables_wrapper .dataTables_info {
+    font-size: 0.9rem;
+}
+
+.dataTables_wrapper .dataTables_paginate {
+    font-size: 0.9rem;
+}
+
 .dataTables_wrapper .dataTables_filter {
     width: 100%;
 }
@@ -24,16 +44,12 @@
     background-color: #eee;
 }
 
-.dataTables_wrapper:nth-child(1) > div {
-    overflow-x: auto;
-}
-
-.dataTables_wrapper.form-inline:nth-child(1) > div {
-    overflow-y: hidden;
-}
-
 .dataTables_wrapper .row:last-of-type {
     margin-bottom: 0px;
+}
+
+.dataTables_wrapper .row:last-child [class*=col-] {
+    margin-bottom: 5px;
 }
 
 .dataTables_wrapper table {
@@ -42,10 +58,6 @@
 
 .dataTables_wrapper table .row-selected {
     background-color: #FFFFE0;
-}
-
-.dataTables_wrapper .row:last-child [class*=col-] {
-    margin-bottom: 5px;
 }
 
 .dataTables_wrapper table tbody tr {
@@ -65,36 +77,21 @@
     display: table-footer-group;
 }
 
-.dataTables_wrapper table tfoot th {
+.dataTables_wrapper table tfoot .row-search th {
     border-bottom: 1px dashed #eee;
     padding: 15px 5px 10px;
     font-size: 0.9rem;
+}
+
+.dataTables_wrapper table tfoot .row-search th:hover {
+    background-color: #f5f5f5;
+    transition: background .2s ease-out, border-color 0s ease-out, color .2s ease-out;
 }
 
 .dataTables_wrapper table tfoot input {
     border: none;
     width: 100%;
     background-color: transparent;
-}
-
-.dataTables_wrapper .dataTables_processing {
-    height: 67px;
-}
-
-.messages-master .panel-body {
-    padding: 20px 20px 10px;
-}
-
-.messages-master .dataTables_wrapper .dataTables_empty {
-    cursor: default;
-}
-
-.dataTables_wrapper .dataTables_info {
-    font-size: 0.9rem;
-}
-
-.dataTables_wrapper .dataTables_paginate {
-    font-size: 0.9rem;
 }
 
 .dataTables_wrapper .table-ratings tbody td {
@@ -106,6 +103,14 @@
 
 .dataTables_wrapper .table-ratings tbody td:nth-last-child(2) {
     max-width: unset;
+}
+
+.messages-master .panel-body {
+    padding: 20px 20px 10px;
+}
+
+.messages-master .dataTables_wrapper .dataTables_empty {
+    cursor: default;
 }
 
 .messages-master .dataTables_wrapper table thead {
@@ -122,6 +127,10 @@
 
 .messages-master .dataTables_wrapper .row-unread {
     font-weight: bold;
+}
+
+.messages-master .dataTables_wrapper .dataTables_paginate {
+    font-size: 0.8rem;
 }
 
 .messages-master .dataTables_wrapper table tbody tr {
@@ -149,15 +158,6 @@
 .messages-master .dataTables_wrapper table tbody tr td:last-child {
     width: 100px;
     text-align: right;
-}
-
-.messages-master .dataTables_wrapper table tfoot .row-search th:hover {
-    background-color: #f5f5f5;
-    transition: background .2s ease-out, border-color 0s ease-out, color .2s ease-out;
-}
-
-.messages-master .dataTables_wrapper .dataTables_paginate {
-    font-size: 0.8rem;
 }
 
 .messages-detail {
