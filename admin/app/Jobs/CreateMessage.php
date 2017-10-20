@@ -31,7 +31,7 @@ class CreateMessage implements ShouldQueue
      *
      * @return void
      */
-    public function __construct(String $message, String $direction, Int $status, $transportId, Int $ratingId)
+    public function __construct(String $message, String $direction, Int $status, String $transportId, Int $ratingId)
     {
         $this->message = $message;
         $this->direction = $direction;
