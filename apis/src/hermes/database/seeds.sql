@@ -15,14 +15,14 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
--- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner:
 --
 
 CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 
 
 --
--- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner:
 --
 
 COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
@@ -105,7 +105,7 @@ CREATE TABLE apps (
     key character(32) NOT NULL,
     created_at timestamp(0) without time zone,
     updated_at timestamp(0) without time zone,
-    modified_by integer,
+    updated_by integer,
     deleted_at timestamp(0) without time zone
 );
 
@@ -1053,7 +1053,7 @@ CREATE TABLE users (
     remember_token character varying(100),
     created_at timestamp(0) without time zone,
     updated_at timestamp(0) without time zone,
-    modified_by integer,
+    updated_by integer,
     avatar character varying(255),
     role_id integer
 );
@@ -1346,7 +1346,7 @@ COPY app_user_platform (app_user_id, platform_id) FROM stdin;
 -- Data for Name: apps; Type: TABLE DATA; Schema: public; Owner: hermes
 --
 
-COPY apps (id, name, type, key, created_at, updated_at, modified_by, deleted_at) FROM stdin;
+COPY apps (id, name, type, key, created_at, updated_at, updated_by, deleted_at) FROM stdin;
 1	Denuncia Vial	M	e10adc3949ba59abbe56e057f20f883e	2017-10-11 20:25:59	\N	\N	\N
 2	Mi BA	M	c33367701511b4f6020ec61ded352059	2017-10-11 20:25:59	\N	\N	\N
 3	Más Simple	M	0d06fd8cb26eb57f1a690f493663cc55	2017-10-11 20:25:59	\N	\N	\N
@@ -1418,7 +1418,7 @@ COPY data_rows (id, data_type_id, field, type, display_name, required, browse, r
 14	2	users	select_multiple	Personal	t	f	t	t	t	t	{"relationship":{"key":"id","label":"name","page_slug":"admin/users"}}	5
 15	2	key	text	Key	f	f	t	f	f	f		6
 16	2	updated_at	timestamp	Última Modificación	f	f	t	f	f	f		7
-17	2	modified_by	text	Modificado Por	f	f	t	f	f	f		8
+17	2	updated_by	text	Modificado Por	f	f	t	f	f	f		8
 18	2	created_at	timestamp	Creación	f	f	t	f	f	f		9
 19	2	deleted_at	timestamp	Borrado	f	f	f	f	f	f		10
 20	3	id	number	ID	t	f	f	f	f	f		1
@@ -1496,7 +1496,7 @@ COPY data_rows (id, data_type_id, field, type, display_name, required, browse, r
 92	1	apps	select_multiple	Aplicaciones	f	f	t	t	t	t	{"relationship":{"key":"id","label":"name","page_slug":"admin/apps"}}	7
 93	1	remember_token	text	Recordar Token	f	f	f	f	f	f		8
 94	1	updated_at	timestamp	Última Modificación	f	f	f	f	f	f		9
-95	1	modified_by	text	Modificado Por	f	f	t	f	f	f		10
+95	1	updated_by	text	Modificado Por	f	f	t	f	f	f		10
 96	1	created_at	timestamp	Creación	f	f	t	f	f	f		11
 \.
 
@@ -2014,7 +2014,7 @@ COPY translations (id, table_name, column_name, foreign_key, locale, value, crea
 -- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: hermes
 --
 
-COPY users (id, name, email, remember_token, created_at, updated_at, modified_by, avatar, role_id) FROM stdin;
+COPY users (id, name, email, remember_token, created_at, updated_at, updated_by, avatar, role_id) FROM stdin;
 1	Admin	admin@admin.com	0prXpLH313SzHwgiNHAaGjMwBELfMb7GORtwDrbpjvxkiowrMbkBzGQfB7PE	2017-10-11 20:25:59	\N	\N	users/default.png	1
 2	Juan Fernández	juan@fernandez.com	zUivg2tOekAChn5CQY1Ltv8hDAWGWHkkwpVyKBnWBdc25y6CbtEMN3OTitJP	2017-10-11 20:25:59	\N	\N	users/default.png	3
 3	Martina Giménez	martina@gimenez.com	HrpBsfe2AYjD388l1QYLE6BRdNheQRyfV85HeSo28Qqb602i5YgobH1o2dqU	2017-10-11 20:25:59	\N	\N	users/default.png	3
@@ -2904,11 +2904,11 @@ ALTER TABLE ONLY app_user
 
 
 --
--- Name: apps apps_modified_by_foreign; Type: FK CONSTRAINT; Schema: public; Owner: hermes
+-- Name: apps apps_updated_by_foreign; Type: FK CONSTRAINT; Schema: public; Owner: hermes
 --
 
 ALTER TABLE ONLY apps
-    ADD CONSTRAINT apps_modified_by_foreign FOREIGN KEY (modified_by) REFERENCES users(id) ON DELETE SET NULL;
+    ADD CONSTRAINT apps_updated_by_foreign FOREIGN KEY (updated_by) REFERENCES users(id) ON DELETE SET NULL;
 
 
 --
@@ -3024,11 +3024,11 @@ ALTER TABLE ONLY ratings
 
 
 --
--- Name: users users_modified_by_foreign; Type: FK CONSTRAINT; Schema: public; Owner: hermes
+-- Name: users users_updated_by_foreign; Type: FK CONSTRAINT; Schema: public; Owner: hermes
 --
 
 ALTER TABLE ONLY users
-    ADD CONSTRAINT users_modified_by_foreign FOREIGN KEY (modified_by) REFERENCES users(id) ON DELETE SET NULL;
+    ADD CONSTRAINT users_updated_by_foreign FOREIGN KEY (updated_by) REFERENCES users(id) ON DELETE SET NULL;
 
 
 --

@@ -21,8 +21,8 @@ class CreateAppsTable extends Migration
             $table->char('key', 32)->unique();
             $table->index('key');
             $table->timestamps();
-            $table->integer('modified_by')->unsigned()->nullable();
-            $table->foreign('modified_by')->references('id')->on('users')->onDelete('set null');
+            $table->integer('updated_by')->unsigned()->nullable();
+            $table->foreign('updated_by')->references('id')->on('users')->onDelete('set null');
             $table->softDeletes();
         });
     }

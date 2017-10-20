@@ -159,7 +159,7 @@ class UserDataRowsTableSeeder extends Seeder
             ])->save();
         }
 
-        $dataRow = $this->dataRow($userDataType, 'modified_by');
+        $dataRow = $this->dataRow($userDataType, 'updated_by');
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'text',

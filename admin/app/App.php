@@ -15,7 +15,7 @@ class App extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'type', 'key', 'modified_by'
+        'name', 'type', 'key', 'updated_by'
     ];
 
     /**
@@ -65,30 +65,37 @@ class App extends Model
     /**
      * Get the users that belong to the app.
      */
-     public function users() {
+    public function users() {
         return $this->belongsToMany('App\User');
-     }
+    }
 
     /**
      * Get the app users of the app.
      */
-     public function appusers() {
+    public function appusers() {
         return $this->belongsToMany('App\AppUser');
-     }
+    }
 
     /**
      * Get the platforms the app is in.
      */
-     public function platforms() {
+    public function platforms() {
         return $this->belongsToMany('App\Platform');
-     }
+    }
 
     /**
-     * Get the user that last modified the app.
+     * Get the user that last updated the app.
      */
-     public function modifiedBy() {
-        return $this->belongsTo('App\User', 'modified_by', 'id');
-     }
+    public function updatedBy() {
+        return $this->belongsTo('App\User', 'updated_by', 'id');
+    }
+
+    /**
+     * For Voyager's CRUD.
+     */
+    public function updatedById() {
+        return $this->belongsTo('App\User', 'updated_by', 'id');
+    }
 
     public function setNameAttribute($value) {
         $this->attributes['name'] = ucfirst(filter_var(trim($value), FILTER_SANITIZE_SPECIAL_CHARS));

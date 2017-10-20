@@ -63,37 +63,37 @@ class Device extends Model
      */
      public function brand() {
         return $this->belongsTo('App\Brand', 'brand_id', 'id');
-     }
-
-     /**
-     * Get the platform the device belongs to.
-     */
-     public function platform() {
-        return $this->belongsTo('App\Platform', 'platform_id', 'id');
-     }
+    }
 
     /**
      * For Voyager's CRUD.
      */
-     public function brandId() {
+    public function brandId() {
         return $this->belongsTo('App\Brand', 'brand_id', 'id');
+    }
+
+    /**
+     * Get the platform the device belongs to.
+     */
+    public function platform() {
+        return $this->belongsTo('App\Platform', 'platform_id', 'id');
     }
 
      /**
      * For Voyager's CRUD.
      */
-     public function platformId() {
+    public function platformId() {
         return $this->belongsTo('App\Platform', 'platform_id', 'id');
-     }
+    }
 
      /**
      * Get the app users that belong to the device.
      */
-     public function appusers() {
+    public function appusers() {
         return $this->belongsToMany('App\AppUser');
-     }
+    }
 
-     public function getCreatedAtAttribute() {
+    public function getCreatedAtAttribute() {
         return $this->utils->formatDate($this->attributes['created_at']);
     }
 

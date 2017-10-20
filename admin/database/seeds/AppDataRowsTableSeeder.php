@@ -125,7 +125,7 @@ class AppDataRowsTableSeeder extends Seeder
             ])->save();
         }
 
-        $dataRow = $this->dataRow($appDataType, 'modified_by');
+        $dataRow = $this->dataRow($appDataType, 'updated_by');
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'text',

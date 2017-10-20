@@ -12,7 +12,7 @@ class User extends VoyagerUser
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'modified_by'
+        'name', 'email', 'password', 'updated_by'
     ];
 
     /**
@@ -51,18 +51,32 @@ class User extends VoyagerUser
     }
 
      /**
-     * Get the apps the user belongs to.
-     */
+      * Get the apps the user belongs to.
+      */
      public function apps() {
         return $this->belongsToMany('App\App');
      }
 
      /**
-     * Get the user that last modified the app.
+     * Get the messages that were created by this user.
      */
-     public function modifiedBy() {
-        return $this->belongsTo('App\User', 'modified_by', 'id');
-     }
+    public function messages() {
+        return $this->hasMany('App\Message', 'created_by', 'id');
+    }
+
+    /**
+     * Get the user that last modified this user.
+     */
+    public function updatedBy() {
+        return $this->belongsTo('App\User', 'updated_by', 'id');
+    }
+
+    /**
+     * For Voyager's CRUD.
+     */
+    public function updatedById() {
+        return $this->belongsTo('App\User', 'updated_by', 'id');
+    }
 
     public function getCreatedAtAttribute() {
         return $this->utils->formatDate($this->attributes['created_at']);
