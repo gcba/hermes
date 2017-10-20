@@ -2,7 +2,6 @@
 
 namespace App;
 
-use DateTime;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -70,16 +69,14 @@ class AppUser extends Model
      }
 
      public function getCreatedAtAttribute(){
-        return $this->formatDate($this->attributes['created_at']);
+        $utils = resolve('App\Services\UtilsService');
+
+        return $utils->formatDate($this->attributes['created_at']);
     }
 
     public function getUpdatedAtAttribute(){
-        return $this->attributes['updated_at'] ? $this->formatDate($this->attributes['updated_at']) : '-';
-    }
+        $utils = resolve('App\Services\UtilsService');
 
-    private function formatDate($dateString) {
-        $date = new DateTime($dateString);
-
-        return $date->format('d/m/Y H:i:s');
+        return $this->attributes['updated_at'] ? $utils->formatDate($this->attributes['updated_at']) : '-';
     }
 }

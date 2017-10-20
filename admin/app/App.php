@@ -2,7 +2,6 @@
 
 namespace App;
 
-use DateTime;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -83,9 +82,11 @@ class App extends Model
     }
 
     public function setTypeAttribute($value) {
-        switch ($value) {
-            case 'Móvil': $this->attributes['type'] = 'M';
-            case 'Web': $this->attributes['type'] = 'W';
+        $type = strtolower($value);
+
+        switch ($type) {
+            case 'móvil': $this->attributes['type'] = 'M';
+            case 'web': $this->attributes['type'] = 'W';
         }
 
         if (strlen($value) == 1) {
@@ -103,16 +104,14 @@ class App extends Model
     }
 
     public function getCreatedAtAttribute(){
-        return $this->formatDate($this->attributes['created_at']);
+        $utils = resolve('App\Services\UtilsService');
+
+        return $utils->formatDate($this->attributes['created_at']);
     }
 
     public function getUpdatedAtAttribute(){
-        return $this->attributes['updated_at'] ? $this->formatDate($this->attributes['updated_at']) : '-';
-    }
+        $utils = resolve('App\Services\UtilsService');
 
-    private function formatDate($dateString) {
-        $date = new DateTime($dateString);
-
-        return $date->format('d/m/Y H:i:s');
+        return $this->attributes['updated_at'] ? $utils->formatDate($this->attributes['updated_at']) : '-';
     }
 }
