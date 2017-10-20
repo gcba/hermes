@@ -97,6 +97,8 @@
                 const textarea = $('#messages-form textarea');
                 const csrfToken = $('meta[name="csrf-token"]').attr('content');
 
+                disableForm();
+
                 fetch('/admin/messages', {
                     method: 'post',
                     credentials: 'include',
@@ -116,9 +118,12 @@
                         appendMessage(json.message);
                     }
                     else console.error(json);
+
+                    enableForm();
                 })
                 .catch((error) => {
                     console.error(error);
+                    enableForm();
                 });
 
                 return false;
@@ -156,8 +161,6 @@
                 initComplete: function () {
                     if ($('.dataTables_empty').length !== 0) return;
 
-
-
                     this.api().columns().every(function () {
                         const column = this;
                         const input = document.createElement('input');
@@ -174,9 +177,6 @@
 
                     selectRow($('#dataTable tbody tr:nth-child(1)'));
                 }
-            })
-            .on('stateLoaded.dt', function (e, settings, data) {
-                console.log("hola");
             })
             .on('preDraw', function (e, settings) {
                 $(this).DataTable().rows().every(function () {
@@ -276,16 +276,17 @@
 
         const selectRow = function(row) {
             const rowData = $('#dataTable').DataTable().row(row).data();
+            const isAnonimous = rowData.rating.appuser_id === null;
             const $row = $(row);
-            const $form = $('.messages-detail-compose');
-            const $messageList = $('.messages-detail-list');
 
             $('#dataTable .row-selected').removeClass('row-selected');
 
             if (!$row.hasClass('row-search')) {
+                if (isAnonimous) disableForm();
+
+                hideMessages();
+                hideForm();
                 $row.addClass('row-selected');
-                $form.addClass('hidden');
-                $messageList.addClass('hidden');
 
                 if (rowData) {
                     const ratingID = rowData.rating_id;
@@ -298,9 +299,13 @@
                         return response.json();
                     })
                     .then(function(response) {
+                        if (!isAnonimous) {
+                            enableForm();
+                            showForm();
+                        }
+
+                        showMessages();
                         $row.removeClass('row-unread');
-                        $form.removeClass('hidden');
-                        $messageList.removeClass('hidden');
                         buildThread(response, rowData);
                     })
                 }
@@ -311,6 +316,30 @@
             const thread = $('.messages-detail-list').first();
 
             thread.append(buildMessage(message));
+        }
+
+        const showMessages = function() {
+            $('.messages-detail-list').removeClass('hidden');
+        }
+
+        const hideMessages = function() {
+            $('.messages-detail-list').addClass('hidden');
+        }
+
+        const showForm = function() {
+            $('.messages-detail-compose').removeClass('hidden');
+        }
+
+        const hideForm = function() {
+            $('.messages-detail-compose').addClass('hidden');
+        }
+
+        const enableForm = function() {
+            $("#messages-form :input").prop('disabled', false);
+        }
+
+        const disableForm = function() {
+            $("#messages-form :input").prop('disabled', true);
         }
     </script>
 @stop
