@@ -52,7 +52,7 @@
                             <hr>
                             <form id="messages-detail-compose">
                                 <fieldset>
-                                    <textarea class="form-control custom-control" name="message" rows="3" minlength="5" required></textarea>
+                                    <textarea class="form-control custom-control" name="message" rows="3" minlength="5" maxlength="1500" required></textarea>
                                 </fieldset>
                                 <button type="submit" class="btn btn-primary">Enviar</button>
                             </form>
