@@ -278,10 +278,6 @@
 
             $('#dataTable .row-selected').removeClass('row-selected');
 
-            if ($row.hasClass('row-unread')) {
-                $row.removeClass('row-unread');
-            }
-
             if (!$row.hasClass('row-search')) {
                 $row.addClass('row-selected');
 
@@ -296,6 +292,10 @@
                         return response.json();
                     })
                     .then(function(response) {
+                        if ($row.hasClass('row-unread')) {
+                            $row.removeClass('row-unread');
+                        }
+
                         buildThread(response, rowData);
                     })
                 }
