@@ -21,7 +21,7 @@ func GetConfig(variable string, fallback string) string {
 func GetPort(variable string, defaultPort int) int {
 	port, portErr := strconv.Atoi(os.Getenv(variable))
 
-	if portErr != nil && port > 0 {
+	if portErr != nil || port == 0 {
 		return defaultPort
 	}
 
