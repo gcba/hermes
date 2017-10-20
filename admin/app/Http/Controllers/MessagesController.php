@@ -65,14 +65,17 @@ class MessagesController extends DataTablesController
         $unprocessableEntity = 422;
         $internalServerError = 500;
 
-        $dataType = Voyager::model('DataType')->where('slug', '=', 'messages')->first();
-        $validation = $this->validateBread($request->all(), $dataType->addRows);
+        $ratingId = $request->input('rating');
+        $messageText = $request->input('message');
+
+        $inputData = ['ratingId' => $ratingId, 'message' => $messageText];
+        $rules = ['ratingId' => 'required|integer|min:1', 'message' => 'required|string|max:1500'];
+        $validation = Validator::make($inputData, $rules);
 
         if ($validation->fails()) {
             return response()->json(['errors' => $validation->messages(), 'status' => $badRequest]);
         }
 
-        $ratingId = $request->input('rating');
         $rating = Rating::find($ratingId);
 
         if ($rating === null) {
@@ -95,7 +98,7 @@ class MessagesController extends DataTablesController
 
         $message = new Message;
 
-        $message->message = $request->input('message');
+        $message->message = $messageText;
         $message->direction = 'out';
         $message->status = 0;
         $message->rating()->associate($rating);
