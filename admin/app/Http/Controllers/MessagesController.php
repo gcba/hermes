@@ -99,6 +99,7 @@ class MessagesController extends DataTablesController
         $message->direction = 'out';
         $message->status = 0;
         $message->rating()->associate($rating);
+        $message->createdBy()->associate(Auth::user());
 
         if (!$message->save()) {
             return response()->json(['errors' => 'Could not save new message.', 'status' => $internalServerError]);
