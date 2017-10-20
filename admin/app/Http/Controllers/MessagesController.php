@@ -86,9 +86,9 @@ class MessagesController extends DataTablesController
         }
 
         $replyTo = Message::select('id')
-        ->where([['rating_id', '=', $ratingId], ['direction', '=', 'in']])
-        ->orderBy('created_at', 'desc')
-        ->first();
+            ->where([['rating_id', '=', $ratingId], ['direction', '=', 'in']])
+            ->orderBy('created_at', 'desc')
+            ->first();
 
         if ($replyTo === null) {
             return response()->json(['errors' => "Message not found.", 'status' => $internalServerError]);
