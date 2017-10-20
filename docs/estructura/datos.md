@@ -220,6 +220,7 @@ Los mensajes de las conversaciones con los usuarios de las apps que enviaron cal
 #### Relaciones
 
 - **One-to-many** con Rating, a través de `rating_id`
+- **One-to-many** con User, a través de `created_by`
 
 |Campos          |Tipo                  |Default| FK?   | Null? |Unique?|Index? |
 |----------------|----------------------|-------|:-----:|:-----:|:-----:|:-----:|
@@ -231,6 +232,7 @@ Los mensajes de las conversaciones con los usuarios de las apps que enviaron cal
 |rating_id       |int                   |       |X      |       |       |X      |
 |created_at      |timestamp             |       |       |       |       |       |
 |updated_at      |timestamp             |       |       |X      |       |       |
+|created_by      |int                   |X      |X      |       |       |       |
 
 ### Range
 
