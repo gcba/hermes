@@ -76,13 +76,13 @@ class MessagesController extends DataTablesController
         $rating = Rating::find($ratingId);
 
         if ($rating === null) {
-            return response()->json(['errors' => "Invalid rating.", 'status' => $unprocessableEntity]);
+            return response()->json(['errors' => 'Invalid rating.', 'status' => $unprocessableEntity]);
         }
 
         $user = AppUser::find($rating->appuser_id);
 
         if ($user === null) {
-            return response()->json(['errors' => "Invalid user.", 'status' => $unprocessableEntity]);
+            return response()->json(['errors' => 'Invalid user.', 'status' => $unprocessableEntity]);
         }
 
         $replyTo = Message::select('id')
@@ -91,7 +91,7 @@ class MessagesController extends DataTablesController
             ->first();
 
         if ($replyTo === null) {
-            return response()->json(['errors' => "Message not found.", 'status' => $internalServerError]);
+            return response()->json(['errors' => 'Message not found.', 'status' => $internalServerError]);
         }
 
         $message = new Message;
@@ -101,7 +101,7 @@ class MessagesController extends DataTablesController
         $message->rating()->associate($rating);
 
         if (!$message->save()) {
-            return response()->json(['errors' => "Could not save new message.", 'status' => $internalServerError]);
+            return response()->json(['errors' => 'Could not save new message.', 'status' => $internalServerError]);
         }
 
         if (isset($user->email)) {
@@ -110,7 +110,7 @@ class MessagesController extends DataTablesController
             SendMessage::dispatch($subject, $message, $replyTo, $user);
         }
         else {
-            return response()->json(['errors' => "User has no email.", 'status' => $unprocessableEntity]);
+            return response()->json(['errors' => 'User has no email.', 'status' => $unprocessableEntity]);
         }
 
         return response()->json(['status' => $created, 'message' => $message]);
