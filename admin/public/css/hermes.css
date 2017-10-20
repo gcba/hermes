@@ -92,6 +92,17 @@
     font-size: 0.9rem;
 }
 
+.dataTables_wrapper .table-ratings tbody td {
+    max-width: 100px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.dataTables_wrapper .table-ratings tbody td:nth-last-child(2) {
+    max-width: unset;
+}
+
 .messages-master .dataTables_wrapper table thead {
     display: none;
 }
