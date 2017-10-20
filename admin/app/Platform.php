@@ -25,6 +25,19 @@ class Platform extends Model
      */
     protected $dates = ['deleted_at'];
 
+    protected $utils;
+
+    /**
+     * Create a new controller instance.
+     *
+     * @param  UtilsService $utils
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->utils = resolve('App\Services\UtilsService');
+    }
+
     /**
      * Boot function for using with User Events
      *
@@ -74,15 +87,11 @@ class Platform extends Model
         $this->attributes['name'] = filter_var(trim($value), FILTER_SANITIZE_SPECIAL_CHARS);
     }
 
-    public function getCreatedAtAttribute(){
-        $utils = resolve('App\Services\UtilsService');
-
-        return $utils->formatDate($this->attributes['created_at']);
+    public function getCreatedAtAttribute() {
+        return $this->utils->formatDate($this->attributes['created_at']);
     }
 
-    public function getUpdatedAtAttribute(){
-        $utils = resolve('App\Services\UtilsService');
-
-        return $this->attributes['updated_at'] ? $utils->formatDate($this->attributes['updated_at']) : '-';
+    public function getUpdatedAtAttribute() {
+        return $this->attributes['updated_at'] ? $this->utils->formatDate($this->attributes['updated_at']) : '-';
     }
 }
