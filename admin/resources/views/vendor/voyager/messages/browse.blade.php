@@ -1,6 +1,6 @@
 @extends('voyager::master')
 
-@section('page_title', __('voyager.generic.viewing').' '.$dataType->display_name_plural)
+@section('page_title', __('voyager.generic.viewing') . ' ' . $dataType->display_name_plural)
 
 @section('page_header')
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -48,14 +48,16 @@
                     <div class="panel-body">
                         <div class="messages-detail-list">
                         </div>
-                        @if (Voyager::can('add_'.$dataType->name))
-                            <hr>
-                            <form id="messages-detail-compose">
-                                <fieldset>
-                                    <textarea class="form-control custom-control" name="message" rows="3" minlength="5" maxlength="1500" required></textarea>
-                                </fieldset>
-                                <button type="submit" class="btn btn-primary">Enviar</button>
-                            </form>
+                        @if (Voyager::can('add_' . $dataType->name))
+                            <div class="messages-detail-compose hidden">
+                                <hr>
+                                <form id="messages-form">
+                                    <fieldset>
+                                        <textarea class="form-control custom-control" name="message" rows="3" minlength="5" maxlength="1500" required></textarea>
+                                    </fieldset>
+                                    <button type="submit" class="btn btn-primary">Enviar</button>
+                                </form>
+                            </div>
                         @endif
                     </div>
                 </div>
@@ -87,12 +89,12 @@
                 $('.side-body').multilingual();
             @endif
 
-            $('#messages-detail-compose').submit(function(e) {
+            $('#messages-form').submit(function(e) {
                 e.preventDefault();
 
                 const selectedRow = $('#dataTable .row-selected').first();
                 const rowData = $('#dataTable').DataTable().row(selectedRow).data();
-                const textarea = $('#messages-detail-compose textarea');
+                const textarea = $('#messages-form textarea');
                 const csrfToken = $('meta[name="csrf-token"]').attr('content');
 
                 fetch('/admin/messages', {
@@ -275,11 +277,15 @@
         const selectRow = function(row) {
             const rowData = $('#dataTable').DataTable().row(row).data();
             const $row = $(row);
+            const $form = $('.messages-detail-compose');
+            const $messageList = $('.messages-detail-list');
 
             $('#dataTable .row-selected').removeClass('row-selected');
 
             if (!$row.hasClass('row-search')) {
                 $row.addClass('row-selected');
+                $form.addClass('hidden');
+                $messageList.addClass('hidden');
 
                 if (rowData) {
                     const ratingID = rowData.rating_id;
@@ -292,10 +298,9 @@
                         return response.json();
                     })
                     .then(function(response) {
-                        if ($row.hasClass('row-unread')) {
-                            $row.removeClass('row-unread');
-                        }
-
+                        $row.removeClass('row-unread');
+                        $form.removeClass('hidden');
+                        $messageList.removeClass('hidden');
                         buildThread(response, rowData);
                     })
                 }

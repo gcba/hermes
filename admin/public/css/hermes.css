@@ -177,15 +177,15 @@
     height: 100%;
 }
 
-.messages-detail #messages-detail-compose {
+.messages-detail #messages-form {
     margin-top: 2rem;
 }
 
-.messages-detail #messages-detail-compose textarea {
+.messages-detail #messages-form textarea {
     border-radius: 4px;
 }
 
-.messages-detail #messages-detail-compose .btn {
+.messages-detail #messages-form .btn {
     float: right;
     width: 100px;
     margin-top: 0.75rem;
