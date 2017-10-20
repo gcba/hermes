@@ -314,8 +314,9 @@
 
         const appendMessage = function(message) {
             const thread = $('.messages-detail-list').first();
+            const newMessage = buildMessage(message);
 
-            thread.append(buildMessage(message));
+            newMessage.hide().appendTo(thread).fadeIn('slow');
         }
 
         const showMessages = function() {
