@@ -102,7 +102,5 @@ class MailgunMessages extends Command
         else {
             $this->error('Error sending email: ' . $result->message);
         }
-
-        return;
     }
 }

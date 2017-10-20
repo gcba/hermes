@@ -85,9 +85,8 @@ class MessagesController extends DataTablesController
             return response()->json(['errors' => 'Invalid user.', 'status' => $unprocessableEntity]);
         }
 
-        $replyTo = Message::select('id')
-            ->where([['rating_id', '=', $ratingId], ['direction', '=', 'in']])
-            ->orderBy('created_at', 'desc')
+        $replyTo = Message::where([['rating_id', '=', $rating->id], ['direction', '=', 'in']])
+            ->latest()
             ->first();
 
         if ($replyTo === null) {
@@ -98,6 +97,7 @@ class MessagesController extends DataTablesController
 
         $message->message = $request->input('message');
         $message->direction = 'out';
+        $message->status = 0;
         $message->rating()->associate($rating);
 
         if (!$message->save()) {
