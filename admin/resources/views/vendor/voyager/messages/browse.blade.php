@@ -346,11 +346,11 @@
         }
 
         const enableForm = function() {
-            $("#messages-form :input").prop('disabled', false);
+            $('#messages-form :input, #messages-form button').prop('disabled', false);
         }
 
         const disableForm = function() {
-            $("#messages-form :input").prop('disabled', true);
+            $('#messages-form :input, #messages-form button').prop('disabled', true);
         }
     </script>
 @stop
