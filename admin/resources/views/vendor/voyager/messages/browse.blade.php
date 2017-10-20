@@ -279,13 +279,15 @@
             const isAnonimous = rowData.rating.appuser_id === null;
             const $row = $(row);
 
-            $('#dataTable .row-selected').removeClass('row-selected');
-
             if (!$row.hasClass('row-search')) {
                 if (isAnonimous) disableForm();
 
-                hideMessages();
-                hideForm();
+                if (!$row.hasClass('row-selected')) {
+                    hideMessages();
+                    hideForm();
+                }
+
+                $('#dataTable .row-selected').removeClass('row-selected');
                 $row.addClass('row-selected');
 
                 if (rowData) {
