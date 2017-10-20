@@ -228,7 +228,8 @@
 
         const threadHeading = function(name, row) {
             const container = $('<div>', { class: 'messages-detail-header' });
-            const user = $('<h3>', { text: name + ' ' });
+            const user = $('<h3>', { text: name });
+            const rating = $('<span>', { text: row.rating.rating, class: 'label label-default' });
 
             const contextualInfo = $('<small>', {
                 text: row.rating.app_version ?
@@ -236,6 +237,7 @@
                 `${row.rating.app.name}, ${row.rating.platform.name}`
             });
 
+            user.prepend(rating);
             user.append(contextualInfo);
             container.append(user);
 
@@ -306,8 +308,8 @@
                             showForm();
                         }
 
-                        showMessages();
                         $row.removeClass('row-unread');
+                        showMessages();
                         buildThread(response, rowData);
                     })
                 }

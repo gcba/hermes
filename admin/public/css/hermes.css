@@ -138,6 +138,10 @@
     margin-bottom: 0.5em;
 }
 
+.messages-master .dataTables_wrapper .row>[class*=col-]:last-child {
+    margin-bottom: 4px;
+}
+
 .messages-master .dataTables_wrapper .row-unread {
     font-weight: bold;
 }
@@ -163,6 +167,7 @@
 
 .messages-detail .panel-body {
     padding: 0px 20px;
+    overflow: visible;
 }
 
 .messages-detail .messages-detail-header {
@@ -170,7 +175,13 @@
 }
 
 .messages-detail .messages-detail-header small {
-    margin-left: 0.5rem;
+    margin-left: 0.7rem;
+}
+
+.messages-detail .messages-detail-header .label {
+    margin-right: 0.7rem;
+    position: relative;
+    top: -0.2rem;
 }
 
 .messages-detail .messages-detail-list {
