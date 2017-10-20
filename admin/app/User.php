@@ -58,11 +58,25 @@ class User extends VoyagerUser
      }
 
      /**
-     * Get the user that last modified the app.
+     * Get the messages that were created by this user.
      */
-     public function modifiedBy() {
+    public function messages() {
+        return $this->hasMany('App\Message', 'created_by', 'id');
+    }
+
+     /**
+     * Get the user that last modified this user.
+     */
+    public function modifiedBy() {
         return $this->belongsTo('App\User', 'modified_by', 'id');
-     }
+    }
+
+    /**
+     * For Voyager's CRUD.
+     */
+    public function modifiedById() {
+        return $this->belongsTo('App\User', 'modified_by', 'id');
+    }
 
     public function getCreatedAtAttribute() {
         return $this->utils->formatDate($this->attributes['created_at']);

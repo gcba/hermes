@@ -48,12 +48,27 @@ class Message extends Model
         return $this->belongsTo('App\Rating', 'rating_id', 'id');
     }
 
-     /**
+    /**
      * For Voyager's CRUD.
      */
     public function ratingId() {
         return $this->belongsTo('App\Rating', 'rating_id', 'id');
     }
+
+    /**
+     * Get the user that created the message.
+     */
+    public function createdBy() {
+        return $this->belongsTo('App\User', 'created_by', 'id');
+    }
+
+    /**
+     * For Voyager's CRUD.
+     */
+    public function createdById() {
+        return $this->belongsTo('App\User', 'created_by', 'id');
+    }
+
 
     public function setMessageAttribute($value) {
         $filteredValue = filter_var(
