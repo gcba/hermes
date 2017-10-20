@@ -96,6 +96,8 @@
                 const rowData = $('#dataTable').DataTable().row(selectedRow).data();
                 const textarea = $('#messages-form textarea');
                 const csrfToken = $('meta[name="csrf-token"]').attr('content');
+                const errorTitle = 'Error';
+                const errorMessage = 'No se pudo enviar el mensaje.';
 
                 disableForm();
 
@@ -117,13 +119,17 @@
                         textarea.val('');
                         appendMessage(json.message);
                     }
-                    else console.error(json);
+                    else {
+                        toastr.error(errorMessage, errorTitle)
+                        console.error(json);
+                    }
 
                     enableForm();
                 })
                 .catch((error) => {
-                    console.error(error);
                     enableForm();
+                    toastr.error(errorMessage, errorTitle)
+                    console.error(error);
                 });
 
                 return false;
