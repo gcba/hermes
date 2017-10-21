@@ -98,6 +98,13 @@
                 const csrfToken = $('meta[name="csrf-token"]').attr('content');
                 const errorTitle = 'Error';
                 const errorMessage = 'No se pudo enviar el mensaje.';
+                const messageText = textarea.val().trim();
+
+                if (messageText.length === 0) {
+                    toastr.warning('El mensaje está vacío.');
+
+                    return false;
+                }
 
                 disableForm();
 
@@ -109,7 +116,7 @@
                         'X-CSRF-TOKEN': csrfToken
                     },
                     body: JSON.stringify({
-                        message: textarea.val().trim(),
+                        message: messageText,
                         rating: rowData.rating_id
                     })
                 })
@@ -120,7 +127,7 @@
                         appendMessage(json.message);
                     }
                     else {
-                        toastr.error(errorMessage, errorTitle)
+                        toastr.error(errorMessage, errorTitle);
                         console.error(json);
                     }
 
@@ -128,7 +135,7 @@
                 })
                 .catch((error) => {
                     enableForm();
-                    toastr.error(errorMessage, errorTitle)
+                    toastr.error(errorMessage, errorTitle);
                     console.error(error);
                 });
 
