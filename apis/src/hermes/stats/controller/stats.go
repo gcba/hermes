@@ -23,8 +23,8 @@ func PostStats(echoContext echo.Context) error {
 		db := database.GetReadDB()
 		defer db.Close()
 
-		currentContext := echoContext.Request().Context()
-		loadedContext := context.WithValue(currentContext, schema.DB, db)
+		baseContext := echoContext.Request().Context()
+		loadedContext := context.WithValue(baseContext, schema.DB, db)
 		response := schema.Schema.Exec(loadedContext, request.Query, "", request.Variables)
 
 		return responses.PostResponse(echoContext, response)

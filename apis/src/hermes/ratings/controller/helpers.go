@@ -55,9 +55,9 @@ func loggedErrorResponse(tag string, message string, context echo.Context) error
 }
 
 /*
-*
-* App
-*
+ *
+ * App
+ *
  */
 func getApp(db *gorm.DB, frame *frame, channel chan appResult) {
 	errorMessage := "Error getting an App:"
@@ -94,9 +94,9 @@ func getApp(db *gorm.DB, frame *frame, channel chan appResult) {
 }
 
 /*
-*
-* Platform
-*
+ *
+ * Platform
+ *
  */
 func getPlatform(db *gorm.DB, frame *frame, channel chan platformResult) {
 	errorMessage := "Error getting a Platform:"
@@ -133,9 +133,9 @@ func getPlatform(db *gorm.DB, frame *frame, channel chan platformResult) {
 }
 
 /*
-*
-* Range
-*
+ *
+ * Range
+ *
  */
 func getRange(db *gorm.DB, frame *frame, channel chan rangeResult) {
 	errorMessage := "Error getting a Range:"
@@ -172,9 +172,9 @@ func getRange(db *gorm.DB, frame *frame, channel chan rangeResult) {
 }
 
 /*
-*
-* AppUser
-*
+ *
+ * AppUser
+ *
  */
 func hasAppUser(request *parser.Request) bool {
 	if request.User == nil {
@@ -258,9 +258,9 @@ func attachAppUser(rating *models.Rating, dbs *databases, frame *frame, channel 
 }
 
 /*
-*
-* Browser
-*
+ *
+ * Browser
+ *
  */
 func hasBrowser(request *parser.Request) bool {
 	if request.Browser == nil {
@@ -316,9 +316,9 @@ func attachBrowser(rating *models.Rating, dbs *databases, frame *frame, channel 
 }
 
 /*
-*
-* Device
-*
+ *
+ * Device
+ *
  */
 func getDevice(brand *models.Brand, platform *models.Platform, dbs *databases, frame *frame) (*models.Device, error) {
 	var device *models.Device
@@ -427,9 +427,9 @@ func attachDevice(rating *models.Rating, platform *models.Platform, dbs *databas
 }
 
 /*
-*
-* Brand
-*
+ *
+ * Brand
+ *
  */
 func getBrand(dbs *databases, frame *frame) (*models.Brand, error) {
 	getErrorMessage := "Could not get a Brand: "
@@ -465,9 +465,9 @@ func getBrand(dbs *databases, frame *frame) (*models.Brand, error) {
 }
 
 /*
-*
-* Rating
-*
+ *
+ * Rating
+ *
  */
 func buildRating(dbs *databases, frame *frame) (*models.Rating, *models.Platform, error) {
 	appChannel := make(chan appResult)
@@ -581,9 +581,9 @@ func attachFields(rating *models.Rating, platform *models.Platform, dbs *databas
 }
 
 /*
-*
-* Message
-*
+ *
+ * Message
+ *
  */
 func hasMessage(request *parser.Request) bool {
 	result := false

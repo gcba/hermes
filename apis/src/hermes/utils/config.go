@@ -29,13 +29,13 @@ func GetPort(variable string, defaultPort int) int {
 }
 
 func GetPublicKey(variable string, echo *echo.Echo) *rsa.PublicKey {
-	keyData, readErr := ioutil.ReadFile(os.Getenv(variable))
+	rawKey, readErr := ioutil.ReadFile(os.Getenv(variable))
 
 	if readErr != nil {
 		echo.Logger.Fatal("Could not find key file")
 	}
 
-	key, parseErr := jwt.ParseRSAPublicKeyFromPEM(keyData)
+	key, parseErr := jwt.ParseRSAPublicKeyFromPEM(rawKey)
 
 	if parseErr != nil {
 		echo.Logger.Fatal(parseErr.Error())

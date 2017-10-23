@@ -13,7 +13,6 @@ import (
 )
 
 // Request holds the mapped fields from the request's JSON body
-
 type (
 	Request struct {
 		Query     string                 `json:"query" validate:"required,gte=10,lte=5000" conform:"trim"`
@@ -94,7 +93,6 @@ func escape(request *Request) {
 }
 
 // From: https://gist.github.com/hvoecking/10772475, license: MIT
-
 func sanitizeMap(obj interface{}, sanitizer *bluemonday.Policy) interface{} {
 	original := reflect.ValueOf(obj)
 	copy := reflect.New(original.Type()).Elem()
@@ -105,7 +103,6 @@ func sanitizeMap(obj interface{}, sanitizer *bluemonday.Policy) interface{} {
 }
 
 // From: https://gist.github.com/hvoecking/10772475, license: MIT
-
 func sanitizeMapRecursive(copy, original reflect.Value, sanitizer *bluemonday.Policy) {
 	switch original.Kind() {
 	case reflect.Interface:

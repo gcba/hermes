@@ -43,9 +43,9 @@ func PostRatings(context echo.Context) error {
 }
 
 /*
-*
-* Message
-*
+ *
+ * Message
+ *
  */
 func newMessage(rating uint, db *gorm.DB, frame *frame) error {
 	message := &models.Message{
@@ -72,9 +72,9 @@ func newMessage(rating uint, db *gorm.DB, frame *frame) error {
 }
 
 /*
-*
-* Rating
-*
+ *
+ * Rating
+ *
  */
 func newRating(dbs *databases, frame *frame) error {
 	rating, platform, buildErr := buildRating(dbs, frame)
