@@ -172,9 +172,13 @@ class MailgunWebhooks extends Command
             'url' => $url
         ]);
 
-        if ($newWebhook->http_response_code !== 200) {
-            $this->error('Error creating the webhook. Are you connected to the internet?');
+        if ($newWebhook->http_response_code === 200) {
+            $this->info("Webhook '" . $type . "' cerated successfully");
+
+            return;
         }
+
+        $this->error('Error creating the webhook. Are you connected to the internet?');
 
         return;
     }
