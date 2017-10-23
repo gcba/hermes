@@ -373,6 +373,8 @@ func getDevice(brand *models.Brand, platform *models.Platform, dbs *databases, f
 
 			return &models.Device{}, loggedErrorResponse(getErrorMessage, cannotCastError, frame.context)
 		}
+	} else if !ok {
+		return &models.Device{}, loggedErrorResponse(getErrorMessage, cannotCastError, frame.context)
 	}
 
 	if device != nil {
