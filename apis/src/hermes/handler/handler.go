@@ -4,7 +4,6 @@ import (
 	"os"
 	"strconv"
 
-	"hermes/middlewares"
 	"hermes/responses"
 	"hermes/utils"
 
@@ -35,11 +34,11 @@ func Handler(port int, env string, publicKey string) *echo.Echo {
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
 	e.Use(middleware.BodyLimit("20K"))
-	e.Use(middlewares.NotImplementedMiddleware)
-	e.Use(middlewares.NotAcceptableMiddleware)
-	e.Use(middlewares.BadRequestMiddleware)
-	e.Use(middlewares.UnsupportedMediaTypeMiddleware)
-	e.Use(middlewares.CorsMiddleware)
+	e.Use(NotImplementedMiddleware)
+	e.Use(NotAcceptableMiddleware)
+	e.Use(BadRequestMiddleware)
+	e.Use(UnsupportedMediaTypeMiddleware)
+	e.Use(CorsMiddleware)
 
 	e.HTTPErrorHandler = responses.ErrorHandler
 	e.Server.Addr = ":" + strconv.Itoa(port)
