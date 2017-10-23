@@ -61,7 +61,7 @@ class Message extends Model
         $filteredValue = filter_var(
             trim(mb_strimwidth($value, 0, 1500, '')),
             FILTER_SANITIZE_STRING,
-            FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_BACKTICK | FILTER_FLAG_ENCODE_LOW
+            FILTER_FLAG_NO_ENCODE_QUOTES | FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_BACKTICK | FILTER_FLAG_ENCODE_LOW
         );
 
         $this->attributes['message'] = ucfirst(htmlspecialchars($filteredValue));
@@ -72,7 +72,7 @@ class Message extends Model
     }
 
     public function getMessageAttribute() {
-        return html_entity_decode( $this->attributes['message']);
+        return html_entity_decode($this->attributes['message']);
     }
 
     public function getCreatedAtAttribute() {
