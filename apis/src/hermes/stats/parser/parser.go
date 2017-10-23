@@ -6,9 +6,9 @@ import (
 	"reflect"
 	"strings"
 
-	"github.com/go-playground/validator"
+	base "hermes/parser"
+
 	"github.com/labstack/echo"
-	"github.com/leebenson/conform"
 	"github.com/microcosm-cc/bluemonday"
 )
 
@@ -24,72 +24,35 @@ type (
 
 // Parse parses, scrubs and escapes a request's JSON body and maps it to a struct
 func Parse(context echo.Context) (*Request, error) {
-	request := new(Request)
+	rawRequest, err := base.Parse(newRequest, escape, context)
+	request, castOk := rawRequest.(*Request)
 
-	conform.Strings(request)
-	escape(request)
-
-	if err := bind(request, context); err != nil {
-		return request, err
+	if err != nil {
+		return nil, err
 	}
 
-	if err := validate(request, context); err != nil {
-		return request, err
+	if !castOk {
+		return nil, echo.NewHTTPError(http.StatusInternalServerError)
 	}
 
 	return request, nil
 }
 
-func bind(request *Request, context echo.Context) error {
-	if err := context.Bind(request); err != nil {
-		errorDescription := err.Error()
-		errorMessage := fmt.Sprintf("Error parsing request: %s", errorDescription)
-		errorCode := http.StatusBadRequest
-
-		if httpError, ok := err.(*echo.HTTPError); ok {
-			if value, isString := httpError.Message.(string); isString {
-				errorMessage = value
-				errorCode = httpError.Code
-			}
-		}
-
-		context.Logger().Error("Error binding request: ", errorDescription)
-
-		return echo.NewHTTPError(errorCode, []string{errorMessage})
-	}
-
-	return nil
+func newRequest() interface{} {
+	return new(Request)
 }
 
-func validate(request *Request, context echo.Context) error {
-	if errs := context.Validate(request); errs != nil {
-		var errorList []string
-		var errorMessage = "Error validating request: "
-
-		if _, ok := errs.(*validator.InvalidValidationError); ok {
-			context.Logger().Error(errorMessage, errs.Error())
-
-			return echo.NewHTTPError(http.StatusUnprocessableEntity, []string{errs.Error()})
-		}
-
-		for _, err := range errs.(validator.ValidationErrors) {
-			errorDescription := err.(error).Error()
-			errorList = append(errorList, errorDescription)
-
-			context.Logger().Error(errorMessage, errorDescription)
-		}
-
-		return echo.NewHTTPError(http.StatusUnprocessableEntity, errorList)
-	}
-
-	return nil
-}
-
-func escape(request *Request) {
+func escape(request interface{}) error {
 	sanitizer := bluemonday.StrictPolicy()
 
-	request.Query = sanitizer.Sanitize(request.Query)
-	request.Variables, _ = sanitizeMap(request.Variables, sanitizer).(map[string]interface{})
+	if data, ok := request.(*Request); ok {
+		data.Query = sanitizer.Sanitize(data.Query)
+		data.Variables, _ = sanitizeMap(data.Variables, sanitizer).(map[string]interface{})
+
+		return nil
+	}
+
+	return echo.NewHTTPError(http.StatusInternalServerError)
 }
 
 // From: https://gist.github.com/hvoecking/10772475, license: MIT
