@@ -77,7 +77,7 @@ Finalmente, cargarlo con:
 $ source .env
 ```
 
-Ahora se puede correr las APIs.
+Ahora se pueden correr las APIs.
 
 ```bash
 $ go run main.go start ratings

@@ -298,7 +298,7 @@ func (f *field) resolveOperator() *string {
 				operator = "ILIKE"
 			}
 
-			operator = "ILIKE"
+			operator = "LIKE"
 		default:
 			operator = "="
 		}
