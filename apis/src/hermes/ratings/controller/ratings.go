@@ -14,32 +14,46 @@ import (
 func OptionsRatings(context echo.Context) error {
 	endpoints := []responses.Endpoint{responses.Endpoints["PostRatings"]}
 
-	context.Response().Header().Set(echo.HeaderAllow, "OPTIONS, POST")
-
-	return responses.OptionsResponse(endpoints, context)
+	return responses.OptionsResponse(endpoints, "OPTIONS, POST", context)
 }
 
 // PostRatings saves a new rating to the database
 func PostRatings(context echo.Context) error {
-	request, err := parser.Parse(context)
+	request, parseErr := parser.Parse(context)
 
-	if err != nil {
-		return err
+	if parseErr != nil {
+		return parseErr
 	}
 
-	writeDB := database.GetWriteDB()
-	tx := writeDB.Begin()
-	dbs := &databases{read: database.GetReadDB(), write: tx}
-	frame := &frame{request: request, context: context}
+	if !context.Response().Committed {
+		readDB, readDBErr := database.GetReadDB()
 
-	defer dbs.read.Close()
-	defer dbs.write.Close()
+		if readDBErr != nil {
+			return readDBErr
+		}
 
-	if err := newRating(dbs, frame); err != nil {
-		return err
+		defer readDB.Close()
+
+		writeDB, writeDBErr := database.GetWriteDB()
+
+		if writeDBErr != nil {
+			return writeDBErr
+		}
+
+		defer writeDB.Close()
+
+		tx := writeDB.Begin()
+		dbs := &databases{read: readDB, write: tx}
+		frame := &frame{request: request, context: context}
+
+		if ratingErr := newRating(dbs, frame); ratingErr != nil {
+			return ratingErr
+		}
+
+		return responses.PostResponse(frame.context)
 	}
 
-	return responses.PostResponse(frame.context)
+	return nil
 }
 
 /*

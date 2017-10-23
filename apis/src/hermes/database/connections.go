@@ -3,6 +3,7 @@ package database
 import (
 	"fmt"
 	"log"
+	"net/http"
 	"os"
 	"reflect"
 
@@ -10,6 +11,7 @@ import (
 
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres" // postgres driver
+	"github.com/labstack/echo"
 )
 
 // Load enviroment variables
@@ -36,24 +38,32 @@ var (
 )
 
 // GetReadDB connects to the read database and returns a pointer to the connection
-func GetReadDB() *gorm.DB {
-	db := getDB(readDBHost, readDBPort, readDBName, readDBUser, readDBPassword, writeDBSslMode)
+func GetReadDB() (*gorm.DB, error) {
+	db, err := getDB(readDBHost, readDBPort, readDBName, readDBUser, readDBPassword, writeDBSslMode)
+
+	if err != nil {
+		return nil, err
+	}
 
 	ReadDBDriver = reflect.ValueOf(db.DB().Driver()).Type().String()
 
-	return db
+	return db, nil
 }
 
 // GetWriteDB connects to the write database and returns a pointer to the connection
-func GetWriteDB() *gorm.DB {
-	db := getDB(writeDBHost, writeDBPort, writeDBName, writeDBUser, writeDBPassword, writeDBSslMode)
+func GetWriteDB() (*gorm.DB, error) {
+	db, err := getDB(writeDBHost, writeDBPort, writeDBName, writeDBUser, writeDBPassword, writeDBSslMode)
+
+	if err != nil {
+		return nil, err
+	}
 
 	WriteDBDriver = reflect.ValueOf(db.DB().Driver()).Type().String()
 
-	return db
+	return db, nil
 }
 
-func getDB(host string, port string, db string, user string, password string, sslMode string) *gorm.DB {
+func getDB(host string, port string, db string, user string, password string, sslMode string) (*gorm.DB, error) {
 	credentials := fmt.Sprintf(
 		"host=%s port=%s user=%s dbname=%s sslmode=%s password=%s",
 		host,
@@ -67,7 +77,9 @@ func getDB(host string, port string, db string, user string, password string, ss
 
 	if err != nil {
 		log.Println("Failed to connect to database. Error: " + err.Error())
+
+		return nil, echo.NewHTTPError(http.StatusInternalServerError)
 	}
 
-	return connection
+	return connection, nil
 }

@@ -76,7 +76,7 @@ func getApp(db *gorm.DB, frame *frame, channel chan appResult) {
 		return
 	}
 
-	if value, ok := result.Value.(*models.App); ok {
+	if value, castOk := result.Value.(*models.App); castOk {
 		resultStruct.value = value
 
 		channel <- resultStruct
@@ -115,7 +115,7 @@ func getPlatform(db *gorm.DB, frame *frame, channel chan platformResult) {
 		return
 	}
 
-	if value, ok := result.Value.(*models.Platform); ok {
+	if value, castOk := result.Value.(*models.Platform); castOk {
 		resultStruct.value = value
 
 		channel <- resultStruct
@@ -154,7 +154,7 @@ func getRange(db *gorm.DB, frame *frame, channel chan rangeResult) {
 		return
 	}
 
-	if value, ok := result.Value.(*models.Range); ok {
+	if value, castOk := result.Value.(*models.Range); castOk {
 		resultStruct.value = value
 
 		channel <- resultStruct
@@ -230,7 +230,7 @@ func getAppUser(dbs *databases, frame *frame) (*models.AppUser, error) {
 			return &models.AppUser{}, loggedErrorResponse(createErrorMessage, invalidValueError, frame.context)
 		}
 
-		if value, ok := createResult.Value.(*models.AppUser); ok {
+		if value, castOk := createResult.Value.(*models.AppUser); castOk {
 			frame.context.Logger().Info("Created a new AppUser: ", value)
 
 			return value, nil
@@ -239,7 +239,7 @@ func getAppUser(dbs *databases, frame *frame) (*models.AppUser, error) {
 		return &models.AppUser{}, loggedErrorResponse(getErrorMessage, invalidValueError, frame.context)
 	}
 
-	if value, ok := getResult.Value.(*models.AppUser); ok {
+	if value, castOk := getResult.Value.(*models.AppUser); castOk {
 		return value, nil
 	}
 
@@ -287,7 +287,7 @@ func getBrowser(dbs *databases, frame *frame) (*models.Browser, error) {
 			return &models.Browser{}, loggedErrorResponse(createErrorMessage, invalidValueError, frame.context)
 		}
 
-		if value, ok := createResult.Value.(*models.Browser); ok {
+		if value, castOk := createResult.Value.(*models.Browser); castOk {
 			frame.context.Logger().Info("Created a new Browser: ", value)
 
 			return value, nil
@@ -296,7 +296,7 @@ func getBrowser(dbs *databases, frame *frame) (*models.Browser, error) {
 		return &models.Browser{}, loggedErrorResponse(getErrorMessage, invalidValueError, frame.context)
 	}
 
-	if value, ok := getResult.Value.(*models.Browser); ok {
+	if value, castOk := getResult.Value.(*models.Browser); castOk {
 		return value, nil
 	}
 
@@ -351,7 +351,7 @@ func getDevice(brand *models.Brand, platform *models.Platform, dbs *databases, f
 		return &models.Device{}, loggedErrorResponse(getErrorMessage, invalidValueError, frame.context)
 	}
 
-	if result, ok := getResult.Value.(*models.Device); (ok && brand != nil) && (result.BrandID != brand.ID) {
+	if result, castOk := getResult.Value.(*models.Device); (castOk && brand != nil) && (result.BrandID != brand.ID) {
 		checkDeviceName := fmt.Sprintf("%v (%v)", deviceName, brand.Name)
 		checkGetResult := models.GetDevice(checkDeviceName, dbs.read)
 		checkGetErrorList := checkGetResult.GetErrors()
@@ -367,13 +367,13 @@ func getDevice(brand *models.Brand, platform *models.Platform, dbs *databases, f
 		} else if len(checkGetErrorList) > 0 || checkGetResult.Error != nil || checkGetResult.Value == nil {
 			return &models.Device{}, loggedErrorResponse(getErrorMessage, invalidValueError, frame.context)
 		} else {
-			if value, ok := checkGetResult.Value.(*models.Device); ok {
+			if value, checkCastOk := checkGetResult.Value.(*models.Device); checkCastOk {
 				return value, nil
 			}
 
 			return &models.Device{}, loggedErrorResponse(getErrorMessage, cannotCastError, frame.context)
 		}
-	} else if !ok {
+	} else if !castOk {
 		return &models.Device{}, loggedErrorResponse(getErrorMessage, cannotCastError, frame.context)
 	}
 
@@ -387,7 +387,7 @@ func getDevice(brand *models.Brand, platform *models.Platform, dbs *databases, f
 			return &models.Device{}, loggedErrorResponse(createErrorMessage, invalidValueError, frame.context)
 		}
 
-		if value, ok := createResult.Value.(*models.Device); ok {
+		if value, castOk := createResult.Value.(*models.Device); castOk {
 			frame.context.Logger().Info("Created a new Device: ", value)
 
 			return value, nil
@@ -396,7 +396,7 @@ func getDevice(brand *models.Brand, platform *models.Platform, dbs *databases, f
 		return &models.Device{}, loggedErrorResponse(createErrorMessage, cannotCastError, frame.context)
 	}
 
-	if value, ok := getResult.Value.(*models.Device); ok {
+	if value, castOk := getResult.Value.(*models.Device); castOk {
 		return value, nil
 	}
 
@@ -450,7 +450,7 @@ func getBrand(dbs *databases, frame *frame) (*models.Brand, error) {
 			return &models.Brand{}, loggedErrorResponse(createErrorMessage, invalidValueError, frame.context)
 		}
 
-		if value, ok := createResult.Value.(*models.Brand); ok {
+		if value, castOk := createResult.Value.(*models.Brand); castOk {
 			frame.context.Logger().Info("Created a new Brand: ", value)
 
 			return value, nil
@@ -459,7 +459,7 @@ func getBrand(dbs *databases, frame *frame) (*models.Brand, error) {
 		return &models.Brand{}, loggedErrorResponse(getErrorMessage, invalidValueError, frame.context)
 	}
 
-	if value, ok := getResult.Value.(*models.Brand); ok {
+	if value, castOk := getResult.Value.(*models.Brand); castOk {
 		return value, nil
 	}
 

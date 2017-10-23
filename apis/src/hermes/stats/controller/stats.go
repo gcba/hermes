@@ -13,14 +13,19 @@ import (
 
 // PostStats is the GraphQL controller
 func PostStats(echoContext echo.Context) error {
-	request, err := parser.Parse(echoContext)
+	request, parseErr := parser.Parse(echoContext)
 
-	if err != nil {
-		return err
+	if parseErr != nil {
+		return parseErr
 	}
 
 	if !echoContext.Response().Committed {
-		db := database.GetReadDB()
+		db, dbErr := database.GetReadDB()
+
+		if dbErr != nil {
+			return dbErr
+		}
+
 		defer db.Close()
 
 		baseContext := echoContext.Request().Context()

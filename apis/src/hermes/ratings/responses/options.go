@@ -53,11 +53,13 @@ var (
 		"PostRatings":    postRatings}
 )
 
-func OptionsResponse(endpoints []Endpoint, context echo.Context) error {
+func OptionsResponse(endpoints []Endpoint, allow string, context echo.Context) error {
 	if !context.Response().Committed {
 		response := Options{
 			Meta:      responses.Statuses[http.StatusOK],
 			Endpoints: endpoints}
+
+		context.Response().Header().Set(echo.HeaderAllow, allow)
 
 		return context.JSON(http.StatusOK, &response)
 	}

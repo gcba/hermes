@@ -16,15 +16,15 @@ func Parse(factory func() interface{}, escape func(interface{}) error, context e
 	conform.Strings(request)
 
 	if err := escape(request); err != nil {
-		return request, err
+		return nil, err
 	}
 
 	if err := bind(request, context); err != nil {
-		return request, err
+		return nil, err
 	}
 
 	if err := validate(request, context); err != nil {
-		return request, err
+		return nil, err
 	}
 
 	return request, nil
