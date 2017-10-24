@@ -3,8 +3,16 @@
     overflow-x: hidden;
 }
 
+.content-container {
+    max-width: 1600px;
+}
+
 .container-fluid {
     padding-right: 0px;
+}
+
+.navbar .navbar-nav > li.profile, .voyager .navbar.navbar-default .navbar-nav > li {
+    padding-right: 1em;
 }
 
 .dataTables_wrapper:nth-child(1) > div {
