@@ -78,6 +78,7 @@ class MailgunMessages extends Command
         $result = Mailgun::raw($text, function ($message) use($email, $subject, $isReply, $inReplyTo) {
             if ($isReply && $inReplyTo !== null) {
                 $message->header('In-Reply-To', '<' . $inReplyTo->transport_id . '>');
+                $message->header('References', '<' . $inReplyTo->transport_id . '>');
             }
 
             $message->to($email, env('MAILGUN_SENDER', ''))->subject($subject);
@@ -87,11 +88,10 @@ class MailgunMessages extends Command
 
         if ($result->status == 200) {
             $direction = 'out';
-            $status = 0;
             $transportId = filter_var(substr(trim($result->id), 1, -1), FILTER_SANITIZE_EMAIL);
             $rating = Rating::where('has_message', true)->orderBy('id', 'desc')->first();
 
-            CreateMessage::dispatch($text, $direction, $status, $transportId, $rating->id);
+            CreateMessage::dispatch($text, $direction, $transportId, $rating->id);
 
             if ($isReply && $inReplyTo !== null) {
                 SetMessageStatus::dispatch($inReplyTo, 2);

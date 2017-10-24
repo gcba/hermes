@@ -31,11 +31,10 @@ class CreateMessage implements ShouldQueue
      *
      * @return void
      */
-    public function __construct(String $message, String $direction, Int $status, $transportId, Int $ratingId)
+    public function __construct(String $message, String $direction, $transportId, Int $ratingId)
     {
         $this->message = $message;
         $this->direction = $direction;
-        $this->status = $status;
         $this->transportId = $transportId; // Intentionally not type hinted, to be able to pass on null values
         $this->ratingId = $ratingId;
     }
@@ -50,7 +49,7 @@ class CreateMessage implements ShouldQueue
         $message = Message::create([
             'message' => $this->message,
             'direction' => $this->direction,
-            'status' => $this->status,
+            'status' => 0,
             'transport_id' => $this->transportId,
             'rating_id' => $this->ratingId
         ]);

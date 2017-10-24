@@ -28,13 +28,12 @@ class MailgunController extends Controller
             $messageReplied = Message::where('transport_id', $inReplyTo)->first();
 
             if ($messageReplied !== null) {
-                $message =$data['stripped-text']; // Sanitization happens in mutator
+                $message = $data['stripped-text']; // Sanitization happens in mutator
                 $direction = 'in';
-                $status = 0;
                 $transportId = null;
                 $ratingId = $messageReplied->rating->id;
 
-                CreateMessage::dispatch($message, $direction, $status, $transportId, $ratingId);
+                CreateMessage::dispatch($message, $direction, $transportId, $ratingId);
                 SetMessageStatus::dispatch($messageReplied, 2); // Sent/Received = 0, Notified/Delivered = 1, Replied = 2
             }
         }
