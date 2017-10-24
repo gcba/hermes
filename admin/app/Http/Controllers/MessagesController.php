@@ -101,7 +101,7 @@ class MessagesController extends DataTablesController
         $message->message = $messageText;
         $message->direction = 'out';
         $message->status = 0;
-        $message->rating()->associate($rating);
+        $message->rating_id = $rating->id;
         $message->createdBy()->associate(Auth::user());
 
         if (!$message->save()) {

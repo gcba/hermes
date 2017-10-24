@@ -23,14 +23,15 @@ class MailgunController extends Controller
         parse_str($request->getContent(), $data);
 
         $inReplyTo = filter_var(substr(trim($data['In-Reply-To']), 1, -1), FILTER_SANITIZE_EMAIL);
+        $messageId = filter_var(substr(trim($data['Message-Id']), 1, -1), FILTER_SANITIZE_EMAIL);
 
-        if (filter_var($inReplyTo, FILTER_VALIDATE_EMAIL)) {
+        if (filter_var($inReplyTo, FILTER_VALIDATE_EMAIL) && filter_var($inReplyTo, FILTER_VALIDATE_EMAIL)) {
             $messageReplied = Message::where('transport_id', $inReplyTo)->first();
 
             if ($messageReplied !== null) {
                 $message = $data['stripped-text']; // Sanitization happens in mutator
                 $direction = 'in';
-                $transportId = null;
+                $transportId = $messageId;
                 $ratingId = $messageReplied->rating->id;
 
                 CreateMessage::dispatch($message, $direction, $transportId, $ratingId);

@@ -56,8 +56,13 @@ class SendMessage implements ShouldQueue
             if ($this->replyTo !== null &&
             isset($this->replyTo->transport_id) &&
             strlen($this->replyTo->transport_id) > 0) {
-                $where = [['rating_id', '=', $message->rating_id], ['transport_id', '<>', $message->transport_id]];
-                $references = Messages::where($where)
+                $where = [
+                    ['rating_id', '=', $this->message->rating_id],
+                    ['transport_id', '<>', $this->message->transport_id],
+                    ['transport_id', '<>', '']
+                ];
+
+                $references = Message::where($where)
                     ->whereNotNull('transport_id')
                     ->latest()
                     ->get()
