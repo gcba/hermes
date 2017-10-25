@@ -87,7 +87,7 @@
 
 .dataTables_wrapper table tfoot .row-search th {
     border-bottom: 1px dashed #eee;
-    padding: 15px 5px 10px;
+    padding: 1rem 0.5rem 1rem;
     font-size: 0.9rem;
 }
 
@@ -99,6 +99,7 @@
 .dataTables_wrapper table tfoot input {
     border: none;
     width: 100%;
+    height: 1rem;
     background-color: transparent;
 }
 
