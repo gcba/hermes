@@ -23,11 +23,8 @@ class MessagesController extends DataTablesController
     */
     public function messagesAPI(Request $request)
     {
-        $user = Auth::user();
-
-        if ($user->hasPermission('browse_messages')) {
+        if (Auth::user()->hasPermission('browse_messages')) {
             $params = $request->query()['columns'];
-
             $model = Rating::with('latestMessage', 'app', 'appuser', 'platform')->where('has_message', true)->get();
 
             $datatables = Datatables::of($model)
@@ -40,8 +37,6 @@ class MessagesController extends DataTablesController
 
         return Response::json([], 401);
     }
-
-    // From Voyager's VoyagerBreadController.php, customized
 
     // POST BRE(A)D
     public function create(Request $request)
