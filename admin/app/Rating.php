@@ -140,6 +140,10 @@ class Rating extends Model
         return $this->belongsTo('App\Browser', 'browser_id', 'id');
     }
 
+    public function latestMessage() {
+        return $this->hasOne('App\Message', 'rating_id', 'id')->latest();
+    }
+
     public function getHasMessageAttribute() {
         return $this->attributes['has_message'] ? '✔️' : '';
     }

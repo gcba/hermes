@@ -28,19 +28,7 @@ class MessagesController extends DataTablesController
         if ($user->hasPermission('browse_messages')) {
             $params = $request->query()['columns'];
 
-            $model = Message::with(['rating', 'rating.app', 'rating.platform', 'rating.appuser'])
-                ->select([
-                    'messages.id',
-                    'messages.message',
-                    'messages.direction',
-                    'messages.status',
-                    'messages.created_at',
-                    'messages.rating_id'
-                ])
-                ->where('direction', '=', 'in')
-                ->orderBy('created_at', 'desc')
-                ->get()
-                ->unique('rating_id');
+            $model = Rating::with('latestMessage', 'app', 'appuser', 'platform')->where('has_message', true)->get();
 
             $datatables = Datatables::of($model)
                 ->filter(function ($query) use($params) {

@@ -117,7 +117,7 @@
                     },
                     body: JSON.stringify({
                         message: messageText,
-                        rating: rowData.rating_id
+                        rating: rowData.id
                     })
                 })
                 .then((response) => response.json())
@@ -159,10 +159,10 @@
                     }
                 },
                 columns: [
-                    { data: 'message', name: 'message' },
-                    { data: 'rating.app.name', name: 'app' },
-                    { data: 'rating.rating', name: 'rating.rating', visible: false },
-                    { data: 'created_at', name: 'created_at' }
+                    { data: 'latest_message.message', name: 'message' },
+                    { data: 'app.name', name: 'app' },
+                    { data: 'rating', name: 'rating', visible: false },
+                    { data: 'latest_message.created_at', name: 'created_at' }
                 ],
                 bSort: false,
                 bInfo: false,
@@ -242,12 +242,12 @@
         const threadHeading = function(name, row) {
             const container = $('<div>', { class: 'messages-detail-header' });
             const user = $('<h3>', { text: name });
-            const rating = $('<span>', { text: row.rating.rating, class: 'label label-default' });
+            const rating = $('<span>', { text: row.rating, class: 'label label-default' });
 
             const contextualInfo = $('<small>', {
-                text: row.rating.app_version ?
-                `${row.rating.app.name} ${row.rating.app_version}, ${row.rating.platform.name}` :
-                `${row.rating.app.name}, ${row.rating.platform.name}`
+                text: row.app_version ?
+                `${row.app.name} ${row.app_version}, ${row.platform.name}` :
+                `${row.app.name}, ${row.platform.name}`
             });
 
             user.prepend(rating);
@@ -277,8 +277,8 @@
         const buildThread = function(messages, row) {
             const thread = $('.messages-detail-list').first().empty();
 
-            if (row.rating && row.rating.appuser) {
-                thread.append(threadHeading(row.rating.appuser.name, row));
+            if (row.appuser) {
+                thread.append(threadHeading(row.appuser.name, row));
             }
             else {
                 thread.append(threadHeading('Anónimo', row));
@@ -291,7 +291,7 @@
 
         const selectRow = function(row) {
             const rowData = $('#dataTable').DataTable().row(row).data();
-            const isAnonimous = rowData.rating.appuser_id === null;
+            const isAnonimous = rowData.appuser_id === null;
             const $row = $(row);
 
             if (!$row.hasClass('row-search')) {
@@ -306,7 +306,7 @@
                 $row.addClass('row-selected');
 
                 if (rowData) {
-                    const ratingID = rowData.rating_id;
+                    const ratingID = rowData.id;
 
                     fetch('/admin/ratings/' + ratingID + '/messages', {
                         method: 'GET',
