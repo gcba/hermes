@@ -3,10 +3,6 @@
     overflow-x: hidden;
 }
 
-.content-container {
-    max-width: 1600px;
-}
-
 .container-fluid {
     padding-right: 0px;
 }
@@ -112,6 +108,10 @@
 
 .dataTables_wrapper .table-ratings tbody td:nth-last-child(2) {
     max-width: unset;
+}
+
+.messages .content-container {
+    max-width: 1600px;
 }
 
 .messages-master .panel-body {
