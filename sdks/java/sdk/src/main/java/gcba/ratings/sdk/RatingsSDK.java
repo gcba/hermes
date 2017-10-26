@@ -37,8 +37,8 @@ public final class RatingsSDK {
     private HashMap<String, String> user;
 
     private void validateUrl(String url) {
-        if (url == null) throw new IllegalArgumentException("api can't be null");
-        if (!url.trim().matches("^(ftp|http|https):\\/\\/[^ \"]+$")) throw new IllegalArgumentException("invalid api");
+        if (url == null) throw new IllegalArgumentException("endpoint can't be null");
+        if (!url.trim().matches("^(ftp|http|https):\\/\\/[^ \"]+$")) throw new IllegalArgumentException("invalid endpoint");
     }
 
     private void validateKey(String key, String description) {
