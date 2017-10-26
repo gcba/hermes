@@ -123,6 +123,8 @@
                 .then((response) => response.json())
                 .then((json) => {
                     if (json.status === 201) {
+                        $('#dataTable').DataTable().ajax.reload();
+
                         textarea.val('');
                         appendMessage(json.message);
                     }
@@ -131,7 +133,6 @@
                         console.error(json);
                     }
 
-                    $('#dataTable').DataTable().ajax.reload();
                     enableForm();
                 })
                 .catch((error) => {
