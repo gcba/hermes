@@ -4,6 +4,8 @@ package gcba.ratings.sdk;
  * Created by ritazerrizuela on 10/26/17.
  */
 
+// From https://stackoverflow.com/questions/446663/best-way-to-define-error-codes-strings-in-java
+
 enum RatingsValidationError implements RatingsError {
     NAME_TOO_SHORT(100, "name too short"),
     NAME_TOO_LONG(101, "name too long"),
