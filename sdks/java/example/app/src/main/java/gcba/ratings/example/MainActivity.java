@@ -4,7 +4,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import org.json.JSONObject;
 
-import gcba.ratings.sdk.Rating;
+import gcba.ratings.sdk.RatingsResult;
+import gcba.ratings.sdk.RatingsSDK;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,42 +22,38 @@ public class MainActivity extends AppCompatActivity {
                 String range = app;
                 String token = app;
 
-                try{
-                    Rating rating = new Rating("https://7333ab98.ngrok.io", app, platform, range, token);
-                    JSONObject result;
+                RatingsSDK rating = new RatingsSDK("https://7333ab98.ngrok.io", app, platform, range, token);
+                RatingsResult result;
 
-                    // Rating only; no user
+                // Rating only; no user
 
-                    result = rating.create(5);
+                result = rating.create(5);
 
-                    // Rating and description only; no user
+                // Rating and description only; no user
 
-                    result = rating.create(4, "Bueno");
+                result = rating.create(4, "Bueno");
 
-                    // Rating, description and comment; no user
+                // Rating, description and comment; no user
 
-                    result = rating.create(3, "Regular", "Lorem ipsum dolor...");
+                result = rating.create(3, "Regular", "Lorem ipsum dolor...");
 
-                    // Rating, description and comment; user name and mibaId only
+                // Rating, description and comment; user name and mibaId only
 
-                    rating.setUser("Juan Pérez", "dc62591b-1cd3-4c6c-a943-f682e8860e08");
+                rating.setUser("Juan Pérez", "dc62591b-1cd3-4c6c-a943-f682e8860e08");
 
-                    result = rating.create(2, "Regular", "Lorem ipsum dolor...");
+                result = rating.create(2, "Regular", "Lorem ipsum dolor...");
 
-                    // Rating, description and comment; user name and email only
+                // Rating, description and comment; user name and email only
 
-                    rating.setUser("Juan Pérez", null, "juan@example.com");
+                rating.setUser("Juan Pérez", null, "juan@example.com");
 
-                    result = rating.create(1, "Muy Malo", "Lorem ipsum dolor...");
+                result = rating.create(1, "Muy Malo", "Lorem ipsum dolor...");
 
-                    // Rating, description and comment; user name, email and mibaId
+                // Rating, description and comment; user name, email and mibaId
 
-                    rating.setUser("Juan Pérez", "ae0bfd64-7b37-4bb5-a628-b6cfe28a68af", "juan@perez.com");
+                rating.setUser("Juan Pérez", "ae0bfd64-7b37-4bb5-a628-b6cfe28a68af", "juan@perez.com");
 
-                    result = rating.create(5, "Muy Bueno", "Lorem ipsum dolor...");
-                } catch(Error e) {
-                    System.err.println("Error: " + e.getMessage());
-                }
+                result = rating.create(5, "Muy Bueno", "Lorem ipsum dolor...");
             }
         });
 

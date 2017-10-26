@@ -9,8 +9,8 @@ import android.os.Build;
  * Created by ritazerrizuela on 7/17/17.
  */
 
-final class Request {
-    Request() {
+final class RatingsRequest {
+    RatingsRequest() {
         this.app = getApp();
         this.platform = getPlatform();
         this.device = getDevice();
