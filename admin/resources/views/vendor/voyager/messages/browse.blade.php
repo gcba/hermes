@@ -131,6 +131,7 @@
                         console.error(json);
                     }
 
+                    $('#dataTable').DataTable().ajax.reload();
                     enableForm();
                 })
                 .catch((error) => {
