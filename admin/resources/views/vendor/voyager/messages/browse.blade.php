@@ -123,8 +123,7 @@
                 .then((response) => response.json())
                 .then((json) => {
                     if (json.status === 201) {
-                        $('#dataTable').DataTable().ajax.reload();
-
+                        reloadThreads();
                         textarea.val('');
                         appendMessage(json.message);
                     }
@@ -360,6 +359,10 @@
 
         const disableForm = function() {
             $('#messages-form :input, #messages-form button').prop('disabled', true);
+        }
+
+        const reloadThreads = function() {
+            $('#dataTable').DataTable().ajax.reload();
         }
     </script>
 @stop
