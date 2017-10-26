@@ -1422,16 +1422,16 @@
         },
         {
             "name": "justinrainbow/json-schema",
-            "version": "5.2.5",
+            "version": "5.2.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/justinrainbow/json-schema.git",
-                "reference": "0d4fda8efdf216ade084a7f0aad5637572ce9835"
+                "reference": "d283e11b6e14c6f4664cf080415c4341293e5bbd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/justinrainbow/json-schema/zipball/0d4fda8efdf216ade084a7f0aad5637572ce9835",
-                "reference": "0d4fda8efdf216ade084a7f0aad5637572ce9835",
+                "url": "https://api.github.com/repos/justinrainbow/json-schema/zipball/d283e11b6e14c6f4664cf080415c4341293e5bbd",
+                "reference": "d283e11b6e14c6f4664cf080415c4341293e5bbd",
                 "shasum": ""
             },
             "require": {
@@ -1484,7 +1484,7 @@
                 "json",
                 "schema"
             ],
-            "time": "2017-10-10T13:22:37+00:00"
+            "time": "2017-10-21T13:15:38+00:00"
         },
         {
             "name": "larapack/doctrine-support",
@@ -1578,16 +1578,16 @@
         },
         {
             "name": "larapack/voyager-hooks",
-            "version": "v1.0.3",
+            "version": "v1.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/larapack/voyager-hooks.git",
-                "reference": "ad4107167d6eca8e348dfd7e6fa3774fff4afec0"
+                "reference": "7843095c17a5f776704c06dff19d26cd2abc9d01"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/larapack/voyager-hooks/zipball/ad4107167d6eca8e348dfd7e6fa3774fff4afec0",
-                "reference": "ad4107167d6eca8e348dfd7e6fa3774fff4afec0",
+                "url": "https://api.github.com/repos/larapack/voyager-hooks/zipball/7843095c17a5f776704c06dff19d26cd2abc9d01",
+                "reference": "7843095c17a5f776704c06dff19d26cd2abc9d01",
                 "shasum": ""
             },
             "require": {
@@ -1597,6 +1597,13 @@
                 "orchestra/testbench": "~3.0"
             },
             "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Larapack\\VoyagerHooks\\VoyagerHooksServiceProvider"
+                    ]
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "Larapack\\VoyagerHooks\\": "src/"
@@ -1619,7 +1626,7 @@
                 "laravel",
                 "voyager"
             ],
-            "time": "2017-09-22T16:10:18+00:00"
+            "time": "2017-10-25T06:42:36+00:00"
         },
         {
             "name": "laravel/framework",
@@ -4096,16 +4103,16 @@
         },
         {
             "name": "tcg/voyager",
-            "version": "v1.0.5",
+            "version": "v1.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/the-control-group/voyager.git",
-                "reference": "0b11c4c09d494ca72497ec0fc2e66dd21fa457d6"
+                "reference": "0e27b4935d195ef5537fd3aacd0a1aafa7a1e3df"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/the-control-group/voyager/zipball/0b11c4c09d494ca72497ec0fc2e66dd21fa457d6",
-                "reference": "0b11c4c09d494ca72497ec0fc2e66dd21fa457d6",
+                "url": "https://api.github.com/repos/the-control-group/voyager/zipball/0e27b4935d195ef5537fd3aacd0a1aafa7a1e3df",
+                "reference": "0e27b4935d195ef5537fd3aacd0a1aafa7a1e3df",
                 "shasum": ""
             },
             "require": {
@@ -4158,7 +4165,7 @@
                 "laravel",
                 "panel"
             ],
-            "time": "2017-10-04T15:41:54+00:00"
+            "time": "2017-10-24T13:57:24+00:00"
         },
         {
             "name": "tijsverkoyen/css-to-inline-styles",
@@ -4283,7 +4290,7 @@
             },
             "notification-url": "https://larapack.io/downloads",
             "description": "This hook will add support for Voyager front-end themes",
-            "time": "2017-10-20T12:10:10+00:00"
+            "time": "2017-10-11T16:10:26+00:00"
         },
         {
             "name": "webmozart/assert",
