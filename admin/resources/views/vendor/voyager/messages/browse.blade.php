@@ -371,7 +371,7 @@
         const reloadThreads = function(currentThread) {
             $('#dataTable').DataTable().ajax.reload(() => {
                 $('#dataTable tbody').children().eq(currentThread).addClass('row-selected');
-            }, true);
+            }, false);
         };
     </script>
 @stop
