@@ -10,7 +10,7 @@
 		B12231FC302F903794410F0A /* Pods_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9840FD63DA987B3618EE5B8 /* Pods_Example.framework */; };
 		B7004DEEA4015AECC619DE54 /* Pods_RatingsSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDB7FFCB994DD44AF45C9FAE /* Pods_RatingsSDK.framework */; };
 		C08F76C71F27B2A30053E5DA /* RatingsSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = C08F76C51F27B2A30053E5DA /* RatingsSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C08F76CE1F27B2CB0053E5DA /* RatingsSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08F76CD1F27B2CB0053E5DA /* RatingsSDK.swift */; };
+		C08F76CE1F27B2CB0053E5DA /* Ratings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08F76CD1F27B2CB0053E5DA /* Ratings.swift */; };
 		C08F76D61F27B30C0053E5DA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08F76D51F27B30C0053E5DA /* AppDelegate.swift */; };
 		C08F76D81F27B30C0053E5DA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08F76D71F27B30C0053E5DA /* ViewController.swift */; };
 		C08F76DB1F27B30C0053E5DA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C08F76D91F27B30C0053E5DA /* Main.storyboard */; };
@@ -54,7 +54,7 @@
 		C08F76C21F27B2A30053E5DA /* RatingsSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RatingsSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C08F76C51F27B2A30053E5DA /* RatingsSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RatingsSDK.h; sourceTree = "<group>"; };
 		C08F76C61F27B2A30053E5DA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C08F76CD1F27B2CB0053E5DA /* RatingsSDK.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingsSDK.swift; sourceTree = "<group>"; };
+		C08F76CD1F27B2CB0053E5DA /* Ratings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ratings.swift; sourceTree = "<group>"; };
 		C08F76D31F27B30C0053E5DA /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C08F76D51F27B30C0053E5DA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C08F76D71F27B30C0053E5DA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -134,7 +134,7 @@
 			children = (
 				C08F76C51F27B2A30053E5DA /* RatingsSDK.h */,
 				C08F76C61F27B2A30053E5DA /* Info.plist */,
-				C08F76CD1F27B2CB0053E5DA /* RatingsSDK.swift */,
+				C08F76CD1F27B2CB0053E5DA /* Ratings.swift */,
 				C0BADFA11F91449B004DF800 /* RatingsError.swift */,
 				C0BADFA31F91654C004DF800 /* RatingsUser.swift */,
 			);
@@ -368,7 +368,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C08F76CE1F27B2CB0053E5DA /* RatingsSDK.swift in Sources */,
+				C08F76CE1F27B2CB0053E5DA /* Ratings.swift in Sources */,
 				C0BADFA21F91449B004DF800 /* RatingsError.swift in Sources */,
 				C0BADFA41F91654C004DF800 /* RatingsUser.swift in Sources */,
 			);

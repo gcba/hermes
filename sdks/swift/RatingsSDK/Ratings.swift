@@ -39,11 +39,11 @@ public class Ratings {
     private let range: String
     private let deviceInfo: GBDeviceInfo
     
-    private var timeout: Double
     private var _user: RatingsUser?
     
     // MARK: - Public properties
     
+    public var timeout: Double
     public var user: RatingsUser?
 
     // MARK: - Validations

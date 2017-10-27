@@ -135,14 +135,14 @@ public final class Ratings {
 
         try {
             response = webb
-                    .post("/ratings")
-                    .header("Content-Type", "application/json; charset=UTF-8")
-                    .header("Accept", "application/json")
-                    .header("Authorization", "Bearer " + token)
-                    .body(json)
-                    .connectTimeout(timeout)
-                    .retry(3, false)
-                    .asJsonObject();
+                .post("/ratings")
+                .header("Content-Type", "application/json; charset=UTF-8")
+                .header("Accept", "application/json")
+                .header("Authorization", "Bearer " + token)
+                .body(json)
+                .connectTimeout(timeout)
+                .retry(3, false)
+                .asJsonObject();
         } catch (WebbException e) {
             errorResponse = e.getResponse();
 
