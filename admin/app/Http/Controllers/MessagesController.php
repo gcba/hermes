@@ -79,20 +79,19 @@ class MessagesController extends DataTablesController
             return response()->json(['errors' => 'Message not found.', 'status' => $internalServerError]);
         }
 
-        $message = new Message;
-
-        $message->message = $messageText;
-        $message->direction = 'out';
-        $message->status = 0;
-        $message->rating_id = $rating->id;
-        $message->createdBy()->associate(Auth::user());
-
-        if (!$message->save()) {
-            return response()->json(['errors' => 'Could not save new message.', 'status' => $internalServerError]);
-        }
-
         if (isset($user->email)) {
             $subject = env('MAIL_SUBJECT', 'Gracias por tus comentarios');
+            $message = new Message;
+
+            $message->message = $messageText;
+            $message->direction = 'out';
+            $message->status = 0;
+            $message->rating_id = $rating->id;
+            $message->createdBy()->associate(Auth::user());
+
+            if (!$message->save()) {
+                return response()->json(['errors' => 'Could not save new message.', 'status' => $internalServerError]);
+            }
 
             SendMessage::dispatch($subject, $message, $replyTo, $user);
         }

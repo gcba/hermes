@@ -93,12 +93,12 @@
                 e.preventDefault();
 
                 const selectedRow = $('#dataTable .row-selected').first();
+                const selectedRowIndex = selectedRow.index();
                 const rowData = $('#dataTable').DataTable().row(selectedRow).data();
-                const textarea = $('#messages-form textarea');
                 const csrfToken = $('meta[name="csrf-token"]').attr('content');
                 const errorTitle = 'Error';
                 const errorMessage = 'No se pudo enviar el mensaje.';
-                const messageText = textarea.val().trim();
+                const messageText = $('#messages-form textarea').val().trim();
 
                 if (messageText.length === 0) {
                     toastr.warning('El mensaje está vacío.');
@@ -123,8 +123,8 @@
                 .then((response) => response.json())
                 .then((json) => {
                     if (json.status === 201) {
-                        reloadThreads();
-                        textarea.val('');
+                        reloadThreads(selectedRowIndex);
+                        clearForm();
                         appendMessage(json.message);
                     }
                     else {
@@ -292,11 +292,14 @@
 
         const selectRow = function(row) {
             const rowData = $('#dataTable').DataTable().row(row).data();
-            const isAnonimous = rowData.appuser_id === null;
+            const isAnonimous = rowData.appuser_id === null || rowData.appuser === null;
+            const hasNoEmail = rowData.appuser !== null && rowData.appuser.email === null;
             const $row = $(row);
 
             if (!$row.hasClass('row-search')) {
-                if (isAnonimous) disableForm();
+                clearForm();
+
+                if (isAnonimous || hasNoEmail) disableForm();
 
                 if (!$row.hasClass('row-selected')) {
                     hideMessages();
@@ -317,7 +320,7 @@
                         return response.json();
                     })
                     .then(function(response) {
-                        if (!isAnonimous) {
+                        if (!isAnonimous && !hasNoEmail) {
                             enableForm();
                             showForm();
                         }
@@ -361,8 +364,14 @@
             $('#messages-form :input, #messages-form button').prop('disabled', true);
         };
 
-        const reloadThreads = function() {
-            $('#dataTable').DataTable().ajax.reload();
+        const clearForm = function() {
+            $('#messages-form textarea').val('');
+        };
+
+        const reloadThreads = function(currentThread) {
+            $('#dataTable').DataTable().ajax.reload(() => {
+                $('#dataTable tbody').children().eq(currentThread).addClass('row-selected');
+            }, true);
         };
     </script>
 @stop
