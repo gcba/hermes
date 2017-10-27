@@ -7,13 +7,13 @@ package gcba.ratings.sdk;
 // From https://stackoverflow.com/questions/446663/best-way-to-define-error-codes-strings-in-java
 
 final class RatingsHTTPError implements RatingsError {
-    private final int code;
-    private final String description;
-
     RatingsHTTPError(int code, String description) {
         this.code = code;
         this.description = description;
     }
+
+    private final int code;
+    private final String description;
 
     public String getDescription() {
         return description;

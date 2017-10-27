@@ -12,8 +12,8 @@ import java.util.HashMap;
  * Created by ritazerrizuela on 7/17/17.
  */
 
-public final class RatingsSDK {
-    public RatingsSDK(String api, String app, String platform, String range, String token) {
+public final class Ratings {
+    public Ratings(String api, String app, String platform, String range, String token) {
         validateUrl(api);
         validateKey(app, "app");
         validateKey(platform, "platform");

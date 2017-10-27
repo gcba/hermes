@@ -1,15 +1,15 @@
 'use strict';
 
-import 'whatwg-fetch'
+import 'whatwg-fetch';
 
 import isMobile from 'ismobilejs';
 import platform from 'platform';
 
 let errors = [];
 
-const fail = (message, type) => {
-    errors.push({ message, type });
-}
+const fail = (type) => {
+    errors.push(type);
+};
 
 const check = {
     isString: (thing) => {
@@ -23,10 +23,10 @@ const check = {
     },
     isPlainObject: (thing) => {
         return typeof thing === 'object' &&
-                thing !== null &&
-                thing.constructor === Object &&
-                thing.hasOwnProperty('isPrototypeOf') === false &&
-                thing.toString() === '[object Object]';
+            thing !== null &&
+            thing.constructor === Object &&
+            thing.hasOwnProperty('isPrototypeOf') === false &&
+            thing.toString() === '[object Object]';
     }
 };
 
@@ -34,50 +34,46 @@ const validate = {
     options: (value) => {
         if (check.isPlainObject(value)) return true;
 
-        fail('invalid options object', 'INVALID_OPTIONS');
+        fail('INVALID_OPTIONS');
     },
     rating: (value) => {
         if (check.isInteger(value) && value >= -127 && value <= 127) return value;
 
-        fail('invalid rating', 'INVALID_RATING');
+        fail('INVALID_RATING');
     },
     description: (value) => {
-        const errorType = 'INVALID_DESCRIPTION';
-
         if (check.isString(value)) {
             const trimmedValue = value.trim();
 
-            if (trimmedValue.length < 3) fail('description too short', errorType);
-            if (trimmedValue.length > 30) fail('description too long', errorType);
+            if (trimmedValue.length < 3) fail('DESCRIPTION_TOO_SHORT');
+            if (trimmedValue.length > 30) fail('DESCRIPTION_TOO_LONG');
 
             return trimmedValue;
         }
 
-        fail('invalid description', errorType);
+        fail('INVALID_DESCRIPTION');
     },
     comment: (value) => {
-        const errorType = 'INVALID_COMMENT';
-
         if (check.isString(value)) {
             const trimmedValue = value.trim();
 
-            if (trimmedValue.length < 3) fail('comment too short', errorType);
-            if (trimmedValue.length > 1000) fail('comment too long', errorType);
+            if (trimmedValue.length < 3) fail('COMMENT_TOO_SHORT');
+            if (trimmedValue.length > 1000) fail('COMMENT_TOO_LONG');
 
             return trimmedValue;
         }
 
-        fail('invalid comment', errorType);
+        fail('INVALID_COMMENT');
     },
     key: (value, name) => {
         if (value && check.isString(value.trim()) && value.trim().length === 32) return value.trim();
 
-        fail('invalid ' + name, 'INVALID_' + name.toUpperCase());
+        fail('INVALID_' + name.toUpperCase());
     },
     token: (value) => {
         if (value && check.isString(value) && value.trim().length > 0) return value.trim();
 
-        fail('invalid token', 'INVALID_TOKEN');
+        fail('INVALID_TOKEN');
     },
     url: (value) => {
         const url = new RegExp(/^(ftp|http|https):\/\/[^ "]+$/);
@@ -88,78 +84,62 @@ const validate = {
             return baseUrl[baseUrl.length - 1] === '/' ? baseUrl + 'ratings' : baseUrl + '/ratings';
         }
 
-        fail('invalid endpoint', 'INVALID_ENDPOINT');
+        fail('INVALID_ENDPOINT');
     },
     appVersion: (value) => {
-        const errorType = 'INVALID_VERSION';
-
         if (check.isString(value)) {
             const trimmedValue = value.trim();
 
-            if (trimmedValue.length < 1) fail('version too short', errorType);
-            if (trimmedValue.length > 15) fail('version too long', errorType);
+            if (trimmedValue.length < 1) fail('VERSION_TOO_SHORT');
+            if (trimmedValue.length > 15) fail('VERSION_TOO_LONG');
 
             return trimmedValue;
         }
 
-        fail('invalid version', errorType);
+        fail('INVALID_VERSION');
     },
     isMobile: (value) => {
         if (value === undefined || value === null || check.isBool(value)) return value;
 
-        fail('invalid isMobile', 'INVALID_IS_MOBILE');
+        fail('INVALID_IS_MOBILE');
     },
     userAgent: (value) => {
         if (check.isString(value) && value.trim().length > 0) return value.trim();
 
-        fail('invalid userAgent', 'INVALID_USER_AGENT');
+        fail('INVALID_USER_AGENT');
     },
     name: (value) => {
-        const errorType = 'INVALID_NAME';
-
         if (check.isString(value)) {
             const trimmedValue = value.trim();
 
-            if (trimmedValue.length < 3) fail('name too short', errorType);
-            if (trimmedValue.length > 70) fail('name too long', errorType);
+            if (trimmedValue.length < 3) fail('NAME_TOO_SHORT');
+            if (trimmedValue.length > 70) fail('NAME_TOO_LONG');
 
             return trimmedValue;
         }
 
-        fail('invalid name', errorType);
+        fail('INVALID_NAME');
     },
     email: (value) => {
-        const errorType = 'INVALID_EMAIL';
         const email = new RegExp(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/);
 
         if (check.isString(value) && email.test(value.trim())) {
             const trimmedValue = value.trim();
 
-            if (trimmedValue.length < 3) fail('email too short', errorType);
-            if (trimmedValue.length > 100) fail('email too long', errorType);
+            if (trimmedValue.length < 3) fail('EMAIL_TOO_SHORT');
+            if (trimmedValue.length > 100) fail('EMAIL_TOO_LONG');
 
             return trimmedValue;
         }
 
-        fail('invalid email', errorType);
+        fail('INVALID_EMAIL');
     },
     mibaId: (value) => {
         if (check.isString(value) && value.length === 36) return value.trim();
 
-        fail('invalid mibaId', 'INVALID_MIBAID');
+        fail('INVALID_MIBAID');
     }
 };
-
-class RatingError {
-    constructor(message) {
-        this.message = message;
-        this.name = 'RatingError'
-    }
-
-    toString() {
-        return this.name + ': ' + this.message
-    }
-}
 
 class Rating {
     constructor(options) {
@@ -213,8 +193,8 @@ class Rating {
 
     get screen() {
         return {
-            width: self.screen.width || window.screen.width,
-            height: self.screen.height || window.screen.height
+            width: this.screen.width || window.screen.width,
+            height: this.screen.height || window.screen.height
         };
     }
 
@@ -222,9 +202,9 @@ class Rating {
         if (this._user) {
             const result = {};
 
-            if (this._user.name) result.name = this._user.name
-            if (this._user.email) result.email = this._user.email
-            if (this._user.mibaId) result.mibaId = this._user.mibaId
+            if (this._user.name) result.name = this._user.name;
+            if (this._user.email) result.email = this._user.email;
+            if (this._user.mibaId) result.mibaId = this._user.mibaId;
 
             return result;
         }
@@ -240,7 +220,6 @@ class Rating {
     }
 
     set user(value) {
-        const isPlainObject = check.isPlainObject(value);
         const hasName = check.isString(value.name) && value.name.trim().length > 0;
         const hasEmail = check.isString(value.email) && value.email.trim().length > 0;
         const hasMibaId = check.isString(value.mibaId) && value.mibaId.trim().length > 0;
@@ -248,7 +227,10 @@ class Rating {
         const email = validate.email(value.email);
         const user = {};
 
-        if (!(isPlainObject && (hasName || hasEmail || hasMibaId))) fail('user object is invalid', 'INVALID_USER');
+        if (!check.isPlainObject(value)) fail('INVALID_USER');
+        if (!hasName) fail('MISSING_NAME');
+        if (!hasEmail && !hasMibaId) fail('MISSING_EMAIL_AND_MIBAID');
+
         if (hasName) user.name = name;
         if (hasEmail) user.email = email;
         if (hasMibaId) user.mibaId = validate.mibaId(value.mibaId);
@@ -257,11 +239,9 @@ class Rating {
     }
 
     set screen(value) {
-        const isPlainObject = check.isPlainObject(value);
-        const hasValidWidth = check.isInteger(value.width) && value > 0;
-        const hasValidHeight = check.isInteger(value.width) && value > 0;
-
-        if (!(isPlainObject && hasValidWidth &&  hasValidHeight)) fail('screen object is invalid', 'INVALID_SCREEN');
+        if (!check.isPlainObject(value)) fail('INVALID_SCREEN');
+        if (!check.isInteger(value.width) && value > 0) fail('INVALID_SCREEN_WIDTH');
+        if (!check.isInteger(value.width) && value > 0) fail('INVALID_SCREEN_HEIGHT');
 
         this._screen = value;
     }
@@ -296,7 +276,7 @@ class Rating {
 
         const checkErrors = () => {
             return new Promise((resolve, reject) => {
-                errors.length == 0 ? resolve() : reject(errors.slice(0));
+                errors.length === 0 ? resolve() : reject(errors.slice(0));
                 errors = [];
             });
         };

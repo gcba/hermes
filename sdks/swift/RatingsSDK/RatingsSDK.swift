@@ -61,16 +61,16 @@ public class Ratings {
     }
     
     private func validateName(_ name: String) -> RatingsError? {
-        guard name.length >= 3 else { return RatingsError.invalidName("name too short") }
-        guard name.length <= 70 else { return RatingsError.invalidName("name too long") }
+        guard name.length >= 3 else { return RatingsError.nameTooShort("name too short") }
+        guard name.length <= 70 else { return RatingsError.nameTooLong("name too long") }
         
         return nil
     }
     
     private func validateEmail(_ email: String) -> RatingsError? {
         guard email.isEmail else { return RatingsError.invalidEmail("invalid email") }
-        guard email.length >= 3 else { return RatingsError.invalidEmail("email too short") }
-        guard email.length <= 100 else { return RatingsError.invalidEmail("email too long") }
+        guard email.length >= 3 else { return RatingsError.emailTooShort("email too short") }
+        guard email.length <= 100 else { return RatingsError.emailTooLong("email too long") }
         
         return nil
     }
@@ -88,15 +88,15 @@ public class Ratings {
     }
     
     private func validateDescription(_ description: String) -> RatingsError? {
-        guard description.length >= 3 else { return RatingsError.invalidDescription("description too short") }
-        guard description.length <= 30 else { return RatingsError.invalidDescription("description too long") }
+        guard description.length >= 3 else { return RatingsError.descriptionTooShort("description too short") }
+        guard description.length <= 30 else { return RatingsError.descriptionTooLong("description too long") }
         
         return nil
     }
     
     private func validateComment(_ comment: String) -> RatingsError? {
-        guard comment.length >= 3 else { return RatingsError.invalidComment("comment too short") }
-        guard comment.length <= 1000 else { return RatingsError.invalidComment("comment too long") }
+        guard comment.length >= 3 else { return RatingsError.commentTooShort("comment too short") }
+        guard comment.length <= 1000 else { return RatingsError.commentTooLong("comment too long") }
         
         return nil
     }

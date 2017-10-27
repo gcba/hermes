@@ -20,13 +20,13 @@ enum RatingsValidationError implements RatingsError {
     COMMENT_TOO_LONG(110, "comment too long"),
     INVALID_RATING(111, "invalid rating");
 
-    private final int code;
-    private final String description;
-
     RatingsValidationError(int code, String description) {
         this.code = code;
         this.description = description;
     }
+
+    private final int code;
+    private final String description;
 
     public String getDescription() {
         return description;

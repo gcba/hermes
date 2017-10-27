@@ -2,10 +2,9 @@ package gcba.ratings.example;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import org.json.JSONObject;
 
 import gcba.ratings.sdk.RatingsResult;
-import gcba.ratings.sdk.RatingsSDK;
+import gcba.ratings.sdk.Ratings;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
                 String range = app;
                 String token = app;
 
-                RatingsSDK rating = new RatingsSDK("https://7333ab98.ngrok.io", app, platform, range, token);
+                Ratings rating = new Ratings("https://7333ab98.ngrok.io", app, platform, range, token);
                 RatingsResult result;
 
                 // Rating only; no user

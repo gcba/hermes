@@ -1844,8 +1844,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 var errors = [];
 
-var fail = function fail(message, type) {
-    errors.push({ message: message, type: type });
+var fail = function fail(type) {
+    errors.push(type);
 };
 
 var check = {
@@ -1867,50 +1867,46 @@ var validate = {
     options: function options(value) {
         if (check.isPlainObject(value)) return true;
 
-        fail('invalid options object', 'INVALID_OPTIONS');
+        fail('INVALID_OPTIONS');
     },
     rating: function rating(value) {
         if (check.isInteger(value) && value >= -127 && value <= 127) return value;
 
-        fail('invalid rating', 'INVALID_RATING');
+        fail('INVALID_RATING');
     },
     description: function description(value) {
-        var errorType = 'INVALID_DESCRIPTION';
-
         if (check.isString(value)) {
             var trimmedValue = value.trim();
 
-            if (trimmedValue.length < 3) fail('description too short', errorType);
-            if (trimmedValue.length > 30) fail('description too long', errorType);
+            if (trimmedValue.length < 3) fail('DESCRIPTION_TOO_SHORT');
+            if (trimmedValue.length > 30) fail('DESCRIPTION_TOO_LONG');
 
             return trimmedValue;
         }
 
-        fail('invalid description', errorType);
+        fail('INVALID_DESCRIPTION');
     },
     comment: function comment(value) {
-        var errorType = 'INVALID_COMMENT';
-
         if (check.isString(value)) {
             var trimmedValue = value.trim();
 
-            if (trimmedValue.length < 3) fail('comment too short', errorType);
-            if (trimmedValue.length > 1000) fail('comment too long', errorType);
+            if (trimmedValue.length < 3) fail('COMMENT_TOO_SHORT');
+            if (trimmedValue.length > 1000) fail('COMMENT_TOO_LONG');
 
             return trimmedValue;
         }
 
-        fail('invalid comment', errorType);
+        fail('INVALID_COMMENT');
     },
     key: function key(value, name) {
         if (value && check.isString(value.trim()) && value.trim().length === 32) return value.trim();
 
-        fail('invalid ' + name, 'INVALID_' + name.toUpperCase());
+        fail('INVALID_' + name.toUpperCase());
     },
     token: function token(value) {
         if (value && check.isString(value) && value.trim().length > 0) return value.trim();
 
-        fail('invalid token', 'INVALID_TOKEN');
+        fail('INVALID_TOKEN');
     },
     url: function url(value) {
         var url = new RegExp(/^(ftp|http|https):\/\/[^ "]+$/);
@@ -1921,85 +1917,62 @@ var validate = {
             return baseUrl[baseUrl.length - 1] === '/' ? baseUrl + 'ratings' : baseUrl + '/ratings';
         }
 
-        fail('invalid endpoint', 'INVALID_ENDPOINT');
+        fail('INVALID_ENDPOINT');
     },
     appVersion: function appVersion(value) {
-        var errorType = 'INVALID_VERSION';
-
         if (check.isString(value)) {
             var trimmedValue = value.trim();
 
-            if (trimmedValue.length < 1) fail('version too short', errorType);
-            if (trimmedValue.length > 15) fail('version too long', errorType);
+            if (trimmedValue.length < 1) fail('VERSION_TOO_SHORT');
+            if (trimmedValue.length > 15) fail('VERSION_TOO_LONG');
 
             return trimmedValue;
         }
 
-        fail('invalid version', errorType);
+        fail('INVALID_VERSION');
     },
     isMobile: function isMobile$$1(value) {
         if (value === undefined || value === null || check.isBool(value)) return value;
 
-        fail('invalid isMobile', 'INVALID_IS_MOBILE');
+        fail('INVALID_IS_MOBILE');
     },
     userAgent: function userAgent(value) {
         if (check.isString(value) && value.trim().length > 0) return value.trim();
 
-        fail('invalid userAgent', 'INVALID_USER_AGENT');
+        fail('INVALID_USER_AGENT');
     },
     name: function name(value) {
-        var errorType = 'INVALID_NAME';
-
         if (check.isString(value)) {
             var trimmedValue = value.trim();
 
-            if (trimmedValue.length < 3) fail('name too short', errorType);
-            if (trimmedValue.length > 70) fail('name too long', errorType);
+            if (trimmedValue.length < 3) fail('NAME_TOO_SHORT');
+            if (trimmedValue.length > 70) fail('NAME_TOO_LONG');
 
             return trimmedValue;
         }
 
-        fail('invalid name', errorType);
+        fail('INVALID_NAME');
     },
     email: function email(value) {
-        var errorType = 'INVALID_EMAIL';
         var email = new RegExp(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/);
 
         if (check.isString(value) && email.test(value.trim())) {
             var trimmedValue = value.trim();
 
-            if (trimmedValue.length < 3) fail('email too short', errorType);
-            if (trimmedValue.length > 100) fail('email too long', errorType);
+            if (trimmedValue.length < 3) fail('EMAIL_TOO_SHORT');
+            if (trimmedValue.length > 100) fail('EMAIL_TOO_LONG');
 
             return trimmedValue;
         }
 
-        fail('invalid email', errorType);
+        fail('INVALID_EMAIL');
     },
     mibaId: function mibaId(value) {
         if (check.isString(value) && value.length === 36) return value.trim();
 
-        fail('invalid mibaId', 'INVALID_MIBAID');
+        fail('INVALID_MIBAID');
     }
 };
-
-var RatingError = function () {
-    function RatingError(message) {
-        _classCallCheck(this, RatingError);
-
-        this.message = message;
-        this.name = 'RatingError';
-    }
-
-    _createClass(RatingError, [{
-        key: 'toString',
-        value: function toString() {
-            return this.name + ': ' + this.message;
-        }
-    }]);
-
-    return RatingError;
-}();
 
 var Rating = function () {
     function Rating(options) {
@@ -2059,7 +2032,7 @@ var Rating = function () {
 
             var checkErrors = function checkErrors() {
                 return new Promise(function (resolve, reject) {
-                    errors.length == 0 ? resolve() : reject(errors.slice(0));
+                    errors.length === 0 ? resolve() : reject(errors.slice(0));
                     errors = [];
                 });
             };
@@ -2107,16 +2080,14 @@ var Rating = function () {
         key: 'screen',
         get: function get() {
             return {
-                width: self.screen.width || window.screen.width,
-                height: self.screen.height || window.screen.height
+                width: this.screen.width || window.screen.width,
+                height: this.screen.height || window.screen.height
             };
         },
         set: function set(value) {
-            var isPlainObject = check.isPlainObject(value);
-            var hasValidWidth = check.isInteger(value.width) && value > 0;
-            var hasValidHeight = check.isInteger(value.width) && value > 0;
-
-            if (!(isPlainObject && hasValidWidth && hasValidHeight)) fail('screen object is invalid', 'INVALID_SCREEN');
+            if (!check.isPlainObject(value)) fail('INVALID_SCREEN');
+            if (!check.isInteger(value.width) && value > 0) fail('INVALID_SCREEN_WIDTH');
+            if (!check.isInteger(value.width) && value > 0) fail('INVALID_SCREEN_HEIGHT');
 
             this._screen = value;
         }
@@ -2136,7 +2107,6 @@ var Rating = function () {
             return;
         },
         set: function set(value) {
-            var isPlainObject = check.isPlainObject(value);
             var hasName = check.isString(value.name) && value.name.trim().length > 0;
             var hasEmail = check.isString(value.email) && value.email.trim().length > 0;
             var hasMibaId = check.isString(value.mibaId) && value.mibaId.trim().length > 0;
@@ -2144,7 +2114,10 @@ var Rating = function () {
             var email = validate.email(value.email);
             var user = {};
 
-            if (!(isPlainObject && (hasName || hasEmail || hasMibaId))) fail('user object is invalid', 'INVALID_USER');
+            if (!check.isPlainObject(value)) fail('INVALID_USER');
+            if (!hasName) fail('MISSING_NAME');
+            if (!hasEmail && !hasMibaId) fail('MISSING_EMAIL_AND_MIBAID');
+
             if (hasName) user.name = name;
             if (hasEmail) user.email = email;
             if (hasMibaId) user.mibaId = validate.mibaId(value.mibaId);
