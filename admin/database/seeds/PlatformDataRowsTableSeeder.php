@@ -61,6 +61,23 @@ class PlatformDataRowsTableSeeder extends Seeder
             ])->save();
         }
 
+        $dataRow = $this->dataRow($platformDataType, 'apps');
+        if (!$dataRow->exists) {
+            $dataRow->fill([
+                'type'         => 'relationship',
+                'field'        => 'platform_belongstomany_app_relationship',
+                'display_name' => 'Apps',
+                'required'     => 1,
+                'browse'       => 1,
+                'read'         => 1,
+                'edit'         => 1,
+                'add'          => 1,
+                'delete'       => 1,
+                'details'      => '{"model":"App\\\App","table":"apps","type":"belongsToMany","column":"id","key":"id","label":"name","pivot_table":"app_platform","pivot":"1"}',
+                'order'        => 4,
+            ])->save();
+        }
+
         $dataRow = $this->dataRow($platformDataType, 'updated_at');
         if (!$dataRow->exists) {
             $dataRow->fill([
@@ -73,7 +90,7 @@ class PlatformDataRowsTableSeeder extends Seeder
                 'add'          => 0,
                 'delete'       => 0,
                 'details'      => '',
-                'order'        => 4,
+                'order'        => 5,
             ])->save();
         }
 
@@ -89,7 +106,7 @@ class PlatformDataRowsTableSeeder extends Seeder
                 'add'          => 0,
                 'delete'       => 0,
                 'details'      => '',
-                'order'        => 5,
+                'order'        => 6,
             ])->save();
         }
 
@@ -105,7 +122,7 @@ class PlatformDataRowsTableSeeder extends Seeder
                 'add'          => 0,
                 'delete'       => 0,
                 'details'      => '',
-                'order'        => 6,
+                'order'        => 7,
             ])->save();
         }
     }

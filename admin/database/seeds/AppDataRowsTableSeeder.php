@@ -56,7 +56,7 @@ class AppDataRowsTableSeeder extends Seeder
                 'edit'         => 1,
                 'add'          => 1,
                 'delete'       => 1,
-                'details'      => '{"default":"M","options":{"Móvil":"Móvil","Web":"Web"},"validation":{"rules":["required","alpha","size:1"],"messages":{"required":"Falta el campo :attribute.","alpha":"El campo :attribute sólo puede constar de una letra.","size":"El campo :attribute sólo puede constar de una letra."}}}',
+                'details'      => '{"default":"M","options":{"M":"Móvil","W":"Web"},"validation":{"rules":["required","alpha","size:1"],"messages":{"required":"Falta el campo :attribute.","alpha":"El campo :attribute sólo puede constar de una letra.","size":"El campo :attribute sólo puede constar de una letra."}}}',
                 'order'        => 3,
             ])->save();
         }
@@ -64,15 +64,16 @@ class AppDataRowsTableSeeder extends Seeder
         $dataRow = $this->dataRow($appDataType, 'platforms');
         if (!$dataRow->exists) {
             $dataRow->fill([
-                'type'         => 'select_multiple',
+                'type'         => 'relationship',
+                'field'        => 'app_belongstomany_platform_relationship',
                 'display_name' => 'Plataformas',
                 'required'     => 1,
-                'browse'       => 0,
+                'browse'       => 1,
                 'read'         => 1,
                 'edit'         => 1,
                 'add'          => 1,
                 'delete'       => 1,
-                'details'      => '{"relationship":{"key":"id","label":"name","page_slug":"admin/platforms"}}',
+                'details'      => '{"model":"App\\\Platform","table":"platforms","type":"belongsToMany","column":"id","key":"id","label":"name","pivot_table":"app_platform","pivot":"1"}',
                 'order'        => 4,
             ])->save();
         }
@@ -80,15 +81,16 @@ class AppDataRowsTableSeeder extends Seeder
         $dataRow = $this->dataRow($appDataType, 'users');
         if (!$dataRow->exists) {
             $dataRow->fill([
-                'type'         => 'select_multiple',
+                'type'         => 'relationship',
+                'field'        => 'app_belongstomany_user_relationship',
                 'display_name' => 'Personal',
                 'required'     => 1,
-                'browse'       => 0,
+                'browse'       => 1,
                 'read'         => 1,
                 'edit'         => 1,
                 'add'          => 1,
                 'delete'       => 1,
-                'details'      => '{"relationship":{"key":"id","label":"name","page_slug":"admin/users"}}',
+                'details'      => '{"model":"App\\\User","table":"users","type":"belongsToMany","column":"id","key":"id","label":"name","pivot_table":"app_user","pivot":"1"}',
                 'order'        => 5,
             ])->save();
         }

@@ -88,28 +88,6 @@ class App extends Model
         $this->attributes['name'] = ucfirst(filter_var(trim($value), FILTER_SANITIZE_SPECIAL_CHARS));
     }
 
-    public function setTypeAttribute($value) {
-        $type = strtolower($value);
-
-        switch ($type) {
-            case 'móvil': $this->attributes['type'] = 'M';
-            case 'web': $this->attributes['type'] = 'W';
-        }
-
-        if (strlen($value) == 1) {
-            $this->attributes['type'] = $value;
-        }
-    }
-
-    public function getTypeAttribute() {
-        if (array_key_exists('type', $this->attributes)) {
-            switch ($this->attributes['type']) {
-                case 'M': return 'Móvil';
-                case 'W': return 'Web';
-            }
-        }
-    }
-
     public function getCreatedAtAttribute() {
         $utils = resolve('App\Services\UtilsService');
 

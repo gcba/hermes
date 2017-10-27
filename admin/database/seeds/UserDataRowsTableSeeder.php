@@ -114,15 +114,16 @@ class UserDataRowsTableSeeder extends Seeder
         $dataRow = $this->dataRow($userDataType, 'apps');
         if (!$dataRow->exists) {
             $dataRow->fill([
-                'type'         => 'select_multiple',
+                'type'         => 'relationship',
+                'field'        => 'user_belongstomany_app_relationship',
                 'display_name' => 'Aplicaciones',
                 'required'     => 0,
-                'browse'       => 0,
+                'browse'       => 1,
                 'read'         => 1,
                 'edit'         => 1,
                 'add'          => 1,
                 'delete'       => 1,
-                'details'      => '{"relationship":{"key":"id","label":"name","page_slug":"admin/apps"}}',
+                'details'      => '{"model":"App\\\App","table":"apps","type":"belongsToMany","column":"id","key":"id","label":"name","pivot_table":"app_user","pivot":"1"}',
                 'order'        => 7,
             ])->save();
         }

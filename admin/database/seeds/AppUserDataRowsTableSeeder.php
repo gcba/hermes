@@ -80,15 +80,16 @@ class AppUserDataRowsTableSeeder extends Seeder
         $dataRow = $this->dataRow($appuserDataType, 'apps');
         if (!$dataRow->exists) {
             $dataRow->fill([
-                'type'         => 'select_multiple',
+                'type'         => 'relationship',
+                'field'        => 'appuser_belongstomany_app_relationship',
                 'display_name' => 'Aplicaciones',
                 'required'     => 1,
-                'browse'       => 0,
+                'browse'       => 1,
                 'read'         => 1,
                 'edit'         => 0,
                 'add'          => 0,
                 'delete'       => 0,
-                'details'      => '{"relationship":{"key":"id","label":"name","page_slug":"admin/apps"}}',
+                'details'      => '{"model":"App\\\App","table":"apps","type":"belongsToMany","column":"id","key":"id","label":"name","pivot_table":"app_user_app","pivot":"1"}',
                 'order'        => 5,
             ])->save();
         }
@@ -96,15 +97,16 @@ class AppUserDataRowsTableSeeder extends Seeder
         $dataRow = $this->dataRow($appuserDataType, 'platforms');
         if (!$dataRow->exists) {
             $dataRow->fill([
-                'type'         => 'select_multiple',
+                'type'         => 'relationship',
+                'field'        => 'appuser_belongstomany_platform_relationship',
                 'display_name' => 'Plataformas',
                 'required'     => 1,
-                'browse'       => 0,
+                'browse'       => 1,
                 'read'         => 1,
                 'edit'         => 0,
                 'add'          => 0,
                 'delete'       => 0,
-                'details'      => '{"relationship":{"key":"id","label":"name","page_slug":"admin/platforms"}}',
+                'details'      => '{"model":"AppUser\\\Platform","table":"platforms","type":"belongsToMany","column":"id","key":"id","label":"name","pivot_table":"app_user_platform","pivot":"1"}',
                 'order'        => 6,
             ])->save();
         }

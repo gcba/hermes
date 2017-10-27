@@ -137,7 +137,7 @@ class MenuItemsTableSeeder extends Seeder
 
             $contextMenuItem = MenuItem::firstOrNew([
                 'menu_id'    => $adminMenu->id,
-                'title'      => 'Contexto',
+                'title'      => 'Más',
                 'order'      => 7,
                 'url'        => null,
                 'parameters' => null,
@@ -145,7 +145,7 @@ class MenuItemsTableSeeder extends Seeder
             if (!$contextMenuItem->exists) {
                 $contextMenuItem->fill([
                     'target'     => '_self',
-                    'icon_class' => 'voyager-world',
+                    'icon_class' => 'voyager-plus',
                     'color'      => null,
                     'parent_id'  => null,
                 ])->save();
