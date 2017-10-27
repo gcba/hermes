@@ -224,21 +224,21 @@
 
         const messagePanel = function(direction) {
             return $('<div>', { class: 'panel panel-default message message-' + direction });
-        }
+        };
 
         const messageHeading = function(content, direction) {
             return $('<div>', {
                 class: 'message-pill',
                 text: content
              });
-        }
+        };
 
         const messageBody = function(content) {
             return $('<div>', {
                 class: 'panel-body message-body',
                 text: content
              });
-        }
+        };
 
         const threadHeading = function(name, row) {
             const container = $('<div>', { class: 'messages-detail-header' });
@@ -256,7 +256,7 @@
             container.append(user);
 
             return container;
-        }
+        };
 
         const buildMessage = function(content) {
             const message = messagePanel(content.direction);
@@ -273,7 +273,7 @@
             }
 
             return message;
-        }
+        };
 
         const buildThread = function(messages, row) {
             const thread = $('.messages-detail-list').first().empty();
@@ -288,7 +288,7 @@
             for (const message of messages) {
                thread.append(buildMessage(message));
             }
-        }
+        };
 
         const selectRow = function(row) {
             const rowData = $('#dataTable').DataTable().row(row).data();
@@ -328,41 +328,41 @@
                     })
                 }
             }
-        }
+        };
 
         const appendMessage = function(message) {
             const thread = $('.messages-detail-list').first();
             const newMessage = buildMessage(message);
 
             newMessage.hide().appendTo(thread).fadeIn('slow');
-        }
+        };
 
         const showMessages = function() {
             $('.messages-detail-list').removeClass('hidden');
-        }
+        };
 
         const hideMessages = function() {
             $('.messages-detail-list').addClass('hidden');
-        }
+        };
 
         const showForm = function() {
             $('.messages-detail-compose').removeClass('hidden');
-        }
+        };
 
         const hideForm = function() {
             $('.messages-detail-compose').addClass('hidden');
-        }
+        };
 
         const enableForm = function() {
             $('#messages-form :input, #messages-form button').prop('disabled', false);
-        }
+        };
 
         const disableForm = function() {
             $('#messages-form :input, #messages-form button').prop('disabled', true);
-        }
+        };
 
         const reloadThreads = function() {
             $('#dataTable').DataTable().ajax.reload();
-        }
+        };
     </script>
 @stop
