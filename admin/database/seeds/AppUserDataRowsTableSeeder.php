@@ -106,7 +106,7 @@ class AppUserDataRowsTableSeeder extends Seeder
                 'edit'         => 0,
                 'add'          => 0,
                 'delete'       => 0,
-                'details'      => '{"model":"AppUser\\\Platform","table":"platforms","type":"belongsToMany","column":"id","key":"id","label":"name","pivot_table":"app_user_platform","pivot":"1"}',
+                'details'      => '{"model":"App\\\Platform","table":"platforms","type":"belongsToMany","column":"id","key":"id","label":"name","pivot_table":"app_user_platform","pivot":"1"}',
                 'order'        => 6,
             ])->save();
         }
