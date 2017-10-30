@@ -75,7 +75,7 @@ class Apps_Platforms_UsersSeeder extends Seeder
             $options = [$denunciaVial->id, $miBA->id, $masSimple->id];
 
             foreach ($supportUsers as $support) {
-                $support->apps()->attach(array_rand($options));
+                $support->apps()->attach($options[array_rand($options)]);
             }
         }
     }
