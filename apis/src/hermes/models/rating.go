@@ -4,6 +4,7 @@ import (
 	"time"
 
 	"github.com/jinzhu/gorm"
+	"github.com/lib/pq"
 )
 
 type Rating struct {
@@ -21,7 +22,9 @@ type Rating struct {
 	AppUserID       uint   `gorm:"column:appuser_id;DEFAULT:NULL"`
 	BrowserID       uint   `gorm:"DEFAULT:NULL"`
 
-	CreatedAt time.Time `gorm:"not null;type:datetime;default:CURRENT_TIMESTAMP"`
+	CreatedAt time.Time   `gorm:"not null;type:datetime;default:CURRENT_TIMESTAMP"`
+	UpdatedAt pq.NullTime `gorm:"default:NULL"`
+	DeletedAt pq.NullTime `gorm:"default:NULL"`
 }
 
 // CreateRating creates a new rating

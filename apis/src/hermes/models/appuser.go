@@ -4,6 +4,7 @@ import (
 	"time"
 
 	"github.com/jinzhu/gorm"
+	"github.com/lib/pq"
 )
 
 type AppUser struct {
@@ -15,7 +16,9 @@ type AppUser struct {
 	Platforms []Platform `gorm:"many2many:app_user_platform;"`
 	Devices   []Device   `gorm:"many2many:app_user_device;"`
 
-	CreatedAt time.Time `gorm:"not null;type:datetime;default:CURRENT_TIMESTAMP"`
+	CreatedAt time.Time   `gorm:"not null;type:datetime;default:CURRENT_TIMESTAMP"`
+	UpdatedAt pq.NullTime `gorm:"default:NULL"`
+	DeletedAt pq.NullTime `gorm:"default:NULL"`
 }
 
 // TableName sets AppUser's table name to be `appuser`
