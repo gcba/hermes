@@ -78,14 +78,6 @@
                 <li class="menu-item -level-2"><a class="link title -active link-usoapis" href="../uso/apis.html">APIs</a>
                   <ul class="headings heading-list">
                     <li class="heading-item -depth-2"><a class="hlink link-instalacion" href="#instalacion">Instalación</a>
-                      <ul class="heading-list -depth-2">
-                        <li class="heading-item -depth-3"><a class="hlink link-package-manager" href="#package-manager">Package manager</a>
-                        </li>
-                        <li class="heading-item -depth-3"><a class="hlink link-dependencias" href="#dependencias">Dependencias</a>
-                        </li>
-                        <li class="heading-item -depth-3"><a class="hlink link-variables-de-entorno" href="#variables-de-entorno">Variables de entorno</a>
-                        </li>
-                      </ul>
                     </li>
                     <li class="heading-item -depth-2"><a class="hlink link-api-de-calificaciones" href="#api-de-calificaciones">API de calificaciones</a>
                     </li>
@@ -117,25 +109,7 @@
         </div>
         <div class="markdown-body"><h1 id="apis">APIs</h1>
 <h2 id="instalacion">Instalaci&#xF3;n</h2>
-<p>Implica clonar el repo, instalar las dependencias y configurar las variables de entorno.</p>
-<h3 id="package-manager">Package manager</h3>
-<p>Para instalar <a href="https://github.com/Masterminds/glide">Glide</a>:</p>
-<h4 id="macos">MacOS</h4>
-<pre><code class="lang-bash">$ brew install glide
-</code></pre>
-<h4 id="ubuntu">Ubuntu</h4>
-<p>En <strong>Zesty (17.04)</strong> o m&#xE1;s reciente:</p>
-<pre><code class="lang-bash">$ sudo add-apt-repository ppa:masterminds/glide &amp;&amp; sudo apt-get update
-$ sudo apt-get install golang-glide
-</code></pre>
-<p>En versiones anteriores a Zesty:</p>
-<pre><code class="lang-bash">$ sudo add-apt-repository ppa:masterminds/glide &amp;&amp; sudo apt-get update
-$ sudo apt-get install glide
-</code></pre>
-<h3 id="dependencias">Dependencias</h3>
-<pre><code class="lang-bash">$ glide install
-</code></pre>
-<h3 id="variables-de-entorno">Variables de entorno</h3>
+<p>Implica clonar el repo y configurar las variables de entorno.</p>
 <p>En <code>&lt;REPO&gt;/apis/src/hermes</code> crear un archivo <code>.env</code> con los valores de configuraci&#xF3;n:</p>
 <pre><code class="lang-bash"><span class="pl-c1">export</span> GOPATH=&lt;REPO&gt;/apis
 
@@ -166,7 +140,7 @@ $ sudo apt-get install glide
 <span class="pl-c1">export</span> HERMES_RATINGS_PUBLICKEY=&lt;RATINGS_PUBLICKEY&gt; <span class="pl-c"># Para la autenticaci&#xF3;n JWT</span>
 <span class="pl-c1">export</span> HERMES_STATS_PUBLICKEY=&lt;STATS_PUBLICKEY&gt; <span class="pl-c"># Para la autenticaci&#xF3;n JWT</span>
 </code></pre>
-<p>Finalmente, cargarlo con:</p>
+<p>Luego cargarlo con:</p>
 <pre><code class="lang-bash">$ <span class="pl-c1">source</span> .env
 </code></pre>
 <p>Ahora se pueden correr las APIs.</p>

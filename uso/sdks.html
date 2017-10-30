@@ -110,7 +110,7 @@
         <div class="markdown-body"><h1 id="sdks">SDKs</h1>
 <h2 id="javascript">JavaScript</h2>
 <h3 id="instalacion">Instalaci&#xF3;n</h3>
-<h4 id="modulo-es6">M&#xF3;dulo ES6</h4>
+<h4 id="modulo-es2015+">M&#xF3;dulo ES2015+</h4>
 <p>Se encuentra en <code>&lt;REPO&gt;/sdks/js</code>.</p>
 <h5 id="npm">NPM</h5>
 <pre><code class="lang-bash">$ npm install <span class="pl-s">&apos;&lt;REPO&gt;/sdks/js&apos;</span>
@@ -166,6 +166,8 @@ sdk.create({
 <pre><code class="lang-swift"><span class="pl-k">import</span> RatingsSDK
 </code></pre>
 <pre><code class="lang-swift"><span class="pl-k">let</span> sdk = <span class="hljs-type">Ratings</span>(api: &lt;<span class="hljs-type">ENDPOINT</span>&gt;, token: &lt;<span class="hljs-type">TOKEN</span>&gt;, app: &lt;<span class="hljs-type">APP</span>&gt;, platform: &lt;<span class="hljs-type">PLATFORM</span>&gt;, range: &lt;<span class="hljs-type">RANGE</span>&gt;)
+
+sdk.timeout = <span class="hljs-number">5</span> <span class="pl-c">// Opcional; por defecto son 3 segundos</span>
 
 <span class="pl-c">// Opcional; omitir para calificaciones an&#xF3;nimas</span>
 sdk.user = <span class="hljs-type">RatingsUser</span>(

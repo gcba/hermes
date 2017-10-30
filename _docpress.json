@@ -970,24 +970,7 @@
               {
                 "title": "Instalación",
                 "depth": 2,
-                "id": "instalacion",
-                "headings": [
-                  {
-                    "title": "Package manager",
-                    "depth": 3,
-                    "id": "package-manager"
-                  },
-                  {
-                    "title": "Dependencias",
-                    "depth": 3,
-                    "id": "dependencias"
-                  },
-                  {
-                    "title": "Variables de entorno",
-                    "depth": 3,
-                    "id": "variables-de-entorno"
-                  }
-                ]
+                "id": "instalacion"
               },
               {
                 "title": "API de calificaciones",
@@ -2021,24 +2004,7 @@
         {
           "title": "Instalación",
           "depth": 2,
-          "id": "instalacion",
-          "headings": [
-            {
-              "title": "Package manager",
-              "depth": 3,
-              "id": "package-manager"
-            },
-            {
-              "title": "Dependencias",
-              "depth": 3,
-              "id": "dependencias"
-            },
-            {
-              "title": "Variables de entorno",
-              "depth": 3,
-              "id": "variables-de-entorno"
-            }
-          ]
+          "id": "instalacion"
         },
         {
           "title": "API de calificaciones",
