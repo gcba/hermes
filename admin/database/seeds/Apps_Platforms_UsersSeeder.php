@@ -71,11 +71,11 @@ class Apps_Platforms_UsersSeeder extends Seeder
             // Let's attach Users to Apps
 
             $supportRole = Role::where('name', 'support')->firstOrFail();
-            $supportUsers = User::with('apps')->where('role_id', $supportRole->id)->get();
-            $appOptions = [$denunciaVial->id, $miBA->id, $masSimple->id];
+            $supportUsers = User::where('role_id', $supportRole->id)->get();
+            $options = [$denunciaVial->id, $miBA->id, $masSimple->id];
 
             foreach ($supportUsers as $support) {
-                $support->apps()->attach(array_rand($appOptions));
+                $support->apps()->attach(array_rand($options));
             }
         }
     }
