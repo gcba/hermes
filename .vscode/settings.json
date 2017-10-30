@@ -1,6 +1,6 @@
 // Place your settings in this file to overwrite default and user settings.
 {
     "go.gopath": "/Users/ritazerrizuela/Documents/Projects/Hermes/hermes/apis",
-    "go.goroot": "/usr/local/Cellar/go/1.9.1/libexec",
+    "go.goroot": "/usr/local/Cellar/go/1.9.2/libexec",
     "java.configuration.updateBuildConfiguration": "automatic"
 }
