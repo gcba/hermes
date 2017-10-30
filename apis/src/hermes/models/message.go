@@ -15,7 +15,6 @@ type Message struct {
 	RatingID    uint   `gorm:"not null"`
 
 	CreatedAt time.Time `gorm:"not null;type:datetime;default:CURRENT_TIMESTAMP"`
-	UpdatedAt time.Time `gorm:"-"`
 }
 
 // CreateMessage creates a new message

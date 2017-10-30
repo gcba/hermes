@@ -7,14 +7,13 @@ import (
 )
 
 type App struct {
-	ID   uint   `gorm:"primary_key"`
-	Name string `gorm:"size:30;not null"`
-	Type string `gorm:"type:char;not null"`
-	Key  string `gorm:"type:char(32);not null"`
+	ID       uint      `gorm:"primary_key"`
+	Name     string    `gorm:"size:30;not null"`
+	Type     string    `gorm:"type:char;not null"`
+	Key      string    `gorm:"type:char(32);not null"`
+	AppUsers []AppUser `gorm:"many2many:app_user_app;"`
 
 	CreatedAt time.Time `gorm:"not null;type:datetime;default:CURRENT_TIMESTAMP"`
-	UpdatedAt time.Time `gorm:"-"`
-	DeletedAt time.Time `gorm:"-"`
 }
 
 // GetApp gets an app by key

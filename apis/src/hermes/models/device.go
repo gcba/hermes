@@ -7,17 +7,16 @@ import (
 )
 
 type Device struct {
-	ID           uint   `gorm:"primary_key;AUTO_INCREMENT"`
-	Name         string `gorm:"size:30;not null"`
-	ScreenWidth  int    `gorm:"not null"`
-	ScreenHeight int    `gorm:"not null"`
-	PPI          *int   `gorm:"DEFAULT:NULL"`
-	BrandID      uint   `gorm:"DEFAULT:NULL"`
-	PlatformID   uint   `gorm:"DEFAULT:NULL"`
+	ID           uint      `gorm:"primary_key;AUTO_INCREMENT"`
+	Name         string    `gorm:"size:30;not null"`
+	ScreenWidth  int       `gorm:"not null"`
+	ScreenHeight int       `gorm:"not null"`
+	PPI          *int      `gorm:"DEFAULT:NULL"`
+	BrandID      uint      `gorm:"DEFAULT:NULL"`
+	PlatformID   uint      `gorm:"DEFAULT:NULL"`
+	AppUsers     []AppUser `gorm:"many2many:app_user_device;"`
 
 	CreatedAt time.Time `gorm:"not null;type:datetime;default:CURRENT_TIMESTAMP"`
-	UpdatedAt time.Time `gorm:"-"`
-	DeletedAt time.Time `gorm:"-"`
 }
 
 // GetDevice gets a device by name and brand id

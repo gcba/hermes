@@ -22,6 +22,12 @@ type (
 		write *gorm.DB
 	}
 
+	records struct {
+		rating   *models.Rating
+		app      *models.App
+		platform *models.Platform
+	}
+
 	appResult struct {
 		value *models.App
 		err   error
@@ -34,6 +40,11 @@ type (
 
 	rangeResult struct {
 		value *models.Range
+		err   error
+	}
+
+	deviceResult struct {
+		value *models.Device
 		err   error
 	}
 )
@@ -193,7 +204,7 @@ func hasAppUser(request *parser.Request) bool {
 	return true
 }
 
-func getAppUser(dbs *databases, frame *frame) (*models.AppUser, error) {
+func getAppUser(records *records, dbs *databases, frame *frame, deviceChan chan deviceResult) (*models.AppUser, error) {
 	var getResult *gorm.DB
 
 	getErrorMessage := "Could not get an AppUser: "
@@ -207,18 +218,27 @@ func getAppUser(dbs *databases, frame *frame) (*models.AppUser, error) {
 	}
 
 	getErrorList := getResult.GetErrors()
+	device, deviceOk := <-deviceChan
 
 	if getResult.RecordNotFound() {
-		var appuser *models.AppUser
+		if !deviceOk {
+			return &models.AppUser{}, loggedErrorResponse(createErrorMessage, "Could not get a Device", frame.context)
+		}
+
+		if device.err != nil {
+			return &models.AppUser{}, loggedErrorResponse(createErrorMessage, device.err.Error(), frame.context)
+		}
+
+		appuser := &models.AppUser{
+			Name:      frame.request.User.Name,
+			Apps:      []models.App{*records.app},
+			Platforms: []models.Platform{*records.platform},
+			Devices:   []models.Device{*device.value}}
 
 		if hasMibaID {
-			appuser = &models.AppUser{
-				Name:   frame.request.User.Name,
-				MiBAID: &frame.request.User.MiBAID}
+			appuser.MiBAID = &frame.request.User.MiBAID
 		} else {
-			appuser = &models.AppUser{
-				Name:  frame.request.User.Name,
-				Email: &frame.request.User.Email}
+			appuser.Email = &frame.request.User.Email
 		}
 
 		createResult := models.CreateAppUser(appuser, dbs.write)
@@ -246,15 +266,15 @@ func getAppUser(dbs *databases, frame *frame) (*models.AppUser, error) {
 	return &models.AppUser{}, loggedErrorResponse(getErrorMessage, cannotCastError, frame.context)
 }
 
-func attachAppUser(rating *models.Rating, dbs *databases, frame *frame, channel chan error) {
-	appUser, err := getAppUser(dbs, frame)
+func attachAppUser(records *records, dbs *databases, frame *frame, deviceChan chan deviceResult, errorChan chan error) {
+	appUser, err := getAppUser(records, dbs, frame, deviceChan)
 
 	if err == nil {
-		rating.AppUserID = appUser.ID
+		records.rating.AppUserID = appUser.ID
 	}
 
-	channel <- err
-	close(channel)
+	errorChan <- err
+	close(errorChan)
 }
 
 /*
@@ -403,29 +423,40 @@ func getDevice(brand *models.Brand, platform *models.Platform, dbs *databases, f
 	return &models.Device{}, loggedErrorResponse(getErrorMessage, cannotCastError, frame.context)
 }
 
-func attachDevice(rating *models.Rating, platform *models.Platform, dbs *databases, frame *frame, channel chan error) {
+func attachDevice(records *records, dbs *databases, frame *frame, modelChan chan deviceResult, errorChan chan error) {
 	var brand *models.Brand
 	var brandErr error
+
+	resultStruct := deviceResult{}
 
 	if frame.request.Device.Brand != nil {
 		brand, brandErr = getBrand(dbs, frame)
 
 		if brandErr != nil {
-			channel <- brandErr
-			close(channel)
+			resultStruct.err = brandErr
+
+			modelChan <- resultStruct
+			close(modelChan)
+			errorChan <- brandErr
+			close(errorChan)
 
 			return
 		}
 	}
 
-	device, deviceErr := getDevice(brand, platform, dbs, frame)
+	device, deviceErr := getDevice(brand, records.platform, dbs, frame)
 
 	if deviceErr == nil {
-		rating.DeviceID = device.ID
+		resultStruct.value = device
+		records.rating.DeviceID = device.ID
+	} else {
+		resultStruct.err = deviceErr
 	}
 
-	channel <- deviceErr
-	close(channel)
+	modelChan <- resultStruct
+	close(modelChan)
+	errorChan <- deviceErr
+	close(errorChan)
 }
 
 /*
@@ -471,10 +502,10 @@ func getBrand(dbs *databases, frame *frame) (*models.Brand, error) {
  * Rating
  *
  */
-func buildRating(dbs *databases, frame *frame) (*models.Rating, *models.Platform, error) {
-	appChannel := make(chan appResult)
-	platformChannel := make(chan platformResult)
-	rangeChannel := make(chan rangeResult)
+func buildRating(records *records, dbs *databases, frame *frame) error {
+	appChannel := make(chan appResult, 1)
+	platformChannel := make(chan platformResult, 1)
+	rangeChannel := make(chan rangeResult, 1)
 
 	go getApp(dbs.read, frame, appChannel)
 	go getPlatform(dbs.read, frame, platformChannel)
@@ -485,23 +516,23 @@ func buildRating(dbs *databases, frame *frame) (*models.Rating, *models.Platform
 	rangeRecord, rangeOk := <-rangeChannel
 
 	if !appOk || !platformOk || !rangeOk {
-		return nil, nil, loggedErrorResponse("", channelClosedError, frame.context)
+		return loggedErrorResponse("", channelClosedError, frame.context)
 	}
 
 	if app.err != nil {
-		return nil, nil, app.err
+		return app.err
 	}
 
 	if platform.err != nil {
-		return nil, nil, platform.err
+		return platform.err
 	}
 
 	if rangeRecord.err != nil {
-		return nil, nil, rangeRecord.err
+		return rangeRecord.err
 	}
 
 	if err := validateRating(rangeRecord.value.From, rangeRecord.value.To, frame); err != nil {
-		return nil, nil, err
+		return err
 	}
 
 	rating := &models.Rating{
@@ -514,7 +545,11 @@ func buildRating(dbs *databases, frame *frame) (*models.Rating, *models.Platform
 		RangeID:         rangeRecord.value.ID,
 		PlatformID:      platform.value.ID}
 
-	return rating, platform.value, nil
+	records.rating = rating
+	records.app = app.value
+	records.platform = platform.value
+
+	return nil
 }
 
 func validateRating(from int8, to int8, frame *frame) error {
@@ -532,10 +567,11 @@ func validateRating(from int8, to int8, frame *frame) error {
 	return nil
 }
 
-func attachFields(rating *models.Rating, platform *models.Platform, dbs *databases, frame *frame) error {
+func attachFields(records *records, dbs *databases, frame *frame) error {
+	deviceChannel := make(chan deviceResult, 1)
 	attachDeviceChannel := make(chan error)
 
-	go attachDevice(rating, platform, dbs, frame, attachDeviceChannel)
+	go attachDevice(records, dbs, frame, deviceChannel, attachDeviceChannel)
 
 	deviceError, deviceOk := <-attachDeviceChannel
 
@@ -550,7 +586,7 @@ func attachFields(rating *models.Rating, platform *models.Platform, dbs *databas
 	if hasAppUser(frame.request) {
 		attachAppUserChannel := make(chan error)
 
-		go attachAppUser(rating, dbs, frame, attachAppUserChannel)
+		go attachAppUser(records, dbs, frame, deviceChannel, attachAppUserChannel)
 
 		appUserError, appUserOk := <-attachAppUserChannel
 
@@ -566,7 +602,7 @@ func attachFields(rating *models.Rating, platform *models.Platform, dbs *databas
 	if hasBrowser(frame.request) {
 		attachBrowserChannel := make(chan error)
 
-		go attachBrowser(rating, dbs, frame, attachBrowserChannel)
+		go attachBrowser(records.rating, dbs, frame, attachBrowserChannel)
 
 		browserError, browserOk := <-attachBrowserChannel
 

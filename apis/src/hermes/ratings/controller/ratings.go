@@ -91,20 +91,21 @@ func newMessage(rating uint, db *gorm.DB, frame *frame) error {
  *
  */
 func newRating(dbs *databases, frame *frame) error {
-	rating, platform, buildErr := buildRating(dbs, frame)
+	records := &records{}
+	buildErr := buildRating(records, dbs, frame)
 	errorMessage := "Error creating a new Rating: "
 
 	if buildErr != nil {
 		return buildErr
 	}
 
-	attachErr := attachFields(rating, platform, dbs, frame)
+	attachErr := attachFields(records, dbs, frame)
 
 	if attachErr != nil {
 		return attachErr
 	}
 
-	result := models.CreateRating(rating, dbs.write)
+	result := models.CreateRating(records.rating, dbs.write)
 	errorList := result.GetErrors()
 
 	if len(errorList) > 0 || result.Error != nil || result.Value == nil {
@@ -116,7 +117,7 @@ func newRating(dbs *databases, frame *frame) error {
 	if value, ok := result.Value.(*models.Rating); ok {
 		frame.context.Logger().Info("Created a new Rating: ", value)
 
-		if rating.HasMessage {
+		if records.rating.HasMessage {
 			if err := newMessage(value.ID, dbs.write, frame); err != nil {
 				dbs.write.Rollback()
 

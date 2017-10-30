@@ -7,13 +7,12 @@ import (
 )
 
 type Platform struct {
-	ID   uint   `gorm:"primary_key;AUTO_INCREMENT"`
-	Name string `gorm:"size:15;not null"`
-	Key  string `gorm:"type:char(32);not null"`
+	ID       uint      `gorm:"primary_key;AUTO_INCREMENT"`
+	Name     string    `gorm:"size:15;not null"`
+	Key      string    `gorm:"type:char(32);not null"`
+	AppUsers []AppUser `gorm:"many2many:app_user_platform;"`
 
 	CreatedAt time.Time `gorm:"not null;type:datetime;default:CURRENT_TIMESTAMP"`
-	UpdatedAt time.Time `gorm:"-"`
-	DeletedAt time.Time `gorm:"-"`
 }
 
 // GetPlatform gets a platform by key

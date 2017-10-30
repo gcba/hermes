@@ -11,8 +11,6 @@ type Browser struct {
 	Name string `gorm:"size:15;not null"`
 
 	CreatedAt time.Time `gorm:"not null;type:datetime;default:CURRENT_TIMESTAMP"`
-	UpdatedAt time.Time `gorm:"-"`
-	DeletedAt time.Time `gorm:"-"`
 }
 
 // GetBrowser gets a browser by name

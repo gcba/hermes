@@ -11,8 +11,6 @@ type Brand struct {
 	Name string `gorm:"size:30;not null"`
 
 	CreatedAt time.Time `gorm:"not null;type:datetime;default:CURRENT_TIMESTAMP"`
-	UpdatedAt time.Time `gorm:"-"`
-	DeletedAt time.Time `gorm:"-"`
 }
 
 // GetBrand gets a brand by name

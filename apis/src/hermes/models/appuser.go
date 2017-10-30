@@ -7,14 +7,15 @@ import (
 )
 
 type AppUser struct {
-	ID     uint    `gorm:"primary_key;AUTO_INCREMENT"`
-	Name   string  `gorm:"size:70;not null"`
-	Email  *string `gorm:"size:100;DEFAULT:NULL"`
-	MiBAID *string `gorm:"column:miba_id;type:char(36);DEFAULT:NULL"`
+	ID        uint       `gorm:"primary_key;AUTO_INCREMENT"`
+	Name      string     `gorm:"size:70;not null"`
+	Email     *string    `gorm:"size:100;DEFAULT:NULL"`
+	MiBAID    *string    `gorm:"column:miba_id;type:char(36);DEFAULT:NULL"`
+	Apps      []App      `gorm:"many2many:app_user_app;"`
+	Platforms []Platform `gorm:"many2many:app_user_platform;"`
+	Devices   []Device   `gorm:"many2many:app_user_device;"`
 
 	CreatedAt time.Time `gorm:"not null;type:datetime;default:CURRENT_TIMESTAMP"`
-	UpdatedAt time.Time `gorm:"-"`
-	DeletedAt time.Time `gorm:"-"`
 }
 
 // TableName sets AppUser's table name to be `appuser`
