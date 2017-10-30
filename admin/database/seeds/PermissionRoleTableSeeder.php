@@ -34,6 +34,7 @@ class PermissionRoleTableSeeder extends Seeder
             'edit_browsers',
             'edit_brands'
         ];
+
         $supervisorCannot = [
             'delete_appusers',
             'delete_ratings',
@@ -42,6 +43,8 @@ class PermissionRoleTableSeeder extends Seeder
             'delete_browsers',
             'delete_devices',
             'delete_brands',
+            'browse_compass',
+            'browse_database',
             'browse_settings',
             'read_settings',
             'edit_settings',
@@ -58,6 +61,7 @@ class PermissionRoleTableSeeder extends Seeder
             'add_roles',
             'delete_roles'
         ];
+
         $supportCannot = [
             'add_apps',
             'add_users',
@@ -71,6 +75,7 @@ class PermissionRoleTableSeeder extends Seeder
             'read_users',
             'delete_users'
         ];
+
         $userCannot = [
             'add_messages',
             'delete_messages'

@@ -13,7 +13,6 @@ class PermissionsTableSeeder extends Seeder
         $keys = [
             'browse_admin',
             'browse_database',
-            // 'browse_media',
             'browse_settings',
             'browse_apps',
             'browse_appusers',
@@ -25,6 +24,7 @@ class PermissionsTableSeeder extends Seeder
             'browse_ranges',
             'browse_messages',
             'browse_ratings',
+            'browse_compass'
         ];
 
         foreach ($keys as $key) {
