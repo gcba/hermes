@@ -125,6 +125,23 @@ class DeviceDataRowsTableSeeder extends Seeder
             ])->save();
         }
 
+        $dataRow = $this->dataRow($deviceDataType, 'appusers');
+        if (!$dataRow->exists) {
+            $dataRow->fill([
+                'type'         => 'relationship',
+                'field'        => 'device_belongstomany_appuser_relationship',
+                'display_name' => 'Usuarios',
+                'required'     => 1,
+                'browse'       => 1,
+                'read'         => 1,
+                'edit'         => 0,
+                'add'          => 0,
+                'delete'       => 0,
+                'details'      => '{"model":"App\\\AppUser","table":"appusers","type":"belongsToMany","column":"id","key":"id","label":"name","pivot_table":"app_user_device","pivot":"1"}',
+                'order'        => 8,
+            ])->save();
+        }
+
         $dataRow = $this->dataRow($deviceDataType, 'updated_at');
         if (!$dataRow->exists) {
             $dataRow->fill([
@@ -137,7 +154,7 @@ class DeviceDataRowsTableSeeder extends Seeder
                 'add'          => 0,
                 'delete'       => 0,
                 'details'      => '',
-                'order'        => 8,
+                'order'        => 9,
             ])->save();
         }
 
@@ -153,7 +170,7 @@ class DeviceDataRowsTableSeeder extends Seeder
                 'add'          => 0,
                 'delete'       => 0,
                 'details'      => '',
-                'order'        => 9,
+                'order'        => 10,
             ])->save();
         }
 
@@ -169,7 +186,7 @@ class DeviceDataRowsTableSeeder extends Seeder
                 'add'          => 0,
                 'delete'       => 0,
                 'details'      => '',
-                'order'        => 10,
+                'order'        => 11,
             ])->save();
         }
     }
