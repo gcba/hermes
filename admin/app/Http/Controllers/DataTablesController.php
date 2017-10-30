@@ -24,11 +24,24 @@ class DataTablesController extends Controller {
         if ($user->hasPermission('browse_ratings')) {
             $model = Rating::with(['range', 'app', 'platform', 'browser', 'appuser', 'device'])->select('ratings.*');
             $params = $request->query()['columns'];
+            $noResults = 'No results';
 
             $datatables = Datatables::of($model)
                 ->filter(function ($query) use($params) {
                     $query = $this->filterQuery($query, $params);
                 }, true)
+                ->editColumn('range.name', function($item){
+                    return $item->range ? $item->range->name : '';
+                })
+                ->editColumn('device.name', function($item){
+                    return $item->device ? $item->device->name : '';
+                })
+                ->editColumn('platform.name', function($item){
+                    return $item->platform ? $item->platform->name : '';
+                })
+                ->editColumn('browser.name', function($item){
+                    return $item->browser ? $item->browser->name : '';
+                })
                 ->editColumn('appuser.name', function($item){
                     return $item->appuser ? $item->appuser->name : '';
                 });
