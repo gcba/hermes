@@ -569,7 +569,7 @@ func validateRating(from int8, to int8, frame *frame) error {
 
 func attachFields(records *records, dbs *databases, frame *frame) error {
 	deviceChannel := make(chan deviceResult, 1)
-	attachDeviceChannel := make(chan error)
+	attachDeviceChannel := make(chan error, 1)
 
 	go attachDevice(records, dbs, frame, deviceChannel, attachDeviceChannel)
 
@@ -584,7 +584,7 @@ func attachFields(records *records, dbs *databases, frame *frame) error {
 	}
 
 	if hasAppUser(frame.request) {
-		attachAppUserChannel := make(chan error)
+		attachAppUserChannel := make(chan error, 1)
 
 		go attachAppUser(records, dbs, frame, deviceChannel, attachAppUserChannel)
 
@@ -600,7 +600,7 @@ func attachFields(records *records, dbs *databases, frame *frame) error {
 	}
 
 	if hasBrowser(frame.request) {
-		attachBrowserChannel := make(chan error)
+		attachBrowserChannel := make(chan error, 1)
 
 		go attachBrowser(records.rating, dbs, frame, attachBrowserChannel)
 
