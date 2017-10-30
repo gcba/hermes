@@ -98,7 +98,8 @@ class UserDataRowsTableSeeder extends Seeder
         $dataRow = $this->dataRow($userDataType, 'role_id');
         if (!$dataRow->exists) {
             $dataRow->fill([
-                'type'         => 'select_dropdown',
+                'type'         => 'relationship',
+                'field'        => 'user_belongsto_role_relationship',
                 'display_name' => 'Rol',
                 'required'     => 1,
                 'browse'       => 1,
@@ -106,7 +107,7 @@ class UserDataRowsTableSeeder extends Seeder
                 'edit'         => 1,
                 'add'          => 1,
                 'delete'       => 1,
-                'details'      => '{"validation":{"rules":["required","integer"],"messages":{"required":"Falta el campo :attribute.","integer":"El campo :attribute debe ser un número entero."},"relationship":{"key":"id","label":"display_name","page_slug":"admin/roles"}}}',
+                'details'      => '{"validation":{"rules":["required","integer"],"messages":{"required":"Falta el campo :attribute.","integer":"El campo :attribute debe ser un número entero."}},"model":"TCG\\\Voyager\\\Models\\\Role","table":"roles","type":"belongsTo","column":"id","key":"id","label":"display_name","pivot_table":"","pivot":"0"}',
                 'order'        => 6,
             ])->save();
         }

@@ -32,7 +32,8 @@ class DeviceDataRowsTableSeeder extends Seeder
         $dataRow = $this->dataRow($deviceDataType, 'brand_id');
         if (!$dataRow->exists) {
             $dataRow->fill([
-                'type'         => 'select_dropdown',
+                'type'         => 'relationship',
+                'field'        => 'device_belongsto_brand_relationship',
                 'display_name' => 'Marca',
                 'required'     => 1,
                 'browse'       => 1,
@@ -40,7 +41,7 @@ class DeviceDataRowsTableSeeder extends Seeder
                 'edit'         => 0,
                 'add'          => 0,
                 'delete'       => 0,
-                'details'      => '{"validation":{"rules":["integer","nullable"],"messages":{"integer":"El campo :attribute debe ser un número entero."}},"relationship":{"key":"id","label":"name","page_slug":"admin/brands"}}',
+                'details'      => '{"model":"App\\\Brand","table":"brands","type":"belongsTo","column":"id","key":"id","label":"name","pivot_table":"","pivot":"0"}',
                 'order'        => 2,
             ])->save();
         }
@@ -112,7 +113,8 @@ class DeviceDataRowsTableSeeder extends Seeder
         $dataRow = $this->dataRow($deviceDataType, 'platform_id');
         if (!$dataRow->exists) {
             $dataRow->fill([
-                'type'         => 'select_dropdown',
+                'type'         => 'relationship',
+                'field'        => 'device_belongsto_platform_relationship',
                 'display_name' => 'Plataforma',
                 'required'     => 1,
                 'browse'       => 1,
@@ -120,7 +122,7 @@ class DeviceDataRowsTableSeeder extends Seeder
                 'edit'         => 0,
                 'add'          => 0,
                 'delete'       => 0,
-                'details'      => '{"validation":{"rules":["required","integer"],"messages":{"required":"Falta el campo :attribute.","integer":"El campo :attribute debe ser un número entero."}},"relationship":{"key":"id","label":"name","page_slug":"admin/platforms"}}',
+                'details'      => '{"validation":{"rules":["required","integer"],"messages":{"required":"Falta el campo :attribute.","integer":"El campo :attribute debe ser un número entero."}},"model":"App\\\Platform","table":"platforms","type":"belongsTo","column":"id","key":"id","label":"name","pivot_table":"","pivot":"0"}',
                 'order'        => 7,
             ])->save();
         }

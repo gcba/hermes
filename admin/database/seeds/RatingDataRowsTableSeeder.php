@@ -48,7 +48,8 @@ class RatingDataRowsTableSeeder extends Seeder
         $dataRow = $this->dataRow($ratingDataType, 'range_id');
         if (!$dataRow->exists) {
             $dataRow->fill([
-                'type'         => 'select_dropdown',
+                'type'         => 'relationship',
+                'field'        => 'rating_belongsto_range_relationship',
                 'display_name' => 'Rango',
                 'required'     => 1,
                 'browse'       => 1,
@@ -56,7 +57,7 @@ class RatingDataRowsTableSeeder extends Seeder
                 'edit'         => 0,
                 'add'          => 0,
                 'delete'       => 0,
-                'details'      => '{"validation":{"rules":["required","integer"],"messages":{"required":"Falta el campo :attribute.","integer":"El campo :attribute debe ser un número entero."}},"relationship":{"key":"id","label":"name","page_slug":"admin/ranges"}}',
+                'details'      => '{"validation":{"rules":["required","integer"],"messages":{"required":"Falta el campo :attribute.","integer":"El campo :attribute debe ser un número entero."}},"model":"App\\\Range","table":"ranges","type":"belongsTo","column":"id","key":"id","label":"name","pivot_table":"","pivot":"0"}',
                 'order'        => 3,
             ])->save();
         }
@@ -96,7 +97,8 @@ class RatingDataRowsTableSeeder extends Seeder
         $dataRow = $this->dataRow($ratingDataType, 'app_id');
         if (!$dataRow->exists) {
             $dataRow->fill([
-                'type'         => 'select_dropdown',
+                'type'         => 'relationship',
+                'field'        => 'rating_belongsto_app_relationship',
                 'display_name' => 'App',
                 'required'     => 1,
                 'browse'       => 1,
@@ -104,7 +106,7 @@ class RatingDataRowsTableSeeder extends Seeder
                 'edit'         => 0,
                 'add'          => 0,
                 'delete'       => 0,
-                'details'      => '{"validation":{"rules":["required","integer"],"messages":{"required":"Falta el campo :attribute.","integer":"El campo :attribute debe ser un número entero."}},"relationship":{"key":"id","label":"name","page_slug":"admin/apps"}}',
+                'details'      => '{"validation":{"rules":["required","integer"],"messages":{"required":"Falta el campo :attribute.","integer":"El campo :attribute debe ser un número entero."}},"model":"App\\\App","table":"apps","type":"belongsTo","column":"id","key":"id","label":"name","pivot_table":"","pivot":"0"}',
                 'order'        => 6,
             ])->save();
         }
@@ -128,7 +130,8 @@ class RatingDataRowsTableSeeder extends Seeder
         $dataRow = $this->dataRow($ratingDataType, 'platform_id');
         if (!$dataRow->exists) {
             $dataRow->fill([
-                'type'         => 'select_dropdown',
+                'type'         => 'relationship',
+                'field'        => 'rating_belongsto_platform_relationship',
                 'display_name' => 'Plataforma',
                 'required'     => 1,
                 'browse'       => 1,
@@ -136,7 +139,7 @@ class RatingDataRowsTableSeeder extends Seeder
                 'edit'         => 0,
                 'add'          => 0,
                 'delete'       => 0,
-                'details'      => '{"validation":{"rules":["required","integer"],"messages":{"required":"Falta el campo :attribute.","integer":"El campo :attribute debe ser un número entero."}},"relationship":{"key":"id","label":"name"}}',
+                'details'      => '{"validation":{"rules":["required","integer"],"messages":{"required":"Falta el campo :attribute.","integer":"El campo :attribute debe ser un número entero."}},"model":"App\\\Platform","table":"platforms","type":"belongsTo","column":"id","key":"id","label":"name","pivot_table":"","pivot":"0"}',
                 'order'        => 8,
             ])->save();
         }
@@ -160,7 +163,8 @@ class RatingDataRowsTableSeeder extends Seeder
         $dataRow = $this->dataRow($ratingDataType, 'browser_id');
         if (!$dataRow->exists) {
             $dataRow->fill([
-                'type'         => 'select_dropdown',
+                'type'         => 'relationship',
+                'field'        => 'rating_belongsto_browser_relationship',
                 'display_name' => 'Browser',
                 'required'     => 0,
                 'browse'       => 1,
@@ -168,7 +172,7 @@ class RatingDataRowsTableSeeder extends Seeder
                 'edit'         => 0,
                 'add'          => 0,
                 'delete'       => 0,
-                'details'      => '{"validation":{"rules":["integer","nullable"],"messages":{"integer":"El campo :attribute debe ser un número entero."}},"relationship":{"key":"id","label":"name"}}',
+                'details'      => '{"validation":{"rules":["integer","nullable"],"messages":{"integer":"El campo :attribute debe ser un número entero."}},"model":"App\\\Browser","table":"browsers","type":"belongsTo","column":"id","key":"id","label":"name","pivot_table":"","pivot":"0"}',
                 'order'        => 10,
             ])->save();
         }
@@ -192,7 +196,8 @@ class RatingDataRowsTableSeeder extends Seeder
         $dataRow = $this->dataRow($ratingDataType, 'appuser_id');
         if (!$dataRow->exists) {
             $dataRow->fill([
-                'type'         => 'select_dropdown',
+                'type'         => 'relationship',
+                'field'        => 'rating_belongsto_appuser_relationship',
                 'display_name' => 'Usuario',
                 'required'     => 0,
                 'browse'       => 1,
@@ -200,7 +205,7 @@ class RatingDataRowsTableSeeder extends Seeder
                 'edit'         => 0,
                 'add'          => 0,
                 'delete'       => 0,
-                'details'      => '{"validation":{"rules":["integer","nullable"],"messages":{"integer":"El campo :attribute debe ser un número entero."}},"relationship":{"key":"id","label":"name","page_slug":"admin/appusers"}}',
+                'details'      => '{"validation":{"rules":["integer","nullable"],"messages":{"integer":"El campo :attribute debe ser un número entero."}},"model":"App\\\AppUser","table":"appusers","type":"belongsTo","column":"id","key":"id","label":"name","pivot_table":"","pivot":"0"}',
                 'order'        => 12,
             ])->save();
         }
@@ -208,7 +213,8 @@ class RatingDataRowsTableSeeder extends Seeder
         $dataRow = $this->dataRow($ratingDataType, 'device_id');
         if (!$dataRow->exists) {
             $dataRow->fill([
-                'type'         => 'select_dropdown',
+                'type'         => 'relationship',
+                'field'        => 'rating_belongsto_device_relationship',
                 'display_name' => 'Dispositivo',
                 'required'     => 0,
                 'browse'       => 1,
@@ -216,7 +222,7 @@ class RatingDataRowsTableSeeder extends Seeder
                 'edit'         => 0,
                 'add'          => 0,
                 'delete'       => 0,
-                'details'      => '{"validation":{"rules":["integer","nullable"],"messages":{"integer":"El campo :attribute debe ser un número entero."}},"relationship":{"key":"id","label":"name","page_slug":"admin/devices"}}',
+                'details'      => '{"validation":{"rules":["integer","nullable"],"messages":{"integer":"El campo :attribute debe ser un número entero."}},"model":"App\\\Device","table":"devices","type":"belongsTo","column":"id","key":"id","label":"name","pivot_table":"","pivot":"0"}',
                 'order'        => 13,
             ])->save();
         }

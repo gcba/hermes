@@ -64,15 +64,16 @@ class AppUserDataRowsTableSeeder extends Seeder
         $dataRow = $this->dataRow($appuserDataType, 'ratings');
         if (!$dataRow->exists) {
             $dataRow->fill([
-                'type'         => 'select_dropdown',
+                'type'         => 'relationship',
+                'field'        => 'appuser_hasmany_rating_relationship',
                 'display_name' => 'Calificaciones',
                 'required'     => 1,
-                'browse'       => 0,
+                'browse'       => 1,
                 'read'         => 1,
                 'edit'         => 0,
                 'add'          => 0,
                 'delete'       => 0,
-                'details'      => '{"relationship":{"key":"id","label":"rating","page_slug":"admin/ratings"}}',
+                'details'      => '{"model":"App\\\Rating","table":"ratings","type":"hasMany","column":"id","key":"id","label":"rating","pivot_table":"","pivot":"0"}',
                 'order'        => 4,
             ])->save();
         }

@@ -64,7 +64,8 @@ class MessageDataRowsTableSeeder extends Seeder
         $dataRow = $this->dataRow($messageDataType, 'rating_id');
         if (!$dataRow->exists) {
             $dataRow->fill([
-                'type'         => 'select_dropdown',
+                'type'         => 'relationship',
+                'field'        => 'message_belongsto_rating_relationship',
                 'display_name' => 'Rating',
                 'required'     => 1,
                 'browse'       => 1,
@@ -72,7 +73,7 @@ class MessageDataRowsTableSeeder extends Seeder
                 'edit'         => 0,
                 'add'          => 1,
                 'delete'       => 1,
-                'details'      => '{"validation":{"rules":["required","integer"],"messages":{"required":"Falta el campo :attribute.","integer":"El campo :attribute debe ser un número entero."}},"relationship":{"key":"id","label":"rating","page_slug":"admin/ratings"}}',
+                'details'      => '{"validation":{"rules":["required","integer"],"messages":{"required":"Falta el campo :attribute.","integer":"El campo :attribute debe ser un número entero."}},"model":"App\\\Rating","table":"ratings","type":"belongsTo","column":"id","key":"id","label":"rating","pivot_table":"","pivot":"0"}',
                 'order'        => 4,
             ])->save();
         }
