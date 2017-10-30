@@ -61,22 +61,6 @@ class UserDataRowsTableSeeder extends Seeder
             ])->save();
         }
 
-        $dataRow = $this->dataRow($userDataType, 'password');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'password',
-                'display_name' => 'Password',
-                'required'     => 1,
-                'browse'       => 0,
-                'read'         => 0,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 0,
-                'details'      => '{"validation":{"rules":["required","string","min:8","max:70"],"messages":{"required":"Falta el campo :attribute.","string":"El campo :attribute debe tener texto.","max":"El campo :attribute puede tener hasta :max carácteres.","min":"El campo :attribute debe tener al menos :min carácteres."}}}',
-                'order'        => 4,
-            ])->save();
-        }
-
         /*
         $dataRow = $this->dataRow($userDataType, 'avatar');
         if (!$dataRow->exists) {
@@ -90,7 +74,7 @@ class UserDataRowsTableSeeder extends Seeder
                 'add'          => 1,
                 'delete'       => 1,
                 'details'      => '{"validation":{"rules":["image","dimensions:min_width=100,min_height=100,max_width=300,max_height=300"],"messages":{"image":"El campo :attribute debe ser una imagen.","integer":"El :attribute tener un alto y un ancho ancho entre :min_width y :max_width píxeles."}}}',
-                'order'        => 5,
+                'order'        => 4,
             ])->save();
         }
         */
@@ -108,7 +92,7 @@ class UserDataRowsTableSeeder extends Seeder
                 'add'          => 1,
                 'delete'       => 1,
                 'details'      => '{"validation":{"rules":["required","integer"],"messages":{"required":"Falta el campo :attribute.","integer":"El campo :attribute debe ser un número entero."}},"model":"TCG\\\Voyager\\\Models\\\Role","table":"roles","type":"belongsTo","column":"id","key":"id","label":"display_name","pivot_table":"","pivot":"0"}',
-                'order'        => 6,
+                'order'        => 5,
             ])->save();
         }
 
@@ -125,23 +109,7 @@ class UserDataRowsTableSeeder extends Seeder
                 'add'          => 1,
                 'delete'       => 1,
                 'details'      => '{"model":"App\\\App","table":"apps","type":"belongsToMany","column":"id","key":"id","label":"name","pivot_table":"app_user","pivot":"1"}',
-                'order'        => 7,
-            ])->save();
-        }
-
-        $dataRow = $this->dataRow($userDataType, 'remember_token');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'text',
-                'display_name' => 'Recordar Token',
-                'required'     => 0,
-                'browse'       => 0,
-                'read'         => 0,
-                'edit'         => 0,
-                'add'          => 0,
-                'delete'       => 0,
-                'details'      => '',
-                'order'        => 8,
+                'order'        => 6,
             ])->save();
         }
 
@@ -157,7 +125,7 @@ class UserDataRowsTableSeeder extends Seeder
                 'add'          => 0,
                 'delete'       => 0,
                 'details'      => '',
-                'order'        => 9,
+                'order'        => 7,
             ])->save();
         }
 
@@ -173,7 +141,7 @@ class UserDataRowsTableSeeder extends Seeder
                 'add'          => 0,
                 'delete'       => 0,
                 'details'      => '',
-                'order'        => 10,
+                'order'        => 8,
             ])->save();
         }
 
@@ -189,7 +157,7 @@ class UserDataRowsTableSeeder extends Seeder
                 'add'          => 0,
                 'delete'       => 0,
                 'details'      => '',
-                'order'        => 11,
+                'order'        => 9,
             ])->save();
         }
     }
