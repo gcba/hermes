@@ -17,12 +17,15 @@
 }
 
 .app-container .side-menu .panel.widget h4 {
-    height: unset;
     float: right;
-    display: block;
     position: unset;
-    top: unset;
-    width: 80%;
+    visibility: hidden;
+    height: auto;
+}
+
+.app-container .side-menu:hover .panel.widget h4, .app-container.expanded .panel.widget h4 {
+    visibility: visible;
+    height: auto;
 }
 
 .app-container .side-menu .panel.widget .avatar {
