@@ -2,41 +2,7 @@
 
 ## Instalación
 
-Implica clonar el repo, instalar las dependencias y configurar las variables de entorno.
-
-### Package manager
-
-Para instalar [Glide](https://github.com/Masterminds/glide):
-
-#### MacOS
-
-```bash
-$ brew install glide
-```
-
-#### Ubuntu
-
-En **Zesty (17.04)** o más reciente:
-
-```bash
-$ sudo add-apt-repository ppa:masterminds/glide && sudo apt-get update
-$ sudo apt-get install golang-glide
-```
-
-En versiones anteriores a Zesty:
-
-```bash
-$ sudo add-apt-repository ppa:masterminds/glide && sudo apt-get update
-$ sudo apt-get install glide
-```
-
-### Dependencias
-
-```bash
-$ glide install
-```
-
-### Variables de entorno
+Implica clonar el repo y configurar las variables de entorno.
 
 En `<REPO>/apis/src/hermes` crear un archivo `.env` con los valores de configuración:
 
@@ -71,7 +37,7 @@ export HERMES_RATINGS_PUBLICKEY=<RATINGS_PUBLICKEY> # Para la autenticación JWT
 export HERMES_STATS_PUBLICKEY=<STATS_PUBLICKEY> # Para la autenticación JWT
 ```
 
-Finalmente, cargarlo con:
+Luego cargarlo con:
 
 ```bash
 $ source .env

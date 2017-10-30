@@ -4,7 +4,7 @@
 
 ### Instalación
 
-#### Módulo ES6
+#### Módulo ES2015+
 
 Se encuentra en `<REPO>/sdks/js`.
 
