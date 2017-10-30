@@ -231,8 +231,8 @@ Los mensajes de las conversaciones con los usuarios de las apps que enviaron cal
 |transport_id    |varchar(90)           |       |       |X      |X      |X      |
 |rating_id       |int                   |       |X      |       |       |X      |
 |created_at      |timestamp             |       |       |       |       |       |
-|updated_at      |timestamp             |       |       |X      |       |       |
 |created_by      |int                   |X      |X      |       |       |       |
+|updated_at      |timestamp             |       |       |X      |       |       |
 
 ### Range
 
