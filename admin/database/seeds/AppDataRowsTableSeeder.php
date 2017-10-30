@@ -78,6 +78,23 @@ class AppDataRowsTableSeeder extends Seeder
             ])->save();
         }
 
+        $dataRow = $this->dataRow($appDataType, 'appusers');
+        if (!$dataRow->exists) {
+            $dataRow->fill([
+                'type'         => 'relationship',
+                'field'        => 'app_belongstomany_appuser_relationship',
+                'display_name' => 'Usuarios',
+                'required'     => 1,
+                'browse'       => 1,
+                'read'         => 1,
+                'edit'         => 0,
+                'add'          => 0,
+                'delete'       => 0,
+                'details'      => '{"model":"App\\\AppUser","table":"appusers","type":"belongsToMany","column":"id","key":"id","label":"name","pivot_table":"app_user_app","pivot":"1"}',
+                'order'        => 5,
+            ])->save();
+        }
+
         $dataRow = $this->dataRow($appDataType, 'users');
         if (!$dataRow->exists) {
             $dataRow->fill([
@@ -91,7 +108,7 @@ class AppDataRowsTableSeeder extends Seeder
                 'add'          => 1,
                 'delete'       => 1,
                 'details'      => '{"model":"App\\\User","table":"users","type":"belongsToMany","column":"id","key":"id","label":"name","pivot_table":"app_user","pivot":"1"}',
-                'order'        => 5,
+                'order'        => 6,
             ])->save();
         }
 
@@ -107,7 +124,7 @@ class AppDataRowsTableSeeder extends Seeder
                 'add'          => 0,
                 'delete'       => 0,
                 'details'      => '',
-                'order'        => 6,
+                'order'        => 7,
             ])->save();
         }
 
@@ -123,7 +140,7 @@ class AppDataRowsTableSeeder extends Seeder
                 'add'          => 0,
                 'delete'       => 0,
                 'details'      => '',
-                'order'        => 7,
+                'order'        => 8,
             ])->save();
         }
 
@@ -139,7 +156,7 @@ class AppDataRowsTableSeeder extends Seeder
                 'add'          => 0,
                 'delete'       => 0,
                 'details'      => '',
-                'order'        => 8,
+                'order'        => 9,
             ])->save();
         }
 
@@ -155,7 +172,7 @@ class AppDataRowsTableSeeder extends Seeder
                 'add'          => 0,
                 'delete'       => 0,
                 'details'      => '',
-                'order'        => 9,
+                'order'        => 10,
             ])->save();
         }
 
@@ -171,7 +188,7 @@ class AppDataRowsTableSeeder extends Seeder
                 'add'          => 0,
                 'delete'       => 0,
                 'details'      => '',
-                'order'        => 10,
+                'order'        => 11,
             ])->save();
         }
     }
