@@ -12,9 +12,20 @@ import (
 )
 
 func TestGetRange(t *testing.T) {
-	writeDb := database.GetWriteDB()
+	writeDb, writeDbError := database.GetWriteDB()
+
+	if writeDbError != nil {
+		t.Fatal("Could not get connect to write database")
+	}
+
 	defer writeDb.Close()
-	readDb := database.GetReadDB()
+
+	readDb, readDbError := database.GetReadDB()
+
+	if readDbError != nil {
+		t.Fatal("Could not get connect to read database")
+	}
+
 	defer readDb.Close()
 
 	rangeRecord := Range{
@@ -28,9 +39,6 @@ func TestGetRange(t *testing.T) {
 	require.Equal(t, nil, result.Error)
 
 	if value, ok := result.Value.(*Range); ok {
-		var result Range
-
-		readDb.First(&result, value.ID)
 		require.Equal(t, rangeRecord.From, value.From)
 		require.Equal(t, rangeRecord.To, value.To)
 		require.Equal(t, rangeRecord.Key, value.Key)

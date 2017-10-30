@@ -12,9 +12,20 @@ import (
 )
 
 func TestGetPlatform(t *testing.T) {
-	writeDb := database.GetWriteDB()
+	writeDb, writeDbError := database.GetWriteDB()
+
+	if writeDbError != nil {
+		t.Fatal("Could not get connect to write database")
+	}
+
 	defer writeDb.Close()
-	readDb := database.GetReadDB()
+
+	readDb, readDbError := database.GetReadDB()
+
+	if readDbError != nil {
+		t.Fatal("Could not get connect to read database")
+	}
+
 	defer readDb.Close()
 
 	name := uniuri.New()
@@ -29,9 +40,6 @@ func TestGetPlatform(t *testing.T) {
 	require.Equal(t, nil, result.Error)
 
 	if value, ok := result.Value.(*Platform); ok {
-		var result Platform
-
-		readDb.First(&result, value.ID)
 		require.Equal(t, platform.Name, value.Name)
 		require.Equal(t, platform.Key, value.Key)
 	} else {

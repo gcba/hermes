@@ -11,7 +11,12 @@ import (
 )
 
 func TestCreateBrowser(t *testing.T) {
-	db := database.GetWriteDB()
+	db, dbError := database.GetWriteDB()
+
+	if dbError != nil {
+		t.Fatal("Could not get connect to write database")
+	}
+
 	defer db.Close()
 
 	name := uniuri.New()
@@ -30,9 +35,20 @@ func TestCreateBrowser(t *testing.T) {
 }
 
 func TestGetBrowser(t *testing.T) {
-	writeDb := database.GetWriteDB()
+	writeDb, writeDbError := database.GetWriteDB()
+
+	if writeDbError != nil {
+		t.Fatal("Could not get connect to write database")
+	}
+
 	defer writeDb.Close()
-	readDb := database.GetReadDB()
+
+	readDb, readDbError := database.GetReadDB()
+
+	if readDbError != nil {
+		t.Fatal("Could not get connect to read database")
+	}
+
 	defer readDb.Close()
 
 	name := uniuri.New()
@@ -42,10 +58,7 @@ func TestGetBrowser(t *testing.T) {
 	record := writeDb.Create(&browser)
 
 	if value, ok := record.Value.(*Browser); ok {
-		var result Browser
-
-		readDb.First(&result, value.ID)
-		require.Equal(t, name, result.Name)
+		require.Equal(t, name, value.Name)
 	} else {
 		t.Fatal("Value is not a Browser")
 	}

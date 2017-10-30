@@ -11,7 +11,12 @@ import (
 )
 
 func TestCreateRating(t *testing.T) {
-	db := database.GetWriteDB()
+	db, dbError := database.GetWriteDB()
+
+	if dbError != nil {
+		t.Fatal("Could not get connect to write database")
+	}
+
 	defer db.Close()
 
 	description := uniuri.New()

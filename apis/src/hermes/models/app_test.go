@@ -12,9 +12,20 @@ import (
 )
 
 func TestGetApp(t *testing.T) {
-	writeDb := database.GetWriteDB()
+	writeDb, writeDbError := database.GetWriteDB()
+
+	if writeDbError != nil {
+		t.Fatal("Could not get connect to write database")
+	}
+
 	defer writeDb.Close()
-	readDb := database.GetReadDB()
+
+	readDb, readDbError := database.GetReadDB()
+
+	if readDbError != nil {
+		t.Fatal("Could not get connect to read database")
+	}
+
 	defer readDb.Close()
 
 	app := App{

@@ -10,7 +10,12 @@ import (
 )
 
 func TestCreateAppUser(t *testing.T) {
-	db := database.GetWriteDB()
+	db, dbError := database.GetWriteDB()
+
+	if dbError != nil {
+		t.Fatal("Could not get connect to write database")
+	}
+
 	defer db.Close()
 
 	name := uniuri.New()
@@ -32,12 +37,21 @@ func TestCreateAppUser(t *testing.T) {
 }
 
 func TestGetAppUser(t *testing.T) {
-	writeDb := database.GetWriteDB()
-	defer writeDb.Close()
-	readDb := database.GetReadDB()
-	defer readDb.Close()
+	writeDb, writeDbError := database.GetWriteDB()
 
-	var result AppUser
+	if writeDbError != nil {
+		t.Fatal("Could not get connect to write database")
+	}
+
+	defer writeDb.Close()
+
+	readDb, readDbError := database.GetReadDB()
+
+	if readDbError != nil {
+		t.Fatal("Could not get connect to read database")
+	}
+
+	defer readDb.Close()
 
 	name := uniuri.New()
 	email := "test@test.com"
@@ -47,11 +61,9 @@ func TestGetAppUser(t *testing.T) {
 	record := writeDb.Create(&appuser)
 
 	if value, ok := record.Value.(*AppUser); ok {
-		readDb.First(&result, value.ID)
-
-		require.Equal(t, value.Name, result.Name)
-		require.Equal(t, email, *result.Email)
-		require.Equal(t, mibaID, *result.MiBAID)
+		require.Equal(t, value.Name, appuser.Name)
+		require.Equal(t, value.Email, appuser.Email)
+		require.Equal(t, value.MiBAID, appuser.MiBAID)
 	} else {
 		t.Fatal("Value is not an AppUser")
 	}
