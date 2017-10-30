@@ -73,7 +73,7 @@ class MessageDataRowsTableSeeder extends Seeder
                 'edit'         => 0,
                 'add'          => 1,
                 'delete'       => 1,
-                'details'      => '{"validation":{"rules":["required","integer"],"messages":{"required":"Falta el campo :attribute.","integer":"El campo :attribute debe ser un número entero."}},"model":"App\\\Rating","table":"ratings","type":"belongsTo","column":"id","key":"id","label":"rating","pivot_table":"","pivot":"0"}',
+                'details'      => '{"validation":{"rules":["required","integer"],"messages":{"required":"Falta el campo :attribute.","integer":"El campo :attribute debe ser un número entero."}},"model":"App\\\Rating","table":"ratings","type":"belongsTo","column":"rating_id","key":"id","label":"rating","pivot_table":"","pivot":"0"}',
                 'order'        => 4,
             ])->save();
         }

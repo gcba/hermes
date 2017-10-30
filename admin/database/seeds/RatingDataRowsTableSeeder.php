@@ -57,7 +57,7 @@ class RatingDataRowsTableSeeder extends Seeder
                 'edit'         => 0,
                 'add'          => 0,
                 'delete'       => 0,
-                'details'      => '{"validation":{"rules":["required","integer"],"messages":{"required":"Falta el campo :attribute.","integer":"El campo :attribute debe ser un número entero."}},"model":"App\\\Range","table":"ranges","type":"belongsTo","column":"id","key":"id","label":"name","pivot_table":"","pivot":"0"}',
+                'details'      => '{"validation":{"rules":["required","integer"],"messages":{"required":"Falta el campo :attribute.","integer":"El campo :attribute debe ser un número entero."}},"model":"App\\\Range","table":"ranges","type":"belongsTo","column":"range_id","key":"id","label":"name","pivot_table":"","pivot":"0"}',
                 'order'        => 3,
             ])->save();
         }
@@ -106,7 +106,7 @@ class RatingDataRowsTableSeeder extends Seeder
                 'edit'         => 0,
                 'add'          => 0,
                 'delete'       => 0,
-                'details'      => '{"validation":{"rules":["required","integer"],"messages":{"required":"Falta el campo :attribute.","integer":"El campo :attribute debe ser un número entero."}},"model":"App\\\App","table":"apps","type":"belongsTo","column":"id","key":"id","label":"name","pivot_table":"","pivot":"0"}',
+                'details'      => '{"validation":{"rules":["required","integer"],"messages":{"required":"Falta el campo :attribute.","integer":"El campo :attribute debe ser un número entero."}},"model":"App\\\App","table":"apps","type":"belongsTo","column":"app_id","key":"id","label":"name","pivot_table":"","pivot":"0"}',
                 'order'        => 6,
             ])->save();
         }
@@ -139,7 +139,7 @@ class RatingDataRowsTableSeeder extends Seeder
                 'edit'         => 0,
                 'add'          => 0,
                 'delete'       => 0,
-                'details'      => '{"validation":{"rules":["required","integer"],"messages":{"required":"Falta el campo :attribute.","integer":"El campo :attribute debe ser un número entero."}},"model":"App\\\Platform","table":"platforms","type":"belongsTo","column":"id","key":"id","label":"name","pivot_table":"","pivot":"0"}',
+                'details'      => '{"validation":{"rules":["required","integer"],"messages":{"required":"Falta el campo :attribute.","integer":"El campo :attribute debe ser un número entero."}},"model":"App\\\Platform","table":"platforms","type":"belongsTo","column":"platform_id","key":"id","label":"name","pivot_table":"","pivot":"0"}',
                 'order'        => 8,
             ])->save();
         }
@@ -172,7 +172,7 @@ class RatingDataRowsTableSeeder extends Seeder
                 'edit'         => 0,
                 'add'          => 0,
                 'delete'       => 0,
-                'details'      => '{"validation":{"rules":["integer","nullable"],"messages":{"integer":"El campo :attribute debe ser un número entero."}},"model":"App\\\Browser","table":"browsers","type":"belongsTo","column":"id","key":"id","label":"name","pivot_table":"","pivot":"0"}',
+                'details'      => '{"validation":{"rules":["integer","nullable"],"messages":{"integer":"El campo :attribute debe ser un número entero."}},"model":"App\\\Browser","table":"browsers","type":"belongsTo","column":"browser_id","key":"id","label":"name","pivot_table":"","pivot":"0"}',
                 'order'        => 10,
             ])->save();
         }
@@ -205,7 +205,7 @@ class RatingDataRowsTableSeeder extends Seeder
                 'edit'         => 0,
                 'add'          => 0,
                 'delete'       => 0,
-                'details'      => '{"validation":{"rules":["integer","nullable"],"messages":{"integer":"El campo :attribute debe ser un número entero."}},"model":"App\\\AppUser","table":"appusers","type":"belongsTo","column":"id","key":"id","label":"name","pivot_table":"","pivot":"0"}',
+                'details'      => '{"validation":{"rules":["integer","nullable"],"messages":{"integer":"El campo :attribute debe ser un número entero."}},"model":"App\\\AppUser","table":"appusers","type":"belongsTo","column":"appuser_id","key":"id","label":"name","pivot_table":"","pivot":"0"}',
                 'order'        => 12,
             ])->save();
         }
@@ -222,7 +222,7 @@ class RatingDataRowsTableSeeder extends Seeder
                 'edit'         => 0,
                 'add'          => 0,
                 'delete'       => 0,
-                'details'      => '{"validation":{"rules":["integer","nullable"],"messages":{"integer":"El campo :attribute debe ser un número entero."}},"model":"App\\\Device","table":"devices","type":"belongsTo","column":"id","key":"id","label":"name","pivot_table":"","pivot":"0"}',
+                'details'      => '{"validation":{"rules":["integer","nullable"],"messages":{"integer":"El campo :attribute debe ser un número entero."}},"model":"App\\\Device","table":"devices","type":"belongsTo","column":"device_id","key":"id","label":"name","pivot_table":"","pivot":"0"}',
                 'order'        => 13,
             ])->save();
         }

@@ -41,7 +41,7 @@ class DeviceDataRowsTableSeeder extends Seeder
                 'edit'         => 0,
                 'add'          => 0,
                 'delete'       => 0,
-                'details'      => '{"model":"App\\\Brand","table":"brands","type":"belongsTo","column":"id","key":"id","label":"name","pivot_table":"","pivot":"0"}',
+                'details'      => '{"model":"App\\\Brand","table":"brands","type":"belongsTo","column":"brand_id","key":"id","label":"name","pivot_table":"","pivot":"0"}',
                 'order'        => 2,
             ])->save();
         }
@@ -122,7 +122,7 @@ class DeviceDataRowsTableSeeder extends Seeder
                 'edit'         => 0,
                 'add'          => 0,
                 'delete'       => 0,
-                'details'      => '{"validation":{"rules":["required","integer"],"messages":{"required":"Falta el campo :attribute.","integer":"El campo :attribute debe ser un número entero."}},"model":"App\\\Platform","table":"platforms","type":"belongsTo","column":"id","key":"id","label":"name","pivot_table":"","pivot":"0"}',
+                'details'      => '{"validation":{"rules":["required","integer"],"messages":{"required":"Falta el campo :attribute.","integer":"El campo :attribute debe ser un número entero."}},"model":"App\\\Platform","table":"platforms","type":"belongsTo","column":"platform_id","key":"id","label":"name","pivot_table":"","pivot":"0"}',
                 'order'        => 7,
             ])->save();
         }
