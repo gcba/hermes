@@ -135,7 +135,7 @@ class AppUserDataRowsTableSeeder extends Seeder
                 'type'         => 'text',
                 'display_name' => 'ID MiBA',
                 'required'     => 1,
-                'browse'       => 1,
+                'browse'       => 0,
                 'read'         => 1,
                 'edit'         => 0,
                 'add'          => 0,
