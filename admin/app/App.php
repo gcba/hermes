@@ -60,7 +60,7 @@ class App extends Model
      * Get the app users of the app.
      */
     public function appusers() {
-        return $this->belongsToMany('App\AppUser');
+        return $this->belongsToMany('App\AppUser', 'app_user_app');
     }
 
     /**

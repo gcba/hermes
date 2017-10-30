@@ -68,6 +68,15 @@ class Apps_Platforms_UsersSeeder extends Seeder
             $android->appusers()->attach($appusers[4]->id);
             $android->appusers()->attach($appusers[5]->id);
 
+            // Let's attach AppUsers to Apps
+
+            $denunciaVial->appusers()->attach($appusers[0]->id);
+            $denunciaVial->appusers()->attach($appusers[1]->id);
+            $miBA->appusers()->attach($appusers[2]->id);
+            $miBA->appusers()->attach($appusers[3]->id);
+            $masSimple->appusers()->attach($appusers[4]->id);
+            $masSimple->appusers()->attach($appusers[5]->id);
+
             // Let's attach Users to Apps
 
             $supportRole = Role::where('name', 'support')->firstOrFail();
