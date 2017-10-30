@@ -32,7 +32,7 @@ func GetPublicKey(variable string, echo *echo.Echo) *rsa.PublicKey {
 	rawKey, readErr := ioutil.ReadFile(os.Getenv(variable))
 
 	if readErr != nil {
-		echo.Logger.Fatal("Could not find key file")
+		echo.Logger.Fatal("Could not find public key file")
 	}
 
 	key, parseErr := jwt.ParseRSAPublicKeyFromPEM(rawKey)
