@@ -91,6 +91,8 @@ import RatingsSDK
 ```swift
 let sdk = Ratings(api: <ENDPOINT>, token: <TOKEN>, app: <APP>, platform: <PLATFORM>, range: <RANGE>)
 
+sdk.timeout = 5 // Opcional; por defecto son 3 segundos
+
 // Opcional; omitir para calificaciones anónimas
 sdk.user = RatingsUser(
     name: "Juan Pérez",
