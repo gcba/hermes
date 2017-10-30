@@ -72,12 +72,10 @@ class Apps_Platforms_UsersSeeder extends Seeder
 
             $supportRole = Role::where('name', 'support')->firstOrFail();
             $supportUsers = User::with('apps')->where('role_id', $supportRole->id)->get();
-            $booleanOptions = [true, false];
+            $appOptions = [$denunciaVial->id, $miBA->id, $masSimple->id];
 
             foreach ($supportUsers as $support) {
-                $isOwner = $booleanOptions[array_rand($booleanOptions)];
-
-                $support->apps()->attach([$denunciaVial->id, $miBA->id, $masSimple->id]);
+                $support->apps()->attach(array_rand($appOptions));
             }
         }
     }
