@@ -33,7 +33,7 @@ class RangeDataRowsTableSeeder extends Seeder
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'text',
-                'display_name' => 'Nombre',
+                'display_name' => 'Rango',
                 'required'     => 0,
                 'browse'       => 1,
                 'read'         => 1,
@@ -51,7 +51,7 @@ class RangeDataRowsTableSeeder extends Seeder
                 'type'         => 'number',
                 'display_name' => 'Desde',
                 'required'     => 1,
-                'browse'       => 1,
+                'browse'       => 0,
                 'read'         => 1,
                 'edit'         => 1,
                 'add'          => 1,
@@ -67,7 +67,7 @@ class RangeDataRowsTableSeeder extends Seeder
                 'type'         => 'number',
                 'display_name' => 'Hasta',
                 'required'     => 1,
-                'browse'       => 1,
+                'browse'       => 0,
                 'read'         => 1,
                 'edit'         => 1,
                 'add'          => 1,
