@@ -22,7 +22,7 @@ type (
 
 // Parse parses, scrubs and escapes a request's JSON body and maps it to a struct
 func Parse(context echo.Context) (*Request, error) {
-	rawRequest, err := base.Parse(newRequest, escape, context)
+	rawRequest, err := base.Parse(new(Request), escape, context)
 	request, castOk := rawRequest.(*Request)
 
 	if err != nil {
@@ -34,10 +34,6 @@ func Parse(context echo.Context) (*Request, error) {
 	}
 
 	return request, nil
-}
-
-func newRequest() interface{} {
-	return new(Request)
 }
 
 func escape(request interface{}) error {

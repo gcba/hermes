@@ -10,9 +10,7 @@ import (
 )
 
 // Parse parses, scrubs and escapes a request's JSON body and maps it to a struct
-func Parse(factory func() interface{}, escape func(interface{}) error, context echo.Context) (interface{}, error) {
-	request := factory()
-
+func Parse(request interface{}, escape func(interface{}) error, context echo.Context) (interface{}, error) {
 	conform.Strings(request)
 
 	if err := escape(request); err != nil {
