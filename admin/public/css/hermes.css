@@ -7,8 +7,26 @@
     padding-right: 0px;
 }
 
+.edit-add.container-fluid {
+    margin-left: 0px;
+    max-width: 960px;
+}
+
 .navbar .navbar-nav > li.profile, .voyager .navbar.navbar-default .navbar-nav > li {
     padding-right: 1em;
+}
+
+.app-container .side-menu .panel.widget h4 {
+    height: unset;
+    float: right;
+    display: block;
+    position: unset;
+    top: unset;
+    width: 80%;
+}
+
+.app-container .side-menu .panel.widget .avatar {
+    display: none;
 }
 
 .dataTables_wrapper:nth-child(1) > div {
