@@ -3,8 +3,8 @@ package gcba.ratings.example;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import gcba.ratings.sdk.RatingsResult;
 import gcba.ratings.sdk.Ratings;
+import gcba.ratings.sdk.RatingsResult;
 
 public class MainActivity extends AppCompatActivity {
 
