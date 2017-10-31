@@ -226,10 +226,12 @@ RatingsResult result;
 sdk.setTimeout(<span class="hljs-number">5</span>); <span class="pl-c">// Opcional, por defecto son 3 segundos</span>
 
 <span class="pl-c">// Opcional, omitir para calificaciones an&#xF3;nimas</span>
-<span class="pl-c">// Par&#xE1;metros: nombre (String), email (String), mibaID (String). El email es opcional si est&#xE1; el mibaId, y viceversa.</span>
+<span class="pl-c">// Par&#xE1;metros: nombre (String), email (String), mibaID (String)</span>
+<span class="pl-c">// El email es opcional si est&#xE1; el mibaId, y viceversa</span>
 sdk.setUser(<span class="pl-s">&quot;Juan P&#xE9;rez&quot;</span>, <span class="pl-s">&quot;juan@example.com&quot;</span>, <span class="pl-s">&quot;dc62591b-1cd3-4c6c-a943-f682e8860e08&quot;</span>);
 
-<span class="pl-c">// Par&#xE1;metros: calificaci&#xF3;n (int), descripci&#xF3;n (String), mensaje (String). Descripci&#xF3;n y mensaje son opcionales.</span>
+<span class="pl-c">// Par&#xE1;metros: calificaci&#xF3;n (int), descripci&#xF3;n (String), mensaje (String)</span>
+<span class="pl-c">// Descripci&#xF3;n y mensaje son opcionales</span>
 result = sdk.create(<span class="hljs-number">5</span>, <span class="pl-s">&quot;Excelente&quot;</span>, <span class="pl-s">&quot;Me encant&#xF3;&quot;</span>);
 
 <span class="pl-k">if</span> (result.error != <span class="pl-k">null</span>) {
