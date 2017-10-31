@@ -147,9 +147,9 @@ import gcba.ratings.sdk.RatingsResult;
 Ratings sdk = new Ratings(<ENDPOINT>, <TOKEN>, <APP>, <PLATFORM>, <RANGE>);
 RatingsResult result;
 
-sdk.setTimeout(5); // Opcional, por defecto son 3 segundos.
+sdk.setTimeout(5); // Opcional, por defecto son 3 segundos
 
-// Opcional, omitir para calificaciones anónimas.
+// Opcional, omitir para calificaciones anónimas
 // Parámetros: Nombre, email, mibaID. El email es opcional si está el mibaId, y viceversa.
 sdk.setUser("Juan Pérez", "juan@example.com", "dc62591b-1cd3-4c6c-a943-f682e8860e08");
 
