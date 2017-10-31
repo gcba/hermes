@@ -101,11 +101,34 @@ sdk.user = RatingsUser(
 )
 
 // Description y comment son opcionales
-sdk.create(rating: 5, description: "Muy Bueno", comment: "Lorem ipsum dolor...") { response, error in
+sdk.create(rating: 5, description: "Excelente", comment: "Me encantó") { response, error in
     guard error == nil else {
         // ...
     }
 
     // ...
+}
+```
+
+## Java
+
+### Enviar una calificación
+
+```java
+import gcba.ratings.sdk.Ratings;
+import gcba.ratings.sdk.RatingsResult;
+```
+```java
+Ratings rating = new Ratings(<ENDPOINT>, <TOKEN>, <APP>, <PLATFORM>, <RANGE>);
+RatingsResult result;
+
+// Opcional; parámetros: Nombre, email, mibaID. El email es opcional si está el mibaId, y viceversa.
+rating.setUser("Juan Pérez", "juan@example.com", "dc62591b-1cd3-4c6c-a943-f682e8860e08");
+
+// Parámetos: calificación, descripción, mensaje. Descripcion y mensaje son opcionales.
+result = rating.create(5, "Excelente", "Me encantó");
+
+if (result.error != null) {
+    // ..
 }
 ```
