@@ -46,7 +46,7 @@ const sdk = new Ratings({
     platform: <PLATFORM>
 });
 
-// Opcional; omitir para calificaciones anónimas
+// Opcional, omitir para calificaciones anónimas
 sdk.user = {
     name: 'Juan Pérez',
     email: 'juan@example.com', // Opcional si está el mibaId
@@ -95,7 +95,7 @@ let sdk = Ratings(api: <ENDPOINT>, token: <TOKEN>, app: <APP>, platform: <PLATFO
 
 sdk.timeout = 5 // Opcional; por defecto son 3 segundos
 
-// Opcional; omitir para calificaciones anónimas
+// Opcional, omitir para calificaciones anónimas
 sdk.user = RatingsUser(
     name: "Juan Pérez",
     email: "juan@example.com", // Opcional si está el mibaId
@@ -118,14 +118,14 @@ Se requiere como mínimo el SDK Android 15.0.
 
 ### Instalación
 
-1. Importar en Android Studio el archivo `sdk-release.aar` que se encuentra en `<REPO>/sdks/java/sdk/build/outputs/aar`:
+1. Importar en Android Studio el archivo `ratings-sdk-release.aar` que se encuentra en `<REPO>/sdks/java/ratings-sdk/build/outputs/aar`:
 ```
 File > New > New Module... > Import .JAR/.AAR Package
 ```
 
 2. Agregar las dependencias en `build.gradle`:
 ```groovy
-compile project(':sdk-release')
+compile project(':ratings-sdk-release')
 compile 'com.google.code.gson:gson:2.8.1'
 compile('com.goebl:david-webb:1.3.0') {
     exclude group: 'org.json', module: 'json'
@@ -147,10 +147,11 @@ import gcba.ratings.sdk.RatingsResult;
 Ratings rating = new Ratings(<ENDPOINT>, <TOKEN>, <APP>, <PLATFORM>, <RANGE>);
 RatingsResult result;
 
-// Opcional; parámetros: Nombre, email, mibaID. El email es opcional si está el mibaId, y viceversa.
+// Opcional, omitir para calificaciones anónimas.
+// Parámetros: Nombre, email, mibaID. El email es opcional si está el mibaId, y viceversa.
 rating.setUser("Juan Pérez", "juan@example.com", "dc62591b-1cd3-4c6c-a943-f682e8860e08");
 
-// Parámetos: calificación, descripción, mensaje. Descripción y mensaje son opcionales.
+// Parámetros: calificación, descripción, mensaje. Descripción y mensaje son opcionales.
 result = rating.create(5, "Excelente", "Me encantó");
 
 if (result.error != null) {
