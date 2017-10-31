@@ -95,6 +95,14 @@
                         </li>
                       </ul>
                     </li>
+                    <li class="heading-item -depth-2"><a class="hlink link-java" href="#java">Java</a>
+                      <ul class="heading-list -depth-2">
+                        <li class="heading-item -depth-3"><a class="hlink link-instalacion" href="#instalacion">Instalación</a>
+                        </li>
+                        <li class="heading-item -depth-3"><a class="hlink link-enviar-una-calificacion" href="#enviar-una-calificacion">Enviar una calificación</a>
+                        </li>
+                      </ul>
+                    </li>
                   </ul>
                 </li>
               </ul>
@@ -135,11 +143,11 @@
     platform: &lt;PLATFORM&gt;
 });
 
-// Opcional; omitir para calificaciones an&#xF3;nimas
+// Opcional, omitir para calificaciones an&#xF3;nimas
 sdk.user = {
-    name: &quot;Juan P&#xE9;rez&quot;,
-    email: &quot;juan@example.com&quot;, // Opcional si est&#xE1; el mibaId
-    mibaId: &quot;04860d65-7e93-49e8-a983-a4007d23ffa5&quot; // Opcional si est&#xE1; el email
+    name: &apos;Juan P&#xE9;rez&apos;,
+    email: &apos;juan@example.com&apos;, // Opcional si est&#xE1; el mibaId
+    mibaId: &apos;dc62591b-1cd3-4c6c-a943-f682e8860e08&apos; // Opcional si est&#xE1; el email
 }
 
 sdk.create({
@@ -155,6 +163,7 @@ sdk.create({
 });
 </code></pre>
 <h2 id="swift">Swift</h2>
+<p>Se requiere como m&#xED;nimo iOS 9.0.</p>
 <h3 id="instalacion">Instalaci&#xF3;n</h3>
 <h4 id="cocoapods">Cocoapods</h4>
 <p>En el <code>Podfile</code> del proyecto:</p>
@@ -169,20 +178,60 @@ sdk.create({
 
 sdk.timeout = <span class="hljs-number">5</span> <span class="pl-c">// Opcional; por defecto son 3 segundos</span>
 
-<span class="pl-c">// Opcional; omitir para calificaciones an&#xF3;nimas</span>
+<span class="pl-c">// Opcional, omitir para calificaciones an&#xF3;nimas</span>
 sdk.user = <span class="hljs-type">RatingsUser</span>(
     name: <span class="pl-s">&quot;Juan P&#xE9;rez&quot;</span>,
     email: <span class="pl-s">&quot;juan@example.com&quot;</span>, <span class="pl-c">// Opcional si est&#xE1; el mibaId</span>
-    mibaId: <span class="pl-s">&quot;08108a49-4c68-47da-8510-93922b6b2d76&quot;</span> <span class="pl-c">// Opcional si est&#xE1; el email</span>
+    mibaId: <span class="pl-s">&quot;dc62591b-1cd3-4c6c-a943-f682e8860e08&quot;</span> <span class="pl-c">// Opcional si est&#xE1; el email</span>
 )
 
 <span class="pl-c">// Description y comment son opcionales</span>
-sdk.create(rating: <span class="hljs-number">5</span>, description: <span class="pl-s">&quot;Muy Bueno&quot;</span>, comment: <span class="pl-s">&quot;Lorem ipsum dolor...&quot;</span>) { response, error <span class="pl-k">in</span>
+sdk.create(rating: <span class="hljs-number">5</span>, description: <span class="pl-s">&quot;Excelente&quot;</span>, comment: <span class="pl-s">&quot;Me encant&#xF3;&quot;</span>) { response, error <span class="pl-k">in</span>
     <span class="pl-k">guard</span> error == <span class="pl-c1">nil</span> <span class="pl-k">else</span> {
         <span class="pl-c">// ...</span>
     }
 
     <span class="pl-c">// ...</span>
+}
+</code></pre>
+<h2 id="java">Java</h2>
+<p>Se requiere como m&#xED;nimo el SDK Android 15.0.</p>
+<h3 id="instalacion">Instalaci&#xF3;n</h3>
+<ol>
+<li>Importar en Android Studio el archivo <code>ratings-sdk-release.aar</code> que se encuentra en <code>&lt;REPO&gt;/sdks/java/ratings-sdk/build/outputs/aar</code>:</li>
+</ol>
+<pre><code>File &gt; New &gt; New Module... &gt; Import .JAR/.AAR Package
+</code></pre>
+<ol start="2">
+<li>Agregar las dependencias en <code>build.gradle</code>:</li>
+</ol>
+<pre><code class="lang-groovy">compile project(<span class="pl-s">&apos;:ratings-sdk-release&apos;</span>)
+compile <span class="pl-s">&apos;com.google.code.gson:gson:2.8.1&apos;</span>
+compile(<span class="pl-s">&apos;com.goebl:david-webb:1.3.0&apos;</span>) {
+    exclude <span class="pl-s">group:</span> <span class="pl-s">&apos;org.json&apos;</span>, <span class="pl-s">module:</span> <span class="pl-s">&apos;json&apos;</span>
+}
+</code></pre>
+<ol start="3">
+<li>Asegurarse que el permiso para acceder a internet est&#xE9; en <code>AndroidManifest.xml</code>:</li>
+</ol>
+<pre><code class="lang-xml"><span class="hljs-tag">&lt;<span class="hljs-name">uses-permission</span> <span class="hljs-attr">android:name</span>=<span class="pl-s">&quot;android.permission.INTERNET&quot;</span>/&gt;</span>
+</code></pre>
+<h3 id="enviar-una-calificacion">Enviar una calificaci&#xF3;n</h3>
+<pre><code class="lang-java"><span class="pl-k">import</span> gcba.ratings.sdk.Ratings;
+<span class="pl-k">import</span> gcba.ratings.sdk.RatingsResult;
+</code></pre>
+<pre><code class="lang-java">Ratings rating = <span class="pl-k">new</span> Ratings(&lt;ENDPOINT&gt;, &lt;TOKEN&gt;, &lt;APP&gt;, &lt;PLATFORM&gt;, &lt;RANGE&gt;);
+RatingsResult result;
+
+<span class="pl-c">// Opcional, omitir para calificaciones an&#xF3;nimas.</span>
+<span class="pl-c">// Par&#xE1;metros: Nombre, email, mibaID. El email es opcional si est&#xE1; el mibaId, y viceversa.</span>
+rating.setUser(<span class="pl-s">&quot;Juan P&#xE9;rez&quot;</span>, <span class="pl-s">&quot;juan@example.com&quot;</span>, <span class="pl-s">&quot;dc62591b-1cd3-4c6c-a943-f682e8860e08&quot;</span>);
+
+<span class="pl-c">// Par&#xE1;metros: calificaci&#xF3;n, descripci&#xF3;n, mensaje. Descripci&#xF3;n y mensaje son opcionales.</span>
+result = rating.create(<span class="hljs-number">5</span>, <span class="pl-s">&quot;Excelente&quot;</span>, <span class="pl-s">&quot;Me encant&#xF3;&quot;</span>);
+
+<span class="pl-k">if</span> (result.error != <span class="pl-k">null</span>) {
+    <span class="pl-c">// ..</span>
 }
 </code></pre>
 

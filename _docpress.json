@@ -1045,6 +1045,23 @@
                     "id": "enviar-una-calificacion"
                   }
                 ]
+              },
+              {
+                "title": "Java",
+                "depth": 2,
+                "id": "java",
+                "headings": [
+                  {
+                    "title": "Instalación",
+                    "depth": 3,
+                    "id": "instalacion"
+                  },
+                  {
+                    "title": "Enviar una calificación",
+                    "depth": 3,
+                    "id": "enviar-una-calificacion"
+                  }
+                ]
               }
             ]
           }
@@ -2067,6 +2084,23 @@
           "title": "Swift",
           "depth": 2,
           "id": "swift",
+          "headings": [
+            {
+              "title": "Instalación",
+              "depth": 3,
+              "id": "instalacion"
+            },
+            {
+              "title": "Enviar una calificación",
+              "depth": 3,
+              "id": "enviar-una-calificacion"
+            }
+          ]
+        },
+        {
+          "title": "Java",
+          "depth": 2,
+          "id": "java",
           "headings": [
             {
               "title": "Instalación",
