@@ -13,18 +13,18 @@ import java.util.HashMap;
  */
 
 public final class Ratings {
-    public Ratings(String api, String app, String platform, String range, String token) {
+    public Ratings(String api, String token, String app, String platform, String range) {
         validateUrl(api);
+        validateToken(token);
         validateKey(app, "app");
         validateKey(platform, "platform");
         validateKey(range, "range");
-        validateToken(token);
 
         this.url = api.trim();
+        this.token = token.trim();
         this.app = app.trim();
         this.platform = platform.trim();
         this.range = range.trim();
-        this.token = token.trim();
         this.timeout = 3000;
     }
 
@@ -160,17 +160,17 @@ public final class Ratings {
     }
 
     public void setUser(String name, String mibaId) {
-        setUser(name, mibaId, null);
+        setUser(name, null, mibaId);
     }
 
-    public void setUser(String name, String mibaId, String email) {
+    public void setUser(String name, String email, String mibaId) {
         HashMap<String, String> newUser;
 
         newUser = new HashMap<String, String>();
 
         if (name != null) newUser.put("name", name.trim());
-        if (mibaId != null) newUser.put("mibaId", mibaId.trim());
         if (email != null) newUser.put("email", email.trim());
+        if (mibaId != null) newUser.put("mibaId", mibaId.trim());
 
         user = newUser;
     }

@@ -2,6 +2,7 @@ package gcba.ratings.example;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 
 import gcba.ratings.sdk.Ratings;
 import gcba.ratings.sdk.RatingsResult;
@@ -21,38 +22,62 @@ public class MainActivity extends AppCompatActivity {
                 String range = app;
                 String token = app;
 
-                Ratings rating = new Ratings("https://7333ab98.ngrok.io", app, platform, range, token);
+                Ratings rating = new Ratings("https://75100f11.ngrok.io", token, app, platform, range);
                 RatingsResult result;
 
                 // Rating only; no user
 
                 result = rating.create(5);
 
+                if (result.error != null) {
+                    Log.e("RATINGS-ERROR", result.error.getDescription());
+                }
+
                 // Rating and description only; no user
 
                 result = rating.create(4, "Bueno");
+
+                if (result.error != null) {
+                    Log.e("RATINGS-ERROR", result.error.getDescription());
+                }
 
                 // Rating, description and comment; no user
 
                 result = rating.create(3, "Regular", "Lorem ipsum dolor...");
 
+                if (result.error != null) {
+                    Log.e("RATINGS-ERROR", result.error.getDescription());
+                }
+
                 // Rating, description and comment; user name and mibaId only
 
-                rating.setUser("Juan Pérez", "dc62591b-1cd3-4c6c-a943-f682e8860e08");
+                rating.setUser("Juan Pérez", null, "dc62591b-1cd3-4c6c-a943-f682e8860e08");
 
                 result = rating.create(2, "Regular", "Lorem ipsum dolor...");
 
+                if (result.error != null) {
+                    Log.e("RATINGS-ERROR", result.error.getDescription());
+                }
+
                 // Rating, description and comment; user name and email only
 
-                rating.setUser("Juan Pérez", null, "juan@example.com");
+                rating.setUser("Juan Pérez", "juan@example.com",null);
 
                 result = rating.create(1, "Muy Malo", "Lorem ipsum dolor...");
 
+                if (result.error != null) {
+                    Log.e("RATINGS-ERROR", result.error.getDescription());
+                }
+
                 // Rating, description and comment; user name, email and mibaId
 
-                rating.setUser("Juan Pérez", "ae0bfd64-7b37-4bb5-a628-b6cfe28a68af", "juan@perez.com");
+                rating.setUser("Juan Pérez","juan@perez.com", "ae0bfd64-7b37-4bb5-a628-b6cfe28a68af");
 
                 result = rating.create(5, "Muy Bueno", "Lorem ipsum dolor...");
+
+                if (result.error != null) {
+                    Log.e("RATINGS-ERROR", result.error.getDescription());
+                }
             }
         });
 
