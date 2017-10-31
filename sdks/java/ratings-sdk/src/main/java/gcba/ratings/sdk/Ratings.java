@@ -125,11 +125,14 @@ public final class Ratings {
         String json;
         Response<JSONObject> response;
         Response errorResponse;
+        Object errorBody;
         RatingsHTTPError error;
+        int UNKNOWN_ERROR;
 
         webb = Webb.create();
         gson = new Gson();
         json = gson.toJson(request);
+        UNKNOWN_ERROR = 112;
 
         webb.setBaseUri(url);
 
@@ -147,7 +150,19 @@ public final class Ratings {
             errorResponse = e.getResponse();
 
             if (errorResponse != null) error = new RatingsHTTPError(errorResponse.getStatusCode(), errorResponse.getStatusLine());
-            else error = new RatingsHTTPError(112, e.getMessage());
+            else error = new RatingsHTTPError(UNKNOWN_ERROR, e.getMessage());
+
+            return new RatingsResult(null, error);
+        } catch (Exception e) {
+            error = new RatingsHTTPError(UNKNOWN_ERROR, e.getLocalizedMessage());
+
+            return new RatingsResult(null, error);
+        }
+
+        errorBody = response.getErrorBody();
+
+        if (errorBody != null) {
+            error = new RatingsHTTPError(UNKNOWN_ERROR, errorBody.toString());
 
             return new RatingsResult(null, error);
         }
