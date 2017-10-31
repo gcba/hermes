@@ -4,8 +4,8 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/example/app/app.iml" filepath="$PROJECT_DIR$/example/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/java.iml" filepath="$PROJECT_DIR$/java.iml" />
-      <module fileurl="file://$PROJECT_DIR$/sdk/sdk.iml" filepath="$PROJECT_DIR$/sdk/sdk.iml" />
-      <module fileurl="file://$PROJECT_DIR$/sdk-debug/sdk-debug.iml" filepath="$PROJECT_DIR$/sdk-debug/sdk-debug.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ratings-sdk/sdk.iml" filepath="$PROJECT_DIR$/ratings-sdk/sdk.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ratings-sdk-debug/sdk-debug.iml" filepath="$PROJECT_DIR$/ratings-sdk-debug/sdk-debug.iml" />
     </modules>
   </component>
 </project>

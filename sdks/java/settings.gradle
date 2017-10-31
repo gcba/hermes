@@ -1,2 +1,2 @@
-include ':sdk', ':app', ':sdk-debug'
+include ':ratings-sdk', ':app', ':ratings-sdk-debug'
 project(':app').projectDir = new File('example/app')

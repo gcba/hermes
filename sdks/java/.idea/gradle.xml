@@ -9,8 +9,8 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/example/app" />
-            <option value="$PROJECT_DIR$/sdk" />
-            <option value="$PROJECT_DIR$/sdk-debug" />
+            <option value="$PROJECT_DIR$/ratings-sdk" />
+            <option value="$PROJECT_DIR$/ratings-sdk-debug" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
