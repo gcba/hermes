@@ -48,9 +48,9 @@ const sdk = new Ratings({
 
 // Opcional; omitir para calificaciones anónimas
 sdk.user = {
-    name: "Juan Pérez",
-    email: "juan@example.com", // Opcional si está el mibaId
-    mibaId: "04860d65-7e93-49e8-a983-a4007d23ffa5" // Opcional si está el email
+    name: 'Juan Pérez',
+    email: 'juan@example.com', // Opcional si está el mibaId
+    mibaId: 'dc62591b-1cd3-4c6c-a943-f682e8860e08' // Opcional si está el email
 }
 
 sdk.create({
@@ -67,6 +67,8 @@ sdk.create({
 ```
 
 ## Swift
+
+Se requiere como mínimo iOS 9.0.
 
 ### Instalación
 
@@ -97,7 +99,7 @@ sdk.timeout = 5 // Opcional; por defecto son 3 segundos
 sdk.user = RatingsUser(
     name: "Juan Pérez",
     email: "juan@example.com", // Opcional si está el mibaId
-    mibaId: "08108a49-4c68-47da-8510-93922b6b2d76" // Opcional si está el email
+    mibaId: "dc62591b-1cd3-4c6c-a943-f682e8860e08" // Opcional si está el email
 )
 
 // Description y comment son opcionales
@@ -112,6 +114,29 @@ sdk.create(rating: 5, description: "Excelente", comment: "Me encantó") { respon
 
 ## Java
 
+Se requiere como mínimo el SDK Android 15.0.
+
+### Instalación
+
+1. Importar en Android Studio el archivo `sdk-release.aar` que se encuentra en `<REPO>/sdks/java/sdk/build/outputs/aar`:
+```
+File > New > New Module... > Import .JAR/.AAR Package
+```
+
+2. Agregar las dependencias en `build.gradle`:
+```groovy
+compile project(':sdk-release')
+compile 'com.google.code.gson:gson:2.8.1'
+compile('com.goebl:david-webb:1.3.0') {
+    exclude group: 'org.json', module: 'json'
+}
+```
+
+3. Asegurarse que el permiso para acceder a internet esté en `AndroidManifest.xml`:
+```xml
+<uses-permission android:name="android.permission.INTERNET"/>
+```
+
 ### Enviar una calificación
 
 ```java
@@ -125,7 +150,7 @@ RatingsResult result;
 // Opcional; parámetros: Nombre, email, mibaID. El email es opcional si está el mibaId, y viceversa.
 rating.setUser("Juan Pérez", "juan@example.com", "dc62591b-1cd3-4c6c-a943-f682e8860e08");
 
-// Parámetos: calificación, descripción, mensaje. Descripcion y mensaje son opcionales.
+// Parámetos: calificación, descripción, mensaje. Descripción y mensaje son opcionales.
 result = rating.create(5, "Excelente", "Me encantó");
 
 if (result.error != null) {
