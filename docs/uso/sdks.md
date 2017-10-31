@@ -150,10 +150,10 @@ RatingsResult result;
 sdk.setTimeout(5); // Opcional, por defecto son 3 segundos
 
 // Opcional, omitir para calificaciones anónimas
-// Parámetros: Nombre, email, mibaID. El email es opcional si está el mibaId, y viceversa.
+// Parámetros: nombre (String), email (String), mibaID (String). El email es opcional si está el mibaId, y viceversa.
 sdk.setUser("Juan Pérez", "juan@example.com", "dc62591b-1cd3-4c6c-a943-f682e8860e08");
 
-// Parámetros: calificación, descripción, mensaje. Descripción y mensaje son opcionales.
+// Parámetros: calificación (int), descripción (String), mensaje (String). Descripción y mensaje son opcionales.
 result = sdk.create(5, "Excelente", "Me encantó");
 
 if (result.error != null) {
