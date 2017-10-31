@@ -1,6 +1,7 @@
+EMBEDDED_CONTENT_CONTAINS_SWIFT = YES
 FRAMEWORK_SEARCH_PATHS = $(inherited) "$PODS_CONFIGURATION_BUILD_DIR/GBDeviceInfo" "$PODS_CONFIGURATION_BUILD_DIR/SwiftHTTP" "$PODS_CONFIGURATION_BUILD_DIR/SwifterSwift"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-LD_RUNPATH_SEARCH_PATHS = $(inherited) '@executable_path/Frameworks' '@loader_path/Frameworks' '@executable_path/../../Frameworks'
+LD_RUNPATH_SEARCH_PATHS = $(inherited) '@executable_path/Frameworks' '@loader_path/Frameworks'
 OTHER_CFLAGS = $(inherited) -iquote "$PODS_CONFIGURATION_BUILD_DIR/GBDeviceInfo/GBDeviceInfo.framework/Headers" -iquote "$PODS_CONFIGURATION_BUILD_DIR/SwiftHTTP/SwiftHTTP.framework/Headers" -iquote "$PODS_CONFIGURATION_BUILD_DIR/SwifterSwift/SwifterSwift.framework/Headers"
 OTHER_LDFLAGS = $(inherited) -framework "GBDeviceInfo" -framework "SwiftHTTP" -framework "SwifterSwift"
 OTHER_SWIFT_FLAGS = $(inherited) "-D" "COCOAPODS"
