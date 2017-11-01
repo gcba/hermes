@@ -17,7 +17,7 @@ class RatingsTableSeeder extends Seeder
      */
     public function run()
     {
-        if (Rating::count() == 0) {
+        if (\App::isLocal() && Rating::count() == 0) {
             $appusers = AppUser::all();
             $apps = App::all();
             $ranges = Range::all()->toArray();

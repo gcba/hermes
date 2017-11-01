@@ -12,7 +12,7 @@ class BrowsersTableSeeder extends Seeder
      */
     public function run()
     {
-        if (Browser::count() == 0) {
+        if (\App::isLocal() && Browser::count() == 0) {
             Browser::create([
                 'name' => 'Chrome'
             ]);

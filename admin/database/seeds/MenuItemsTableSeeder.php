@@ -24,6 +24,7 @@ class MenuItemsTableSeeder extends Seeder
                 'url'        => route('voyager.dashboard', [], false),
                 'order'      => 1,
             ]);
+
             if (!$dashboardMenuItem->exists) {
                 $dashboardMenuItem->fill([
                     'target'     => '_self',
@@ -33,23 +34,6 @@ class MenuItemsTableSeeder extends Seeder
                 ])->save();
             }
 
-            /*
-            $adminMenuItem = MenuItem::firstOrNew([
-                'menu_id'    => $adminMenu->id,
-                'title'      => 'Media',
-                'url'        => route('voyager.media.index', [], false),
-            ]);
-            if (!$adminMenuItem->exists) {
-                $adminMenuItem->fill([
-                    'target'     => '_self',
-                    'icon_class' => 'voyager-images',
-                    'color'      => null,
-                    'parent_id'  => null,
-                    'order'      => 5,
-                ])->save();
-            }
-            */
-
             $ratingsMenuItem = MenuItem::firstOrNew([
                 'menu_id'    => $adminMenu->id,
                 'title'      => 'Calificaciones',
@@ -58,6 +42,7 @@ class MenuItemsTableSeeder extends Seeder
                 'url'        => null,
                 'parameters' => null,
             ]);
+
             if (!$ratingsMenuItem->exists) {
                 $ratingsMenuItem->fill([
                     'target'     => '_self',
@@ -75,6 +60,7 @@ class MenuItemsTableSeeder extends Seeder
                 'url'        => null,
                 'parameters' => null,
             ]);
+
             if (!$messagesMenuItem->exists) {
                 $messagesMenuItem->fill([
                     'target'     => '_self',
@@ -92,6 +78,7 @@ class MenuItemsTableSeeder extends Seeder
                 'url'        => null,
                 'parameters' => null,
             ]);
+
             if (!$appusersMenuItem->exists) {
                 $appusersMenuItem->fill([
                     'target'     => '_self',
@@ -109,6 +96,7 @@ class MenuItemsTableSeeder extends Seeder
                 'url'        => null,
                 'parameters' => null,
             ]);
+
             if (!$appsMenuItem->exists) {
                 $appsMenuItem->fill([
                     'target'     => '_self',
@@ -126,6 +114,7 @@ class MenuItemsTableSeeder extends Seeder
                 'url'        => null,
                 'parameters' => null,
             ]);
+
             if (!$rangesMenuItem->exists) {
                 $rangesMenuItem->fill([
                     'target'     => '_self',
@@ -142,6 +131,7 @@ class MenuItemsTableSeeder extends Seeder
                 'url'        => null,
                 'parameters' => null,
             ]);
+
             if (!$contextMenuItem->exists) {
                 $contextMenuItem->fill([
                     'target'     => '_self',
@@ -160,6 +150,7 @@ class MenuItemsTableSeeder extends Seeder
                 'url'        => null,
                 'parameters' => null,
             ]);
+
             if (!$platformsMenuItem->exists) {
                 $platformsMenuItem->fill([
                     'target'     => '_self',
@@ -177,6 +168,7 @@ class MenuItemsTableSeeder extends Seeder
                 'url'        => null,
                 'parameters' => null,
             ]);
+
             if (!$devicesMenuItem->exists) {
                 $devicesMenuItem->fill([
                     'target'     => '_self',
@@ -194,6 +186,7 @@ class MenuItemsTableSeeder extends Seeder
                 'url'        => null,
                 'parameters' => null,
             ]);
+
             if (!$brandsMenuItem->exists) {
                 $brandsMenuItem->fill([
                     'target'     => '_self',
@@ -211,6 +204,7 @@ class MenuItemsTableSeeder extends Seeder
                 'url'        => null,
                 'parameters' => null,
             ]);
+
             if (!$browsersMenuItem->exists) {
                 $browsersMenuItem->fill([
                     'target'     => '_self',
@@ -226,6 +220,7 @@ class MenuItemsTableSeeder extends Seeder
                 'url'        => null,
                 'parameters' => null,
             ]);
+
             if (!$administrationMenuItem->exists) {
                 $administrationMenuItem->fill([
                     'target'     => '_self',
@@ -243,6 +238,7 @@ class MenuItemsTableSeeder extends Seeder
                 'order'      => 1,
                 'parameters' => null,
             ]);
+
             if (!$usersMenuItem->exists) {
                 $usersMenuItem->fill([
                     'target'     => '_self',
@@ -259,6 +255,7 @@ class MenuItemsTableSeeder extends Seeder
                 'order'      => 2,
                 'parameters' => null,
             ]);
+
             if (!$rolesMenuItem->exists) {
                 $rolesMenuItem->fill([
                     'target'     => '_self',
@@ -275,6 +272,7 @@ class MenuItemsTableSeeder extends Seeder
                 'order'      => 3,
                 'parameters' => null,
             ]);
+
             if (!$menusMenuItem->exists) {
                 $menusMenuItem->fill([
                     'target'     => '_self',
@@ -291,6 +289,7 @@ class MenuItemsTableSeeder extends Seeder
                 'order'      => 4,
                 'parameters' => null,
             ]);
+
             if (!$dbMenuItem->exists) {
                 $dbMenuItem->fill([
                     'target'     => '_self',
@@ -307,6 +306,7 @@ class MenuItemsTableSeeder extends Seeder
                 'order'      => 5,
                 'parameters' => null,
             ]);
+
             if (!$configMenuItem->exists) {
                 $configMenuItem->fill([
                     'target'     => '_self',

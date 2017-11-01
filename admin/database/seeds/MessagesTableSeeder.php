@@ -13,7 +13,7 @@ class MessagesTableSeeder extends Seeder
      */
     public function run()
     {
-        if (Message::count() == 0) {
+        if (\App::isLocal() && Message::count() == 0) {
             $ratingsWithMessages = Rating::where('has_message', true)->get();
 
             foreach ($ratingsWithMessages as $rating) {

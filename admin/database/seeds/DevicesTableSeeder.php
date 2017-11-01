@@ -15,7 +15,7 @@ class DevicesTableSeeder extends Seeder
      */
     public function run()
     {
-        if (Device::count() == 0) {
+        if (\App::isLocal() && Device::count() == 0) {
             $apple = Brand::where('name', 'Apple')->firstOrFail();
             $samsung = Brand::where('name', 'Samsung')->firstOrFail();
             $google = Brand::where('name', 'Google')->firstOrFail();

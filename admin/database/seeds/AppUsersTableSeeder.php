@@ -12,7 +12,7 @@ class AppUsersTableSeeder extends Seeder
      */
     public function run()
     {
-        if (AppUser::count() == 0) {
+        if (\App::isLocal() && AppUser::count() == 0) {
             AppUser::create([
                 'name'  => 'Mariano Gómez',
                 'email' => 'mariano@gomez.com',

@@ -35,27 +35,16 @@ class PermissionsTableSeeder extends Seeder
         }
 
         Permission::generateFor('menus');
-
         Permission::generateFor('roles');
-
         Permission::generateFor('users');
-
         Permission::generateFor('appusers');
-
         Permission::generateFor('apps');
-
         Permission::generateFor('platforms');
-
         Permission::generateFor('brands');
-
         Permission::generateFor('browsers');
-
         Permission::generateFor('devices');
-
         Permission::generateFor('ranges');
-
         Permission::generateFor('messages');
-
         Permission::generateFor('ratings');
     }
 }

@@ -12,7 +12,7 @@ class RangesTableSeeder extends Seeder
      */
     public function run()
     {
-        if (Range::count() == 0) {
+        if (\App::isLocal() && Range::count() == 0) {
             Range::create([
                 'from' => 0,
                 'to' => 5,

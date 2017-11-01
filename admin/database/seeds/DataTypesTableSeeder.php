@@ -20,7 +20,6 @@ class DataTypesTableSeeder extends Seeder
                 'icon'                  => 'voyager-person',
                 'model_name'            => 'App\\User',
                 'controller'            => '\\App\\Http\\Controllers\\Controller',
-                // 'controller'            => '',
                 'generate_permissions'  => 1,
                 'description'           => 'Personal',
                 'server_side'           => 0

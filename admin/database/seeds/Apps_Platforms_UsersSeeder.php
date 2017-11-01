@@ -21,70 +21,76 @@ class Apps_Platforms_UsersSeeder extends Seeder
                 'name' => 'iOS',
                 'key'  => md5("123456")
             ]);
+
             $android = Platform::create([
                 'name' => 'Android',
                 'key'  => md5("654321")
             ]);
+
             $windows = Platform::create([
                 'name' => 'Browser',
                 'key'  => md5("789123")
             ]);
 
-            $denunciaVial = App::create([
-                'name' => 'Denuncia Vial',
-                'type' => 'M',
-                'key'  => md5("123456")
-            ]);
-            $miBA = App::create([
-                'name' => 'Mi BA',
-                'type' => 'M',
-                'key'  => md5("654321")
-            ]);
-            $masSimple = App::create([
-                'name' => 'Más Simple',
-                'type' => 'M',
-                'key'  => md5("789123")
-            ]);
+            if (\App::isLocal()) {
+                $denunciaVial = App::create([
+                    'name' => 'Denuncia Vial',
+                    'type' => 'M',
+                    'key'  => md5("123456")
+                ]);
 
-            // Let's attach Apps to Platforms
+                $miBA = App::create([
+                    'name' => 'Mi BA',
+                    'type' => 'M',
+                    'key'  => md5("654321")
+                ]);
 
-            $ios->apps()->attach($denunciaVial->id);
-            $ios->apps()->attach($miBA->id);
-            $ios->apps()->attach($masSimple->id);
+                $masSimple = App::create([
+                    'name' => 'Más Simple',
+                    'type' => 'M',
+                    'key'  => md5("789123")
+                ]);
 
-            $android->apps()->attach($denunciaVial->id);
-            $android->apps()->attach($miBA->id);
-            $android->apps()->attach($masSimple->id);
+                // Let's attach Apps to Platforms
 
-            // Let's attach AppUsers to Platforms
+                $ios->apps()->attach($denunciaVial->id);
+                $ios->apps()->attach($miBA->id);
+                $ios->apps()->attach($masSimple->id);
 
-            $appusers = AppUser::all();
+                $android->apps()->attach($denunciaVial->id);
+                $android->apps()->attach($miBA->id);
+                $android->apps()->attach($masSimple->id);
 
-            $ios->appusers()->attach($appusers[0]->id);
-            $ios->appusers()->attach($appusers[1]->id);
-            $ios->appusers()->attach($appusers[3]->id);
+                // Let's attach AppUsers to Platforms
 
-            $android->appusers()->attach($appusers[2]->id);
-            $android->appusers()->attach($appusers[4]->id);
-            $android->appusers()->attach($appusers[5]->id);
+                $appusers = AppUser::all();
 
-            // Let's attach AppUsers to Apps
+                $ios->appusers()->attach($appusers[0]->id);
+                $ios->appusers()->attach($appusers[1]->id);
+                $ios->appusers()->attach($appusers[3]->id);
 
-            $denunciaVial->appusers()->attach($appusers[0]->id);
-            $denunciaVial->appusers()->attach($appusers[1]->id);
-            $miBA->appusers()->attach($appusers[2]->id);
-            $miBA->appusers()->attach($appusers[3]->id);
-            $masSimple->appusers()->attach($appusers[4]->id);
-            $masSimple->appusers()->attach($appusers[5]->id);
+                $android->appusers()->attach($appusers[2]->id);
+                $android->appusers()->attach($appusers[4]->id);
+                $android->appusers()->attach($appusers[5]->id);
 
-            // Let's attach Users to Apps
+                // Let's attach AppUsers to Apps
 
-            $supportRole = Role::where('name', 'support')->firstOrFail();
-            $supportUsers = User::where('role_id', $supportRole->id)->get();
-            $options = [$denunciaVial->id, $miBA->id, $masSimple->id];
+                $denunciaVial->appusers()->attach($appusers[0]->id);
+                $denunciaVial->appusers()->attach($appusers[1]->id);
+                $miBA->appusers()->attach($appusers[2]->id);
+                $miBA->appusers()->attach($appusers[3]->id);
+                $masSimple->appusers()->attach($appusers[4]->id);
+                $masSimple->appusers()->attach($appusers[5]->id);
 
-            foreach ($supportUsers as $support) {
-                $support->apps()->attach($options[array_rand($options)]);
+                // Let's attach Users to Apps
+
+                $supportRole = Role::where('name', 'support')->firstOrFail();
+                $supportUsers = User::where('role_id', $supportRole->id)->get();
+                $options = [$denunciaVial->id, $miBA->id, $masSimple->id];
+
+                foreach ($supportUsers as $support) {
+                    $support->apps()->attach($options[array_rand($options)]);
+                }
             }
         }
     }

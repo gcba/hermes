@@ -12,7 +12,7 @@ class BrandsTableSeeder extends Seeder
      */
     public function run()
     {
-        if (Brand::count() == 0) {
+        if (\App::isLocal() && Brand::count() == 0) {
             Brand::create([
                 'name' => 'Apple'
             ]);

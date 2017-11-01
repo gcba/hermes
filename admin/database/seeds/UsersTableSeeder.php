@@ -13,7 +13,7 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        if (User::count() == 0) {
+        if (\App::isLocal() && User::count() == 0) {
             $adminRole = Role::where('name', 'admin')->firstOrFail();
             $supportRole = Role::where('name', 'support')->firstOrFail();
             $userRole = Role::where('name', 'user')->firstOrFail();
