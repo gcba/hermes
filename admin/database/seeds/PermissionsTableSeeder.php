@@ -47,5 +47,6 @@ class PermissionsTableSeeder extends Seeder
         Permission::generateFor('ranges');
         Permission::generateFor('messages');
         Permission::generateFor('ratings');
+        Permission::generateFor('settings');
     }
 }

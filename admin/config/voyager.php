@@ -91,7 +91,7 @@ return [
 
     'database' => [
         'tables' => [
-            'hidden' => ['migrations', 'data_rows', 'data_types', 'menu_items', 'password_resets', 'permission_role', 'permissions', 'settings'],
+            'hidden' => ['migrations', 'data_rows', 'data_types', 'menu_items', 'password_resets', 'permission_role', 'settings'],
         ],
     ],
 
@@ -104,6 +104,7 @@ return [
     | to view the Voyager admin panel
     |
     */
+
     'prefix' => 'admin',
 
     /*
@@ -175,7 +176,7 @@ return [
             'Home' => [
                 'route'         => '/',
                 'icon_class'    => 'voyager-home',
-                'target_blank'  => false,
+                'target_blank'  => true,
             ],
             'Logout' => [
                 'route'      => 'voyager.logout',
@@ -198,8 +199,10 @@ return [
     | When a change happens on Voyager, we can automate some routines.
     |
     */
+
     // When a BREAD is added, create the Menu item using the BREAD properties.
     'add_bread_menu_item' => true,
+
     // When a BREAD is added, create the related Permission.
     'add_bread_permission' => true,
 
@@ -210,20 +213,18 @@ return [
     |
     | Here you change some of the Voyager UI settings.
     |
-    | TODO: Move style properties to assets/css
-    |
     */
+
+    'primary_color' => '#22A7F0',
 
     'login' => [
         'gradient_a' => '#ffffff',
         'gradient_b' => '#ffffff',
     ],
 
-    'primary_color' => '#22A7F0',
-
     'show_dev_tips' => true, // Show development tip "How To Use:" in Menu and Settings
 
-    // Here you can specify additonal assets you would like to be included in the master.blade
+    // Here you can specify additional assets you would like to be included in the master.blade
     'additional_css' => [
         'css/datatables.mark.min.css',
         'css/hermes.css'
@@ -234,5 +235,14 @@ return [
         'js/datatables.mark.min.js',
         'js/hermes.js'
     ],
+
+    'googlemaps' => [
+         'key'    => env('GOOGLE_MAPS_KEY', ''),
+         'center' => [
+             'lat' => env('GOOGLE_MAPS_DEFAULT_CENTER_LAT', '32.715738'),
+             'lng' => env('GOOGLE_MAPS_DEFAULT_CENTER_LNG', '-117.161084'),
+         ],
+         'zoom' => env('GOOGLE_MAPS_DEFAULT_ZOOM', 11),
+     ],
 
 ];
