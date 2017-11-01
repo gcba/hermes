@@ -21,7 +21,7 @@ const resolvePlugin = nodeResolve({
 const babelPlugin = babel({
     include: 'src/**',
     exclude: 'node_modules/**',
-    presets: [['es2015', {'modules': false}], 'stage-3'],
+    presets: [['env', {'modules': false}], 'stage-3'],
     runtimeHelpers: true,
     babelrc: false
 });
