@@ -4,7 +4,7 @@ Pod::Spec.new do |spec|
     spec.summary = 'Hermes Swift SDK'
     spec.homepage = 'https://gcba.github.io/hermes/uso/sdks.html'
     spec.authors = { 'Rita Zerrizuela' => 'zeta@widcket.com' }
-    spec.license = { :type => 'MIT', :file => 'LICENSE.md' }
+    spec.license = { :type => 'MIT', :file => 'LICENSE' }
     spec.source = { :git => 'https://github.com/gcba/hermes.git', :branch => 'master' }
     spec.source_files = 'sdks/swift/RatingsSDK/Ratings*.swift'
     spec.frameworks = 'Foundation'
