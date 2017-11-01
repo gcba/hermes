@@ -193,8 +193,8 @@ class Rating {
 
     get screen() {
         return {
-            width: this.screen.width || window.screen.width,
-            height: this.screen.height || window.screen.height
+            width: this._screen.width || window.screen.width,
+            height: this._screen.height || window.screen.height
         };
     }
 
