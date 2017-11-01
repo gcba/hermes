@@ -2,14 +2,6 @@
 platform :ios, '9.0'
 plugin 'cocoapods-rome'
 
-target 'Example' do
-  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
-  use_frameworks!
-
-  # Pods for Example
-
-end
-
 target 'RatingsSDK' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
@@ -18,5 +10,13 @@ target 'RatingsSDK' do
   pod 'SwiftHTTP', '~> 2.0'
   pod 'SwifterSwift/Foundation', '~> 3.1.1'
   pod 'GBDeviceInfo', '~> 4.3'
+
+end
+
+target 'Example' do
+  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for Example
 
 end
