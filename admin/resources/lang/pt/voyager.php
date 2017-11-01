@@ -24,6 +24,7 @@ return [
         'choose_type'            => 'Escolha o tipo',
         'click_here'             => 'Clique aqui',
         'close'                  => 'Fechar',
+        'compass'                => 'Bússola',
         'created_at'             => 'Criado em',
         'custom'                 => 'Personalizado',
         'dashboard'              => 'Painel de Controle',
@@ -93,7 +94,7 @@ return [
     ],
 
     'login' => [
-        'loginin'      => 'A iniciar sessão',
+        'loggingin'    => 'A iniciar sessão',
         'signin_below' => 'Iniciar sessão abaixo:',
         'welcome'      => 'Bem-vindo ao Voyager. O painel de administração que faltava ao Laravel',
     ],
@@ -141,7 +142,7 @@ return [
         'error_deleting_folder'  => 'Oops, ocorreu algo inesperado removendo esta pasta, por favor verifique as suas permissões',
         'error_may_exist'        => 'Talvez um Ficheiro ou Pasta exista com esse nome. Por favor tente com outro nome, ou apague o ficheiro correspondente.',
         'error_moving'           => 'Oops, ocorreu um problema ao mover esse ficheiro / pasta, verifique as suas permissões.',
-        'error_uploading'        => 'Falha ac Copiar: Ocorreu um erro desconhecido!',
+        'error_uploading'        => 'Falha ao Copiar: Ocorreu um erro desconhecido!',
         'folder_exists_already'  => 'Oops, essa pasta já existe, por favor remova essa pasta se desejar criar uma nova',
         'image_does_not_exist'   => 'A imagem não existe',
         'image_removed'          => 'Imagem removida',
@@ -211,7 +212,7 @@ return [
     ],
 
     'database' => [
-        'add_bread'                 => 'Adicionar BREAD  esta tabela',
+        'add_bread'                 => 'Adicionar BREAD a esta tabela',
         'add_new_column'            => 'Adicionar Novo Campo',
         'add_softdeletes'           => 'Adicionar Soft Deletes',
         'add_timestamps'            => 'Adicionar Timestamps',

@@ -18,7 +18,8 @@ class SettingsTableSeeder extends Seeder
                 'value'        => 'Hermes',
                 'details'      => '',
                 'type'         => 'text',
-                'order'        => 1
+                'order'        => 1,
+                'group'        => 'Site'
             ])->save();
         }
 
@@ -30,7 +31,8 @@ class SettingsTableSeeder extends Seeder
                 'value'        => 'Gestión de feedback de las apps de la Ciudad',
                 'details'      => '',
                 'type'         => 'text',
-                'order'        => 2
+                'order'        => 2,
+                'group'        => 'Site'
             ])->save();
         }
 
@@ -42,7 +44,8 @@ class SettingsTableSeeder extends Seeder
                 'value'        => '',
                 'details'      => '',
                 'type'         => 'image',
-                'order'        => 3
+                'order'        => 3,
+                'group'        => 'Site'
             ])->save();
         }
 
@@ -54,7 +57,8 @@ class SettingsTableSeeder extends Seeder
                 'value'        => '',
                 'details'      => '',
                 'type'         => 'image',
-                'order'        => 9
+                'order'        => 9,
+                'group'        => 'Admin'
             ])->save();
         }
 
@@ -66,7 +70,8 @@ class SettingsTableSeeder extends Seeder
                 'value'        => 'Hermes',
                 'details'      => '',
                 'type'         => 'text',
-                'order'        => 4
+                'order'        => 4,
+                'group'        => 'Admin'
             ])->save();
         }
 
@@ -78,7 +83,8 @@ class SettingsTableSeeder extends Seeder
                 'value'        => 'Gestión de feedback de las apps de la Ciudad',
                 'details'      => '',
                 'type'         => 'text',
-                'order'        => 5
+                'order'        => 5,
+                'group'        => 'Admin'
             ])->save();
         }
 
@@ -90,7 +96,8 @@ class SettingsTableSeeder extends Seeder
                 'value'        => '',
                 'details'      => '',
                 'type'         => 'image',
-                'order'        => 6
+                'order'        => 6,
+                'group'        => 'Admin'
             ])->save();
         }
 
@@ -102,7 +109,8 @@ class SettingsTableSeeder extends Seeder
                 'value'        => '',
                 'details'      => '',
                 'type'         => 'image',
-                'order'        => 7
+                'order'        => 7,
+                'group'        => 'Admin'
             ])->save();
         }
 
@@ -114,7 +122,8 @@ class SettingsTableSeeder extends Seeder
                 'value'        => '',
                 'details'      => '',
                 'type'         => 'text',
-                'order'        => 9
+                'order'        => 9,
+                'group'        => 'Admin'
             ])->save();
         }
     }

@@ -299,11 +299,27 @@ class MenuItemsTableSeeder extends Seeder
             }
 
             $configMenuItem = MenuItem::firstOrNew([
+                'menu_id' => $adminMenu->id,
+                'title'   => 'Hooks',
+                'url'     => route('voyager.hooks', [], false),
+                'parent_id'  => $administrationMenuItem->id,
+                'order'      => 5,
+                'parameters' => null,
+            ]);
+            if (!$configMenuItem->exists) {
+                $configMenuItem->fill([
+                    'target'     => '_self',
+                    'icon_class' => 'voyager-hook',
+                    'color'      => null,
+                ])->save();
+            }
+
+            $configMenuItem = MenuItem::firstOrNew([
                 'menu_id'    => $adminMenu->id,
                 'title'      => 'Configuración',
                 'url'        => route('voyager.settings.index', [], false),
                 'parent_id'  => $administrationMenuItem->id,
-                'order'      => 5,
+                'order'      => 6,
                 'parameters' => null,
             ]);
 

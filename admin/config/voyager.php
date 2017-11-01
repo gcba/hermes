@@ -97,6 +97,17 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | The prefix you wish to use with your voyager installation
+    |--------------------------------------------------------------------------
+    |
+    | specify the domain prefix you would like your users to visit in order
+    | to view the Voyager admin panel
+    |
+    */
+    'prefix' => 'admin',
+
+    /*
+    |--------------------------------------------------------------------------
     | Multilingual configuration
     |--------------------------------------------------------------------------
     |
@@ -114,13 +125,13 @@ return [
         /*
          * Select default language
          */
-        'default' => 'en',
+        'default' => 'es',
 
         /*
          * Select languages that are supported.
          */
         'locales' => [
-            'en',
+            'es',
             //'pt',
         ],
     ],
@@ -178,6 +189,19 @@ return [
             'TCG\\Voyager\\Widgets\\UserDimmer',
         ],
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Automatic Procedures
+    |--------------------------------------------------------------------------
+    |
+    | When a change happens on Voyager, we can automate some routines.
+    |
+    */
+    // When a BREAD is added, create the Menu item using the BREAD properties.
+    'add_bread_menu_item' => true,
+    // When a BREAD is added, create the related Permission.
+    'add_bread_permission' => true,
 
     /*
     |--------------------------------------------------------------------------
