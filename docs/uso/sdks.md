@@ -82,7 +82,13 @@ pod 'RatingsSDK', :path => '<REPO>/sdks/swift'
 
 #### Manual
 
-Agregar al proyecto los archivos `RatingsSDK.swift`, `RatingsUser.swift` y `RatingsError.swift` que están en `<REPO>/sdks/swift/RatingsSDK`.
+Agregar al proyecto los archivos `RatingsSDK.swift`, `RatingsUser.swift` y `RatingsError.swift` que están en `<REPO>/sdks/swift/RatingsSDK`. Luego agregar las dependencias al `Podfile`:
+
+```ruby
+pod 'SwiftHTTP', '~> 2.0'
+pod 'SwifterSwift/Foundation', '~> 3.1.1'
+pod 'GBDeviceInfo', '~> 4.3'
+```
 
 ### Enviar una calificación
 
