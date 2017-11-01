@@ -166,8 +166,6 @@ public class Ratings {
         }
         
         DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: .now() + .seconds(backoff)) {
-            let completionHandler = callback
-            
             do {
                 try HTTP.POST(self.url, parameters: params, headers: headers, requestSerializer: JSONParameterSerializer()).start { response in
                     guard response.error == nil else {
@@ -178,20 +176,20 @@ public class Ratings {
                         }
                         
                         response.error!.domain == "HTTP" ?
-                            completionHandler(nil, RatingsError.http(response.error!.localizedDescription, response.error!.code, response)) :
-                            completionHandler(nil, RatingsError.other(response.error!.localizedDescription))
+                            callback(nil, RatingsError.http(response.error!.localizedDescription, response.error!.code, response)) :
+                            callback(nil, RatingsError.other(response.error!.localizedDescription))
                         
                         return
                     }
                     
-                    completionHandler(response, nil)
+                    callback(response, nil)
                     
                     return
                 }
             }
             catch let error {
                 debugPrint(error.localizedDescription)
-                completionHandler(nil, RatingsError.other(error.localizedDescription))
+                callback(nil, RatingsError.other(error.localizedDescription))
             }
         }
     }

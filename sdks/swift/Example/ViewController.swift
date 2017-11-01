@@ -37,7 +37,7 @@ class ViewController: UIViewController {
         sdk.create(rating: 3, description: "Regular", comment: "Lorem ipsum dolor...") { response, error in
             if error != nil {
                 debugPrint("Error: \(error!.message)")
-            }            
+            }
         }
         
         // Rating, description and comment; user name and mibaId only
