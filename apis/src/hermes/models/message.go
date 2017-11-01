@@ -4,7 +4,6 @@ import (
 	"time"
 
 	"github.com/jinzhu/gorm"
-	"github.com/lib/pq"
 )
 
 type Message struct {
@@ -15,9 +14,9 @@ type Message struct {
 	TransportID *uint  `gorm:"DEFAULT:NULL"`
 	RatingID    uint   `gorm:"not null"`
 
-	CreatedAt time.Time   `gorm:"not null;type:datetime;default:CURRENT_TIMESTAMP"`
-	CreatedBy *uint       `gorm:"default:NULL"`
-	UpdatedAt pq.NullTime `gorm:"default:NULL"`
+	CreatedAt time.Time  `gorm:"not null;type:datetime;default:CURRENT_TIMESTAMP"`
+	CreatedBy *uint      `gorm:"default:NULL"`
+	UpdatedAt *time.Time `gorm:"default:NULL"`
 }
 
 // CreateMessage creates a new message

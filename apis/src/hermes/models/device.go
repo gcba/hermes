@@ -4,7 +4,6 @@ import (
 	"time"
 
 	"github.com/jinzhu/gorm"
-	"github.com/lib/pq"
 )
 
 type Device struct {
@@ -13,13 +12,13 @@ type Device struct {
 	ScreenWidth  int       `gorm:"not null"`
 	ScreenHeight int       `gorm:"not null"`
 	PPI          *int      `gorm:"DEFAULT:NULL"`
-	BrandID      uint      `gorm:"DEFAULT:NULL"`
+	BrandID      *uint     `gorm:"DEFAULT:NULL"`
 	PlatformID   uint      `gorm:"DEFAULT:NULL"`
 	AppUsers     []AppUser `gorm:"many2many:app_user_device;"`
 
-	CreatedAt time.Time   `gorm:"not null;type:datetime;default:CURRENT_TIMESTAMP"`
-	UpdatedAt pq.NullTime `gorm:"default:NULL"`
-	DeletedAt pq.NullTime `gorm:"default:NULL"`
+	CreatedAt time.Time  `gorm:"not null;type:datetime;default:CURRENT_TIMESTAMP"`
+	UpdatedAt *time.Time `gorm:"default:NULL"`
+	DeletedAt *time.Time `gorm:"default:NULL"`
 }
 
 // GetDevice gets a device by name and brand id

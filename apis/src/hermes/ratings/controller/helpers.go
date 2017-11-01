@@ -365,13 +365,13 @@ func getDevice(brand *models.Brand, platform *models.Platform, dbs *databases, f
 			PlatformID:   platform.ID}
 
 		if brand != nil {
-			device.BrandID = brand.ID
+			device.BrandID = &brand.ID
 		}
 	} else if len(getErrorList) > 0 || getResult.Error != nil || getResult.Value == nil {
 		return &models.Device{}, loggedErrorResponse(getErrorMessage, invalidValueError, frame.context)
 	}
 
-	if result, castOk := getResult.Value.(*models.Device); (castOk && brand != nil) && (result.BrandID != brand.ID) {
+	if result, castOk := getResult.Value.(*models.Device); (castOk && brand != nil) && (result.BrandID != &brand.ID) {
 		checkDeviceName := fmt.Sprintf("%v (%v)", deviceName, brand.Name)
 		checkGetResult := models.GetDevice(checkDeviceName, dbs.read)
 		checkGetErrorList := checkGetResult.GetErrors()
@@ -383,7 +383,7 @@ func getDevice(brand *models.Brand, platform *models.Platform, dbs *databases, f
 				ScreenHeight: frame.request.Device.Screen.Height,
 				PPI:          frame.request.Device.Screen.PPI,
 				PlatformID:   platform.ID,
-				BrandID:      brand.ID}
+				BrandID:      &brand.ID}
 		} else if len(checkGetErrorList) > 0 || checkGetResult.Error != nil || checkGetResult.Value == nil {
 			return &models.Device{}, loggedErrorResponse(getErrorMessage, invalidValueError, frame.context)
 		} else {
