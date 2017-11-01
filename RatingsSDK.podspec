@@ -10,5 +10,8 @@ Pod::Spec.new do |spec|
     spec.source_files = 'sdks/swift/RatingsSDK/Ratings*.{swift,h,m}'
     spec.public_header_files = 'sdks/swift/RatingsSDK/Ratings*.h'
     spec.frameworks = 'Foundation'
-    spec.vendored_frameworks = ['sdks/swift/Rome/*.framework']
+
+    spec.dependency 'SwiftHTTP', '~> 2.0.2'
+    spec.dependency 'SwifterSwift/Foundation', '~> 3.1.0'
+    spec.dependency 'GBDeviceInfo', '~> 4.3.0'
 end
