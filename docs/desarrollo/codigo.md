@@ -16,7 +16,7 @@ PostgreSQL 10.
 
 ### Cache y job queue
 
-Redis 3.0.
+Redis 4.0
 
 ## Convenciones
 
