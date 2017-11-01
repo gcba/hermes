@@ -170,7 +170,11 @@ sdk.create({
 <pre><code class="lang-ruby">pod <span class="pl-s">&apos;RatingsSDK&apos;</span>, <span class="hljs-symbol">:path</span> =&gt; <span class="pl-s">&apos;&lt;REPO&gt;/sdks/swift&apos;</span>
 </code></pre>
 <h4 id="manual">Manual</h4>
-<p>Agregar al proyecto los archivos <code>RatingsSDK.swift</code>, <code>RatingsUser.swift</code> y <code>RatingsError.swift</code> que est&#xE1;n en <code>&lt;REPO&gt;/sdks/swift/RatingsSDK</code>.</p>
+<p>Agregar al proyecto los archivos <code>RatingsSDK.swift</code>, <code>RatingsUser.swift</code> y <code>RatingsError.swift</code> que est&#xE1;n en <code>&lt;REPO&gt;/sdks/swift/RatingsSDK</code>. Luego agregar las dependencias al <code>Podfile</code>:</p>
+<pre><code class="lang-ruby">pod <span class="pl-s">&apos;SwiftHTTP&apos;</span>, <span class="pl-s">&apos;~&gt; 2.0&apos;</span>
+pod <span class="pl-s">&apos;SwifterSwift/Foundation&apos;</span>, <span class="pl-s">&apos;~&gt; 3.1.1&apos;</span>
+pod <span class="pl-s">&apos;GBDeviceInfo&apos;</span>, <span class="pl-s">&apos;~&gt; 4.3&apos;</span>
+</code></pre>
 <h3 id="enviar-una-calificacion">Enviar una calificaci&#xF3;n</h3>
 <pre><code class="lang-swift"><span class="pl-k">import</span> RatingsSDK
 </code></pre>
