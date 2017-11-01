@@ -170,17 +170,23 @@ public class Ratings {
             
             do {
                 try HTTP.POST(self.url, parameters: params, headers: headers, requestSerializer: JSONParameterSerializer()).start { response in
-                    if response.error != nil && (response.error!.code == 503 || response.error!.code == 504 || response.error!.code >= 520) {
-                        guard retry > 0 else {
-                            completionHandler(response, RatingsError.http("Could not create new rating", response.error!.code, response))
-                            
+                    guard response.error == nil else {
+                        if (response.error!.code == 503 || response.error!.code == 504 || response.error!.code >= 520) && retry > 0 {
+                            self.send(params: params, retry: retry - 1, callback: callback)
+                                
                             return
                         }
                         
-                        self.send(params: params, retry: retry - 1, callback: callback)
-                    } else {
-                        completionHandler(response, nil)
+                        response.error!.domain == "HTTP" ?
+                            completionHandler(nil, RatingsError.http(response.error!.localizedDescription, response.error!.code, response)) :
+                            completionHandler(nil, RatingsError.other(response.error!.localizedDescription))
+                        
+                        return
                     }
+                    
+                    completionHandler(response, nil)
+                    
+                    return
                 }
             }
             catch let error {
