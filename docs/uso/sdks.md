@@ -77,7 +77,7 @@ Se requiere como mínimo iOS 9.0.
 En el `Podfile` del proyecto:
 
 ```ruby
-pod 'RatingsSDK', :path => '<REPO>/sdks/swift'
+pod 'RatingsSDK', :path => '<REPO>'
 ```
 
 #### Manual
