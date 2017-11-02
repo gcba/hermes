@@ -28,17 +28,59 @@ class MessagesController extends DataTablesController
         if ($user !== null && $user->hasPermission('browse_messages')) {
             $userApps = $user->apps()->pluck('id')->toArray();
             $params = $request->query()['columns'];
+            $search = false;
 
-            $model = Rating::with('latestMessage', 'app', 'appuser', 'platform')
-                ->where('has_message', true)
-                ->whereHas('app', function ($query) use($userApps){
-                    $query->whereIn('id', $userApps);
-                })->get();
+            foreach ($params as $index => $column) {
+                if (strlen($column['search']['value']) > 0) {
+                    $search = true;
+                }
+            }
 
-            $datatables = Datatables::of($model)
-                ->filter(function ($query) use($params) {
-                    $query = $this->filterQuery($query, $params);
-                }, true);
+            if ($search) {
+                $where = $this->parseParams($params);
+
+                $model = Rating::with('messages', 'app', 'appuser', 'platform')
+                    ->select('ratings.*')
+                    ->where('has_message', true)
+                    ->whereHas('app', function ($query) use($userApps) {
+                        $query->whereIn('id', $userApps);
+                    });
+
+                $ratings = $model->pluck('id')->toArray();
+                $messages = Message::whereIn('rating_id', $ratings);
+
+                foreach ($where as $key => $value) {
+                    $messages = $messages->where($value[0], $value[1], $value[2]);
+                }
+
+                $messages = $messages->get();
+                $model = $model->get();
+                $result = collect([]);
+
+                foreach ($model as $key => $value) {
+                    $value = collect($value)->forget('messages');
+                    $message = collect($messages->where('rating_id', $value['id'])->first());
+
+                    $value->put('messages', $message);
+
+                    $result = $result->push($value);
+                }
+
+                $datatables = Datatables::of($result);
+            }
+            else {
+                $model = Rating::with('latestMessage', 'app', 'appuser', 'platform')
+                    ->where('has_message', true)
+                    ->whereHas('app', function ($query) use($userApps) {
+                        $query->whereIn('id', $userApps);
+                    })->get();
+
+                $datatables = Datatables::of($model)
+                    ->addColumn('messages', function (Rating $rating) {
+                        return collect($rating)['latest_message'];
+                    })
+                    ->removeColumn('latest_message');
+            }
 
             return $datatables->make(true);
         }

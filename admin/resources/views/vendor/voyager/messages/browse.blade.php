@@ -160,10 +160,10 @@
                     }
                 },
                 columns: [
-                    { data: 'latest_message.message', name: 'message' },
-                    { data: 'app.name', name: 'app' },
+                    { data: 'messages.message', name: 'messages.message' },
+                    { data: 'app.name', name: 'app.name' },
                     { data: 'rating', name: 'rating', visible: false },
-                    { data: 'latest_message.created_at', name: 'created_at' }
+                    { data: 'messages.created_at', name: 'messages.created_at' }
                 ],
                 bSort: false,
                 bInfo: false,
@@ -194,7 +194,7 @@
             })
             .on('preDraw', function (e, settings) {
                 $(this).DataTable().rows().every(function () {
-                    if (this.data().latest_message.status === 0 && this.data().latest_message.direction !== 'out') {
+                    if (this.data().messages.status === 0 && this.data().messages.direction !== 'out') {
                         $(this.node()).addClass('row-unread');
                     }
                 });
