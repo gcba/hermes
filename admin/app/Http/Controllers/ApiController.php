@@ -20,8 +20,12 @@ class ApiController extends Controller {
     {
         $user = Auth::user();
 
-        if ($user->hasPermission('read_messages')) {
-            return Response::json($message);
+        if ($user !== null) {
+            $userApps = $user->apps()->pluck('id')->toArray();
+
+            if ($user->hasPermission('read_messages') && in_array($message->id, $userApps)) {
+                return Response::json($message);
+            }
         }
 
         return Response::json([], 401);
@@ -36,8 +40,14 @@ class ApiController extends Controller {
     {
         $user = Auth::user();
 
-        if ($user->hasPermission('read_messages')) {
-            $messages = Message::where('rating_id', $id)->orderBy('created_at', 'asc')->get();
+        if ($user !== null && $user->hasPermission('read_messages')) {
+            $userApps = $user->apps()->pluck('id')->toArray();
+
+            $messages = Message::with('rating.app')->where('rating_id', $id)
+            ->whereHas('rating.app', function ($query) use($userApps){
+                $query->whereIn('id', $userApps);
+            })
+            ->orderBy('created_at', 'asc')->get();
 
              foreach ($messages as $item) {
                 if ($item->direction === 'in' && $item->status === 0) {

@@ -23,9 +23,17 @@ class MessagesController extends DataTablesController
     */
     public function messagesAPI(Request $request)
     {
-        if (Auth::user()->hasPermission('browse_messages')) {
+        $user = \Auth::user();
+
+        if ($user !== null && $user->hasPermission('browse_messages')) {
+            $userApps = $user->apps()->pluck('id')->toArray();
             $params = $request->query()['columns'];
-            $model = Rating::with('latestMessage', 'app', 'appuser', 'platform')->where('has_message', true)->get();
+
+            $model = Rating::with('latestMessage', 'app', 'appuser', 'platform')
+                ->where('has_message', true)
+                ->whereHas('app', function ($query) use($userApps){
+                    $query->whereIn('id', $userApps);
+                })->get();
 
             $datatables = Datatables::of($model)
                 ->filter(function ($query) use($params) {

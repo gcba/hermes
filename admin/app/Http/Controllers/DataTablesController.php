@@ -21,7 +21,7 @@ class DataTablesController extends Controller {
     {
         $user = Auth::user();
 
-        if ($user->hasPermission('browse_ratings')) {
+        if ($user !== null && $user->hasPermission('browse_ratings')) {
             $userApps = $user->apps()->pluck('id')->toArray();
 
             $model = Rating::with(['range', 'app', 'platform', 'browser', 'appuser', 'device'])
@@ -68,7 +68,7 @@ class DataTablesController extends Controller {
     {
         $user = Auth::user();
 
-        if ($user->hasPermission('browse_devices')) {
+        if ($user !== null && $user->hasPermission('browse_devices')) {
             $model = Device::with(['platform', 'brand'])->select('devices.*');
             $params = $request->query()['columns'];
 
@@ -95,12 +95,12 @@ class DataTablesController extends Controller {
     {
         $user = Auth::user();
 
-        if ($user->hasPermission('browse_appusers')) {
+        if ($user !== null && $user->hasPermission('browse_appusers')) {
             $userApps = $user->apps()->pluck('id')->toArray();
 
             $model = AppUser::with('apps')
                 ->select('appusers.*')
-                ->whereHas('apps', function ($query) {
+                ->whereHas('apps', function ($query) use($userApps) {
                     $query->whereIn('id', $userApps);
                 });
 
