@@ -3,8 +3,8 @@
 namespace App\Console\Commands;
 
 use App\User;
+use App\Role;
 use Illuminate\Console\Command;
-use TCG\Voyager\Models\Role;
 
 class RolesAssign extends Command
 {

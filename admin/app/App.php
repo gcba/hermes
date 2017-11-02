@@ -5,7 +5,6 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
-use TCG\Voyager\Models\Role;
 
 class App extends Model
 {
@@ -41,12 +40,13 @@ class App extends Model
             }
 
             $model->attributes['updated_at'] = null;
+            $model->attributes['updated_by'] = null;
         });
 
         static::updating(function ($model) {
             \Auth::user() !== null ?
                 $model->attributes['updated_by'] = \Auth::user()->id :
-                $model->attributes['updated_at'] = null;
+                $model->attributes['updated_by'] = null;
         });
 
         static::created(function($model){

@@ -4,7 +4,6 @@ namespace App;
 
 use Illuminate\Support\Facades\Auth;
 use TCG\Voyager\Models\User as VoyagerUser;
-use TCG\Voyager\Models\Role;
 
 class User extends VoyagerUser
 {
@@ -14,16 +13,7 @@ class User extends VoyagerUser
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'updated_by'
-    ];
-
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'password', 'remember_token'
+        'name', 'email', 'role_id', 'updated_by'
     ];
 
     /**
@@ -36,12 +26,13 @@ class User extends VoyagerUser
 
         static::creating(function ($model) {
             $model->attributes['updated_at'] = null;
+            $model->attributes['updated_by'] = null;
         });
 
         static::updating(function ($model) {
             \Auth::user() !== null ?
                 $model->attributes['updated_by'] = \Auth::user()->id :
-                $model->attributes['updated_at'] = null;
+                $model->attributes['updated_by'] = null;
 
             $adminRole = Role::where('name', 'admin')->firstOrFail();
 
@@ -65,6 +56,20 @@ class User extends VoyagerUser
      */
     public function messages() {
         return $this->hasMany('App\Message', 'created_by', 'id');
+    }
+
+    /**
+     * Get the user that last modified this user.
+     */
+    public function role() {
+        return $this->belongsTo('App\Role', 'role_id', 'id');
+    }
+
+    /**
+     * For Voyager's CRUD.
+     */
+    public function roleId() {
+        return $this->belongsTo('App\Role', 'role_id', 'id');
     }
 
     /**

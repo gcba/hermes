@@ -14,7 +14,7 @@ class AddVoyagerUserFields extends Migration
                 $table->string('avatar')->nullable()->default('users/default.png');
             }
 
-            $table->integer('role_id')->nullable();
+            $table->integer('role_id')->unsigned()->nullable();
             $table->foreign('role_id')->references('id')->on('roles')->onDelete('set null');
             $table->index('role_id');
         });
