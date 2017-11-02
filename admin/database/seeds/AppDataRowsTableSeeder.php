@@ -14,6 +14,7 @@ class AppDataRowsTableSeeder extends Seeder
         $appDataType = DataType::where('slug', 'apps')->firstOrFail();
 
         $dataRow = $this->dataRow($appDataType, 'id');
+
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'number',
@@ -30,6 +31,7 @@ class AppDataRowsTableSeeder extends Seeder
         }
 
         $dataRow = $this->dataRow($appDataType, 'name');
+
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'text',
@@ -46,6 +48,7 @@ class AppDataRowsTableSeeder extends Seeder
         }
 
         $dataRow = $this->dataRow($appDataType, 'type');
+
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'radio_btn',
@@ -62,6 +65,7 @@ class AppDataRowsTableSeeder extends Seeder
         }
 
         $dataRow = $this->dataRow($appDataType, 'platforms');
+
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'relationship',
@@ -79,6 +83,7 @@ class AppDataRowsTableSeeder extends Seeder
         }
 
         $dataRow = $this->dataRow($appDataType, 'appusers');
+
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'relationship',
@@ -96,6 +101,7 @@ class AppDataRowsTableSeeder extends Seeder
         }
 
         $dataRow = $this->dataRow($appDataType, 'users');
+
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'relationship',
@@ -113,6 +119,7 @@ class AppDataRowsTableSeeder extends Seeder
         }
 
         $dataRow = $this->dataRow($appDataType, 'key');
+
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'text',
@@ -129,6 +136,7 @@ class AppDataRowsTableSeeder extends Seeder
         }
 
         $dataRow = $this->dataRow($appDataType, 'updated_at');
+
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'timestamp',
@@ -145,22 +153,25 @@ class AppDataRowsTableSeeder extends Seeder
         }
 
         $dataRow = $this->dataRow($appDataType, 'updated_by');
+
         if (!$dataRow->exists) {
             $dataRow->fill([
-                'type'         => 'text',
+                'type'         => 'relationship',
+                'field'        => 'app_belongsto_user_relationship',
                 'display_name' => 'Modificado Por',
                 'required'     => 0,
-                'browse'       => 0,
+                'browse'       => 1,
                 'read'         => 1,
                 'edit'         => 0,
                 'add'          => 0,
-                'delete'       => 0,
-                'details'      => '',
+                'delete'       => 1,
+                'details'      => '{"model":"App\\\User","table":"users","type":"belongsTo","column":"updated_by","key":"id","label":"name","pivot_table":"","pivot":"0"}',
                 'order'        => 9,
             ])->save();
         }
 
         $dataRow = $this->dataRow($appDataType, 'created_at');
+
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'timestamp',
@@ -177,6 +188,7 @@ class AppDataRowsTableSeeder extends Seeder
         }
 
         $dataRow = $this->dataRow($appDataType, 'deleted_at');
+
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'timestamp',
@@ -204,8 +216,8 @@ class AppDataRowsTableSeeder extends Seeder
     protected function dataRow($type, $field)
     {
         return DataRow::firstOrNew([
-                'data_type_id' => $type->id,
-                'field'        => $field,
-            ]);
+            'data_type_id' => $type->id,
+            'field'        => $field,
+        ]);
     }
 }

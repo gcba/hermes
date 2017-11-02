@@ -82,6 +82,24 @@ class MessageDataRowsTableSeeder extends Seeder
             ])->save();
         }
 
+        $dataRow = $this->dataRow($messageDataType, 'created_by');
+
+        if (!$dataRow->exists) {
+            $dataRow->fill([
+                'type'         => 'relationship',
+                'field'        => 'message_belongsto_user_relationship',
+                'display_name' => 'Creado Por',
+                'required'     => 0,
+                'browse'       => 1,
+                'read'         => 1,
+                'edit'         => 0,
+                'add'          => 0,
+                'delete'       => 1,
+                'details'      => '{"model":"App\\\User","table":"users","type":"belongsTo","column":"created_by","key":"id","label":"name","pivot_table":"","pivot":"0"}',
+                'order'        => 5,
+            ])->save();
+        }
+
         $dataRow = $this->dataRow($messageDataType, 'updated_at');
 
         if (!$dataRow->exists) {
@@ -95,7 +113,7 @@ class MessageDataRowsTableSeeder extends Seeder
                 'add'          => 0,
                 'delete'       => 0,
                 'details'      => '',
-                'order'        => 5,
+                'order'        => 6,
             ])->save();
         }
 
@@ -112,7 +130,7 @@ class MessageDataRowsTableSeeder extends Seeder
                 'add'          => 0,
                 'delete'       => 0,
                 'details'      => '',
-                'order'        => 6,
+                'order'        => 7,
             ])->save();
         }
     }

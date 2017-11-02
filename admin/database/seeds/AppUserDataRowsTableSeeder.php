@@ -73,7 +73,7 @@ class AppUserDataRowsTableSeeder extends Seeder
                 'edit'         => 0,
                 'add'          => 0,
                 'delete'       => 0,
-                'details'      => '{"model":"App\\\Rating","table":"ratings","type":"hasMany","column":"id","key":"id","label":"rating","pivot_table":"","pivot":"0"}',
+                'details'      => '{"model":"App\\\Rating","table":"ratings","type":"hasMany","column":"appuser_id","key":"id","label":"rating","pivot_table":"","pivot":"0"}',
                 'order'        => 4,
             ])->save();
         }
@@ -205,8 +205,8 @@ class AppUserDataRowsTableSeeder extends Seeder
     protected function dataRow($type, $field)
     {
         return DataRow::firstOrNew([
-                'data_type_id' => $type->id,
-                'field'        => $field,
-            ]);
+            'data_type_id' => $type->id,
+            'field'        => $field,
+        ]);
     }
 }

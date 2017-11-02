@@ -35,6 +35,23 @@ class RoleDataRowsTableSeeder extends Seeder
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'text',
+                'display_name' => 'Valor',
+                'required'     => 1,
+                'browse'       => 0,
+                'read'         => 1,
+                'edit'         => 1,
+                'add'          => 1,
+                'delete'       => 1,
+                'details'      => '',
+                'order'        => 2,
+            ])->save();
+        }
+
+        $dataRow = $this->dataRow($roleDataType, 'display_name');
+
+        if (!$dataRow->exists) {
+            $dataRow->fill([
+                'type'         => 'text',
                 'display_name' => 'Nombre',
                 'required'     => 1,
                 'browse'       => 1,
@@ -43,7 +60,24 @@ class RoleDataRowsTableSeeder extends Seeder
                 'add'          => 1,
                 'delete'       => 1,
                 'details'      => '',
-                'order'        => 2,
+                'order'        => 3,
+            ])->save();
+        }
+
+        $dataRow = $this->dataRow($roleDataType, 'users');
+        if (!$dataRow->exists) {
+            $dataRow->fill([
+                'type'         => 'relationship',
+                'field'        => 'role_hasmany_user_relationship',
+                'display_name' => 'Personal',
+                'required'     => 1,
+                'browse'       => 1,
+                'read'         => 1,
+                'edit'         => 1,
+                'add'          => 1,
+                'delete'       => 1,
+                'details'      => '{"model":"App\\\User","table":"users","type":"hasMany","column":"role_id","key":"id","label":"name","pivot_table":"","pivot":"0"}',
+                'order'        => 4,
             ])->save();
         }
 
@@ -60,7 +94,7 @@ class RoleDataRowsTableSeeder extends Seeder
                 'add'          => 0,
                 'delete'       => 0,
                 'details'      => '',
-                'order'        => 3,
+                'order'        => 5,
             ])->save();
         }
 
@@ -77,24 +111,7 @@ class RoleDataRowsTableSeeder extends Seeder
                 'add'          => 0,
                 'delete'       => 0,
                 'details'      => '',
-                'order'        => 4,
-            ])->save();
-        }
-
-        $dataRow = $this->dataRow($roleDataType, 'display_name');
-
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'text',
-                'display_name' => 'Display Name',
-                'required'     => 1,
-                'browse'       => 1,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 1,
-                'details'      => '',
-                'order'        => 5,
+                'order'        => 6,
             ])->save();
         }
     }

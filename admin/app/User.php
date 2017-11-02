@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Support\Facades\Auth;
 use TCG\Voyager\Models\User as VoyagerUser;
 
 class User extends VoyagerUser
@@ -34,6 +35,20 @@ class User extends VoyagerUser
 
         static::creating(function ($model) {
             $model->attributes['updated_at'] = null;
+        });
+
+        static::updating(function ($model) {
+            \Auth::user() !== null ?
+                $model->attributes['updated_by'] = \Auth::user()->id :
+                $model->attributes['updated_at'] = null;
+
+            $adminRole = Role::where('name', 'admin')->firstOrFail();
+
+            if ($model->role_id === $adminRole->id) {
+                $apps = Apps::select('id')->pluck('id')->toArray();
+
+                $model->apps()->attach($apps);
+            }
         });
     }
 

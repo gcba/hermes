@@ -22,7 +22,14 @@ class DataTablesController extends Controller {
         $user = Auth::user();
 
         if ($user->hasPermission('browse_ratings')) {
-            $model = Rating::with(['range', 'app', 'platform', 'browser', 'appuser', 'device'])->select('ratings.*');
+            $userApps = $user->apps()->pluck('id')->toArray();
+
+            $model = Rating::with(['range', 'app', 'platform', 'browser', 'appuser', 'device'])
+                ->select('ratings.*')
+                ->whereHas('app', function ($query) {
+                    $query->whereIn('id', $userApps);
+                });
+
             $params = $request->query()['columns'];
             $noResults = 'No results';
 
@@ -89,7 +96,15 @@ class DataTablesController extends Controller {
         $user = Auth::user();
 
         if ($user->hasPermission('browse_appusers')) {
-            return Datatables::of(AppUser::query())->make(true);
+            $userApps = $user->apps()->pluck('id')->toArray();
+
+            $model = AppUser::with('apps')
+                ->select('appusers.*')
+                ->whereHas('apps', function ($query) {
+                    $query->whereIn('id', $userApps);
+                });
+
+            return Datatables::of($model)->make(true);
         }
 
         return Response::json([], 401);

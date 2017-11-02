@@ -130,22 +130,25 @@ class UserDataRowsTableSeeder extends Seeder
         }
 
         $dataRow = $this->dataRow($userDataType, 'updated_by');
+
         if (!$dataRow->exists) {
             $dataRow->fill([
-                'type'         => 'text',
+                'type'         => 'relationship',
+                'field'        => 'user_belongsto_user_relationship',
                 'display_name' => 'Modificado Por',
                 'required'     => 0,
-                'browse'       => 0,
+                'browse'       => 1,
                 'read'         => 1,
                 'edit'         => 0,
                 'add'          => 0,
-                'delete'       => 0,
-                'details'      => '',
+                'delete'       => 1,
+                'details'      => '{"model":"App\\\User","table":"users","type":"belongsTo","column":"updated_by","key":"id","label":"name","pivot_table":"","pivot":"0"}',
                 'order'        => 8,
             ])->save();
         }
 
         $dataRow = $this->dataRow($userDataType, 'created_at');
+
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'timestamp',
@@ -173,8 +176,8 @@ class UserDataRowsTableSeeder extends Seeder
     protected function dataRow($type, $field)
     {
         return DataRow::firstOrNew([
-                'data_type_id' => $type->id,
-                'field'        => $field,
-            ]);
+            'data_type_id' => $type->id,
+            'field'        => $field,
+        ]);
     }
 }

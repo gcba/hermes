@@ -14,6 +14,7 @@ class RatingDataRowsTableSeeder extends Seeder
         $ratingDataType = DataType::where('slug', 'ratings')->firstOrFail();
 
         $dataRow = $this->dataRow($ratingDataType, 'id');
+
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'number',
@@ -30,6 +31,7 @@ class RatingDataRowsTableSeeder extends Seeder
         }
 
         $dataRow = $this->dataRow($ratingDataType, 'rating');
+
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'number',
@@ -46,6 +48,7 @@ class RatingDataRowsTableSeeder extends Seeder
         }
 
         $dataRow = $this->dataRow($ratingDataType, 'range_id');
+
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'relationship',
@@ -63,6 +66,7 @@ class RatingDataRowsTableSeeder extends Seeder
         }
 
         $dataRow = $this->dataRow($ratingDataType, 'description');
+
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'text',
@@ -79,6 +83,7 @@ class RatingDataRowsTableSeeder extends Seeder
         }
 
         $dataRow = $this->dataRow($ratingDataType, 'has_message');
+
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'check',
@@ -95,6 +100,7 @@ class RatingDataRowsTableSeeder extends Seeder
         }
 
         $dataRow = $this->dataRow($ratingDataType, 'app_id');
+
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'relationship',
@@ -112,6 +118,7 @@ class RatingDataRowsTableSeeder extends Seeder
         }
 
         $dataRow = $this->dataRow($ratingDataType, 'app_version');
+
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'text',
@@ -128,6 +135,7 @@ class RatingDataRowsTableSeeder extends Seeder
         }
 
         $dataRow = $this->dataRow($ratingDataType, 'platform_id');
+
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'relationship',
@@ -145,6 +153,7 @@ class RatingDataRowsTableSeeder extends Seeder
         }
 
         $dataRow = $this->dataRow($ratingDataType, 'platform_version');
+
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'text',
@@ -161,6 +170,7 @@ class RatingDataRowsTableSeeder extends Seeder
         }
 
         $dataRow = $this->dataRow($ratingDataType, 'browser_id');
+
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'relationship',
@@ -178,6 +188,7 @@ class RatingDataRowsTableSeeder extends Seeder
         }
 
         $dataRow = $this->dataRow($ratingDataType, 'browser_version');
+
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'text',
@@ -194,6 +205,7 @@ class RatingDataRowsTableSeeder extends Seeder
         }
 
         $dataRow = $this->dataRow($ratingDataType, 'appuser_id');
+
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'relationship',
@@ -211,6 +223,7 @@ class RatingDataRowsTableSeeder extends Seeder
         }
 
         $dataRow = $this->dataRow($ratingDataType, 'device_id');
+
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'relationship',
@@ -228,6 +241,7 @@ class RatingDataRowsTableSeeder extends Seeder
         }
 
         $dataRow = $this->dataRow($ratingDataType, 'updated_at');
+
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'timestamp',
@@ -244,6 +258,7 @@ class RatingDataRowsTableSeeder extends Seeder
         }
 
         $dataRow = $this->dataRow($ratingDataType, 'created_at');
+
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'timestamp',
@@ -260,6 +275,7 @@ class RatingDataRowsTableSeeder extends Seeder
         }
 
         $dataRow = $this->dataRow($ratingDataType, 'deleted_at');
+
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'timestamp',
@@ -287,8 +303,8 @@ class RatingDataRowsTableSeeder extends Seeder
     protected function dataRow($type, $field)
     {
         return DataRow::firstOrNew([
-                'data_type_id' => $type->id,
-                'field'        => $field,
-            ]);
+            'data_type_id' => $type->id,
+            'field'        => $field,
+        ]);
     }
 }

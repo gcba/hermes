@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Message extends Model
 {
@@ -24,6 +25,10 @@ class Message extends Model
         parent::boot();
 
         static::creating(function ($model) {
+            if (\Auth::user() !== null) {
+                $model->attributes['created_by'] = \Auth::user()->id;
+            }
+
             $model->attributes['updated_at'] = null;
         });
     }
