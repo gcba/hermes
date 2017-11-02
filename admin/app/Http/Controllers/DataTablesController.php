@@ -26,7 +26,7 @@ class DataTablesController extends Controller {
 
             $model = Rating::with(['range', 'app', 'platform', 'browser', 'appuser', 'device'])
                 ->select('ratings.*')
-                ->whereHas('app', function ($query) {
+                ->whereHas('app', function ($query) use($userApps) {
                     $query->whereIn('id', $userApps);
                 });
 
