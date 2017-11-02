@@ -14,6 +14,7 @@ class DeviceDataRowsTableSeeder extends Seeder
         $deviceDataType = DataType::where('slug', 'devices')->firstOrFail();
 
         $dataRow = $this->dataRow($deviceDataType, 'id');
+
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'number',
@@ -30,6 +31,7 @@ class DeviceDataRowsTableSeeder extends Seeder
         }
 
         $dataRow = $this->dataRow($deviceDataType, 'brand_id');
+
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'relationship',
@@ -47,6 +49,7 @@ class DeviceDataRowsTableSeeder extends Seeder
         }
 
         $dataRow = $this->dataRow($deviceDataType, 'name');
+
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'text',
@@ -63,6 +66,7 @@ class DeviceDataRowsTableSeeder extends Seeder
         }
 
         $dataRow = $this->dataRow($deviceDataType, 'screen_width');
+
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'number',
@@ -79,6 +83,7 @@ class DeviceDataRowsTableSeeder extends Seeder
         }
 
         $dataRow = $this->dataRow($deviceDataType, 'screen_height');
+
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'number',
@@ -95,6 +100,7 @@ class DeviceDataRowsTableSeeder extends Seeder
         }
 
         $dataRow = $this->dataRow($deviceDataType, 'ppi');
+
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'number',
@@ -111,6 +117,7 @@ class DeviceDataRowsTableSeeder extends Seeder
         }
 
         $dataRow = $this->dataRow($deviceDataType, 'platform_id');
+
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'relationship',
@@ -128,6 +135,7 @@ class DeviceDataRowsTableSeeder extends Seeder
         }
 
         $dataRow = $this->dataRow($deviceDataType, 'appusers');
+
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'relationship',
@@ -145,6 +153,7 @@ class DeviceDataRowsTableSeeder extends Seeder
         }
 
         $dataRow = $this->dataRow($deviceDataType, 'updated_at');
+
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'timestamp',
@@ -161,6 +170,7 @@ class DeviceDataRowsTableSeeder extends Seeder
         }
 
         $dataRow = $this->dataRow($deviceDataType, 'created_at');
+
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'timestamp',
@@ -177,6 +187,7 @@ class DeviceDataRowsTableSeeder extends Seeder
         }
 
         $dataRow = $this->dataRow($deviceDataType, 'deleted_at');
+
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'timestamp',
@@ -204,8 +215,8 @@ class DeviceDataRowsTableSeeder extends Seeder
     protected function dataRow($type, $field)
     {
         return DataRow::firstOrNew([
-                'data_type_id' => $type->id,
-                'field'        => $field,
-            ]);
+            'data_type_id' => $type->id,
+            'field'        => $field,
+        ]);
     }
 }

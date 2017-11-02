@@ -14,6 +14,7 @@ class MessageDataRowsTableSeeder extends Seeder
         $messageDataType = DataType::where('slug', 'messages')->firstOrFail();
 
         $dataRow = $this->dataRow($messageDataType, 'id');
+
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'number',
@@ -30,6 +31,7 @@ class MessageDataRowsTableSeeder extends Seeder
         }
 
         $dataRow = $this->dataRow($messageDataType, 'message');
+
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'text_area',
@@ -46,6 +48,7 @@ class MessageDataRowsTableSeeder extends Seeder
         }
 
         $dataRow = $this->dataRow($messageDataType, 'direction');
+
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'text',
@@ -62,6 +65,7 @@ class MessageDataRowsTableSeeder extends Seeder
         }
 
         $dataRow = $this->dataRow($messageDataType, 'rating_id');
+
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'relationship',
@@ -79,6 +83,7 @@ class MessageDataRowsTableSeeder extends Seeder
         }
 
         $dataRow = $this->dataRow($messageDataType, 'updated_at');
+
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'timestamp',
@@ -95,6 +100,7 @@ class MessageDataRowsTableSeeder extends Seeder
         }
 
         $dataRow = $this->dataRow($messageDataType, 'created_at');
+
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'timestamp',
@@ -122,8 +128,8 @@ class MessageDataRowsTableSeeder extends Seeder
     protected function dataRow($type, $field)
     {
         return DataRow::firstOrNew([
-                'data_type_id' => $type->id,
-                'field'        => $field,
-            ]);
+            'data_type_id' => $type->id,
+            'field'        => $field,
+        ]);
     }
 }
