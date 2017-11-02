@@ -26,7 +26,7 @@ class CreateRatingsTable extends Migration
             $table->foreign('app_id')->references('id')->on('apps')->onDelete('cascade');
             $table->index('app_id');
             $table->integer('range_id')->unsigned();
-            $table->foreign('range_id')->references('id')->on('ranges')->onDelete('cascade');
+            $table->foreign('range_id')->references('id')->on('ranges')->onDelete('set null');
             $table->integer('platform_id')->unsigned();
             $table->foreign('platform_id')->references('id')->on('platforms')->onDelete('set null');
             $table->index('platform_id');
@@ -35,7 +35,7 @@ class CreateRatingsTable extends Migration
             $table->foreign('device_id')->references('id')->on('devices')->onDelete('set null');
             $table->index('device_id');
             $table->integer('appuser_id')->unsigned()->nullable();
-            $table->foreign('appuser_id')->references('id')->on('appusers')->onDelete('cascade');
+            $table->foreign('appuser_id')->references('id')->on('appusers')->onDelete('set null');
             $table->index('appuser_id');
             $table->integer('browser_id')->unsigned()->nullable();
             $table->foreign('browser_id')->references('id')->on('browsers')->onDelete('set null');

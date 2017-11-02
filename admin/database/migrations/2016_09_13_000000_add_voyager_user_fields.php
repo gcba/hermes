@@ -11,9 +11,12 @@ class AddVoyagerUserFields extends Migration
     {
         Schema::table('users', function ($table) {
             if (!Schema::hasColumn('users', 'avatar')) {
-                $table->string('avatar')->nullable()->after('email')->default('users/default.png');
+                $table->string('avatar')->nullable()->default('users/default.png');
             }
-            $table->integer('role_id')->nullable()->after('id');
+
+            $table->integer('role_id')->nullable();
+            $table->foreign('role_id')->references('id')->on('roles')->onDelete('set null');
+            $table->index('role_id');
         });
     }
 
