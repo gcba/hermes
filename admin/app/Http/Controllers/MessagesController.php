@@ -53,7 +53,7 @@ class MessagesController extends DataTablesController
                     $messages = $messages->where($value[0], $value[1], $value[2]);
                 }
 
-                $messages = $messages->get();
+                $messages = $messages->latest()->get();
                 $model = $model->get();
                 $result = collect([]);
 
