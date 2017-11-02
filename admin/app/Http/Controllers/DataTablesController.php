@@ -10,6 +10,7 @@ use App\Rating;
 use App\Message;
 use App\Device;
 use App\AppUser;
+use Config;
 
 class DataTablesController extends Controller {
     /**
@@ -23,6 +24,8 @@ class DataTablesController extends Controller {
 
         if ($user !== null && $user->hasPermission('browse_ratings')) {
             $userApps = $user->apps()->pluck('id')->toArray();
+            $params = $request->query()['columns'];
+            $where = $this->parseParams($params);
 
             $model = Rating::with(['range', 'app', 'platform', 'browser', 'appuser', 'device'])
                 ->select('ratings.*')
@@ -30,13 +33,13 @@ class DataTablesController extends Controller {
                     $query->whereIn('id', $userApps);
                 });
 
-            $params = $request->query()['columns'];
-            $noResults = 'No results';
+            foreach ($where as $key => $value) {
+                $model = $model->whereHas($key, function ($query) use($value) {
+                    $query->where($value[0], $value[1], $value[2]);
+                });
+            }
 
             $datatables = Datatables::of($model)
-                ->filter(function ($query) use($params) {
-                    $query = $this->filterQuery($query, $params);
-                }, true)
                 ->editColumn('range.name', function($item){
                     return $item->range ? $item->range->name : '';
                 })
@@ -69,13 +72,17 @@ class DataTablesController extends Controller {
         $user = Auth::user();
 
         if ($user !== null && $user->hasPermission('browse_devices')) {
-            $model = Device::with(['platform', 'brand'])->select('devices.*');
             $params = $request->query()['columns'];
+            $where = $this->parseParams($params);
+            $model = Device::with(['platform', 'brand'])->select('devices.*');
+
+            foreach ($where as $key => $value) {
+                $model = $model->whereHas($key, function ($query) use($value) {
+                    $query->where($value[0], $value[1], $value[2]);
+                });
+            }
 
             $datatables = Datatables::of($model)
-                ->filter(function ($query) use($params) {
-                    $query = $this->filterQuery($query, $params);
-                }, true)
                 ->editColumn('brand.name', function($item) {
                     return $item->brand ? $item->brand->name : '';
                 });
@@ -110,28 +117,23 @@ class DataTablesController extends Controller {
         return Response::json([], 401);
     }
 
-    protected function filterQuery($query, $params)
+    protected function parseParams($params)
     {
+        $where = [];
+
         foreach ($params as $index => $column) {
             $searchTerm = $column['search']['value'];
             $field = explode('.', $column['data']);
 
             if ($searchTerm !== null && count($field) > 1) {
-                $query->whereHas($field[0], function ($q) use ($searchTerm, $field) {
-                    $isNumeric = is_numeric($searchTerm);
-                    $operator = $isNumeric ? '=' : 'like';
-                    $searchTerm = $isNumeric ? $searchTerm : $searchTerm . '%';
+                $isNumeric = is_numeric($searchTerm);
+                $operator = $isNumeric ? '=' : 'ilike';
+                $searchTerm = $isNumeric ? $searchTerm : '%' . $searchTerm . '%';
 
-                    $q->where($field[1], $operator, $searchTerm);
-                });
+                $where[$field[0]] = [$field[1], $operator, $searchTerm];
             }
         }
 
-        return $query;
-    }
-
-    protected function shortenString($string, $limit)
-    {
-        return strlen($string) > $limit ? trim(substr($string, 0, $limit)) . "..." : $string;
+        return $where;
     }
 }

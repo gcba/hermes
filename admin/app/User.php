@@ -51,7 +51,7 @@ class User extends VoyagerUser
         return $this->belongsToMany('App\App');
      }
 
-     /**
+    /**
      * Get the messages that were created by this user.
      */
     public function messages() {

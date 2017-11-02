@@ -145,7 +145,7 @@ class Rating extends Model
     }
 
     public function getHasMessageAttribute() {
-        return $this->attributes['has_message'] ? '✔️' : '';
+        return $this->attributes['has_message'] ? 'Sí' : 'No';
     }
 
     public function getCreatedAtAttribute() {
