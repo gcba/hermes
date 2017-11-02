@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Support\Facades\Auth;
 use TCG\Voyager\Models\User as VoyagerUser;
+use TCG\Voyager\Models\Role;
 
 class User extends VoyagerUser
 {
@@ -45,7 +46,7 @@ class User extends VoyagerUser
             $adminRole = Role::where('name', 'admin')->firstOrFail();
 
             if ($model->role_id === $adminRole->id) {
-                $apps = Apps::select('id')->pluck('id')->toArray();
+                $apps = App::select('id')->pluck('id')->toArray();
 
                 $model->apps()->attach($apps);
             }
