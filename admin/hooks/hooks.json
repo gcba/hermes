@@ -5,7 +5,7 @@
             "name": "voyager-themes",
             "description": "This hook will add support for Voyager front-end themes",
             "version": "0.3",
-            "enabled": true
+            "enabled": false
         }
     }
 }
