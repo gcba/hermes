@@ -82,6 +82,7 @@ class MessageDataRowsTableSeeder extends Seeder
             ])->save();
         }
 
+        /*
         $dataRow = $this->dataRow($messageDataType, 'created_by');
 
         if (!$dataRow->exists) {
@@ -99,6 +100,7 @@ class MessageDataRowsTableSeeder extends Seeder
                 'order'        => 5,
             ])->save();
         }
+        */
 
         $dataRow = $this->dataRow($messageDataType, 'updated_at');
 
