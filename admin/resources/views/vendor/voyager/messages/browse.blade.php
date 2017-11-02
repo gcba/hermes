@@ -194,7 +194,7 @@
             })
             .on('preDraw', function (e, settings) {
                 $(this).DataTable().rows().every(function () {
-                    if (this.data().latest_message.status === 0) {
+                    if (this.data().latest_message.status === 0 && this.data().latest_message.direction !== 'out') {
                         $(this.node()).addClass('row-unread');
                     }
                 });
