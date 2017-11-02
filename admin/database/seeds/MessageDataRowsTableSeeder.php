@@ -82,7 +82,6 @@ class MessageDataRowsTableSeeder extends Seeder
             ])->save();
         }
 
-        /*
         $dataRow = $this->dataRow($messageDataType, 'created_by');
 
         if (!$dataRow->exists) {
@@ -91,7 +90,7 @@ class MessageDataRowsTableSeeder extends Seeder
                 'field'        => 'message_belongsto_user_relationship',
                 'display_name' => 'Creado Por',
                 'required'     => 0,
-                'browse'       => 1,
+                'browse'       => 0,
                 'read'         => 1,
                 'edit'         => 0,
                 'add'          => 0,
@@ -100,7 +99,6 @@ class MessageDataRowsTableSeeder extends Seeder
                 'order'        => 5,
             ])->save();
         }
-        */
 
         $dataRow = $this->dataRow($messageDataType, 'updated_at');
 
