@@ -10,8 +10,10 @@ class RatingPolicy extends BasePolicy
     public function before($user, $ability) {
         $role = $user->role()->pluck('name')[0];
 
-        if (($role === 'admin' && ($ability === 'read' || $ability === 'delete')) ||
-        ($role === 'supervisor' && $ability === 'read')) {
+        error_log($role);
+
+        if (($role === 'admin' && ($ability === 'browse' || $ability === 'read' || $ability === 'delete')) ||
+        ($role === 'supervisor' && ($ability === 'browse' || $ability === 'read'))) {
             return true;
         }
 

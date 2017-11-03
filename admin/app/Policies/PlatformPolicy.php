@@ -10,8 +10,8 @@ class PlatformPolicy extends BasePolicy
     public function before($user, $ability) {
         $role = $user->role()->pluck('name')[0];
 
-        if ($role === 'admin' || ($role === 'supervisor' &&
-        ($ability === 'read' || $ability === 'create' || $ability === 'edit'))) {
+        if ($role === 'admin' || $role === 'supervisor' &&
+        ($ability === 'browse' || $ability === 'read' || $ability === 'create' || $ability === 'edit')) {
             return true;
         }
 
