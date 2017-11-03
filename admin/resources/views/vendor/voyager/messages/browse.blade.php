@@ -206,6 +206,10 @@
             selectRow(this);
         });
 
+        $('#search-input select').select2({
+            minimumResultsForSearch: Infinity
+        });
+
         var deleteFormAction;
 
         $('td').on('click', '.delete', function (e) {

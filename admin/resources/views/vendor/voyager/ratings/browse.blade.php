@@ -30,7 +30,6 @@
                                 </tr>
                             </thead>
                             <tbody>
-
                             </tbody>
                             <tfoot>
                                 @foreach($dataType->browseRows as $row)
