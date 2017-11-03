@@ -8,10 +8,10 @@ use TCG\Voyager\Contracts\User as UserType;
 class MessagePolicy extends BasePolicy
 {
     public function before($user, $ability) {
-        $role = $user->role()->pluck('name')->get('name');
+        $role = $user->role()->pluck('name')[0];
 
         if (($role === 'admin' || $role === 'supervisor') &&
-        ($ability === 'read' || $ability === 'create' || $ability === 'delete')) {
+        ($ability === 'browse' || $ability === 'read' || $ability === 'create' || $ability === 'delete')) {
             return true;
         }
 
@@ -20,7 +20,8 @@ class MessagePolicy extends BasePolicy
 
     protected function checkApp(UserType $user, $model) {
         $userApps = $user->apps()->pluck('id')->toArray();
+        $appId = $model->rating()->pluck('app_id')->get('app_id');
 
-        return in_array($model->app_id, $userApps);
+        return in_array($appId, $userApps);
     }
 }

@@ -103,6 +103,7 @@ class DataTypesTableSeeder extends Seeder
                 'icon'                  => 'voyager-phone',
                 'model_name'            => 'App\\Device',
                 'controller'            => '\\App\\Http\\Controllers\\DataTablesController',
+                'policy_name'           => '\\App\\Policies\\DevicePolicy',
                 'generate_permissions'  => 1,
                 'description'           => 'Dispositivos móviles',
                 'server_side'           => 0

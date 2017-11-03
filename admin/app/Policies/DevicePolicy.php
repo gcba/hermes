@@ -5,7 +5,7 @@ namespace App\Policies;
 use App\Policies\BasePolicy;
 use TCG\Voyager\Contracts\User as UserType;
 
-class RatingPolicy extends BasePolicy
+class DevicePolicy extends BasePolicy
 {
     public function before($user, $ability) {
         $role = $user->role()->pluck('name')[0];
@@ -20,7 +20,8 @@ class RatingPolicy extends BasePolicy
 
     protected function checkApp(UserType $user, $model) {
         $userApps = $user->apps()->pluck('id')->toArray();
+        $deviceApps = $model->ratings()->pluck('app_id')->toArray();
 
-        return in_array($model->app_id, $userApps);
+        return count(array_intersect($userApps, $deviceApps)) > 0;
     }
 }
