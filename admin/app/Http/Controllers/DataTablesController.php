@@ -23,15 +23,9 @@ class DataTablesController extends Controller {
         $user = Auth::user();
 
         if ($user !== null && $user->hasPermission('browse_ratings')) {
-            $userApps = $user->apps()->pluck('id')->toArray();
             $params = $request->query()['columns'];
             $where = $this->parseParams($params);
-
-            $model = Rating::with(['range', 'app', 'platform', 'browser', 'appuser', 'device'])
-                ->select('ratings.*')
-                ->whereHas('app', function ($query) use($userApps) {
-                    $query->whereIn('id', $userApps);
-                });
+            $model = Rating::with(['range', 'app', 'platform', 'browser', 'appuser', 'device'])->select('ratings.*');
 
             foreach ($where as $key => $value) {
                 $model = $model->whereHas($key, function ($query) use($value) {

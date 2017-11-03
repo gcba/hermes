@@ -8,7 +8,9 @@ use TCG\Voyager\Contracts\User as UserType;
 class PlatformPolicy extends BasePolicy
 {
     public function before($user, $ability) {
-        if ($user->role()->pluck('name')->get('name') === 'admin') {
+        $role = $user->role()->pluck('name')->get('name');
+
+        if ($role === 'admin') {
             return true;
         }
     }

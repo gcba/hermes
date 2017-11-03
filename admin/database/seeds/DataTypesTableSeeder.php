@@ -20,7 +20,7 @@ class DataTypesTableSeeder extends Seeder
                 'icon'                  => 'voyager-person',
                 'model_name'            => 'App\\User',
                 'controller'            => '\\App\\Http\\Controllers\\Controller',
-                'policy_name'           => 'TCG\\Voyager\\Policies\\UserPolicy',
+                'policy_name'           => '\\App\\Policies\\UserPolicy',
                 'generate_permissions'  => 1,
                 'description'           => 'Personal',
                 'server_side'           => 0
