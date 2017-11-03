@@ -8,9 +8,10 @@ use TCG\Voyager\Contracts\User as UserType;
 class RatingPolicy extends BasePolicy
 {
     public function before($user, $ability) {
-        if ($user->role()->pluck('name')->get('name') === 'admin' && (
-            $ability === 'read' || $ability === 'delete'
-        )) {
+        $role = $user->role()->pluck('name')->get('name');
+
+        if (($role === 'admin' && ($ability === 'read' || $ability === 'delete')) ||
+        ($role === 'supervisor' && $ability === 'read')) {
             return true;
         }
 

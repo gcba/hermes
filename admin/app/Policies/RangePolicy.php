@@ -8,9 +8,10 @@ use TCG\Voyager\Contracts\User as UserType;
 class RangePolicy extends BasePolicy
 {
     public function before($user, $ability) {
-        if ($user->role()->pluck('name')->get('name') === 'admin' && (
-            $ability === 'read' || $ability === 'create' || $ability === 'delete'
-        )) {
+        $role = $user->role()->pluck('name')->get('name');
+
+        if (($role === 'admin' && ($ability === 'read' || $ability === 'create' || $ability === 'delete')) ||
+        ($role === 'supervisor' && ($ability === 'read' || $ability === 'create'))) {
             return true;
         }
 
