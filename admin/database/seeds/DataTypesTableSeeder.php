@@ -165,6 +165,7 @@ class DataTypesTableSeeder extends Seeder
                 'icon'                  => 'voyager-star-two',
                 'model_name'            => 'App\\Rating',
                 'controller'            => '\\App\\Http\\Controllers\\DataTablesController',
+                'policy_name'           => '\\App\\Policies\\RatingPolicy',
                 'generate_permissions'  => 1,
                 'description'           => 'Calificaciones',
                 'server_side'           => 0
