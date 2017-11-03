@@ -117,6 +117,7 @@ class DataTypesTableSeeder extends Seeder
                 'icon'                  => 'voyager-chat',
                 'model_name'            => 'App\\Message',
                 'controller'            => '\\App\\Http\\Controllers\\MessagesController',
+                'policy_name'           => '\\App\\Policies\\MessagePolicy',
                 'generate_permissions'  => 1,
                 'description'           => 'Mensajes',
                 'server_side'           => 0
