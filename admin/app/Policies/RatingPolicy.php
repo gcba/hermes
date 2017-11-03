@@ -3,7 +3,6 @@
 namespace App\Policies;
 
 use App\User;
-use App\Rating;
 use TCG\Voyager\Policies\BasePolicy;
 use TCG\Voyager\Contracts\User as UserType;
 
