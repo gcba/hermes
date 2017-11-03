@@ -13,6 +13,8 @@ class RatingPolicy extends BasePolicy
         )) {
             return true;
         }
+
+        return false;
     }
 
     protected function checkApp(UserType $user, $model) {

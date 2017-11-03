@@ -13,6 +13,8 @@ class PlatformPolicy extends BasePolicy
         if ($role === 'admin') {
             return true;
         }
+
+        return false;
     }
 
     protected function checkApp(UserType $user, $model) {

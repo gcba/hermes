@@ -54,6 +54,7 @@ class DataTypesTableSeeder extends Seeder
                 'icon'                  => 'voyager-people',
                 'model_name'            => 'App\\AppUser',
                 'controller'            => '\\App\\Http\\Controllers\\Controller',
+                'policy_name'           => '\\App\\Policies\\AppUserPolicy',
                 'generate_permissions'  => 1,
                 'description'           => 'Usuarios de las aplicaciones',
                 'server_side'           => 0
