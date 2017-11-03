@@ -48,14 +48,6 @@ class App extends Model
                 $model->attributes['updated_by'] = \Auth::user()->id :
                 $model->attributes['updated_by'] = null;
         });
-
-        static::created(function($model){
-            $adminRole = Role::where('name', 'admin')->firstOrFail();
-            $admins = User::select('id')->where('role_id', $adminRole->id)->pluck('id')->toArray();
-
-            $model->users()->attach($admins);
-            $model->save();
-        });
     }
 
     /**
