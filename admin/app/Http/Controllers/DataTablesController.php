@@ -23,6 +23,7 @@ class DataTablesController extends Controller {
         $user = Auth::user();
 
         if ($user !== null && $user->hasPermission('browse_ratings')) {
+            $userApps = $user->apps()->pluck('id')->toArray();
             $params = $request->query()['columns'];
             $where = $this->parseParams($params);
 
