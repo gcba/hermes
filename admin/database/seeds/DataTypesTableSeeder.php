@@ -71,7 +71,6 @@ class DataTypesTableSeeder extends Seeder
                 'icon'                  => 'voyager-tag',
                 'model_name'            => 'App\\Brand',
                 'controller'            => '\\App\\Http\\Controllers\\Controller',
-                'policy_name'           => '\\App\\Policies\\BrandPolicy',
                 'generate_permissions'  => 1,
                 'description'           => 'Marcas de los dispositivos',
                 'server_side'           => 0
@@ -104,7 +103,6 @@ class DataTypesTableSeeder extends Seeder
                 'icon'                  => 'voyager-phone',
                 'model_name'            => 'App\\Device',
                 'controller'            => '\\App\\Http\\Controllers\\DataTablesController',
-                'policy_name'           => '\\App\\Policies\\DevicePolicy',
                 'generate_permissions'  => 1,
                 'description'           => 'Dispositivos móviles',
                 'server_side'           => 0
@@ -138,7 +136,6 @@ class DataTypesTableSeeder extends Seeder
                 'icon'                  => 'voyager-laptop',
                 'model_name'            => 'App\\Platform',
                 'controller'            => '\\App\\Http\\Controllers\\Controller',
-                'policy_name'           => '\\App\\Policies\\PlatformPolicy',
                 'generate_permissions'  => 1,
                 'description'           => 'Plataformas donde andan las aplicaciones',
                 'server_side'           => 0
