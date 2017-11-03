@@ -5,13 +5,13 @@ namespace App\Policies;
 use App\Policies\BasePolicy;
 use TCG\Voyager\Contracts\User as UserType;
 
-class PlatformPolicy extends BasePolicy
+class BrandPolicy extends BasePolicy
 {
     public function before($user, $ability) {
         $role = $user->role()->pluck('name')[0];
 
-        if ($role === 'admin' || $role === 'supervisor' &&
-        ($ability === 'browse' || $ability === 'read' || $ability === 'create' || $ability === 'edit')) {
+        if (($role === 'admin' && ($ability === 'browse' || $ability === 'read' || $ability === 'delete')) ||
+        ($role === 'supervisor' && ($ability === 'browse' || $ability === 'read'))) {
             return true;
         }
 

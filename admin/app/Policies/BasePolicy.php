@@ -16,6 +16,19 @@ abstract class BasePolicy extends VoyagerBasePolicy
      *
      * @return bool
      */
+    public function browse(User $user, $model)
+    {
+        return true;
+    }
+
+    /**
+     * Determine if the given model can be viewed by the user.
+     *
+     * @param \App\User $user
+     * @param  $model
+     *
+     * @return bool
+     */
     public function read(User $user, $model)
     {
         return $this->checkPermission($user, $model, 'read');
@@ -50,8 +63,6 @@ abstract class BasePolicy extends VoyagerBasePolicy
     abstract protected function checkApp(UserType $user, $model);
 
     protected function checkPermission(UserType $user, $model, $action) {
-        $userApps = $user->apps()->pluck('id')->toArray();
-
-        return $this->checkApp($user, $model) || parent::checkPermission($user, $model, $action);
+        return $this->checkApp($user, $model) && parent::checkPermission($user, $model, $action);
     }
 }

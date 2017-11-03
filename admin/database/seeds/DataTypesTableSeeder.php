@@ -71,6 +71,7 @@ class DataTypesTableSeeder extends Seeder
                 'icon'                  => 'voyager-tag',
                 'model_name'            => 'App\\Brand',
                 'controller'            => '\\App\\Http\\Controllers\\Controller',
+                'policy_name'           => '\\App\\Policies\\BrandPolicy',
                 'generate_permissions'  => 1,
                 'description'           => 'Marcas de los dispositivos',
                 'server_side'           => 0

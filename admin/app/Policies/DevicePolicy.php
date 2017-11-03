@@ -19,9 +19,6 @@ class DevicePolicy extends BasePolicy
     }
 
     protected function checkApp(UserType $user, $model) {
-        $userApps = $user->apps()->pluck('id')->toArray();
-        $deviceApps = $model->ratings()->pluck('app_id')->toArray();
-
-        return count(array_intersect($userApps, $deviceApps)) > 0;
+        return true;
     }
 }
