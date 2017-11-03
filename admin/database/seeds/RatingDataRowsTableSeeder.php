@@ -35,7 +35,7 @@ class RatingDataRowsTableSeeder extends Seeder
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'number',
-                'display_name' => 'Calificación',
+                'display_name' => '⭐',
                 'required'     => 1,
                 'browse'       => 1,
                 'read'         => 1,
@@ -87,7 +87,7 @@ class RatingDataRowsTableSeeder extends Seeder
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'check',
-                'display_name' => 'Mensaje',
+                'display_name' => 'Mje.',
                 'required'     => 1,
                 'browse'       => 1,
                 'read'         => 1,
@@ -122,7 +122,7 @@ class RatingDataRowsTableSeeder extends Seeder
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'text',
-                'display_name' => 'Versión',
+                'display_name' => 'Vers.',
                 'required'     => 0,
                 'browse'       => 1,
                 'read'         => 1,
@@ -157,7 +157,7 @@ class RatingDataRowsTableSeeder extends Seeder
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'text',
-                'display_name' => 'Versión',
+                'display_name' => 'Vers.',
                 'required'     => 0,
                 'browse'       => 1,
                 'read'         => 1,
@@ -192,7 +192,7 @@ class RatingDataRowsTableSeeder extends Seeder
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'text',
-                'display_name' => 'Versión',
+                'display_name' => 'Vers.',
                 'required'     => 0,
                 'browse'       => 1,
                 'read'         => 1,

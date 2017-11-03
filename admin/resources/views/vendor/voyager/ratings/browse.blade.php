@@ -3,10 +3,12 @@
 @section('page_title', __('voyager.generic.viewing').' '.$dataType->display_name_plural)
 
 @section('page_header')
-    <h1 class="page-title">
-        <i class="{{ $dataType->icon }}"></i> {{ $dataType->display_name_plural }}
-    </h1>
-    @include('voyager::multilingual.language-selector')
+    <div class="container-fluid">
+        <h1 class="page-title">
+            <i class="{{ $dataType->icon }}"></i> {{ $dataType->display_name_plural }}
+        </h1>
+        @include('voyager::multilingual.language-selector')
+    </div>
 @stop
 
 @section('content')
@@ -16,41 +18,33 @@
             <div class="col-md-12">
                 <div class="panel panel-bordered">
                     <div class="panel-body table-responsive">
-                        <table id="dataTable" class="row table table-hover table-ratings">
+                        <table id="dataTable" class="table table-hover table-ratings">
                             <thead>
                                 <tr>
                                     @foreach($dataType->browseRows as $row)
-                                        <th>{{ $row->display_name }}</th>
+                                    <th>
+                                        {{ $row->display_name }}
+                                    </th>
                                     @endforeach
                                     <th class="actions">{{ __('voyager.generic.actions') }}</th>
                                 </tr>
                             </thead>
-                            <tbody></tbody>
+                            <tbody>
+
+                            </tbody>
                             <tfoot>
                                 @foreach($dataType->browseRows as $row)
                                     <th></th>
                                 @endforeach
                             </tfoot>
                         </table>
-                        @if (isset($dataType->server_side) && $dataType->server_side)
-                            <div class="pull-left">
-                                <div role="status" class="show-res" aria-live="polite">{{ trans_choice(
-                                    'voyager.generic.showing_entries', $dataTypeContent->total(), [
-                                        'from' => $dataTypeContent->firstItem(),
-                                        'to' => $dataTypeContent->lastItem(),
-                                        'all' => $dataTypeContent->total()
-                                    ]) }}</div>
-                            </div>
-                            <div class="pull-right">
-                                {{ $dataTypeContent->links() }}
-                            </div>
-                        @endif
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
+    {{-- Single delete modal --}}
     <div class="modal modal-danger fade" tabindex="-1" id="delete_modal" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -122,26 +116,32 @@
                     { data: 'browser_version', name: 'browser_version' },
                     { data: 'appuser.name', name: 'appuser.name' },
                     { data: 'device.name', name: 'device.name' },
-                    { data: 'created_at', name: 'created_at' },
-                    { data: 'updated_at', name: 'updated_at' }
+                    { data: 'created_at', name: 'created_at' }
                 ],
                 order: [[12, 'desc']],
                 mark: true,
                 initComplete: function () {
+                    if ($('.dataTables_empty').length !== 0) return;
+
                     this.api().columns().every(function () {
                         const column = this;
-                        const input = document.createElement("input");
+                        const input = document.createElement('input');
 
                         $(input).appendTo($(column.footer()).empty())
-                        .on('change', function () {
-                            const $this = $(this);
-                            const val = $.fn.dataTable.util.escapeRegex($this.val().trim());
+                            .on('change', function () {
+                                const $this = $(this);
+                                const val = $.fn.dataTable.util.escapeRegex($this.val().trim());
 
-                            column.search($this.val()).draw();
-                        });
+                                column.search($this.val()).draw();
+                            })
+                            .closest('tr').addClass('row-search');
                     });
                 }
             });
+        });
+
+        $('#search-input select').select2({
+            minimumResultsForSearch: Infinity
         });
 
         var deleteFormAction;
