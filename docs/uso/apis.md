@@ -259,6 +259,10 @@ Para construir condiciones se pueden usar los siguientes operadores:
 |**gte**             |Mayor o igual a *(greater than or equal)*|
 |**lte**             |Menor o igual a *(lower than or equal)*  |
 
+#### Campos
+
+En todos los casos los registros que han sido borrados lógicamente no son tenidos en cuenta para los cálculos.
+
 ### Responses
 
 #### Count
