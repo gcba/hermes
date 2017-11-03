@@ -152,6 +152,7 @@ class DataTypesTableSeeder extends Seeder
                 'icon'                  => 'voyager-star-half',
                 'model_name'            => 'App\\Range',
                 'controller'            => '\\App\\Http\\Controllers\\Controller',
+                'policy_name'           => '\\App\\Policies\\RangePolicy',
                 'generate_permissions'  => 1,
                 'description'           => 'Rangos de calificaciones',
                 'server_side'           => 0
