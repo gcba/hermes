@@ -37,6 +37,7 @@ class DataTypesTableSeeder extends Seeder
                 'icon'                  => 'voyager-categories',
                 'model_name'            => 'App\\App',
                 'controller'            => '\\App\\Http\\Controllers\\Controller',
+                'policy_name'           => '\\App\\Policies\\AppPolicy',
                 'generate_permissions'  => 1,
                 'description'           => 'Aplicaciones',
                 'server_side'           => 0
