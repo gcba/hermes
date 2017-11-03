@@ -7,6 +7,14 @@ use TCG\Voyager\Contracts\User as UserType;
 
 class MessagePolicy extends BasePolicy
 {
+    public function before($user, $ability) {
+        if ($user->role()->pluck('name')->get('name') === 'admin' && (
+            $ability === 'read' || $ability === 'create' || $ability === 'delete'
+        )) {
+            return true;
+        }
+    }
+
     protected function checkApp(UserType $user, $model) {
         $userApps = $user->apps()->pluck('id')->toArray();
 
