@@ -31,7 +31,7 @@ class MessagesController extends DataTablesController
             $search = false;
 
             foreach ($params as $index => $column) {
-                if (strlen($column['search']['value']) > 0) {
+                if (strlen(trim($column['search']['value'])) > 0) {
                     $search = true;
                 }
             }
