@@ -135,6 +135,7 @@ class DataTypesTableSeeder extends Seeder
                 'icon'                  => 'voyager-laptop',
                 'model_name'            => 'App\\Platform',
                 'controller'            => '\\App\\Http\\Controllers\\Controller',
+                'policy_name'           => '\\App\\Policies\\PlatformPolicy',
                 'generate_permissions'  => 1,
                 'description'           => 'Plataformas donde andan las aplicaciones',
                 'server_side'           => 0
