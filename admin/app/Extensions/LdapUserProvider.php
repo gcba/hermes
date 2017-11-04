@@ -24,7 +24,7 @@ class LdapUserProvider extends EloquentUserProvider
   /**
     * @var SoapWrapper
     */
-  protected $soapWrapper;
+  // protected $soapWrapper;
 
    /**
     * Create a new database user provider.
@@ -37,11 +37,12 @@ class LdapUserProvider extends EloquentUserProvider
     {
         parent::__construct($hasher, $model);
 
-        $this->soapWrapper = new SoapWrapper();
+        // $this->soapWrapper = new SoapWrapper();
 
-        $this->setupLDAP();
+        // $this->setupLDAP();
     }
 
+    /*
     private function setupLDAP() {
         $url = env('LDAP_URL', 'https://esb-qa.gcba.gob.ar/ad/consulta?wsdl');
 
@@ -67,6 +68,7 @@ class LdapUserProvider extends EloquentUserProvider
             return;
         }
     }
+    */
 
     /**
      * Retrieve a user by the given credentials.
@@ -76,6 +78,7 @@ class LdapUserProvider extends EloquentUserProvider
      */
     public function retrieveByCredentials(array $credentials)
     {
+        /*
         if (empty($credentials) || !$this->soapWrapper->has('LDAP')) {
             return null;
         }
@@ -90,10 +93,13 @@ class LdapUserProvider extends EloquentUserProvider
             return null;
         }
 
+
         if ($validationResponse->return == 1) {
+        */
             $user = parent::retrieveByCredentials($credentials);
 
             if (!$user) {
+                /*
                 try {
                     $userDataResponse = $this->soapWrapper->call('LDAP.buscarporemail', [
                         new buscarporemail($credentials['email'])
@@ -103,10 +109,11 @@ class LdapUserProvider extends EloquentUserProvider
 
                     return null;
                 }
+                */
 
                 $newUser = new User;
 
-                $newUser->name = $userDataResponse->return->nombre . ' ' . $userDataResponse->return->apellido;
+                $newUser->name = "Rita" . ' ' . "Zerrizuela";
                 $newUser->email = $credentials['email'];
 
                 $newUser->save();
@@ -117,8 +124,8 @@ class LdapUserProvider extends EloquentUserProvider
             return $user;
         }
 
-        return null;
-    }
+       // return null;
+    //}
 
    /**
      * Validate a user against the given credentials.
