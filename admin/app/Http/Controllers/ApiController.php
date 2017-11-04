@@ -44,10 +44,10 @@ class ApiController extends Controller {
             $userApps = $user->apps()->pluck('id')->toArray();
 
             $messages = Message::with('rating.app')->where('rating_id', $id)
-                ->whereHas('rating.app', function ($query) use($userApps) {
-                    $query->whereIn('id', $userApps);
-                })
-                ->orderBy('created_at', 'asc')->get();
+            ->whereHas('rating.app', function ($query) use($userApps){
+                $query->whereIn('id', $userApps);
+            })
+            ->orderBy('created_at', 'asc')->get();
 
              foreach ($messages as $item) {
                 if ($item->direction === 'in' && $item->status === 0) {

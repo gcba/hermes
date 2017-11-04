@@ -20,7 +20,7 @@ class DataTypesTableSeeder extends Seeder
                 'icon'                  => 'voyager-person',
                 'model_name'            => 'App\\User',
                 'controller'            => '\\App\\Http\\Controllers\\Controller',
-                'policy_name'           => '\\App\\Policies\\UserPolicy',
+                'policy_name'           => 'TCG\\Voyager\\Policies\\UserPolicy',
                 'generate_permissions'  => 1,
                 'description'           => 'Personal',
                 'server_side'           => 0
@@ -37,7 +37,6 @@ class DataTypesTableSeeder extends Seeder
                 'icon'                  => 'voyager-categories',
                 'model_name'            => 'App\\App',
                 'controller'            => '\\App\\Http\\Controllers\\Controller',
-                'policy_name'           => '\\App\\Policies\\AppPolicy',
                 'generate_permissions'  => 1,
                 'description'           => 'Aplicaciones',
                 'server_side'           => 0
@@ -54,7 +53,6 @@ class DataTypesTableSeeder extends Seeder
                 'icon'                  => 'voyager-people',
                 'model_name'            => 'App\\AppUser',
                 'controller'            => '\\App\\Http\\Controllers\\Controller',
-                'policy_name'           => '\\App\\Policies\\AppUserPolicy',
                 'generate_permissions'  => 1,
                 'description'           => 'Usuarios de las aplicaciones',
                 'server_side'           => 0
@@ -119,7 +117,6 @@ class DataTypesTableSeeder extends Seeder
                 'icon'                  => 'voyager-chat',
                 'model_name'            => 'App\\Message',
                 'controller'            => '\\App\\Http\\Controllers\\MessagesController',
-                'policy_name'           => '\\App\\Policies\\MessagePolicy',
                 'generate_permissions'  => 1,
                 'description'           => 'Mensajes',
                 'server_side'           => 0
@@ -152,7 +149,6 @@ class DataTypesTableSeeder extends Seeder
                 'icon'                  => 'voyager-star-half',
                 'model_name'            => 'App\\Range',
                 'controller'            => '\\App\\Http\\Controllers\\Controller',
-                'policy_name'           => '\\App\\Policies\\RangePolicy',
                 'generate_permissions'  => 1,
                 'description'           => 'Rangos de calificaciones',
                 'server_side'           => 0
@@ -169,7 +165,6 @@ class DataTypesTableSeeder extends Seeder
                 'icon'                  => 'voyager-star-two',
                 'model_name'            => 'App\\Rating',
                 'controller'            => '\\App\\Http\\Controllers\\DataTablesController',
-                'policy_name'           => '\\App\\Policies\\RatingPolicy',
                 'generate_permissions'  => 1,
                 'description'           => 'Calificaciones',
                 'server_side'           => 0

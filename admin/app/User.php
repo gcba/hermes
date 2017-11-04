@@ -33,6 +33,14 @@ class User extends VoyagerUser
             \Auth::user() !== null ?
                 $model->attributes['updated_by'] = \Auth::user()->id :
                 $model->attributes['updated_by'] = null;
+
+            $adminRole = Role::where('name', 'admin')->firstOrFail();
+
+            if ($model->role_id === $adminRole->id) {
+                $apps = App::select('id')->pluck('id')->toArray();
+
+                $model->apps()->attach($apps);
+            }
         });
     }
 
