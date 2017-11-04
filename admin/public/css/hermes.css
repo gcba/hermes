@@ -134,6 +134,7 @@
 
 .dataTables_wrapper .table-ratings tbody td .btn {
     margin: 0px;
+    padding: 6px 13px;
     font-size: 12px;
     line-height: 1;
 }
