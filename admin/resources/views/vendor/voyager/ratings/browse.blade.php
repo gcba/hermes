@@ -89,6 +89,7 @@
             $('#dataTable').DataTable({
                 processing: true,
                 serverSide: true,
+                language: {!! json_encode(["language" => __('voyager.datatable')]) !!}.language,
                 ajax: {
                     url: '{!! route('ratings.api') !!}',
                     data: function (d) {
