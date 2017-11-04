@@ -132,6 +132,12 @@
     max-width: unset;
 }
 
+.dataTables_wrapper .table-ratings tbody td .btn {
+    margin: 0px;
+    font-size: 12px;
+    line-height: 1;
+}
+
 .messages .content-container {
     max-width: 1600px;
 }

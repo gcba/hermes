@@ -26,7 +26,7 @@
                                         {{ $row->display_name }}
                                     </th>
                                     @endforeach
-                                    <th class="actions">{{ __('voyager.generic.actions') }}</th>
+                                    <th class="actions">Ver</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -115,7 +115,14 @@
                     { data: 'browser_version', name: 'browser_version' },
                     { data: 'appuser.name', name: 'appuser.name' },
                     { data: 'device.name', name: 'device.name' },
-                    { data: 'created_at', name: 'created_at' }
+                    { data: 'created_at', name: 'created_at' },
+                    {
+                        'data': null,
+                        'render': function (data, type, row, meta) {
+                            return '<a href="/admin/ratings/' + data.id + '" title="Ver" class="btn btn-sm btn-warning pull-right"><i class="voyager-eye"></i><span class="hidden-xs hidden-sm"></span></a>';
+                        },
+                        'targets': -1
+                    }
                 ],
                 order: [[12, 'desc']],
                 mark: true,
