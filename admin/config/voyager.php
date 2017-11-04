@@ -186,9 +186,7 @@ return [
         'data_tables' => [
             'responsive' => true, // Use responsive extension for jQuery dataTables that are not server-side paginated
         ],
-        'widgets' => [
-            'TCG\\Voyager\\Widgets\\UserDimmer',
-        ],
+        'widgets' => [],
     ],
 
     /*
