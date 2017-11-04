@@ -70,7 +70,7 @@ class RatingDataRowsTableSeeder extends Seeder
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'text',
-                'display_name' => 'Descripc.',
+                'display_name' => 'Desc.',
                 'required'     => 0,
                 'browse'       => 1,
                 'read'         => 1,
@@ -228,7 +228,7 @@ class RatingDataRowsTableSeeder extends Seeder
             $dataRow->fill([
                 'type'         => 'relationship',
                 'field'        => 'rating_belongsto_device_relationship',
-                'display_name' => 'Dispositivo',
+                'display_name' => 'Disp.',
                 'required'     => 0,
                 'browse'       => 1,
                 'read'         => 1,
