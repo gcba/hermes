@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Jobs\SetMessageStatus;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
@@ -16,8 +17,12 @@ class ApiController extends Controller {
     *
     * @return \Illuminate\Http\JsonResponse
     */
-    public function message(Message $message)
+    public function message(Request $request, Message $message)
     {
+        if (!$request->ajax()){
+            return $this->show($request, $message->id);
+        }
+
         $user = Auth::user();
 
         if ($user !== null) {
@@ -59,5 +64,40 @@ class ApiController extends Controller {
         }
 
         return Response::json([], 401);
+    }
+
+    // From TCG\Voyager\Http\Controllers\VoyagerBreadController, modified
+    public function show(Request $request, $id)
+    {
+        $dataType = Voyager::model('DataType')->where('slug', '=', 'messages')->first();
+        $relationships = $this->getRelationships($dataType);
+
+        if (strlen($dataType->model_name) != 0) {
+            $model = app($dataType->model_name);
+            $dataTypeContent = call_user_func([$model->with($relationships), 'findOrFail'], $id);
+        } else {
+            // If Model doest exist, get data from table name
+            $dataTypeContent = DB::table($dataType->name)->where('id', $id)->first();
+        }
+
+        // Replace relationships' keys for labels and create READ links if a slug is provided.
+        $dataTypeContent = $this->resolveRelations($dataTypeContent, $dataType, true);
+
+        // If a column has a relationship associated with it, we do not want to show that field
+        $this->removeRelationshipField($dataType, 'read');
+
+        // Check permission
+        $this->authorize('read', $dataTypeContent);
+
+        // Check if BREAD is Translatable
+        $isModelTranslatable = is_bread_translatable($dataTypeContent);
+
+        $view = 'voyager::bread.read';
+
+        if (view()->exists("voyager::messages.read")) {
+            $view = "voyager::$slug.read";
+        }
+
+        return Voyager::view($view, compact('dataType', 'dataTypeContent', 'isModelTranslatable'));
     }
 }

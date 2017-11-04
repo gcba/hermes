@@ -171,7 +171,7 @@
                 language: {
                     search: '',
                     sLengthMenu: '_MENU_',
-                    sEmptyTable: 'No hay datos disponibles en la tabla',
+                    sEmptyTable: 'Sin mensajes para mostrar',
                     sLoadingRecords: 'Cargando...',
                     sProcessing: 'Procesando...',
                     sZeroRecords: 'No se encontraron registros coincidentes',
@@ -240,11 +240,13 @@
             return $('<div>', { class: 'panel panel-default message message-' + direction });
         };
 
-        const messageHeading = function(content, direction) {
-            return $('<div>', {
+        const messageHeading = function(id, content, direction) {
+            return $('<a>', {
                 class: 'message-pill',
-                text: content
-             });
+                text: content,
+                title: 'Ver mensaje',
+                href: '/admin/messages/' + id
+            });
         };
 
         const messageBody = function(content) {
@@ -274,7 +276,7 @@
 
         const buildMessage = function(content) {
             const message = messagePanel(content.direction);
-            const heading = messageHeading(content.created_at, content.direction);
+            const heading = messageHeading(content.id, content.created_at, content.direction);
             const body = messageBody(content.message);
 
             if (content.direction === 'in') {
