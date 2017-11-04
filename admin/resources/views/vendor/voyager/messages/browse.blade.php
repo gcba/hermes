@@ -171,6 +171,10 @@
                 language: {
                     search: '',
                     sLengthMenu: '_MENU_',
+                    sEmptyTable: 'No hay datos disponibles en la tabla',
+                    sLoadingRecords: 'Cargando...',
+                    sProcessing: 'Procesando...',
+                    sZeroRecords: 'No se encontraron registros coincidentes',
                     oPaginate: {
                         sFirst: 'Primero',
                         sLast: 'Último',
