@@ -146,7 +146,6 @@
             $('#dataTable').DataTable({
                 processing: true,
                 serverSide: true,
-                language: {!! json_encode(["language" => __('voyager.datatable')]) !!}.language,
                 ajax: {
                     url: '{!! route('messages.api') !!}',
                     data: function (d) {
@@ -171,7 +170,13 @@
                 mark: true,
                 language: {
                     search: '',
-                    sLengthMenu: '_MENU_'
+                    sLengthMenu: '_MENU_',
+                    oPaginate: {
+                        sFirst: 'Primero',
+                        sLast: 'Último',
+                        sNext: 'Siguiente',
+                        sPrevious: 'Anterior'
+                    }
                 },
                 initComplete: function () {
                     if ($('.dataTables_empty').length !== 0) return;
