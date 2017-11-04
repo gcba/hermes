@@ -53,7 +53,7 @@ class RatingDataRowsTableSeeder extends Seeder
             $dataRow->fill([
                 'type'         => 'relationship',
                 'field'        => 'rating_belongsto_range_relationship',
-                'display_name' => 'Rango',
+                'display_name' => 'Rgo.',
                 'required'     => 1,
                 'browse'       => 1,
                 'read'         => 1,
@@ -70,7 +70,7 @@ class RatingDataRowsTableSeeder extends Seeder
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'text',
-                'display_name' => 'Descripción',
+                'display_name' => 'Descripc.',
                 'required'     => 0,
                 'browse'       => 1,
                 'read'         => 1,
@@ -140,7 +140,7 @@ class RatingDataRowsTableSeeder extends Seeder
             $dataRow->fill([
                 'type'         => 'relationship',
                 'field'        => 'rating_belongsto_platform_relationship',
-                'display_name' => 'Plataforma',
+                'display_name' => 'Plataf.',
                 'required'     => 1,
                 'browse'       => 1,
                 'read'         => 1,
