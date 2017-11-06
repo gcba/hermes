@@ -22,7 +22,7 @@ var (
 	readDBName     = os.Getenv("HERMES_READDB_NAME")
 	readDBUser     = os.Getenv("HERMES_READDB_USER")
 	readDBPassword = os.Getenv("HERMES_READDB_PASSWORD")
-	readDBSslMode  = utils.GetConfig("HERMES_READDB_SSLMODE", "disable")
+	readDBSslMode  = utils.GetConfig("HERMES_READDB_SSLMODE", "prefer")
 
 	ReadDBDriver string
 
@@ -32,7 +32,7 @@ var (
 	writeDBName     = os.Getenv("HERMES_WRITEDB_NAME")
 	writeDBUser     = os.Getenv("HERMES_WRITEDB_USER")
 	writeDBPassword = os.Getenv("HERMES_WRITEDB_PASSWORD")
-	writeDBSslMode  = utils.GetConfig("HERMES_READDB_SSLMODE", "disable")
+	writeDBSslMode  = utils.GetConfig("HERMES_READDB_SSLMODE", "prefer")
 
 	WriteDBDriver string
 )
