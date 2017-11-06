@@ -2,11 +2,14 @@
 
 namespace App;
 
+use Spatie\Activitylog\Traits\LogsActivity;
 use Illuminate\Support\Facades\Auth;
 use TCG\Voyager\Models\Role as VoyagerRole;
 
 class Role extends VoyagerRole
 {
+    use LogsActivity;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -15,6 +18,13 @@ class Role extends VoyagerRole
     protected $fillable = [
         'name', 'display_name'
     ];
+
+    /**
+     * Log all fillable attributes.
+     *
+     * @var array
+     */
+    protected static $logFillable = true;
 
     /**
      * Boot function for using with User Events

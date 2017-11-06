@@ -2,12 +2,14 @@
 
 namespace App;
 
+use Spatie\Activitylog\Traits\LogsActivity;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Range extends Model
 {
     use SoftDeletes;
+    use LogsActivity;
 
     /**
      * The attributes that are mass assignable.
@@ -17,6 +19,13 @@ class Range extends Model
     protected $fillable = [
         'name', 'from', 'to', 'key'
     ];
+
+    /**
+     * Log all fillable attributes.
+     *
+     * @var array
+     */
+    protected static $logFillable = true;
 
     /**
      * The attributes that should be mutated to dates.

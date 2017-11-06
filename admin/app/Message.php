@@ -2,11 +2,14 @@
 
 namespace App;
 
+use Spatie\Activitylog\Traits\LogsActivity;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
 class Message extends Model
 {
+    use LogsActivity;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -15,6 +18,13 @@ class Message extends Model
     protected $fillable = [
         'message', 'direction', 'status', 'transport_id', 'rating_id', 'created_by'
     ];
+
+    /**
+     * Log all fillable attributes.
+     *
+     * @var array
+     */
+    protected static $logFillable = true;
 
     /**
      * Boot function for using with User Events

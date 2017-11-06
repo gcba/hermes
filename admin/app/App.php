@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Spatie\Activitylog\Traits\LogsActivity;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
@@ -9,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 class App extends Model
 {
     use SoftDeletes;
+    use LogsActivity;
 
     /**
      * The attributes that are mass assignable.
@@ -18,6 +20,13 @@ class App extends Model
     protected $fillable = [
         'name', 'type', 'key', 'updated_by'
     ];
+
+    /**
+     * Log all fillable attributes.
+     *
+     * @var array
+     */
+    protected static $logFillable = true;
 
     /**
      * The attributes that should be mutated to dates.
