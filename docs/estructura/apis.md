@@ -4,7 +4,7 @@
 
 ### Autenticación
 
-Delegada en la API Gateway.
+Por token JWT firmado con clave privada.
 
 ## API de calificaciones
 
