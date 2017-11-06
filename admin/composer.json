@@ -20,7 +20,6 @@
         "spatie/laravel-activitylog": "^2.2",
         "tcg/voyager": "1.0.*",
         "voyager-themes": "^0.3.0",
-        "watson/rememberable": "^2.0",
         "yajra/laravel-datatables-oracle": "^8.0"
     },
     "require-dev": {
