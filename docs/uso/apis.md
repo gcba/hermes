@@ -23,18 +23,18 @@ export HERMES_READDB_PORT=5432 # Se puede omitir, por defecto es '5432'
 export HERMES_READDB_NAME=hermes
 export HERMES_READDB_USER=hermes
 export HERMES_READDB_PASSWORD=<READDB_PASSWORD>
-export HERMES_READDB_SSLMODE=prefer # Se puede omitir, por defecto es 'prefer'.
+export HERMES_READDB_SSLMODE=disable # Se puede omitir, por defecto es 'disable'.
 
 export HERMES_WRITEDB_HOST=localhost # Se puede omitir, por defecto es 'localhost'
 export HERMES_WRITEDB_PORT=5432 # Se puede omitir, por defecto es '5432'
 export HERMES_WRITEDB_NAME=hermes
 export HERMES_WRITEDB_USER=hermes
 export HERMES_WRITEDB_PASSWORD=<WRITEDB_PASSWORD>
-export HERMES_WRITEDB_SSLMODE=prefer # Se puede omitir, por defecto es 'prefer'.
+export HERMES_WRITEDB_SSLMODE=disable # Se puede omitir, por defecto es 'disable'.
 
 # Keys
-export HERMES_RATINGS_PUBLICKEY=<RATINGS_PUBLICKEY> # Para la autenticación JWT
-export HERMES_STATS_PUBLICKEY=<STATS_PUBLICKEY> # Para la autenticación JWT
+export HERMES_RATINGS_PUBLICKEY=<RATINGS_PUBLICKEY> # Ruta a la clave pública para la autenticación JWT
+export HERMES_STATS_PUBLICKEY=<STATS_PUBLICKEY> # Ruta a la clave pública para la autenticación JWT
 ```
 
 Luego cargarlo con:
