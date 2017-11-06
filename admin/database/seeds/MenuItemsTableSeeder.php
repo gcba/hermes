@@ -306,6 +306,7 @@ class MenuItemsTableSeeder extends Seeder
                 'order'      => 5,
                 'parameters' => null,
             ]);
+
             if (!$configMenuItem->exists) {
                 $configMenuItem->fill([
                     'target'     => '_self',
@@ -316,10 +317,27 @@ class MenuItemsTableSeeder extends Seeder
 
             $configMenuItem = MenuItem::firstOrNew([
                 'menu_id'    => $adminMenu->id,
+                'title'   => 'Compass',
+                'url'     => route('voyager.compass.index', [], false),
+                'parent_id'  => $administrationMenuItem->id,
+                'order'      => 6,
+                'parameters' => null
+            ]);
+
+            if (!$configMenuItem->exists) {
+                $configMenuItem->fill([
+                    'target'     => '_self',
+                    'icon_class' => 'voyager-compass',
+                    'color'      => null,
+                ])->save();
+            }
+
+            $configMenuItem = MenuItem::firstOrNew([
+                'menu_id'    => $adminMenu->id,
                 'title'      => 'Configuración',
                 'url'        => route('voyager.settings.index', [], false),
                 'parent_id'  => $administrationMenuItem->id,
-                'order'      => 6,
+                'order'      => 7,
                 'parameters' => null,
             ]);
 

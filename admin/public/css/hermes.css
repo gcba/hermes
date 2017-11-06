@@ -312,6 +312,10 @@
     text-align: right;
 }
 
+#commands pre {
+    white-space: pre-wrap;
+}
+
 @media screen and (max-width: 991px) {
     .messages-detail {
         padding-left: 15px;
