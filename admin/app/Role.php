@@ -3,12 +3,14 @@
 namespace App;
 
 use Spatie\Activitylog\Traits\LogsActivity;
+use Watson\Rememberable\Rememberable;
 use Illuminate\Support\Facades\Auth;
 use TCG\Voyager\Models\Role as VoyagerRole;
 
 class Role extends VoyagerRole
 {
     use LogsActivity;
+    use Rememberable;
 
     /**
      * The attributes that are mass assignable.
@@ -22,9 +24,16 @@ class Role extends VoyagerRole
     /**
      * Log all fillable attributes.
      *
-     * @var array
+     * @var bool
      */
     protected static $logFillable = true;
+
+    /**
+     * Queries cache TTL.
+     *
+     * @var int
+     */
+    protected $rememberFor = 1440; // Cache for a day
 
     /**
      * Boot function for using with User Events
@@ -35,7 +44,17 @@ class Role extends VoyagerRole
         parent::boot();
 
         static::creating(function ($model) {
+            Role::flushCache();
+
             $model->attributes['updated_at'] = null;
+        });
+
+        static::updating(function ($model) {
+            Role::flushCache();
+        });
+
+        static::deleting(function ($model) {
+            Role::flushCache();
         });
     }
 
