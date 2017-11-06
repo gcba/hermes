@@ -34,7 +34,7 @@ abstract class Token extends Command
         // Adapted from https://stackoverflow.com/questions/33773477/jwt-json-web-token-in-php-without-using-3rd-party-library-how-to-sign
 
         $headers = ['alg' => 'RS256', 'typ' => 'JWT'];
-        $payload = '{}';
+        $payload = json_encode([ 'at' => time()]);
         $signature = '';
         $headersEncoded = $this->base64UrlEncode(json_encode($headers));
         $payloadEncoded = $this->base64UrlEncode($payload);

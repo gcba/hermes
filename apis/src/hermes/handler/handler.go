@@ -7,9 +7,17 @@ import (
 	"hermes/responses"
 	"hermes/utils"
 
+	"github.com/dgrijalva/jwt-go"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
 	"github.com/labstack/gommon/log"
+)
+
+type (
+	claims struct {
+		jwt.StandardClaims
+		At int64 `json:"at"`
+	}
 )
 
 func Handler(port int, env string, publicKey string) *echo.Echo {
@@ -23,7 +31,8 @@ func Handler(port int, env string, publicKey string) *echo.Echo {
 		jwtConfig := middleware.JWTConfig{
 			SigningKey:    utils.GetPublicKey(publicKey, e),
 			SigningMethod: "RS256",
-			ContextKey:    "jwt"}
+			ContextKey:    "jwt",
+			Claims:        &claims{}}
 
 		e.Logger.SetLevel(log.ERROR)
 		e.Pre(middleware.HTTPSRedirect())
