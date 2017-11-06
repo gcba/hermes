@@ -22,7 +22,7 @@ class Message extends Model
     /**
      * Log all fillable attributes.
      *
-     * @var array
+     * @var bool
      */
     protected static $logFillable = true;
 
