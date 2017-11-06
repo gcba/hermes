@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use TCG\Voyager\Facades\Voyager;
-use Yajra\Datatables\Datatables;
+use Yajra\DataTables\Datatables;
 use App\Rating;
 use App\Message;
 use App\Device;

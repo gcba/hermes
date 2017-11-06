@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
 use TCG\Voyager\Facades\Voyager;
-use Yajra\Datatables\Datatables;
+use Yajra\DataTables\Datatables;
 use Validator;
 
 class MessagesController extends DataTablesController

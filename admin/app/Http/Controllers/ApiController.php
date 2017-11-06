@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
 use TCG\Voyager\Facades\Voyager;
-use Yajra\Datatables\Datatables;
+use Yajra\DataTables\Datatables;
 use App\Message;
 
 class ApiController extends Controller {

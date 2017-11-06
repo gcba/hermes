@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use TCG\Voyager\Facades\Voyager;
 use TCG\Voyager\Http\Controllers\VoyagerBreadController as BreadController;
-use Yajra\Datatables\Datatables;
+use Yajra\DataTables\Datatables;
 use Validator;
 
 class Controller extends BreadController

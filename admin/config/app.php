@@ -232,7 +232,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
-        'Datatables' => Yajra\Datatables\Facades\Datatables::class,
+        'Datatables' => Yajra\Datatables\Facades\DataTables::class,
         'SoapWrapper' => Artisaninweb\SoapWrapper\Facade::class,
         'Mailgun' => Bogardo\Mailgun\Facades\Mailgun::class
 
