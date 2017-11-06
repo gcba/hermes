@@ -4,7 +4,7 @@
 
 ### Admin
 
-PHP 7.1 con Laravel 5.4.
+PHP 7.1 con Laravel 5.5.
 
 ### APIs
 
@@ -57,14 +57,6 @@ Se trabajará con un esquema de 3 ramas: dev, qa y master, con una rama adiciona
 ### Commits
 
 Los mensajes de los commits deberán ser breves, concisos y estar escritos en inglés.
-
-### Releases
-
-Se seguirá el esquema SemVer (semantic versioning): major.minor.patch.
-
-Es decir, cuando haya breaking changes se incrementará la versión major; cuando haya nuevas funcionalidades pero no breaking changes se incrementará la versión minor; y cuando sólo haya bugfixes pero no nuevas funcionalidades ni breaking changes se incrementará la versión patch.
-
-En una primer etapa no habrá releases hasta que se complete una versión funcional del proyecto.
 
 ### Estructura de carpetas
 
