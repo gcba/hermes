@@ -2,6 +2,13 @@
 
 ## Instalación
 
+### Prerequisitos
+
+- Go 1.9.
+- Postgres 10.
+
+### Procedimiento
+
 Implica clonar el repo y configurar las variables de entorno.
 
 En `<REPO>/apis/src/hermes` crear un archivo `.env` con los valores de configuración:

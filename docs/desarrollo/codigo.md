@@ -4,7 +4,7 @@
 
 ### Admin
 
-PHP 7.1 con Laravel 5.5.
+PHP 7.1 con las extensiones  **pgsql** y **openssl** y Laravel 5.5.
 
 ### APIs
 

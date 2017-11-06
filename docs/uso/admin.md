@@ -2,7 +2,18 @@
 
 ## Instalación
 
-Implica clonar el repo, instalar las dependencias, configurar las variables de entorno, correr las migraciones y crear un admin. Para instalar las dependencias es necesario tener [Composer](https://getcomposer.org/).
+Implica clonar el repo, instalar las dependencias, configurar las variables de entorno, correr las migraciones y crear un admin.
+
+### Prerequisitos
+
+- PHP 7.1 con las extensiones **pgsql** y **openssl**.
+- Postgres 10.
+- Redis 4.
+- Una cuenta Mailgun.
+
+Para instalar las dependencias es necesario tener [Composer](https://getcomposer.org/).
+
+### Procedimiemto
 
 En `<REPO>/admin` instalar las dependencias con:
 
@@ -112,7 +123,7 @@ $ php artisan token:ratings
 $ php artisan token:stats
 ```
 
-### Por el admin
+### Por el Admin
 
 1. Iniciar sesión con un usuario administrador.
 2. Ir a `Administración > Compass`.
