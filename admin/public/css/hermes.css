@@ -1,3 +1,10 @@
+.ranges .side-body > .page-content > .row,
+.platforms .side-body > .page-content > .row,
+.brands .side-body > .page-content > .row,
+.browsers .side-body > .page-content > .row {
+    max-width: 750px;
+}
+
 .app-container {
     overflow-y: auto;
     overflow-x: hidden;
@@ -32,6 +39,11 @@
     display: none;
 }
 
+.panel-body .table-responsive {
+    border: unset;
+    overflow-x: unset;
+}
+
 .dataTables_wrapper:nth-child(1) > div {
     overflow-x: auto;
 }
@@ -54,6 +66,7 @@
 
 .dataTables_wrapper .dataTables_filter {
     width: 100%;
+    margin-right: 6px;
 }
 
 .dataTables_wrapper .dataTables_filter label {
