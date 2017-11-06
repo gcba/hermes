@@ -80,33 +80,17 @@ class UserDataRowsTableSeeder extends Seeder
         $dataRow = $this->dataRow($userDataType, 'role_id');
         if (!$dataRow->exists) {
             $dataRow->fill([
-                'type'         => 'select_dropdown',
-                'display_name' => 'Rol',
-                'required'     => 1,
-                'browse'       => 0,
-                'read'         => 0,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 0,
-                'details'      => '{"relationship":{"key":"id","label":"display_name"}}',
-                'order'        => 5,
-            ])->save();
-        }
-
-        $dataRow = $this->dataRow($userDataType, 'role');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
                 'type'         => 'relationship',
                 'field'        => 'user_belongsto_role_relationship',
                 'display_name' => 'Rol',
-                'required'     => 0,
+                'required'     => 1,
                 'browse'       => 1,
                 'read'         => 1,
-                'edit'         => 0,
-                'add'          => 0,
+                'edit'         => 1,
+                'add'          => 1,
                 'delete'       => 1,
                 'details'      => '{"validation":{"rules":["required","integer"],"messages":{"required":"Falta el campo :attribute.","integer":"El campo :attribute debe ser un número entero."}},"model":"App\\\Role","table":"roles","type":"belongsTo","column":"role_id","key":"id","label":"display_name","pivot_table":"","pivot":"0"}',
-                'order'        => 6,
+                'order'        => 5,
             ])->save();
         }
 
@@ -123,7 +107,7 @@ class UserDataRowsTableSeeder extends Seeder
                 'add'          => 1,
                 'delete'       => 1,
                 'details'      => '{"model":"App\\\App","table":"apps","type":"belongsToMany","column":"id","key":"id","label":"name","pivot_table":"app_user","pivot":"1"}',
-                'order'        => 7,
+                'order'        => 6,
             ])->save();
         }
 
@@ -139,7 +123,7 @@ class UserDataRowsTableSeeder extends Seeder
                 'add'          => 0,
                 'delete'       => 0,
                 'details'      => '',
-                'order'        => 8,
+                'order'        => 7,
             ])->save();
         }
 
@@ -157,7 +141,7 @@ class UserDataRowsTableSeeder extends Seeder
                 'add'          => 0,
                 'delete'       => 1,
                 'details'      => '{"model":"App\\\User","table":"users","type":"belongsTo","column":"updated_by","key":"id","label":"name","pivot_table":"","pivot":"0"}',
-                'order'        => 9,
+                'order'        => 8,
             ])->save();
         }
 
@@ -174,7 +158,7 @@ class UserDataRowsTableSeeder extends Seeder
                 'add'          => 0,
                 'delete'       => 0,
                 'details'      => '',
-                'order'        => 10,
+                'order'        => 9,
             ])->save();
         }
     }
