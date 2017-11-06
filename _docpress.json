@@ -973,9 +973,9 @@
                     "id": "prerequisitos"
                   },
                   {
-                    "title": "Procedimiemto",
+                    "title": "Procedimiento",
                     "depth": 3,
-                    "id": "procedimiemto"
+                    "id": "procedimiento"
                   }
                 ]
               },
@@ -2083,9 +2083,9 @@
               "id": "prerequisitos"
             },
             {
-              "title": "Procedimiemto",
+              "title": "Procedimiento",
               "depth": 3,
-              "id": "procedimiemto"
+              "id": "procedimiento"
             }
           ]
         },
