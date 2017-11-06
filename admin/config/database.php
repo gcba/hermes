@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'mysql'),
+    'default' => env('DB_CONNECTION', 'pgsql'),
 
     /*
     |--------------------------------------------------------------------------
@@ -42,19 +42,25 @@ return [
         'pgsql' => [
             'driver' => 'pgsql',
             'read' => [
-                'host' => env('DB_HOST', '127.0.0.1'),
+                'host' => env('HERMES_READDB_HOST', 'localhost'),
+                'port' => env('HERMES_READDB_PORT', '5432'),
+                'database' => env('HERMES_READDB_NAME', 'hermes'),
+                'username' => env('HERMES_READDB_USER', 'hermes'),
+                'password' => env('HERMES_READDB_PASSWORD', ''),
+                'password' => env('HERMES_READDB_SSLMODE', 'disable'),
             ],
             'write' => [
-                'host' => env('DB_HOST', '127.0.0.1')
+                'host' => env('HERMES_WRITEDB_HOST', 'localhost'),
+                'port' => env('HERMES_WRITEDB_PORT', '5432'),
+                'database' => env('HERMES_WRITEDB_NAME', 'hermes'),
+                'username' => env('HERMES_WRITEDB_USER', 'hermes'),
+                'password' => env('HERMES_WRITEDB_PASSWORD', ''),
+                'password' => env('HERMES_WRITEDB_SSLMODE', 'disable'),
             ],
-            'port' => env('DB_PORT', '5432'),
-            'database' => env('DB_DATABASE', 'forge'),
-            'username' => env('DB_USERNAME', 'forge'),
-            'password' => env('DB_PASSWORD', ''),
+            'sticky' => true,
             'charset' => 'utf8',
             'prefix' => '',
             'schema' => 'public',
-            'sslmode' => 'prefer',
         ],
 
     ],
@@ -88,7 +94,7 @@ return [
         'client' => 'predis',
 
         'default' => [
-            'host' => env('REDIS_HOST', '127.0.0.1'),
+            'host' => env('REDIS_HOST', 'localhost'),
             'password' => env('REDIS_PASSWORD', null),
             'port' => env('REDIS_PORT', 6379),
             'database' => 0,
