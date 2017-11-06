@@ -75,9 +75,17 @@
             </li>
             <li class="menu-item -level-1 -parent"><span class="title">Uso</span>
               <ul class="submenu">
+                <li class="menu-item -level-2"><a class="link title  link-usoadmin" href="../uso/admin.html">Admin</a>
+                </li>
                 <li class="menu-item -level-2"><a class="link title -active link-usoapis" href="../uso/apis.html">APIs</a>
                   <ul class="headings heading-list">
                     <li class="heading-item -depth-2"><a class="hlink link-instalacion" href="#instalacion">Instalación</a>
+                      <ul class="heading-list -depth-2">
+                        <li class="heading-item -depth-3"><a class="hlink link-prerequisitos" href="#prerequisitos">Prerequisitos</a>
+                        </li>
+                        <li class="heading-item -depth-3"><a class="hlink link-procedimiento" href="#procedimiento">Procedimiento</a>
+                        </li>
+                      </ul>
                     </li>
                     <li class="heading-item -depth-2"><a class="hlink link-api-de-calificaciones" href="#api-de-calificaciones">API de calificaciones</a>
                     </li>
@@ -109,6 +117,12 @@
         </div>
         <div class="markdown-body"><h1 id="apis">APIs</h1>
 <h2 id="instalacion">Instalaci&#xF3;n</h2>
+<h3 id="prerequisitos">Prerequisitos</h3>
+<ul>
+<li>Go 1.9.</li>
+<li>Postgres 10.</li>
+</ul>
+<h3 id="procedimiento">Procedimiento</h3>
 <p>Implica clonar el repo y configurar las variables de entorno.</p>
 <p>En <code>&lt;REPO&gt;/apis/src/hermes</code> crear un archivo <code>.env</code> con los valores de configuraci&#xF3;n:</p>
 <pre><code class="lang-bash"><span class="pl-c1">export</span> GOPATH=&lt;REPO&gt;/apis
@@ -390,7 +404,7 @@
 
         </div>
         <div class="footer-nav">
-          <div class="left"><a href="../desarrollo/sprint13.html"><span class="title">Sprint 13</span></a></div>
+          <div class="left"><a href="../uso/admin.html"><span class="title">Admin</span></a></div>
           <div class="right"><a href="../uso/sdks.html"><span class="label">Next: </span><span class="title">SDKs</span></a></div>
         </div>
       </div>

@@ -957,6 +957,58 @@
         "title": "Uso",
         "sections": [
           {
+            "title": "Admin",
+            "source": "docs/uso/admin.md",
+            "url": "uso/admin.html",
+            "slug": "usoadmin",
+            "headings": [
+              {
+                "title": "Instalación",
+                "depth": 2,
+                "id": "instalacion",
+                "headings": [
+                  {
+                    "title": "Prerequisitos",
+                    "depth": 3,
+                    "id": "prerequisitos"
+                  },
+                  {
+                    "title": "Procedimiemto",
+                    "depth": 3,
+                    "id": "procedimiemto"
+                  }
+                ]
+              },
+              {
+                "title": "Cola de tareas",
+                "depth": 2,
+                "id": "cola-de-tareas"
+              },
+              {
+                "title": "Crear tokens para las APIs",
+                "depth": 2,
+                "id": "crear-tokens-para-las-apis",
+                "headings": [
+                  {
+                    "title": "Por consola",
+                    "depth": 3,
+                    "id": "por-consola"
+                  },
+                  {
+                    "title": "Por el Admin",
+                    "depth": 3,
+                    "id": "por-el-admin"
+                  }
+                ]
+              },
+              {
+                "title": "Contenido por defecto",
+                "depth": 2,
+                "id": "contenido-por-defecto"
+              }
+            ]
+          },
+          {
             "title": "APIs",
             "source": "docs/uso/apis.md",
             "url": "uso/apis.html",
@@ -965,7 +1017,19 @@
               {
                 "title": "Instalación",
                 "depth": 2,
-                "id": "instalacion"
+                "id": "instalacion",
+                "headings": [
+                  {
+                    "title": "Prerequisitos",
+                    "depth": 3,
+                    "id": "prerequisitos"
+                  },
+                  {
+                    "title": "Procedimiento",
+                    "depth": 3,
+                    "id": "procedimiento"
+                  }
+                ]
               },
               {
                 "title": "API de calificaciones",
@@ -2002,6 +2066,58 @@
         }
       ]
     },
+    "uso/admin.html": {
+      "source": "docs/uso/admin.md",
+      "title": "Admin - Hermes",
+      "pageTitle": "Admin",
+      "slug": "usoadmin",
+      "headings": [
+        {
+          "title": "Instalación",
+          "depth": 2,
+          "id": "instalacion",
+          "headings": [
+            {
+              "title": "Prerequisitos",
+              "depth": 3,
+              "id": "prerequisitos"
+            },
+            {
+              "title": "Procedimiemto",
+              "depth": 3,
+              "id": "procedimiemto"
+            }
+          ]
+        },
+        {
+          "title": "Cola de tareas",
+          "depth": 2,
+          "id": "cola-de-tareas"
+        },
+        {
+          "title": "Crear tokens para las APIs",
+          "depth": 2,
+          "id": "crear-tokens-para-las-apis",
+          "headings": [
+            {
+              "title": "Por consola",
+              "depth": 3,
+              "id": "por-consola"
+            },
+            {
+              "title": "Por el Admin",
+              "depth": 3,
+              "id": "por-el-admin"
+            }
+          ]
+        },
+        {
+          "title": "Contenido por defecto",
+          "depth": 2,
+          "id": "contenido-por-defecto"
+        }
+      ]
+    },
     "uso/apis.html": {
       "source": "docs/uso/apis.md",
       "title": "APIs - Hermes",
@@ -2011,7 +2127,19 @@
         {
           "title": "Instalación",
           "depth": 2,
-          "id": "instalacion"
+          "id": "instalacion",
+          "headings": [
+            {
+              "title": "Prerequisitos",
+              "depth": 3,
+              "id": "prerequisitos"
+            },
+            {
+              "title": "Procedimiento",
+              "depth": 3,
+              "id": "procedimiento"
+            }
+          ]
         },
         {
           "title": "API de calificaciones",
@@ -2132,6 +2260,7 @@
     "docs/desarrollo/sprint11.md": "desarrollo/sprint11.html",
     "docs/desarrollo/sprint12.md": "desarrollo/sprint12.html",
     "docs/desarrollo/sprint13.md": "desarrollo/sprint13.html",
+    "docs/uso/admin.md": "uso/admin.html",
     "docs/uso/apis.md": "uso/apis.html",
     "docs/uso/sdks.md": "uso/sdks.html",
     "docs/images/schema.png": "images/schema.png"
