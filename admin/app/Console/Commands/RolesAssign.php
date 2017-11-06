@@ -65,7 +65,7 @@ class RolesAssign extends Command
         $role = Role::where('name', $roleName)->first();
 
         if ($role === null) {
-            $this->error("'$roleName' is not a valid role");
+            $this->error("\'$roleName\' is not a valid role");
 
             return;
         }
@@ -74,6 +74,12 @@ class RolesAssign extends Command
 
         if ($user === null) {
             $this->error('User does not exist');
+
+            return;
+        }
+
+        if ($user->role_id === $role->id) {
+            $this->error("The user already has the \'$roleName\' role");
 
             return;
         }
