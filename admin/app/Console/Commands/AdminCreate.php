@@ -58,10 +58,10 @@ class AdminCreate extends Command
             return;
         }
 
-        $this->setRole($name, $email);
+        $this->createAdmin($name, $email);
     }
 
-    private function setRole(String $userName, String $email) {
+    private function createAdmin(String $userName, String $email) {
         $role = Role::where('name', 'admin')->first();
 
         if ($role === null) {
