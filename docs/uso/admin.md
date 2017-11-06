@@ -13,7 +13,7 @@ Implica clonar el repo, instalar las dependencias, configurar las variables de e
 
 Para instalar las dependencias es necesario tener [Composer](https://getcomposer.org/).
 
-### Procedimiemto
+### Procedimiento
 
 En `<REPO>/admin` instalar las dependencias con:
 
