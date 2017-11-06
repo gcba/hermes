@@ -6,6 +6,7 @@ use App\Console\Commands\MailgunRoutes;
 use App\Console\Commands\MailgunWebhooks;
 use App\Console\Commands\MailgunMessages;
 use App\Console\Commands\RolesAssign;
+use App\Console\Commands\AdminCreate;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -21,7 +22,8 @@ class Kernel extends ConsoleKernel
         MailgunRoutes::class,
         MailgunWebhooks::class,
         MailgunMessages::class,
-        RolesAssign::class
+        RolesAssign::class,
+        AdminCreate::class
     ];
 
     /**
