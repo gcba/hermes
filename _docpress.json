@@ -460,11 +460,6 @@
                     "id": "commits"
                   },
                   {
-                    "title": "Releases",
-                    "depth": 3,
-                    "id": "releases"
-                  },
-                  {
                     "title": "Estructura de carpetas",
                     "depth": 3,
                     "id": "estructura-de-carpetas"
@@ -1514,11 +1509,6 @@
               "title": "Commits",
               "depth": 3,
               "id": "commits"
-            },
-            {
-              "title": "Releases",
-              "depth": 3,
-              "id": "releases"
             },
             {
               "title": "Estructura de carpetas",
