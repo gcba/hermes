@@ -39,11 +39,7 @@ class User extends VoyagerUser
             $model->attributes['updated_by'] = null;
         });
 
-        static::updating(function ($model) {
-            \Auth::user() !== null ?
-                $model->attributes['updated_by'] = \Auth::user()->id :
-                $model->attributes['updated_by'] = null;
-
+        static::created(function ($model) {
             $adminRole = Role::where('name', 'admin')->firstOrFail();
 
             if ($model->role_id === $adminRole->id) {
@@ -51,6 +47,12 @@ class User extends VoyagerUser
 
                 $model->apps()->attach($apps);
             }
+        });
+
+        static::updating(function ($model) {
+            \Auth::user() !== null ?
+                $model->attributes['updated_by'] = \Auth::user()->id :
+                $model->attributes['updated_by'] = null;
         });
     }
 

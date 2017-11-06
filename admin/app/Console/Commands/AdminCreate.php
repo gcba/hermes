@@ -70,7 +70,7 @@ class AdminCreate extends Command
             return;
         }
 
-        $user  = new User;
+        $user = new User;
 
         $user->name = $userName;
         $user->email = $email;
