@@ -21,6 +21,6 @@ class TokenRatings extends Token
     protected $description = 'Generate a new token for the Ratings API';
 
     protected function key() {
-        return env('RATINGS_PRIVATE_KEY', null);
+        return env('HERMES_RATINGS_PRIVATEKEY', null);
     }
 }

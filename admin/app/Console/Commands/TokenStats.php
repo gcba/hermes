@@ -21,6 +21,6 @@ class TokenStats extends Token
     protected $description = 'Generate a new token for the Stats API';
 
     protected function key() {
-        return env('STATS_PRIVATE_KEY', null);
+        return env('HERMES_STATS_PRIVATEKEY', null);
     }
 }
