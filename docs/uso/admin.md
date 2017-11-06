@@ -2,7 +2,7 @@
 
 ## Instalación
 
-Implica clonar el repo, instalar las dependencias, configurar las variables de entorno, correr las migraciones y crear un admin.
+Implica clonar el repo, instalar las dependencias, configurar las variables de entorno, correr las migraciones y crear un usuario administrador.
 
 ### Prerequisitos
 
@@ -91,7 +91,7 @@ Luego correr las migraciones:
 $ php artisan migrate --seed
 ```
 
-Finalmente crear un usuario admin:
+Finalmente crear un usuario administrador:
 
 ```bash
 $ php artisan admin:create "Juan Perez" juan@perez.com
@@ -103,9 +103,13 @@ Ahora ya se puede levantar la aplicación.
 $ php artisan serve
 ```
 
-## Contenido por defecto
+## Cola de tareas
 
-Si el entorno (`APP_ENV`) es `local`, al correr las migraciones se crearán registros de ejemplo en la base de datos: aplicaciones, calificaciones, mensajes, usuarios, etc.
+Es necesaria para enviar y recibir mensajes por Mailgun. Corre como un proceso aparte:
+
+```bash
+$ php artisan queue:run redis
+```
 
 ## Crear tokens para las APIs
 
@@ -130,3 +134,7 @@ $ php artisan token:stats
 3. Abrir la pestaña **Commands**.
 4. Hacer click en el comando `php artisan token:ratings` o en `php artisan token:stats` (según corresponda) para que aparezca el botón **Run Command**.
 5. Hacer click en **Run Command**.
+
+## Contenido por defecto
+
+Si el entorno (`APP_ENV`) es `local`, al correr las migraciones se crearán registros de ejemplo en la base de datos: aplicaciones, calificaciones, mensajes, usuarios, etc.
