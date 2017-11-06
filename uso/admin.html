@@ -154,9 +154,10 @@ HERMES_WRITEDB_PASSWORD=&lt;WRITEDB_PASSWORD&gt;
 HERMES_WRITEDB_SSLMODE=<span class="pl-c1">disable</span> <span class="pl-c"># Opcional, por defecto es &apos;disable&apos;</span>
 
 BROADCAST_DRIVER=<span class="pl-c1">log</span>
-CACHE_DRIVER=redis
-SESSION_DRIVER=redis
-QUEUE_DRIVER=redis
+CACHE_DRIVER=rediss <span class="pl-c"># Opcional, por defecto es &apos;redis&apos;</span>
+QUEUE_DRIVER=redis <span class="pl-c"># Opcional, por defecto es &apos;redis&apos;</span>
+SESSION_DRIVER=redis <span class="pl-c"># Opcional, por defecto es &apos;redis&apos;</span>
+SESSION_SECURE_COOKIE=<span class="pl-c1">false</span>  <span class="pl-c"># Opcional, por defecto es &apos;false&apos;</span>
 
 REDIS_HOST=localhost <span class="pl-c"># Opcional, por defecto es &apos;localhost&apos;</span>
 REDIS_PASSWORD=&lt;REDIS_PASSWORD&gt;
