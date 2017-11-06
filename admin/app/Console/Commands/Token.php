@@ -26,9 +26,11 @@ abstract class Token extends Command
         {
             $key = File::get($this->key());
         }
-        catch (FileNotFoundException $exception)
+        catch (Exception $exception)
         {
             $this->error('Cannot read key file');
+
+            return;
         }
 
         // Adapted from https://stackoverflow.com/questions/33773477/jwt-json-web-token-in-php-without-using-3rd-party-library-how-to-sign
@@ -43,6 +45,7 @@ abstract class Token extends Command
 
         $signatureEncoded = $this->base64UrlEncode($signature);
         $token = "$headersEncoded.$payloadEncoded.$signatureEncoded";
+
         $this->info($token);
     }
 
