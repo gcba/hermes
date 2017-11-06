@@ -5,6 +5,10 @@
     max-width: 750px;
 }
 
+.side-body > .page-content > .row > [class*=col-]:not(:last-child) {
+   padding-right: 15px;
+}
+
 .app-container {
     overflow-y: auto;
     overflow-x: hidden;
