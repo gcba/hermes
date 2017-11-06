@@ -83,7 +83,7 @@ class PlatformDataRowsTableSeeder extends Seeder
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'relationship',
-                'field'        => 'device_belongstomany_appuser_relationship',
+                'field'        => 'platform_belongstomany_appuser_relationship',
                 'display_name' => 'Usuarios',
                 'required'     => 0,
                 'browse'       => 0,
