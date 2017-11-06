@@ -6,23 +6,21 @@ use App\User;
 use App\Role;
 use Illuminate\Console\Command;
 
-class RolesAssign extends Command
+class AdminAssign extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'roles:assign
-    {role : The role to apply. Can be \'admin\', \'supervisor\', \'support\' or \'user\'  }
-    {email : The user\'s email }';
+    protected $signature = 'admin:assign {email : The user\'s email }';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Assign a role to a user';
+    protected $description = 'Turn an existing user into an admin';
 
     /**
      * Execute the console command.
@@ -31,20 +29,7 @@ class RolesAssign extends Command
      */
     public function handle()
     {
-        $role = $this->argument('role');
         $email = $this->argument('email');
-
-        if (!$role && !$email) {
-            $this->error('No arguments passed');
-
-            return;
-        }
-
-        if (!$role) {
-            $this->error('No role specified');
-
-            return;
-        }
 
         if (!$email) {
             $this->error('No email address');
@@ -58,14 +43,14 @@ class RolesAssign extends Command
             return;
         }
 
-        $this->setRole($role, $email);
+        $this->assignAdmin($email);
     }
 
-    private function setRole(String $roleName, String $email) {
-        $role = Role::where('name', $roleName)->first();
+    private function assignAdmin(String $email) {
+        $role = Role::where('name', 'admin')->first();
 
         if ($role === null) {
-            $this->error("\'$roleName\' is not a valid role");
+            $this->error('Admin role does not exist');
 
             return;
         }
@@ -79,7 +64,7 @@ class RolesAssign extends Command
         }
 
         if ($user->role_id === $role->id) {
-            $this->error("The user already has the \'$roleName\' role");
+            $this->error('The user is already an admin');
 
             return;
         }
@@ -87,11 +72,11 @@ class RolesAssign extends Command
         $user->role_id = $role->id;
 
         if (!$user->save()) {
-            $this->error('Error assigning role to user');
+            $this->error('Error assigning admin role');
 
             return;
         }
 
-        $this->info('Role assigned successfully');
+        $this->info('Admin role assigned successfully');
     }
 }
