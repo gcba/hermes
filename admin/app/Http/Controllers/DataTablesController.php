@@ -125,7 +125,7 @@ class DataTablesController extends Controller {
             $searchTerm = trim($column['search']['value']);
             $field = explode('.', $column['data']);
 
-            if (strlen($searchTerm) > 0 && count($field) > 1) {
+            if (strlen($searchTerm) > 0 && count($field) > 1 && strlen(trim($field[0])) > 0) {
                 $isNumeric = is_numeric($searchTerm);
                 $operator = $isNumeric ? '=' : 'ilike';
                 $searchTerm = $isNumeric ? $searchTerm : '%' . $searchTerm . '%';

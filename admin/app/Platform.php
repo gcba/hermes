@@ -61,21 +61,21 @@ class Platform extends Model
         return $this->hasMany('App\Rating', 'platform_id', 'id');
     }
 
-     /**
+    /**
      * Get the devices that belong to the platform.
      */
      public function devices() {
         return $this->hasMany('App\Device', 'platform_id', 'id');
      }
 
-     /**
+    /**
      * Get the apps that belong to the platform.
      */
      public function apps() {
         return $this->belongsToMany('App\App');
      }
 
-     /**
+    /**
      * Get the appusers that belong to the platform.
      */
      public function appusers() {
