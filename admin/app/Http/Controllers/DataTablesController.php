@@ -133,7 +133,7 @@ class DataTablesController extends Controller {
             $searchTerm = trim($column['search']['value']);
             $field = explode('.', $column['data']);
 
-            if (strlen($searchTerm) > 0 || count($field) <= 1) {
+            if (strlen($searchTerm) === 0 || count($field) <= 1) {
                 continue;
             }
 
