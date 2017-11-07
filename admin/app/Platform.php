@@ -2,9 +2,12 @@
 
 namespace App;
 
-use Spatie\Activitylog\Traits\LogsActivity;
+use App\Services\UtilsService;
+
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Platform extends Model
 {
@@ -83,15 +86,11 @@ class Platform extends Model
         $this->attributes['name'] = filter_var(trim($value), FILTER_SANITIZE_SPECIAL_CHARS);
     }
 
-    public function getCreatedAtAttribute() {
-        $utils = resolve('App\Services\UtilsService');
-
-        return $utils->formatDate($this->attributes['created_at']);
+    public function getCreatedAtAttribute(String $value) {
+        return UtilsService::formatDate($value);
     }
 
-    public function getUpdatedAtAttribute() {
-        $utils = resolve('App\Services\UtilsService');
-
-        return $this->attributes['updated_at'] ? $utils->formatDate($this->attributes['updated_at']) : '-';
+    public function getUpdatedAtAttribute($value) {
+        return $value ? UtilsService::formatDate($value) : '';
     }
 }

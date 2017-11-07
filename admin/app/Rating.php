@@ -2,9 +2,12 @@
 
 namespace App;
 
-use Spatie\Activitylog\Traits\LogsActivity;
+use App\Services\UtilsService;
+
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Rating extends Model
 {
@@ -153,19 +156,15 @@ class Rating extends Model
         return $this->hasOne('App\Message', 'rating_id', 'id')->latest();
     }
 
-    public function getHasMessageAttribute() {
-        return $this->attributes['has_message'] ? 'Sí' : 'No';
+    public function getHasMessageAttribute(Bool $value) {
+        return $value ? 'Sí' : 'No';
     }
 
-    public function getCreatedAtAttribute() {
-        $utils = resolve('App\Services\UtilsService');
-
-        return $utils->formatDate($this->attributes['created_at']);
+    public function getCreatedAtAttribute(String $value) {
+        return UtilsService::formatDate($value);
     }
 
-    public function getUpdatedAtAttribute() {
-        $utils = resolve('App\Services\UtilsService');
-
-        return $this->attributes['updated_at'] ? $utils->formatDate($this->attributes['updated_at']) : '-';
+    public function getUpdatedAtAttribute($value) {
+        return $value ? UtilsService::formatDate($value) : '';
     }
 }

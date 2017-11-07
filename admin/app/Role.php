@@ -2,9 +2,12 @@
 
 namespace App;
 
-use Spatie\Activitylog\Traits\LogsActivity;
+use App\Services\UtilsService;
+
 use Illuminate\Support\Facades\Auth;
 use TCG\Voyager\Models\Role as VoyagerRole;
+
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Role extends VoyagerRole
 {
@@ -46,15 +49,11 @@ class Role extends VoyagerRole
         return $this->hasMany('App\User', 'role_id', 'id');
     }
 
-    public function getCreatedAtAttribute() {
-        $utils = resolve('App\Services\UtilsService');
-
-        return $utils->formatDate($this->attributes['created_at']);
+    public function getCreatedAtAttribute(String $value) {
+        return UtilsService::formatDate($value);
     }
 
-    public function getUpdatedAtAttribute() {
-        $utils = resolve('App\Services\UtilsService');
-
-        return $this->attributes['updated_at'] ? $utils->formatDate($this->attributes['updated_at']) : '-';
+    public function getUpdatedAtAttribute($value) {
+        return $value ? UtilsService::formatDate($value) : '';
     }
 }
