@@ -105,7 +105,7 @@ $ php artisan serve
 
 ## Mensajes
 
-Paara poder enviar y recibir mensajes es necesario configurar una route y un webhook en Mailgun y correr la cola de tareas.
+Para poder enviar y recibir mensajes es necesario configurar una route y un webhook en Mailgun y correr la cola de tareas.
 
 ### Route
 
