@@ -130,7 +130,7 @@ class MessagesController extends DataTablesController
         }
 
         if (isset($user->email)) {
-            $subject = env('MAIL_SUBJECT', 'Gracias por tus comentarios');
+            $subject = env('MAIL_SUBJECT', 'Example');
             $message = new Message;
 
             $message->message = $messageText;

@@ -70,7 +70,7 @@ return [
      * Specify an email address that receives all emails send with Mailgun
      * This email address will overwrite all email addresses within messages
      */
-    'catch_all' => env('MAILGUN_CATCH_ALL', ''),
+    'catch_all' => env('MAIL_CATCH_ALL', ''),
 
     /*
      * Testing

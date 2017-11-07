@@ -32,6 +32,7 @@ APP_LOG_LEVEL=debug
 APP_URL=http://localhost:8000
 APP_DATETIME_FORMAT='d/m/Y H:i:s'
 
+LDAP_URL=<LDAP_URL> # URL del WSDL del servicio de autenticación
 DB_CONNECTION=pgsql
 
 HERMES_READDB_HOST=localhost # Opcional, por defecto es 'localhost'
@@ -48,33 +49,31 @@ HERMES_WRITEDB_USER=hermes # Opcional, por defecto es 'hermes'
 HERMES_WRITEDB_PASSWORD=<WRITEDB_PASSWORD>
 HERMES_WRITEDB_SSLMODE=disable # Opcional, por defecto es 'disable'
 
-BROADCAST_DRIVER=log
-CACHE_DRIVER=rediss # Opcional, por defecto es 'redis'
+BROADCAST_DRIVER=redis # Opcional, por defecto es 'redis'
+CACHE_DRIVER=redis # Opcional, por defecto es 'redis'
 QUEUE_DRIVER=redis # Opcional, por defecto es 'redis'
 SESSION_DRIVER=redis # Opcional, por defecto es 'redis'
-SESSION_SECURE_COOKIE=false  # Opcional, por defecto es 'false'
+SESSION_SECURE_COOKIE=false # Opcional, por defecto es 'false'
 
 REDIS_HOST=localhost # Opcional, por defecto es 'localhost'
 REDIS_PASSWORD=<REDIS_PASSWORD>
 REDIS_PORT=6379 # Opcional, por defecto es '6379'
 
-LDAP_URL=<LDAP_URL> # URL del WSDL del servicio de autenticación
-
-MAIL_DRIVER=mailgun
+MAIL_DRIVER=mailgun # Opcional, por defecto es 'mailgun'
 MAIL_HOST=smtp.mailgun.org # Opcional, por defecto es 'smtp.mailgun.org'
 MAIL_PORT=587 # Opcional, por defecto es '587'
 MAIL_USER=<MAILGUN_USERNAME>
 MAIL_PASSWORD=<MAILGUN_PASSWORD>
-MAIL_ENCRYPTION=tls
+MAIL_ENCRYPTION=tls # Opcional, por defecto es 'tls'
 MAIL_FROM=<EMAIL_FROM>
 MAIL_SENDER="Gobierno de la Ciudad de Buenos Aires"
 MAIL_REPLY_TO=<EMAIL_REPLYTO>
-MAIL_SUBJECT="Gracias por tu comentario" # Opcional, por defecto es 'Gracias por tu comentario'
+MAIL_SUBJECT="Gracias por tu comentario"
+MAIL_CATCH_ALL=<EMAIL_CATCHALL> # Envía todos los mensajes a esta dirección
 
 MAILGUN_DOMAIN=<MAILGUN_DOMAIN>
 MAILGUN_API_KEY=<MAILGUN_APIKEY>
 MAILGUN_VALIDATION_KEY=<MAILGUN_VALIDATIONKEY>
-MAILGUN_CATCH_ALL=<EMAIL_CATCHALL> # Envía todos los mensajes a esta dirección
 
 HERMES_RATINGS_PRIVATEKEY=<RATINGS_PRIVATEKEY> # Ruta a la clave privada
 HERMES_STATS_PRIVATEKEY=<STATS_PRIVATEKEY> # Ruta a la clave privada
