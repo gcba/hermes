@@ -126,6 +126,7 @@
                     }
                 ],
                 order: [[12, 'desc']],
+                bFilter: false,
                 mark: true,
                 initComplete: function () {
                     if ($('.dataTables_empty').length !== 0) return;
