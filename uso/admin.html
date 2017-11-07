@@ -204,7 +204,7 @@ HERMES_STATS_PRIVATEKEY=&lt;STATS_PRIVATEKEY&gt; <span class="pl-c"># Ruta a la 
 <pre><code class="lang-bash">$ php artisan serve
 </code></pre>
 <h2 id="mensajes">Mensajes</h2>
-<p>Paara poder enviar y recibir mensajes es necesario configurar una route y un webhook en Mailgun y correr la cola de tareas.</p>
+<p>Para poder enviar y recibir mensajes es necesario configurar una route y un webhook en Mailgun y correr la cola de tareas.</p>
 <h3 id="route">Route</h3>
 <p>Una route <code>catch_all</code> permite redirigir a Hermes todos los mensajes entrantes. Puede configurarse por consola:</p>
 <pre><code class="lang-bash">$ php artisan mailgun:routes &lt;APP_URL&gt;/webhooks/messages/receive
