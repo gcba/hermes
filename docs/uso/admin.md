@@ -103,9 +103,56 @@ Ahora ya se puede levantar la aplicación.
 $ php artisan serve
 ```
 
-## Cola de tareas
+## Mensajes
 
-Es necesaria para enviar y recibir mensajes por Mailgun. Corre como un proceso aparte:
+Paara poder enviar y recibir mensajes es necesario configurar una route y un webhook en Mailgun y correr la cola de tareas.
+
+### Route
+
+Una route `catch_all` permite redirigir a Hermes todos los mensajes entrantes. Puede configurarse por consola:
+
+```bash
+$ php artisan mailgun:routes <APP_URL>/webhooks/messages/receive
+```
+
+El comando `mailgun:routes` puede también listar todas las routes configuradas en la cuenta de Mailgun o eliminarlas.
+
+```bash
+$ php artisan mailgun:routes --help
+
+Usage:
+  mailgun:routes [options] [--] [<url>]
+
+Arguments:
+  url                   The url of the route to create
+
+Options:
+      --delete          Delete all routes
+      --list            List all existing routes
+  -h, --help            Display this help message
+  -q, --quiet           Do not output any message
+  -V, --version         Display this application version
+      --ansi            Force ANSI output
+      --no-ansi         Disable ANSI output
+  -n, --no-interaction  Do not ask any interactive question
+      --env[=ENV]       The environment the command should run under
+  -v|vv|vvv, --verbose  Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug
+
+Help:
+  Create a new Mailgun Route
+```
+
+### Webhook
+
+Un webhook de tipo `deliver` es necesario para que Mailgun pueda notificar a Hermes que un mensaje fue recibido por su destinatario. Puede configurarse por consola:
+
+```bash
+$ php artisan mailgun:webhooks deliver <APP_URL>/webhooks/messages/notify
+```
+
+### Cola de tareas
+
+Envía/recibe mensajes y reliza operaciones sobre los mismos. Corre como un proceso aparte:
 
 ```bash
 $ php artisan queue:run redis
