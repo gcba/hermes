@@ -150,6 +150,34 @@ Un webhook de tipo `deliver` es necesario para que Mailgun pueda notificar a Her
 $ php artisan mailgun:webhooks deliver <APP_URL>/webhooks/messages/notify
 ```
 
+El comando `mailgun:webhooks` puede también listar todos los webhooks configurados en la cuenta de Mailgun o eliminarlos.
+
+```bash
+$ php artisan mailgun:webhooks --help
+
+Usage:
+  mailgun:webhooks [options] [--] [<type>] [<url>]
+
+Arguments:
+  type                  The type of webhook to create. Can be: open, click, unsubscribe, spam, bounce, drop, deliver
+  url                   The url of the webhook
+
+Options:
+      --delete          Delete all webhooks
+      --list            List all existing webhooks
+  -h, --help            Display this help message
+  -q, --quiet           Do not output any message
+  -V, --version         Display this application version
+      --ansi            Force ANSI output
+      --no-ansi         Disable ANSI output
+  -n, --no-interaction  Do not ask any interactive question
+      --env[=ENV]       The environment the command should run under
+  -v|vv|vvv, --verbose  Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug
+
+Help:
+  Create a new Mailgun Webhook
+```
+
 ### Cola de tareas
 
 Envía/recibe mensajes y reliza operaciones sobre los mismos. Corre como un proceso aparte:
