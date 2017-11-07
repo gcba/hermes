@@ -2,7 +2,8 @@
 .platforms .side-body > .page-content > .row,
 .brands .side-body > .page-content > .row,
 .browsers .side-body > .page-content > .row,
-.edit-add.container-fluid {
+.edit-add.container-fluid,
+.read.container-fluid {
     max-width: 750px;
 }
 
@@ -25,6 +26,11 @@
 
 .edit-add.container-fluid, .browse.container-fluid {
     padding-right: 5px !important;
+}
+
+.read.container-fluid {
+    margin-left: 0px;
+    margin-right: 0px;
 }
 
 .navbar .navbar-nav > li.profile, .voyager .navbar.navbar-default .navbar-nav > li {
