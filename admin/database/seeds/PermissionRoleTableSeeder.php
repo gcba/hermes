@@ -21,11 +21,13 @@ class PermissionRoleTableSeeder extends Seeder
         $allPermissions = Permission::all();
 
         $adminCannot = [
+            // Add
             'add_appusers',
             'add_ratings',
             'add_devices',
             'add_browsers',
             'add_brands',
+            // Edit
             'edit_appusers',
             'edit_ratings',
             'edit_messages',
@@ -36,6 +38,32 @@ class PermissionRoleTableSeeder extends Seeder
         ];
 
         $supervisorCannot = [
+            // Browse
+            'browse_compass',
+            'browse_database',
+            'browse_hooks',
+            'browse_settings',
+            'browse_menus',
+            'browse_roles',
+            // Read
+            'read_database',
+            'read_hooks',
+            'read_settings',
+            'read_menus',
+            'read_roles',
+            // Add
+            'add_database',
+            'add_hooks',
+            'add_settings',
+            'add_menus',
+            'add_roles',
+            // Edit
+            'edit_database',
+            'edit_hooks',
+            'edit_settings',
+            'edit_menus',
+            'edit_roles',
+            // Delete
             'delete_appusers',
             'delete_ratings',
             'delete_ranges',
@@ -43,50 +71,36 @@ class PermissionRoleTableSeeder extends Seeder
             'delete_browsers',
             'delete_devices',
             'delete_brands',
-            'browse_compass',
-            'browse_database',
-            'read_database',
-            'edit_database',
-            'add_database',
             'delete_database',
-            'browse_hooks',
-            'read_hooks',
-            'edit_hooks',
-            'add_hooks',
             'delete_hooks',
-            'browse_settings',
-            'read_settings',
-            'edit_settings',
-            'add_settings',
             'delete_settings',
-            'browse_menus',
-            'read_menus',
-            'edit_menus',
-            'add_menus',
             'delete_menus',
-            'browse_roles',
-            'read_roles',
-            'edit_roles',
-            'add_roles',
             'delete_roles'
         ];
 
         $supportCannot = [
+            // Browse
+            'browse_users',
+            // Read
+            'read_users',
+            // Add
             'add_apps',
             'add_users',
             'add_ranges',
             'add_platforms',
+            // Edit
             'edit_apps',
             'edit_users',
             'edit_platforms',
+            // Delete
             'delete_apps',
-            'browse_users',
-            'read_users',
             'delete_users'
         ];
 
         $userCannot = [
+            // Add
             'add_messages',
+            // Delete
             'delete_messages'
         ];
 
