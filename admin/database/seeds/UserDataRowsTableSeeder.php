@@ -56,7 +56,7 @@ class UserDataRowsTableSeeder extends Seeder
                 'edit'         => 1,
                 'add'          => 1,
                 'delete'       => 1,
-                'details'      => '{"validation":{"rules":["required","string","email"],"messages":{"required":"Falta el campo :attribute.","string":"El campo :attribute debe tener texto.","email":"El campo :attribute debe ser un email válido."}}}',
+                'details'      => '{"validation":{"rules":["required","string","email","unique:users,email"],"messages":{"required":"Falta el campo :attribute.","string":"El campo :attribute debe tener texto.","email":"El campo :attribute debe ser un email válido."}}}',
                 'order'        => 3,
             ])->save();
         }
