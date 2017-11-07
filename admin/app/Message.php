@@ -30,6 +30,13 @@ class Message extends Model
     protected static $logFillable = true;
 
     /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = ['created_at', 'updated_at'];
+
+    /**
      * Boot function for using with User Events
      *
      * @return void
