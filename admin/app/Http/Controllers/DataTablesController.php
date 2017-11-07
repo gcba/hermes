@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use TCG\Voyager\Facades\Voyager;
-use Yajra\DataTables\Datatables;
 use App\Rating;
 use App\Message;
 use App\Device;
 use App\AppUser;
+use App\Services\UtilsService;
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use TCG\Voyager\Facades\Voyager;
+use Yajra\DataTables\Datatables;
 use Config;
 
 class DataTablesController extends Controller {
@@ -40,6 +42,11 @@ class DataTablesController extends Controller {
             }
 
             $datatables = Datatables::of($model)
+                ->filterColumn('has_message', function($query, $keyword) {
+                    $boolSearchTerm = UtilsService::beginsWith($keyword, 's');
+
+                    $query->where('has_message', $boolSearchTerm);
+                }, true)
                 ->editColumn('range.name', function($item){
                     return $item->range ? $item->range->name : '';
                 })
