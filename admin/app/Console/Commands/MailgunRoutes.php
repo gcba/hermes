@@ -153,10 +153,7 @@ class MailgunRoutes extends Command
         ]);
 
         if ($newRoute->http_response_code === 200) {
-            $id = $newRoute->http_response_body->route->id;
-            $description = $newRoute->http_response_body->route->description;
-
-            $this->saveRoute($id, $description);
+            $this->info("Route '" . $newRoute->http_response_body->route->description . "' created successfully");
 
             return;
         }
@@ -170,22 +167,5 @@ class MailgunRoutes extends Command
         return $response->http_response_code === 200 && count($response->http_response_body->items) > 0 ?
             $response->http_response_body->items :
             null;
-    }
-
-    private function saveRoute(String $id, String $name) {
-        $setting = Setting::firstOrNew(['key' => $this->key]);
-
-        $setting->key = $this->key;
-        $setting->value = $id;
-        $setting->display_name = 'Mailgun Route ID';
-        $setting->type = 'text';
-
-        if (!$setting->save()) {
-            $this->error('Error saving route to settings');
-
-            return;
-        }
-
-        $this->info("Route '" . $name . "' saved successfully");
     }
 }

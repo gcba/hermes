@@ -173,7 +173,7 @@ class MailgunWebhooks extends Command
         ]);
 
         if ($newWebhook->http_response_code === 200) {
-            $this->info("Webhook '" . $type . "' cerated successfully");
+            $this->info("Webhook '" . $type . "' created successfully");
 
             return;
         }
