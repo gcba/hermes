@@ -43,7 +43,7 @@ class LdapUserProvider extends EloquentUserProvider
     }
 
     private function setupLDAP() {
-        $url = env('LDAP_URL', 'https://esb-qa.gcba.gob.ar/ad/consulta?wsdl');
+        $url = env('LDAP_URL', null);
 
         try {
             $this->soapWrapper->add('LDAP', function ($service) use($url) {
