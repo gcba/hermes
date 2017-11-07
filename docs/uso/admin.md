@@ -7,7 +7,7 @@ Implica clonar el repo, instalar las dependencias, configurar las variables de e
 ### Prerequisitos
 
 - PHP 7.1 con las extensiones **pgsql** y **openssl**.
-- Postgres 10.
+- Postgres 10 configurado (o no) con réplica master/slave.
 - Redis 4.
 - Una cuenta de Mailgun.
 
