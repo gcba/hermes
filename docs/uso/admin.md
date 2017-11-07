@@ -9,7 +9,7 @@ Implica clonar el repo, instalar las dependencias, configurar las variables de e
 - PHP 7.1 con las extensiones **pgsql** y **openssl**.
 - Postgres 10.
 - Redis 4.
-- Una cuenta Mailgun.
+- Una cuenta de Mailgun.
 
 Para instalar las dependencias es necesario tener [Composer](https://getcomposer.org/).
 
@@ -94,7 +94,7 @@ $ php artisan migrate --seed
 Finalmente crear un usuario administrador:
 
 ```bash
-$ php artisan admin:create "Juan Perez" juan@perez.com
+$ php artisan admin:create "Juan Perez" juanperez@buenosaires.gob.ar
 ```
 
 Ahora ya se puede levantar la aplicación.
@@ -133,7 +133,9 @@ $ php artisan token:stats
 2. Ir a `Administración > Compass`.
 3. Abrir la pestaña **Commands**.
 4. Hacer click en el comando `php artisan token:ratings` o en `php artisan token:stats` (según corresponda) para que aparezca el botón **Run Command**.
-5. Hacer click en **Run Command**.
+5. Hacer click en **Run Command**. No hace falta escribir nada en **Additional Args?**.
+
+El token generado permanecerá visible en Compass hasta que se haga click en **clear output**.
 
 ## Contenido por defecto
 
