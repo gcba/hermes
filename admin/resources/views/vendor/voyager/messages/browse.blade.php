@@ -165,6 +165,7 @@
                     { data: 'rating', name: 'rating', visible: false },
                     { data: 'messages.created_at', name: 'messages.created_at' }
                 ],
+                dom: '<"top"i>rt<"bottom"flp><"clear">',
                 bSort: false,
                 bInfo: false,
                 mark: true,
