@@ -119,6 +119,10 @@
     vertical-align: middle;
 }
 
+.dataTables_wrapper table tbody tr td p {
+    margin: 0px;
+}
+
 .dataTables_wrapper table tfoot {
     display: table-footer-group;
 }
