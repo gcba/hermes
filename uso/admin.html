@@ -237,6 +237,31 @@ Help:
 <p>Un webhook de tipo <code>deliver</code> es necesario para que Mailgun pueda notificar a Hermes que un mensaje fue recibido por su destinatario. Puede configurarse por consola:</p>
 <pre><code class="lang-bash">$ php artisan mailgun:webhooks deliver &lt;APP_URL&gt;/webhooks/messages/notify
 </code></pre>
+<p>El comando <code>mailgun:webhooks</code> puede tambi&#xE9;n listar todos los webhooks configurados en la cuenta de Mailgun o eliminarlos.</p>
+<pre><code class="lang-bash">$ php artisan mailgun:webhooks --help
+
+Usage:
+  mailgun:webhooks [options] [--] [&lt;<span class="pl-c1">type</span>&gt;] [&lt;url&gt;]
+
+Arguments:
+  <span class="pl-c1">type</span>                  The <span class="pl-c1">type</span> of webhook to create. Can be: open, click, unsubscribe, spam, bounce, drop, deliver
+  url                   The url of the webhook
+
+Options:
+      --delete          Delete all webhooks
+      --list            List all existing webhooks
+  -h, --help            Display this <span class="pl-c1">help</span> message
+  -q, --quiet           Do not output any message
+  -V, --version         Display this application version
+      --ansi            Force ANSI output
+      --no-ansi         Disable ANSI output
+  -n, --no-interaction  Do not ask any interactive question
+      --env[=ENV]       The environment the <span class="pl-c1">command</span> should run under
+  -v|vv|vvv, --verbose  Increase the verbosity of messages: 1 <span class="pl-k">for</span> normal output, 2 <span class="pl-k">for</span> more verbose output and 3 <span class="pl-k">for</span> debug
+
+Help:
+  Create a new Mailgun Webhook
+</code></pre>
 <h3 id="cola-de-tareas">Cola de tareas</h3>
 <p>Env&#xED;a/recibe mensajes y reliza operaciones sobre los mismos. Corre como un proceso aparte:</p>
 <pre><code class="lang-bash">$ php artisan queue:run redis
