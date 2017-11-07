@@ -65,8 +65,6 @@
                         </li>
                         <li class="heading-item -depth-3"><a class="hlink link-range" href="#range">Range</a>
                         </li>
-                        <li class="heading-item -depth-3"><a class="hlink link-setting" href="#setting">Setting</a>
-                        </li>
                       </ul>
                     </li>
                     <li class="heading-item -depth-2"><a class="hlink link-timestamps" href="#timestamps">Timestamps</a>
@@ -135,7 +133,7 @@
         </div>
         <div class="markdown-body"><h1 id="modelo-de-datos">Modelo de datos</h1>
 <p><img src="https://github.com/gcba/hermes/raw/master/docs/images/schema.png" alt="Schema"></p>
-<p>Consta de 16 tablas, sin contar las necesarias para roles y permisos (no aparecen en la imagen) dado que &#xE9;stas son creadas y manejadas autom&#xE1;ticamente por un componente de autorizaci&#xF3;n.</p>
+<p>Consta de 15 tablas, sin contar las necesarias para roles y permisos (no aparecen en la imagen) dado que &#xE9;stas son creadas y manejadas autom&#xE1;ticamente por un componente de autorizaci&#xF3;n.</p>
 <h2 id="tablas">Tablas</h2>
 <h3 id="user">User</h3>
 <p>El usuario del backend.</p>
@@ -1205,82 +1203,6 @@
 <td>deleted_at</td>
 <td>timestamp</td>
 <td style="text-align:center"></td>
-<td style="text-align:center">X</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-</tbody>
-</table>
-<h3 id="setting">Setting</h3>
-<p>Los valores de configuraci&#xF3;n del backend.</p>
-<h4 id="relaciones">Relaciones</h4>
-<ul>
-<li><strong>One-to-many</strong> con User, a trav&#xE9;s de <code>updated_by</code></li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>Campos</th>
-<th>Tipo</th>
-<th style="text-align:center">FK?</th>
-<th style="text-align:center">Null?</th>
-<th style="text-align:center">Unique?</th>
-<th style="text-align:center">Index?</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>id</td>
-<td>int (PK)</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td>name</td>
-<td>varchar(30)</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td>key</td>
-<td>varchar(30)</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-<td style="text-align:center">X</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td>value</td>
-<td>varchar(254)</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">X</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td>created_at</td>
-<td>timestamp</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td>updated_at</td>
-<td>timestamp</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">X</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td>updated_by</td>
-<td>int</td>
-<td style="text-align:center">X</td>
 <td style="text-align:center">X</td>
 <td style="text-align:center"></td>
 <td style="text-align:center"></td>

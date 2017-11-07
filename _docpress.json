@@ -300,11 +300,6 @@
                     "title": "Range",
                     "depth": 3,
                     "id": "range"
-                  },
-                  {
-                    "title": "Setting",
-                    "depth": 3,
-                    "id": "setting"
                   }
                 ]
               },
@@ -1437,11 +1432,6 @@
               "title": "Range",
               "depth": 3,
               "id": "range"
-            },
-            {
-              "title": "Setting",
-              "depth": 3,
-              "id": "setting"
             }
           ]
         },
