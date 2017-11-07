@@ -180,7 +180,7 @@ Help:
 
 ### Cola de tareas
 
-Envía/recibe mensajes y reliza operaciones sobre los mismos. Corre como un proceso aparte:
+Envía/recibe mensajes y realiza operaciones sobre los mismos. Corre como un proceso aparte:
 
 ```bash
 $ php artisan queue:run redis
