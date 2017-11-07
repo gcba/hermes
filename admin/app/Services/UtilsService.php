@@ -11,4 +11,8 @@ class UtilsService
 
         return $date->format(env('APP_DATETIME_FORMAT', 'd/m/Y H:i:s'));
     }
+
+    public static function beginsWith($string, $prefix) {
+        return strncmp($string, $prefix, strlen($prefix)) === 0;
+    }
 }
