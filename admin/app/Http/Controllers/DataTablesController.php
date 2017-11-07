@@ -35,18 +35,19 @@ class DataTablesController extends Controller {
                     $query->whereIn('id', $userApps);
                 });
 
-            foreach ($where as $key => $value) {
-                $model = $model->whereHas($key, function ($query) use($value) {
-                    $query->where($value[0], $value[1], $value[2]);
-                });
-            }
-
             $datatables = Datatables::of($model)
                 ->filterColumn('has_message', function($query, $keyword) {
                     $boolSearchTerm = UtilsService::beginsWith($keyword, 's');
 
                     $query->where('has_message', $boolSearchTerm);
-                }, true)
+                })
+                ->filter(function ($query) use($model, $params, $where) {
+                    foreach ($where as $key => $value) {
+                        $model = $model->whereHas($key, function ($query) use($value) {
+                            $query->where($value[0], $value[1], $value[2]);
+                        });
+                    }
+                })
                 ->editColumn('range.name', function($item){
                     return $item->range ? $item->range->name : '';
                 })
