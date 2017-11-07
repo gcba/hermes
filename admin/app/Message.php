@@ -45,8 +45,10 @@ class Message extends Model
         parent::boot();
 
         static::creating(function ($model) {
-            \Auth::user() !== null ?
-                $model->attributes['created_by'] = \Auth::user()->id :
+            $user = \Auth::user();
+
+            $user !== null ?
+                $model->attributes['created_by'] = $user->id :
                 $model->attributes['created_by'] = null;
 
             $model->attributes['updated_at'] = null;

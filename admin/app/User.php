@@ -62,8 +62,10 @@ class User extends VoyagerUser
         });
 
         static::updating(function ($model) {
-            \Auth::user() !== null ?
-                $model->attributes['updated_by'] = \Auth::user()->id :
+            $user = \Auth::user();
+
+            $user !== null ?
+                $model->attributes['updated_by'] = $user->id :
                 $model->attributes['updated_by'] = null;
         });
     }
