@@ -7,16 +7,16 @@ use App\Http\Ldap\validar;
 use App\Http\Ldap\validarResponse;
 // use App\Http\Ldap\validar_porcuit;
 // use App\Http\Ldap\validar_porcuitResponse;
-use App\Http\Ldap\buscarporemail;
-use App\Http\Ldap\buscarporemailResponse;
+// use App\Http\Ldap\buscarporemail;
+// use App\Http\Ldap\buscarporemailResponse;
 // use App\Http\Ldap\buscarporcuit;
 // use App\Http\Ldap\buscarporcuitResponse;
-use Artisaninweb\SoapWrapper\SoapWrapper;
 
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Auth\EloquentUserProvider;
 use Illuminate\Hashing\BcryptHasher;
 use Illuminate\Support\Facades\Log;
+use Artisaninweb\SoapWrapper\SoapWrapper;
 
 class LdapUserProvider extends EloquentUserProvider
 {
@@ -55,8 +55,8 @@ class LdapUserProvider extends EloquentUserProvider
                         validarResponse::class,
                         // validar_porcuit::class,
                         // validar_porcuitResponse::class,
-                        buscarporemail::class,
-                        buscarporemailResponse::class,
+                        // buscarporemail::class,
+                        // buscarporemailResponse::class,
                         // buscarporcuit::class,
                         // buscarporcuitResponse::class
                 ]);
@@ -80,6 +80,12 @@ class LdapUserProvider extends EloquentUserProvider
             return null;
         }
 
+        $user = parent::retrieveByCredentials($credentials);
+
+        if (!$user) {
+            return null;
+        }
+
         try {
             $validationResponse = $this->soapWrapper->call('LDAP.validar', [
                 new validar($credentials['email'], $credentials['password'])
@@ -91,29 +97,6 @@ class LdapUserProvider extends EloquentUserProvider
         }
 
         if ($validationResponse->return == 1) {
-            $user = parent::retrieveByCredentials($credentials);
-
-            if (!$user) {
-                try {
-                    $userDataResponse = $this->soapWrapper->call('LDAP.buscarporemail', [
-                        new buscarporemail($credentials['email'])
-                    ]);
-                } catch (\SoapFault $fault) {
-                    Log::error($fault);
-
-                    return null;
-                }
-
-                $newUser = new User;
-
-                $newUser->name = $userDataResponse->return->nombre . ' ' . $userDataResponse->return->apellido;
-                $newUser->email = $credentials['email'];
-
-                $newUser->save();
-
-                return $newUser;
-            }
-
             return $user;
         }
 
