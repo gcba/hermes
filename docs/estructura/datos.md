@@ -2,7 +2,7 @@
 
 ![Schema](https://github.com/gcba/hermes/raw/master/docs/images/schema.png)
 
-Consta de 16 tablas, sin contar las necesarias para roles y permisos (no aparecen en la imagen) dado que éstas son creadas y manejadas automáticamente por un componente de autorización.
+Consta de 15 tablas, sin contar las necesarias para roles y permisos (no aparecen en la imagen) dado que éstas son creadas y manejadas automáticamente por un componente de autorización.
 
 ## Tablas
 
@@ -248,24 +248,6 @@ Los rangos de calificaciones de cada app.
 |created_at      |timestamp             |       |       |       |       |
 |updated_at      |timestamp             |       |X      |       |       |
 |deleted_at      |timestamp             |       |X      |       |       |
-
-### Setting
-
-Los valores de configuración del backend.
-
-#### Relaciones
-
-- **One-to-many** con User, a través de `updated_by`
-
-|Campos          |Tipo                  | FK?   | Null? |Unique?|Index? |
-|----------------|----------------------|:-----:|:-----:|:-----:|:-----:|
-|id              |int (PK)              |       |       |       |       |
-|name            |varchar(30)           |       |       |       |       |
-|key             |varchar(30)           |       |       |X      |       |
-|value           |varchar(254)          |       |X      |       |       |
-|created_at      |timestamp             |       |       |       |       |
-|updated_at      |timestamp             |       |X      |       |       |
-|updated_by      |int                   |X      |X      |       |       |
 
 ## Timestamps
 
