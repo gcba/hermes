@@ -8,11 +8,12 @@ use Illuminate\Support\Facades\Auth;
 use TCG\Voyager\Models\User as VoyagerUser;
 
 use Spatie\Activitylog\Traits\LogsActivity;
-
+use NeylsonGularte\EloquentExtraEvents\ExtraEventsTrait;
 
 class User extends VoyagerUser
 {
     use LogsActivity;
+    use ExtraEventsTrait;
 
     /**
      * The attributes that are mass assignable.

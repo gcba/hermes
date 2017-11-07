@@ -4,16 +4,18 @@ namespace App;
 
 use App\Services\UtilsService;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Facades\Auth;
 
 use Spatie\Activitylog\Traits\LogsActivity;
+use NeylsonGularte\EloquentExtraEvents\ExtraEventsTrait;
 
 class App extends Model
 {
     use SoftDeletes;
     use LogsActivity;
+    use ExtraEventsTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -56,8 +58,10 @@ class App extends Model
         });
 
         static::updating(function ($model) {
-            \Auth::user() !== null ?
-                $model->attributes['updated_by'] = \Auth::user()->id :
+            $user = \Auth::user();
+
+            $user !== null ?
+                $model->attributes['updated_by'] = $user->id :
                 $model->attributes['updated_by'] = null;
         });
 
