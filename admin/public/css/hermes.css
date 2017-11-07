@@ -1,7 +1,8 @@
 .ranges .side-body > .page-content > .row,
 .platforms .side-body > .page-content > .row,
 .brands .side-body > .page-content > .row,
-.browsers .side-body > .page-content > .row {
+.browsers .side-body > .page-content > .row,
+.edit-add.container-fluid {
     max-width: 750px;
 }
 
@@ -20,7 +21,10 @@
 
 .edit-add.container-fluid {
     margin-left: 0px;
-    max-width: 960px;
+}
+
+.browse.container-fluid, .browse.container-fluid {
+    padding-right: 5px !important;
 }
 
 .navbar .navbar-nav > li.profile, .voyager .navbar.navbar-default .navbar-nav > li {
