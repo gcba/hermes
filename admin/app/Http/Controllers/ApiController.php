@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Message;
 use App\Jobs\SetMessageStatus;
 
 use Illuminate\Http\Request;
@@ -9,7 +10,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
 use TCG\Voyager\Facades\Voyager;
 use Yajra\DataTables\Datatables;
-use App\Message;
 
 class ApiController extends Controller {
     /**

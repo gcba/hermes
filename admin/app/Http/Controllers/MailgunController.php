@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Message;
 use App\Jobs\CreateMessage;
 use App\Jobs\SetMessageStatus;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 
