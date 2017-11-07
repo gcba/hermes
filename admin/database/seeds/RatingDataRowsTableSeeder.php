@@ -122,7 +122,7 @@ class RatingDataRowsTableSeeder extends Seeder
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'text',
-                'display_name' => 'V.',
+                'display_name' => 'A.V.',
                 'required'     => 0,
                 'browse'       => 1,
                 'read'         => 1,
@@ -157,7 +157,7 @@ class RatingDataRowsTableSeeder extends Seeder
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'text',
-                'display_name' => 'V.',
+                'display_name' => 'P.V.',
                 'required'     => 0,
                 'browse'       => 1,
                 'read'         => 1,
@@ -192,7 +192,7 @@ class RatingDataRowsTableSeeder extends Seeder
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'text',
-                'display_name' => 'V.',
+                'display_name' => 'B.V.',
                 'required'     => 0,
                 'browse'       => 1,
                 'read'         => 1,
