@@ -14,9 +14,11 @@ Controlador, Parser y Generador serán únicos para toda la aplicación, con pos
 
 ## Física
 
+![Architecture](https://github.com/gcba/hermes/raw/master/docs/images/architecture.png)
+
 ### Admin y APIs
 
-Tanto el Admin como las APIs compartirán una máquina virtual. El Admin no estará expuesto en forma directa, sino detrás de Nginx. En el caso de las APIs un API Gateway recibirá las todas las requests desde Nginx y las distribuirá a la API correspondiente.
+Tanto el Admin como las APIs compartirán una máquina virtual. Los servicios no estarán expuestos de forma directa, sino detrás de Nginx.
 
 ### Base de datos
 
