@@ -2287,6 +2287,7 @@
     "docs/uso/admin.md": "uso/admin.html",
     "docs/uso/apis.md": "uso/apis.html",
     "docs/uso/sdks.md": "uso/sdks.html",
+    "docs/images/architecture.png": "images/architecture.png",
     "docs/images/schema.png": "images/schema.png"
   }
 }

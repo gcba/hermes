@@ -117,8 +117,9 @@
 <p>Se utilizar&#xE1; una adaptaci&#xF3;n de MVC compuesta por el Modelo, un Controlador, un Parser de Requests y un Generador de Responses. Este &#xFA;ltimo ser&#xE1; el encargado de generar las responses JSON. El Parser transformar&#xE1; las responses a un formato intermedio, &#xFA;til para el Controlador. Tanto el Parser como el Generador admitir&#xE1;n el uso de middlewares.</p>
 <p>Controlador, Parser y Generador ser&#xE1;n &#xFA;nicos para toda la aplicaci&#xF3;n, con posibilidades de adoptar reglas en el Controlador para casos particulares. S&#xF3;lo en el caso del Modelo habr&#xE1; uno para cada entidad.</p>
 <h2 id="fisica">F&#xED;sica</h2>
+<p><img src="https://github.com/gcba/hermes/raw/master/docs/images/architecture.png" alt="Architecture"></p>
 <h3 id="admin-y-apis">Admin y APIs</h3>
-<p>Tanto el Admin como las APIs compartir&#xE1;n una m&#xE1;quina virtual. El Admin no estar&#xE1; expuesto en forma directa, sino detr&#xE1;s de Nginx. En el caso de las APIs un API Gateway recibir&#xE1; las todas las requests desde Nginx y las distribuir&#xE1; a la API correspondiente.</p>
+<p>Tanto el Admin como las APIs compartir&#xE1;n una m&#xE1;quina virtual. Los servicios no estar&#xE1;n expuestos de forma directa, sino detr&#xE1;s de Nginx.</p>
 <h3 id="base-de-datos">Base de datos</h3>
 <p>Se utlizar&#xE1;n dos servidores de bases de datos replicados en estructura master-slave. El servidor master estar&#xE1; encargado &#xFA;nicamente de las escrituras, y el slave ser&#xE1; de s&#xF3;lo lectura.</p>
 
