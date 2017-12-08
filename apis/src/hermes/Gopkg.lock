@@ -106,8 +106,8 @@
 [[projects]]
   name = "github.com/go-playground/validator"
   packages = ["."]
-  revision = "1304298bf10d085adec514b076772a79c9cadb6b"
-  version = "v9.8.0"
+  revision = "61caf9d3038e1af346dbf5c2e16f6678e1548364"
+  version = "v9.9.0"
 
 [[projects]]
   branch = "master"
@@ -119,7 +119,7 @@
   branch = "master"
   name = "github.com/iancoleman/strcase"
   packages = ["."]
-  revision = "e1e131f0f235122cd147dfb40fb9aaf7d97a45bc"
+  revision = "3de563c3dc08a7504131e9d63f678b7d1c3e85d7"
 
 [[projects]]
   name = "github.com/imkira/go-interpol"
@@ -166,8 +166,8 @@
 [[projects]]
   name = "github.com/labstack/echo"
   packages = [".","middleware"]
-  revision = "cec7629194fe4bf83b0c72d9a02d340c7a1468ac"
-  version = "3.2.3"
+  revision = "0473c51f1dbd83487effce00702571d19033a6e5"
+  version = "3.2.5"
 
 [[projects]]
   name = "github.com/labstack/gommon"
@@ -185,7 +185,7 @@
   branch = "master"
   name = "github.com/lib/pq"
   packages = [".","hstore","oid"]
-  revision = "b609790bd85edf8e9ab7e0f8912750a786177bcf"
+  revision = "83612a56d3dd153a94a629cd64925371c9adad78"
 
 [[projects]]
   name = "github.com/mattn/go-colorable"
@@ -233,7 +233,7 @@
   branch = "master"
   name = "github.com/sergi/go-diff"
   packages = ["diffmatchpatch"]
-  revision = "2fc9cd33b5f86077aa3e0f442fa0476a9fa9a1dc"
+  revision = "1744e2970ca51c86172c8190fadad617561ed6e7"
 
 [[projects]]
   name = "github.com/stretchr/testify"
@@ -299,25 +299,25 @@
   branch = "master"
   name = "golang.org/x/crypto"
   packages = ["acme","acme/autocert"]
-  revision = "687d4b818545e443c8ba223cbef20b1721afd4db"
+  revision = "94eea52f7b742c7cbe0b03b22f0c4c8631ece122"
 
 [[projects]]
   branch = "master"
   name = "golang.org/x/net"
   packages = ["context","html","html/atom","idna","publicsuffix"]
-  revision = "01c190206fbdffa42f334f4b2bf2220f50e64920"
+  revision = "dc871a5d77e227f5bbf6545176ef3eeebf87e76e"
 
 [[projects]]
   branch = "master"
   name = "golang.org/x/sys"
   packages = ["unix"]
-  revision = "d4266bc12aae0b4128952c889b769442fce5d2f1"
+  revision = "a0f4589a76f1f83070cb9e5613809e1d07b97c13"
 
 [[projects]]
   branch = "master"
   name = "golang.org/x/text"
   packages = ["collate","collate/build","internal/colltab","internal/gen","internal/tag","internal/triegen","internal/ucd","language","secure/bidirule","transform","unicode/bidi","unicode/cldr","unicode/norm","unicode/rangetable"]
-  revision = "88f656faf3f37f690df1a32515b479415e1a6769"
+  revision = "be25de41fadfae372d6470bda81ca6beb55ef551"
 
 [solve-meta]
   analyzer-name = "dep"
