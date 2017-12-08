@@ -290,7 +290,7 @@ En todos los casos los registros que han sido borrados lógicamente no son tenid
 
 ```json
 {
-  "meta": {
+    "meta": {
         "code": ...,
         "message": ...
     },
