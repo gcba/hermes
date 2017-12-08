@@ -9,9 +9,15 @@
 
 ### Procedimiento
 
-Implica clonar el repo y configurar las variables de entorno.
+Implica clonar el repo, instalar las dependencias y configurar las variables de entorno.
 
-En `<REPO>/apis/src/hermes` crear un archivo `.env` con los valores de configuración:
+En `<REPO>/apis/src/hermes` instalar las dependencias con [dep](https://github.com/golang/dep):
+
+```bash
+$ dep ensure
+```
+
+En el mismo directorio crear un archivo `.env` con los valores de configuración:
 
 ```bash
 export GOPATH=<REPO>/apis
