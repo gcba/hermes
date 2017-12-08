@@ -123,8 +123,11 @@
 <li>Postgres 10.</li>
 </ul>
 <h3 id="procedimiento">Procedimiento</h3>
-<p>Implica clonar el repo y configurar las variables de entorno.</p>
-<p>En <code>&lt;REPO&gt;/apis/src/hermes</code> crear un archivo <code>.env</code> con los valores de configuraci&#xF3;n:</p>
+<p>Implica clonar el repo, instalar las dependencias y configurar las variables de entorno.</p>
+<p>En <code>&lt;REPO&gt;/apis/src/hermes</code> instalar las dependencias con <a href="https://github.com/golang/dep">dep</a>:</p>
+<pre><code class="lang-bash">$ dep ensure
+</code></pre>
+<p>En el mismo directorio crear un archivo <code>.env</code> con los valores de configuraci&#xF3;n:</p>
 <pre><code class="lang-bash"><span class="pl-c1">export</span> GOPATH=&lt;REPO&gt;/apis
 
 <span class="pl-c"># Environment</span>
