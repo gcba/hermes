@@ -124,9 +124,6 @@ func (r *Resolver) Average(context context.Context, args arguments) (float64, er
 			return result.Average, invalidTableError(entity.Table)
 		}
 
-		average := fmt.Sprintf("AVG(%s) AS Average", args.Field.Name)
-		query := db.Select(average).Table(entity.Table)
-
 		if entity.Field == nil {
 			return result.Average, badRequestError("Average requires a field name")
 		}
@@ -149,6 +146,9 @@ func (r *Resolver) Average(context context.Context, args arguments) (float64, er
 		} else if !isNumericKind(fieldKind) {
 			return result.Average, invalidFieldError(*entity.Field)
 		}
+
+		average := fmt.Sprintf("AVG(%s) AS Average", args.Field.Name)
+		query := db.Select(average).Table(entity.Table)
 
 		if operator := args.Field.resolveOperator(); operator != nil {
 			if value := args.Field.getValue(); value != nil {
