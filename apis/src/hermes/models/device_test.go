@@ -21,14 +21,16 @@ func TestCreateDevice(t *testing.T) {
 
 	name := uniuri.New()
 	ppi := 320
+	brandId := uint(1)
+	platformId := uint(2)
 
 	device := Device{
 		Name:         name,
 		ScreenWidth:  720,
 		ScreenHeight: 1280,
 		PPI:          &ppi,
-		BrandID:      1,
-		PlatformID:   2}
+		BrandID:      &brandId,
+		PlatformID:   platformId}
 
 	result := db.Create(&device)
 
@@ -65,14 +67,16 @@ func TestGetDevice(t *testing.T) {
 
 	name := uniuri.New()
 	ppi := 430
+	brandId := uint(2)
+	platformId := uint(2)
 
 	device := Device{
 		Name:         name,
 		ScreenWidth:  960,
 		ScreenHeight: 1600,
 		PPI:          &ppi,
-		BrandID:      2,
-		PlatformID:   2}
+		BrandID:      &brandId,
+		PlatformID:   platformId}
 
 	record := writeDb.Create(&device)
 
