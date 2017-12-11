@@ -9,8 +9,8 @@ import (
 type AppUser struct {
 	ID        uint       `gorm:"primary_key;AUTO_INCREMENT"`
 	Name      string     `gorm:"size:70;not null"`
-	Email     *string    `gorm:"size:100;DEFAULT:NULL"`
-	MiBAID    *string    `gorm:"column:miba_id;type:char(36);DEFAULT:NULL"`
+	Email     *string    `gorm:"size:100;default:NULL"`
+	MiBAID    *string    `gorm:"column:miba_id;type:char(36);default:NULL"`
 	Apps      []App      `gorm:"many2many:app_user_app;"`
 	Platforms []Platform `gorm:"many2many:app_user_platform;"`
 	Devices   []Device   `gorm:"many2many:app_user_device;"`

@@ -11,9 +11,9 @@ type Device struct {
 	Name         string    `gorm:"size:30;not null"`
 	ScreenWidth  int       `gorm:"not null"`
 	ScreenHeight int       `gorm:"not null"`
-	PPI          *int      `gorm:"DEFAULT:NULL"`
-	BrandID      *uint     `gorm:"DEFAULT:NULL"`
-	PlatformID   uint      `gorm:"DEFAULT:NULL"`
+	PPI          *int      `gorm:"default:NULL"`
+	BrandID      *uint     `gorm:"default:NULL"`
+	PlatformID   uint      `gorm:"default:NULL"`
 	AppUsers     []AppUser `gorm:"many2many:app_user_device;"`
 
 	CreatedAt time.Time  `gorm:"not null;type:datetime;default:CURRENT_TIMESTAMP"`
