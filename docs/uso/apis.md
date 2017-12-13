@@ -66,7 +66,7 @@ $ go run main.go start ratings
 $ go run main.go start stats
 ```
 
-Para compilar el binario directamente usar `go install`:
+Para compilar el binario directamente:
 
 ```bash
 $ go install hermes
