@@ -84,7 +84,7 @@ func CorsMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
 }
 
 func hasAcceptHeader(context echo.Context) bool {
-	if header := context.Request().Header.Get("Accept"); strings.TrimSpace(header) != "" {
+	if header := context.Request().Header.Get("Accept"); len(strings.TrimSpace(header)) > 0 {
 		return true
 	}
 
@@ -102,7 +102,7 @@ func isValidAcceptHeader(context echo.Context) bool {
 }
 
 func hasContentTypeHeader(context echo.Context) bool {
-	if header := context.Request().Header.Get("Content-Type"); strings.TrimSpace(header) != "" {
+	if header := context.Request().Header.Get("Content-Type"); len(strings.TrimSpace(header)) > 0 {
 		return true
 	}
 

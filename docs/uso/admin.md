@@ -6,7 +6,14 @@ Implica clonar el repo, instalar las dependencias, configurar las variables de e
 
 ### Prerequisitos
 
-- PHP 7.1 con las extensiones **pgsql** y **openssl**.
+- PHP 7.1 con las extensiones:
+    - mbstring
+    - openssl
+    - opcache
+    - pdo
+    - pgsql
+    - tokenizer
+    - xml
 - Postgres 10 configurado (o no) con réplica master/slave.
 - Redis 4.
 - Una cuenta de Mailgun.
@@ -75,8 +82,8 @@ MAILGUN_DOMAIN=<MAILGUN_DOMAIN>
 MAILGUN_API_KEY=<MAILGUN_APIKEY>
 MAILGUN_VALIDATION_KEY=<MAILGUN_VALIDATIONKEY>
 
-HERMES_RATINGS_PRIVATEKEY=<RATINGS_PRIVATEKEY> # Ruta a la clave privada
-HERMES_STATS_PRIVATEKEY=<STATS_PRIVATEKEY> # Ruta a la clave privada
+HERMES_RATINGS_PRIVATEKEY=<RATINGS_PRIVATEKEY> # Ruta a la clave privada, debe estar en formato PEM
+HERMES_STATS_PRIVATEKEY=<STATS_PRIVATEKEY> # Ruta a la clave privada, debe estar en formato PEM
 ```
 
 Para generar y guardar automáticamente un valor en `APP_KEY`:
