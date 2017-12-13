@@ -123,7 +123,7 @@
 <li>Postgres 10.</li>
 </ul>
 <h3 id="procedimiento">Procedimiento</h3>
-<p>Implica clonar el repo, instalar las dependencias y configurar las variables de entorno.</p>
+<p>Implica clonar el repo, configurar las variables de entorno e instalar las dependencias.</p>
 <p>En <code>&lt;REPO&gt;/apis/src/hermes</code> instalar las dependencias con <a href="https://github.com/golang/dep">dep</a>:</p>
 <pre><code class="lang-bash">$ dep ensure
 </code></pre>
@@ -153,18 +153,25 @@
 <span class="pl-c1">export</span> HERMES_WRITEDB_PASSWORD=&lt;WRITEDB_PASSWORD&gt;
 <span class="pl-c1">export</span> HERMES_WRITEDB_SSLMODE=<span class="pl-c1">disable</span> <span class="pl-c"># Se puede omitir, por defecto es &apos;disable&apos;.</span>
 
-<span class="pl-c"># Keys</span>
+<span class="pl-c"># Keys -&gt; deben estar en formato PEM</span>
 <span class="pl-c1">export</span> HERMES_RATINGS_PUBLICKEY=&lt;RATINGS_PUBLICKEY&gt; <span class="pl-c"># Ruta a la clave p&#xFA;blica para la autenticaci&#xF3;n JWT</span>
 <span class="pl-c1">export</span> HERMES_STATS_PUBLICKEY=&lt;STATS_PUBLICKEY&gt; <span class="pl-c"># Ruta a la clave p&#xFA;blica para la autenticaci&#xF3;n JWT</span>
 </code></pre>
 <p>Luego cargarlo con:</p>
 <pre><code class="lang-bash">$ <span class="pl-c1">source</span> .env
 </code></pre>
+<p>En el mismo directorio instalar las dependencias con <a href="https://github.com/golang/dep">dep</a>:</p>
+<pre><code class="lang-bash">$ dep ensure
+</code></pre>
 <p>Ahora se pueden correr las APIs.</p>
 <pre><code class="lang-bash">$ go run main.go start ratings
 </code></pre>
 <pre><code class="lang-bash">$ go run main.go start stats
 </code></pre>
+<p>Para compilar el binario directamente usar <code>go install</code>:</p>
+<pre><code class="lang-bash">$ go install hermes
+</code></pre>
+<p>El binario generado estar&#xE1; en <code>&lt;REPO&gt;/apis/bin</code>.</p>
 <h2 id="api-de-calificaciones">API de calificaciones</h2>
 <p>Esta API no debe usarse directamente, sino por medio de los <a href="sdks.html">SDKs</a>.</p>
 <h2 id="api-de-estadisticas">API de estad&#xED;sticas</h2>
