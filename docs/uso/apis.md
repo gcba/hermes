@@ -9,7 +9,7 @@
 
 ### Procedimiento
 
-Implica clonar el repo y configurar las variables de entorno.
+Implica clonar el repo, configurar las variables de entorno e instalar las dependencias.
 
 En `<REPO>/apis/src/hermes` crear un archivo `.env` con los valores de configuración:
 
@@ -39,7 +39,7 @@ export HERMES_WRITEDB_USER=hermes
 export HERMES_WRITEDB_PASSWORD=<WRITEDB_PASSWORD>
 export HERMES_WRITEDB_SSLMODE=disable # Se puede omitir, por defecto es 'disable'.
 
-# Keys
+# Keys -> deben estar en formato PEM
 export HERMES_RATINGS_PUBLICKEY=<RATINGS_PUBLICKEY> # Ruta a la clave pública para la autenticación JWT
 export HERMES_STATS_PUBLICKEY=<STATS_PUBLICKEY> # Ruta a la clave pública para la autenticación JWT
 ```
@@ -48,6 +48,12 @@ Luego cargarlo con:
 
 ```bash
 $ source .env
+```
+
+En el mismo directorio instalar las dependencias con [dep](https://github.com/golang/dep):
+
+```bash
+$ dep ensure
 ```
 
 Ahora se pueden correr las APIs.
@@ -59,6 +65,14 @@ $ go run main.go start ratings
 ```bash
 $ go run main.go start stats
 ```
+
+Para compilar el binario directamente usar `go install`:
+
+```bash
+$ go install hermes
+```
+
+El binario generado estará en `<REPO>/apis/bin`.
 
 ## API de calificaciones
 
