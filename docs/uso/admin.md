@@ -12,6 +12,7 @@ Implica clonar el repo, instalar las dependencias, configurar las variables de e
     - opcache
     - pdo
     - pgsql
+    - soap
     - tokenizer
     - xml
 - Postgres 10 configurado (o no) con réplica master/slave.
