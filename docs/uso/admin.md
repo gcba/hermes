@@ -191,7 +191,7 @@ Help:
 Envía/recibe mensajes y realiza operaciones sobre los mismos. Corre como un proceso aparte:
 
 ```bash
-$ php artisan queue:run redis
+$ php artisan queue:work redis
 ```
 
 ## Crear tokens para las APIs
