@@ -176,3 +176,28 @@ Seguir las instrucciones de instalación:
 - [Admin](admin.md)
 - [APIs](apis.md)
 
+## Permisos
+
+### Admin
+
+Asegurarse que el usuario bajo el que corren Nginx y PHP-FM pueden acceder a los archivos del Admin. Este usuario es generalmente `nginx`:
+
+```bash
+# usermod -a -G nginx,<USUARIO_OWNER_DEL_ADMIN> nginx
+# sudo chown -R nginx:<USUARIO_OWNER_DEL_ADMIN> <REPO>/admin
+```
+
+### APIs
+
+Crear un nuevo usuario bajo el cual correrán las APIs:
+
+```bash
+# useradd apis -s /sbin/nologin -M
+```
+
+Y asegurarse de que pueda acceder a los archivos de las APIs:
+
+```bash
+# usermod -a -G <USUARIO_OWNER_DE_LAS_APIS>,apis <USUARIO_OWNER_DE_LAS_APIS>
+# chown -R <USUARIO_OWNER_DE_LAS_APIS>:apis <REPO>/apis
+```
