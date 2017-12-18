@@ -123,6 +123,14 @@
                     </li>
                     <li class="heading-item -depth-2"><a class="hlink link-admin-y-apis" href="#admin-y-apis">Admin y APIs</a>
                     </li>
+                    <li class="heading-item -depth-2"><a class="hlink link-permisos" href="#permisos">Permisos</a>
+                      <ul class="heading-list -depth-2">
+                        <li class="heading-item -depth-3"><a class="hlink link-admin" href="#admin">Admin</a>
+                        </li>
+                        <li class="heading-item -depth-3"><a class="hlink link-apis" href="#apis">APIs</a>
+                        </li>
+                      </ul>
+                    </li>
                   </ul>
                 </li>
               </ul>
@@ -278,6 +286,20 @@ host    all             all             ::1/128                 trust
 <li><a href="admin.html">Admin</a></li>
 <li><a href="apis.html">APIs</a></li>
 </ul>
+<h2 id="permisos">Permisos</h2>
+<h3 id="admin">Admin</h3>
+<p>Asegurarse que el usuario bajo el que corren Nginx y PHP-FM pueden acceder a los archivos del Admin. Este usuario es generalmente <code>nginx</code>:</p>
+<pre><code class="lang-bash"><span class="pl-c"># usermod -a -G nginx,&lt;USUARIO_OWNER_DEL_ADMIN&gt; nginx</span>
+<span class="pl-c"># sudo chown -R nginx:&lt;USUARIO_OWNER_DEL_ADMIN&gt; &lt;REPO&gt;/admin</span>
+</code></pre>
+<h3 id="apis">APIs</h3>
+<p>Crear un nuevo usuario bajo el cual correr&#xE1;n las APIs:</p>
+<pre><code class="lang-bash"><span class="pl-c"># useradd apis -s /sbin/nologin -M</span>
+</code></pre>
+<p>Y asegurarse de que pueda acceder a los archivos de las APIs:</p>
+<pre><code class="lang-bash"><span class="pl-c"># usermod -a -G &lt;USUARIO_OWNER_DE_LAS_APIS&gt;,apis &lt;USUARIO_OWNER_DE_LAS_APIS&gt;</span>
+<span class="pl-c"># chown -R &lt;USUARIO_OWNER_DE_LAS_APIS&gt;:apis &lt;REPO&gt;/apis</span>
+</code></pre>
 
         </div>
         <div class="footer-nav">

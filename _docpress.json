@@ -1165,6 +1165,23 @@
                 "title": "Admin y APIs",
                 "depth": 2,
                 "id": "admin-y-apis"
+              },
+              {
+                "title": "Permisos",
+                "depth": 2,
+                "id": "permisos",
+                "headings": [
+                  {
+                    "title": "Admin",
+                    "depth": 3,
+                    "id": "admin"
+                  },
+                  {
+                    "title": "APIs",
+                    "depth": 3,
+                    "id": "apis"
+                  }
+                ]
               }
             ]
           }
@@ -2433,6 +2450,23 @@
           "title": "Admin y APIs",
           "depth": 2,
           "id": "admin-y-apis"
+        },
+        {
+          "title": "Permisos",
+          "depth": 2,
+          "id": "permisos",
+          "headings": [
+            {
+              "title": "Admin",
+              "depth": 3,
+              "id": "admin"
+            },
+            {
+              "title": "APIs",
+              "depth": 3,
+              "id": "apis"
+            }
+          ]
         }
       ]
     },
