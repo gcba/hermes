@@ -28,6 +28,10 @@ Hermes
     * [Sprint 11](desarrollo/sprint11.md)
     * [Sprint 12](desarrollo/sprint12.md)
     * [Sprint 13](desarrollo/sprint13.md)
+* Instalación
+    * [Admin](instalacion/admin.md)
+    * [APIs](instalacion/apis.md)
+    * [SDKs](instalacion/sdks.md)
 * Uso
     * [Admin](uso/admin.md)
     * [APIs](uso/apis.md)
