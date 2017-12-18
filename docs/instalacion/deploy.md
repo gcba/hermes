@@ -13,7 +13,7 @@ Hacer un deploy de Hermes en **RHEL 7** implica:
 
 ### Instalar
 
-```bash
+```
 # yum install rh-php71 rh-php71-php-fpm rh-php71-php-mbstring rh-php71-php-opcache rh-php71-php-pdo rh-php71-php-pgsql rh-php71-php-soap rh-php71-php-xml
 # scl enable rh-php71 bash
 ```
@@ -45,7 +45,7 @@ opcache.fast_shutdown=0
 
 ### Instalar
 
-```bash
+```
 # yum install nginx14
 # scl enable nginx14 bash
 ```
@@ -118,7 +118,7 @@ En `/opt/rh/nginx14/root/etc/nginx/nginx.conf`:
 
 ### Instalar
 
-```bash
+```
 # wget https://storage.googleapis.com/golang/go1.9.2.linux-amd64.tar.gz
 # tar xzvf go1.9.2.linux-amd64.tar.gz
 # mv go /usr/local/
@@ -129,7 +129,7 @@ En `/opt/rh/nginx14/root/etc/nginx/nginx.conf`:
 
 ### Instalar
 
-```bash
+```
 # yum install rh-redis32-redis
 # scl enable rh-redis32 bash
 ```
@@ -150,7 +150,7 @@ En `/etc/opt/rh/rh-redis32/redis.conf`:
 
 Si no está instalado por defecto:
 
-```bash
+```
 # yum install postgresql
 ```
 
@@ -183,7 +183,7 @@ Seguir las instrucciones de instalación:
 
 Asegurarse que el usuario bajo el que corren Nginx y PHP-FM pueden acceder a los archivos del Admin. Este usuario es generalmente `nginx`:
 
-```bash
+```
 # usermod -a -G nginx,<USUARIO_OWNER_DEL_ADMIN> nginx
 # sudo chown -R nginx:<USUARIO_OWNER_DEL_ADMIN> <REPO>/admin
 ```
@@ -192,13 +192,13 @@ Asegurarse que el usuario bajo el que corren Nginx y PHP-FM pueden acceder a los
 
 Crear un nuevo usuario bajo el cual correrán las APIs:
 
-```bash
+```
 # useradd apis -s /sbin/nologin -M
 ```
 
 Y asegurarse de que pueda acceder a los archivos de las APIs:
 
-```bash
+```
 # usermod -a -G <USUARIO_OWNER_DE_LAS_APIS>,apis <USUARIO_OWNER_DE_LAS_APIS>
 # chown -R <USUARIO_OWNER_DE_LAS_APIS>:apis <REPO>/apis
 ```
