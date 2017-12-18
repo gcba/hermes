@@ -39,7 +39,7 @@ export HERMES_WRITEDB_USER=hermes
 export HERMES_WRITEDB_PASSWORD=<WRITEDB_PASSWORD>
 export HERMES_WRITEDB_SSLMODE=disable # Se puede omitir, por defecto es 'disable'.
 
-# Keys -> deben estar en formato PEM
+# Keys -> deben estar en formato PEM. Sólo se usan en producción.
 export HERMES_RATINGS_PUBLICKEY=<RATINGS_PUBLICKEY> # Ruta a la clave pública para la autenticación JWT
 export HERMES_STATS_PUBLICKEY=<STATS_PUBLICKEY> # Ruta a la clave pública para la autenticación JWT
 ```
