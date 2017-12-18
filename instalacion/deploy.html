@@ -164,8 +164,8 @@
 </ol>
 <h2 id="php">PHP</h2>
 <h3 id="instalar">Instalar</h3>
-<pre><code class="lang-bash"><span class="pl-c"># yum install rh-php71 rh-php71-php-fpm rh-php71-php-mbstring rh-php71-php-opcache rh-php71-php-pdo rh-php71-php-pgsql rh-php71-php-soap rh-php71-php-xml</span>
-<span class="pl-c"># scl enable rh-php71 bash</span>
+<pre><code># yum install rh-php71 rh-php71-php-fpm rh-php71-php-mbstring rh-php71-php-opcache rh-php71-php-pdo rh-php71-php-pgsql rh-php71-php-soap rh-php71-php-xml
+# scl enable rh-php71 bash
 </code></pre>
 <h3 id="configurar">Configurar</h3>
 <p>En <code>/etc/opt/rh/rh-php71/php.ini</code>:</p>
@@ -186,8 +186,8 @@ opcache.fast_shutdown=0
 </code></pre>
 <h2 id="nginx">Nginx</h2>
 <h3 id="instalar">Instalar</h3>
-<pre><code class="lang-bash"><span class="pl-c"># yum install nginx14</span>
-<span class="pl-c"># scl enable nginx14 bash</span>
+<pre><code># yum install nginx14
+# scl enable nginx14 bash
 </code></pre>
 <h3 id="configurar">Configurar</h3>
 <p>En <code>/opt/rh/nginx14/root/etc/nginx/nginx.conf</code>:</p>
@@ -249,14 +249,14 @@ opcache.fast_shutdown=0
 </code></pre>
 <h2 id="go">Go</h2>
 <h3 id="instalar">Instalar</h3>
-<pre><code class="lang-bash"><span class="pl-c"># wget https://storage.googleapis.com/golang/go1.9.2.linux-amd64.tar.gz</span>
-<span class="pl-c"># tar xzvf go1.9.2.linux-amd64.tar.gz</span>
-<span class="pl-c"># mv go /usr/local/</span>
+<pre><code># wget https://storage.googleapis.com/golang/go1.9.2.linux-amd64.tar.gz
+# tar xzvf go1.9.2.linux-amd64.tar.gz
+# mv go /usr/local/
 </code></pre>
 <h2 id="redis">Redis</h2>
 <h3 id="instalar">Instalar</h3>
-<pre><code class="lang-bash"><span class="pl-c"># yum install rh-redis32-redis</span>
-<span class="pl-c"># scl enable rh-redis32 bash</span>
+<pre><code># yum install rh-redis32-redis
+# scl enable rh-redis32 bash
 </code></pre>
 <h3 id="configurar">Configurar</h3>
 <p>En <code>/etc/opt/rh/rh-redis32/redis.conf</code>:</p>
@@ -268,7 +268,7 @@ opcache.fast_shutdown=0
 <h2 id="postgres">Postgres</h2>
 <h3 id="instalar">Instalar</h3>
 <p>Si no est&#xE1; instalado por defecto:</p>
-<pre><code class="lang-bash"><span class="pl-c"># yum install postgresql</span>
+<pre><code># yum install postgresql
 </code></pre>
 <h3 id="configurar">Configurar</h3>
 <p>En <code>/var/lib/pgsql/data/pg_hba.conf</code>:</p>
@@ -289,16 +289,16 @@ host    all             all             ::1/128                 trust
 <h2 id="permisos">Permisos</h2>
 <h3 id="admin">Admin</h3>
 <p>Asegurarse que el usuario bajo el que corren Nginx y PHP-FM pueden acceder a los archivos del Admin. Este usuario es generalmente <code>nginx</code>:</p>
-<pre><code class="lang-bash"><span class="pl-c"># usermod -a -G nginx,&lt;USUARIO_OWNER_DEL_ADMIN&gt; nginx</span>
-<span class="pl-c"># sudo chown -R nginx:&lt;USUARIO_OWNER_DEL_ADMIN&gt; &lt;REPO&gt;/admin</span>
+<pre><code># usermod -a -G nginx,&lt;USUARIO_OWNER_DEL_ADMIN&gt; nginx
+# sudo chown -R nginx:&lt;USUARIO_OWNER_DEL_ADMIN&gt; &lt;REPO&gt;/admin
 </code></pre>
 <h3 id="apis">APIs</h3>
 <p>Crear un nuevo usuario bajo el cual correr&#xE1;n las APIs:</p>
-<pre><code class="lang-bash"><span class="pl-c"># useradd apis -s /sbin/nologin -M</span>
+<pre><code># useradd apis -s /sbin/nologin -M
 </code></pre>
 <p>Y asegurarse de que pueda acceder a los archivos de las APIs:</p>
-<pre><code class="lang-bash"><span class="pl-c"># usermod -a -G &lt;USUARIO_OWNER_DE_LAS_APIS&gt;,apis &lt;USUARIO_OWNER_DE_LAS_APIS&gt;</span>
-<span class="pl-c"># chown -R &lt;USUARIO_OWNER_DE_LAS_APIS&gt;:apis &lt;REPO&gt;/apis</span>
+<pre><code># usermod -a -G &lt;USUARIO_OWNER_DE_LAS_APIS&gt;,apis &lt;USUARIO_OWNER_DE_LAS_APIS&gt;
+# chown -R &lt;USUARIO_OWNER_DE_LAS_APIS&gt;:apis &lt;REPO&gt;/apis
 </code></pre>
 
         </div>
