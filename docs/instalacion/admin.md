@@ -23,6 +23,24 @@ Para instalar las dependencias es necesario tener [Composer](https://getcomposer
 
 ### Procedimiento
 
+Luego de clonar el repo, dentro de `<REPO>/admin` crear los siguientes directorios:
+
+```
+/storage
+|___/app
+|___/framework
+|   |___/cache
+|   |___/sessions
+|   |___/views
+|___/logs
+```
+
+Y otorgarles permisos **775**:
+
+```bash
+$ sudo chmod 755 -R storage
+```
+
 En `<REPO>/admin` instalar las dependencias con:
 
 ```bash
