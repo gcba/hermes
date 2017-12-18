@@ -148,6 +148,18 @@
 </ul>
 <p>Para instalar las dependencias es necesario tener <a href="https://getcomposer.org/">Composer</a>.</p>
 <h3 id="procedimiento">Procedimiento</h3>
+<p>Luego de clonar el repo, dentro de <code>&lt;REPO&gt;/admin</code> crear los siguientes directorios:</p>
+<pre><code>/storage
+|___/app
+|___/framework
+|   |___/cache
+|   |___/sessions
+|   |___/views
+|___/logs
+</code></pre>
+<p>Y otorgarles permisos <strong>775</strong>:</p>
+<pre><code class="lang-bash">$ sudo chmod 755 -R storage
+</code></pre>
 <p>En <code>&lt;REPO&gt;/admin</code> instalar las dependencias con:</p>
 <pre><code class="lang-bash">$ composer install
 </code></pre>

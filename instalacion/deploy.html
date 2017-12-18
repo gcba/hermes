@@ -154,7 +154,7 @@
           </div>
         </div>
         <div class="markdown-body"><h1 id="deploy">Deploy</h1>
-<p>Hacer un deploy de Hermes en RHEL 7 implica:</p>
+<p>Hacer un deploy de Hermes en <strong>RHEL 7</strong> implica:</p>
 <ol>
 <li>Instalar y configurar PHP, Nginx, Go, Redis y Postgres</li>
 <li>Instalar y configurar el Admin y las APIs</li>
@@ -200,7 +200,7 @@ opcache.fast_shutdown=0
     listen 80;
     listen [::]:80;
     server_name localhost;
-    root /srv/asi-236-hermes/admin/public;
+    root &lt;REPO&gt;/admin/public;
 
     add_header X-Frame-Options &quot;SAMEORIGIN&quot;;
     add_header X-XSS-Protection &quot;1; mode=block&quot;;
