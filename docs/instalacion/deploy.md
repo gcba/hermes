@@ -1,6 +1,6 @@
 # Deploy
 
-Hacer un deploy de Hermes en RHEL 7 implica:
+Hacer un deploy de Hermes en **RHEL 7** implica:
 
 1. Instalar y configurar PHP, Nginx, Go, Redis y Postgres
 2. Instalar y configurar el Admin y las APIs
@@ -65,7 +65,7 @@ En `/opt/rh/nginx14/root/etc/nginx/nginx.conf`:
     listen 80;
     listen [::]:80;
     server_name localhost;
-    root /srv/asi-236-hermes/admin/public;
+    root <REPO>/admin/public;
 
     add_header X-Frame-Options "SAMEORIGIN";
     add_header X-XSS-Protection "1; mode=block";
@@ -168,6 +168,7 @@ host    all             all             127.0.0.1/32            trust
 # IPv6 local connections:
 host    all             all             ::1/128                 trust
 ```
+
 
 ## Admin y APIs
 
