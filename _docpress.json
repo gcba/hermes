@@ -1160,6 +1160,11 @@
                     "id": "configurar"
                   }
                 ]
+              },
+              {
+                "title": "Admin y APIs",
+                "depth": 2,
+                "id": "admin-y-apis"
               }
             ]
           }
@@ -2423,6 +2428,11 @@
               "id": "configurar"
             }
           ]
+        },
+        {
+          "title": "Admin y APIs",
+          "depth": 2,
+          "id": "admin-y-apis"
         }
       ]
     },

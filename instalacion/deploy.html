@@ -121,6 +121,8 @@
                         </li>
                       </ul>
                     </li>
+                    <li class="heading-item -depth-2"><a class="hlink link-admin-y-apis" href="#admin-y-apis">Admin y APIs</a>
+                    </li>
                   </ul>
                 </li>
               </ul>
@@ -264,12 +266,18 @@ opcache.fast_shutdown=0
 <p>En <code>/var/lib/pgsql/data/pg_hba.conf</code>:</p>
 <h4 id="remplazar">Remplazar</h4>
 <pre><code class="lang-conf"># &quot;local&quot; is for Unix domain socket connections only
-local   all             all                                     md5
+local   all             all                                     peer
 # IPv4 local connections:
 host    all             all             127.0.0.1/32            trust
 # IPv6 local connections:
 host    all             all             ::1/128                 trust
 </code></pre>
+<h2 id="admin-y-apis">Admin y APIs</h2>
+<p>Seguir las instrucciones de instalaci&#xF3;n:</p>
+<ul>
+<li><a href="admin.html">Admin</a></li>
+<li><a href="apis.html">APIs</a></li>
+</ul>
 
         </div>
         <div class="footer-nav">
