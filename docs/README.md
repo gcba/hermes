@@ -32,6 +32,7 @@ Hermes
     * [Admin](instalacion/admin.md)
     * [APIs](instalacion/apis.md)
     * [SDKs](instalacion/sdks.md)
+    * [Deploy](instalacion/deploy.md)
 * Uso
     * [Admin](uso/admin.md)
     * [APIs](uso/apis.md)
