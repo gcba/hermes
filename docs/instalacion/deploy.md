@@ -186,6 +186,7 @@ Asegurarse que el usuario bajo el que corren Nginx y PHP-FM pueden acceder a los
 ```
 # usermod -a -G nginx,<USUARIO_OWNER_DEL_ADMIN> nginx
 # sudo chown -R nginx:<USUARIO_OWNER_DEL_ADMIN> <REPO>/admin
+# sudo chmod -R 755 <REPO>/admin/storage
 ```
 
 ### APIs

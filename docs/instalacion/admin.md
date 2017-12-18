@@ -35,12 +35,6 @@ Luego de clonar el repo, dentro de `<REPO>/admin` crear los siguientes directori
 |___/logs
 ```
 
-Y otorgarles permisos **775**:
-
-```bash
-$ sudo chmod -R 755 storage
-```
-
 En `<REPO>/admin` instalar las dependencias con:
 
 ```bash
