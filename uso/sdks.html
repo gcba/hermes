@@ -73,6 +73,18 @@
                 </li>
               </ul>
             </li>
+            <li class="menu-item -level-1 -parent"><span class="title">Instalación</span>
+              <ul class="submenu">
+                <li class="menu-item -level-2"><a class="link title  link-instalacionadmin" href="../instalacion/admin.html">Admin</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-instalacionapis" href="../instalacion/apis.html">APIs</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-instalacionsdks" href="../instalacion/sdks.html">SDKs</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-instalaciondeploy" href="../instalacion/deploy.html">Deploy</a>
+                </li>
+              </ul>
+            </li>
             <li class="menu-item -level-1 -parent"><span class="title">Uso</span>
               <ul class="submenu">
                 <li class="menu-item -level-2"><a class="link title  link-usoadmin" href="../uso/admin.html">Admin</a>
@@ -83,24 +95,18 @@
                   <ul class="headings heading-list">
                     <li class="heading-item -depth-2"><a class="hlink link-javascript" href="#javascript">JavaScript</a>
                       <ul class="heading-list -depth-2">
-                        <li class="heading-item -depth-3"><a class="hlink link-instalacion" href="#instalacion">Instalación</a>
-                        </li>
                         <li class="heading-item -depth-3"><a class="hlink link-enviar-una-calificacion" href="#enviar-una-calificacion">Enviar una calificación</a>
                         </li>
                       </ul>
                     </li>
                     <li class="heading-item -depth-2"><a class="hlink link-swift" href="#swift">Swift</a>
                       <ul class="heading-list -depth-2">
-                        <li class="heading-item -depth-3"><a class="hlink link-instalacion" href="#instalacion">Instalación</a>
-                        </li>
                         <li class="heading-item -depth-3"><a class="hlink link-enviar-una-calificacion" href="#enviar-una-calificacion">Enviar una calificación</a>
                         </li>
                       </ul>
                     </li>
                     <li class="heading-item -depth-2"><a class="hlink link-java" href="#java">Java</a>
                       <ul class="heading-list -depth-2">
-                        <li class="heading-item -depth-3"><a class="hlink link-instalacion" href="#instalacion">Instalación</a>
-                        </li>
                         <li class="heading-item -depth-3"><a class="hlink link-enviar-una-calificacion" href="#enviar-una-calificacion">Enviar una calificación</a>
                         </li>
                       </ul>
@@ -119,23 +125,10 @@
         </div>
         <div class="markdown-body"><h1 id="sdks">SDKs</h1>
 <h2 id="javascript">JavaScript</h2>
-<h3 id="instalacion">Instalaci&#xF3;n</h3>
-<h4 id="modulo-es2015+">M&#xF3;dulo ES2015+</h4>
-<p>Se encuentra en <code>&lt;REPO&gt;/sdks/js</code>.</p>
-<h5 id="npm">NPM</h5>
-<pre><code class="lang-bash">$ npm install <span class="pl-s">&apos;&lt;REPO&gt;/sdks/js&apos;</span>
-</code></pre>
-<h5 id="yarn">Yarn</h5>
-<pre><code class="lang-bash">$ yarn add file:&lt;REPO&gt;/sdks/js
-</code></pre>
-<h5 id="importacion">Importaci&#xF3;n</h5>
-<pre><code class="lang-javascript"><span class="pl-k">import</span> Ratings <span class="pl-k">from</span> <span class="pl-s">&apos;ratings-sdk&apos;</span>;
-</code></pre>
-<h4 id="modulo-umd">M&#xF3;dulo UMD</h4>
-<p>Los archivos minificados y sin minificar est&#xE1;n en <code>&lt;REPO&gt;/sdks/js/dist</code>.</p>
-<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="pl-s">&quot;js/ratings.min.js&quot;</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
-</code></pre>
 <h3 id="enviar-una-calificacion">Enviar una calificaci&#xF3;n</h3>
+<pre><code class="lang-javascript"><span class="pl-c">// M&#xF3;dulo ES2015+</span>
+<span class="pl-k">import</span> Ratings <span class="pl-k">from</span> <span class="pl-s">&apos;ratings-sdk&apos;</span>;
+</code></pre>
 <pre><code class="lang-javascript"><span class="pl-k">const</span> sdk = <span class="pl-k">new</span> Ratings({
     <span class="hljs-attr">api</span>: &lt;ENDPOINT&gt;,
     token: &lt;TOKEN&gt;,
@@ -165,18 +158,6 @@ sdk.create({
 });
 </code></pre>
 <h2 id="swift">Swift</h2>
-<p>Se requiere como m&#xED;nimo iOS 9.0.</p>
-<h3 id="instalacion">Instalaci&#xF3;n</h3>
-<h4 id="cocoapods">Cocoapods</h4>
-<p>En el <code>Podfile</code> del proyecto:</p>
-<pre><code class="lang-ruby">pod <span class="pl-s">&apos;RatingsSDK&apos;</span>, <span class="hljs-symbol">:git</span> =&gt; <span class="pl-s">&apos;https://github.com/gcba/hermes.git&apos;</span>
-</code></pre>
-<h4 id="manual">Manual</h4>
-<p>Agregar al proyecto los archivos <code>RatingsSDK.swift</code>, <code>RatingsUser.swift</code> y <code>RatingsError.swift</code> que est&#xE1;n en <code>&lt;REPO&gt;/sdks/swift/RatingsSDK</code>. Luego agregar las dependencias al <code>Podfile</code>:</p>
-<pre><code class="lang-ruby">pod <span class="pl-s">&apos;SwiftHTTP&apos;</span>, <span class="pl-s">&apos;~&gt; 2.0&apos;</span>
-pod <span class="pl-s">&apos;SwifterSwift/Foundation&apos;</span>, <span class="pl-s">&apos;~&gt; 3.1.1&apos;</span>
-pod <span class="pl-s">&apos;GBDeviceInfo&apos;</span>, <span class="pl-s">&apos;~&gt; 4.3&apos;</span>
-</code></pre>
 <h3 id="enviar-una-calificacion">Enviar una calificaci&#xF3;n</h3>
 <pre><code class="lang-swift"><span class="pl-k">import</span> RatingsSDK
 </code></pre>
@@ -201,27 +182,6 @@ sdk.create(rating: <span class="hljs-number">5</span>, description: <span class=
 }
 </code></pre>
 <h2 id="java">Java</h2>
-<p>Se requiere como m&#xED;nimo el SDK Android 15.0.</p>
-<h3 id="instalacion">Instalaci&#xF3;n</h3>
-<ol>
-<li>Importar en Android Studio el archivo <code>ratings-sdk-release.aar</code> que se encuentra en <code>&lt;REPO&gt;/sdks/java/ratings-sdk/build/outputs/aar</code>:</li>
-</ol>
-<pre><code>File &gt; New &gt; New Module... &gt; Import .JAR/.AAR Package
-</code></pre>
-<ol start="2">
-<li>Agregar las dependencias en <code>build.gradle</code>:</li>
-</ol>
-<pre><code class="lang-groovy">compile project(<span class="pl-s">&apos;:ratings-sdk-release&apos;</span>)
-compile <span class="pl-s">&apos;com.google.code.gson:gson:2.8.1&apos;</span>
-compile(<span class="pl-s">&apos;com.goebl:david-webb:1.3.0&apos;</span>) {
-    exclude <span class="pl-s">group:</span> <span class="pl-s">&apos;org.json&apos;</span>, <span class="pl-s">module:</span> <span class="pl-s">&apos;json&apos;</span>
-}
-</code></pre>
-<ol start="3">
-<li>Asegurarse que el permiso para acceder a internet est&#xE9; en <code>AndroidManifest.xml</code>:</li>
-</ol>
-<pre><code class="lang-xml"><span class="hljs-tag">&lt;<span class="hljs-name">uses-permission</span> <span class="hljs-attr">android:name</span>=<span class="pl-s">&quot;android.permission.INTERNET&quot;</span>/&gt;</span>
-</code></pre>
 <h3 id="enviar-una-calificacion">Enviar una calificaci&#xF3;n</h3>
 <pre><code class="lang-java"><span class="pl-k">import</span> gcba.ratings.sdk.Ratings;
 <span class="pl-k">import</span> gcba.ratings.sdk.RatingsResult;

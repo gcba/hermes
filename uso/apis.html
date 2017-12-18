@@ -73,20 +73,24 @@
                 </li>
               </ul>
             </li>
+            <li class="menu-item -level-1 -parent"><span class="title">Instalación</span>
+              <ul class="submenu">
+                <li class="menu-item -level-2"><a class="link title  link-instalacionadmin" href="../instalacion/admin.html">Admin</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-instalacionapis" href="../instalacion/apis.html">APIs</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-instalacionsdks" href="../instalacion/sdks.html">SDKs</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-instalaciondeploy" href="../instalacion/deploy.html">Deploy</a>
+                </li>
+              </ul>
+            </li>
             <li class="menu-item -level-1 -parent"><span class="title">Uso</span>
               <ul class="submenu">
                 <li class="menu-item -level-2"><a class="link title  link-usoadmin" href="../uso/admin.html">Admin</a>
                 </li>
                 <li class="menu-item -level-2"><a class="link title -active link-usoapis" href="../uso/apis.html">APIs</a>
                   <ul class="headings heading-list">
-                    <li class="heading-item -depth-2"><a class="hlink link-instalacion" href="#instalacion">Instalación</a>
-                      <ul class="heading-list -depth-2">
-                        <li class="heading-item -depth-3"><a class="hlink link-prerequisitos" href="#prerequisitos">Prerequisitos</a>
-                        </li>
-                        <li class="heading-item -depth-3"><a class="hlink link-procedimiento" href="#procedimiento">Procedimiento</a>
-                        </li>
-                      </ul>
-                    </li>
                     <li class="heading-item -depth-2"><a class="hlink link-api-de-calificaciones" href="#api-de-calificaciones">API de calificaciones</a>
                     </li>
                     <li class="heading-item -depth-2"><a class="hlink link-api-de-estadisticas" href="#api-de-estadisticas">API de estadísticas</a>
@@ -116,62 +120,13 @@
           </div>
         </div>
         <div class="markdown-body"><h1 id="apis">APIs</h1>
-<h2 id="instalacion">Instalaci&#xF3;n</h2>
-<h3 id="prerequisitos">Prerequisitos</h3>
-<ul>
-<li>Go 1.9.</li>
-<li>Postgres 10.</li>
-</ul>
-<h3 id="procedimiento">Procedimiento</h3>
-<p>Implica clonar el repo, configurar las variables de entorno e instalar las dependencias.</p>
-<p>En <code>&lt;REPO&gt;/apis/src/hermes</code> crear un archivo <code>.env</code> con los valores de configuraci&#xF3;n:</p>
-<pre><code class="lang-bash"><span class="pl-c1">export</span> GOPATH=&lt;REPO&gt;/apis
-
-<span class="pl-c"># Environment</span>
-<span class="pl-c1">export</span> HERMES_RATINGS_ENV=DEV
-<span class="pl-c1">export</span> HERMES_STATS_ENV=DEV
-
-<span class="pl-c"># Ports</span>
-<span class="pl-c1">export</span> HERMES_RATINGS_PORT=5000 <span class="pl-c"># Se puede omitir, por defecto es &apos;5000&apos;</span>
-<span class="pl-c1">export</span> HERMES_STATS_PORT=7000 <span class="pl-c"># Se puede omitir, por defecto es &apos;7000&apos;</span>
-
-<span class="pl-c"># Database</span>
-<span class="pl-c1">export</span> HERMES_READDB_HOST=localhost <span class="pl-c"># Se puede omitir, por defecto es &apos;localhost&apos;</span>
-<span class="pl-c1">export</span> HERMES_READDB_PORT=5432 <span class="pl-c"># Se puede omitir, por defecto es &apos;5432&apos;</span>
-<span class="pl-c1">export</span> HERMES_READDB_NAME=hermes
-<span class="pl-c1">export</span> HERMES_READDB_USER=hermes
-<span class="pl-c1">export</span> HERMES_READDB_PASSWORD=&lt;READDB_PASSWORD&gt;
-<span class="pl-c1">export</span> HERMES_READDB_SSLMODE=<span class="pl-c1">disable</span> <span class="pl-c"># Se puede omitir, por defecto es &apos;disable&apos;.</span>
-
-<span class="pl-c1">export</span> HERMES_WRITEDB_HOST=localhost <span class="pl-c"># Se puede omitir, por defecto es &apos;localhost&apos;</span>
-<span class="pl-c1">export</span> HERMES_WRITEDB_PORT=5432 <span class="pl-c"># Se puede omitir, por defecto es &apos;5432&apos;</span>
-<span class="pl-c1">export</span> HERMES_WRITEDB_NAME=hermes
-<span class="pl-c1">export</span> HERMES_WRITEDB_USER=hermes
-<span class="pl-c1">export</span> HERMES_WRITEDB_PASSWORD=&lt;WRITEDB_PASSWORD&gt;
-<span class="pl-c1">export</span> HERMES_WRITEDB_SSLMODE=<span class="pl-c1">disable</span> <span class="pl-c"># Se puede omitir, por defecto es &apos;disable&apos;.</span>
-
-<span class="pl-c"># Keys -&gt; deben estar en formato PEM</span>
-<span class="pl-c1">export</span> HERMES_RATINGS_PUBLICKEY=&lt;RATINGS_PUBLICKEY&gt; <span class="pl-c"># Ruta a la clave p&#xFA;blica para la autenticaci&#xF3;n JWT</span>
-<span class="pl-c1">export</span> HERMES_STATS_PUBLICKEY=&lt;STATS_PUBLICKEY&gt; <span class="pl-c"># Ruta a la clave p&#xFA;blica para la autenticaci&#xF3;n JWT</span>
-</code></pre>
-<p>Luego cargarlo con:</p>
-<pre><code class="lang-bash">$ <span class="pl-c1">source</span> .env
-</code></pre>
-<p>En el mismo directorio instalar las dependencias con <a href="https://github.com/golang/dep">dep</a>:</p>
-<pre><code class="lang-bash">$ dep ensure
-</code></pre>
-<p>Ahora se pueden correr las APIs.</p>
-<pre><code class="lang-bash">$ go run main.go start ratings
-</code></pre>
-<pre><code class="lang-bash">$ go run main.go start stats
-</code></pre>
-<p>Para compilar el binario directamente:</p>
-<pre><code class="lang-bash">$ go install hermes
-</code></pre>
-<p>El binario generado estar&#xE1; en <code>&lt;REPO&gt;/apis/bin</code>.</p>
 <h2 id="api-de-calificaciones">API de calificaciones</h2>
+<pre><code class="lang-bash">$ hermes start ratings
+</code></pre>
 <p>Esta API no debe usarse directamente, sino por medio de los <a href="sdks.html">SDKs</a>.</p>
 <h2 id="api-de-estadisticas">API de estad&#xED;sticas</h2>
+<pre><code class="lang-bash">$ hermes start stats
+</code></pre>
 <h3 id="endpoints">Endpoints</h3>
 <p>Hay un &#xFA;nico endpoint: <code>POST /stats</code>.</p>
 <h3 id="headers">Headers</h3>

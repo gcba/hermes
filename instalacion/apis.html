@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="../assets/style.css?t=615badd5">
     <script src="../assets/script.js?t=42463e55"></script>
-    <title>Sprint 12 - Hermes</title>
+    <title>APIs - Hermes</title>
     <meta name="viewport" content="width=device-width">
   </head>
   <body class="-menu-visible">
@@ -67,19 +67,7 @@
                 </li>
                 <li class="menu-item -level-2"><a class="link title  link-desarrollosprint11" href="../desarrollo/sprint11.html">Sprint 11</a>
                 </li>
-                <li class="menu-item -level-2"><a class="link title -active link-desarrollosprint12" href="../desarrollo/sprint12.html">Sprint 12</a>
-                  <ul class="headings heading-list">
-                    <li class="heading-item -depth-2"><a class="hlink link-dias" href="#dias">Días</a>
-                    </li>
-                    <li class="heading-item -depth-2"><a class="hlink link-objetivo" href="#objetivo">Objetivo</a>
-                    </li>
-                    <li class="heading-item -depth-2"><a class="hlink link-tareas" href="#tareas">Tareas</a>
-                      <ul class="heading-list -depth-2">
-                        <li class="heading-item -depth-3"><a class="hlink link-apis" href="#apis">APIs</a>
-                        </li>
-                      </ul>
-                    </li>
-                  </ul>
+                <li class="menu-item -level-2"><a class="link title  link-desarrollosprint12" href="../desarrollo/sprint12.html">Sprint 12</a>
                 </li>
                 <li class="menu-item -level-2"><a class="link title  link-desarrollosprint13" href="../desarrollo/sprint13.html">Sprint 13</a>
                 </li>
@@ -89,7 +77,17 @@
               <ul class="submenu">
                 <li class="menu-item -level-2"><a class="link title  link-instalacionadmin" href="../instalacion/admin.html">Admin</a>
                 </li>
-                <li class="menu-item -level-2"><a class="link title  link-instalacionapis" href="../instalacion/apis.html">APIs</a>
+                <li class="menu-item -level-2"><a class="link title -active link-instalacionapis" href="../instalacion/apis.html">APIs</a>
+                  <ul class="headings heading-list">
+                    <li class="heading-item -depth-2"><a class="hlink link-instalacion" href="#instalacion">Instalación</a>
+                      <ul class="heading-list -depth-2">
+                        <li class="heading-item -depth-3"><a class="hlink link-prerequisitos" href="#prerequisitos">Prerequisitos</a>
+                        </li>
+                        <li class="heading-item -depth-3"><a class="hlink link-procedimiento" href="#procedimiento">Procedimiento</a>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
                 </li>
                 <li class="menu-item -level-2"><a class="link title  link-instalacionsdks" href="../instalacion/sdks.html">SDKs</a>
                 </li>
@@ -110,59 +108,70 @@
           </ul>
         </li>
       </div>
-      <div class="body page-desarrollosprint12">
+      <div class="body page-instalacionapis">
         <div class="header-nav">
           <div class="right">
           </div>
         </div>
-        <div class="markdown-body"><h1 id="sprint-12">Sprint 12</h1>
-<h2 id="dias">D&#xED;as</h2>
+        <div class="markdown-body"><h1 id="apis">APIs</h1>
+<h2 id="instalacion">Instalaci&#xF3;n</h2>
+<h3 id="prerequisitos">Prerequisitos</h3>
 <ul>
-<li>Lunes 14/07</li>
-<li>Mi&#xE9;rcoles 16/08</li>
-<li>Viernes 18/07</li>
+<li>Go 1.9.</li>
+<li>Postgres 10.</li>
 </ul>
-<h2 id="objetivo">Objetivo</h2>
-<p>Crear el &#xFA;nico endpoint de la API de estad&#xED;sticas, sin los resolvers.</p>
-<h2 id="tareas">Tareas</h2>
-<h3 id="apis">APIs</h3>
-<ol>
-<li>
-<p>Convertir la API de calificaciones en un subpackage</p>
-</li>
-<li>
-<p>Extraer los modelos a un subpackage com&#xFA;n</p>
-</li>
-<li>
-<p>Extraer la conexi&#xF3;n a la base de datos a un subpackage com&#xFA;n</p>
-</li>
-<li>
-<p>Emplear un &#xFA;nico main.go</p>
-</li>
-<li>
-<p>Crear un comando para iniciar la API de calificaciones</p>
-</li>
-<li>
-<p>Crear un comando para iniciar la API de estad&#xED;sticas</p>
-</li>
-<li>
-<p>Agregar schema GraphQL</p>
-</li>
-<li>
-<p>Crear endpoint POST /stats</p>
-</li>
-<li>
-<p>Crear los stubs de los resolvers</p>
-</li>
-<li>
-<p>Integrar los stubs</p>
-</li>
-</ol>
+<h3 id="procedimiento">Procedimiento</h3>
+<p>Implica clonar el repo, configurar las variables de entorno e instalar las dependencias.</p>
+<p>En <code>&lt;REPO&gt;/apis/src/hermes</code> crear un archivo <code>.env</code> con los valores de configuraci&#xF3;n:</p>
+<pre><code class="lang-bash"><span class="pl-c1">export</span> GOPATH=&lt;REPO&gt;/apis
+
+<span class="pl-c"># Environment</span>
+<span class="pl-c1">export</span> HERMES_RATINGS_ENV=DEV
+<span class="pl-c1">export</span> HERMES_STATS_ENV=DEV
+
+<span class="pl-c"># Ports</span>
+<span class="pl-c1">export</span> HERMES_RATINGS_PORT=5000 <span class="pl-c"># Se puede omitir, por defecto es &apos;5000&apos;</span>
+<span class="pl-c1">export</span> HERMES_STATS_PORT=7000 <span class="pl-c"># Se puede omitir, por defecto es &apos;7000&apos;</span>
+
+<span class="pl-c"># Database</span>
+<span class="pl-c1">export</span> HERMES_READDB_HOST=localhost <span class="pl-c"># Se puede omitir, por defecto es &apos;localhost&apos;</span>
+<span class="pl-c1">export</span> HERMES_READDB_PORT=5432 <span class="pl-c"># Se puede omitir, por defecto es &apos;5432&apos;</span>
+<span class="pl-c1">export</span> HERMES_READDB_NAME=hermes
+<span class="pl-c1">export</span> HERMES_READDB_USER=hermes
+<span class="pl-c1">export</span> HERMES_READDB_PASSWORD=&lt;READDB_PASSWORD&gt;
+<span class="pl-c1">export</span> HERMES_READDB_SSLMODE=<span class="pl-c1">disable</span> <span class="pl-c"># Se puede omitir, por defecto es &apos;disable&apos;.</span>
+
+<span class="pl-c1">export</span> HERMES_WRITEDB_HOST=localhost <span class="pl-c"># Se puede omitir, por defecto es &apos;localhost&apos;</span>
+<span class="pl-c1">export</span> HERMES_WRITEDB_PORT=5432 <span class="pl-c"># Se puede omitir, por defecto es &apos;5432&apos;</span>
+<span class="pl-c1">export</span> HERMES_WRITEDB_NAME=hermes
+<span class="pl-c1">export</span> HERMES_WRITEDB_USER=hermes
+<span class="pl-c1">export</span> HERMES_WRITEDB_PASSWORD=&lt;WRITEDB_PASSWORD&gt;
+<span class="pl-c1">export</span> HERMES_WRITEDB_SSLMODE=<span class="pl-c1">disable</span> <span class="pl-c"># Se puede omitir, por defecto es &apos;disable&apos;.</span>
+
+<span class="pl-c"># Keys -&gt; deben estar en formato PEM</span>
+<span class="pl-c1">export</span> HERMES_RATINGS_PUBLICKEY=&lt;RATINGS_PUBLICKEY&gt; <span class="pl-c"># Ruta a la clave p&#xFA;blica para la autenticaci&#xF3;n JWT</span>
+<span class="pl-c1">export</span> HERMES_STATS_PUBLICKEY=&lt;STATS_PUBLICKEY&gt; <span class="pl-c"># Ruta a la clave p&#xFA;blica para la autenticaci&#xF3;n JWT</span>
+</code></pre>
+<p>Luego cargarlo con:</p>
+<pre><code class="lang-bash">$ <span class="pl-c1">source</span> .env
+</code></pre>
+<p>En el mismo directorio instalar las dependencias con <a href="https://github.com/golang/dep">dep</a>:</p>
+<pre><code class="lang-bash">$ dep ensure
+</code></pre>
+<p>Ahora se pueden correr las APIs.</p>
+<pre><code class="lang-bash">$ go run main.go start ratings
+</code></pre>
+<pre><code class="lang-bash">$ go run main.go start stats
+</code></pre>
+<p>Para compilar el binario directamente:</p>
+<pre><code class="lang-bash">$ go install hermes
+</code></pre>
+<p>El binario generado estar&#xE1; en <code>&lt;REPO&gt;/apis/bin</code>.</p>
 
         </div>
         <div class="footer-nav">
-          <div class="left"><a href="../desarrollo/sprint11.html"><span class="title">Sprint 11</span></a></div>
-          <div class="right"><a href="../desarrollo/sprint13.html"><span class="label">Next: </span><span class="title">Sprint 13</span></a></div>
+          <div class="left"><a href="../instalacion/admin.html"><span class="title">Admin</span></a></div>
+          <div class="right"><a href="../instalacion/sdks.html"><span class="label">Next: </span><span class="title">SDKs</span></a></div>
         </div>
       </div>
     </div>

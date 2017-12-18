@@ -949,13 +949,13 @@
         ]
       },
       {
-        "title": "Uso",
+        "title": "Instalación",
         "sections": [
           {
             "title": "Admin",
-            "source": "docs/uso/admin.md",
-            "url": "uso/admin.html",
-            "slug": "usoadmin",
+            "source": "docs/instalacion/admin.md",
+            "url": "instalacion/admin.html",
+            "slug": "instalacionadmin",
             "headings": [
               {
                 "title": "Instalación",
@@ -997,23 +997,6 @@
                 ]
               },
               {
-                "title": "Crear tokens para las APIs",
-                "depth": 2,
-                "id": "crear-tokens-para-las-apis",
-                "headings": [
-                  {
-                    "title": "Por consola",
-                    "depth": 3,
-                    "id": "por-consola"
-                  },
-                  {
-                    "title": "Por el Admin",
-                    "depth": 3,
-                    "id": "por-el-admin"
-                  }
-                ]
-              },
-              {
                 "title": "Contenido por defecto",
                 "depth": 2,
                 "id": "contenido-por-defecto"
@@ -1022,9 +1005,9 @@
           },
           {
             "title": "APIs",
-            "source": "docs/uso/apis.md",
-            "url": "uso/apis.html",
-            "slug": "usoapis",
+            "source": "docs/instalacion/apis.md",
+            "url": "instalacion/apis.html",
+            "slug": "instalacionapis",
             "headings": [
               {
                 "title": "Instalación",
@@ -1042,7 +1025,180 @@
                     "id": "procedimiento"
                   }
                 ]
+              }
+            ]
+          },
+          {
+            "title": "SDKs",
+            "source": "docs/instalacion/sdks.md",
+            "url": "instalacion/sdks.html",
+            "slug": "instalacionsdks",
+            "headings": [
+              {
+                "title": "JavaScript",
+                "depth": 2,
+                "id": "javascript",
+                "headings": [
+                  {
+                    "title": "Módulo ES2015+",
+                    "depth": 3,
+                    "id": "modulo-es2015+"
+                  },
+                  {
+                    "title": "Módulo UMD",
+                    "depth": 3,
+                    "id": "modulo-umd"
+                  }
+                ]
               },
+              {
+                "title": "Swift",
+                "depth": 2,
+                "id": "swift",
+                "headings": [
+                  {
+                    "title": "Cocoapods",
+                    "depth": 3,
+                    "id": "cocoapods"
+                  },
+                  {
+                    "title": "Manual",
+                    "depth": 3,
+                    "id": "manual"
+                  }
+                ]
+              },
+              {
+                "title": "Java",
+                "depth": 2,
+                "id": "java"
+              }
+            ]
+          },
+          {
+            "title": "Deploy",
+            "source": "docs/instalacion/deploy.md",
+            "url": "instalacion/deploy.html",
+            "slug": "instalaciondeploy",
+            "headings": [
+              {
+                "title": "PHP",
+                "depth": 2,
+                "id": "php",
+                "headings": [
+                  {
+                    "title": "Instalar",
+                    "depth": 3,
+                    "id": "instalar"
+                  },
+                  {
+                    "title": "Configurar",
+                    "depth": 3,
+                    "id": "configurar"
+                  }
+                ]
+              },
+              {
+                "title": "Nginx",
+                "depth": 2,
+                "id": "nginx",
+                "headings": [
+                  {
+                    "title": "Instalar",
+                    "depth": 3,
+                    "id": "instalar"
+                  },
+                  {
+                    "title": "Configurar",
+                    "depth": 3,
+                    "id": "configurar"
+                  }
+                ]
+              },
+              {
+                "title": "Go",
+                "depth": 2,
+                "id": "go",
+                "headings": [
+                  {
+                    "title": "Instalar",
+                    "depth": 3,
+                    "id": "instalar"
+                  }
+                ]
+              },
+              {
+                "title": "Redis",
+                "depth": 2,
+                "id": "redis",
+                "headings": [
+                  {
+                    "title": "Instalar",
+                    "depth": 3,
+                    "id": "instalar"
+                  },
+                  {
+                    "title": "Configurar",
+                    "depth": 3,
+                    "id": "configurar"
+                  }
+                ]
+              },
+              {
+                "title": "Postgres",
+                "depth": 2,
+                "id": "postgres",
+                "headings": [
+                  {
+                    "title": "Instalar",
+                    "depth": 3,
+                    "id": "instalar"
+                  },
+                  {
+                    "title": "Configurar",
+                    "depth": 3,
+                    "id": "configurar"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Uso",
+        "sections": [
+          {
+            "title": "Admin",
+            "source": "docs/uso/admin.md",
+            "url": "uso/admin.html",
+            "slug": "usoadmin",
+            "headings": [
+              {
+                "title": "Crear tokens para las APIs",
+                "depth": 2,
+                "id": "crear-tokens-para-las-apis",
+                "headings": [
+                  {
+                    "title": "Por consola",
+                    "depth": 3,
+                    "id": "por-consola"
+                  },
+                  {
+                    "title": "Por el Admin",
+                    "depth": 3,
+                    "id": "por-el-admin"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "title": "APIs",
+            "source": "docs/uso/apis.md",
+            "url": "uso/apis.html",
+            "slug": "usoapis",
+            "headings": [
               {
                 "title": "API de calificaciones",
                 "depth": 2,
@@ -1089,11 +1245,6 @@
                 "id": "javascript",
                 "headings": [
                   {
-                    "title": "Instalación",
-                    "depth": 3,
-                    "id": "instalacion"
-                  },
-                  {
                     "title": "Enviar una calificación",
                     "depth": 3,
                     "id": "enviar-una-calificacion"
@@ -1106,11 +1257,6 @@
                 "id": "swift",
                 "headings": [
                   {
-                    "title": "Instalación",
-                    "depth": 3,
-                    "id": "instalacion"
-                  },
-                  {
                     "title": "Enviar una calificación",
                     "depth": 3,
                     "id": "enviar-una-calificacion"
@@ -1122,11 +1268,6 @@
                 "depth": 2,
                 "id": "java",
                 "headings": [
-                  {
-                    "title": "Instalación",
-                    "depth": 3,
-                    "id": "instalacion"
-                  },
                   {
                     "title": "Enviar una calificación",
                     "depth": 3,
@@ -2073,11 +2214,11 @@
         }
       ]
     },
-    "uso/admin.html": {
-      "source": "docs/uso/admin.md",
+    "instalacion/admin.html": {
+      "source": "docs/instalacion/admin.md",
       "title": "Admin - Hermes",
       "pageTitle": "Admin",
-      "slug": "usoadmin",
+      "slug": "instalacionadmin",
       "headings": [
         {
           "title": "Instalación",
@@ -2119,34 +2260,17 @@
           ]
         },
         {
-          "title": "Crear tokens para las APIs",
-          "depth": 2,
-          "id": "crear-tokens-para-las-apis",
-          "headings": [
-            {
-              "title": "Por consola",
-              "depth": 3,
-              "id": "por-consola"
-            },
-            {
-              "title": "Por el Admin",
-              "depth": 3,
-              "id": "por-el-admin"
-            }
-          ]
-        },
-        {
           "title": "Contenido por defecto",
           "depth": 2,
           "id": "contenido-por-defecto"
         }
       ]
     },
-    "uso/apis.html": {
-      "source": "docs/uso/apis.md",
+    "instalacion/apis.html": {
+      "source": "docs/instalacion/apis.md",
       "title": "APIs - Hermes",
       "pageTitle": "APIs",
-      "slug": "usoapis",
+      "slug": "instalacionapis",
       "headings": [
         {
           "title": "Instalación",
@@ -2164,7 +2288,175 @@
               "id": "procedimiento"
             }
           ]
+        }
+      ]
+    },
+    "instalacion/sdks.html": {
+      "source": "docs/instalacion/sdks.md",
+      "title": "SDKs - Hermes",
+      "pageTitle": "SDKs",
+      "slug": "instalacionsdks",
+      "headings": [
+        {
+          "title": "JavaScript",
+          "depth": 2,
+          "id": "javascript",
+          "headings": [
+            {
+              "title": "Módulo ES2015+",
+              "depth": 3,
+              "id": "modulo-es2015+"
+            },
+            {
+              "title": "Módulo UMD",
+              "depth": 3,
+              "id": "modulo-umd"
+            }
+          ]
         },
+        {
+          "title": "Swift",
+          "depth": 2,
+          "id": "swift",
+          "headings": [
+            {
+              "title": "Cocoapods",
+              "depth": 3,
+              "id": "cocoapods"
+            },
+            {
+              "title": "Manual",
+              "depth": 3,
+              "id": "manual"
+            }
+          ]
+        },
+        {
+          "title": "Java",
+          "depth": 2,
+          "id": "java"
+        }
+      ]
+    },
+    "instalacion/deploy.html": {
+      "source": "docs/instalacion/deploy.md",
+      "title": "Deploy - Hermes",
+      "pageTitle": "Deploy",
+      "slug": "instalaciondeploy",
+      "headings": [
+        {
+          "title": "PHP",
+          "depth": 2,
+          "id": "php",
+          "headings": [
+            {
+              "title": "Instalar",
+              "depth": 3,
+              "id": "instalar"
+            },
+            {
+              "title": "Configurar",
+              "depth": 3,
+              "id": "configurar"
+            }
+          ]
+        },
+        {
+          "title": "Nginx",
+          "depth": 2,
+          "id": "nginx",
+          "headings": [
+            {
+              "title": "Instalar",
+              "depth": 3,
+              "id": "instalar"
+            },
+            {
+              "title": "Configurar",
+              "depth": 3,
+              "id": "configurar"
+            }
+          ]
+        },
+        {
+          "title": "Go",
+          "depth": 2,
+          "id": "go",
+          "headings": [
+            {
+              "title": "Instalar",
+              "depth": 3,
+              "id": "instalar"
+            }
+          ]
+        },
+        {
+          "title": "Redis",
+          "depth": 2,
+          "id": "redis",
+          "headings": [
+            {
+              "title": "Instalar",
+              "depth": 3,
+              "id": "instalar"
+            },
+            {
+              "title": "Configurar",
+              "depth": 3,
+              "id": "configurar"
+            }
+          ]
+        },
+        {
+          "title": "Postgres",
+          "depth": 2,
+          "id": "postgres",
+          "headings": [
+            {
+              "title": "Instalar",
+              "depth": 3,
+              "id": "instalar"
+            },
+            {
+              "title": "Configurar",
+              "depth": 3,
+              "id": "configurar"
+            }
+          ]
+        }
+      ]
+    },
+    "uso/admin.html": {
+      "source": "docs/uso/admin.md",
+      "title": "Admin - Hermes",
+      "pageTitle": "Admin",
+      "slug": "usoadmin",
+      "headings": [
+        {
+          "title": "Crear tokens para las APIs",
+          "depth": 2,
+          "id": "crear-tokens-para-las-apis",
+          "headings": [
+            {
+              "title": "Por consola",
+              "depth": 3,
+              "id": "por-consola"
+            },
+            {
+              "title": "Por el Admin",
+              "depth": 3,
+              "id": "por-el-admin"
+            }
+          ]
+        }
+      ]
+    },
+    "uso/apis.html": {
+      "source": "docs/uso/apis.md",
+      "title": "APIs - Hermes",
+      "pageTitle": "APIs",
+      "slug": "usoapis",
+      "headings": [
         {
           "title": "API de calificaciones",
           "depth": 2,
@@ -2211,11 +2503,6 @@
           "id": "javascript",
           "headings": [
             {
-              "title": "Instalación",
-              "depth": 3,
-              "id": "instalacion"
-            },
-            {
               "title": "Enviar una calificación",
               "depth": 3,
               "id": "enviar-una-calificacion"
@@ -2228,11 +2515,6 @@
           "id": "swift",
           "headings": [
             {
-              "title": "Instalación",
-              "depth": 3,
-              "id": "instalacion"
-            },
-            {
               "title": "Enviar una calificación",
               "depth": 3,
               "id": "enviar-una-calificacion"
@@ -2244,11 +2526,6 @@
           "depth": 2,
           "id": "java",
           "headings": [
-            {
-              "title": "Instalación",
-              "depth": 3,
-              "id": "instalacion"
-            },
             {
               "title": "Enviar una calificación",
               "depth": 3,
@@ -2284,6 +2561,10 @@
     "docs/desarrollo/sprint11.md": "desarrollo/sprint11.html",
     "docs/desarrollo/sprint12.md": "desarrollo/sprint12.html",
     "docs/desarrollo/sprint13.md": "desarrollo/sprint13.html",
+    "docs/instalacion/admin.md": "instalacion/admin.html",
+    "docs/instalacion/apis.md": "instalacion/apis.html",
+    "docs/instalacion/sdks.md": "instalacion/sdks.html",
+    "docs/instalacion/deploy.md": "instalacion/deploy.html",
     "docs/uso/admin.md": "uso/admin.html",
     "docs/uso/apis.md": "uso/apis.html",
     "docs/uso/sdks.md": "uso/sdks.html",

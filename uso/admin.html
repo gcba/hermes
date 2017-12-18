@@ -73,28 +73,22 @@
                 </li>
               </ul>
             </li>
+            <li class="menu-item -level-1 -parent"><span class="title">Instalación</span>
+              <ul class="submenu">
+                <li class="menu-item -level-2"><a class="link title  link-instalacionadmin" href="../instalacion/admin.html">Admin</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-instalacionapis" href="../instalacion/apis.html">APIs</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-instalacionsdks" href="../instalacion/sdks.html">SDKs</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-instalaciondeploy" href="../instalacion/deploy.html">Deploy</a>
+                </li>
+              </ul>
+            </li>
             <li class="menu-item -level-1 -parent"><span class="title">Uso</span>
               <ul class="submenu">
                 <li class="menu-item -level-2"><a class="link title -active link-usoadmin" href="../uso/admin.html">Admin</a>
                   <ul class="headings heading-list">
-                    <li class="heading-item -depth-2"><a class="hlink link-instalacion" href="#instalacion">Instalación</a>
-                      <ul class="heading-list -depth-2">
-                        <li class="heading-item -depth-3"><a class="hlink link-prerequisitos" href="#prerequisitos">Prerequisitos</a>
-                        </li>
-                        <li class="heading-item -depth-3"><a class="hlink link-procedimiento" href="#procedimiento">Procedimiento</a>
-                        </li>
-                      </ul>
-                    </li>
-                    <li class="heading-item -depth-2"><a class="hlink link-mensajes" href="#mensajes">Mensajes</a>
-                      <ul class="heading-list -depth-2">
-                        <li class="heading-item -depth-3"><a class="hlink link-route" href="#route">Route</a>
-                        </li>
-                        <li class="heading-item -depth-3"><a class="hlink link-webhook" href="#webhook">Webhook</a>
-                        </li>
-                        <li class="heading-item -depth-3"><a class="hlink link-cola-de-tareas" href="#cola-de-tareas">Cola de tareas</a>
-                        </li>
-                      </ul>
-                    </li>
                     <li class="heading-item -depth-2"><a class="hlink link-crear-tokens-para-las-apis" href="#crear-tokens-para-las-apis">Crear tokens para las APIs</a>
                       <ul class="heading-list -depth-2">
                         <li class="heading-item -depth-3"><a class="hlink link-por-consola" href="#por-consola">Por consola</a>
@@ -102,8 +96,6 @@
                         <li class="heading-item -depth-3"><a class="hlink link-por-el-admin" href="#por-el-admin">Por el Admin</a>
                         </li>
                       </ul>
-                    </li>
-                    <li class="heading-item -depth-2"><a class="hlink link-contenido-por-defecto" href="#contenido-por-defecto">Contenido por defecto</a>
                     </li>
                   </ul>
                 </li>
@@ -122,161 +114,6 @@
           </div>
         </div>
         <div class="markdown-body"><h1 id="admin">Admin</h1>
-<h2 id="instalacion">Instalaci&#xF3;n</h2>
-<p>Implica clonar el repo, instalar las dependencias, configurar las variables de entorno, correr las migraciones y crear un usuario administrador.</p>
-<h3 id="prerequisitos">Prerequisitos</h3>
-<ul>
-<li>PHP 7.1 con las extensiones:
-<ul>
-<li>mbstring</li>
-<li>openssl</li>
-<li>opcache</li>
-<li>pdo</li>
-<li>pgsql</li>
-<li>soap</li>
-<li>tokenizer</li>
-<li>xml</li>
-</ul>
-</li>
-<li>Postgres 10 configurado (o no) con r&#xE9;plica master/slave.</li>
-<li>Redis 4.</li>
-<li>Una cuenta de Mailgun.</li>
-</ul>
-<p>Para instalar las dependencias es necesario tener <a href="https://getcomposer.org/">Composer</a>.</p>
-<h3 id="procedimiento">Procedimiento</h3>
-<p>En <code>&lt;REPO&gt;/admin</code> instalar las dependencias con:</p>
-<pre><code class="lang-bash">$ composer install
-</code></pre>
-<p>En el mismo directorio, crear un archivo <code>.env</code> con los valores de configuraci&#xF3;n:</p>
-<pre><code class="lang-bash">APP_NAME=Hermes
-APP_ENV=<span class="pl-c1">local</span>
-APP_KEY= <span class="pl-c"># Dejar vac&#xED;o por el momento, se lo completar&#xE1; a continuaci&#xF3;n</span>
-APP_DEBUG=<span class="pl-c1">true</span>
-APP_LOG_LEVEL=debug
-APP_URL=http://localhost:8000
-APP_DATETIME_FORMAT=<span class="pl-s">&apos;d/m/Y H:i:s&apos;</span>
-
-LDAP_URL=&lt;LDAP_URL&gt; <span class="pl-c"># URL del WSDL del servicio de autenticaci&#xF3;n</span>
-DB_CONNECTION=pgsql
-
-HERMES_READDB_HOST=localhost <span class="pl-c"># Opcional, por defecto es &apos;localhost&apos;</span>
-HERMES_READDB_PORT=5432 <span class="pl-c"># Opcional, por defecto es &apos;5432&apos;</span>
-HERMES_READDB_NAME=hermes <span class="pl-c"># Opcional, por defecto es &apos;hermes&apos;</span>
-HERMES_READDB_USER=hermes <span class="pl-c"># Opcional, por defecto es &apos;hermes&apos;</span>
-HERMES_READDB_PASSWORD=&lt;READDB_PASSWORD&gt;
-HERMES_READDB_SSLMODE=<span class="pl-c1">disable</span>
-
-HERMES_WRITEDB_HOST=localhost <span class="pl-c"># Opcional, por defecto es &apos;localhost&apos;</span>
-HERMES_WRITEDB_PORT=5432 <span class="pl-c"># Opcional, por defecto es &apos;5432&apos;</span>
-HERMES_WRITEDB_NAME=hermes <span class="pl-c"># Opcional, por defecto es &apos;hermes&apos;</span>
-HERMES_WRITEDB_USER=hermes <span class="pl-c"># Opcional, por defecto es &apos;hermes&apos;</span>
-HERMES_WRITEDB_PASSWORD=&lt;WRITEDB_PASSWORD&gt;
-HERMES_WRITEDB_SSLMODE=<span class="pl-c1">disable</span> <span class="pl-c"># Opcional, por defecto es &apos;disable&apos;</span>
-
-BROADCAST_DRIVER=redis <span class="pl-c"># Opcional, por defecto es &apos;redis&apos;</span>
-CACHE_DRIVER=redis <span class="pl-c"># Opcional, por defecto es &apos;redis&apos;</span>
-QUEUE_DRIVER=redis <span class="pl-c"># Opcional, por defecto es &apos;redis&apos;</span>
-SESSION_DRIVER=redis <span class="pl-c"># Opcional, por defecto es &apos;redis&apos;</span>
-SESSION_SECURE_COOKIE=<span class="pl-c1">false</span> <span class="pl-c"># Opcional, por defecto es &apos;false&apos;</span>
-
-REDIS_HOST=localhost <span class="pl-c"># Opcional, por defecto es &apos;localhost&apos;</span>
-REDIS_PASSWORD=&lt;REDIS_PASSWORD&gt;
-REDIS_PORT=6379 <span class="pl-c"># Opcional, por defecto es &apos;6379&apos;</span>
-
-MAIL_DRIVER=mailgun <span class="pl-c"># Opcional, por defecto es &apos;mailgun&apos;</span>
-MAIL_HOST=smtp.mailgun.org <span class="pl-c"># Opcional, por defecto es &apos;smtp.mailgun.org&apos;</span>
-MAIL_PORT=587 <span class="pl-c"># Opcional, por defecto es &apos;587&apos;</span>
-MAIL_USER=&lt;MAILGUN_USERNAME&gt;
-MAIL_PASSWORD=&lt;MAILGUN_PASSWORD&gt;
-MAIL_ENCRYPTION=tls <span class="pl-c"># Opcional, por defecto es &apos;tls&apos;</span>
-MAIL_FROM=&lt;EMAIL_FROM&gt;
-MAIL_SENDER=<span class="pl-s">&quot;Gobierno de la Ciudad de Buenos Aires&quot;</span>
-MAIL_REPLY_TO=&lt;EMAIL_REPLYTO&gt;
-MAIL_SUBJECT=<span class="pl-s">&quot;Gracias por tu comentario&quot;</span>
-MAIL_CATCH_ALL=&lt;EMAIL_CATCHALL&gt; <span class="pl-c"># Env&#xED;a todos los mensajes a esta direcci&#xF3;n</span>
-
-MAILGUN_DOMAIN=&lt;MAILGUN_DOMAIN&gt;
-MAILGUN_API_KEY=&lt;MAILGUN_APIKEY&gt;
-MAILGUN_VALIDATION_KEY=&lt;MAILGUN_VALIDATIONKEY&gt;
-
-HERMES_RATINGS_PRIVATEKEY=&lt;RATINGS_PRIVATEKEY&gt; <span class="pl-c"># Ruta a la clave privada, debe estar en formato PEM</span>
-HERMES_STATS_PRIVATEKEY=&lt;STATS_PRIVATEKEY&gt; <span class="pl-c"># Ruta a la clave privada, debe estar en formato PEM</span>
-</code></pre>
-<p>Para generar y guardar autom&#xE1;ticamente un valor en <code>APP_KEY</code>:</p>
-<pre><code class="lang-bash">$ php artisan key:generate
-</code></pre>
-<p>Luego correr las migraciones:</p>
-<pre><code class="lang-bash">$ php artisan migrate --seed
-</code></pre>
-<p>Finalmente crear un usuario administrador:</p>
-<pre><code class="lang-bash">$ php artisan admin:create <span class="pl-s">&quot;Juan Perez&quot;</span> juanperez@buenosaires.gob.ar
-</code></pre>
-<p>Ahora ya se puede levantar la aplicaci&#xF3;n.</p>
-<pre><code class="lang-bash">$ php artisan serve
-</code></pre>
-<h2 id="mensajes">Mensajes</h2>
-<p>Para poder enviar y recibir mensajes es necesario configurar una route y un webhook en Mailgun y correr la cola de tareas.</p>
-<h3 id="route">Route</h3>
-<p>Una route <code>catch_all</code> permite redirigir a Hermes todos los mensajes entrantes. Puede configurarse por consola:</p>
-<pre><code class="lang-bash">$ php artisan mailgun:routes &lt;APP_URL&gt;/webhooks/messages/receive
-</code></pre>
-<p>El comando <code>mailgun:routes</code> puede tambi&#xE9;n listar todas las routes configuradas en la cuenta de Mailgun o eliminarlas.</p>
-<pre><code class="lang-bash">$ php artisan mailgun:routes --help
-
-Usage:
-  mailgun:routes [options] [--] [&lt;url&gt;]
-
-Arguments:
-  url                   The url of the route to create
-
-Options:
-      --delete          Delete all routes
-      --list            List all existing routes
-  -h, --help            Display this <span class="pl-c1">help</span> message
-  -q, --quiet           Do not output any message
-  -V, --version         Display this application version
-      --ansi            Force ANSI output
-      --no-ansi         Disable ANSI output
-  -n, --no-interaction  Do not ask any interactive question
-      --env[=ENV]       The environment the <span class="pl-c1">command</span> should run under
-  -v|vv|vvv, --verbose  Increase the verbosity of messages: 1 <span class="pl-k">for</span> normal output, 2 <span class="pl-k">for</span> more verbose output and 3 <span class="pl-k">for</span> debug
-
-Help:
-  Create a new Mailgun Route
-</code></pre>
-<h3 id="webhook">Webhook</h3>
-<p>Un webhook de tipo <code>deliver</code> es necesario para que Mailgun pueda notificar a Hermes que un mensaje fue recibido por su destinatario. Puede configurarse por consola:</p>
-<pre><code class="lang-bash">$ php artisan mailgun:webhooks deliver &lt;APP_URL&gt;/webhooks/messages/notify
-</code></pre>
-<p>El comando <code>mailgun:webhooks</code> puede tambi&#xE9;n listar todos los webhooks configurados en la cuenta de Mailgun o eliminarlos.</p>
-<pre><code class="lang-bash">$ php artisan mailgun:webhooks --help
-
-Usage:
-  mailgun:webhooks [options] [--] [&lt;<span class="pl-c1">type</span>&gt;] [&lt;url&gt;]
-
-Arguments:
-  <span class="pl-c1">type</span>                  The <span class="pl-c1">type</span> of webhook to create. Can be: open, click, unsubscribe, spam, bounce, drop, deliver
-  url                   The url of the webhook
-
-Options:
-      --delete          Delete all webhooks
-      --list            List all existing webhooks
-  -h, --help            Display this <span class="pl-c1">help</span> message
-  -q, --quiet           Do not output any message
-  -V, --version         Display this application version
-      --ansi            Force ANSI output
-      --no-ansi         Disable ANSI output
-  -n, --no-interaction  Do not ask any interactive question
-      --env[=ENV]       The environment the <span class="pl-c1">command</span> should run under
-  -v|vv|vvv, --verbose  Increase the verbosity of messages: 1 <span class="pl-k">for</span> normal output, 2 <span class="pl-k">for</span> more verbose output and 3 <span class="pl-k">for</span> debug
-
-Help:
-  Create a new Mailgun Webhook
-</code></pre>
-<h3 id="cola-de-tareas">Cola de tareas</h3>
-<p>Env&#xED;a/recibe mensajes y realiza operaciones sobre los mismos. Corre como un proceso aparte:</p>
-<pre><code class="lang-bash">$ php artisan queue:work redis
-</code></pre>
 <h2 id="crear-tokens-para-las-apis">Crear tokens para las APIs</h2>
 <h3 id="por-consola">Por consola</h3>
 <h4 id="api-de-calificaciones">Api de calificaciones</h4>
@@ -294,12 +131,10 @@ Help:
 <li>Hacer click en <strong>Run Command</strong>. No hace falta escribir nada en <strong>Additional Args?</strong>.</li>
 </ol>
 <p>El token generado permanecer&#xE1; visible en Compass hasta que se haga click en <strong>clear output</strong>.</p>
-<h2 id="contenido-por-defecto">Contenido por defecto</h2>
-<p>Si el entorno (<code>APP_ENV</code>) es <code>local</code>, al correr las migraciones se crear&#xE1;n registros de ejemplo en la base de datos: aplicaciones, calificaciones, mensajes, usuarios, etc.</p>
 
         </div>
         <div class="footer-nav">
-          <div class="left"><a href="../desarrollo/sprint13.html"><span class="title">Sprint 13</span></a></div>
+          <div class="left"><a href="../instalacion/deploy.html"><span class="title">Deploy</span></a></div>
           <div class="right"><a href="../uso/apis.html"><span class="label">Next: </span><span class="title">APIs</span></a></div>
         </div>
       </div>
