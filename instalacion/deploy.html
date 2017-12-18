@@ -291,6 +291,7 @@ host    all             all             ::1/128                 trust
 <p>Asegurarse que el usuario bajo el que corren Nginx y PHP-FM pueden acceder a los archivos del Admin. Este usuario es generalmente <code>nginx</code>:</p>
 <pre><code># usermod -a -G nginx,&lt;USUARIO_OWNER_DEL_ADMIN&gt; nginx
 # sudo chown -R nginx:&lt;USUARIO_OWNER_DEL_ADMIN&gt; &lt;REPO&gt;/admin
+# sudo chmod -R 755 &lt;REPO&gt;/admin/storage
 </code></pre>
 <h3 id="apis">APIs</h3>
 <p>Crear un nuevo usuario bajo el cual correr&#xE1;n las APIs:</p>
