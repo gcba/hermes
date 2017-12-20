@@ -3,10 +3,10 @@
 Hacer un deploy de Hermes en **RHEL 7** implica:
 
 1. Instalar y configurar PHP, Nginx, Go, Redis y Postgres
-2. Instalar y configurar el Admin y las APIs
-3. Configurar permisos
-4. Configurar paths y scripts de inicio
-5. Configurar systemd para los servicios y las APIs
+2. Configurar paths
+3. Instalar y configurar el Admin y las APIs
+4. Configurar permisos
+5. Configurar scripts de inicio
 
 
 ## PHP
@@ -180,12 +180,40 @@ host    all             all             ::1/128                 trust
 ```
 
 
+### Paths
+
+En `/etc/profile.d` crear un archivo llamado `enable` con el siguiente contenido:
+
+```bash
+source /opt/rh/nginx14/enable
+source /opt/rh/rh-php71/enable
+source /opt/rh/rh-redis32/enable
+```
+
+Y otro llamado `export` que contenga:
+
+```bash
+PATH=$PATH:/usr/local/go/bin
+PATH=$PATH:<REPO>/apis/bin
+
+export PATH
+```
+
+Luego cargar ambos archivos:
+
+```bash
+ $ source /etc/profile.d/enable
+ $ source /etc/profile.d/export
+```
+
+
 ## Admin y APIs
 
 Seguir las instrucciones de instalación:
 
 - [Admin](admin.md)
 - [APIs](apis.md)
+
 
 ## Permisos
 
@@ -215,37 +243,9 @@ Y asegurarse de que pueda acceder a los archivos de las APIs:
 ```
 
 
-## Paths y scripts de inicio
+## Scripts de inicio
 
-### Paths
-
-En `/etc/profile.d` crear un archivo llamado `enable` con el siguiente contenido:
-
-```bash
-source /opt/rh/nginx14/enable
-source /opt/rh/rh-php71/enable
-source /opt/rh/rh-redis32/enable
-```
-
-Y otro llamado `export` que contenga:
-
-```bash
-PATH=$PATH:/usr/local/go/bin
-PATH=$PATH:<REPO>/apis/bin
-
-export PATH
-```
-
-Luego cargar ambos archivos:
-
-```bash
- $ source /etc/profile.d/enable
- $ source /etc/profile.d/export
-```
-
-### Systemd
-
-#### PHP
+### PHP
 
 Editar la configuración de Systemd:
 
@@ -263,7 +263,7 @@ Restart=always
 StartLimitInterval=0
 ```
 
-#### Nginx
+### Nginx
 
 Editar la configuración de Systemd:
 
@@ -281,7 +281,7 @@ Restart=always
 StartLimitInterval=0
 ```
 
-#### Redis
+### Redis
 
 Editar la configuración de Systemd:
 
@@ -299,7 +299,7 @@ Restart=always
 StartLimitInterval=0
 ```
 
-#### Postgres
+### Postgres
 
 Editar la configuración de Systemd:
 
@@ -317,7 +317,7 @@ Restart=always
 StartLimitInterval=0
 ```
 
-#### Cola de tareas
+### Cola de tareas
 
 En `/usr/lib/systemd/system/` crear un archivo llamado `hermes-queue.service` con el siguiente contenido:
 
@@ -337,7 +337,7 @@ StartLimitInterval=0
 WantedBy=multi-user.target
 ```
 
-#### API de calificaciones
+### API de calificaciones
 
 En `/usr/lib/systemd/system/` crear un archivo llamado `hermes-ratings.service` con el siguiente contenido:
 
@@ -365,7 +365,7 @@ SyslogIdentifier=hermes-ratings
 WantedBy=multi-user.target
 ```
 
-#### API de estadísticas
+### API de estadísticas
 
 En `/usr/lib/systemd/system/` crear un archivo llamado `hermes-stats.service` con el siguiente contenido:
 
