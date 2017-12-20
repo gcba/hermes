@@ -403,8 +403,8 @@ Habilitar los servicios para que se ejecuten al bootear el sistema:
 
 ```
 # systemctl daemon-reload
-# chkconfig rh-php71-php-fpm on
 # chkconfig nginx14-nginx on
+# chkconfig rh-php71-php-fpm on
 # chkconfig rh-redis32-redis on
 # chkconfig hermes-queue on
 # chkconfig hermes-ratings on
