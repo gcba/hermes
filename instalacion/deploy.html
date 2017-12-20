@@ -131,6 +131,16 @@
                         </li>
                       </ul>
                     </li>
+                    <li class="heading-item -depth-2"><a class="hlink link-paths-y-scripts-de-inicio" href="#paths-y-scripts-de-inicio">Paths y scripts de inicio</a>
+                      <ul class="heading-list -depth-2">
+                        <li class="heading-item -depth-3"><a class="hlink link-paths" href="#paths">Paths</a>
+                        </li>
+                        <li class="heading-item -depth-3"><a class="hlink link-systemd" href="#systemd">Systemd</a>
+                        </li>
+                        <li class="heading-item -depth-3"><a class="hlink link-correr-servicios" href="#correr-servicios">Correr servicios</a>
+                        </li>
+                      </ul>
+                    </li>
                   </ul>
                 </li>
               </ul>
@@ -184,6 +194,16 @@ opcache.validate_timestamps=0
 opcache.save_comments=1
 opcache.fast_shutdown=0
 </code></pre>
+<p>En <code>/etc/opt/rh/rh-php71/php-fpm.d/www.conf</code>:</p>
+<h4 id="cambiar">Cambiar</h4>
+<ul>
+<li><code>user = apache</code> a <code>user = nginx</code></li>
+<li><code>group = apache</code> a <code>group = nginx</code></li>
+<li><code>listen = 127.0.0.1:9000</code> a <code>listen = /var/run/php-fpm.sock</code></li>
+<li><code>;listen.owner = nobody</code> a <code>listen.owner = nginx</code></li>
+<li><code>;listen.group = nobody</code> a <code>listen.group = nginx</code></li>
+<li><code>;listen.mode = 0660</code> a <code>listen.mode = 0660</code></li>
+</ul>
 <h2 id="nginx">Nginx</h2>
 <h3 id="instalar">Instalar</h3>
 <pre><code># yum install nginx14
@@ -211,7 +231,7 @@ opcache.fast_shutdown=0
     charset utf-8;
 
     location /ratings {
-        proxy_pass http://127.0.0.1:5000;
+        proxy_pass http://127.0.0.1:&lt;PUERTO_API_CALIFICACIONES&gt;;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
@@ -219,7 +239,7 @@ opcache.fast_shutdown=0
     }
 
     location /stats {
-        proxy_pass http://127.0.0.1:7000;
+        proxy_pass http://127.0.0.1:&lt;PUERTO_API_ESTADISTICAS&gt;;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
@@ -288,7 +308,7 @@ host    all             all             ::1/128                 trust
 </ul>
 <h2 id="permisos">Permisos</h2>
 <h3 id="admin">Admin</h3>
-<p>Asegurarse que el usuario bajo el que corren Nginx y PHP-FM pueden acceder a los archivos del Admin. Este usuario es generalmente <code>nginx</code>:</p>
+<p>Asegurarse que el usuario bajo el que corren Nginx y PHP-FPM (<code>nginx</code>) pueda acceder a los archivos del Admin:</p>
 <pre><code># usermod -a -G nginx,&lt;USUARIO_OWNER_DEL_ADMIN&gt; nginx
 # sudo chown -R nginx:&lt;USUARIO_OWNER_DEL_ADMIN&gt; &lt;REPO&gt;/admin
 # sudo chmod -R 755 &lt;REPO&gt;/admin/storage
@@ -300,6 +320,148 @@ host    all             all             ::1/128                 trust
 <p>Y asegurarse de que pueda acceder a los archivos de las APIs:</p>
 <pre><code># usermod -a -G &lt;USUARIO_OWNER_DE_LAS_APIS&gt;,apis &lt;USUARIO_OWNER_DE_LAS_APIS&gt;
 # chown -R &lt;USUARIO_OWNER_DE_LAS_APIS&gt;:apis &lt;REPO&gt;/apis
+</code></pre>
+<h2 id="paths-y-scripts-de-inicio">Paths y scripts de inicio</h2>
+<h3 id="paths">Paths</h3>
+<p>En <code>/etc/profile.d</code> crear un archivo llamado <code>enable</code> con el siguiente contenido:</p>
+<pre><code class="lang-bash"><span class="pl-c1">source</span> /opt/rh/nginx14/<span class="pl-c1">enable</span>
+<span class="pl-c1">source</span> /opt/rh/rh-php71/<span class="pl-c1">enable</span>
+<span class="pl-c1">source</span> /opt/rh/rh-redis32/<span class="pl-c1">enable</span>
+</code></pre>
+<p>Y otro llamado <code>export</code> que contenga:</p>
+<pre><code class="lang-bash">PATH=<span class="hljs-variable">$PATH</span>:/usr/<span class="pl-c1">local</span>/go/bin
+PATH=<span class="hljs-variable">$PATH</span>:&lt;REPO&gt;/apis/bin
+</code></pre>
+<p>Luego cargar ambos archivos:</p>
+<pre><code class="lang-bash"> $ <span class="pl-c1">source</span> /etc/profile.d/<span class="pl-c1">enable</span>
+ $ <span class="pl-c1">source</span> /etc/profile.d/<span class="pl-c1">export</span>
+</code></pre>
+<h3 id="systemd">Systemd</h3>
+<h4 id="php">PHP</h4>
+<p>Editar la configuraci&#xF3;n de Systemd:</p>
+<pre><code>#&#xA0;systemctl edit rh-php71-php-fpm
+</code></pre>
+<p>E ingresar lo siguiente:</p>
+<pre><code class="lang-ini">.include /lib/systemd/system/rh-php71-php-fpm.service
+
+[Service]
+Restart=always
+StartLimitInterval=0
+</code></pre>
+<h4 id="nginx">Nginx</h4>
+<p>Editar la configuraci&#xF3;n de Systemd:</p>
+<pre><code>#&#xA0;systemctl edit nginx14-nginx
+</code></pre>
+<p>E ingresar lo siguiente:</p>
+<pre><code class="lang-ini">.include /lib/systemd/system/nginx14-nginx.service
+
+[Service]
+Restart=always
+StartLimitInterval=0
+</code></pre>
+<h4 id="redis">Redis</h4>
+<p>Editar la configuraci&#xF3;n de Systemd:</p>
+<pre><code>#&#xA0;systemctl edit rh-redis32-redis
+</code></pre>
+<p>E ingresar lo siguiente:</p>
+<pre><code class="lang-ini">.include /lib/systemd/system/rh-redis32-redis.service
+
+[Service]
+Restart=always
+StartLimitInterval=0
+</code></pre>
+<h4 id="postgres">Postgres</h4>
+<p>Editar la configuraci&#xF3;n de Systemd:</p>
+<pre><code>#&#xA0;systemctl edit postgresql
+</code></pre>
+<p>E ingresar lo siguiente:</p>
+<pre><code class="lang-ini">.include /lib/systemd/system/postgresql.service
+
+[Service]
+Restart=always
+StartLimitInterval=0
+</code></pre>
+<h4 id="cola-de-tareas">Cola de tareas</h4>
+<p>En <code>/usr/lib/systemd/system/</code> crear un archivo llamado <code>hermes-queue.service</code> con el siguiente contenido:</p>
+<pre><code class="lang-ini"><span class="hljs-section">[Unit]</span>
+<span class="hljs-attr">Description</span>=Laravel queue worker
+<span class="hljs-attr">After</span>=rh-redis32-redis.service
+<span class="hljs-section">
+[Service]</span>
+<span class="hljs-attr">User</span>=redis
+<span class="hljs-attr">Group</span>=redis
+<span class="hljs-attr">Restart</span>=always
+<span class="hljs-attr">ExecStart</span>=/opt/rh/rh-php71/root/usr/bin/php &lt;REPO&gt;/admin/artisan queue:work redis --daemon --env=production
+<span class="hljs-attr">StartLimitInterval</span>=<span class="hljs-number">0</span>
+<span class="hljs-section">
+[Install]</span>
+<span class="hljs-attr">WantedBy</span>=multi-user.target
+</code></pre>
+<h4 id="api-de-calificaciones">API de calificaciones</h4>
+<p>En <code>/usr/lib/systemd/system/</code> crear un archivo llamado <code>hermes-ratings.service</code> con el siguiente contenido:</p>
+<pre><code class="lang-ini"><span class="hljs-section">[Unit]</span>
+<span class="hljs-attr">Description</span>=Ratings API
+<span class="hljs-attr">After</span>=postgresql.service
+<span class="hljs-section">
+[Service]</span>
+<span class="hljs-attr">Type</span>=simple
+<span class="hljs-attr">User</span>=apis
+<span class="hljs-attr">Group</span>=apis
+<span class="hljs-attr">Restart</span>=always
+<span class="hljs-attr">ExecStart</span>=/bin/bash -a -c <span class="pl-s">&apos;source &lt;REPO&gt;/apis/src/hermes/.env &amp;&amp; exec &lt;REPO&gt;/apis/bin/hermes start ratings&apos;</span>
+<span class="hljs-attr">StartLimitInterval</span>=<span class="hljs-number">0</span>
+<span class="hljs-attr">PermissionsStartOnly</span>=<span class="pl-c1">true</span>
+<span class="hljs-attr">ExecStartPre</span>=/bin/mkdir -p /var/log/hermes-ratings
+<span class="hljs-attr">ExecStartPre</span>=/bin/chown &lt;USUARIO_OWNER_DE_LAS_APIS&gt;:&lt;USUARIO_OWNER_DE_LAS_APIS&gt; /var/log/hermes-ratings
+<span class="hljs-attr">ExecStartPre</span>=/bin/chmod <span class="hljs-number">755</span> /var/log/hermes-ratings
+<span class="hljs-attr">StandardOutput</span>=syslog
+<span class="hljs-attr">StandardError</span>=syslog
+<span class="hljs-attr">SyslogIdentifier</span>=hermes-ratings
+<span class="hljs-section">
+[Install]</span>
+<span class="hljs-attr">WantedBy</span>=multi-user.target
+</code></pre>
+<h4 id="api-de-estadisticas">API de estad&#xED;sticas</h4>
+<p>En <code>/usr/lib/systemd/system/</code> crear un archivo llamado <code>hermes-stats.service</code> con el siguiente contenido:</p>
+<pre><code class="lang-ini"><span class="hljs-section">[Unit]</span>
+<span class="hljs-attr">Description</span>=Stats API
+<span class="hljs-attr">After</span>=postgresql.service
+<span class="hljs-section">
+[Service]</span>
+<span class="hljs-attr">Type</span>=simple
+<span class="hljs-attr">User</span>=apis
+<span class="hljs-attr">Group</span>=apis
+<span class="hljs-attr">Restart</span>=always
+<span class="hljs-attr">ExecStart</span>=/bin/bash -a -c <span class="pl-s">&apos;source &lt;REPO&gt;/apis/src/hermes/.env &amp;&amp; exec &lt;REPO&gt;/apis/bin/hermes start stats&apos;</span>
+<span class="hljs-attr">StartLimitInterval</span>=<span class="hljs-number">0</span>
+<span class="hljs-attr">PermissionsStartOnly</span>=<span class="pl-c1">true</span>
+<span class="hljs-attr">ExecStartPre</span>=/bin/mkdir -p /var/log/hermes-stats
+<span class="hljs-attr">ExecStartPre</span>=/bin/chown &lt;USUARIO_OWNER_DE_LAS_APIS&gt;:&lt;USUARIO_OWNER_DE_LAS_APIS&gt; /var/log/hermes-stats
+<span class="hljs-attr">ExecStartPre</span>=/bin/chmod <span class="hljs-number">755</span> /var/log/hermes-stats
+<span class="hljs-attr">StandardOutput</span>=syslog
+<span class="hljs-attr">StandardError</span>=syslog
+<span class="hljs-attr">SyslogIdentifier</span>=hermes-stats
+<span class="hljs-section">
+[Install]</span>
+<span class="hljs-attr">WantedBy</span>=multi-user.target
+</code></pre>
+<h3 id="correr-servicios">Correr servicios</h3>
+<p>Habilitar los servicios para que se ejecuten al bootear el sistema:</p>
+<pre><code># systemctl daemon-reload
+# chkconfig rh-php71-php-fpm on
+# chkconfig nginx14-nginx on
+# chkconfig rh-redis32-redis on
+# chkconfig hermes-queue on
+# chkconfig hermes-ratings on
+# chkconfig hermes-stats on
+</code></pre>
+<p>Ahora ya se pueden correr:</p>
+<pre><code># systemctl start nginx14-nginx
+# systemctl start rh-php71-php-fpm
+# systemctl start rh-redis32-redis
+# systemctl start hermes-queue
+# systemctl start hermes-ratings
+# systemctl start hermes-stats
 </code></pre>
 
         </div>

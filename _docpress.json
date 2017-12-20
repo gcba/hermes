@@ -1182,6 +1182,28 @@
                     "id": "apis"
                   }
                 ]
+              },
+              {
+                "title": "Paths y scripts de inicio",
+                "depth": 2,
+                "id": "paths-y-scripts-de-inicio",
+                "headings": [
+                  {
+                    "title": "Paths",
+                    "depth": 3,
+                    "id": "paths"
+                  },
+                  {
+                    "title": "Systemd",
+                    "depth": 3,
+                    "id": "systemd"
+                  },
+                  {
+                    "title": "Correr servicios",
+                    "depth": 3,
+                    "id": "correr-servicios"
+                  }
+                ]
               }
             ]
           }
@@ -2465,6 +2487,28 @@
               "title": "APIs",
               "depth": 3,
               "id": "apis"
+            }
+          ]
+        },
+        {
+          "title": "Paths y scripts de inicio",
+          "depth": 2,
+          "id": "paths-y-scripts-de-inicio",
+          "headings": [
+            {
+              "title": "Paths",
+              "depth": 3,
+              "id": "paths"
+            },
+            {
+              "title": "Systemd",
+              "depth": 3,
+              "id": "systemd"
+            },
+            {
+              "title": "Correr servicios",
+              "depth": 3,
+              "id": "correr-servicios"
             }
           ]
         }
