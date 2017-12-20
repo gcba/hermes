@@ -151,7 +151,7 @@ En `/etc/opt/rh/rh-redis32/redis.conf`:
 #### Cambiar
 
 - `supervised no` a `supervised systemd`.
-- `# requirepass foobared` a `requirepass <REDIS_PASSWORD>`.
+- `# requirepass foobared` a `requirepass <PASSWORD_REDIS>`.
 
 
 ## Postgres
