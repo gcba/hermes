@@ -202,8 +202,8 @@ export PATH
 Luego cargar ambos archivos:
 
 ```bash
- $ source /etc/profile.d/enable
- $ source /etc/profile.d/export
+ $ source /etc/profile.d/enable.sh
+ $ source /etc/profile.d/export.sh
 ```
 
 
