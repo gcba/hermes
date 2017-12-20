@@ -446,6 +446,9 @@ StartLimitInterval=0
 <span class="hljs-attr">WantedBy</span>=multi-user.target
 </code></pre>
 <h3 id="correr-servicios">Correr servicios</h3>
+<p>Asegurarse que la timezone est&#xE9; bien configurada:</p>
+<pre><code># timedatectl set-timezone America/Buenos_Aires
+</code></pre>
 <p>Habilitar los servicios para que se ejecuten al bootear el sistema:</p>
 <pre><code># systemctl daemon-reload
 # chkconfig rh-php71-php-fpm on

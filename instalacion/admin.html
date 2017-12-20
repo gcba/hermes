@@ -212,8 +212,8 @@ MAILGUN_DOMAIN=&lt;MAILGUN_DOMAIN&gt;
 MAILGUN_API_KEY=&lt;MAILGUN_APIKEY&gt;
 MAILGUN_VALIDATION_KEY=&lt;MAILGUN_VALIDATIONKEY&gt;
 
-HERMES_RATINGS_PRIVATEKEY=&lt;RATINGS_PRIVATEKEY&gt; <span class="pl-c"># Ruta a la clave privada, debe estar en formato PEM</span>
-HERMES_STATS_PRIVATEKEY=&lt;STATS_PRIVATEKEY&gt; <span class="pl-c"># Ruta a la clave privada, debe estar en formato PEM</span>
+HERMES_RATINGS_PRIVATEKEY=&lt;RATINGS_PRIVATEKEY&gt; <span class="pl-c"># Ruta a la clave privada (RSA), debe estar en formato PEM</span>
+HERMES_STATS_PRIVATEKEY=&lt;STATS_PRIVATEKEY&gt; <span class="pl-c"># Ruta a la clave privada (RSA), debe estar en formato PEM</span>
 </code></pre>
 <p>Para generar y guardar autom&#xE1;ticamente un valor en <code>APP_KEY</code>:</p>
 <pre><code class="lang-bash">$ php artisan key:generate
