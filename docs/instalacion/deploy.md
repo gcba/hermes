@@ -182,7 +182,7 @@ host    all             all             ::1/128                 trust
 
 ### Paths
 
-En `/etc/profile.d` crear un archivo llamado `enable` con el siguiente contenido:
+En `/etc/profile.d` crear un archivo llamado `enable.sh` con el siguiente contenido:
 
 ```bash
 source /opt/rh/nginx14/enable
@@ -190,7 +190,7 @@ source /opt/rh/rh-php71/enable
 source /opt/rh/rh-redis32/enable
 ```
 
-Y otro llamado `export` que contenga:
+Y otro llamado `export.sh` que contenga:
 
 ```bash
 PATH=$PATH:/usr/local/go/bin
