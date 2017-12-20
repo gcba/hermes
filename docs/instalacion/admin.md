@@ -95,8 +95,8 @@ MAILGUN_DOMAIN=<MAILGUN_DOMAIN>
 MAILGUN_API_KEY=<MAILGUN_APIKEY>
 MAILGUN_VALIDATION_KEY=<MAILGUN_VALIDATIONKEY>
 
-HERMES_RATINGS_PRIVATEKEY=<RATINGS_PRIVATEKEY> # Ruta a la clave privada, debe estar en formato PEM
-HERMES_STATS_PRIVATEKEY=<STATS_PRIVATEKEY> # Ruta a la clave privada, debe estar en formato PEM
+HERMES_RATINGS_PRIVATEKEY=<RATINGS_PRIVATEKEY> # Ruta a la clave privada (RSA), debe estar en formato PEM
+HERMES_STATS_PRIVATEKEY=<STATS_PRIVATEKEY> # Ruta a la clave privada (RSA), debe estar en formato PEM
 ```
 
 Para generar y guardar automáticamente un valor en `APP_KEY`:

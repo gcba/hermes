@@ -393,6 +393,12 @@ WantedBy=multi-user.target
 
 ### Correr servicios
 
+Asegurarse que la timezone esté bien configurada:
+
+```
+# timedatectl set-timezone America/Buenos_Aires
+```
+
 Habilitar los servicios para que se ejecuten al bootear el sistema:
 
 ```
