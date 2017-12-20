@@ -391,7 +391,8 @@ SyslogIdentifier=hermes-stats
 WantedBy=multi-user.target
 ```
 
-### Correr servicios
+
+## Correr servicios
 
 Asegurarse que la timezone esté bien configurada:
 
