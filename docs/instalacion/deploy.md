@@ -214,6 +214,7 @@ Y asegurarse de que pueda acceder a los archivos de las APIs:
 # chown -R <USUARIO_OWNER_DE_LAS_APIS>:apis <REPO>/apis
 ```
 
+
 ## Paths y scripts de inicio
 
 ### Paths
@@ -390,9 +391,9 @@ SyslogIdentifier=hermes-stats
 WantedBy=multi-user.target
 ```
 
-#### Habilitar servicios
+### Correr servicios
 
-Finalmente, habilitar los servicios para que se ejecuten al bootear el sistema:
+Habilitar los servicios para que se ejecuten al bootear el sistema:
 
 ```
 # systemctl daemon-reload
@@ -402,4 +403,15 @@ Finalmente, habilitar los servicios para que se ejecuten al bootear el sistema:
 # chkconfig hermes-queue on
 # chkconfig hermes-ratings on
 # chkconfig hermes-stats on
+```
+
+Ahora ya se pueden correr:
+
+```
+# systemctl start nginx14-nginx
+# systemctl start rh-php71-php-fpm
+# systemctl start rh-redis32-redis
+# systemctl start hermes-queue
+# systemctl start hermes-ratings
+# systemctl start hermes-stats
 ```
