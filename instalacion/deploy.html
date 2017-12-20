@@ -313,12 +313,12 @@ host    all             all             127.0.0.1/32            trust
 host    all             all             ::1/128                 trust
 </code></pre>
 <h3 id="paths">Paths</h3>
-<p>En <code>/etc/profile.d</code> crear un archivo llamado <code>enable</code> con el siguiente contenido:</p>
+<p>En <code>/etc/profile.d</code> crear un archivo llamado <code>enable.sh</code> con el siguiente contenido:</p>
 <pre><code class="lang-bash"><span class="pl-c1">source</span> /opt/rh/nginx14/<span class="pl-c1">enable</span>
 <span class="pl-c1">source</span> /opt/rh/rh-php71/<span class="pl-c1">enable</span>
 <span class="pl-c1">source</span> /opt/rh/rh-redis32/<span class="pl-c1">enable</span>
 </code></pre>
-<p>Y otro llamado <code>export</code> que contenga:</p>
+<p>Y otro llamado <code>export.sh</code> que contenga:</p>
 <pre><code class="lang-bash">PATH=<span class="hljs-variable">$PATH</span>:/usr/<span class="pl-c1">local</span>/go/bin
 PATH=<span class="hljs-variable">$PATH</span>:&lt;REPO&gt;/apis/bin
 
