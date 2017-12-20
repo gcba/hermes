@@ -119,6 +119,8 @@
                         </li>
                         <li class="heading-item -depth-3"><a class="hlink link-configurar" href="#configurar">Configurar</a>
                         </li>
+                        <li class="heading-item -depth-3"><a class="hlink link-paths" href="#paths">Paths</a>
+                        </li>
                       </ul>
                     </li>
                     <li class="heading-item -depth-2"><a class="hlink link-admin-y-apis" href="#admin-y-apis">Admin y APIs</a>
@@ -131,11 +133,21 @@
                         </li>
                       </ul>
                     </li>
-                    <li class="heading-item -depth-2"><a class="hlink link-paths-y-scripts-de-inicio" href="#paths-y-scripts-de-inicio">Paths y scripts de inicio</a>
+                    <li class="heading-item -depth-2"><a class="hlink link-scripts-de-inicio" href="#scripts-de-inicio">Scripts de inicio</a>
                       <ul class="heading-list -depth-2">
-                        <li class="heading-item -depth-3"><a class="hlink link-paths" href="#paths">Paths</a>
+                        <li class="heading-item -depth-3"><a class="hlink link-php" href="#php">PHP</a>
                         </li>
-                        <li class="heading-item -depth-3"><a class="hlink link-systemd" href="#systemd">Systemd</a>
+                        <li class="heading-item -depth-3"><a class="hlink link-nginx" href="#nginx">Nginx</a>
+                        </li>
+                        <li class="heading-item -depth-3"><a class="hlink link-redis" href="#redis">Redis</a>
+                        </li>
+                        <li class="heading-item -depth-3"><a class="hlink link-postgres" href="#postgres">Postgres</a>
+                        </li>
+                        <li class="heading-item -depth-3"><a class="hlink link-cola-de-tareas" href="#cola-de-tareas">Cola de tareas</a>
+                        </li>
+                        <li class="heading-item -depth-3"><a class="hlink link-api-de-calificaciones" href="#api-de-calificaciones">API de calificaciones</a>
+                        </li>
+                        <li class="heading-item -depth-3"><a class="hlink link-api-de-estadisticas" href="#api-de-estadisticas">API de estadísticas</a>
                         </li>
                       </ul>
                     </li>
@@ -167,10 +179,10 @@
 <p>Hacer un deploy de Hermes en <strong>RHEL 7</strong> implica:</p>
 <ol>
 <li>Instalar y configurar PHP, Nginx, Go, Redis y Postgres</li>
+<li>Configurar paths</li>
 <li>Instalar y configurar el Admin y las APIs</li>
 <li>Configurar permisos</li>
-<li>Configurar paths y scripts de inicio</li>
-<li>Configurar systemd para los servicios y las APIs</li>
+<li>Configurar scripts de inicio</li>
 </ol>
 <h2 id="php">PHP</h2>
 <h3 id="instalar">Instalar</h3>
@@ -300,6 +312,22 @@ host    all             all             127.0.0.1/32            trust
 # IPv6 local connections:
 host    all             all             ::1/128                 trust
 </code></pre>
+<h3 id="paths">Paths</h3>
+<p>En <code>/etc/profile.d</code> crear un archivo llamado <code>enable</code> con el siguiente contenido:</p>
+<pre><code class="lang-bash"><span class="pl-c1">source</span> /opt/rh/nginx14/<span class="pl-c1">enable</span>
+<span class="pl-c1">source</span> /opt/rh/rh-php71/<span class="pl-c1">enable</span>
+<span class="pl-c1">source</span> /opt/rh/rh-redis32/<span class="pl-c1">enable</span>
+</code></pre>
+<p>Y otro llamado <code>export</code> que contenga:</p>
+<pre><code class="lang-bash">PATH=<span class="hljs-variable">$PATH</span>:/usr/<span class="pl-c1">local</span>/go/bin
+PATH=<span class="hljs-variable">$PATH</span>:&lt;REPO&gt;/apis/bin
+
+<span class="pl-c1">export</span> PATH
+</code></pre>
+<p>Luego cargar ambos archivos:</p>
+<pre><code class="lang-bash"> $ <span class="pl-c1">source</span> /etc/profile.d/<span class="pl-c1">enable</span>
+ $ <span class="pl-c1">source</span> /etc/profile.d/<span class="pl-c1">export</span>
+</code></pre>
 <h2 id="admin-y-apis">Admin y APIs</h2>
 <p>Seguir las instrucciones de instalaci&#xF3;n:</p>
 <ul>
@@ -321,25 +349,8 @@ host    all             all             ::1/128                 trust
 <pre><code># usermod -a -G &lt;USUARIO_OWNER_DE_LAS_APIS&gt;,apis &lt;USUARIO_OWNER_DE_LAS_APIS&gt;
 # chown -R &lt;USUARIO_OWNER_DE_LAS_APIS&gt;:apis &lt;REPO&gt;/apis
 </code></pre>
-<h2 id="paths-y-scripts-de-inicio">Paths y scripts de inicio</h2>
-<h3 id="paths">Paths</h3>
-<p>En <code>/etc/profile.d</code> crear un archivo llamado <code>enable</code> con el siguiente contenido:</p>
-<pre><code class="lang-bash"><span class="pl-c1">source</span> /opt/rh/nginx14/<span class="pl-c1">enable</span>
-<span class="pl-c1">source</span> /opt/rh/rh-php71/<span class="pl-c1">enable</span>
-<span class="pl-c1">source</span> /opt/rh/rh-redis32/<span class="pl-c1">enable</span>
-</code></pre>
-<p>Y otro llamado <code>export</code> que contenga:</p>
-<pre><code class="lang-bash">PATH=<span class="hljs-variable">$PATH</span>:/usr/<span class="pl-c1">local</span>/go/bin
-PATH=<span class="hljs-variable">$PATH</span>:&lt;REPO&gt;/apis/bin
-
-<span class="pl-c1">export</span> PATH
-</code></pre>
-<p>Luego cargar ambos archivos:</p>
-<pre><code class="lang-bash"> $ <span class="pl-c1">source</span> /etc/profile.d/<span class="pl-c1">enable</span>
- $ <span class="pl-c1">source</span> /etc/profile.d/<span class="pl-c1">export</span>
-</code></pre>
-<h3 id="systemd">Systemd</h3>
-<h4 id="php">PHP</h4>
+<h2 id="scripts-de-inicio">Scripts de inicio</h2>
+<h3 id="php">PHP</h3>
 <p>Editar la configuraci&#xF3;n de Systemd:</p>
 <pre><code>#&#xA0;systemctl edit rh-php71-php-fpm
 </code></pre>
@@ -350,7 +361,7 @@ PATH=<span class="hljs-variable">$PATH</span>:&lt;REPO&gt;/apis/bin
 Restart=always
 StartLimitInterval=0
 </code></pre>
-<h4 id="nginx">Nginx</h4>
+<h3 id="nginx">Nginx</h3>
 <p>Editar la configuraci&#xF3;n de Systemd:</p>
 <pre><code>#&#xA0;systemctl edit nginx14-nginx
 </code></pre>
@@ -361,7 +372,7 @@ StartLimitInterval=0
 Restart=always
 StartLimitInterval=0
 </code></pre>
-<h4 id="redis">Redis</h4>
+<h3 id="redis">Redis</h3>
 <p>Editar la configuraci&#xF3;n de Systemd:</p>
 <pre><code>#&#xA0;systemctl edit rh-redis32-redis
 </code></pre>
@@ -372,7 +383,7 @@ StartLimitInterval=0
 Restart=always
 StartLimitInterval=0
 </code></pre>
-<h4 id="postgres">Postgres</h4>
+<h3 id="postgres">Postgres</h3>
 <p>Editar la configuraci&#xF3;n de Systemd:</p>
 <pre><code>#&#xA0;systemctl edit postgresql
 </code></pre>
@@ -383,7 +394,7 @@ StartLimitInterval=0
 Restart=always
 StartLimitInterval=0
 </code></pre>
-<h4 id="cola-de-tareas">Cola de tareas</h4>
+<h3 id="cola-de-tareas">Cola de tareas</h3>
 <p>En <code>/usr/lib/systemd/system/</code> crear un archivo llamado <code>hermes-queue.service</code> con el siguiente contenido:</p>
 <pre><code class="lang-ini"><span class="hljs-section">[Unit]</span>
 <span class="hljs-attr">Description</span>=Laravel queue worker
@@ -399,7 +410,7 @@ StartLimitInterval=0
 [Install]</span>
 <span class="hljs-attr">WantedBy</span>=multi-user.target
 </code></pre>
-<h4 id="api-de-calificaciones">API de calificaciones</h4>
+<h3 id="api-de-calificaciones">API de calificaciones</h3>
 <p>En <code>/usr/lib/systemd/system/</code> crear un archivo llamado <code>hermes-ratings.service</code> con el siguiente contenido:</p>
 <pre><code class="lang-ini"><span class="hljs-section">[Unit]</span>
 <span class="hljs-attr">Description</span>=Ratings API
@@ -423,7 +434,7 @@ StartLimitInterval=0
 [Install]</span>
 <span class="hljs-attr">WantedBy</span>=multi-user.target
 </code></pre>
-<h4 id="api-de-estadisticas">API de estad&#xED;sticas</h4>
+<h3 id="api-de-estadisticas">API de estad&#xED;sticas</h3>
 <p>En <code>/usr/lib/systemd/system/</code> crear un archivo llamado <code>hermes-stats.service</code> con el siguiente contenido:</p>
 <pre><code class="lang-ini"><span class="hljs-section">[Unit]</span>
 <span class="hljs-attr">Description</span>=Stats API

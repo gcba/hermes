@@ -1158,6 +1158,11 @@
                     "title": "Configurar",
                     "depth": 3,
                     "id": "configurar"
+                  },
+                  {
+                    "title": "Paths",
+                    "depth": 3,
+                    "id": "paths"
                   }
                 ]
               },
@@ -1184,19 +1189,44 @@
                 ]
               },
               {
-                "title": "Paths y scripts de inicio",
+                "title": "Scripts de inicio",
                 "depth": 2,
-                "id": "paths-y-scripts-de-inicio",
+                "id": "scripts-de-inicio",
                 "headings": [
                   {
-                    "title": "Paths",
+                    "title": "PHP",
                     "depth": 3,
-                    "id": "paths"
+                    "id": "php"
                   },
                   {
-                    "title": "Systemd",
+                    "title": "Nginx",
                     "depth": 3,
-                    "id": "systemd"
+                    "id": "nginx"
+                  },
+                  {
+                    "title": "Redis",
+                    "depth": 3,
+                    "id": "redis"
+                  },
+                  {
+                    "title": "Postgres",
+                    "depth": 3,
+                    "id": "postgres"
+                  },
+                  {
+                    "title": "Cola de tareas",
+                    "depth": 3,
+                    "id": "cola-de-tareas"
+                  },
+                  {
+                    "title": "API de calificaciones",
+                    "depth": 3,
+                    "id": "api-de-calificaciones"
+                  },
+                  {
+                    "title": "API de estadísticas",
+                    "depth": 3,
+                    "id": "api-de-estadisticas"
                   }
                 ]
               },
@@ -2465,6 +2495,11 @@
               "title": "Configurar",
               "depth": 3,
               "id": "configurar"
+            },
+            {
+              "title": "Paths",
+              "depth": 3,
+              "id": "paths"
             }
           ]
         },
@@ -2491,19 +2526,44 @@
           ]
         },
         {
-          "title": "Paths y scripts de inicio",
+          "title": "Scripts de inicio",
           "depth": 2,
-          "id": "paths-y-scripts-de-inicio",
+          "id": "scripts-de-inicio",
           "headings": [
             {
-              "title": "Paths",
+              "title": "PHP",
               "depth": 3,
-              "id": "paths"
+              "id": "php"
             },
             {
-              "title": "Systemd",
+              "title": "Nginx",
               "depth": 3,
-              "id": "systemd"
+              "id": "nginx"
+            },
+            {
+              "title": "Redis",
+              "depth": 3,
+              "id": "redis"
+            },
+            {
+              "title": "Postgres",
+              "depth": 3,
+              "id": "postgres"
+            },
+            {
+              "title": "Cola de tareas",
+              "depth": 3,
+              "id": "cola-de-tareas"
+            },
+            {
+              "title": "API de calificaciones",
+              "depth": 3,
+              "id": "api-de-calificaciones"
+            },
+            {
+              "title": "API de estadísticas",
+              "depth": 3,
+              "id": "api-de-estadisticas"
             }
           ]
         },
