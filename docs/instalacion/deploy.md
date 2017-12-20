@@ -232,6 +232,8 @@ Y otro llamado `export` que contenga:
 ```bash
 PATH=$PATH:/usr/local/go/bin
 PATH=$PATH:<REPO>/apis/bin
+
+export PATH
 ```
 
 Luego cargar ambos archivos:
