@@ -40,6 +40,16 @@ opcache.save_comments=1
 opcache.fast_shutdown=0
 ```
 
+En `/etc/opt/rh/rh-php71/php-fpm.d/www.conf`:
+
+#### Cambiar
+
+- `user = apache` a `user = nginx`
+- `group = apache` a `group = nginx`
+- `listen = 127.0.0.1:9000` a `listen = /var/run/php-fpm.sock`
+- `;listen.owner = nobody` a `listen.owner = nginx`
+- `;listen.group = nobody` a `listen.group = nginx`
+- `;listen.mode = 0660` a `listen.mode = 0660`
 
 ## Nginx
 
@@ -76,7 +86,7 @@ En `/opt/rh/nginx14/root/etc/nginx/nginx.conf`:
     charset utf-8;
 
     location /ratings {
-        proxy_pass http://127.0.0.1:5000;
+        proxy_pass http://127.0.0.1:<PUERTO_API_CALIFICACIONES>;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
@@ -84,7 +94,7 @@ En `/opt/rh/nginx14/root/etc/nginx/nginx.conf`:
     }
 
     location /stats {
-        proxy_pass http://127.0.0.1:7000;
+        proxy_pass http://127.0.0.1:<PUERTO_API_ESTADISTICAS>;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
@@ -181,7 +191,7 @@ Seguir las instrucciones de instalación:
 
 ### Admin
 
-Asegurarse que el usuario bajo el que corren Nginx y PHP-FM pueden acceder a los archivos del Admin. Este usuario es generalmente `nginx`:
+Asegurarse que el usuario bajo el que corren Nginx y PHP-FPM (`nginx`) pueda acceder a los archivos del Admin:
 
 ```
 # usermod -a -G nginx,<USUARIO_OWNER_DEL_ADMIN> nginx
@@ -202,4 +212,194 @@ Y asegurarse de que pueda acceder a los archivos de las APIs:
 ```
 # usermod -a -G <USUARIO_OWNER_DE_LAS_APIS>,apis <USUARIO_OWNER_DE_LAS_APIS>
 # chown -R <USUARIO_OWNER_DE_LAS_APIS>:apis <REPO>/apis
+```
+
+## Paths y scripts de inicio
+
+### Paths
+
+En `/etc/profile.d` crear un archivo llamado `enable` con el siguiente contenido:
+
+```bash
+source /opt/rh/nginx14/enable
+source /opt/rh/rh-php71/enable
+source /opt/rh/rh-redis32/enable
+```
+
+Y otro llamado `export` que contenga:
+
+```bash
+PATH=$PATH:/usr/local/go/bin
+PATH=$PATH:<REPO>/apis/bin
+```
+
+Luego cargar ambos archivos:
+
+```bash
+ $ source /etc/profile.d/enable
+ $ source /etc/profile.d/export
+```
+
+### Systemd
+
+#### PHP
+
+Editar la configuración de Systemd:
+
+```
+# systemctl edit rh-php71-php-fpm
+```
+
+E ingresar lo siguiente:
+
+```ini
+.include /lib/systemd/system/rh-php71-php-fpm.service
+
+[Service]
+Restart=always
+StartLimitInterval=0
+```
+
+#### Nginx
+
+Editar la configuración de Systemd:
+
+```
+# systemctl edit nginx14-nginx
+```
+
+E ingresar lo siguiente:
+
+```ini
+.include /lib/systemd/system/nginx14-nginx.service
+
+[Service]
+Restart=always
+StartLimitInterval=0
+```
+
+#### Redis
+
+Editar la configuración de Systemd:
+
+```
+# systemctl edit rh-redis32-redis
+```
+
+E ingresar lo siguiente:
+
+```ini
+.include /lib/systemd/system/rh-redis32-redis.service
+
+[Service]
+Restart=always
+StartLimitInterval=0
+```
+
+#### Postgres
+
+Editar la configuración de Systemd:
+
+```
+# systemctl edit postgresql
+```
+
+E ingresar lo siguiente:
+
+```ini
+.include /lib/systemd/system/postgresql.service
+
+[Service]
+Restart=always
+StartLimitInterval=0
+```
+
+#### Cola de tareas
+
+En `/usr/lib/systemd/system/` crear un archivo llamado `hermes-queue.service` con el siguiente contenido:
+
+```ini
+[Unit]
+Description=Laravel queue worker
+After=rh-redis32-redis.service
+
+[Service]
+User=redis
+Group=redis
+Restart=always
+ExecStart=/opt/rh/rh-php71/root/usr/bin/php <REPO>/admin/artisan queue:work redis --daemon --env=production
+StartLimitInterval=0
+
+[Install]
+WantedBy=multi-user.target
+```
+
+#### API de calificaciones
+
+En `/usr/lib/systemd/system/` crear un archivo llamado `hermes-ratings.service` con el siguiente contenido:
+
+```ini
+[Unit]
+Description=Ratings API
+After=postgresql.service
+
+[Service]
+Type=simple
+User=apis
+Group=apis
+Restart=always
+ExecStart=/bin/bash -a -c 'source <REPO>/apis/src/hermes/.env && exec <REPO>/apis/bin/hermes start ratings'
+StartLimitInterval=0
+PermissionsStartOnly=true
+ExecStartPre=/bin/mkdir -p /var/log/hermes-ratings
+ExecStartPre=/bin/chown <USUARIO_OWNER_DE_LAS_APIS>:<USUARIO_OWNER_DE_LAS_APIS> /var/log/hermes-ratings
+ExecStartPre=/bin/chmod 755 /var/log/hermes-ratings
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=hermes-ratings
+
+[Install]
+WantedBy=multi-user.target
+```
+
+#### API de estadísticas
+
+En `/usr/lib/systemd/system/` crear un archivo llamado `hermes-stats.service` con el siguiente contenido:
+
+```ini
+[Unit]
+Description=Stats API
+After=postgresql.service
+
+[Service]
+Type=simple
+User=apis
+Group=apis
+Restart=always
+ExecStart=/bin/bash -a -c 'source <REPO>/apis/src/hermes/.env && exec <REPO>/apis/bin/hermes start stats'
+StartLimitInterval=0
+PermissionsStartOnly=true
+ExecStartPre=/bin/mkdir -p /var/log/hermes-stats
+ExecStartPre=/bin/chown <USUARIO_OWNER_DE_LAS_APIS>:<USUARIO_OWNER_DE_LAS_APIS> /var/log/hermes-stats
+ExecStartPre=/bin/chmod 755 /var/log/hermes-stats
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=hermes-stats
+
+[Install]
+WantedBy=multi-user.target
+```
+
+#### Habilitar servicios
+
+Finalmente, habilitar los servicios para que se ejecuten al bootear el sistema:
+
+```
+# systemctl daemon-reload
+# chkconfig rh-php71-php-fpm on
+# chkconfig nginx14-nginx on
+# chkconfig rh-redis32-redis on
+# chkconfig hermes-queue on
+# chkconfig hermes-ratings on
+# chkconfig hermes-stats on
 ```
