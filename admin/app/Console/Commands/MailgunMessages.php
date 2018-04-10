@@ -81,7 +81,7 @@ class MailgunMessages extends Command
                 $message->header('References', '<' . $inReplyTo->transport_id . '>');
             }
 
-            $message->to($email, env('MAILGUN_SENDER', ''))->subject($subject);
+            $message->to($email, env('MAIL_SENDER', ''))->subject($subject);
 
             return;
         });
