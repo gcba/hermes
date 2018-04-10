@@ -210,6 +210,7 @@ func getAppUser(records *records, dbs *databases, frame *frame, deviceChan chan 
 	getErrorMessage := "Could not get an AppUser: "
 	createErrorMessage := "Could not create an AppUser: "
 	hasMibaID := len(frame.request.User.MiBAID) > 0
+	hasEmail := len(frame.request.User.Email) > 0
 
 	if hasMibaID {
 		getResult = models.GetAppUser(frame.request.User.MiBAID, dbs.read)
@@ -237,7 +238,9 @@ func getAppUser(records *records, dbs *databases, frame *frame, deviceChan chan 
 
 		if hasMibaID {
 			appuser.MiBAID = &frame.request.User.MiBAID
-		} else {
+		}
+
+		if hasEmail {
 			appuser.Email = &frame.request.User.Email
 		}
 
