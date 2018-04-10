@@ -72,7 +72,7 @@ class SendMessage implements ShouldQueue
                 $message->header('References', '<' . $references . '>');
             }
 
-            $message->to($email, env('MAILGUN_SENDER', ''))->subject($this->subject);
+            $message->to($email, env('MAIL_SENDER', ''))->subject($this->subject);
 
             return;
         });
